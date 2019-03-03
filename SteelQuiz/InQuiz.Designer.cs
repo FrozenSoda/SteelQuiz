@@ -62,6 +62,7 @@
             this.KeyPreview = true;
             this.Name = "InQuiz";
             this.Text = "InQuiz";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.InQuiz_FormClosing);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.InQuiz_KeyPress);
             this.ResumeLayout(false);
 

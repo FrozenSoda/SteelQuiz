@@ -38,12 +38,9 @@ namespace SteelQuiz.QuizData
             L2_to_L1
         }
 
-#warning BROKEN
         public int[] WrongChIndexes(string comp, TranslationMode translationMode)
         {
-            // find common sequences
             var incorrectIndexes = new List<int>();
-            var subsequences = new List<int>();
             string word = null;
             if (translationMode == TranslationMode.L1_to_L2)
             {
@@ -54,44 +51,44 @@ namespace SteelQuiz.QuizData
                 word = Word1;
             }
 
-            for (int i = 0; i < word.Length; ++i)
+            int woffset = 0; //word offset
+            int coffset = 0; //comp offset
+            for (int _i = 0; _i < word.Length; ++_i)
             {
-                var correct = false;
+                int wi = _i + woffset;
+                int ci = _i + coffset;
 
-                if (TranslationRules.HasFlag(Rules.IgnoreExclamation) && word[i] == '!')
+                if (ci < comp.Length)
                 {
-                    continue;
-                }
-
-                for (int j = 0; j < comp.Length; ++j)
-                {
-                    if (TranslationRules.HasFlag(Rules.IgnoreCapitalization) && char.ToUpper(word[i]) == char.ToUpper(comp[j]))
+                    if (word[wi] != comp[ci])
                     {
-                        if (!subsequences.Contains(j))
+                        if (TranslationRules.HasFlag(Rules.IgnoreCapitalization) && char.ToUpper(word[wi]) != char.ToUpper(comp[ci]))
                         {
-                            subsequences.Add(j);
-                            correct = true;
+                            if (TranslationRules.HasFlag(Rules.IgnoreExclamation))
+                            {
+                                if (word[wi] == '!')
+                                {
+                                    ++woffset;
+                                }
+                                else if (comp[ci] == '!')
+                                {
+                                    ++coffset;
+                                }
+                                else
+                                {
+                                    incorrectIndexes.Add(ci);
+                                }
+                            }
+                            else
+                            {
+                                incorrectIndexes.Add(ci);
+                            }
                         }
                     }
-                    else if (word[i] == comp[j])
-                    {
-                        if (!subsequences.Contains(j))
-                        {
-                            subsequences.Add(j);
-                            correct = true;
-                        }
-                    }
-
-                    if (!correct)
-                    {
-                        incorrectIndexes.Add(j);
-                        correct = true;
-                    }
                 }
-
-                if (!correct)
+                else
                 {
-                    incorrectIndexes.Add(0);
+                    incorrectIndexes.Add(ci);
                 }
             }
 

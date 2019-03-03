@@ -62,12 +62,13 @@
       <DependentUpon>InQuiz.cs</DependentUpon>
     </Compile>
     <Compile Include="MetaData.cs" />
+    <Compile Include="QuizAI.cs" />
     <Compile Include="QuizData\Quiz.cs" />
     <Compile Include="QuizImporter.cs" />
     <Compile Include="QuizProgressData\CfgQuizzesProgressData.cs" />
     <Compile Include="QuizProgressData\QuizProgData.cs" />
     <Compile Include="QuizProgressData\WordProgData.cs" />
-    <Compile Include="QuizEngine.cs" />
+    <Compile Include="QuizCore.cs" />
     <Compile Include="SUtil.cs" />
     <Compile Include="Welcome.cs">
       <SubType>Form</SubType>

@@ -26,8 +26,8 @@ namespace SteelQuiz
 
         private void NewWord()
         {
-            var rnd = new Random().Next(0, QuizEngine.Quiz.WordPairs.Length);
-            currentWordPair = QuizEngine.Quiz.WordPairs[rnd];
+            var rnd = new Random().Next(0, QuizCore.Quiz.WordPairs.Length);
+            currentWordPair = QuizCore.Quiz.WordPairs[rnd];
             if (translationMode == WordPair.TranslationMode.L1_to_L2)
             {
                 lbl_word1.Text = currentWordPair.Word1;
@@ -95,6 +95,12 @@ namespace SteelQuiz
                 currentInput += e.KeyChar.ToString();
             }
             lbl_word2.Text = currentInput;
+        }
+
+        private void InQuiz_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            QuizCore.SaveProgress();
+            Application.Exit();
         }
     }
 }

@@ -8,11 +8,11 @@ namespace SteelQuiz.QuizProgressData
 {
     public class CfgQuizzesProgressData
     {
-        public List<QuizProgData> QuizStates { get; set; }
+        public List<QuizProgData> QuizProgDatas { get; set; }
 
         public CfgQuizzesProgressData()
         {
-            QuizStates = new List<QuizProgData>();
+            QuizProgDatas = new List<QuizProgData>();
         }
     }
 }

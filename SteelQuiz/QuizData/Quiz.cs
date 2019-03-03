@@ -10,12 +10,12 @@ namespace SteelQuiz.QuizData
     public class Quiz
     {
         public Guid GUID { get; set; }
-        public Version QuizFileFormatVersion { get; set; }
+        public string QuizFileFormatVersion { get; set; }
         public string Language1 { get; set; }
         public string Language2 { get; set; }
         public WordPair[] WordPairs { get; set; }
 
-        public Quiz(string lang1, string lang2, Version quizFileFormatVersion)
+        public Quiz(string lang1, string lang2, string quizFileFormatVersion)
         {
             GUID = Guid.NewGuid();
             Language1 = lang1;

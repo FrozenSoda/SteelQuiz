@@ -9,10 +9,10 @@ namespace SteelQuiz.QuizProgressData
 {
     public class WordProgData
     {
-        public WordPair Word1 { get; set; }
-        public WordPair Word2 { get; set; }
+        public WordPair WordPair { get; set; }
         public int TriesCount { get; set; } = 0;
         public int SuccessCount { get; set; } = 0;
+        public bool AskedThisRound { get; set; } = false;
 
         public int GetSuccessRate()
         {

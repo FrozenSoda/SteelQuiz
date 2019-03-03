@@ -32,7 +32,7 @@ namespace SteelQuiz
                 }
             }
 
-            if (File.Exists(Path.Combine(QuizEngine.QUIZ_FOLDER, quizFilename + ".json")))
+            if (File.Exists(Path.Combine(QuizCore.QUIZ_FOLDER, quizFilename + QuizCore.QUIZ_EXTENSION)))
             {
                 var msg = MessageBox.Show("A quiz with this name already exists. Replace?", "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (msg == DialogResult.No)

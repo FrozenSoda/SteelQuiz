@@ -10,14 +10,30 @@ using Newtonsoft.Json;
 
 namespace SteelQuiz
 {
-    public static class QuizEngine
+    public static class QuizCore
     {
+        public const string QUIZ_EXTENSION = ".steelquiz";
         public static readonly string APP_CFG_FOLDER = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SteelQuiz");
         public static readonly string QUIZ_FOLDER = Path.Combine(APP_CFG_FOLDER, "Quizzes");
         public static readonly string PROGRESS_CFG_PATH = Path.Combine(APP_CFG_FOLDER, "QuizProgress.json");
 
         public static Quiz Quiz { get; set; }
         public static QuizProgData QuizProgress { get; set; }
+
+        public static void Load(string quizPath)
+        {
+            if (!File.Exists(quizPath))
+            {
+                throw new FileNotFoundException("The quiz file cannot be found");
+            }
+
+            Quiz quiz;
+            using (var reader = new StreamReader(quizPath))
+            {
+                quiz = JsonConvert.DeserializeObject<Quiz>(reader.ReadToEnd());
+            }
+            Load(quiz);
+        }
 
         public static void Load(Quiz quiz)
         {
@@ -47,7 +63,7 @@ namespace SteelQuiz
 
                 //find progress for current quiz
                 bool found = false;
-                foreach (QuizProgData progData in cfgDz.QuizStates)
+                foreach (QuizProgData progData in cfgDz.QuizProgDatas)
                 {
                     if (progData.QuizGUID.Equals(Quiz.GUID))
                     {
@@ -59,14 +75,12 @@ namespace SteelQuiz
 
                 if (!found)
                 {
-                    QuizProgress = new QuizProgData();
-                    QuizProgress.QuizGUID = Quiz.GUID;
+                    QuizProgress = new QuizProgData(Quiz);
                 }
             }
             else
             {
-                QuizProgress = new QuizProgData();
-                QuizProgress.QuizGUID = Quiz.GUID;
+                QuizProgress = new QuizProgData(Quiz);
             }
 
             SaveProgress();
@@ -85,11 +99,11 @@ namespace SteelQuiz
 
                 //find progress for current quiz
                 bool found = false;
-                for (int i = 0; i < cfgDz.QuizStates.Count; ++i)
+                for (int i = 0; i < cfgDz.QuizProgDatas.Count; ++i)
                 {
-                    if (cfgDz.QuizStates[i].QuizGUID.Equals(Quiz.GUID))
+                    if (cfgDz.QuizProgDatas[i].QuizGUID.Equals(Quiz.GUID))
                     {
-                        cfgDz.QuizStates[i] = QuizProgress;
+                        cfgDz.QuizProgDatas[i] = QuizProgress;
                         found = true;
                         break;
                     }
@@ -97,13 +111,13 @@ namespace SteelQuiz
 
                 if (!found)
                 {
-                    cfgDz.QuizStates.Add(QuizProgress);
+                    cfgDz.QuizProgDatas.Add(QuizProgress);
                 }
             }
             else
             {
                 cfgDz = new CfgQuizzesProgressData();
-                cfgDz.QuizStates.Add(QuizProgress);
+                cfgDz.QuizProgDatas.Add(QuizProgress);
             }
 
             // SERIALIZE AND SAVE

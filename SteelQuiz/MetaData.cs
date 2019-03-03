@@ -8,6 +8,6 @@ namespace SteelQuiz
 {
     public static class MetaData
     {
-        public static readonly Version QUIZ_FILE_FORMAT_VERSION = new Version(1, 0, 0);
+        public static readonly string QUIZ_FILE_FORMAT_VERSION = "1.0.0";
     }
 }

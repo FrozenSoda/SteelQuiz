@@ -33,6 +33,7 @@
             this.btn_loadQuiz = new System.Windows.Forms.Button();
             this.btn_importQuizFromSite = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+            this.ofd_loadQuiz = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // lbl_welcome
@@ -64,6 +65,7 @@
             this.btn_loadQuiz.TabIndex = 2;
             this.btn_loadQuiz.Text = "Load quiz from file";
             this.btn_loadQuiz.UseVisualStyleBackColor = true;
+            this.btn_loadQuiz.Click += new System.EventHandler(this.btn_loadQuiz_Click);
             // 
             // btn_importQuizFromSite
             // 
@@ -85,6 +87,11 @@
             this.button4.Text = "inQuiz";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // ofd_loadQuiz
+            // 
+            this.ofd_loadQuiz.Filter = "SteelQuiz Quizzes|*.steelquiz";
+            this.ofd_loadQuiz.Title = "Select a quiz to load";
             // 
             // Welcome
             // 
@@ -109,6 +116,7 @@
         private System.Windows.Forms.Button btn_loadQuiz;
         private System.Windows.Forms.Button btn_importQuizFromSite;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.OpenFileDialog ofd_loadQuiz;
     }
 }
 

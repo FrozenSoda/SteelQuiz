@@ -90,13 +90,13 @@ namespace SteelQuiz
 
             var quiz = new Quiz(lang1, lang2, MetaData.QUIZ_FILE_FORMAT_VERSION);
             quiz.WordPairs = wordPairs.ToArray();
-            QuizEngine.Load(quiz);
+            QuizCore.Load(quiz);
             
             if (filename == "")
             {
-                filename = QuizEngine.Quiz.GUID.ToString();
+                filename = QuizCore.Quiz.GUID.ToString();
             }
-            QuizEngine.SaveQuiz(filename + ".json");
+            QuizCore.SaveQuiz(filename + QuizCore.QUIZ_EXTENSION);
 
             return true;
         }
@@ -106,7 +106,8 @@ namespace SteelQuiz
             return str
                 .Replace(@"\u00e5", "å")
                 .Replace(@"\u00e4", "ä")
-                .Replace(@"\u00f6", "ö");
+                .Replace(@"\u00f6", "ö")
+                .Replace(@"\u00e9", "é");
         }
     }
 }
