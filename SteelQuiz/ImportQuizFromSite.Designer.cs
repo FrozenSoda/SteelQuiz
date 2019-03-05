@@ -163,6 +163,8 @@
             this.Controls.Add(this.txt_url);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.flp_siteRdo);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "ImportQuizFromSite";
             this.Text = "ImportQuizFromSite";
             this.flp_siteRdo.ResumeLayout(false);

@@ -20,6 +20,9 @@ namespace SteelQuiz
         public static Quiz Quiz { get; set; }
         public static QuizProgData QuizProgress { get; set; }
 
+        public static bool QuizRandomized { get; set; } = false;
+        public static List<WordProgData> originalWordProgDataCollection = null;
+
         public static void Load(string quizPath)
         {
             if (!File.Exists(quizPath))
@@ -76,18 +79,26 @@ namespace SteelQuiz
                 if (!found)
                 {
                     QuizProgress = new QuizProgData(Quiz);
+                    SaveProgress();
                 }
             }
             else
             {
                 QuizProgress = new QuizProgData(Quiz);
+                SaveProgress();
             }
-
-            SaveProgress();
         }
 
         public static void SaveProgress()
         {
+            /*
+            List<WordProgData> bkpOfCurrent = null;
+            if (QuizRandomized)
+            {
+                RevertWordProgDataCollection(out bkpOfCurrent);
+            }
+            */
+
             // DESERIALIZE AND PROCESS
             CfgQuizzesProgressData cfgDz;
             if (File.Exists(PROGRESS_CFG_PATH))
@@ -126,6 +137,13 @@ namespace SteelQuiz
             {
                 writer.Write(cfgSz);
             }
+
+            /*
+            if (QuizRandomized)
+            {
+                QuizProgress.WordProgDatas = bkpOfCurrent.Clone();
+            }
+            */
         }
 
         public static void SaveQuiz(string filename)
@@ -135,6 +153,57 @@ namespace SteelQuiz
                 var quizDz = JsonConvert.SerializeObject(Quiz, Formatting.Indented);
                 writer.Write(quizDz);
             }
+        }
+
+        public static void QuizRandomize(this IList<WordProgData> list)
+        {
+            originalWordProgDataCollection = list.Clone();
+            QuizRandomized = true;
+
+            var rnd = new Random();
+            int n = list.Count;
+            while (n > 1)
+            {
+                --n;
+                int k = rnd.Next(n + 1);
+                var value = list[k];
+                list[k] = list[n];
+                list[n] = value;
+            }
+        }
+
+        private static void RevertWordProgDataCollection(out List<WordProgData> bkpOfCurrent)
+        {
+            bkpOfCurrent = QuizProgress.WordProgDatas.Clone();
+            QuizProgress.WordProgDatas = originalWordProgDataCollection.Clone();
+        }
+
+        public static int GetTotalWordsThisRound()
+        {
+            var counter = 0;
+            foreach (var word in QuizProgress.WordProgDatas)
+            {
+                if (!word.SkipThisRound)
+                {
+                    ++counter;
+                }
+            }
+
+            return counter;
+        }
+
+        public static int GetWordsAskedThisRound()
+        {
+            var counter = 0;
+            foreach (var word in QuizProgress.WordProgDatas)
+            {
+                if (word.AskedThisRound)
+                {
+                    ++counter;
+                }
+            }
+
+            return counter;
         }
     }
 }

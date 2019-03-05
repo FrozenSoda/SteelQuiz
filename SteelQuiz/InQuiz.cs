@@ -17,6 +17,7 @@ namespace SteelQuiz
         private string currentInput = "";
         private WordPair.TranslationMode translationMode = WordPair.TranslationMode.L1_to_L2;
         private bool waitingForEnter = false;
+        private bool userCopyWord = false;
 
         public InQuiz()
         {
@@ -26,8 +27,14 @@ namespace SteelQuiz
 
         private void NewWord()
         {
-            var rnd = new Random().Next(0, QuizCore.Quiz.WordPairs.Length);
-            currentWordPair = QuizCore.Quiz.WordPairs[rnd];
+            currentWordPair = QuizAI.GenerateWordPair();
+
+            if (currentWordPair == null)
+            {
+                NewRound();
+                return;
+            }
+
             if (translationMode == WordPair.TranslationMode.L1_to_L2)
             {
                 lbl_word1.Text = currentWordPair.Word1;
@@ -37,11 +44,20 @@ namespace SteelQuiz
                 lbl_word1.Text = currentWordPair.Word2;
             }
             currentInput = "";
+            lbl_progress.Text = $"Progress this round: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
+        }
+
+        private void NewRound()
+        {
+            lbl_word1.Text = "Round completed! Press enter to continue";
+            waitingForEnter = true;
+            lbl_progress.Text = $"Progress this round: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
         }
 
         private void CheckWord()
         {
-            var wrongCh = currentWordPair.WrongChIndexes(currentInput, translationMode);
+            var wrongCh = currentWordPair.WrongChIndexes(currentInput, translationMode, !userCopyWord);
+            userCopyWord = false;
             if (wrongCh.Length == 0)
             {
                 lbl_word1.Text = "Correct! Press enter to continue";
@@ -51,12 +67,13 @@ namespace SteelQuiz
             {
                 if (translationMode == WordPair.TranslationMode.L1_to_L2)
                 {
-                    lbl_word1.Text = currentWordPair.Word2 + "\r\n\r\nType the correct word";
+                    lbl_word1.Text = "Wrong\r\n\r\nCorrect word is: " + currentWordPair.Word2 + "\r\n\r\nType the correct word";
                 }
                 else if (translationMode == WordPair.TranslationMode.L2_to_L1)
                 {
-                    lbl_word1.Text = currentWordPair.Word1 + "\r\n\r\nType the correct word";
+                    lbl_word1.Text = "Wrong\r\n\r\nCorrect word is: " + currentWordPair.Word1 + "\r\n\r\nType the correct word";
                 }
+                userCopyWord = true;
                 currentInput = "";
                 lbl_word2.Text = "";
             }

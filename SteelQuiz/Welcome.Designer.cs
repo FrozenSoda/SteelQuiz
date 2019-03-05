@@ -32,7 +32,6 @@
             this.btn_createQuiz = new System.Windows.Forms.Button();
             this.btn_loadQuiz = new System.Windows.Forms.Button();
             this.btn_importQuizFromSite = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
             this.ofd_loadQuiz = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
@@ -78,16 +77,6 @@
             this.btn_importQuizFromSite.UseVisualStyleBackColor = true;
             this.btn_importQuizFromSite.Click += new System.EventHandler(this.btn_importQuizFromSite_Click);
             // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(713, 415);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 4;
-            this.button4.Text = "inQuiz";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
             // ofd_loadQuiz
             // 
             this.ofd_loadQuiz.Filter = "SteelQuiz Quizzes|*.steelquiz";
@@ -98,11 +87,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button4);
             this.Controls.Add(this.btn_importQuizFromSite);
             this.Controls.Add(this.btn_loadQuiz);
             this.Controls.Add(this.btn_createQuiz);
             this.Controls.Add(this.lbl_welcome);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "Welcome";
             this.Text = "SteelQuiz";
             this.ResumeLayout(false);
@@ -115,7 +105,6 @@
         private System.Windows.Forms.Button btn_createQuiz;
         private System.Windows.Forms.Button btn_loadQuiz;
         private System.Windows.Forms.Button btn_importQuizFromSite;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.OpenFileDialog ofd_loadQuiz;
     }
 }

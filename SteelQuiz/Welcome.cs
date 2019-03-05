@@ -17,12 +17,6 @@ namespace SteelQuiz
             InitializeComponent();
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            var frmInQuiz = new InQuiz();
-            frmInQuiz.Show();
-        }
-
         private void btn_importQuizFromSite_Click(object sender, EventArgs e)
         {
             var import = new ImportQuizFromSite();
