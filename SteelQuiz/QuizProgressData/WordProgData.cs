@@ -15,7 +15,7 @@ namespace SteelQuiz.QuizProgressData
         [JsonProperty]
         private List<WordTry> WordTries { get; set; } = null;
 
-        const int WORD_TRIES_TO_KEEP = 5;
+        private const int WORD_TRIES_TO_KEEP = 5;
 
         public bool AskedThisRound { get; set; } = false;
         public bool SkipThisRound { get; set; } = false;
