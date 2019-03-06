@@ -118,9 +118,9 @@ namespace SteelQuiz
 
                 // Eventually skip asking the word
 
-                var dontAskAgainPrb = dontAskProb(wordPairData.GetSuccessRate(), wordPairData.TriesCount);
+                var dontAskAgainPrb = dontAskProb(wordPairData.GetSuccessRate(), wordPairData.GetWordTriesCount());
 
-                if (wordPairData.TriesCount >= MINIMUM_TRIES_COUNT_TO_CONSIDER_SKIPPING && new Random().NextBool(dontAskAgainPrb))
+                if (wordPairData.GetWordTriesCount() >= MINIMUM_TRIES_COUNT_TO_CONSIDER_SKIPPING && new Random().NextBool(dontAskAgainPrb))
                 {
                     wordPairData.SkipThisRound = true;
                 }

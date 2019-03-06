@@ -79,6 +79,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuizData\WordPair.cs" />
+    <Compile Include="QuizProgressData\WordTry.cs" />
     <EmbeddedResource Include="ImportQuizFromSite.resx">
       <DependentUpon>ImportQuizFromSite.cs</DependentUpon>
     </EmbeddedResource>

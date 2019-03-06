@@ -152,11 +152,8 @@ namespace SteelQuiz.QuizData
 
             if (updateProgress)
             {
-                ++GetWordProgData().TriesCount;
-                if (incorrectIndexes.Count == 0)
-                {
-                    ++GetWordProgData().SuccessCount;
-                }
+                var success = incorrectIndexes.Count == 0;
+                GetWordProgData().AddWordTry(new WordTry(success));
                 QuizCore.SaveProgress();
             }
 
