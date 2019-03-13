@@ -9,12 +9,22 @@ namespace SteelQuiz
 {
     public static class SUtil
     {
-        public static int RandomNext(int min, int maxExcl, int[] exclusions)
+        public static int[] RandomUnique(this Random rnd, int min, int maxExcl, int count)
+        {
+            var nums = new List<int>();
+            for (int i = 0; i < count; ++i)
+            {
+                nums.Add(rnd.RandomNext(min, maxExcl, nums.ToArray()));
+            }
+
+            return nums.ToArray();
+        }
+
+        public static int RandomNext(this Random rnd, int min, int maxExcl, int[] exclusions)
         {
             var excl = new HashSet<int>(exclusions);
             var range = Enumerable.Range(min, maxExcl).Where(i => !excl.Contains(i));
-            var rand = new Random();
-            int index = rand.Next(0, maxExcl - excl.Count);
+            int index = rnd.Next(0, maxExcl - excl.Count);
             return range.ElementAt(index);
         }
 

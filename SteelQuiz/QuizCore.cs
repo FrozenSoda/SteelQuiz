@@ -157,7 +157,7 @@ namespace SteelQuiz
 
         public static void QuizRandomize(this IList<WordProgData> list)
         {
-            originalWordProgDataCollection = list.Clone();
+            //originalWordProgDataCollection = list.Clone();
             QuizRandomized = true;
 
             var rnd = new Random();

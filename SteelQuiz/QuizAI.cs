@@ -116,6 +116,8 @@ namespace SteelQuiz
                 return prb;
             }
 
+            var rnd = new Random();
+            var skipCount = 0;
             foreach (var wordPairData in QuizCore.QuizProgress.WordProgDatas)
             {
                 wordPairData.AskedThisRound = false;
@@ -125,11 +127,26 @@ namespace SteelQuiz
 
                 var dontAskAgainPrb = dontAskProb(wordPairData.GetSuccessRate(), wordPairData.GetWordTriesCount());
 
-                if (wordPairData.GetWordTriesCount() >= MINIMUM_TRIES_COUNT_TO_CONSIDER_SKIPPING && new Random().NextBool(dontAskAgainPrb))
+                if (wordPairData.GetWordTriesCount() >= MINIMUM_TRIES_COUNT_TO_CONSIDER_SKIPPING && rnd.NextBool(dontAskAgainPrb))
                 {
                     wordPairData.SkipThisRound = true;
+                    ++skipCount;
                 }
             }
+
+            if (skipCount == QuizCore.QuizProgress.WordProgDatas.Count)
+            {
+                // if all words are skipped, select five random words to ask (remove skip sign)
+                var toAsk = new Random().RandomUnique(0, QuizCore.QuizProgress.WordProgDatas.Count, 5);
+                for (int i = 0; i < QuizCore.QuizProgress.WordProgDatas.Count; ++i)
+                {
+                    if (toAsk.Contains(i))
+                    {
+                        QuizCore.QuizProgress.WordProgDatas[i].SkipThisRound = false;
+                    }
+                }
+            }
+
             QuizCore.QuizProgress.WordProgDatas.QuizRandomize();
 
             QuizCore.SaveProgress();
