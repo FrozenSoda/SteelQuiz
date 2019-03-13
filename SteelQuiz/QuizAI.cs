@@ -99,8 +99,13 @@ namespace SteelQuiz
         {
             const int MINIMUM_TRIES_COUNT_TO_CONSIDER_SKIPPING = 2;
 
-            double dontAskProb(double successRate, double triesCount)
+            double dontAskProb(double successRate, int triesCount)
             {
+                if (triesCount == 0)
+                {
+                    return 0;
+                }
+
                 const double PROB_OFFSET = 0.15;
                 var prb = successRate;
                 if (prb == 1)

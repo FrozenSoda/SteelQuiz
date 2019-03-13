@@ -81,14 +81,15 @@ namespace SteelQuiz
 
         private void InQuiz_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (currentInput == "")
+            if (e.KeyChar == '\u001b')
             {
-                lbl_word2.Text = "";
+                // ignore ESC
+                return;
             }
 
             if (e.KeyChar == '\b')
             {
-                //backspace
+                // BACKSPACE
                 if (currentInput.Length > 0)
                 {
                     currentInput = currentInput.Remove(currentInput.Length - 1);
@@ -96,7 +97,7 @@ namespace SteelQuiz
             }
             else if (e.KeyChar == '\r')
             {
-                //enter
+                // ENTER
                 if (waitingForEnter)
                 {
                     waitingForEnter = false;
