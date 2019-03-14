@@ -16,7 +16,8 @@ namespace SteelQuiz
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Welcome());
+            ConfigManager.LoadConfig();
+            Application.Run(new TermsOfUse());
         }
     }
 }

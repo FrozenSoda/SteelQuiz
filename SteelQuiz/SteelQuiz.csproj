@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigManager.cs" />
     <Compile Include="ImportQuizFromSite.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,7 +70,14 @@
     <Compile Include="QuizProgressData\QuizProgData.cs" />
     <Compile Include="QuizProgressData\WordProgData.cs" />
     <Compile Include="QuizCore.cs" />
+    <Compile Include="Config.cs" />
     <Compile Include="SUtil.cs" />
+    <Compile Include="TermsOfUse.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TermsOfUse.Designer.cs">
+      <DependentUpon>TermsOfUse.cs</DependentUpon>
+    </Compile>
     <Compile Include="Welcome.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +93,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InQuiz.resx">
       <DependentUpon>InQuiz.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TermsOfUse.resx">
+      <DependentUpon>TermsOfUse.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Welcome.resx">
       <DependentUpon>Welcome.cs</DependentUpon>

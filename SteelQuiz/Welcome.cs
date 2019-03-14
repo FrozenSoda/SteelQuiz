@@ -48,5 +48,11 @@ namespace SteelQuiz
                 Hide();
             }
         }
+
+        private void Welcome_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ConfigManager.SaveConfig();
+            Application.Exit();
+        }
     }
 }

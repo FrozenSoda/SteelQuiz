@@ -33,6 +33,7 @@
             this.btn_loadQuiz = new System.Windows.Forms.Button();
             this.btn_importQuizFromSite = new System.Windows.Forms.Button();
             this.ofd_loadQuiz = new System.Windows.Forms.OpenFileDialog();
+            this.lbl_copyright = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lbl_welcome
@@ -82,11 +83,21 @@
             this.ofd_loadQuiz.Filter = "SteelQuiz Quizzes|*.steelquiz";
             this.ofd_loadQuiz.Title = "Select a quiz to load";
             // 
+            // lbl_copyright
+            // 
+            this.lbl_copyright.AutoSize = true;
+            this.lbl_copyright.Location = new System.Drawing.Point(12, 428);
+            this.lbl_copyright.Name = "lbl_copyright";
+            this.lbl_copyright.Size = new System.Drawing.Size(351, 13);
+            this.lbl_copyright.TabIndex = 4;
+            this.lbl_copyright.Text = "Experimental software | Copyright (C) 2019 steel9apps - All rights reserved";
+            // 
             // Welcome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lbl_copyright);
             this.Controls.Add(this.btn_importQuizFromSite);
             this.Controls.Add(this.btn_loadQuiz);
             this.Controls.Add(this.btn_createQuiz);
@@ -94,8 +105,10 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Welcome";
-            this.Text = "SteelQuiz";
+            this.Text = "SteelQuiz | Experimental closed beta";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Welcome_FormClosing);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -106,6 +119,7 @@
         private System.Windows.Forms.Button btn_loadQuiz;
         private System.Windows.Forms.Button btn_importQuizFromSite;
         private System.Windows.Forms.OpenFileDialog ofd_loadQuiz;
+        private System.Windows.Forms.Label lbl_copyright;
     }
 }
 

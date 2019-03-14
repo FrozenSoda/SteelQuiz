@@ -118,6 +118,7 @@ namespace SteelQuiz
         private void InQuiz_FormClosing(object sender, FormClosingEventArgs e)
         {
             QuizCore.SaveProgress();
+            ConfigManager.SaveConfig();
             Application.Exit();
         }
     }

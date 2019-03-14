@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using SteelQuiz.QuizData;
 using SteelQuiz.QuizProgressData;
 
@@ -17,7 +18,7 @@ namespace SteelQuiz
                 return QuizCore.QuizProgress.CurrentWordPair;
             }
 
-            var alreadyAsked = QuizCore.QuizProgress.WordsNotToAsk(); //words already asked this round
+            var alreadyAsked = QuizCore.QuizProgress.WordsNotToAsk();
 
             if (alreadyAsked.Length == QuizCore.Quiz.WordPairs.Length)
             {
@@ -136,6 +137,26 @@ namespace SteelQuiz
 
             if (skipCount == QuizCore.QuizProgress.WordProgDatas.Count)
             {
+                if (!QuizCore.QuizProgress.MasterNoticeShowed)
+                {
+                    var allSuccess100 = true;
+                    foreach (var word in QuizCore.QuizProgress.WordProgDatas)
+                    {
+                        if (word.GetSuccessRate() < 1)
+                        {
+                            allSuccess100 = false;
+                        }
+                    }
+
+                    if (allSuccess100)
+                    {
+                        QuizCore.QuizProgress.MasterNoticeShowed = true;
+                        MessageBox.Show("Congratulations! It seems that you have mastered this quiz. " +
+                            "Repeat it to make sure you don't forget it, and don't remember to do a full test of the words to make sure you still know them all.",
+                            "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+
                 // if all words are skipped, select five random words to ask (remove skip sign)
                 var toAsk = new Random().RandomUnique(0, QuizCore.QuizProgress.WordProgDatas.Count, 5);
                 for (int i = 0; i < QuizCore.QuizProgress.WordProgDatas.Count; ++i)

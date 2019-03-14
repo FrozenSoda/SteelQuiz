@@ -38,7 +38,7 @@ namespace SteelQuiz
             Load(quiz);
         }
 
-        public static void Load(Quiz quiz)
+        public static void CheckInitDirectories()
         {
             if (!Directory.Exists(APP_CFG_FOLDER))
             {
@@ -48,6 +48,11 @@ namespace SteelQuiz
             {
                 Directory.CreateDirectory(QUIZ_FOLDER);
             }
+        }
+
+        public static void Load(Quiz quiz)
+        {
+            CheckInitDirectories();
 
             Quiz = quiz;
             LoadProgressData();
@@ -71,6 +76,7 @@ namespace SteelQuiz
                     if (progData.QuizGUID.Equals(Quiz.GUID))
                     {
                         QuizProgress = progData;
+                        QuizProgress.MasterNoticeShowed = false;
                         found = true;
                         break;
                     }
