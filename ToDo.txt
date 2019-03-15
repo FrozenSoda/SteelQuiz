@@ -1,1 +1,3 @@
 - Word sounds from Studentlitteratur should be played
+- Quiz backups should be placed in separate backup folder
+- Quiz progress should be backupped before upgrade

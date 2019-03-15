@@ -30,7 +30,7 @@ namespace SteelQuiz
             }
         }
 
-        public static WordPair GenerateWordPairWithoutAI()
+        private static WordPair GenerateWordPairWithoutAI()
         {
             var wordsNotToAsk = QuizCore.QuizProgress.WordsNotToAsk();
 
@@ -60,7 +60,7 @@ namespace SteelQuiz
             return wordPair;
         }
 
-        public static WordPair GenerateWordPairAI()
+        private static WordPair GenerateWordPairAI()
         {
             var alreadyAsked = QuizCore.QuizProgress.WordsNotToAsk();
 
