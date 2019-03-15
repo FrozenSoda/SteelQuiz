@@ -104,7 +104,7 @@
             this.lbl_lang1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_lang1.Location = new System.Drawing.Point(12, 9);
             this.lbl_lang1.Name = "lbl_lang1";
-            this.lbl_lang1.Size = new System.Drawing.Size(325, 345);
+            this.lbl_lang1.Size = new System.Drawing.Size(331, 23);
             this.lbl_lang1.TabIndex = 5;
             this.lbl_lang1.Text = "lbl_lang1";
             this.lbl_lang1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -121,6 +121,7 @@
             // 
             // btn_w1_synonyms
             // 
+            this.btn_w1_synonyms.Enabled = false;
             this.btn_w1_synonyms.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_w1_synonyms.Location = new System.Drawing.Point(140, 35);
             this.btn_w1_synonyms.Name = "btn_w1_synonyms";

@@ -39,6 +39,10 @@ namespace SteelQuiz
                 lbl_AI.Text = "Intelligent learning: Enabled";
                 lbl_AI.ForeColor = Color.DarkGreen;
             }
+            if (currentWordPair.Word1Synonyms.Count > 0)
+            {
+                btn_w1_synonyms.Enabled = true;
+            }
         }
 
         private void NewWord()
@@ -206,6 +210,7 @@ namespace SteelQuiz
                 if (currentWordPair.Word1Synonyms.Count == 0)
                 {
                     MessageBox.Show("No synonyms are added for this word!", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    lbl_word2.Focus();
                     return;
                 }
 
@@ -215,10 +220,13 @@ namespace SteelQuiz
                 {
                     lbl_word1.Text += "\r\n" + synonym;
                 }
+
+                btn_w1_synonyms.Text = "<--";
             }
             else
             {
                 lbl_word1.Text = currentWordPair.Word1;
+                btn_w1_synonyms.Text = "Synonyms";
             }
 
             lbl_word2.Focus();
