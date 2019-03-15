@@ -26,6 +26,7 @@ namespace SteelQuiz
             else
             {
                 InitializeComponent();
+                this.Text += $" | v{Application.ProductVersion}";
             }
         }
 

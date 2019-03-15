@@ -13,6 +13,34 @@ namespace SteelQuiz
     {
         public static WordPair GenerateWordPair()
         {
+            if (QuizCore.QuizProgress.FullTestInProgress)
+            {
+                return GenerateWordPairWithoutAI();
+            }
+            else
+            {
+                return GenerateWordPairAI();
+            }
+        }
+
+        public static WordPair GenerateWordPairWithoutAI()
+        {
+            var wordsNotToAsk_Indexes = new List<int>();
+            var wordsNotToAsk = QuizCore.QuizProgress.WordsNotToAsk();
+            for (int i = 0; i < QuizCore.Quiz.WordPairs.Length; ++i)
+            {
+                if (wordsNotToAsk.Contains(QuizCore.Quiz.WordPairs[i]))
+                {
+                    wordsNotToAsk_Indexes.Add(i);
+                }
+            }
+
+            var rndIndex = new Random().RandomNext(0, QuizCore.Quiz.WordPairs.Length, wordsNotToAsk_Indexes.ToArray());
+            return QuizCore.Quiz.WordPairs[rndIndex];
+        }
+
+        public static WordPair GenerateWordPairAI()
+        {
             if (QuizCore.QuizProgress.CurrentWordPair != null)
             {
                 return QuizCore.QuizProgress.CurrentWordPair;
@@ -96,7 +124,7 @@ namespace SteelQuiz
             }
         }
 
-        private static void NewRound()
+        public static void NewRound()
         {
             const int MINIMUM_TRIES_COUNT_TO_CONSIDER_SKIPPING = 2;
 
@@ -128,7 +156,9 @@ namespace SteelQuiz
 
                 var dontAskAgainPrb = dontAskProb(wordPairData.GetSuccessRate(), wordPairData.GetWordTriesCount());
 
-                if (wordPairData.GetWordTriesCount() >= MINIMUM_TRIES_COUNT_TO_CONSIDER_SKIPPING && rnd.NextBool(dontAskAgainPrb))
+                if (!QuizCore.QuizProgress.FullTestInProgress
+                    && wordPairData.GetWordTriesCount() >= MINIMUM_TRIES_COUNT_TO_CONSIDER_SKIPPING
+                    && rnd.NextBool(dontAskAgainPrb))
                 {
                     wordPairData.SkipThisRound = true;
                     ++skipCount;
@@ -151,14 +181,23 @@ namespace SteelQuiz
                     if (allSuccess100)
                     {
                         QuizCore.QuizProgress.MasterNoticeShowed = true;
-                        MessageBox.Show("Congratulations! It seems that you have mastered this quiz. " +
-                            "Repeat it to make sure you don't forget it, and don't remember to do a full test of the words to make sure you still know them all.",
-                            "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        var msg = MessageBox.Show("Congratulations! It seems that you have mastered this quiz. " +
+                            "Repeat it to make sure you don't forget it, and don't remember to do a full test of the words to make sure you still know them all."
+                            + "\r\n\r\nPerform a full test now?",
+                            "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+                        if (msg == DialogResult.Yes)
+                        {
+                            Program.inQuiz.SwitchAIMode();
+                            return;
+                        }
                     }
                 }
 
                 // if all words are skipped, select five random words to ask (remove skip sign)
-                var toAsk = new Random().RandomUnique(0, QuizCore.QuizProgress.WordProgDatas.Count, 5);
+                const int MAXIMUM_WORDS_TO_GENERATE = 5;
+                var toAsk = new Random().RandomUnique(0, QuizCore.QuizProgress.WordProgDatas.Count,
+                    QuizCore.QuizProgress.WordProgDatas.Count >= MAXIMUM_WORDS_TO_GENERATE ? MAXIMUM_WORDS_TO_GENERATE : QuizCore.QuizProgress.WordProgDatas.Count);
                 for (int i = 0; i < QuizCore.QuizProgress.WordProgDatas.Count; ++i)
                 {
                     if (toAsk.Contains(i))

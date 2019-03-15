@@ -55,7 +55,8 @@ namespace SteelQuiz
                         else if (inWord2)
                         {
                             word2 = FixString(foundStr);
-                            wordPairs.Add(new WordPair(word1, word2, WordPair.Rules.IgnoreCapitalization | WordPair.Rules.IgnoreExclamation));
+                            //wordPairs.Add(new WordPair(word1, word2, WordPair.Rules.IgnoreCapitalization | WordPair.Rules.IgnoreExclamation));
+                            wordPairs.ChkAddWordPair(word1, word2, WordPair.Rules.IgnoreCapitalization | WordPair.Rules.IgnoreExclamation);
                             word1 = "";
                             word2 = "";
                             inWord2 = false;
@@ -88,20 +89,54 @@ namespace SteelQuiz
                 return false;
             }
 
+            if (wordPairs.Count == 1 && wordPairs[0].Word2 == "points")
+            {
+                MessageBox.Show("This exercise cannot be imported to SteelQuiz. Only spelling exercises can be imported from Studentlitteratur",
+                    "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
             var quiz = new Quiz(lang1, lang2, MetaData.QUIZ_FILE_FORMAT_VERSION);
             quiz.WordPairs = wordPairs.ToArray();
-            QuizCore.Load(quiz);
             
             if (filename == "")
             {
                 filename = QuizCore.Quiz.GUID.ToString();
             }
-            QuizCore.SaveQuiz(filename + QuizCore.QUIZ_EXTENSION);
+            QuizCore.Load(quiz, Path.Combine(QuizCore.QUIZ_FOLDER, filename + QuizCore.QUIZ_EXTENSION));
+            QuizCore.SaveQuiz();
 
             return true;
         }
 
-        public static string FixString(string str)
+        private static void ChkAddWordPair(this IList<WordPair> wpList, string word1, string word2, WordPair.Rules rules)
+        {
+            foreach (var wp in wpList)
+            {
+                if (word1 == wp.Word1)
+                {
+                    if (word2 == wp.Word2)
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        wp.Word2Synonyms.Add(word2);
+                        return;
+                    }
+                }
+                else if (word2 == wp.Word2)
+                {
+                    wp.Word1Synonyms.Add(word1);
+                    return;
+                }
+            }
+
+            var wordPair = new WordPair(word1, word2, rules);
+            wpList.Add(wordPair);
+        }
+
+        private static string FixString(string str)
         {
             return str
                 .Replace(@"\u00e5", "å")

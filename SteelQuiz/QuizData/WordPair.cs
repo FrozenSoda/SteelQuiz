@@ -10,20 +10,30 @@ namespace SteelQuiz.QuizData
     public class WordPair
     {
         public string Word1 { get; set; }
-        public string[] Word1Synonyms { get; set; }
+        public List<string> Word1Synonyms { get; set; }
 
         public string Word2 { get; set; }
-        public string[] Word2Synonyms { get; set; }
+        public List<string> Word2Synonyms { get; set; }
 
         public Rules TranslationRules { get; set; }
 
-        public WordPair(string word1, string word2, Rules translationRules, string[] word1Synonyms = null, string[] word2Synonyms = null)
+        public WordPair(string word1, string word2, Rules translationRules, List<string> word1Synonyms = null, List<string> word2Synonyms = null)
         {
             Word1 = word1;
             Word2 = word2;
             TranslationRules = translationRules;
             Word1Synonyms = word1Synonyms;
             Word2Synonyms = word2Synonyms;
+
+            if (Word1Synonyms == null)
+            {
+                Word1Synonyms = new List<string>();
+            }
+
+            if (Word2Synonyms == null)
+            {
+                Word2Synonyms = new List<string>();
+            }
         }
 
         [Flags]
@@ -48,9 +58,9 @@ namespace SteelQuiz.QuizData
 
             return
                 this.Word1 == wp2.Word1 &&
-                this.Word1Synonyms == wp2.Word1Synonyms &&
+                this.Word1Synonyms.SequenceEqual(wp2.Word1Synonyms) &&
                 this.Word2 == wp2.Word2 &&
-                this.Word2Synonyms == wp2.Word2Synonyms &&
+                this.Word2Synonyms.SequenceEqual(wp2.Word2Synonyms) &&
                 this.TranslationRules == wp2.TranslationRules;
         }
 

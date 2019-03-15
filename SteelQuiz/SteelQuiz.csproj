@@ -64,6 +64,7 @@
     </Compile>
     <Compile Include="MetaData.cs" />
     <Compile Include="QuizAI.cs" />
+    <Compile Include="QuizCompatibilityConverter.cs" />
     <Compile Include="QuizData\Quiz.cs" />
     <Compile Include="QuizImporter.cs" />
     <Compile Include="QuizProgressData\CfgQuizzesProgressData.cs" />

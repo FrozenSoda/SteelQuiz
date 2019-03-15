@@ -15,6 +15,7 @@ namespace SteelQuiz
         public Welcome()
         {
             InitializeComponent();
+            this.Text += $" | v{Application.ProductVersion}";
         }
 
         private void btn_importQuizFromSite_Click(object sender, EventArgs e)
@@ -35,7 +36,11 @@ namespace SteelQuiz
             {
                 try
                 {
-                    QuizCore.Load(ofd_loadQuiz.FileName);
+                    var load = QuizCore.Load(ofd_loadQuiz.FileName);
+                    if (!load)
+                    {
+                        return;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -43,8 +48,8 @@ namespace SteelQuiz
                     return;
                 }
 
-                var inQuiz = new InQuiz();
-                inQuiz.Show();
+                Program.inQuiz = new InQuiz();
+                Program.inQuiz.Show();
                 Hide();
             }
         }

@@ -17,6 +17,7 @@ namespace SteelQuiz.QuizProgressData
         public WordPair CurrentWordPair { get; private set; } = null;
 
         public bool MasterNoticeShowed { get; set; } = false; // RESET THIS PROPERTY AFTER LOADING
+        public bool FullTestInProgress { get; set; } = false;
 
         public QuizProgData(Quiz quiz)
         {

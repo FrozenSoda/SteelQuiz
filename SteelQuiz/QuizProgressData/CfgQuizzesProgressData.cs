@@ -8,10 +8,12 @@ namespace SteelQuiz.QuizProgressData
 {
     public class CfgQuizzesProgressData
     {
+        public string QuizFileFormatVersion { get; set; }
         public List<QuizProgData> QuizProgDatas { get; set; }
 
         public CfgQuizzesProgressData()
         {
+            QuizFileFormatVersion = MetaData.QUIZ_FILE_FORMAT_VERSION;
             QuizProgDatas = new List<QuizProgData>();
         }
     }

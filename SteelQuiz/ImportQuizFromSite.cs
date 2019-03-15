@@ -17,6 +17,7 @@ namespace SteelQuiz
         public ImportQuizFromSite()
         {
             InitializeComponent();
+            this.Text += $" | v{Application.ProductVersion}";
         }
 
         private void btn_import_Click(object sender, EventArgs e)
@@ -32,7 +33,9 @@ namespace SteelQuiz
                 }
             }
 
-            if (File.Exists(Path.Combine(QuizCore.QUIZ_FOLDER, quizFilename + QuizCore.QUIZ_EXTENSION)))
+            var quizPath = Path.Combine(QuizCore.QUIZ_FOLDER, quizFilename + QuizCore.QUIZ_EXTENSION);
+
+            if (File.Exists(quizPath))
             {
                 var msg = MessageBox.Show("A quiz with this name already exists. Replace?", "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (msg == DialogResult.No)
@@ -45,7 +48,7 @@ namespace SteelQuiz
             var success = false;
             if (rdo_studentlitteratur.Checked)
             {
-                success = QuizImporter.FromStudentlitteratur(url, txt_lang1.Text, txt_lang2.Text, quizFilename);
+                success = QuizImporter.FromStudentlitteratur(url, txt_lang1.Text, txt_lang2.Text, quizPath);
             }
 
             if (success)
