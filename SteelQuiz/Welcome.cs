@@ -23,8 +23,8 @@ namespace SteelQuiz
             var import = new ImportQuizFromSite();
             if (import.ShowDialog() == DialogResult.OK)
             {
-                var inQuiz = new InQuiz();
-                inQuiz.Show();
+                Program.inQuiz = new InQuiz();
+                Program.inQuiz.Show();
                 Hide();
             }
         }

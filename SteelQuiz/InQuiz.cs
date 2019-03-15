@@ -173,6 +173,7 @@ namespace SteelQuiz
 
         public void SwitchAIMode()
         {
+            QuizAI.SkipNextMasterNotice = true;
             QuizCore.QuizProgress.FullTestInProgress = !QuizCore.QuizProgress.FullTestInProgress;
             QuizAI.NewRound();
             NewWord();

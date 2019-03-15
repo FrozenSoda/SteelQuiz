@@ -33,7 +33,7 @@ namespace SteelQuiz
                 }
             }
 
-            var quizPath = Path.Combine(QuizCore.QUIZ_FOLDER, quizFilename + QuizCore.QUIZ_EXTENSION);
+            var quizPath = Path.Combine(QuizCore.QUIZ_FOLDER, quizFilename); //without extension
 
             if (File.Exists(quizPath))
             {

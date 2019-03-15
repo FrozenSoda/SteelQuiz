@@ -11,8 +11,15 @@ namespace SteelQuiz
 {
     public static class QuizAI
     {
+        public static bool SkipNextMasterNotice { get; set; } = false;
+
         public static WordPair GenerateWordPair()
         {
+            if (QuizCore.QuizProgress.CurrentWordPair != null)
+            {
+                return QuizCore.QuizProgress.CurrentWordPair;
+            }
+
             if (QuizCore.QuizProgress.FullTestInProgress)
             {
                 return GenerateWordPairWithoutAI();
@@ -25,27 +32,36 @@ namespace SteelQuiz
 
         public static WordPair GenerateWordPairWithoutAI()
         {
-            var wordsNotToAsk_Indexes = new List<int>();
             var wordsNotToAsk = QuizCore.QuizProgress.WordsNotToAsk();
+
+            if (wordsNotToAsk.Length == QuizCore.Quiz.WordPairs.Length)
+            {
+                NewRound();
+                return null;
+            }
+
+            var wordsNotToAsk_Indexes = new List<int>();
+
             for (int i = 0; i < QuizCore.Quiz.WordPairs.Length; ++i)
             {
-                if (wordsNotToAsk.Contains(QuizCore.Quiz.WordPairs[i]))
+                for (int j = 0; j < wordsNotToAsk.Length; ++j)
                 {
-                    wordsNotToAsk_Indexes.Add(i);
+                    if (QuizCore.Quiz.WordPairs[i].Equals(wordsNotToAsk[j]))
+                    {
+                        wordsNotToAsk_Indexes.Add(i);
+                    }
                 }
             }
 
             var rndIndex = new Random().RandomNext(0, QuizCore.Quiz.WordPairs.Length, wordsNotToAsk_Indexes.ToArray());
-            return QuizCore.Quiz.WordPairs[rndIndex];
+            var wordPair = QuizCore.Quiz.WordPairs[rndIndex];
+            QuizCore.QuizProgress.SetCurrentWordPair(wordPair);
+            QuizCore.SaveProgress();
+            return wordPair;
         }
 
         public static WordPair GenerateWordPairAI()
         {
-            if (QuizCore.QuizProgress.CurrentWordPair != null)
-            {
-                return QuizCore.QuizProgress.CurrentWordPair;
-            }
-
             var alreadyAsked = QuizCore.QuizProgress.WordsNotToAsk();
 
             if (alreadyAsked.Length == QuizCore.Quiz.WordPairs.Length)
@@ -180,16 +196,23 @@ namespace SteelQuiz
 
                     if (allSuccess100)
                     {
-                        QuizCore.QuizProgress.MasterNoticeShowed = true;
-                        var msg = MessageBox.Show("Congratulations! It seems that you have mastered this quiz. " +
-                            "Repeat it to make sure you don't forget it, and don't remember to do a full test of the words to make sure you still know them all."
-                            + "\r\n\r\nPerform a full test now?",
-                            "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-
-                        if (msg == DialogResult.Yes)
+                        if (!SkipNextMasterNotice)
                         {
-                            Program.inQuiz.SwitchAIMode();
-                            return;
+                            QuizCore.QuizProgress.MasterNoticeShowed = true;
+                            var msg = MessageBox.Show("Congratulations! It seems that you have mastered this quiz. " +
+                                "Repeat it to make sure you don't forget it, and don't remember to do a full test of the words to make sure you still know them all."
+                                + "\r\n\r\nPerform a full test now?",
+                                "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+                            if (msg == DialogResult.Yes)
+                            {
+                                Program.inQuiz.SwitchAIMode();
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            SkipNextMasterNotice = false;
                         }
                     }
                 }
