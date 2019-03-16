@@ -72,6 +72,7 @@
     <Compile Include="QuizProgressData\WordProgData.cs" />
     <Compile Include="QuizCore.cs" />
     <Compile Include="Config.cs" />
+    <Compile Include="StringComp.cs" />
     <Compile Include="SUtil.cs" />
     <Compile Include="TermsOfUse.cs">
       <SubType>Form</SubType>

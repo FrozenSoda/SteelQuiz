@@ -80,9 +80,9 @@ namespace SteelQuiz
         private void CheckWord()
         {
             lbl_lang1.Text = "Info";
-            var wrongCh = currentWordPair.WrongChIndexes(currentInput, translationMode, !userCopyWord);
+            var mismatch = currentWordPair.CharacterMismatches(currentInput, translationMode, !userCopyWord);
             userCopyWord = false;
-            if (wrongCh.Length == 0)
+            if (mismatch.Correct())
             {
                 lbl_word1.Text = "Correct! Press enter to continue";
                 waitingForEnter = true;

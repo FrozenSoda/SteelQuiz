@@ -15,9 +15,9 @@ namespace SteelQuiz.QuizData
         public string Word2 { get; set; }
         public List<string> Word2Synonyms { get; set; }
 
-        public Rules TranslationRules { get; set; }
+        public StringComp.Rules TranslationRules { get; set; }
 
-        public WordPair(string word1, string word2, Rules translationRules, List<string> word1Synonyms = null, List<string> word2Synonyms = null)
+        public WordPair(string word1, string word2, StringComp.Rules translationRules, List<string> word1Synonyms = null, List<string> word2Synonyms = null)
         {
             Word1 = word1;
             Word2 = word2;
@@ -34,13 +34,6 @@ namespace SteelQuiz.QuizData
             {
                 Word2Synonyms = new List<string>();
             }
-        }
-
-        [Flags]
-        public enum Rules
-        {
-            IgnoreCapitalization,
-            IgnoreExclamation
         }
 
         public enum TranslationMode
@@ -77,9 +70,66 @@ namespace SteelQuiz.QuizData
             throw new Exception("No word progress data could be found for this word pair");
         }
 
+        public StringComp.CharacterMismatch CharacterMismatches(string input, TranslationMode translationMode, bool updateProgress = true)
+        {
+            var mismatches = new List<StringComp.CharacterMismatch>();
+            if (translationMode == TranslationMode.L1_to_L2)
+            {
+                mismatches.Add(StringComp.CharacterMismatches(Word2, input, TranslationRules));
+                foreach (var synonym in Word2Synonyms)
+                {
+                    mismatches.Add(StringComp.CharacterMismatches(synonym, input, TranslationRules));
+                }
+            }
+            else if (translationMode == TranslationMode.L2_to_L1)
+            {
+                mismatches.Add(StringComp.CharacterMismatches(Word1, input, TranslationRules));
+                foreach (var synonym in Word1Synonyms)
+                {
+                    mismatches.Add(StringComp.CharacterMismatches(synonym, input, TranslationRules));
+                }
+            }
+            else
+            {
+                throw new NotImplementedException("Error in WordPair.CharacterMismatches: All translation modes hasn't been implemented!");
+            }
+
+            // find CharacterMismatch with the least mismatch
+            StringComp.CharacterMismatch bestCharacterMismatch = null;
+            foreach (var mismatch in mismatches)
+            {
+                if (bestCharacterMismatch == null)
+                {
+                    bestCharacterMismatch = mismatch;
+                }
+                else
+                {
+                    if (mismatch.Cmp.Length <= bestCharacterMismatch.Cmp.Length && mismatch.Input.Length <= bestCharacterMismatch.Input.Length)
+                    {
+                        bestCharacterMismatch = mismatch;
+                    }
+                }
+            }
+
+            if (updateProgress)
+            {
+                GetWordProgData().AddWordTry(new WordTry(bestCharacterMismatch.Correct()));
+                QuizCore.SaveProgress();
+            }
+
+            if (bestCharacterMismatch.Correct())
+            {
+                GetWordProgData().AskedThisRound = true;
+                QuizCore.QuizProgress.SetCurrentWordPair(null);
+            }
+
+            return bestCharacterMismatch;
+        }
+
         /*
          * Synonyms should be implemented
          */
+         /*
         public int[] WrongChIndexes(string comp, TranslationMode translationMode, bool updateProgress = true)
         {
             var incorrectIndexes = new List<int>();
@@ -175,5 +225,6 @@ namespace SteelQuiz.QuizData
 
             return incorrectIndexes.ToArray();
         }
+        */
     }
 }
