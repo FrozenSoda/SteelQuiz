@@ -33,7 +33,7 @@ namespace SteelQuiz
                 }
             }
 
-            var quizPath = Path.Combine(QuizCore.QUIZ_FOLDER, quizFilename); //without extension
+            var quizPath = Path.Combine(QuizCore.QUIZ_FOLDER, quizFilename) + QuizCore.QUIZ_EXTENSION;
 
             if (File.Exists(quizPath))
             {
@@ -48,7 +48,7 @@ namespace SteelQuiz
             var success = false;
             if (rdo_studentlitteratur.Checked)
             {
-                success = QuizImporter.FromStudentlitteratur(url, txt_lang1.Text, txt_lang2.Text, quizPath);
+                success = QuizImporter.FromStudentlitteratur(url, txt_lang1.Text, txt_lang2.Text, quizFilename);
             }
 
             if (success)

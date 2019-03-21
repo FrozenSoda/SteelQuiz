@@ -28,6 +28,168 @@ namespace SteelQuiz
                 return false;
             }
 
+            WordPair[] wordPairs = null;
+
+            if (quizEncoded.Contains("_____"))
+            {
+                wordPairs = FromStudentlitteratur_VocabularyBank(quizEncoded);
+            }
+            else
+            {
+                wordPairs = FromStudentlitteratur_Wordmatch(quizEncoded);
+            }
+            
+
+            if (wordPairs.Length == 0)
+            {
+                MessageBox.Show("No quiz could be found in the quiz url specified. Make sure you selected the correct quiz source, and entered the URL correctly",
+                    "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            if (wordPairs.Length == 1)
+            {
+                var msg = MessageBox.Show("SteelQuiz might not be able to import this particular quiz correctly. It might contain errors.\r\n\r\nTry anyway?",
+                    "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button3);
+                if (msg == DialogResult.No)
+                {
+                    return false;
+                }
+            }
+
+            var quiz = new Quiz(lang1, lang2, MetaData.QUIZ_FILE_FORMAT_VERSION);
+            quiz.WordPairs = wordPairs;
+            
+            if (filename == "")
+            {
+                //filename = QuizCore.Quiz.GUID.ToString();
+                filename = quiz.GUID.ToString();
+            }
+            var path = Path.Combine(QuizCore.QUIZ_FOLDER, filename + QuizCore.QUIZ_EXTENSION);
+            QuizCore.Load(quiz, path);
+            QuizCore.SaveQuiz();
+
+            return true;
+        }
+
+        [Flags]
+        private enum InString
+        {
+            DoubleQuote = 2 << 3,
+            SingleQuote = 2 << 2,
+            Colon = 2 << 1,
+            None = 2 << 0
+        }
+
+        private static Dictionary<char, InString> InStringForChars = new Dictionary<char, InString>()
+        {
+            { '"', InString.DoubleQuote },
+            { '\'', InString.SingleQuote },
+            { ':', InString.Colon }
+        };
+
+        private static WordPair[] FromStudentlitteratur_VocabularyBank(string quizEncoded)
+        {
+            var foundStr = "";
+            var inString = InString.None;
+
+            var inQuiz = false;
+            var inWordChk = false;
+            var word1 = "";
+            var word2 = "";
+            var inWord = false;
+
+            var wordPairs = new List<WordPair>();
+
+            for (int i = 0; i < quizEncoded.Length; ++i)
+            {
+                var ch = quizEncoded[i];
+                if (ch == '"' || (!inString.HasFlag(InString.DoubleQuote) && (ch == ':' || ch == ',')))
+                {
+                    if (ch == ',')
+                    {
+                        if (ch == ',')
+                        {
+                            inString &= ~InString.Colon;
+                        }
+                    }
+                    else
+                    {
+                        if (inString.HasFlag(InStringForChars[ch]))
+                        {
+                            inString &= ~InStringForChars[ch];
+                            if (ch == '"')
+                            {
+                                inString &= ~InString.Colon;
+                            }
+                        }
+                        else
+                        {
+                            inString |= InStringForChars[ch];
+                            if (ch == '"')
+                            {
+                                foundStr = foundStr.Replace("{", "").Replace("[", "");
+                            }
+                        }
+                    }
+
+                    if (inString == InString.None)
+                    {
+                        if (inWordChk)
+                        {
+                            if (foundStr == "true")
+                            {
+                                wordPairs.ChkAddWordPair(word1, word2, StringComp.Rules.IgnoreCapitalization | StringComp.Rules.IgnoreExclamation);
+                                word2 = "";
+                            }
+                            inWordChk = false;
+                        }
+                        else if (inWord)
+                        {
+                            if (foundStr.Contains("_____") && foundStr.Contains("(<i>"))
+                            {
+                                word1 = FixString(foundStr.Split(new string[] { "(<i>" }, StringSplitOptions.None)[1]
+                                        .Split(new string[] { @"<\/i>)" }, StringSplitOptions.None)[0]);
+                            }
+                            else
+                            {
+                                word2 = FixString(foundStr);
+                            }
+                            inWord = false;
+                        }
+                        else
+                        {
+                            if (foundStr == "parts")
+                            {
+                                inQuiz = true;
+                            }
+                            else if (inQuiz)
+                            {
+                                if (foundStr == "text")
+                                {
+                                    inWord = true;
+                                }
+                                else if (foundStr == "correct")
+                                {
+                                    inWordChk = true;
+                                }
+                            }
+                        }
+
+                        foundStr = "";
+                    }
+                }
+                else if (inString != InString.None)
+                {
+                    foundStr += ch;
+                }
+            }
+
+            return wordPairs.ToArray();
+        }
+
+        private static WordPair[] FromStudentlitteratur_Wordmatch(string quizEncoded)
+        {
             var foundStr = "";
             var inString = false;
 
@@ -44,6 +206,7 @@ namespace SteelQuiz
                 if (ch == '"')
                 {
                     inString = !inString;
+
                     if (!inString)
                     {
                         //process found string
@@ -82,31 +245,7 @@ namespace SteelQuiz
                 }
             }
 
-            if (wordPairs.Count == 0)
-            {
-                MessageBox.Show("No quiz could be found in the quiz url specified. Make sure you selected the correct quiz source, and entered the URL correctly",
-                    "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-
-            if (wordPairs.Count == 1 && wordPairs[0].Word2 == "points")
-            {
-                MessageBox.Show("This exercise cannot be imported to SteelQuiz. Only spelling exercises can be imported from Studentlitteratur",
-                    "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-
-            var quiz = new Quiz(lang1, lang2, MetaData.QUIZ_FILE_FORMAT_VERSION);
-            quiz.WordPairs = wordPairs.ToArray();
-            
-            if (filename == "")
-            {
-                filename = QuizCore.Quiz.GUID.ToString();
-            }
-            QuizCore.Load(quiz, Path.Combine(QuizCore.QUIZ_FOLDER, filename + QuizCore.QUIZ_EXTENSION));
-            QuizCore.SaveQuiz();
-
-            return true;
+            return wordPairs.ToArray();
         }
 
         private static void ChkAddWordPair(this IList<WordPair> wpList, string word1, string word2, StringComp.Rules rules)

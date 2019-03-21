@@ -8,6 +8,12 @@ namespace SteelQuiz
 {
     public class Config
     {
+        public string FileFormatVersion { get; set; }
         public bool AcceptedTermsOfUse { get; set; } = false;
+
+        public Config()
+        {
+            FileFormatVersion = MetaData.QUIZ_FILE_FORMAT_VERSION;
+        }
     }
 }

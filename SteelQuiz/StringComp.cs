@@ -70,6 +70,8 @@ namespace SteelQuiz
                                 break;
                             }
                         }
+
+                        mismatchInput.Add(j);
                     }
                 }
 
@@ -83,7 +85,7 @@ namespace SteelQuiz
             for (int i = 0; i < input.Length; ++i)
             {
                 var found = false;
-                for (int j = 0; j < cmp.Length; ++j)
+                for (int j = jCurrent; j < cmp.Length; ++j)
                 {
                     if (input[i] == cmp[j])
                     {
@@ -112,6 +114,8 @@ namespace SteelQuiz
                                 break;
                             }
                         }
+
+                        mismatchCmp.Add(j);
                     }
                 }
 

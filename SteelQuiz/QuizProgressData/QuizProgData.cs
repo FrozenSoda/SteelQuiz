@@ -16,7 +16,14 @@ namespace SteelQuiz.QuizProgressData
         [JsonProperty] // required for deserialization of property with private setter
         public WordPair CurrentWordPair { get; private set; } = null;
 
-        public bool MasterNoticeShowed { get; set; } = false; // RESET THIS PROPERTY AFTER LOADING
+        /*
+         * True if the question to perform a full test has been asked (during this application instance)
+         * 
+         * RESET THIS PROPERTY AFTER LOADING PROGRESS DATA
+         */
+        public bool MasterNoticeShowed { get; set; } = false;
+
+
         public bool FullTestInProgress { get; set; } = false;
 
         public QuizProgData(Quiz quiz)

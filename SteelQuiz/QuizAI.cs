@@ -96,6 +96,9 @@ namespace SteelQuiz
                 sum += askPrb;
                 if (r <= sum)
                 {
+                    // Select which synonym of the word to ask for
+
+
                     QuizCore.QuizProgress.SetCurrentWordPair(wordPairData.WordPair);
                     QuizCore.SaveProgress();
                     return wordPairData.WordPair;

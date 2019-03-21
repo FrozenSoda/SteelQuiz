@@ -17,7 +17,11 @@ namespace SteelQuiz
 
         public static void LoadConfig()
         {
-            QuizCore.CheckInitDirectories();
+            var dirInit = QuizCore.CheckInitDirectories();
+            if (!dirInit)
+            {
+                return;
+            }
 
             if (File.Exists(CONFIG_PATH))
             {
@@ -45,7 +49,11 @@ namespace SteelQuiz
 
         public static void SaveConfig()
         {
-            QuizCore.CheckInitDirectories();
+            var dirInit = QuizCore.CheckInitDirectories();
+            if (!dirInit)
+            {
+                return;
+            }
 
             try
             {

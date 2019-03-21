@@ -15,8 +15,10 @@ namespace SteelQuiz
     {
         public const string QUIZ_EXTENSION = ".steelquiz";
         public static readonly string APP_CFG_FOLDER = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SteelQuiz");
+        public static readonly string BACKUP_FOLDER = Path.Combine(APP_CFG_FOLDER, "Backups");
         public static readonly string QUIZ_FOLDER = Path.Combine(APP_CFG_FOLDER, "Quizzes");
-        public static readonly string PROGRESS_CFG_PATH = Path.Combine(APP_CFG_FOLDER, "QuizProgress.json");
+        public static readonly string QUIZ_BACKUP_FOLDER = Path.Combine(QUIZ_FOLDER, "Backups");
+        public static readonly string PROGRESS_FILE_PATH = Path.Combine(APP_CFG_FOLDER, "QuizProgress.json");
 
         public static Quiz Quiz { get; set; }
         public static QuizProgData QuizProgress { get; set; }
@@ -32,30 +34,52 @@ namespace SteelQuiz
                 throw new FileNotFoundException("The quiz file cannot be found");
             }
 
-            Quiz quiz;
+            dynamic quiz;
             using (var reader = new StreamReader(quizPath))
             {
                 quiz = JsonConvert.DeserializeObject<Quiz>(reader.ReadToEnd());
             }
+
             QuizPath = quizPath;
-            return Load(quiz);
+
+            var quizConverted = QuizCompatibilityConverter.ChkUpgradeQuiz(quiz);
+            if (quizConverted != null)
+            {
+                return Load(quiz);
+            }
+            else
+            {
+                return false;
+            }
         }
 
-        public static void CheckInitDirectories()
+        public static bool CheckInitDirectories()
         {
-            if (!Directory.Exists(APP_CFG_FOLDER))
+            try
             {
                 Directory.CreateDirectory(APP_CFG_FOLDER);
-            }
-            if (!Directory.Exists(QUIZ_FOLDER))
-            {
+                Directory.CreateDirectory(BACKUP_FOLDER);
                 Directory.CreateDirectory(QUIZ_FOLDER);
+                Directory.CreateDirectory(QUIZ_BACKUP_FOLDER);
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred while creating the application directories. The application will now shut down.\r\nError:\r\n\r\n" + ex.ToString(),
+                    "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+                return false;
+            }
+
+            return true;
         }
 
         public static bool Load(Quiz quiz, string quizPath = null)
         {
-            CheckInitDirectories();
+            var dirInit = CheckInitDirectories();
+            if (!dirInit)
+            {
+                return false;
+            }
 
             Quiz = quiz;
 
@@ -64,70 +88,49 @@ namespace SteelQuiz
                 QuizPath = quizPath;
             }
 
-            var quizVer = new Version(Quiz.QuizFileFormatVersion);
-            var currVer = new Version(MetaData.QUIZ_FILE_FORMAT_VERSION);
-
-            if (currVer.CompareTo(quizVer) > 0)
-            {
-                //conversion required
-
-                var msg = MessageBox.Show("The quiz file you have selected was made for an older version of SteelQuiz and must be converted to "
-                    + "the current format to load it. A backup will be created automatically, meaning that you won't lose anything when converting.\r\n\r\n"
-                    + "Warning! The quiz will probably be incompatible with older versions of SteelQuiz after the conversion. To use the quiz with "
-                    + "older versions of SteelQuiz after the conversion, you must use the backup quiz, which is created automatically."
-                    + "\r\n\r\nProceed with conversion?", "Quiz conversion required - SteelQuiz",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (msg == DialogResult.No)
-                {
-                    return false;
-                }
-
-                var bkp = BackupQuiz(quizVer);
-                if (!bkp)
-                {
-                    return false;
-                }
-
-                QuizCompatibilityConverter.UpgradeQuiz();
-            }
-
             return LoadProgressData();
-        }
-
-        private static bool BackupQuiz(Version quizVer)
-        {
-            var extStartIndex = QuizPath.Length - QUIZ_EXTENSION.Length;
-            var newQuizFileName = QuizPath.Insert(extStartIndex, "_" + quizVer.ToString());
-            var exCount = 1;
-            while (File.Exists(newQuizFileName)) {
-                ++exCount;
-                newQuizFileName = QuizPath.Insert(extStartIndex, "_" + quizVer.ToString() + "_" + exCount);
-            }
-
-            try
-            {
-                File.Copy(QuizPath, newQuizFileName);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occurred while backing up the quiz, the conversion will not run:\r\n\r\n" + ex.ToString(), "SteelQuiz", MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-                return false;
-            }
-
-            return true;
         }
 
         private static bool LoadProgressData()
         {
-            CfgQuizzesProgressData cfgDz;
+            dynamic cfgDz_dyn;
 
-            if (File.Exists(PROGRESS_CFG_PATH))
+            if (File.Exists(PROGRESS_FILE_PATH))
             {
-                using (var reader = new StreamReader(PROGRESS_CFG_PATH))
+                using (var reader = new StreamReader(PROGRESS_FILE_PATH))
+                {
+                    cfgDz_dyn = JsonConvert.DeserializeObject(reader.ReadToEnd());
+                }
+                var progressVer = SUtil.PropertyDefined(cfgDz_dyn.FileFormatVersion) && cfgDz_dyn.FileFormatVersion != null
+                    ? new Version((string)cfgDz_dyn.FileFormatVersion) : new Version(1, 0, 0);
+                var currVer = new Version(MetaData.QUIZ_FILE_FORMAT_VERSION);
+                if (currVer.CompareTo(progressVer) > 0)
+                {
+                    //conversion required
+
+                    var msg = MessageBox.Show("The progress data files for SteelQuiz on the computer was made for an older version of SteelQuiz and must be converted to "
+                        + "the current format to load it. A backup will be created automatically, meaning that you won't lose anything when converting.\r\n\r\n"
+                        + "Warning! To use older version of SteelQuiz, you must revert the files in %appdata%\\SteelQuiz to the corresponding backups, which are "
+                        + "created automatically in %appdata%\\SteelQuiz\\Backups"
+                        + "\r\n\r\nProceed with conversion?", "Quiz conversion required - SteelQuiz",
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (msg == DialogResult.No)
+                    {
+                        return false;
+                    }
+
+                    var bkp = QuizCompatibilityConverter.BackupProgress(progressVer);
+                    if (!bkp)
+                    {
+                        return false;
+                    }
+                }
+                CfgQuizzesProgressData cfgDz;
+                using (var reader = new StreamReader(PROGRESS_FILE_PATH))
                 {
                     cfgDz = JsonConvert.DeserializeObject<CfgQuizzesProgressData>(reader.ReadToEnd());
                 }
+                cfgDz.FileFormatVersion = MetaData.QUIZ_FILE_FORMAT_VERSION;
 
                 //find progress for current quiz
                 bool found = false;
@@ -169,9 +172,9 @@ namespace SteelQuiz
 
             // DESERIALIZE AND PROCESS
             CfgQuizzesProgressData cfgDz;
-            if (File.Exists(PROGRESS_CFG_PATH))
+            if (File.Exists(PROGRESS_FILE_PATH))
             {
-                using (var reader = new StreamReader(PROGRESS_CFG_PATH))
+                using (var reader = new StreamReader(PROGRESS_FILE_PATH))
                 {
                     cfgDz = JsonConvert.DeserializeObject<CfgQuizzesProgressData>(reader.ReadToEnd());
                 }
@@ -201,7 +204,7 @@ namespace SteelQuiz
 
             // SERIALIZE AND SAVE
             var cfgSz = JsonConvert.SerializeObject(cfgDz, Formatting.Indented);
-            using (var writer = new StreamWriter(PROGRESS_CFG_PATH, false))
+            using (var writer = new StreamWriter(PROGRESS_FILE_PATH, false))
             {
                 writer.Write(cfgSz);
             }
