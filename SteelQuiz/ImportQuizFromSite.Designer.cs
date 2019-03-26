@@ -40,6 +40,7 @@
             this.txt_lang2 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txt_quizName = new System.Windows.Forms.TextBox();
+            this.btn_urlHowToFind = new System.Windows.Forms.Button();
             this.flp_siteRdo.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,15 +69,15 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 58);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(23, 13);
+            this.label1.Size = new System.Drawing.Size(32, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Url:";
+            this.label1.Text = "URL:";
             // 
             // txt_url
             // 
-            this.txt_url.Location = new System.Drawing.Point(41, 55);
+            this.txt_url.Location = new System.Drawing.Point(50, 55);
             this.txt_url.Name = "txt_url";
-            this.txt_url.Size = new System.Drawing.Size(747, 20);
+            this.txt_url.Size = new System.Drawing.Size(657, 20);
             this.txt_url.TabIndex = 1;
             // 
             // btn_import
@@ -147,11 +148,22 @@
             this.txt_quizName.Size = new System.Drawing.Size(710, 20);
             this.txt_quizName.TabIndex = 4;
             // 
+            // btn_urlHowToFind
+            // 
+            this.btn_urlHowToFind.Location = new System.Drawing.Point(713, 53);
+            this.btn_urlHowToFind.Name = "btn_urlHowToFind";
+            this.btn_urlHowToFind.Size = new System.Drawing.Size(75, 23);
+            this.btn_urlHowToFind.TabIndex = 8;
+            this.btn_urlHowToFind.Text = "How to find";
+            this.btn_urlHowToFind.UseVisualStyleBackColor = true;
+            this.btn_urlHowToFind.Click += new System.EventHandler(this.btn_urlHowToFind_Click);
+            // 
             // ImportQuizFromSite
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btn_urlHowToFind);
             this.Controls.Add(this.txt_quizName);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txt_lang2);
@@ -188,5 +200,6 @@
         private System.Windows.Forms.TextBox txt_lang2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txt_quizName;
+        private System.Windows.Forms.Button btn_urlHowToFind;
     }
 }

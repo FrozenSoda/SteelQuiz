@@ -109,40 +109,6 @@ namespace SteelQuiz
             throw new Exception("Probability error at QuizAI.GenerateWordPair()");
         }
 
-        /*
-         * Inefficient method - waiting for occurrence in while loop
-         */
-        public static WordPair GenerateWordPair_old()
-        {
-            var alreadyAsked = QuizCore.QuizProgress.WordsNotToAsk(); //words already asked this round
-
-            if (alreadyAsked.Length == QuizCore.Quiz.WordPairs.Length)
-            {
-                //new round
-                NewRound();
-                return null;
-            }
-
-            while (true)
-            {
-                foreach (var wordPairData in QuizCore.QuizProgress.WordProgDatas.Where(x => !alreadyAsked.Contains(x.WordPair)))
-                {
-                    double askProb = 1 - wordPairData.GetSuccessRate() + 0.05;
-                    if (askProb > 1)
-                    {
-                        askProb = 1;
-                    }
-
-                    if (new Random().NextBool(askProb))
-                    {
-                        wordPairData.AskedThisRound = true;
-                        QuizCore.SaveProgress();
-                        return wordPairData.WordPair;
-                    }
-                }
-            }
-        }
-
         public static void NewRound()
         {
             const int MINIMUM_TRIES_COUNT_TO_CONSIDER_SKIPPING = 2;

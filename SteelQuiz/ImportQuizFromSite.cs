@@ -61,5 +61,15 @@ namespace SteelQuiz
         {
             DialogResult = DialogResult.Cancel;
         }
+
+        private void btn_urlHowToFind_Click(object sender, EventArgs e)
+        {
+            if (rdo_studentlitteratur.Checked)
+            {
+                MessageBox.Show("1. Start the exercise.\r\n2. Open developer tools in your browser (Ctrl+Shift+I in Chrome).\r\n" + 
+                    "3. Go to the Network tab.\r\n4. Write one word in the exercise and press ENTER.\r\n5. Double click the entry which appeared in the Network tab." +
+                    "\r\n6. Copy the URL of the opened tab and paste it in the URL field in SteelQuiz.", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
     }
 }

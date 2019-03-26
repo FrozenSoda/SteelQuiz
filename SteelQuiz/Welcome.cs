@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AutoUpdaterDotNET;
 
 namespace SteelQuiz
 {
@@ -16,6 +17,15 @@ namespace SteelQuiz
         {
             InitializeComponent();
             this.Text += $" | v{Application.ProductVersion}";
+
+            try
+            {
+                AutoUpdater.Start("https://raw.githubusercontent.com/steel9/SteelQuiz/master/Updater/update_meta.xml");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred during the update/update check:\r\n\r\n" + ex.ToString(), "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btn_importQuizFromSite_Click(object sender, EventArgs e)
