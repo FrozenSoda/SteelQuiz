@@ -105,7 +105,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Welcome";
-            this.Text = "SteelQuiz | Experimental closed beta";
+            this.Text = "SteelQuiz | Experimental alpha";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Welcome_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();

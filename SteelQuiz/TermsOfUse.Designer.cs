@@ -96,7 +96,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "TermsOfUse";
-            this.Text = "SteelQuiz | Experimental closed beta";
+            this.Text = "SteelQuiz | Experimental alpha";
             this.Load += new System.EventHandler(this.TermsOfUse_Load);
             this.ResumeLayout(false);
 
