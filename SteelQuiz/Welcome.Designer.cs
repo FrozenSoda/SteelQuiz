@@ -90,7 +90,7 @@
             this.lbl_copyright.Name = "lbl_copyright";
             this.lbl_copyright.Size = new System.Drawing.Size(351, 13);
             this.lbl_copyright.TabIndex = 4;
-            this.lbl_copyright.Text = "Experimental software | Copyright (C) 2019 steel9apps - All rights reserved";
+            this.lbl_copyright.Text = "Experimental software | Copyright (C) 2019 Steel9Apps - All rights reserved";
             // 
             // Welcome
             // 

@@ -14,7 +14,7 @@
 VIProductVersion "${PRODUCT_VERSION}"
 VIFileVersion "${PRODUCT_VERSION}"
 VIAddVersionKey "FileVersion" "${PRODUCT_VERSION}"
-VIAddVersionKey "LegalCopyright" "(C) 2019 steel9apps"
+VIAddVersionKey "LegalCopyright" "(C) 2019 Steel9Apps"
 VIAddVersionKey "FileDescription" "A quiz program designed to make learning words easier"
 
 ;General
@@ -74,6 +74,7 @@ Section "SteelQuiz" SecSteelQuiz
   ;Write the uninstall keys for Windows
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\SteelQuiz" "DisplayName" "SteelQuiz"
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\SteelQuiz" "UninstallString" '"$INSTDIR\uninstall.exe"'
+  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\SteelQuiz" "Publisher" "Steel9Apps"
   WriteRegDWORD HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\SteelQuiz" "NoModify" 1
   WriteRegDWORD HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\SteelQuiz" "NoRepair" 1
   

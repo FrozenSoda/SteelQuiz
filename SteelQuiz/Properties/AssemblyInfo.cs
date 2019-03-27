@@ -1,6 +1,6 @@
 ﻿/*
     SteelQuiz - A quiz program designed to make learning words easier
-    Copyright (C) 2019  steel9apps
+    Copyright (C) 2019  Steel9Apps
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("SteelQuiz")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany(company: "steel9apps")]
+[assembly: AssemblyCompany(company: "Steel9Apps")]
 [assembly: AssemblyProduct("SteelQuiz")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
