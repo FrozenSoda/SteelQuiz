@@ -8,6 +8,15 @@
   !include "MUI2.nsh"
 
 ;--------------------------------
+;Add version info
+!define PRODUCT_VERSION "0.3.3.0"
+
+VIProductVersion "${PRODUCT_VERSION}"
+VIFileVersion "${PRODUCT_VERSION}"
+VIAddVersionKey "FileVersion" "${PRODUCT_VERSION}"
+VIAddVersionKey "LegalCopyright" "(C) 2019 steel9apps"
+VIAddVersionKey "FileDescription" "A quiz program designed to make learning words easier"
+
 ;General
 
   ;Name and file
