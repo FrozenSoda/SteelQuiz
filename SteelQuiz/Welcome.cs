@@ -21,6 +21,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,6 +39,11 @@ namespace SteelQuiz
 
             try
             {
+                if (SUtil.DirectoryHasPermission(Path.GetDirectoryName(Application.ExecutablePath), System.Security.AccessControl.FileSystemRights.WriteData))
+                {
+                    // if application has write permissions to application folder, admin is not required
+                    AutoUpdater.RunUpdateAsAdmin = false;
+                }
                 AutoUpdater.Start("https://raw.githubusercontent.com/steel9/SteelQuiz/master/Updater/update_meta.xml");
             }
             catch (Exception ex)

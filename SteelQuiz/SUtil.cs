@@ -24,6 +24,9 @@ using System.Text;
 using System.Threading.Tasks;
 using SteelQuiz.QuizData;
 using Microsoft.CSharp.RuntimeBinder;
+using System.Security.AccessControl;
+using System.Security.Principal;
+using System.IO;
 
 namespace SteelQuiz
 {
@@ -72,50 +75,36 @@ namespace SteelQuiz
             return true;
         }
 
-        /*
-         * Returns an array with the indexes of the characters in input which matches cmp.
-         * For instance, if cmp is "hello" and input is "_hello", the function will return { 1, 2, 3, 4, 5 } (the "_" index is not in the array)
-         */
-        /*
-       public static int[] SubsequenceIndexes(string cmp, string input, StringComp.Rules rules)
-       {
-           var jCurrent = 0;
-           var subseq = new List<int>();
+        /// <summary>
+        /// Test a directory for create file access permissions
+        /// </summary>
+        /// <param name="DirectoryPath">Full path to directory </param>
+        /// <param name="AccessRight">File System right tested</param>
+        /// <returns>State [bool]</returns>
+        public static bool DirectoryHasPermission(string DirectoryPath, FileSystemRights AccessRight)
+        {
+            if (string.IsNullOrEmpty(DirectoryPath)) return false;
 
-           for (int i = 0; i < cmp.Length; ++i)
-           {
-               for (int j = jCurrent; j < input.Length; ++j)
-               {
-                   if (cmp[i] == input[j])
-                   {
-                       subseq.Add(j);
-                       ++jCurrent;
-                   }
-                   else
-                   {
-                       if (rules.HasFlag(WordPair.Rules.IgnoreCapitalization))
-                       {
-                           if (char.ToUpper(cmp[i]) == char.ToUpper(input[j]))
-                           {
-                               subseq.Add(j);
-                               ++jCurrent;
-                           }
-                       }
+            try
+            {
+                AuthorizationRuleCollection rules = Directory.GetAccessControl(DirectoryPath)
+                    .GetAccessRules(true, true, typeof(SecurityIdentifier));
+                WindowsIdentity identity = WindowsIdentity.GetCurrent();
 
-                       if (rules.HasFlag(WordPair.Rules.IgnoreExclamation))
-                       {
-                           if (cmp[i] == '!')
-                           {
-                               subseq.Add(j);
-                               ++jCurrent;
-                           }
-                       }
-                   }
-               }
-           }
-
-           return subseq.ToArray();
-       }
-       */
+                foreach (FileSystemAccessRule rule in rules)
+                {
+                    if (identity.Groups.Contains(rule.IdentityReference))
+                    {
+                        if ((AccessRight & rule.FileSystemRights) == AccessRight)
+                        {
+                            if (rule.AccessControlType == AccessControlType.Allow)
+                                return true;
+                        }
+                    }
+                }
+            }
+            catch { }
+            return false;
+        }
     }
 }
