@@ -63,7 +63,8 @@ namespace SteelQuiz
             var quizConverted = QuizCompatibilityConverter.ChkUpgradeQuiz(quiz);
             if (quizConverted != null)
             {
-                return Load(quiz);
+                //return Load(quiz);
+                return Load(quizConverted);
             }
             else
             {
