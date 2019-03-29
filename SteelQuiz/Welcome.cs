@@ -39,7 +39,8 @@ namespace SteelQuiz
 
             try
             {
-                if (SUtil.DirectoryHasPermission(Path.GetDirectoryName(Application.ExecutablePath), System.Security.AccessControl.FileSystemRights.WriteData))
+                if (SUtil.DirectoryHasPermission(Path.GetDirectoryName(Path.GetDirectoryName(Application.ExecutablePath)),
+                    System.Security.AccessControl.FileSystemRights.WriteData))
                 {
                     // if application has write permissions to application folder, admin is not required
                     AutoUpdater.RunUpdateAsAdmin = false;
