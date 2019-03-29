@@ -118,9 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="rtb_license.Text" xml:space="preserve">
-    <value>------------LICENSE OF STEELQUIZ------------
+    <value>LICENSE OF STEELQUIZ INCLUDING 3RD PARTY LIBRARIES
+
+THE LICENSE OF EACH APPLICATION/LIBRARY ARE PUT UNDER THE CORRESPONDING HEADING, FOR THAT APPLICATION/LIBRARY
+
+------------------------LICENSE OF STEELQUIZ------------------------
 				
-					GNU GENERAL PUBLIC LICENSE
+                    GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
  Copyright (C) 2007 Free Software Foundation, Inc. &lt;https://fsf.org/&gt;
@@ -796,7 +800,7 @@ Public License instead of this License.  But first, please read
 &lt;https://www.gnu.org/licenses/why-not-lgpl.html&gt;.
 
 
-------------LICENSE OF THIRD PARTY LIBRARIES USED BY STEELQUIZ------------
+------------------------LICENSE OF THIRD PARTY LIBRARIES USED BY STEELQUIZ------------------------
 
 
 --------LICENSE OF NEWTONSOFT.JSON--------

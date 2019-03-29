@@ -2,9 +2,9 @@ LICENSE OF STEELQUIZ INCLUDING 3RD PARTY LIBRARIES
 
 THE LICENSE OF EACH APPLICATION/LIBRARY ARE PUT UNDER THE CORRESPONDING HEADING, FOR THAT APPLICATION/LIBRARY
 
-------------LICENSE OF STEELQUIZ------------
+------------------------LICENSE OF STEELQUIZ------------------------
 				
-					GNU GENERAL PUBLIC LICENSE
+                    GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
  Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
@@ -680,7 +680,7 @@ Public License instead of this License.  But first, please read
 <https://www.gnu.org/licenses/why-not-lgpl.html>.
 
 
-------------LICENSE OF THIRD PARTY LIBRARIES USED BY STEELQUIZ------------
+----------------LICENSE OF THIRD PARTY LIBRARIES USED BY STEELQUIZ----------------
 
 
 --------LICENSE OF NEWTONSOFT.JSON--------
