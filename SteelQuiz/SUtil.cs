@@ -27,6 +27,7 @@ using Microsoft.CSharp.RuntimeBinder;
 using System.Security.AccessControl;
 using System.Security.Principal;
 using System.IO;
+using System.Net;
 
 namespace SteelQuiz
 {
@@ -75,36 +76,20 @@ namespace SteelQuiz
             return true;
         }
 
-        /// <summary>
-        /// Test a directory for create file access permissions
-        /// </summary>
-        /// <param name="DirectoryPath">Full path to directory </param>
-        /// <param name="AccessRight">File System right tested</param>
-        /// <returns>State [bool]</returns>
-        public static bool DirectoryHasPermission(string DirectoryPath, FileSystemRights AccessRight)
+        public static bool InternetConnectionAvailable()
         {
-            if (string.IsNullOrEmpty(DirectoryPath)) return false;
-
             try
             {
-                AuthorizationRuleCollection rules = Directory.GetAccessControl(DirectoryPath)
-                    .GetAccessRules(true, true, typeof(SecurityIdentifier));
-                WindowsIdentity identity = WindowsIdentity.GetCurrent();
-
-                foreach (FileSystemAccessRule rule in rules)
+                using (var client = new WebClient())
+                using (client.OpenRead("http://clients3.google.com/generate_204"))
                 {
-                    if (identity.Groups.Contains(rule.IdentityReference))
-                    {
-                        if ((AccessRight & rule.FileSystemRights) == AccessRight)
-                        {
-                            if (rule.AccessControlType == AccessControlType.Allow)
-                                return true;
-                        }
-                    }
+                    return true;
                 }
             }
-            catch { }
-            return false;
+            catch
+            {
+                return false;
+            }
         }
 
         public static bool IsDirectoryWritable(string dirPath, bool throwIfFails = false)
