@@ -87,7 +87,7 @@ Section "Start Menu Shortcuts" SecStartMenuShortcuts
   ;Create start menu shortcuts
   CreateDirectory "$SMPROGRAMS\SteelQuiz"
   CreateShortcut "$SMPROGRAMS\SteelQuiz\SteelQuiz.lnk" "$INSTDIR\SteelQuiz.exe" "" "$INSTDIR\SteelQuiz.exe" 0
-  CreateShortcut "$SMPROGRAMS\SteelQuiz\Uninstall.lnk" "$INSTDIR\uninstall.exe" "" "$INSTDIR\uninstall.exe" 0
+  CreateShortcut "$SMPROGRAMS\SteelQuiz\Uninstall SteelQuiz.lnk" "$INSTDIR\uninstall.exe" "" "$INSTDIR\uninstall.exe" 0
   
 SectionEnd
 
@@ -109,9 +109,8 @@ SectionEnd
 
 Section "Uninstall"
 
-  ;Delete shortcuts
-  Delete "$SMPROGRAMS\SteelQuiz\*.*"
-  RMDir "$SMPROGRAMS\SteelQuiz"
+  ;Delete app shortcut
+  Delete "$SMPROGRAMS\SteelQuiz\SteelQuiz.lnk"
   
   ;Delete files
   Delete "$INSTDIR\SteelQuiz.exe"
@@ -119,6 +118,12 @@ Section "Uninstall"
   Delete "$INSTDIR\AutoUpdater.NET.dll"
   Delete "$INSTDIR\uninstall.exe"
 
+  ;Delete remaining shortcuts
+  Delete "$SMPROGRAMS\SteelQuiz\Uninstall SteelQuiz.lnk"
+  Delete "$SMPROGRAMS\SteelQuiz\*.*"
+  RMDir "$SMPROGRAMS\SteelQuiz"
+  
+  ;Delete install directory
   RMDir "$INSTDIR"
 
   ;Delete registry keys
