@@ -293,13 +293,66 @@ namespace SteelQuiz
             wpList.Add(wordPair);
         }
 
+        /*
+         * Convert string with encoded unicode characters (for instance \u00f6), also remove unnecessary escape signs (in C#), to construct a readable string
+         */
         private static string FixString(string str)
         {
-            return str
-                .Replace(@"\u00e5", "å")
-                .Replace(@"\u00e4", "ä")
-                .Replace(@"\u00f6", "ö")
-                .Replace(@"\u00e9", "é");
+            const int UNICODE_LENGTH = 6; // \uFFFF
+
+            var foundUnicodeChars = new List<string>();
+            var foundString = "";
+            var inBackslash = false;
+            var inUnicodeChar = false;
+
+            for (int i = 0; i < str.Length; ++i)
+            {
+                var ch = str[i];
+
+                if (ch == '\\')
+                {
+                    inBackslash = !inBackslash;
+                    if (inUnicodeChar)
+                    {
+                        foundUnicodeChars.Add(foundString);
+                        inUnicodeChar = false;
+                    }
+                    foundString = "";
+                }
+                else if (inBackslash && ch == 'u')
+                {
+                    inUnicodeChar = true;
+                    inBackslash = false;
+                    foundString += "\\u";
+                }
+                else if (inUnicodeChar && foundString.Length < UNICODE_LENGTH)
+                {
+                    foundString += ch;
+                }
+                else
+                {
+                    inBackslash = false;
+                    if (foundString.Length == UNICODE_LENGTH)
+                    {
+                        foundUnicodeChars.Add(foundString);
+                        foundString = "";
+                        inUnicodeChar = false;
+                    }
+                }
+            }
+
+            foreach (var unicodeChar in foundUnicodeChars)
+            {
+                var unicodeCodeStr = unicodeChar.Substring(2); // remove \u from unicodeChar
+                var unicodeCode = int.Parse(unicodeCodeStr, System.Globalization.NumberStyles.AllowHexSpecifier);
+                var unicodeCh = char.ConvertFromUtf32(unicodeCode);
+
+                str = str.Replace(unicodeChar, unicodeCh.ToString());
+            }
+
+            str = str.Replace(@"\/", "/"); // remove (in C#) unnecessary escape
+
+            return str;
         }
     }
 }
