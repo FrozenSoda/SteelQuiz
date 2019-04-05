@@ -33,17 +33,19 @@ namespace SteelQuiz
     {
         public static bool FromStudentlitteratur(string url, string lang1, string lang2, string filename)
         {
-            var wclient = new WebClient();
             string quizEncoded;
-            try
+            using (var wclient = new WebClient())
             {
-                quizEncoded = wclient.DownloadString(url);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occurred while downloading the quiz:\r\n\r\n" + ex.ToString(), "SteelQuiz", MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-                return false;
+                try
+                {
+                    quizEncoded = wclient.DownloadString(url);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An error occurred while downloading the quiz:\r\n\r\n" + ex.ToString(), "SteelQuiz", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    return false;
+                }
             }
 
             WordPair[] wordPairs = null;
