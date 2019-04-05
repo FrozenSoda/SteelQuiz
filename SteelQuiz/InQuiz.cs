@@ -266,6 +266,7 @@ namespace SteelQuiz
             Program.frmWelcome.Location = new Point(Location.X + (Size.Width / 2) - (Program.frmWelcome.Size.Width / 2),
                               Location.Y + (Size.Height / 2) - (Program.frmWelcome.Size.Height / 2)
                             );
+            Program.frmWelcome.SetControlStates();
             Program.frmWelcome.Show();
             QuizCore.SaveProgress();
             ConfigManager.SaveConfig();

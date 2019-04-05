@@ -36,10 +36,7 @@ namespace SteelQuiz
         {
             InitializeComponent();
             this.Text += $" | v{Application.ProductVersion}";
-            if (ConfigManager.Config.LastQuiz != Guid.Empty)
-            {
-                btn_continueLast.Enabled = true;
-            }
+            SetControlStates();
 
             if (SUtil.InternetConnectionAvailable())
             {
@@ -56,6 +53,14 @@ namespace SteelQuiz
                 {
                     MessageBox.Show("An error occurred during the update/update check:\r\n\r\n" + ex.ToString(), "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+            }
+        }
+
+        public void SetControlStates()
+        {
+            if (ConfigManager.Config.LastQuiz != Guid.Empty)
+            {
+                btn_continueLast.Enabled = true;
             }
         }
 
