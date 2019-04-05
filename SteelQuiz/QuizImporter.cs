@@ -126,10 +126,7 @@ namespace SteelQuiz
                 {
                     if (ch == ',')
                     {
-                        if (ch == ',')
-                        {
-                            inString &= ~InString.Colon;
-                        }
+                        inString &= ~InString.Colon;
                     }
                     else
                     {
