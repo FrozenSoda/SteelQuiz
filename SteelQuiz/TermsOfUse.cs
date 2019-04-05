@@ -50,7 +50,9 @@ namespace SteelQuiz
 
         protected override void SetVisibleCore(bool value)
         {
-            base.SetVisibleCore(showForm);
+            base.SetVisibleCore(!value ? value : showForm);
+            // if form should be hidden (value is false), then hide it, no setting prevents hiding it
+            // but it the form should be shown, only show it if showForm is true
         }
 
         private void OpenApplication()
