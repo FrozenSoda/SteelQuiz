@@ -196,7 +196,8 @@ namespace SteelQuiz
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "ImportQuizFromSite";
-            this.Text = "ImportQuizFromSite";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Quiz Importer | SteelQuiz";
             this.flp_siteRdo.ResumeLayout(false);
             this.flp_siteRdo.PerformLayout();
             this.ResumeLayout(false);

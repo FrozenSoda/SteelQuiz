@@ -36,6 +36,10 @@ namespace SteelQuiz
         {
             InitializeComponent();
             this.Text += $" | v{Application.ProductVersion}";
+            if (ConfigManager.Config.LastQuiz != Guid.Empty)
+            {
+                btn_continueLast.Enabled = true;
+            }
 
             if (SUtil.InternetConnectionAvailable())
             {
@@ -60,8 +64,8 @@ namespace SteelQuiz
             var import = new ImportQuizFromSite();
             if (import.ShowDialog() == DialogResult.OK)
             {
-                Program.inQuiz = new InQuiz();
-                Program.inQuiz.Show();
+                Program.frmInQuiz = new InQuiz();
+                Program.frmInQuiz.Show();
                 Hide();
             }
         }
@@ -85,8 +89,8 @@ namespace SteelQuiz
                     return;
                 }
 
-                Program.inQuiz = new InQuiz();
-                Program.inQuiz.Show();
+                Program.frmInQuiz = new InQuiz();
+                Program.frmInQuiz.Show();
                 Hide();
             }
         }
@@ -95,6 +99,27 @@ namespace SteelQuiz
         {
             ConfigManager.SaveConfig();
             Application.Exit();
+        }
+
+        private void btn_continueLast_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var load = QuizCore.Load(ConfigManager.Config.LastQuiz);
+                if (!load)
+                {
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("The quiz file could not be loaded:\r\n\r\n" + ex.ToString(), "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            Program.frmInQuiz = new InQuiz();
+            Program.frmInQuiz.Show();
+            Hide();
         }
     }
 }

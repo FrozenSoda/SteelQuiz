@@ -34,6 +34,7 @@
             this.btn_importQuizFromSite = new System.Windows.Forms.Button();
             this.ofd_loadQuiz = new System.Windows.Forms.OpenFileDialog();
             this.lbl_copyright = new System.Windows.Forms.Label();
+            this.btn_continueLast = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbl_welcome
@@ -48,8 +49,10 @@
             // 
             // btn_createQuiz
             // 
+            this.btn_createQuiz.Enabled = false;
             this.btn_createQuiz.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_createQuiz.Location = new System.Drawing.Point(12, 79);
+            this.btn_createQuiz.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_createQuiz.Location = new System.Drawing.Point(13, 84);
             this.btn_createQuiz.Name = "btn_createQuiz";
             this.btn_createQuiz.Size = new System.Drawing.Size(237, 57);
             this.btn_createQuiz.TabIndex = 1;
@@ -59,7 +62,8 @@
             // btn_loadQuiz
             // 
             this.btn_loadQuiz.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_loadQuiz.Location = new System.Drawing.Point(280, 79);
+            this.btn_loadQuiz.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_loadQuiz.Location = new System.Drawing.Point(282, 84);
             this.btn_loadQuiz.Name = "btn_loadQuiz";
             this.btn_loadQuiz.Size = new System.Drawing.Size(237, 57);
             this.btn_loadQuiz.TabIndex = 2;
@@ -70,7 +74,8 @@
             // btn_importQuizFromSite
             // 
             this.btn_importQuizFromSite.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_importQuizFromSite.Location = new System.Drawing.Point(551, 79);
+            this.btn_importQuizFromSite.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_importQuizFromSite.Location = new System.Drawing.Point(551, 84);
             this.btn_importQuizFromSite.Name = "btn_importQuizFromSite";
             this.btn_importQuizFromSite.Size = new System.Drawing.Size(237, 57);
             this.btn_importQuizFromSite.TabIndex = 3;
@@ -88,15 +93,29 @@
             this.lbl_copyright.AutoSize = true;
             this.lbl_copyright.Location = new System.Drawing.Point(12, 428);
             this.lbl_copyright.Name = "lbl_copyright";
-            this.lbl_copyright.Size = new System.Drawing.Size(351, 13);
+            this.lbl_copyright.Size = new System.Drawing.Size(354, 13);
             this.lbl_copyright.TabIndex = 4;
             this.lbl_copyright.Text = "Experimental software | Copyright (C) 2019 Steel9Apps - All rights reserved";
+            // 
+            // btn_continueLast
+            // 
+            this.btn_continueLast.Enabled = false;
+            this.btn_continueLast.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_continueLast.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_continueLast.Location = new System.Drawing.Point(146, 147);
+            this.btn_continueLast.Name = "btn_continueLast";
+            this.btn_continueLast.Size = new System.Drawing.Size(508, 57);
+            this.btn_continueLast.TabIndex = 5;
+            this.btn_continueLast.Text = "Continue working with last quiz";
+            this.btn_continueLast.UseVisualStyleBackColor = true;
+            this.btn_continueLast.Click += new System.EventHandler(this.btn_continueLast_Click);
             // 
             // Welcome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btn_continueLast);
             this.Controls.Add(this.lbl_copyright);
             this.Controls.Add(this.btn_importQuizFromSite);
             this.Controls.Add(this.btn_loadQuiz);
@@ -105,6 +124,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Welcome";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SteelQuiz | Experimental alpha";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Welcome_FormClosing);
             this.ResumeLayout(false);
@@ -120,6 +140,7 @@
         private System.Windows.Forms.Button btn_importQuizFromSite;
         private System.Windows.Forms.OpenFileDialog ofd_loadQuiz;
         private System.Windows.Forms.Label lbl_copyright;
+        private System.Windows.Forms.Button btn_continueLast;
     }
 }
 

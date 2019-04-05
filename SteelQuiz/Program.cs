@@ -26,7 +26,8 @@ namespace SteelQuiz
 {
     static class Program
     {
-        public static InQuiz inQuiz = null;
+        public static Welcome frmWelcome = null;
+        public static InQuiz frmInQuiz = null;
 
         /// <summary>
         /// The main entry point for the application.

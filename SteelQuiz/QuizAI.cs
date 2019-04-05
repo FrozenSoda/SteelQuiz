@@ -193,7 +193,7 @@ namespace SteelQuiz
 
                             if (msg == DialogResult.Yes)
                             {
-                                Program.inQuiz.SwitchAIMode();
+                                Program.frmInQuiz.SwitchAIMode();
                                 return;
                             }
                         }

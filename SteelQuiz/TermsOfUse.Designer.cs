@@ -96,6 +96,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "TermsOfUse";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SteelQuiz | Experimental alpha";
             this.Load += new System.EventHandler(this.TermsOfUse_Load);
             this.ResumeLayout(false);

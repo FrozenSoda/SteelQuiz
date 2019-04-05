@@ -57,8 +57,8 @@ namespace SteelQuiz
 
         private void OpenApplication()
         {
-            var welcome = new Welcome();
-            welcome.Show();
+            Program.frmWelcome = new Welcome();
+            Program.frmWelcome.Show();
             Hide();
         }
 

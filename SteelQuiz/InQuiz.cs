@@ -31,6 +31,8 @@ namespace SteelQuiz
 {
     public partial class InQuiz : Form
     {
+        private bool onCloseEvent = true;
+
         private WordPair currentWordPair = null;
         private string currentInput = "";
         private WordPair.TranslationMode translationMode = WordPair.TranslationMode.L1_to_L2;
@@ -41,6 +43,9 @@ namespace SteelQuiz
         public InQuiz()
         {
             InitializeComponent();
+            this.Location = new Point(Program.frmWelcome.Location.X + (Program.frmWelcome.Size.Width / 2) - (this.Size.Width / 2),
+                              Program.frmWelcome.Location.Y + (Program.frmWelcome.Size.Height / 2) - (this.Size.Height / 2)
+                            );
             lbl_lang1.Text = QuizCore.Quiz.Language1;
             lbl_lang2.Text = QuizCore.Quiz.Language2;
             this.Text += $" | v{Application.ProductVersion}";
@@ -173,6 +178,11 @@ namespace SteelQuiz
 
         private void InQuiz_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (!onCloseEvent)
+            {
+                return;
+            }
+
             QuizCore.SaveProgress();
             ConfigManager.SaveConfig();
             Application.Exit();
@@ -249,6 +259,19 @@ namespace SteelQuiz
             }
 
             lbl_word2.Focus();
+        }
+
+        private void btn_home_Click(object sender, EventArgs e)
+        {
+            Program.frmWelcome.Location = new Point(Location.X + (Size.Width / 2) - (Program.frmWelcome.Size.Width / 2),
+                              Location.Y + (Size.Height / 2) - (Program.frmWelcome.Size.Height / 2)
+                            );
+            Program.frmWelcome.Show();
+            QuizCore.SaveProgress();
+            ConfigManager.SaveConfig();
+            onCloseEvent = false;
+            Close();
+            Program.frmInQuiz = null;
         }
     }
 }

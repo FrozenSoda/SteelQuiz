@@ -72,6 +72,26 @@ namespace SteelQuiz
             }
         }
 
+        public static bool Load(Guid quizGuid)
+        {
+            Quiz quiz;
+
+            foreach (var file in Directory.GetFiles(QUIZ_FOLDER).Where(x => x.EndsWith(QUIZ_EXTENSION)))
+            {
+                using (var reader = new StreamReader(file))
+                {
+                    quiz = JsonConvert.DeserializeObject<Quiz>(reader.ReadToEnd());
+                }
+
+                if (quiz != null && quiz.GUID == quizGuid)
+                {
+                    return Load(file);
+                }
+            }
+
+            return false;
+        }
+
         public static bool CheckInitDirectories()
         {
             try
@@ -106,6 +126,9 @@ namespace SteelQuiz
             {
                 QuizPath = quizPath;
             }
+
+            ConfigManager.Config.LastQuiz = quiz.GUID;
+            ConfigManager.SaveConfig();
 
             return LoadProgressData();
         }

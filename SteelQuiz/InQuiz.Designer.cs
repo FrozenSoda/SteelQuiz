@@ -56,6 +56,7 @@ namespace SteelQuiz
             this.btn_w1_synonyms = new System.Windows.Forms.Button();
             this.pnl_word1 = new System.Windows.Forms.Panel();
             this.pnl_word2 = new System.Windows.Forms.Panel();
+            this.btn_home = new System.Windows.Forms.Button();
             this.pnl_word1.SuspendLayout();
             this.pnl_word2.SuspendLayout();
             this.SuspendLayout();
@@ -168,11 +169,24 @@ namespace SteelQuiz
             this.pnl_word2.Size = new System.Drawing.Size(387, 345);
             this.pnl_word2.TabIndex = 9;
             // 
+            // btn_home
+            // 
+            this.btn_home.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_home.Location = new System.Drawing.Point(12, 35);
+            this.btn_home.Name = "btn_home";
+            this.btn_home.Size = new System.Drawing.Size(68, 23);
+            this.btn_home.TabIndex = 10;
+            this.btn_home.TabStop = false;
+            this.btn_home.Text = "<---";
+            this.btn_home.UseVisualStyleBackColor = true;
+            this.btn_home.Click += new System.EventHandler(this.btn_home_Click);
+            // 
             // InQuiz
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btn_home);
             this.Controls.Add(this.pnl_word2);
             this.Controls.Add(this.pnl_word1);
             this.Controls.Add(this.btn_w1_synonyms);
@@ -185,6 +199,7 @@ namespace SteelQuiz
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "InQuiz";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "SteelQuiz | Experimental alpha";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.InQuiz_FormClosing);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.InQuiz_KeyPress);
@@ -209,5 +224,6 @@ namespace SteelQuiz
         private System.Windows.Forms.Button btn_w1_synonyms;
         private System.Windows.Forms.Panel pnl_word1;
         private System.Windows.Forms.Panel pnl_word2;
+        private System.Windows.Forms.Button btn_home;
     }
 }
