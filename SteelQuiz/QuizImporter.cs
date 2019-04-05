@@ -93,10 +93,10 @@ namespace SteelQuiz
         [Flags]
         private enum InString
         {
-            DoubleQuote = 2 << 3,
-            SingleQuote = 2 << 2,
-            Colon = 2 << 1,
-            None = 2 << 0
+            DoubleQuote = 1 << 3,
+            SingleQuote = 1 << 2,
+            Colon = 1 << 1,
+            None = 1 << 0
         }
 
         private static Dictionary<char, InString> InStringForChars = new Dictionary<char, InString>()
