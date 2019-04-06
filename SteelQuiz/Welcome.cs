@@ -126,5 +126,11 @@ namespace SteelQuiz
             Program.frmInQuiz.Show();
             Hide();
         }
+
+        private void btn_createQuiz_Click(object sender, EventArgs e)
+        {
+            var quizEditor = new QuizEditor();
+            quizEditor.Show();
+        }
     }
 }

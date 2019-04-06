@@ -72,6 +72,18 @@
     <Compile Include="QuizAI.cs" />
     <Compile Include="QuizCompatibilityConverter.cs" />
     <Compile Include="QuizData\Quiz.cs" />
+    <Compile Include="QuizEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuizEditor.Designer.cs">
+      <DependentUpon>QuizEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuizEditorWord.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuizEditorWord.Designer.cs">
+      <DependentUpon>QuizEditorWord.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuizImporter.cs" />
     <Compile Include="QuizProgressData\CfgQuizzesProgressData.cs" />
     <Compile Include="QuizProgressData\QuizProgData.cs" />
@@ -101,6 +113,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InQuiz.resx">
       <DependentUpon>InQuiz.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuizEditor.resx">
+      <DependentUpon>QuizEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuizEditorWord.resx">
+      <DependentUpon>QuizEditorWord.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TermsOfUse.resx">
       <DependentUpon>TermsOfUse.cs</DependentUpon>
