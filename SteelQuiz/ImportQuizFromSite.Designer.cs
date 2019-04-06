@@ -46,6 +46,7 @@ namespace SteelQuiz
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ImportQuizFromSite));
             this.flp_siteRdo = new System.Windows.Forms.FlowLayoutPanel();
             this.rdo_studentlitteratur = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
@@ -194,6 +195,7 @@ namespace SteelQuiz
             this.Controls.Add(this.label1);
             this.Controls.Add(this.flp_siteRdo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "ImportQuizFromSite";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

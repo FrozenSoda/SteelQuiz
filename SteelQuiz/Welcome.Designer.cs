@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Welcome));
             this.lbl_welcome = new System.Windows.Forms.Label();
             this.btn_createQuiz = new System.Windows.Forms.Button();
             this.btn_loadQuiz = new System.Windows.Forms.Button();
@@ -122,6 +123,7 @@
             this.Controls.Add(this.btn_createQuiz);
             this.Controls.Add(this.lbl_welcome);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Welcome";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

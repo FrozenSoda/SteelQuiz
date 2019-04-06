@@ -46,6 +46,7 @@ namespace SteelQuiz
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InQuiz));
             this.lbl_word1 = new System.Windows.Forms.Label();
             this.lbl_word2 = new System.Windows.Forms.Label();
             this.lbl_progress = new System.Windows.Forms.Label();
@@ -196,6 +197,7 @@ namespace SteelQuiz
             this.Controls.Add(this.btn_switchTestMode);
             this.Controls.Add(this.lbl_progress);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "InQuiz";
