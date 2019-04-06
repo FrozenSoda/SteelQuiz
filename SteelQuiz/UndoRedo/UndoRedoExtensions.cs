@@ -10,10 +10,10 @@ namespace SteelQuiz
 {
     public static class UndoRedoExtensions
     {
-        public static Func<TextBox> ChangeText(this TextBox textBox, string text)
+        public static Func<TextBox> ChangeText(this TextBox textBox, string to)
         {
             return () => {
-                textBox.Text = text;
+                textBox.Text = to;
                 return textBox;
             };
         }

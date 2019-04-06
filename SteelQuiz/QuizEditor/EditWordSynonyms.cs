@@ -15,8 +15,8 @@ namespace SteelQuiz
     {
         public string[] Synonyms { get; set; }
 
-        Stack<UndoRedoFuncPair> undoStack = new Stack<UndoRedoFuncPair>();
-        Stack<UndoRedoFuncPair> redoStack = new Stack<UndoRedoFuncPair>();
+        private Stack<UndoRedoFuncPair> undoStack = new Stack<UndoRedoFuncPair>();
+        private Stack<UndoRedoFuncPair> redoStack = new Stack<UndoRedoFuncPair>();
 
         private bool changedTextBox = false; // since listbox select switch
 

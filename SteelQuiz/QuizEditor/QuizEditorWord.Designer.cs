@@ -85,6 +85,7 @@
             this.txt_word.Name = "txt_word";
             this.txt_word.Size = new System.Drawing.Size(359, 20);
             this.txt_word.TabIndex = 0;
+            this.txt_word.TextChanged += new System.EventHandler(this.txt_word_TextChanged);
             // 
             // btn_editSynonyms
             // 

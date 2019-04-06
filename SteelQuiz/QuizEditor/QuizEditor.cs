@@ -26,6 +26,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SteelQuiz.QuizData;
+using SteelQuiz.UndoRedo;
 
 namespace SteelQuiz
 {
@@ -33,6 +34,9 @@ namespace SteelQuiz
     {
         private List<QuizEditorWord> quizEditorWords_lang1 = new List<QuizEditorWord>();
         private List<QuizEditorWord> quizEditorWords_lang2 = new List<QuizEditorWord>();
+
+        private Stack<UndoRedoFuncPair> undoStack = new Stack<UndoRedoFuncPair>();
+        private Stack<UndoRedoFuncPair> redoStack = new Stack<UndoRedoFuncPair>();
 
         public QuizEditor()
         {
@@ -47,11 +51,11 @@ namespace SteelQuiz
         {
             for (int i = 0; i < count; ++i)
             {
-                var w1 = new QuizEditorWord(true);
+                var w1 = new QuizEditorWord(true, ref undoStack, ref redoStack);
                 quizEditorWords_lang1.Add(w1);
                 flp_words.Controls.Add(w1);
 
-                var w2 = new QuizEditorWord(false);
+                var w2 = new QuizEditorWord(false, ref undoStack, ref redoStack);
                 quizEditorWords_lang2.Add(w2);
                 flp_words.Controls.Add(w2);
             }
@@ -92,6 +96,26 @@ namespace SteelQuiz
         private void QuizEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
             Program.frmWelcome.Show();
+        }
+
+        private void Undo()
+        {
+
+        }
+
+        private void Redo()
+        {
+
+        }
+
+        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Undo();
+        }
+
+        private void redoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Redo();
         }
     }
 }

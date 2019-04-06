@@ -49,22 +49,24 @@ namespace SteelQuiz
 
         private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
+#pragma warning disable CS0162 // Unreachable code detected
 #if DEBUG
             return;
 #endif
-
             MessageBox.Show("An application error has occurred:\r\n\r\n" + (e.ExceptionObject as Exception).ToString()
                 , "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+#pragma warning restore CS0162 // Unreachable code detected
         }
 
         private static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
         {
+#pragma warning disable CS0162 // Unreachable code detected
 #if DEBUG
             return;
 #endif
-
             MessageBox.Show("An application error has occurred:\r\n\r\n" + e.Exception.ToString(),
                 "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+#pragma warning restore CS0162 // Unreachable code detected
         }
     }
 }
