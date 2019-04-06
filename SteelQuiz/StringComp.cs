@@ -29,8 +29,9 @@ namespace SteelQuiz
         [Flags]
         public enum Rules
         {
-            IgnoreCapitalization,
-            IgnoreExclamation
+            IgnoreCapitalization = 1 << 2,
+            IgnoreExclamation = 1 << 1,
+            None = 1 << 0
         }
 
         public class CharacterMismatch

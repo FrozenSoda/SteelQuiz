@@ -131,6 +131,7 @@ namespace SteelQuiz
         {
             var quizEditor = new QuizEditor();
             quizEditor.Show();
+            Hide();
         }
     }
 }

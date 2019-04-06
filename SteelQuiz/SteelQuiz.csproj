@@ -56,6 +56,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigManager.cs" />
+    <Compile Include="QuizEditor\EditWordSynonyms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuizEditor\EditWordSynonyms.Designer.cs">
+      <DependentUpon>EditWordSynonyms.cs</DependentUpon>
+    </Compile>
     <Compile Include="ImportQuizFromSite.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,16 +78,16 @@
     <Compile Include="QuizAI.cs" />
     <Compile Include="QuizCompatibilityConverter.cs" />
     <Compile Include="QuizData\Quiz.cs" />
-    <Compile Include="QuizEditor.cs">
+    <Compile Include="QuizEditor\QuizEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="QuizEditor.Designer.cs">
+    <Compile Include="QuizEditor\QuizEditor.Designer.cs">
       <DependentUpon>QuizEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="QuizEditorWord.cs">
+    <Compile Include="QuizEditor\QuizEditorWord.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="QuizEditorWord.Designer.cs">
+    <Compile Include="QuizEditor\QuizEditorWord.Designer.cs">
       <DependentUpon>QuizEditorWord.cs</DependentUpon>
     </Compile>
     <Compile Include="QuizImporter.cs" />
@@ -98,6 +104,8 @@
     <Compile Include="TermsOfUse.Designer.cs">
       <DependentUpon>TermsOfUse.cs</DependentUpon>
     </Compile>
+    <Compile Include="UndoRedo\UndoRedoExtensions.cs" />
+    <Compile Include="UndoRedo\UndoRedoFuncPair.cs" />
     <Compile Include="Welcome.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,10 +122,13 @@
     <EmbeddedResource Include="InQuiz.resx">
       <DependentUpon>InQuiz.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="QuizEditor.resx">
+    <EmbeddedResource Include="QuizEditor\EditWordSynonyms.resx">
+      <DependentUpon>EditWordSynonyms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuizEditor\QuizEditor.resx">
       <DependentUpon>QuizEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="QuizEditorWord.resx">
+    <EmbeddedResource Include="QuizEditor\QuizEditorWord.resx">
       <DependentUpon>QuizEditorWord.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TermsOfUse.resx">
