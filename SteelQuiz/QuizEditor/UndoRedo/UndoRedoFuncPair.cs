@@ -11,9 +11,9 @@ namespace SteelQuiz.UndoRedo
     {
         public Func<object>[] UndoActions { get; set; }
         public Func<object>[] RedoActions { get; set; }
-        public UserControl OwnerControl { get; set; }
+        public Control OwnerControl { get; set; }
 
-        public UndoRedoFuncPair(Func<object>[] undoActions, Func<object>[] redoActions, UserControl ownerControl = null)
+        public UndoRedoFuncPair(Func<object>[] undoActions, Func<object>[] redoActions, Control ownerControl)
         {
             UndoActions = undoActions;
             RedoActions = redoActions;

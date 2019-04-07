@@ -28,6 +28,7 @@ namespace SteelQuiz
     {
         public static Welcome frmWelcome = null;
         public static InQuiz frmInQuiz = null;
+        public static QuizEditor frmQuizEditor = null;
 
         /// <summary>
         /// The main entry point for the application.

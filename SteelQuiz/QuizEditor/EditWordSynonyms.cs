@@ -11,12 +11,12 @@ using SteelQuiz.UndoRedo;
 
 namespace SteelQuiz
 {
-    public partial class EditWordSynonyms : Form
+    public partial class EditWordSynonyms : Form, IUndoRedo
     {
         public string[] Synonyms { get; set; }
 
-        private Stack<UndoRedoFuncPair> undoStack = new Stack<UndoRedoFuncPair>();
-        private Stack<UndoRedoFuncPair> redoStack = new Stack<UndoRedoFuncPair>();
+        public Stack<UndoRedoFuncPair> UndoStack { get; set; } = new Stack<UndoRedoFuncPair>();
+        public Stack<UndoRedoFuncPair> RedoStack { get; set; } = new Stack<UndoRedoFuncPair>();
 
         private bool changedTextBox = false; // since listbox select switch
 
@@ -53,9 +53,10 @@ namespace SteelQuiz
         {
             lst_synonyms.Items.Add(txt_wordAdd.Text);
 
-            undoStack.Push(new UndoRedoFuncPair(
+            UndoStack.Push(new UndoRedoFuncPair(
                 new Func<object>[] { lst_synonyms.RemoveItem(txt_wordAdd.Text) },
-                new Func<object>[] { lst_synonyms.AddItem(txt_wordAdd.Text) }));
+                new Func<object>[] { lst_synonyms.AddItem(txt_wordAdd.Text) },
+                this));
 
             txt_wordAdd.Text = "";
         }
@@ -83,7 +84,7 @@ namespace SteelQuiz
                 redoes.Add(lst_synonyms.ChangeItem(_new, old));
             }
 
-            undoStack.Push(new UndoRedoFuncPair(undoes.ToArray(), redoes.ToArray()));
+            UndoStack.Push(new UndoRedoFuncPair(undoes.ToArray(), redoes.ToArray(), this));
 
             txt_wordAdd.Text = "";
         }
@@ -108,7 +109,7 @@ namespace SteelQuiz
                 redoes.Add(lst_synonyms.RemoveItem(item));
             }
 
-            undoStack.Push(new UndoRedoFuncPair(undoes.ToArray(), redoes.ToArray()));
+            UndoStack.Push(new UndoRedoFuncPair(undoes.ToArray(), redoes.ToArray(), this));
         }
 
         private void lst_synonyms_SelectedIndexChanged(object sender, EventArgs e)
@@ -135,29 +136,29 @@ namespace SteelQuiz
             }
         }
 
-        private void Undo()
+        public void Undo()
         {
-            if (undoStack.Count > 0)
+            if (UndoStack.Count > 0)
             {
-                var pop = undoStack.Pop();
+                var pop = UndoStack.Pop();
                 foreach (var undo in pop.UndoActions)
                 {
                     undo();
                 }
-                redoStack.Push(pop);
+                RedoStack.Push(pop);
             }
         }
 
-        private void Redo()
+        public void Redo()
         {
-            if (redoStack.Count > 0)
+            if (RedoStack.Count > 0)
             {
-                var pop = redoStack.Pop();
+                var pop = RedoStack.Pop();
                 foreach (var redo in pop.RedoActions)
                 {
                     redo();
                 }
-                undoStack.Push(pop);
+                UndoStack.Push(pop);
             }
         }
 

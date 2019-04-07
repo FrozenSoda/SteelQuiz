@@ -6,10 +6,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SteelQuiz
+namespace SteelQuiz.UndoRedo
 {
     public static class UndoRedoExtensions
     {
+        /*
+         * The following Funcs should be added to the undo/redo-stacks. For instance, if an item is added to a listbox, RemoveItem should be added to the undo stack
+         * (which will remove the added item when pressing undo)
+         */ 
+
         public static Func<TextBox> ChangeText(this TextBox textBox, string to)
         {
             return () => {

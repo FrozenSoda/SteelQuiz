@@ -13,20 +13,23 @@ namespace SteelQuiz
 {
     public partial class QuizEditorWord : UserControl
     {
+        public int Language { get; set; }
+        public string Word => txt_word.Text;
         public string[] Synonyms { get; set; } = null;
+        public EditWordSynonyms editWordSynonyms = null;
 
-        private Stack<UndoRedoFuncPair> undoStack = new Stack<UndoRedoFuncPair>();
-        private Stack<UndoRedoFuncPair> redoStack = new Stack<UndoRedoFuncPair>();
-
-        public QuizEditorWord(bool showTranslationRulesOptions, ref Stack<UndoRedoFuncPair> _undoStack, ref Stack<UndoRedoFuncPair> _redoStack)
+        public QuizEditorWord(bool showTranslationRulesOptions)
         {
             InitializeComponent();
             if (showTranslationRulesOptions)
             {
                 pnl_translationRules.Visible = true;
+                Language = 1;
             }
-            undoStack = _undoStack;
-            redoStack = _redoStack;
+            else
+            {
+                Language = 2;
+            }
         }
 
         private void btn_editSynonyms_Click(object sender, EventArgs e)
@@ -42,7 +45,7 @@ namespace SteelQuiz
 
         private void txt_word_TextChanged(object sender, EventArgs e)
         {
-            undoStack.Push(new UndoRedoFuncPair(
+            Program.frmQuizEditor.UndoStack.Push(new UndoRedoFuncPair(
                 new Func<object>[] { txt_word.ChangeText(txt_word_text_old) },
                 new Func<object>[] { txt_word.ChangeText(txt_word.Text) },
                 this));

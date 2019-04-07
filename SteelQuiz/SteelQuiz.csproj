@@ -104,8 +104,9 @@
     <Compile Include="TermsOfUse.Designer.cs">
       <DependentUpon>TermsOfUse.cs</DependentUpon>
     </Compile>
-    <Compile Include="UndoRedo\UndoRedoExtensions.cs" />
-    <Compile Include="UndoRedo\UndoRedoFuncPair.cs" />
+    <Compile Include="QuizEditor\UndoRedo\IUndoRedo.cs" />
+    <Compile Include="QuizEditor\UndoRedo\UndoRedoExtensions.cs" />
+    <Compile Include="QuizEditor\UndoRedo\UndoRedoFuncPair.cs" />
     <Compile Include="Welcome.cs">
       <SubType>Form</SubType>
     </Compile>

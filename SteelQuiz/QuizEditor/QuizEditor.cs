@@ -30,13 +30,13 @@ using SteelQuiz.UndoRedo;
 
 namespace SteelQuiz
 {
-    public partial class QuizEditor : Form
+    public partial class QuizEditor : Form, IUndoRedo
     {
         private List<QuizEditorWord> quizEditorWords_lang1 = new List<QuizEditorWord>();
         private List<QuizEditorWord> quizEditorWords_lang2 = new List<QuizEditorWord>();
 
-        private Stack<UndoRedoFuncPair> undoStack = new Stack<UndoRedoFuncPair>();
-        private Stack<UndoRedoFuncPair> redoStack = new Stack<UndoRedoFuncPair>();
+        public Stack<UndoRedoFuncPair> UndoStack { get; set; } = new Stack<UndoRedoFuncPair>();
+        public Stack<UndoRedoFuncPair> RedoStack { get; set; } = new Stack<UndoRedoFuncPair>();
 
         public QuizEditor()
         {
@@ -51,11 +51,11 @@ namespace SteelQuiz
         {
             for (int i = 0; i < count; ++i)
             {
-                var w1 = new QuizEditorWord(true, ref undoStack, ref redoStack);
+                var w1 = new QuizEditorWord(true);
                 quizEditorWords_lang1.Add(w1);
                 flp_words.Controls.Add(w1);
 
-                var w2 = new QuizEditorWord(false, ref undoStack, ref redoStack);
+                var w2 = new QuizEditorWord(false);
                 quizEditorWords_lang2.Add(w2);
                 flp_words.Controls.Add(w2);
             }
@@ -98,14 +98,42 @@ namespace SteelQuiz
             Program.frmWelcome.Show();
         }
 
-        private void Undo()
+        public void Undo()
         {
+            if (UndoStack.Count > 0)
+            {
+                var pop = UndoStack.Pop();
+                foreach (var undo in pop.UndoActions)
+                {
+                    undo();
+                }
+                RedoStack.Push(pop);
+            }
 
+            if (UndoStack.Count > 0)
+            {
+                var peek = UndoStack.Peek();
+                if (peek.OwnerControl != this)
+                {
+                    foreach (var qwrd in Controls.OfType<QuizEditorWord>())
+                    {
+                        
+                    }
+                }
+            }
         }
 
-        private void Redo()
+        public void Redo()
         {
-
+            if (RedoStack.Count > 0)
+            {
+                var pop = RedoStack.Pop();
+                foreach (var redo in pop.RedoActions)
+                {
+                    redo();
+                }
+                UndoStack.Push(pop);
+            }
         }
 
         private void undoToolStripMenuItem_Click(object sender, EventArgs e)
