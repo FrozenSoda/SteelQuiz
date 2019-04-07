@@ -21,6 +21,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SteelQuiz.QuizEditor;
 
 namespace SteelQuiz
 {
@@ -28,7 +29,7 @@ namespace SteelQuiz
     {
         public static Welcome frmWelcome = null;
         public static InQuiz frmInQuiz = null;
-        public static QuizEditor frmQuizEditor = null;
+        public static QuizEditor.QuizEditor frmQuizEditor = null;
 
         /// <summary>
         /// The main entry point for the application.

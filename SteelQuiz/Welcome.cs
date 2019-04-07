@@ -129,7 +129,7 @@ namespace SteelQuiz
 
         private void btn_createQuiz_Click(object sender, EventArgs e)
         {
-            Program.frmQuizEditor = new QuizEditor();
+            Program.frmQuizEditor = new QuizEditor.QuizEditor();
             Program.frmQuizEditor.Show();
             Hide();
         }

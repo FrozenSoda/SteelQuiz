@@ -1,4 +1,4 @@
-﻿namespace SteelQuiz
+﻿namespace SteelQuiz.QuizEditor
 {
     partial class EditWordSynonyms
     {

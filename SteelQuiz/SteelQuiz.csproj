@@ -90,6 +90,7 @@
     <Compile Include="QuizEditor\QuizEditorWord.Designer.cs">
       <DependentUpon>QuizEditorWord.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuizEditor\UndoRedo\OwnerControlData.cs" />
     <Compile Include="QuizImporter.cs" />
     <Compile Include="QuizProgressData\CfgQuizzesProgressData.cs" />
     <Compile Include="QuizProgressData\QuizProgData.cs" />

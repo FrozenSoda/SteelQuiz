@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SteelQuiz.UndoRedo;
+using SteelQuiz.QuizEditor.UndoRedo;
 
-namespace SteelQuiz
+namespace SteelQuiz.QuizEditor
 {
     public partial class QuizEditorWord : UserControl
     {
@@ -17,6 +17,7 @@ namespace SteelQuiz
         public string Word => txt_word.Text;
         public string[] Synonyms { get; set; } = null;
         public EditWordSynonyms editWordSynonyms = null;
+        public bool ignoreNextTextBoxChange = false;
 
         public QuizEditorWord(bool showTranslationRulesOptions)
         {
@@ -36,7 +37,7 @@ namespace SteelQuiz
         {
             if (editWordSynonyms == null)
             {
-                editWordSynonyms = new EditWordSynonyms(txt_word.Text, Synonyms);
+                editWordSynonyms = new EditWordSynonyms(this, txt_word.Text, Synonyms);
             }
         }
 
@@ -63,10 +64,17 @@ namespace SteelQuiz
 
         private void txt_word_TextChanged(object sender, EventArgs e)
         {
+            if (ignoreNextTextBoxChange)
+            {
+                txt_word_text_old = txt_word.Text;
+                ignoreNextTextBoxChange = false;
+                return;
+            }
+
             Program.frmQuizEditor.UndoStack.Push(new UndoRedoFuncPair(
-                new Func<object>[] { txt_word.ChangeText(txt_word_text_old) },
-                new Func<object>[] { txt_word.ChangeText(txt_word.Text) },
-                this));
+                new Func<object>[] { txt_word.ChangeText(txt_word_text_old, () => { ignoreNextTextBoxChange = true; }) },
+                new Func<object>[] { txt_word.ChangeText(txt_word.Text, () => { ignoreNextTextBoxChange = true; }) },
+                new OwnerControlData(this, this.Parent)));
 
             txt_word_text_old = txt_word.Text;
         }

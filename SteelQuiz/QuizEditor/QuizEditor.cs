@@ -26,9 +26,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SteelQuiz.QuizData;
-using SteelQuiz.UndoRedo;
+using SteelQuiz.QuizEditor.UndoRedo;
 
-namespace SteelQuiz
+namespace SteelQuiz.QuizEditor
 {
     public partial class QuizEditor : Form, IUndoRedo
     {
@@ -103,11 +103,20 @@ namespace SteelQuiz
             if (UndoStack.Count > 0)
             {
                 var peek = UndoStack.Peek();
-                if (peek.OwnerControl != this)
+                if (peek.OwnerControlData.Control == this || this.Controls.Contains(peek.OwnerControlData.Parent))
+                {
+                    var pop = UndoStack.Pop();
+                    foreach (var undo in pop.UndoActions)
+                    {
+                        undo();
+                    }
+                    RedoStack.Push(pop);
+                }
+                else if (peek.OwnerControlData.Control is EditWordSynonyms)
                 {
                     foreach (var qwrd in flp_words.Controls.OfType<QuizEditorWord>())
                     {
-                        if (peek.OwnerControl.Parent == qwrd)
+                        if (peek.OwnerControlData.Parent == qwrd)
                         {
                             qwrd.InitEditWordSynonyms();
                             qwrd.editWordSynonyms.Undo();
@@ -118,43 +127,28 @@ namespace SteelQuiz
                         }
                     }
                 }
-                else
-                {
-                    if (UndoStack.Count > 0)
-                    {
-                        var pop = UndoStack.Pop();
-                        foreach (var undo in pop.UndoActions)
-                        {
-                            undo();
-                        }
-                        RedoStack.Push(pop);
-                    }
-                }
             }
         }
 
         public void Redo()
         {
-            /*
-            if (RedoStack.Count > 0)
-            {
-                var pop = RedoStack.Pop();
-                foreach (var redo in pop.RedoActions)
-                {
-                    redo();
-                }
-                UndoStack.Push(pop);
-            }
-            */
-
             if (RedoStack.Count > 0)
             {
                 var peek = RedoStack.Peek();
-                if (peek.OwnerControl != this)
+                if (peek.OwnerControlData.Control == this || this.Controls.Contains(peek.OwnerControlData.Parent))
+                {
+                    var pop = RedoStack.Pop();
+                    foreach (var redo in pop.RedoActions)
+                    {
+                        redo();
+                    }
+                    UndoStack.Push(pop);
+                }
+                else if (peek.OwnerControlData.Control is EditWordSynonyms)
                 {
                     foreach (var qwrd in flp_words.Controls.OfType<QuizEditorWord>())
                     {
-                        if (peek.OwnerControl.Parent == qwrd)
+                        if (peek.OwnerControlData.Parent == qwrd)
                         {
                             qwrd.InitEditWordSynonyms();
                             qwrd.editWordSynonyms.Redo();
@@ -163,18 +157,6 @@ namespace SteelQuiz
                             qwrd.DisposeEditWordSynonyms();
                             break;
                         }
-                    }
-                }
-                else
-                {
-                    if (RedoStack.Count > 0)
-                    {
-                        var pop = RedoStack.Pop();
-                        foreach (var redo in pop.RedoActions)
-                        {
-                            redo();
-                        }
-                        UndoStack.Push(pop);
                     }
                 }
             }

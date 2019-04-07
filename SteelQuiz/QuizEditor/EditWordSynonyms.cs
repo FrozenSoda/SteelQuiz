@@ -7,22 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SteelQuiz.UndoRedo;
+using SteelQuiz.QuizEditor.UndoRedo;
 
-namespace SteelQuiz
+namespace SteelQuiz.QuizEditor
 {
     public partial class EditWordSynonyms : Form, IUndoRedo
     {
         public string[] Synonyms { get; set; }
-
-        //public Stack<UndoRedoFuncPair> UndoStack { get; set; } = new Stack<UndoRedoFuncPair>();
-        //public Stack<UndoRedoFuncPair> RedoStack { get; set; } = new Stack<UndoRedoFuncPair>();
+        private new QuizEditorWord Parent { get; set; }
 
         private bool changedTextBox = false; // since listbox select switch
 
-        public EditWordSynonyms(string word, string[] currentSynonyms)
+        public EditWordSynonyms(QuizEditorWord parent, string word, string[] currentSynonyms)
         {
             InitializeComponent();
+            Parent = parent;
             lbl_synForWord.Text = $"Synonyms for word: {word}";
 
             if (currentSynonyms != null)
@@ -59,10 +58,10 @@ namespace SteelQuiz
             lst_synonyms.Items.Add(txt_wordAdd.Text);
 
             Program.frmQuizEditor.UndoStack.Push(new UndoRedoFuncPair(
-                new Func<object>[] { lst_synonyms.RemoveItem(txt_wordAdd.Text) },
-                new Func<object>[] { lst_synonyms.AddItem(txt_wordAdd.Text) },
-                this));
-
+                new Func<object>[] { lst_synonyms.RemoveItemChild(this.Parent, lst_synonyms.Name, txt_wordAdd.Text) },
+                new Func<object>[] { lst_synonyms.AddItemChild(this.Parent, lst_synonyms.Name, txt_wordAdd.Text) },
+                new OwnerControlData(this, this.Parent)));
+            
             txt_wordAdd.Text = "";
         }
 
@@ -85,11 +84,11 @@ namespace SteelQuiz
 
                 lst_synonyms.Items[lst_synonyms.Items.IndexOf(item)] = _new;
 
-                undoes.Add(lst_synonyms.ChangeItem(old, _new));
-                redoes.Add(lst_synonyms.ChangeItem(_new, old));
+                undoes.Add(lst_synonyms.ChangeItemChild(this.Parent, lst_synonyms.Name, old, _new));
+                redoes.Add(lst_synonyms.ChangeItemChild(this.Parent, lst_synonyms.Name, _new, old));
             }
 
-            Program.frmQuizEditor.UndoStack.Push(new UndoRedoFuncPair(undoes.ToArray(), redoes.ToArray(), this));
+            Program.frmQuizEditor.UndoStack.Push(new UndoRedoFuncPair(undoes.ToArray(), redoes.ToArray(), new OwnerControlData(this, this.Parent)));
 
             txt_wordAdd.Text = "";
         }
@@ -110,11 +109,11 @@ namespace SteelQuiz
             {
                 lst_synonyms.Items.Remove(item);
 
-                undoes.Add(lst_synonyms.AddItem(item));
-                redoes.Add(lst_synonyms.RemoveItem(item));
+                undoes.Add(lst_synonyms.AddItemChild(this.Parent, lst_synonyms.Name, item));
+                redoes.Add(lst_synonyms.RemoveItemChild(this.Parent, lst_synonyms.Name, item));
             }
 
-            Program.frmQuizEditor.UndoStack.Push(new UndoRedoFuncPair(undoes.ToArray(), redoes.ToArray(), this));
+            Program.frmQuizEditor.UndoStack.Push(new UndoRedoFuncPair(undoes.ToArray(), redoes.ToArray(), new OwnerControlData(this, this.Parent)));
         }
 
         private void lst_synonyms_SelectedIndexChanged(object sender, EventArgs e)
