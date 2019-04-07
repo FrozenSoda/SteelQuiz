@@ -65,8 +65,6 @@ namespace SteelQuiz.QuizEditor
         {
             // add synonyms
 
-            throw new NotImplementedException();
-
             var quiz = new Quiz(cmb_lang1.Text, cmb_lang2.Text, MetaData.QUIZ_FILE_FORMAT_VERSION);
 
             QuizEditorWord w1 = null;
@@ -78,6 +76,8 @@ namespace SteelQuiz.QuizEditor
                 }
                 else
                 {
+                    var w2 = word;
+
                     StringComp.Rules translationRules = StringComp.Rules.None;
                     if (w1.chk_ignoreCapitalization.Checked)
                     {
@@ -87,7 +87,9 @@ namespace SteelQuiz.QuizEditor
                     {
                         translationRules |= StringComp.Rules.IgnoreExclamation;
                     }
-                    var wordPair = new WordPair(w1.txt_word.Text, word.txt_word.Text, translationRules);
+
+                    var wordPair = new WordPair(w1.txt_word.Text, w2.txt_word.Text, translationRules, w1.Synonyms, w2.Synonyms);
+                    
                     w1 = null;
                 }
             }

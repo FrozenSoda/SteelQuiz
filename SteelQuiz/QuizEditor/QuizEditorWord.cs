@@ -33,7 +33,7 @@ namespace SteelQuiz.QuizEditor
     {
         public int Language { get; set; }
         public string Word => txt_word.Text;
-        public string[] Synonyms { get; set; } = null;
+        public List<string> Synonyms { get; set; } = null;
         public EditWordSynonyms EditWordSynonyms { get; set; } = null;
         public bool ignoreNextTextBoxChange = false;
 

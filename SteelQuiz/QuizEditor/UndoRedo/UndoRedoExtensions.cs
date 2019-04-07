@@ -31,6 +31,10 @@ namespace SteelQuiz.QuizEditor.UndoRedo
         /*
          * The following Funcs should be added to the undo/redo-stacks. For instance, if an item is added to a listbox, RemoveItem should be added to the undo stack
          * (which will remove the added item when pressing undo)
+         */
+
+        /*
+         * formPtr is a Func which returns the appropriate form
          */ 
 
         public static Func<TextBox> ChangeText(this TextBox textBox, string to, Action beforeRevertAction = null)
@@ -43,10 +47,10 @@ namespace SteelQuiz.QuizEditor.UndoRedo
         }
 
 
-        public static Func<TextBox> ChangeTextChild(this TextBox textBox, QuizEditorWord owner, string textBoxName, string to)
+        public static Func<TextBox> ChangeText(this TextBox textBox, Func<Form> formPtr, string textBoxName, string to)
         {
             return () => {
-                var txt = owner.EditWordSynonyms.Controls[textBoxName] as TextBox;
+                var txt = formPtr().Controls[textBoxName] as TextBox;
                 if (txt == null)
                 {
                     return null;
@@ -64,40 +68,10 @@ namespace SteelQuiz.QuizEditor.UndoRedo
             };
         }
 
-        /*
-        public static Func<ListBox> RemoveItemChild(this ListBox listBox, QuizEditorWord owner, string listBoxName, object added)
+        public static Func<ListBox> RemoveItem(this ListBox listBox, Func<Form> formPtr, string listBoxName, object added)
         {
             return () => {
-                var lst = owner.editWordSynonyms.Controls[listBoxName] as ListBox;
-                if (lst == null)
-                {
-                    return null;
-                }
-                lst.Items.Remove(added);
-                return lst;
-            };
-        }
-        */
-
-        /*
-        public static Func<ListBox> RemoveItemChild(this ListBox listBox, UserControl parent, string formVarName, string listBoxName, object added)
-        {
-            return () => {
-                var lst = (parent.GetType().GetProperty(formVarName).GetValue(parent, null) as Form).Controls[listBoxName] as ListBox;
-                if (lst == null)
-                {
-                    return null;
-                }
-                lst.Items.Remove(added);
-                return lst;
-            };
-        }
-        */
-
-        public static Func<ListBox> RemoveItem(this ListBox listBox, Func<Form> formPointer, string listBoxName, object added)
-        {
-            return () => {
-                var lst = formPointer().Controls[listBoxName] as ListBox;
+                var lst = formPtr().Controls[listBoxName] as ListBox;
                 if (lst == null)
                 {
                     return null;
@@ -115,10 +89,10 @@ namespace SteelQuiz.QuizEditor.UndoRedo
             };
         }
 
-        public static Func<ListBox> AddItemChild(this ListBox listBox, QuizEditorWord owner, string listBoxName, object removed)
+        public static Func<ListBox> AddItem(this ListBox listBox, Func<Form> formPtr, string listBoxName, object removed)
         {
             return () => {
-                var lst = owner.EditWordSynonyms.Controls[listBoxName] as ListBox;
+                var lst = formPtr().Controls[listBoxName] as ListBox;
                 if (lst == null)
                 {
                     return null;
@@ -136,10 +110,10 @@ namespace SteelQuiz.QuizEditor.UndoRedo
             };
         }
 
-        public static Func<ListBox> ChangeItemChild(this ListBox listBox, QuizEditorWord owner, string listBoxName, object to, object from)
+        public static Func<ListBox> ChangeItem(this ListBox listBox, Func<Form> formPtr, string listBoxName, object to, object from)
         {
             return () => {
-                var lst = owner.EditWordSynonyms.Controls[listBoxName] as ListBox;
+                var lst = formPtr().Controls[listBoxName] as ListBox;
                 if (lst == null)
                 {
                     return null;
