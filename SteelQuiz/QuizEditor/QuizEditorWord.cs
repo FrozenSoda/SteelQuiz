@@ -32,13 +32,31 @@ namespace SteelQuiz
             }
         }
 
+        public void InitEditWordSynonyms()
+        {
+            if (editWordSynonyms == null)
+            {
+                editWordSynonyms = new EditWordSynonyms(txt_word.Text, Synonyms);
+            }
+        }
+
+        public void DisposeEditWordSynonyms()
+        {
+            if (editWordSynonyms != null)
+            {
+                editWordSynonyms.Dispose();
+                editWordSynonyms = null;
+            }
+        }
+
         private void btn_editSynonyms_Click(object sender, EventArgs e)
         {
-            var editSynonyms = new EditWordSynonyms(txt_word.Text, Synonyms);
-            if (editSynonyms.ShowDialog() == DialogResult.OK)
+            InitEditWordSynonyms();
+            if (editWordSynonyms.ShowDialog() == DialogResult.OK)
             {
-                Synonyms = editSynonyms.Synonyms;
+                Synonyms = editWordSynonyms.Synonyms;
             }
+            DisposeEditWordSynonyms();
         }
 
         private string txt_word_text_old = "";

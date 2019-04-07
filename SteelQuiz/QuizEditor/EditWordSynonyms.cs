@@ -34,9 +34,14 @@ namespace SteelQuiz
             }
         }
 
-        private void btn_apply_Click(object sender, EventArgs e)
+        public void ApplyChanges()
         {
             Synonyms = lst_synonyms.Items.OfType<string>().ToArray();
+        }
+
+        private void btn_apply_Click(object sender, EventArgs e)
+        {
+            ApplyChanges();
             DialogResult = DialogResult.OK;
         }
 
