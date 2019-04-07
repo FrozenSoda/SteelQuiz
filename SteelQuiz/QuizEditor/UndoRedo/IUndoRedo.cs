@@ -8,9 +8,6 @@ namespace SteelQuiz.UndoRedo
 {
     interface IUndoRedo
     {
-        Stack<UndoRedoFuncPair> UndoStack { get; set; }
-        Stack<UndoRedoFuncPair> RedoStack { get; set; }
-
         void Undo();
         void Redo();
     }
