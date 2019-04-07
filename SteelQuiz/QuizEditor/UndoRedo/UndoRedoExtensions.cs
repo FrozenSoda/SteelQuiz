@@ -36,7 +36,7 @@ namespace SteelQuiz.QuizEditor.UndoRedo
         public static Func<TextBox> ChangeText(this TextBox textBox, string to, Action beforeRevertAction = null)
         {
             return () => {
-                beforeRevertAction();
+                beforeRevertAction?.Invoke();
                 textBox.Text = to;
                 return textBox;
             };
