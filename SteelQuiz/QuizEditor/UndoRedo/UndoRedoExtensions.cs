@@ -42,10 +42,11 @@ namespace SteelQuiz.QuizEditor.UndoRedo
             };
         }
 
+
         public static Func<TextBox> ChangeTextChild(this TextBox textBox, QuizEditorWord owner, string textBoxName, string to)
         {
             return () => {
-                var txt = owner.editWordSynonyms.Controls[textBoxName] as TextBox;
+                var txt = owner.EditWordSynonyms.Controls[textBoxName] as TextBox;
                 if (txt == null)
                 {
                     return null;
@@ -63,10 +64,40 @@ namespace SteelQuiz.QuizEditor.UndoRedo
             };
         }
 
+        /*
         public static Func<ListBox> RemoveItemChild(this ListBox listBox, QuizEditorWord owner, string listBoxName, object added)
         {
             return () => {
                 var lst = owner.editWordSynonyms.Controls[listBoxName] as ListBox;
+                if (lst == null)
+                {
+                    return null;
+                }
+                lst.Items.Remove(added);
+                return lst;
+            };
+        }
+        */
+
+        /*
+        public static Func<ListBox> RemoveItemChild(this ListBox listBox, UserControl parent, string formVarName, string listBoxName, object added)
+        {
+            return () => {
+                var lst = (parent.GetType().GetProperty(formVarName).GetValue(parent, null) as Form).Controls[listBoxName] as ListBox;
+                if (lst == null)
+                {
+                    return null;
+                }
+                lst.Items.Remove(added);
+                return lst;
+            };
+        }
+        */
+
+        public static Func<ListBox> RemoveItem(this ListBox listBox, Func<Form> formPointer, string listBoxName, object added)
+        {
+            return () => {
+                var lst = formPointer().Controls[listBoxName] as ListBox;
                 if (lst == null)
                 {
                     return null;
@@ -87,7 +118,7 @@ namespace SteelQuiz.QuizEditor.UndoRedo
         public static Func<ListBox> AddItemChild(this ListBox listBox, QuizEditorWord owner, string listBoxName, object removed)
         {
             return () => {
-                var lst = owner.editWordSynonyms.Controls[listBoxName] as ListBox;
+                var lst = owner.EditWordSynonyms.Controls[listBoxName] as ListBox;
                 if (lst == null)
                 {
                     return null;
@@ -108,7 +139,7 @@ namespace SteelQuiz.QuizEditor.UndoRedo
         public static Func<ListBox> ChangeItemChild(this ListBox listBox, QuizEditorWord owner, string listBoxName, object to, object from)
         {
             return () => {
-                var lst = owner.editWordSynonyms.Controls[listBoxName] as ListBox;
+                var lst = owner.EditWordSynonyms.Controls[listBoxName] as ListBox;
                 if (lst == null)
                 {
                     return null;

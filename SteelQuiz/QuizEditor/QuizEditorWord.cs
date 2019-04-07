@@ -34,7 +34,7 @@ namespace SteelQuiz.QuizEditor
         public int Language { get; set; }
         public string Word => txt_word.Text;
         public string[] Synonyms { get; set; } = null;
-        public EditWordSynonyms editWordSynonyms = null;
+        public EditWordSynonyms EditWordSynonyms { get; set; } = null;
         public bool ignoreNextTextBoxChange = false;
 
         public QuizEditorWord(bool showTranslationRulesOptions)
@@ -53,27 +53,27 @@ namespace SteelQuiz.QuizEditor
 
         public void InitEditWordSynonyms()
         {
-            if (editWordSynonyms == null)
+            if (EditWordSynonyms == null)
             {
-                editWordSynonyms = new EditWordSynonyms(this, txt_word.Text, Synonyms);
+                EditWordSynonyms = new EditWordSynonyms(this, txt_word.Text, Synonyms);
             }
         }
 
         public void DisposeEditWordSynonyms()
         {
-            if (editWordSynonyms != null)
+            if (EditWordSynonyms != null)
             {
-                editWordSynonyms.Dispose();
-                editWordSynonyms = null;
+                EditWordSynonyms.Dispose();
+                EditWordSynonyms = null;
             }
         }
 
         private void btn_editSynonyms_Click(object sender, EventArgs e)
         {
             InitEditWordSynonyms();
-            if (editWordSynonyms.ShowDialog() == DialogResult.OK)
+            if (EditWordSynonyms.ShowDialog() == DialogResult.OK)
             {
-                Synonyms = editWordSynonyms.Synonyms;
+                Synonyms = EditWordSynonyms.Synonyms;
             }
             DisposeEditWordSynonyms();
         }

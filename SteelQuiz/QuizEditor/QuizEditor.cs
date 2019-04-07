@@ -119,9 +119,9 @@ namespace SteelQuiz.QuizEditor
                         if (peek.OwnerControlData.Parent == qwrd)
                         {
                             qwrd.InitEditWordSynonyms();
-                            qwrd.editWordSynonyms.Undo();
-                            qwrd.editWordSynonyms.ApplyChanges();
-                            qwrd.Synonyms = qwrd.editWordSynonyms.Synonyms;
+                            qwrd.EditWordSynonyms.Undo();
+                            qwrd.EditWordSynonyms.ApplyChanges();
+                            qwrd.Synonyms = qwrd.EditWordSynonyms.Synonyms;
                             qwrd.DisposeEditWordSynonyms();
                             break;
                         }
@@ -151,9 +151,9 @@ namespace SteelQuiz.QuizEditor
                         if (peek.OwnerControlData.Parent == qwrd)
                         {
                             qwrd.InitEditWordSynonyms();
-                            qwrd.editWordSynonyms.Redo();
-                            qwrd.editWordSynonyms.ApplyChanges();
-                            qwrd.Synonyms = qwrd.editWordSynonyms.Synonyms;
+                            qwrd.EditWordSynonyms.Redo();
+                            qwrd.EditWordSynonyms.ApplyChanges();
+                            qwrd.Synonyms = qwrd.EditWordSynonyms.Synonyms;
                             qwrd.DisposeEditWordSynonyms();
                             break;
                         }

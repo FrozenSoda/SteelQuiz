@@ -75,11 +75,25 @@ namespace SteelQuiz.QuizEditor
         {
             lst_synonyms.Items.Add(txt_wordAdd.Text);
 
+            /*
             Program.frmQuizEditor.UndoStack.Push(new UndoRedoFuncPair(
                 new Func<object>[] { lst_synonyms.RemoveItemChild(this.Parent, lst_synonyms.Name, txt_wordAdd.Text) },
                 new Func<object>[] { lst_synonyms.AddItemChild(this.Parent, lst_synonyms.Name, txt_wordAdd.Text) },
                 new OwnerControlData(this, this.Parent)));
-            
+                */
+
+            /*
+            Program.frmQuizEditor.UndoStack.Push(new UndoRedoFuncPair(
+                new Func<object>[] { lst_synonyms.RemoveItemChild(this.Parent, "EditWordSynonyms", lst_synonyms.Name, txt_wordAdd.Text) },
+                new Func<object>[] { lst_synonyms.AddItemChild(this.Parent, lst_synonyms.Name, txt_wordAdd.Text) },
+                new OwnerControlData(this, this.Parent)));
+                */
+
+            Program.frmQuizEditor.UndoStack.Push(new UndoRedoFuncPair(
+                new Func<object>[] { lst_synonyms.RemoveItem(() => { return this.Parent.EditWordSynonyms; }, lst_synonyms.Name, txt_wordAdd.Text) },
+                new Func<object>[] { lst_synonyms.AddItemChild(this.Parent, lst_synonyms.Name, txt_wordAdd.Text) },
+                new OwnerControlData(this, this.Parent)));
+
             txt_wordAdd.Text = "";
         }
 
@@ -128,7 +142,9 @@ namespace SteelQuiz.QuizEditor
                 lst_synonyms.Items.Remove(item);
 
                 undoes.Add(lst_synonyms.AddItemChild(this.Parent, lst_synonyms.Name, item));
-                redoes.Add(lst_synonyms.RemoveItemChild(this.Parent, lst_synonyms.Name, item));
+                //redoes.Add(lst_synonyms.RemoveItemChild(this.Parent, lst_synonyms.Name, item));
+                //redoes.Add(lst_synonyms.RemoveItemChild(this.Parent, "EditWordSynonyms", lst_synonyms.Name, item));
+                redoes.Add(lst_synonyms.RemoveItem(() => { return this.Parent.EditWordSynonyms; }, lst_synonyms.Name, item));
             }
 
             Program.frmQuizEditor.UndoStack.Push(new UndoRedoFuncPair(undoes.ToArray(), redoes.ToArray(), new OwnerControlData(this, this.Parent)));
