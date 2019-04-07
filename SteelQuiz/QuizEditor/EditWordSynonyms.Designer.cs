@@ -124,6 +124,7 @@ namespace SteelQuiz.QuizEditor
             // 
             // btn_update
             // 
+            this.btn_update.Enabled = false;
             this.btn_update.Location = new System.Drawing.Point(573, 59);
             this.btn_update.Name = "btn_update";
             this.btn_update.Size = new System.Drawing.Size(97, 23);
@@ -134,6 +135,7 @@ namespace SteelQuiz.QuizEditor
             // 
             // btn_remove
             // 
+            this.btn_remove.Enabled = false;
             this.btn_remove.Location = new System.Drawing.Point(676, 59);
             this.btn_remove.Name = "btn_remove";
             this.btn_remove.Size = new System.Drawing.Size(112, 23);
@@ -164,14 +166,14 @@ namespace SteelQuiz.QuizEditor
             // undoToolStripMenuItem
             // 
             this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
-            this.undoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.undoToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.undoToolStripMenuItem.Text = "Undo";
             this.undoToolStripMenuItem.Click += new System.EventHandler(this.undoToolStripMenuItem_Click);
             // 
             // redoToolStripMenuItem
             // 
             this.redoToolStripMenuItem.Name = "redoToolStripMenuItem";
-            this.redoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.redoToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.redoToolStripMenuItem.Text = "Redo";
             this.redoToolStripMenuItem.Click += new System.EventHandler(this.redoToolStripMenuItem_Click);
             // 
@@ -194,6 +196,7 @@ namespace SteelQuiz.QuizEditor
             this.Name = "EditWordSynonyms";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "EditWordSynonyms";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EditWordSynonyms_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

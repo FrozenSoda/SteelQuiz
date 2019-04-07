@@ -37,7 +37,7 @@ namespace SteelQuiz.QuizEditor.UndoRedo
          * formPtr is a Func which returns the appropriate form
          */ 
 
-        public static Func<TextBox> ChangeText(this TextBox textBox, string to, Action beforeRevertAction = null)
+        public static Func<TextBox> ChangeText(this TextBox textBox, string to, Action beforeRevertAction)
         {
             return () => {
                 beforeRevertAction?.Invoke();
@@ -120,6 +120,16 @@ namespace SteelQuiz.QuizEditor.UndoRedo
                 }
                 lst.Items[lst.Items.IndexOf(from)] = to;
                 return lst;
+            };
+        }
+
+        public static Func<CheckBox> SetChecked(this CheckBox checkBox, bool state, Action beforeRevertAction)
+        {
+            return () =>
+            {
+                beforeRevertAction?.Invoke();
+                checkBox.Checked = state;
+                return checkBox;
             };
         }
     }

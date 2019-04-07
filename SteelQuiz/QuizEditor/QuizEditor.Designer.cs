@@ -56,7 +56,7 @@ namespace SteelQuiz.QuizEditor
             this.flp_words = new System.Windows.Forms.FlowLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.mns_top = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,7 +69,9 @@ namespace SteelQuiz.QuizEditor
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quizSettingsVisibleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip1.SuspendLayout();
+            this.sfd_quiz = new System.Windows.Forms.SaveFileDialog();
+            this.ofd_quiz = new System.Windows.Forms.OpenFileDialog();
+            this.mns_top.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -149,18 +151,18 @@ namespace SteelQuiz.QuizEditor
             this.label5.TabIndex = 9;
             this.label5.Text = "Words in language 2";
             // 
-            // menuStrip1
+            // mns_top
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mns_top.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
             this.viewToolStripMenuItem,
             this.helpToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
-            this.menuStrip1.TabIndex = 10;
-            this.menuStrip1.Text = "menuStrip1";
+            this.mns_top.Location = new System.Drawing.Point(0, 0);
+            this.mns_top.Name = "mns_top";
+            this.mns_top.Size = new System.Drawing.Size(800, 24);
+            this.mns_top.TabIndex = 10;
+            this.mns_top.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
@@ -185,18 +187,21 @@ namespace SteelQuiz.QuizEditor
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openToolStripMenuItem.Text = "Open";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
             this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveAsToolStripMenuItem.Text = "Save as";
+            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
@@ -216,14 +221,14 @@ namespace SteelQuiz.QuizEditor
             // undoToolStripMenuItem
             // 
             this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
-            this.undoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.undoToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.undoToolStripMenuItem.Text = "Undo";
             this.undoToolStripMenuItem.Click += new System.EventHandler(this.undoToolStripMenuItem_Click);
             // 
             // redoToolStripMenuItem
             // 
             this.redoToolStripMenuItem.Name = "redoToolStripMenuItem";
-            this.redoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.redoToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.redoToolStripMenuItem.Text = "Redo";
             this.redoToolStripMenuItem.Click += new System.EventHandler(this.redoToolStripMenuItem_Click);
             // 
@@ -247,6 +252,16 @@ namespace SteelQuiz.QuizEditor
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
+            // sfd_quiz
+            // 
+            this.sfd_quiz.Filter = "SteelQuiz Quizzes | *.steelquiz";
+            this.sfd_quiz.Title = "Save quiz";
+            // 
+            // ofd_quiz
+            // 
+            this.ofd_quiz.Filter = "SteelQuiz Quizzes | *.steelquiz";
+            this.ofd_quiz.Title = "Select a quiz to edit";
+            // 
             // QuizEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -261,17 +276,17 @@ namespace SteelQuiz.QuizEditor
             this.Controls.Add(this.cmb_lang1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.mns_top);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MainMenuStrip = this.menuStrip1;
+            this.MainMenuStrip = this.mns_top;
             this.MaximizeBox = false;
             this.Name = "QuizEditor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "QuizEditor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.QuizEditor_FormClosing);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.mns_top.ResumeLayout(false);
+            this.mns_top.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -288,7 +303,7 @@ namespace SteelQuiz.QuizEditor
         private System.Windows.Forms.FlowLayoutPanel flp_words;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip mns_top;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
@@ -301,5 +316,7 @@ namespace SteelQuiz.QuizEditor
         private System.Windows.Forms.ToolStripMenuItem redoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quizSettingsVisibleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.SaveFileDialog sfd_quiz;
+        private System.Windows.Forms.OpenFileDialog ofd_quiz;
     }
 }

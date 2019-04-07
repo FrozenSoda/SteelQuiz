@@ -35,7 +35,10 @@ namespace SteelQuiz.QuizEditor
         public string Word => txt_word.Text;
         public List<string> Synonyms { get; set; } = null;
         public EditWordSynonyms EditWordSynonyms { get; set; } = null;
-        public bool ignoreNextTextBoxChange = false;
+
+        public bool ignore_txt_word_change = false;
+        public bool ignore_chk_ignoreCapitalization_change = false;
+        public bool ignore_chk_ignoreExcl_change = false;
 
         public QuizEditorWord(bool showTranslationRulesOptions)
         {
@@ -82,19 +85,49 @@ namespace SteelQuiz.QuizEditor
 
         private void txt_word_TextChanged(object sender, EventArgs e)
         {
-            if (ignoreNextTextBoxChange)
+            if (ignore_txt_word_change)
             {
                 txt_word_text_old = txt_word.Text;
-                ignoreNextTextBoxChange = false;
+                ignore_txt_word_change = false;
                 return;
             }
 
             Program.frmQuizEditor.UndoStack.Push(new UndoRedoFuncPair(
-                new Func<object>[] { txt_word.ChangeText(txt_word_text_old, () => { ignoreNextTextBoxChange = true; }) },
-                new Func<object>[] { txt_word.ChangeText(txt_word.Text, () => { ignoreNextTextBoxChange = true; }) },
+                new Func<object>[] { txt_word.ChangeText(txt_word_text_old, () => { ignore_txt_word_change = true; }) },
+                new Func<object>[] { txt_word.ChangeText(txt_word.Text, () => { ignore_txt_word_change = true; }) },
                 new OwnerControlData(this, this.Parent)));
 
             txt_word_text_old = txt_word.Text;
+        }
+
+        private void chk_ignoreCapitalization_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ignore_chk_ignoreCapitalization_change)
+            {
+                ignore_chk_ignoreCapitalization_change = false;
+                return;
+            }
+
+            Program.frmQuizEditor.UndoStack.Push(new UndoRedoFuncPair(
+                new Func<object>[] { chk_ignoreCapitalization.SetChecked(!chk_ignoreCapitalization.Checked, () => { ignore_chk_ignoreCapitalization_change = true; }) },
+                new Func<object>[] { chk_ignoreCapitalization.SetChecked(chk_ignoreCapitalization.Checked, () => { ignore_chk_ignoreCapitalization_change = true; }) },
+                new OwnerControlData(this, this.Parent)
+                ));
+        }
+
+        private void chk_ignoreExcl_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ignore_chk_ignoreExcl_change)
+            {
+                ignore_chk_ignoreExcl_change = false;
+                return;
+            }
+
+            Program.frmQuizEditor.UndoStack.Push(new UndoRedoFuncPair(
+                new Func<object>[] { chk_ignoreExcl.SetChecked(!chk_ignoreExcl.Checked, () => { ignore_chk_ignoreExcl_change = true; }) },
+                new Func<object>[] { chk_ignoreExcl.SetChecked(chk_ignoreExcl.Checked, () => { ignore_chk_ignoreExcl_change = true; }) },
+                new OwnerControlData(this, this.Parent)
+                ));
         }
     }
 }

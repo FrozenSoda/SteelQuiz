@@ -76,6 +76,7 @@ namespace SteelQuiz.QuizEditor
             this.chk_ignoreExcl.TabStop = false;
             this.chk_ignoreExcl.Text = "Ignore exclamation marks";
             this.chk_ignoreExcl.UseVisualStyleBackColor = true;
+            this.chk_ignoreExcl.CheckedChanged += new System.EventHandler(this.chk_ignoreExcl_CheckedChanged);
             // 
             // label4
             // 
@@ -96,6 +97,7 @@ namespace SteelQuiz.QuizEditor
             this.chk_ignoreCapitalization.TabStop = false;
             this.chk_ignoreCapitalization.Text = "Ignore capitalization";
             this.chk_ignoreCapitalization.UseVisualStyleBackColor = true;
+            this.chk_ignoreCapitalization.CheckedChanged += new System.EventHandler(this.chk_ignoreCapitalization_CheckedChanged);
             // 
             // txt_word
             // 

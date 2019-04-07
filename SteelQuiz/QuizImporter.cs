@@ -48,7 +48,7 @@ namespace SteelQuiz
                 }
             }
 
-            WordPair[] wordPairs = null;
+            List<WordPair> wordPairs = null;
 
             if (quizEncoded.Contains("_____"))
             {
@@ -60,14 +60,14 @@ namespace SteelQuiz
             }
             
 
-            if (wordPairs.Length == 0)
+            if (wordPairs.Count == 0)
             {
                 MessageBox.Show("No quiz could be found in the quiz url specified. Make sure you selected the correct quiz source, and entered the URL correctly",
                     "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
-            if (wordPairs.Length == 1)
+            if (wordPairs.Count == 1)
             {
                 var msg = MessageBox.Show("SteelQuiz might not be able to import this particular quiz correctly. It might contain errors.\r\n\r\nTry anyway?",
                     "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button3);
@@ -108,7 +108,7 @@ namespace SteelQuiz
             { ':', InString.Colon }
         };
 
-        private static WordPair[] FromStudentlitteratur_VocabularyBank(string quizEncoded)
+        private static List<WordPair> FromStudentlitteratur_VocabularyBank(string quizEncoded)
         {
             var foundStr = "";
             var inString = InString.None;
@@ -202,10 +202,10 @@ namespace SteelQuiz
                 }
             }
 
-            return wordPairs.ToArray();
+            return wordPairs;
         }
 
-        private static WordPair[] FromStudentlitteratur_Wordmatch(string quizEncoded)
+        private static List<WordPair> FromStudentlitteratur_Wordmatch(string quizEncoded)
         {
             var foundStr = "";
             var inString = false;
@@ -262,7 +262,7 @@ namespace SteelQuiz
                 }
             }
 
-            return wordPairs.ToArray();
+            return wordPairs;
         }
 
         private static void ChkAddWordPair(this IList<WordPair> wpList, string word1, string word2, StringComp.Rules rules)

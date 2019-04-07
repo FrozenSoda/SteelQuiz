@@ -52,7 +52,7 @@ namespace SteelQuiz
         {
             var wordsNotToAsk = QuizCore.QuizProgress.WordsNotToAsk();
 
-            if (wordsNotToAsk.Length == QuizCore.Quiz.WordPairs.Length)
+            if (wordsNotToAsk.Length == QuizCore.Quiz.WordPairs.Count)
             {
                 NewRound();
                 return null;
@@ -60,7 +60,7 @@ namespace SteelQuiz
 
             var wordsNotToAsk_Indexes = new List<int>();
 
-            for (int i = 0; i < QuizCore.Quiz.WordPairs.Length; ++i)
+            for (int i = 0; i < QuizCore.Quiz.WordPairs.Count; ++i)
             {
                 for (int j = 0; j < wordsNotToAsk.Length; ++j)
                 {
@@ -71,7 +71,7 @@ namespace SteelQuiz
                 }
             }
 
-            var rndIndex = new Random().RandomNext(0, QuizCore.Quiz.WordPairs.Length, wordsNotToAsk_Indexes.ToArray());
+            var rndIndex = new Random().RandomNext(0, QuizCore.Quiz.WordPairs.Count, wordsNotToAsk_Indexes.ToArray());
             var wordPair = QuizCore.Quiz.WordPairs[rndIndex];
             QuizCore.QuizProgress.SetCurrentWordPair(wordPair);
             QuizCore.SaveProgress();
@@ -82,7 +82,7 @@ namespace SteelQuiz
         {
             var alreadyAsked = QuizCore.QuizProgress.WordsNotToAsk();
 
-            if (alreadyAsked.Length == QuizCore.Quiz.WordPairs.Length)
+            if (alreadyAsked.Length == QuizCore.Quiz.WordPairs.Count)
             {
                 //new round
                 NewRound();

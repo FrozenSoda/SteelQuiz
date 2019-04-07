@@ -21,10 +21,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 using SteelQuiz.QuizData;
 using SteelQuiz.QuizEditor.UndoRedo;
 
@@ -32,8 +34,10 @@ namespace SteelQuiz.QuizEditor
 {
     public partial class QuizEditor : Form, IUndoRedo
     {
-        private List<QuizEditorWord> quizEditorWords_lang1 = new List<QuizEditorWord>();
-        private List<QuizEditorWord> quizEditorWords_lang2 = new List<QuizEditorWord>();
+        private string QuizPath { get; set; } = null;
+
+        //private List<QuizEditorWord> quizEditorWords_lang1 = new List<QuizEditorWord>();
+        //private List<QuizEditorWord> quizEditorWords_lang2 = new List<QuizEditorWord>();
 
         public Stack<UndoRedoFuncPair> UndoStack { get; set; } = new Stack<UndoRedoFuncPair>();
         public Stack<UndoRedoFuncPair> RedoStack { get; set; } = new Stack<UndoRedoFuncPair>();
@@ -44,7 +48,7 @@ namespace SteelQuiz.QuizEditor
             this.Location = new Point(Program.frmWelcome.Location.X + (Program.frmWelcome.Size.Width / 2) - (this.Size.Width / 2),
                               Program.frmWelcome.Location.Y + (Program.frmWelcome.Size.Height / 2) - (this.Size.Height / 2)
                             );
-            AddWordPair(20);
+            AddWordPair(2);
         }
 
         private void AddWordPair(int count = 1)
@@ -52,19 +56,33 @@ namespace SteelQuiz.QuizEditor
             for (int i = 0; i < count; ++i)
             {
                 var w1 = new QuizEditorWord(true);
-                quizEditorWords_lang1.Add(w1);
+                //quizEditorWords_lang1.Add(w1);
                 flp_words.Controls.Add(w1);
 
                 var w2 = new QuizEditorWord(false);
-                quizEditorWords_lang2.Add(w2);
+                //quizEditorWords_lang2.Add(w2);
+                flp_words.Controls.Add(w2);
+            }
+        }
+
+        private void SetWordPairs(int count)
+        {
+            flp_words.Controls.Clear();
+
+            for (int i = 0; i < count; ++i)
+            {
+                var w1 = new QuizEditorWord(true);
+                //quizEditorWords_lang1.Add(w1);
+                flp_words.Controls.Add(w1);
+
+                var w2 = new QuizEditorWord(false);
+                //quizEditorWords_lang2.Add(w2);
                 flp_words.Controls.Add(w2);
             }
         }
 
         private Quiz ConstructQuiz()
         {
-            // add synonyms
-
             var quiz = new Quiz(cmb_lang1.Text, cmb_lang2.Text, MetaData.QUIZ_FILE_FORMAT_VERSION);
 
             QuizEditorWord w1 = null;
@@ -89,9 +107,49 @@ namespace SteelQuiz.QuizEditor
                     }
 
                     var wordPair = new WordPair(w1.txt_word.Text, w2.txt_word.Text, translationRules, w1.Synonyms, w2.Synonyms);
+                    quiz.WordPairs.Add(wordPair);
                     
                     w1 = null;
                 }
+            }
+
+            return quiz;
+        }
+
+        private void LoadQuiz()
+        {
+            var ofd = ofd_quiz.ShowDialog();
+            if (ofd == DialogResult.OK)
+            {
+                QuizPath = ofd_quiz.FileName;
+            }
+            else
+            {
+                return;
+            }
+
+            Quiz quiz;
+
+            using (var reader = new StreamReader(QuizPath))
+            {
+                quiz = JsonConvert.DeserializeObject<Quiz>(reader.ReadToEnd());
+            }
+
+            SetWordPairs(quiz.WordPairs.Count + 2);
+
+            int i = 0;
+            int j = 0;
+
+            for (; i < quiz.WordPairs.Count && j < quiz.WordPairs.Count; ++i, j += 2)
+            {
+                var ctrl1 = flp_words.Controls.OfType<QuizEditorWord>().ElementAt(j);
+                var ctrl2 = flp_words.Controls.OfType<QuizEditorWord>().ElementAt(j + 1);
+                var wp = quiz.WordPairs[i];
+
+                ctrl1.txt_word.Text = wp.Word1;
+                ctrl1.Synonyms = wp.Word1Synonyms;
+                ctrl2.txt_word.Text = wp.Word2;
+                ctrl2.Synonyms = wp.Word2Synonyms;
             }
         }
 
@@ -164,6 +222,41 @@ namespace SteelQuiz.QuizEditor
             }
         }
 
+        private void SaveQuiz(bool saveAs = false)
+        {
+            if (QuizPath == null || saveAs)
+            {
+                sfd_quiz.InitialDirectory = QuizCore.QUIZ_FOLDER;
+                int untitledCounter = 1;
+                sfd_quiz.FileName = $"Untitled{ untitledCounter }.steelquiz";
+                while (File.Exists(Path.Combine(QuizCore.QUIZ_FOLDER, sfd_quiz.FileName)))
+                {
+                    ++untitledCounter;
+                    sfd_quiz.FileName = $"Untitled{ untitledCounter }.steelquiz";
+                }
+
+                var sfd = sfd_quiz.ShowDialog();
+                if (sfd == DialogResult.OK)
+                {
+                    QuizPath = sfd_quiz.FileName;
+                }
+                else
+                {
+                    return;
+                }
+            }
+
+            UseWaitCursor = true;
+
+            var quiz = ConstructQuiz();
+            using (var writer = new StreamWriter(QuizPath, false))
+            {
+                writer.Write(JsonConvert.SerializeObject(quiz, Formatting.Indented));
+            }
+
+            UseWaitCursor = false;
+        }
+
         private void undoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Undo();
@@ -172,6 +265,21 @@ namespace SteelQuiz.QuizEditor
         private void redoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Redo();
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveQuiz();
+        }
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveQuiz(true);
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadQuiz();
         }
     }
 }
