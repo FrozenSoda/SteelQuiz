@@ -109,6 +109,7 @@ namespace SteelQuiz.QuizEditor
             // 
             // cmb_lang2
             // 
+            this.cmb_lang2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cmb_lang2.FormattingEnabled = true;
             this.cmb_lang2.Location = new System.Drawing.Point(455, 70);
             this.cmb_lang2.Name = "cmb_lang2";
@@ -117,6 +118,7 @@ namespace SteelQuiz.QuizEditor
             // 
             // label3
             // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(382, 73);
             this.label3.Name = "label3";
@@ -243,7 +245,7 @@ namespace SteelQuiz.QuizEditor
             // quizSettingsVisibleToolStripMenuItem
             // 
             this.quizSettingsVisibleToolStripMenuItem.Name = "quizSettingsVisibleToolStripMenuItem";
-            this.quizSettingsVisibleToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.quizSettingsVisibleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.quizSettingsVisibleToolStripMenuItem.Text = "Quiz settings visible";
             // 
             // helpToolStripMenuItem
@@ -277,14 +279,13 @@ namespace SteelQuiz.QuizEditor
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.mns_top);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.mns_top;
-            this.MaximizeBox = false;
             this.Name = "QuizEditor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "QuizEditor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.QuizEditor_FormClosing);
+            this.SizeChanged += new System.EventHandler(this.QuizEditor_SizeChanged);
             this.mns_top.ResumeLayout(false);
             this.mns_top.PerformLayout();
             this.ResumeLayout(false);

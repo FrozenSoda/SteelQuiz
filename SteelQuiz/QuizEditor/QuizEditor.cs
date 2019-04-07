@@ -281,5 +281,10 @@ namespace SteelQuiz.QuizEditor
         {
             LoadQuiz();
         }
+
+        private void QuizEditor_SizeChanged(object sender, EventArgs e)
+        {
+            flp_words.Size = new Size(this.Size.Width - 40, this.Size.Height - 174);
+        }
     }
 }

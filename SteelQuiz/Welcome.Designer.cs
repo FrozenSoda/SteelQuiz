@@ -74,7 +74,7 @@ namespace SteelQuiz
             this.btn_createQuiz.Name = "btn_createQuiz";
             this.btn_createQuiz.Size = new System.Drawing.Size(237, 57);
             this.btn_createQuiz.TabIndex = 1;
-            this.btn_createQuiz.Text = "Create quiz";
+            this.btn_createQuiz.Text = "Create / edit quiz";
             this.btn_createQuiz.UseVisualStyleBackColor = true;
             this.btn_createQuiz.Click += new System.EventHandler(this.btn_createQuiz_Click);
             // 
@@ -125,7 +125,7 @@ namespace SteelQuiz
             this.btn_continueLast.Name = "btn_continueLast";
             this.btn_continueLast.Size = new System.Drawing.Size(508, 57);
             this.btn_continueLast.TabIndex = 5;
-            this.btn_continueLast.Text = "Continue working with last quiz";
+            this.btn_continueLast.Text = "Continue practising last quiz";
             this.btn_continueLast.UseVisualStyleBackColor = true;
             this.btn_continueLast.Click += new System.EventHandler(this.btn_continueLast_Click);
             // 
