@@ -104,7 +104,7 @@ namespace SteelQuiz.QuizEditor
             // 
             this.txt_word1.Location = new System.Drawing.Point(3, 3);
             this.txt_word1.Name = "txt_word1";
-            this.txt_word1.Size = new System.Drawing.Size(359, 20);
+            this.txt_word1.Size = new System.Drawing.Size(357, 20);
             this.txt_word1.TabIndex = 0;
             this.txt_word1.Click += new System.EventHandler(this.txt_word_Click);
             this.txt_word1.TextChanged += new System.EventHandler(this.txt_word1_TextChanged);
@@ -125,7 +125,7 @@ namespace SteelQuiz.QuizEditor
             // 
             this.txt_word2.Location = new System.Drawing.Point(368, 3);
             this.txt_word2.Name = "txt_word2";
-            this.txt_word2.Size = new System.Drawing.Size(359, 20);
+            this.txt_word2.Size = new System.Drawing.Size(357, 20);
             this.txt_word2.TabIndex = 5;
             this.txt_word2.Click += new System.EventHandler(this.txt_word_Click);
             this.txt_word2.TextChanged += new System.EventHandler(this.txt_word2_TextChanged);
@@ -142,17 +142,18 @@ namespace SteelQuiz.QuizEditor
             this.btn_editSynonyms_w2.UseVisualStyleBackColor = true;
             this.btn_editSynonyms_w2.Click += new System.EventHandler(this.btn_editSynonyms_w2_Click);
             // 
-            // QuizEditorWord
+            // QuizEditorWordPair
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.btn_editSynonyms_w2);
             this.Controls.Add(this.txt_word2);
             this.Controls.Add(this.btn_editSynonyms_w1);
             this.Controls.Add(this.txt_word1);
             this.Controls.Add(this.pnl_translationRules);
-            this.Name = "QuizEditorWord";
-            this.Size = new System.Drawing.Size(730, 97);
+            this.Name = "QuizEditorWordPair";
+            this.Size = new System.Drawing.Size(728, 95);
             this.pnl_translationRules.ResumeLayout(false);
             this.pnl_translationRules.PerformLayout();
             this.ResumeLayout(false);

@@ -309,5 +309,10 @@ namespace SteelQuiz.QuizEditor
             var quizEditor = new QuizEditor();
             quizEditor.Show();
         }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }
