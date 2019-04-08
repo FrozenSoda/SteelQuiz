@@ -84,11 +84,11 @@
     <Compile Include="QuizEditor\QuizEditor.Designer.cs">
       <DependentUpon>QuizEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="QuizEditor\QuizEditorWord.cs">
+    <Compile Include="QuizEditor\QuizEditorWordPair.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="QuizEditor\QuizEditorWord.Designer.cs">
-      <DependentUpon>QuizEditorWord.cs</DependentUpon>
+    <Compile Include="QuizEditor\QuizEditorWordPair.Designer.cs">
+      <DependentUpon>QuizEditorWordPair.cs</DependentUpon>
     </Compile>
     <Compile Include="QuizEditor\UndoRedo\OwnerControlData.cs" />
     <Compile Include="QuizImporter.cs" />
@@ -130,8 +130,8 @@
     <EmbeddedResource Include="QuizEditor\QuizEditor.resx">
       <DependentUpon>QuizEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="QuizEditor\QuizEditorWord.resx">
-      <DependentUpon>QuizEditorWord.cs</DependentUpon>
+    <EmbeddedResource Include="QuizEditor\QuizEditorWordPair.resx">
+      <DependentUpon>QuizEditorWordPair.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TermsOfUse.resx">
       <DependentUpon>TermsOfUse.cs</DependentUpon>

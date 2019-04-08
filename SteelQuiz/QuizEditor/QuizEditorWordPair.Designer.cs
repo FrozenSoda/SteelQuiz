@@ -18,7 +18,7 @@
 
 namespace SteelQuiz.QuizEditor
 {
-    partial class QuizEditorWord
+    partial class QuizEditorWordPair
     {
         /// <summary> 
         /// Required designer variable.
@@ -108,6 +108,7 @@ namespace SteelQuiz.QuizEditor
             this.txt_word1.TabIndex = 0;
             this.txt_word1.Click += new System.EventHandler(this.txt_word_Click);
             this.txt_word1.TextChanged += new System.EventHandler(this.txt_word1_TextChanged);
+            this.txt_word1.Enter += new System.EventHandler(this.txt_word1_Enter);
             // 
             // btn_editSynonyms_w1
             // 
@@ -128,6 +129,7 @@ namespace SteelQuiz.QuizEditor
             this.txt_word2.TabIndex = 5;
             this.txt_word2.Click += new System.EventHandler(this.txt_word_Click);
             this.txt_word2.TextChanged += new System.EventHandler(this.txt_word2_TextChanged);
+            this.txt_word2.Enter += new System.EventHandler(this.txt_word1_Enter);
             // 
             // btn_editSynonyms_w2
             // 

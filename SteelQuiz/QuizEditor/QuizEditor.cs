@@ -54,9 +54,20 @@ namespace SteelQuiz.QuizEditor
         {
             for (int i = 0; i < count; ++i)
             {
-                var w = new QuizEditorWord(i);
+                var w = new QuizEditorWordPair(flp_controls_count);
                 flp_words.Controls.Add(w);
             }
+        }
+
+        public QuizEditorWordPair PrevWord(int wordNumber)
+        {
+            return wordNumber > 0 ? flp_words.Controls[wordNumber - 1] as QuizEditorWordPair : null;
+        }
+
+        public void RemoveQuizEditorWord()
+        {
+            flp_words.Controls[flp_words.Controls.Count - 1].Dispose();
+            flp_words.Controls.RemoveAt(flp_words.Controls.Count - 1);
         }
 
         private void SetWordPairs(int count)
@@ -73,32 +84,20 @@ namespace SteelQuiz.QuizEditor
         {
             var quiz = new Quiz(cmb_lang1.Text, cmb_lang2.Text, MetaData.QUIZ_FILE_FORMAT_VERSION);
 
-            QuizEditorWord w1 = null;
-            foreach (var word in flp_words.Controls.OfType<QuizEditorWord>())
+            foreach (var wordpair in flp_words.Controls.OfType<QuizEditorWordPair>())
             {
-                if (w1 == null)
+                StringComp.Rules translationRules = StringComp.Rules.None;
+                if (wordpair.chk_ignoreCapitalization.Checked)
                 {
-                    w1 = word;
+                    translationRules |= StringComp.Rules.IgnoreCapitalization;
                 }
-                else
+                if (wordpair.chk_ignoreExcl.Checked)
                 {
-                    var w2 = word;
-
-                    StringComp.Rules translationRules = StringComp.Rules.None;
-                    if (w1.chk_ignoreCapitalization.Checked)
-                    {
-                        translationRules |= StringComp.Rules.IgnoreCapitalization;
-                    }
-                    if (w1.chk_ignoreExcl.Checked)
-                    {
-                        translationRules |= StringComp.Rules.IgnoreExclamation;
-                    }
-
-                    var wordPair = new WordPair(w1.txt_word1.Text, w2.txt_word1.Text, translationRules, w1.Synonyms1, w2.Synonyms1);
-                    quiz.WordPairs.Add(wordPair);
-                    
-                    w1 = null;
+                    translationRules |= StringComp.Rules.IgnoreExclamation;
                 }
+
+                var wordPair = new WordPair(wordpair.txt_word1.Text, wordpair.txt_word2.Text, translationRules, wordpair.Synonyms1, wordpair.Synonyms2);
+                quiz.WordPairs.Add(wordPair);
             }
 
             return quiz;
@@ -125,26 +124,9 @@ namespace SteelQuiz.QuizEditor
 
             SetWordPairs(quiz.WordPairs.Count + 2);
 
-            /*
-            int i = 0;
-            int j = 0;
-
-            for (; i < quiz.WordPairs.Count && j < quiz.WordPairs.Count; ++i, j += 2)
-            {
-                var ctrl1 = flp_words.Controls.OfType<QuizEditorWord>().ElementAt(j);
-                var ctrl2 = flp_words.Controls.OfType<QuizEditorWord>().ElementAt(j + 1);
-                var wp = quiz.WordPairs[i];
-
-                ctrl1.txt_word1.Text = wp.Word1;
-                ctrl1.Synonyms1 = wp.Word1Synonyms;
-                ctrl2.txt_word1.Text = wp.Word2;
-                ctrl2.Synonyms1 = wp.Word2Synonyms;
-            }
-            */
-
             for (int i = 0; i < quiz.WordPairs.Count; ++i)
             {
-                var ctrl = flp_words.Controls.OfType<QuizEditorWord>().ElementAt(i);
+                var ctrl = flp_words.Controls.OfType<QuizEditorWordPair>().ElementAt(i);
                 var wp = quiz.WordPairs[i];
 
                 ctrl.txt_word1.Text = wp.Word1;
@@ -175,7 +157,7 @@ namespace SteelQuiz.QuizEditor
                 }
                 else if (peek.OwnerControlData.Control is EditWordSynonyms)
                 {
-                    foreach (var qwrd in flp_words.Controls.OfType<QuizEditorWord>())
+                    foreach (var qwrd in flp_words.Controls.OfType<QuizEditorWordPair>())
                     {
                         if (peek.OwnerControlData.Parent == qwrd)
                         {
@@ -214,7 +196,7 @@ namespace SteelQuiz.QuizEditor
                 }
                 else if (peek.OwnerControlData.Control is EditWordSynonyms)
                 {
-                    foreach (var qwrd in flp_words.Controls.OfType<QuizEditorWord>())
+                    foreach (var qwrd in flp_words.Controls.OfType<QuizEditorWordPair>())
                     {
                         if (peek.OwnerControlData.Parent == qwrd)
                         {

@@ -29,7 +29,7 @@ using SteelQuiz.QuizEditor.UndoRedo;
 
 namespace SteelQuiz.QuizEditor
 {
-    public partial class QuizEditorWord : UserControl
+    public partial class QuizEditorWordPair : UserControl
     {
         public int Number { get; set; } // number in flowlayoutpanel, the first one has number 0 for instance
         public string Word1 => txt_word1.Text;
@@ -43,7 +43,7 @@ namespace SteelQuiz.QuizEditor
         public bool ignore_chk_ignoreCapitalization_change = false;
         public bool ignore_chk_ignoreExcl_change = false;
 
-        public QuizEditorWord(int number)
+        public QuizEditorWordPair(int number)
         {
             InitializeComponent();
             Number = number;
@@ -90,6 +90,8 @@ namespace SteelQuiz.QuizEditor
 
         private void txt_word1_TextChanged(object sender, EventArgs e)
         {
+            ChkFixWordsCount();
+
             if (ignore_txt_word_change)
             {
                 txt_word1_text_old = txt_word1.Text;
@@ -109,6 +111,8 @@ namespace SteelQuiz.QuizEditor
 
         private void txt_word2_TextChanged(object sender, EventArgs e)
         {
+            ChkFixWordsCount();
+
             if (ignore_txt_word_change)
             {
                 txt_word2_text_old = txt_word2.Text;
@@ -156,10 +160,37 @@ namespace SteelQuiz.QuizEditor
 
         private void txt_word_Click(object sender, EventArgs e)
         {
+            ChkFixWordsCount();
+        }
+
+        private void txt_word1_Enter(object sender, EventArgs e)
+        {
+            ChkFixWordsCount();
+        }
+
+        private void ChkFixWordsCount()
+        {
             if (Number >= Program.frmQuizEditor.flp_controls_count - 1)
             {
-                Program.frmQuizEditor.AddWordPair(1);
+                var prev1 = Program.frmQuizEditor.PrevWord(Number);
+                var prev2 = Program.frmQuizEditor.PrevWord(Number - 1);
+                if (QEWordEmpty(prev1) && QEWordEmpty(prev2))
+                {
+                    Program.frmQuizEditor.RemoveQuizEditorWord();
+                    return;
+                }
+                else
+                {
+                    Program.frmQuizEditor.AddWordPair(1);
+                }
             }
+        }
+
+        private bool QEWordEmpty(QuizEditorWordPair qew)
+        {
+            return qew != null ?
+                qew.txt_word1.Text == "" && qew.Synonyms1.IsNullOrEmpty() && qew.txt_word2.Text == "" && qew.Synonyms2.IsNullOrEmpty()
+                : false;
         }
     }
 }

@@ -45,6 +45,7 @@ namespace SteelQuiz.QuizData
             }
             Language1 = lang1;
             Language2 = lang2;
+            WordPairs = new List<WordPair>();
             FileFormatVersion = quizFileFormatVersion;
         }
     }

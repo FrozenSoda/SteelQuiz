@@ -34,13 +34,13 @@ namespace SteelQuiz.QuizEditor
         public List<string> Synonyms { get; set; }
         public int Language { get; set; }
 
-        private new QuizEditorWord Parent { get; set; }
+        private new QuizEditorWordPair Parent { get; set; }
 
         private bool changedTextBox = false; // since listbox select switch
         private object[] initialListBoxCollection;
         private bool closeWarning = true;
 
-        public EditWordSynonyms(QuizEditorWord parent, string word, List<string> currentSynonyms, int language)
+        public EditWordSynonyms(QuizEditorWordPair parent, string word, List<string> currentSynonyms, int language)
         {
             InitializeComponent();
             Parent = parent;
