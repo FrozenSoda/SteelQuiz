@@ -74,6 +74,7 @@ namespace SteelQuiz.QuizEditor
         {
             UndoStack.Clear();
             RedoStack.Clear();
+            QuizPath = null;
 
             flp_words.Controls.Clear();
 
@@ -219,7 +220,7 @@ namespace SteelQuiz.QuizEditor
             }
         }
 
-        private void SaveQuiz(bool saveAs = false)
+        private bool SaveQuiz(bool saveAs = false)
         {
             if (QuizPath == null || saveAs)
             {
@@ -239,7 +240,7 @@ namespace SteelQuiz.QuizEditor
                 }
                 else
                 {
-                    return;
+                    return false;
                 }
             }
 
@@ -252,6 +253,7 @@ namespace SteelQuiz.QuizEditor
             }
 
             UseWaitCursor = false;
+            return true;
         }
 
         private void undoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -286,6 +288,18 @@ namespace SteelQuiz.QuizEditor
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            var msg = MessageBox.Show("Save current quiz before creating a new?", "SteelQuiz", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            if (msg == DialogResult.Yes)
+            {
+                if (!SaveQuiz())
+                {
+                    return;
+                }
+            }
+            else if (msg == DialogResult.Cancel)
+            {
+                return;
+            }
             SetWordPairs(2);
         }
     }
