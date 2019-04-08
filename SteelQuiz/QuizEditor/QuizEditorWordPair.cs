@@ -39,13 +39,16 @@ namespace SteelQuiz.QuizEditor
         public List<string> Synonyms2 { get; set; } = null;
         public EditWordSynonyms EditWordSynonyms { get; set; } = null;
 
+        public QuizEditor QEOwner { get; set; }
+
         public bool ignore_txt_word_change = false;
         public bool ignore_chk_ignoreCapitalization_change = false;
         public bool ignore_chk_ignoreExcl_change = false;
 
-        public QuizEditorWordPair(int number)
+        public QuizEditorWordPair(QuizEditor owner, int number)
         {
             InitializeComponent();
+            QEOwner = owner;
             Number = number;
         }
 

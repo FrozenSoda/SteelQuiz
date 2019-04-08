@@ -35,6 +35,7 @@ namespace SteelQuiz.QuizEditor
         public int Language { get; set; }
 
         private new QuizEditorWordPair Parent { get; set; }
+        private QuizEditor QEOwner => Parent.QEOwner;
 
         private bool changedTextBox = false; // since listbox select switch
         private object[] initialListBoxCollection;
@@ -150,7 +151,7 @@ namespace SteelQuiz.QuizEditor
 
             lst_synonyms.Items.Add(txt_wordAdd.Text);
 
-            Program.frmQuizEditor.UndoStack.Push(new UndoRedoFuncPair(
+            QEOwner.UndoStack.Push(new UndoRedoFuncPair(
                 new Func<object>[] { lst_synonyms.RemoveItem(() => { return this.Parent.EditWordSynonyms; }, lst_synonyms.Name, txt_wordAdd.Text) },
                 new Func<object>[] { lst_synonyms.AddItem(() => { return this.Parent.EditWordSynonyms; }, lst_synonyms.Name, txt_wordAdd.Text) },
                 new OwnerControlData(this, this.Parent, Language)));
