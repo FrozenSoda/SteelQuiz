@@ -50,8 +50,10 @@ namespace SteelQuiz.QuizEditor
             this.chk_ignoreExcl = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.chk_ignoreCapitalization = new System.Windows.Forms.CheckBox();
-            this.txt_word = new System.Windows.Forms.TextBox();
-            this.btn_editSynonyms = new System.Windows.Forms.Button();
+            this.txt_word1 = new System.Windows.Forms.TextBox();
+            this.btn_editSynonyms_w1 = new System.Windows.Forms.Button();
+            this.txt_word2 = new System.Windows.Forms.TextBox();
+            this.btn_editSynonyms_w2 = new System.Windows.Forms.Button();
             this.pnl_translationRules.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,11 +62,10 @@ namespace SteelQuiz.QuizEditor
             this.pnl_translationRules.Controls.Add(this.chk_ignoreExcl);
             this.pnl_translationRules.Controls.Add(this.label4);
             this.pnl_translationRules.Controls.Add(this.chk_ignoreCapitalization);
-            this.pnl_translationRules.Location = new System.Drawing.Point(3, 29);
+            this.pnl_translationRules.Location = new System.Drawing.Point(237, 29);
             this.pnl_translationRules.Name = "pnl_translationRules";
             this.pnl_translationRules.Size = new System.Drawing.Size(279, 65);
             this.pnl_translationRules.TabIndex = 2;
-            this.pnl_translationRules.Visible = false;
             // 
             // chk_ignoreExcl
             // 
@@ -80,12 +81,12 @@ namespace SteelQuiz.QuizEditor
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(-3, 1);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(84, 13);
+            this.label4.Size = new System.Drawing.Size(282, 13);
             this.label4.TabIndex = 1;
             this.label4.Text = "Translation rules";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // chk_ignoreCapitalization
             // 
@@ -99,34 +100,57 @@ namespace SteelQuiz.QuizEditor
             this.chk_ignoreCapitalization.UseVisualStyleBackColor = true;
             this.chk_ignoreCapitalization.CheckedChanged += new System.EventHandler(this.chk_ignoreCapitalization_CheckedChanged);
             // 
-            // txt_word
+            // txt_word1
             // 
-            this.txt_word.Location = new System.Drawing.Point(3, 3);
-            this.txt_word.Name = "txt_word";
-            this.txt_word.Size = new System.Drawing.Size(359, 20);
-            this.txt_word.TabIndex = 0;
-            this.txt_word.TextChanged += new System.EventHandler(this.txt_word_TextChanged);
+            this.txt_word1.Location = new System.Drawing.Point(3, 3);
+            this.txt_word1.Name = "txt_word1";
+            this.txt_word1.Size = new System.Drawing.Size(359, 20);
+            this.txt_word1.TabIndex = 0;
+            this.txt_word1.Click += new System.EventHandler(this.txt_word_Click);
+            this.txt_word1.TextChanged += new System.EventHandler(this.txt_word1_TextChanged);
             // 
-            // btn_editSynonyms
+            // btn_editSynonyms_w1
             // 
-            this.btn_editSynonyms.Location = new System.Drawing.Point(287, 29);
-            this.btn_editSynonyms.Name = "btn_editSynonyms";
-            this.btn_editSynonyms.Size = new System.Drawing.Size(75, 39);
-            this.btn_editSynonyms.TabIndex = 4;
-            this.btn_editSynonyms.TabStop = false;
-            this.btn_editSynonyms.Text = "Edit synonyms";
-            this.btn_editSynonyms.UseVisualStyleBackColor = true;
-            this.btn_editSynonyms.Click += new System.EventHandler(this.btn_editSynonyms_Click);
+            this.btn_editSynonyms_w1.Location = new System.Drawing.Point(3, 29);
+            this.btn_editSynonyms_w1.Name = "btn_editSynonyms_w1";
+            this.btn_editSynonyms_w1.Size = new System.Drawing.Size(75, 39);
+            this.btn_editSynonyms_w1.TabIndex = 4;
+            this.btn_editSynonyms_w1.TabStop = false;
+            this.btn_editSynonyms_w1.Text = "Edit synonyms";
+            this.btn_editSynonyms_w1.UseVisualStyleBackColor = true;
+            this.btn_editSynonyms_w1.Click += new System.EventHandler(this.btn_editSynonyms_w1_Click);
+            // 
+            // txt_word2
+            // 
+            this.txt_word2.Location = new System.Drawing.Point(368, 3);
+            this.txt_word2.Name = "txt_word2";
+            this.txt_word2.Size = new System.Drawing.Size(359, 20);
+            this.txt_word2.TabIndex = 5;
+            this.txt_word2.Click += new System.EventHandler(this.txt_word_Click);
+            this.txt_word2.TextChanged += new System.EventHandler(this.txt_word2_TextChanged);
+            // 
+            // btn_editSynonyms_w2
+            // 
+            this.btn_editSynonyms_w2.Location = new System.Drawing.Point(652, 29);
+            this.btn_editSynonyms_w2.Name = "btn_editSynonyms_w2";
+            this.btn_editSynonyms_w2.Size = new System.Drawing.Size(75, 39);
+            this.btn_editSynonyms_w2.TabIndex = 6;
+            this.btn_editSynonyms_w2.TabStop = false;
+            this.btn_editSynonyms_w2.Text = "Edit synonyms";
+            this.btn_editSynonyms_w2.UseVisualStyleBackColor = true;
+            this.btn_editSynonyms_w2.Click += new System.EventHandler(this.btn_editSynonyms_w2_Click);
             // 
             // QuizEditorWord
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btn_editSynonyms);
-            this.Controls.Add(this.txt_word);
+            this.Controls.Add(this.btn_editSynonyms_w2);
+            this.Controls.Add(this.txt_word2);
+            this.Controls.Add(this.btn_editSynonyms_w1);
+            this.Controls.Add(this.txt_word1);
             this.Controls.Add(this.pnl_translationRules);
             this.Name = "QuizEditorWord";
-            this.Size = new System.Drawing.Size(365, 97);
+            this.Size = new System.Drawing.Size(730, 97);
             this.pnl_translationRules.ResumeLayout(false);
             this.pnl_translationRules.PerformLayout();
             this.ResumeLayout(false);
@@ -140,7 +164,9 @@ namespace SteelQuiz.QuizEditor
         internal System.Windows.Forms.CheckBox chk_ignoreExcl;
         private System.Windows.Forms.Label label4;
         internal System.Windows.Forms.CheckBox chk_ignoreCapitalization;
-        internal System.Windows.Forms.TextBox txt_word;
-        private System.Windows.Forms.Button btn_editSynonyms;
+        internal System.Windows.Forms.TextBox txt_word1;
+        private System.Windows.Forms.Button btn_editSynonyms_w1;
+        internal System.Windows.Forms.TextBox txt_word2;
+        private System.Windows.Forms.Button btn_editSynonyms_w2;
     }
 }

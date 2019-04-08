@@ -34,13 +34,12 @@ namespace SteelQuiz.QuizEditor
 {
     public partial class QuizEditor : Form, IUndoRedo
     {
-        private string QuizPath { get; set; } = null;
-
-        //private List<QuizEditorWord> quizEditorWords_lang1 = new List<QuizEditorWord>();
-        //private List<QuizEditorWord> quizEditorWords_lang2 = new List<QuizEditorWord>();
+        public int flp_controls_count => flp_words.Controls.Count;
 
         public Stack<UndoRedoFuncPair> UndoStack { get; set; } = new Stack<UndoRedoFuncPair>();
         public Stack<UndoRedoFuncPair> RedoStack { get; set; } = new Stack<UndoRedoFuncPair>();
+
+        private string QuizPath { get; set; } = null;
 
         public QuizEditor()
         {
@@ -51,34 +50,23 @@ namespace SteelQuiz.QuizEditor
             AddWordPair(2);
         }
 
-        private void AddWordPair(int count = 1)
+        public void AddWordPair(int count = 1)
         {
             for (int i = 0; i < count; ++i)
             {
-                var w1 = new QuizEditorWord(true);
-                //quizEditorWords_lang1.Add(w1);
-                flp_words.Controls.Add(w1);
-
-                var w2 = new QuizEditorWord(false);
-                //quizEditorWords_lang2.Add(w2);
-                flp_words.Controls.Add(w2);
+                var w = new QuizEditorWord(i);
+                flp_words.Controls.Add(w);
             }
         }
 
         private void SetWordPairs(int count)
         {
+            UndoStack.Clear();
+            RedoStack.Clear();
+
             flp_words.Controls.Clear();
 
-            for (int i = 0; i < count; ++i)
-            {
-                var w1 = new QuizEditorWord(true);
-                //quizEditorWords_lang1.Add(w1);
-                flp_words.Controls.Add(w1);
-
-                var w2 = new QuizEditorWord(false);
-                //quizEditorWords_lang2.Add(w2);
-                flp_words.Controls.Add(w2);
-            }
+            AddWordPair(count);
         }
 
         private Quiz ConstructQuiz()
@@ -106,7 +94,7 @@ namespace SteelQuiz.QuizEditor
                         translationRules |= StringComp.Rules.IgnoreExclamation;
                     }
 
-                    var wordPair = new WordPair(w1.txt_word.Text, w2.txt_word.Text, translationRules, w1.Synonyms, w2.Synonyms);
+                    var wordPair = new WordPair(w1.txt_word1.Text, w2.txt_word1.Text, translationRules, w1.Synonyms1, w2.Synonyms1);
                     quiz.WordPairs.Add(wordPair);
                     
                     w1 = null;
@@ -137,6 +125,7 @@ namespace SteelQuiz.QuizEditor
 
             SetWordPairs(quiz.WordPairs.Count + 2);
 
+            /*
             int i = 0;
             int j = 0;
 
@@ -146,10 +135,22 @@ namespace SteelQuiz.QuizEditor
                 var ctrl2 = flp_words.Controls.OfType<QuizEditorWord>().ElementAt(j + 1);
                 var wp = quiz.WordPairs[i];
 
-                ctrl1.txt_word.Text = wp.Word1;
-                ctrl1.Synonyms = wp.Word1Synonyms;
-                ctrl2.txt_word.Text = wp.Word2;
-                ctrl2.Synonyms = wp.Word2Synonyms;
+                ctrl1.txt_word1.Text = wp.Word1;
+                ctrl1.Synonyms1 = wp.Word1Synonyms;
+                ctrl2.txt_word1.Text = wp.Word2;
+                ctrl2.Synonyms1 = wp.Word2Synonyms;
+            }
+            */
+
+            for (int i = 0; i < quiz.WordPairs.Count; ++i)
+            {
+                var ctrl = flp_words.Controls.OfType<QuizEditorWord>().ElementAt(i);
+                var wp = quiz.WordPairs[i];
+
+                ctrl.txt_word1.Text = wp.Word1;
+                ctrl.Synonyms1 = wp.Word1Synonyms;
+                ctrl.txt_word2.Text = wp.Word2;
+                ctrl.Synonyms2 = wp.Word2Synonyms;
             }
         }
 
@@ -178,10 +179,17 @@ namespace SteelQuiz.QuizEditor
                     {
                         if (peek.OwnerControlData.Parent == qwrd)
                         {
-                            qwrd.InitEditWordSynonyms();
+                            qwrd.InitEditWordSynonyms(peek.OwnerControlData.Language);
                             qwrd.EditWordSynonyms.Undo();
                             qwrd.EditWordSynonyms.ApplyChanges();
-                            qwrd.Synonyms = qwrd.EditWordSynonyms.Synonyms;
+                            if (peek.OwnerControlData.Language == 1)
+                            {
+                                qwrd.Synonyms1 = qwrd.EditWordSynonyms.Synonyms;
+                            }
+                            else
+                            {
+                                qwrd.Synonyms2 = qwrd.EditWordSynonyms.Synonyms;
+                            }
                             qwrd.DisposeEditWordSynonyms();
                             break;
                         }
@@ -210,10 +218,17 @@ namespace SteelQuiz.QuizEditor
                     {
                         if (peek.OwnerControlData.Parent == qwrd)
                         {
-                            qwrd.InitEditWordSynonyms();
+                            qwrd.InitEditWordSynonyms(peek.OwnerControlData.Language);
                             qwrd.EditWordSynonyms.Redo();
                             qwrd.EditWordSynonyms.ApplyChanges();
-                            qwrd.Synonyms = qwrd.EditWordSynonyms.Synonyms;
+                            if (peek.OwnerControlData.Language == 1)
+                            {
+                                qwrd.Synonyms1 = qwrd.EditWordSynonyms.Synonyms;
+                            }
+                            else
+                            {
+                                qwrd.Synonyms2 = qwrd.EditWordSynonyms.Synonyms;
+                            }
                             qwrd.DisposeEditWordSynonyms();
                             break;
                         }
@@ -285,6 +300,11 @@ namespace SteelQuiz.QuizEditor
         private void QuizEditor_SizeChanged(object sender, EventArgs e)
         {
             flp_words.Size = new Size(this.Size.Width - 40, this.Size.Height - 174);
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetWordPairs(2);
         }
     }
 }

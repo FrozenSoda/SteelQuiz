@@ -29,11 +29,13 @@ namespace SteelQuiz.QuizEditor.UndoRedo
     {
         public Control Control { get; set; }
         public Control Parent { get; set; }
+        public int Language { get; set; }
 
-        public OwnerControlData(Control control, Control parent)
+        public OwnerControlData(Control control, Control parent, int language = -1)
         {
             Control = control;
             Parent = parent;
+            Language = language;
         }
     }
 }

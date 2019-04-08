@@ -31,34 +31,29 @@ namespace SteelQuiz.QuizEditor
 {
     public partial class QuizEditorWord : UserControl
     {
-        public int Language { get; set; }
-        public string Word => txt_word.Text;
-        public List<string> Synonyms { get; set; } = null;
+        public int Number { get; set; } // number in flowlayoutpanel, the first one has number 0 for instance
+        public string Word1 => txt_word1.Text;
+        public string Word2 => txt_word2.Text;
+
+        public List<string> Synonyms1 { get; set; } = null;
+        public List<string> Synonyms2 { get; set; } = null;
         public EditWordSynonyms EditWordSynonyms { get; set; } = null;
 
         public bool ignore_txt_word_change = false;
         public bool ignore_chk_ignoreCapitalization_change = false;
         public bool ignore_chk_ignoreExcl_change = false;
 
-        public QuizEditorWord(bool showTranslationRulesOptions)
+        public QuizEditorWord(int number)
         {
             InitializeComponent();
-            if (showTranslationRulesOptions)
-            {
-                pnl_translationRules.Visible = true;
-                Language = 1;
-            }
-            else
-            {
-                Language = 2;
-            }
+            Number = number;
         }
 
-        public void InitEditWordSynonyms()
+        public void InitEditWordSynonyms(int language)
         {
             if (EditWordSynonyms == null)
             {
-                EditWordSynonyms = new EditWordSynonyms(this, txt_word.Text, Synonyms);
+                EditWordSynonyms = new EditWordSynonyms(this, language == 1 ? txt_word1.Text : txt_word2.Text, language == 1 ? Synonyms1 : Synonyms2, language);
             }
         }
 
@@ -71,33 +66,62 @@ namespace SteelQuiz.QuizEditor
             }
         }
 
-        private void btn_editSynonyms_Click(object sender, EventArgs e)
+        private void btn_editSynonyms_w1_Click(object sender, EventArgs e)
         {
-            InitEditWordSynonyms();
+            InitEditWordSynonyms(1);
             if (EditWordSynonyms.ShowDialog() == DialogResult.OK)
             {
-                Synonyms = EditWordSynonyms.Synonyms;
+                Synonyms1 = EditWordSynonyms.Synonyms;
             }
             DisposeEditWordSynonyms();
         }
 
-        private string txt_word_text_old = "";
+        private void btn_editSynonyms_w2_Click(object sender, EventArgs e)
+        {
+            InitEditWordSynonyms(2);
+            if (EditWordSynonyms.ShowDialog() == DialogResult.OK)
+            {
+                Synonyms2 = EditWordSynonyms.Synonyms;
+            }
+            DisposeEditWordSynonyms();
+        }
 
-        private void txt_word_TextChanged(object sender, EventArgs e)
+        private string txt_word1_text_old = "";
+
+        private void txt_word1_TextChanged(object sender, EventArgs e)
         {
             if (ignore_txt_word_change)
             {
-                txt_word_text_old = txt_word.Text;
+                txt_word1_text_old = txt_word1.Text;
                 ignore_txt_word_change = false;
                 return;
             }
 
             Program.frmQuizEditor.UndoStack.Push(new UndoRedoFuncPair(
-                new Func<object>[] { txt_word.ChangeText(txt_word_text_old, () => { ignore_txt_word_change = true; }) },
-                new Func<object>[] { txt_word.ChangeText(txt_word.Text, () => { ignore_txt_word_change = true; }) },
+                new Func<object>[] { txt_word1.ChangeText(txt_word1_text_old, () => { ignore_txt_word_change = true; }) },
+                new Func<object>[] { txt_word1.ChangeText(txt_word1.Text, () => { ignore_txt_word_change = true; }) },
                 new OwnerControlData(this, this.Parent)));
 
-            txt_word_text_old = txt_word.Text;
+            txt_word1_text_old = txt_word1.Text;
+        }
+
+        private string txt_word2_text_old = "";
+
+        private void txt_word2_TextChanged(object sender, EventArgs e)
+        {
+            if (ignore_txt_word_change)
+            {
+                txt_word2_text_old = txt_word2.Text;
+                ignore_txt_word_change = false;
+                return;
+            }
+
+            Program.frmQuizEditor.UndoStack.Push(new UndoRedoFuncPair(
+                new Func<object>[] { txt_word2.ChangeText(txt_word2_text_old, () => { ignore_txt_word_change = true; }) },
+                new Func<object>[] { txt_word2.ChangeText(txt_word2.Text, () => { ignore_txt_word_change = true; }) },
+                new OwnerControlData(this, this.Parent)));
+
+            txt_word2_text_old = txt_word2.Text;
         }
 
         private void chk_ignoreCapitalization_CheckedChanged(object sender, EventArgs e)
@@ -128,6 +152,14 @@ namespace SteelQuiz.QuizEditor
                 new Func<object>[] { chk_ignoreExcl.SetChecked(chk_ignoreExcl.Checked, () => { ignore_chk_ignoreExcl_change = true; }) },
                 new OwnerControlData(this, this.Parent)
                 ));
+        }
+
+        private void txt_word_Click(object sender, EventArgs e)
+        {
+            if (Number >= Program.frmQuizEditor.flp_controls_count - 1)
+            {
+                Program.frmQuizEditor.AddWordPair(1);
+            }
         }
     }
 }

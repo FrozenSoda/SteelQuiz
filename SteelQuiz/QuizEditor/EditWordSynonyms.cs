@@ -32,16 +32,19 @@ namespace SteelQuiz.QuizEditor
     public partial class EditWordSynonyms : Form, IUndoRedo
     {
         public List<string> Synonyms { get; set; }
+        public int Language { get; set; }
+
         private new QuizEditorWord Parent { get; set; }
 
         private bool changedTextBox = false; // since listbox select switch
         private object[] initialListBoxCollection;
         private bool closeWarning = true;
 
-        public EditWordSynonyms(QuizEditorWord parent, string word, List<string> currentSynonyms)
+        public EditWordSynonyms(QuizEditorWord parent, string word, List<string> currentSynonyms, int language)
         {
             InitializeComponent();
             Parent = parent;
+            Language = language;
             lbl_synForWord.Text = $"Synonyms for word: {word}";
 
             if (currentSynonyms != null)
@@ -71,7 +74,22 @@ namespace SteelQuiz.QuizEditor
 
         private void btn_apply_Click(object sender, EventArgs e)
         {
+            if (txt_wordAdd.Text != "")
+            {
+                var msg = MessageBox.Show("Warning! The textbox contains text not added to the list. Add it to the list and exit?", "SteelQuiz",
+                    MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                if (msg == DialogResult.Yes)
+                {
+                    AddSynonym();
+                }
+                else if (msg == DialogResult.Cancel)
+                {
+                    return;
+                }
+            }
+
             ApplyChanges();
+            closeWarning = false;
             DialogResult = DialogResult.OK;
         }
 
@@ -86,6 +104,11 @@ namespace SteelQuiz.QuizEditor
         }
 
         private void btn_add_Click(object sender, EventArgs e)
+        {
+            AddSynonym();
+        }
+
+        private void AddSynonym()
         {
             if (lst_synonyms.Items.Contains(txt_wordAdd.Text))
             {
@@ -130,7 +153,7 @@ namespace SteelQuiz.QuizEditor
             Program.frmQuizEditor.UndoStack.Push(new UndoRedoFuncPair(
                 new Func<object>[] { lst_synonyms.RemoveItem(() => { return this.Parent.EditWordSynonyms; }, lst_synonyms.Name, txt_wordAdd.Text) },
                 new Func<object>[] { lst_synonyms.AddItem(() => { return this.Parent.EditWordSynonyms; }, lst_synonyms.Name, txt_wordAdd.Text) },
-                new OwnerControlData(this, this.Parent)));
+                new OwnerControlData(this, this.Parent, Language)));
 
             txt_wordAdd.Text = "";
             changedTextBox = false;
@@ -208,7 +231,7 @@ namespace SteelQuiz.QuizEditor
                 redoes.Add(lst_synonyms.ChangeItem(() => { return this.Parent.EditWordSynonyms; }, lst_synonyms.Name, _new, old));
             }
 
-            Program.frmQuizEditor.UndoStack.Push(new UndoRedoFuncPair(undoes.ToArray(), redoes.ToArray(), new OwnerControlData(this, this.Parent)));
+            Program.frmQuizEditor.UndoStack.Push(new UndoRedoFuncPair(undoes.ToArray(), redoes.ToArray(), new OwnerControlData(this, this.Parent, Language)));
 
             txt_wordAdd.Text = "";
             changedTextBox = false;
@@ -234,7 +257,7 @@ namespace SteelQuiz.QuizEditor
                 redoes.Add(lst_synonyms.RemoveItem(() => { return this.Parent.EditWordSynonyms; }, lst_synonyms.Name, item));
             }
 
-            Program.frmQuizEditor.UndoStack.Push(new UndoRedoFuncPair(undoes.ToArray(), redoes.ToArray(), new OwnerControlData(this, this.Parent)));
+            Program.frmQuizEditor.UndoStack.Push(new UndoRedoFuncPair(undoes.ToArray(), redoes.ToArray(), new OwnerControlData(this, this.Parent, Language)));
         }
 
         private void lst_synonyms_SelectedIndexChanged(object sender, EventArgs e)
@@ -285,6 +308,12 @@ namespace SteelQuiz.QuizEditor
             if (Program.frmQuizEditor.UndoStack.Count > 0)
             {
                 var pop = Program.frmQuizEditor.UndoStack.Pop();
+                if (pop.OwnerControlData.Control != this)
+                {
+                    // do not allow undoing stuff outside this window
+                    return;
+                }
+
                 foreach (var undo in pop.UndoActions)
                 {
                     undo();
@@ -298,6 +327,12 @@ namespace SteelQuiz.QuizEditor
             if (Program.frmQuizEditor.RedoStack.Count > 0)
             {
                 var pop = Program.frmQuizEditor.RedoStack.Pop();
+                if (pop.OwnerControlData.Control != this)
+                {
+                    // do not allow redoing stuff outside this window
+                    return;
+                }
+
                 foreach (var redo in pop.RedoActions)
                 {
                     redo();
@@ -318,8 +353,12 @@ namespace SteelQuiz.QuizEditor
 
         private void EditWordSynonyms_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!closeWarning || !ListBoxChanged()
-                || MessageBox.Show("Are you sure you want to cancel? The changes will not be applied", "SteelQuiz", MessageBoxButtons.YesNo,
+            if (!closeWarning || !ListBoxChanged())
+            {
+                return;
+            }
+
+            if (MessageBox.Show("Are you sure you want to cancel? The changes will not be applied", "SteelQuiz", MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 DialogResult = DialogResult.Cancel;
