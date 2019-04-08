@@ -44,6 +44,7 @@ namespace SteelQuiz.QuizEditor
         public QuizEditor()
         {
             InitializeComponent();
+            ++Program.QuizEditorsOpen;
             this.Location = new Point(Program.frmWelcome.Location.X + (Program.frmWelcome.Size.Width / 2) - (this.Size.Width / 2),
                               Program.frmWelcome.Location.Y + (Program.frmWelcome.Size.Height / 2) - (this.Size.Height / 2)
                             );
@@ -54,7 +55,7 @@ namespace SteelQuiz.QuizEditor
         {
             for (int i = 0; i < count; ++i)
             {
-                var w = new QuizEditorWordPair(flp_controls_count);
+                var w = new QuizEditorWordPair(this, flp_controls_count);
                 flp_words.Controls.Add(w);
             }
         }
@@ -139,7 +140,10 @@ namespace SteelQuiz.QuizEditor
 
         private void QuizEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Program.frmWelcome.Show();
+            if (--Program.QuizEditorsOpen == 0)
+            {
+                Program.frmWelcome.Show();
+            }
         }
 
         public void Undo()
@@ -300,7 +304,10 @@ namespace SteelQuiz.QuizEditor
             {
                 return;
             }
-            SetWordPairs(2);
+
+            //SetWordPairs(2);
+            var quizEditor = new QuizEditor();
+            quizEditor.Show();
         }
     }
 }

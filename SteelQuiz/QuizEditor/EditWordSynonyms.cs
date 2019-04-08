@@ -232,7 +232,7 @@ namespace SteelQuiz.QuizEditor
                 redoes.Add(lst_synonyms.ChangeItem(() => { return this.Parent.EditWordSynonyms; }, lst_synonyms.Name, _new, old));
             }
 
-            Program.frmQuizEditor.UndoStack.Push(new UndoRedoFuncPair(undoes.ToArray(), redoes.ToArray(), new OwnerControlData(this, this.Parent, Language)));
+            QEOwner.UndoStack.Push(new UndoRedoFuncPair(undoes.ToArray(), redoes.ToArray(), new OwnerControlData(this, this.Parent, Language)));
 
             txt_wordAdd.Text = "";
             changedTextBox = false;
@@ -258,7 +258,7 @@ namespace SteelQuiz.QuizEditor
                 redoes.Add(lst_synonyms.RemoveItem(() => { return this.Parent.EditWordSynonyms; }, lst_synonyms.Name, item));
             }
 
-            Program.frmQuizEditor.UndoStack.Push(new UndoRedoFuncPair(undoes.ToArray(), redoes.ToArray(), new OwnerControlData(this, this.Parent, Language)));
+            QEOwner.UndoStack.Push(new UndoRedoFuncPair(undoes.ToArray(), redoes.ToArray(), new OwnerControlData(this, this.Parent, Language)));
         }
 
         private void lst_synonyms_SelectedIndexChanged(object sender, EventArgs e)
@@ -306,9 +306,9 @@ namespace SteelQuiz.QuizEditor
 
         public void Undo()
         {
-            if (Program.frmQuizEditor.UndoStack.Count > 0)
+            if (QEOwner.UndoStack.Count > 0)
             {
-                var pop = Program.frmQuizEditor.UndoStack.Pop();
+                var pop = QEOwner.UndoStack.Pop();
                 if (pop.OwnerControlData.Control != this)
                 {
                     // do not allow undoing stuff outside this window
@@ -319,15 +319,15 @@ namespace SteelQuiz.QuizEditor
                 {
                     undo();
                 }
-                Program.frmQuizEditor.RedoStack.Push(pop);
+                QEOwner.RedoStack.Push(pop);
             }
         }
 
         public void Redo()
         {
-            if (Program.frmQuizEditor.RedoStack.Count > 0)
+            if (QEOwner.RedoStack.Count > 0)
             {
-                var pop = Program.frmQuizEditor.RedoStack.Pop();
+                var pop = QEOwner.RedoStack.Pop();
                 if (pop.OwnerControlData.Control != this)
                 {
                     // do not allow redoing stuff outside this window
@@ -338,7 +338,7 @@ namespace SteelQuiz.QuizEditor
                 {
                     redo();
                 }
-                Program.frmQuizEditor.UndoStack.Push(pop);
+                QEOwner.UndoStack.Push(pop);
             }
         }
 

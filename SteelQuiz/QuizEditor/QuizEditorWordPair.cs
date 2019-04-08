@@ -102,7 +102,7 @@ namespace SteelQuiz.QuizEditor
                 return;
             }
 
-            Program.frmQuizEditor.UndoStack.Push(new UndoRedoFuncPair(
+            QEOwner.UndoStack.Push(new UndoRedoFuncPair(
                 new Func<object>[] { txt_word1.ChangeText(txt_word1_text_old, () => { ignore_txt_word_change = true; }) },
                 new Func<object>[] { txt_word1.ChangeText(txt_word1.Text, () => { ignore_txt_word_change = true; }) },
                 new OwnerControlData(this, this.Parent)));
@@ -123,7 +123,7 @@ namespace SteelQuiz.QuizEditor
                 return;
             }
 
-            Program.frmQuizEditor.UndoStack.Push(new UndoRedoFuncPair(
+            QEOwner.UndoStack.Push(new UndoRedoFuncPair(
                 new Func<object>[] { txt_word2.ChangeText(txt_word2_text_old, () => { ignore_txt_word_change = true; }) },
                 new Func<object>[] { txt_word2.ChangeText(txt_word2.Text, () => { ignore_txt_word_change = true; }) },
                 new OwnerControlData(this, this.Parent)));
@@ -139,7 +139,7 @@ namespace SteelQuiz.QuizEditor
                 return;
             }
 
-            Program.frmQuizEditor.UndoStack.Push(new UndoRedoFuncPair(
+            QEOwner.UndoStack.Push(new UndoRedoFuncPair(
                 new Func<object>[] { chk_ignoreCapitalization.SetChecked(!chk_ignoreCapitalization.Checked, () => { ignore_chk_ignoreCapitalization_change = true; }) },
                 new Func<object>[] { chk_ignoreCapitalization.SetChecked(chk_ignoreCapitalization.Checked, () => { ignore_chk_ignoreCapitalization_change = true; }) },
                 new OwnerControlData(this, this.Parent)
@@ -154,7 +154,7 @@ namespace SteelQuiz.QuizEditor
                 return;
             }
 
-            Program.frmQuizEditor.UndoStack.Push(new UndoRedoFuncPair(
+            QEOwner.UndoStack.Push(new UndoRedoFuncPair(
                 new Func<object>[] { chk_ignoreExcl.SetChecked(!chk_ignoreExcl.Checked, () => { ignore_chk_ignoreExcl_change = true; }) },
                 new Func<object>[] { chk_ignoreExcl.SetChecked(chk_ignoreExcl.Checked, () => { ignore_chk_ignoreExcl_change = true; }) },
                 new OwnerControlData(this, this.Parent)
@@ -173,18 +173,18 @@ namespace SteelQuiz.QuizEditor
 
         private void ChkFixWordsCount()
         {
-            if (Number >= Program.frmQuizEditor.flp_controls_count - 1)
+            if (Number >= QEOwner.flp_controls_count - 1)
             {
-                var prev1 = Program.frmQuizEditor.PrevWord(Number);
-                var prev2 = Program.frmQuizEditor.PrevWord(Number - 1);
+                var prev1 = QEOwner.PrevWord(Number);
+                var prev2 = QEOwner.PrevWord(Number - 1);
                 if (QEWordEmpty(prev1) && QEWordEmpty(prev2))
                 {
-                    Program.frmQuizEditor.RemoveQuizEditorWord();
+                    QEOwner.RemoveQuizEditorWord();
                     return;
                 }
                 else
                 {
-                    Program.frmQuizEditor.AddWordPair(1);
+                    QEOwner.AddWordPair(1);
                 }
             }
         }
