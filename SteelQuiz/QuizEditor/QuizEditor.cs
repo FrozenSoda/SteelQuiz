@@ -86,6 +86,7 @@ namespace SteelQuiz.QuizEditor
         {
             var quiz = new Quiz(cmb_lang1.Text, cmb_lang2.Text, MetaData.QUIZ_FILE_FORMAT_VERSION);
 
+            ulong i = 0;
             foreach (var wordpair in flp_words.Controls.OfType<QuizEditorWordPair>())
             {
                 StringComp.Rules translationRules = StringComp.Rules.None;
@@ -98,8 +99,9 @@ namespace SteelQuiz.QuizEditor
                     translationRules |= StringComp.Rules.IgnoreExclamation;
                 }
 
-                var wordPair = new WordPair(wordpair.txt_word1.Text, wordpair.txt_word2.Text, translationRules, wordpair.Synonyms1, wordpair.Synonyms2);
+                var wordPair = new WordPair(i, wordpair.txt_word1.Text, wordpair.txt_word2.Text, translationRules, wordpair.Synonyms1, wordpair.Synonyms2);
                 quiz.WordPairs.Add(wordPair);
+                ++i;
             }
 
             return quiz;

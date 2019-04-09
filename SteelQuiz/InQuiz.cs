@@ -33,7 +33,7 @@ namespace SteelQuiz
     {
         private bool onCloseEvent = true;
 
-        private WordPair currentWordPair = null;
+        private ulong? currentWordPairID = null;
         private string currentInput = "";
         private WordPair.TranslationMode translationMode = WordPair.TranslationMode.L1_to_L2;
         private bool waitingForEnter = false;
@@ -62,7 +62,7 @@ namespace SteelQuiz
                 lbl_AI.Text = "Intelligent learning: Enabled";
                 lbl_AI.ForeColor = Color.DarkGreen;
             }
-            if (currentWordPair.Word1Synonyms.Count > 0)
+            if (currentWordPairID.GetWordPair().Word1Synonyms.Count > 0)
             {
                 btn_w1_synonyms.Enabled = true;
             }
@@ -71,9 +71,9 @@ namespace SteelQuiz
         private void NewWord()
         {
             lbl_lang1.Text = QuizCore.Quiz.Language1;
-            currentWordPair = QuizAI.GenerateWordPair();
+            currentWordPairID = QuizAI.GenerateWordPair();
 
-            if (currentWordPair == null)
+            if (currentWordPairID == null)
             {
                 NewRound();
                 return;
@@ -81,11 +81,11 @@ namespace SteelQuiz
 
             if (translationMode == WordPair.TranslationMode.L1_to_L2)
             {
-                lbl_word1.Text = currentWordPair.Word1;
+                lbl_word1.Text = currentWordPairID.GetWordPair().Word1;
             }
             else if (translationMode == WordPair.TranslationMode.L2_to_L1)
             {
-                lbl_word1.Text = currentWordPair.Word2;
+                lbl_word1.Text = currentWordPairID.GetWordPair().Word2;
             }
             currentInput = "";
             lbl_progress.Text = $"Progress this round: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
@@ -103,7 +103,7 @@ namespace SteelQuiz
         private void CheckWord()
         {
             lbl_lang1.Text = "Info";
-            var mismatch = currentWordPair.CharacterMismatches(currentInput, translationMode, !userCopyWord);
+            var mismatch = currentWordPairID.GetWordPair().CharacterMismatches(currentInput, translationMode, !userCopyWord);
             userCopyWord = false;
             if (mismatch.Correct())
             {
@@ -115,13 +115,13 @@ namespace SteelQuiz
                 if (translationMode == WordPair.TranslationMode.L1_to_L2)
                 {
                     lbl_word1.Text = $"Wrong\r\n\r\n{QuizCore.Quiz.Language1} word:\r\n"
-                        + $"{currentWordPair.Word1}\r\n\r\nCorrect {QuizCore.Quiz.Language2} word is:\r\n{currentWordPair.Word2}"
+                        + $"{currentWordPairID.GetWordPair().Word1}\r\n\r\nCorrect {QuizCore.Quiz.Language2} word is:\r\n{currentWordPairID.GetWordPair().Word2}"
                         + $"\r\n\r\nType the {QuizCore.Quiz.Language2} word";
                 }
                 else if (translationMode == WordPair.TranslationMode.L2_to_L1)
                 {
                     lbl_word1.Text = $"Wrong\r\n\r\n{QuizCore.Quiz.Language2} word:\r\n"
-                        + $"{currentWordPair.Word2}\r\n\r\nCorrect {QuizCore.Quiz.Language1} word is:\r\n{currentWordPair.Word1}"
+                        + $"{currentWordPairID.GetWordPair().Word2}\r\n\r\nCorrect {QuizCore.Quiz.Language1} word is:\r\n{currentWordPairID.GetWordPair().Word1}"
                         + $"\r\n\r\nType the {QuizCore.Quiz.Language1} word";
                 }
                 userCopyWord = true;
@@ -236,7 +236,7 @@ namespace SteelQuiz
 
             if (showingW1synonyms)
             {
-                if (currentWordPair.Word1Synonyms.Count == 0)
+                if (currentWordPairID.GetWordPair().Word1Synonyms.Count == 0)
                 {
                     MessageBox.Show("No synonyms are added for this word!", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     lbl_word2.Focus();
@@ -245,7 +245,7 @@ namespace SteelQuiz
 
                 lbl_word1.Text += "\r\n\r\n---Synonyms---";
 
-                foreach (var synonym in currentWordPair.Word1Synonyms)
+                foreach (var synonym in currentWordPairID.GetWordPair().Word1Synonyms)
                 {
                     lbl_word1.Text += "\r\n" + synonym;
                 }
@@ -254,7 +254,7 @@ namespace SteelQuiz
             }
             else
             {
-                lbl_word1.Text = currentWordPair.Word1;
+                lbl_word1.Text = currentWordPairID.GetWordPair().Word1;
                 btn_w1_synonyms.Text = "Synonyms";
             }
 

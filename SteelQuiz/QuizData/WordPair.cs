@@ -27,6 +27,8 @@ namespace SteelQuiz.QuizData
 {
     public class WordPair
     {
+        public ulong ID { get; set; }
+
         public string Word1 { get; set; }
         public List<string> Word1Synonyms { get; set; }
 
@@ -35,8 +37,9 @@ namespace SteelQuiz.QuizData
 
         public StringComp.Rules TranslationRules { get; set; }
 
-        public WordPair(string word1, string word2, StringComp.Rules translationRules, List<string> word1Synonyms = null, List<string> word2Synonyms = null)
+        public WordPair(ulong id, string word1, string word2, StringComp.Rules translationRules, List<string> word1Synonyms = null, List<string> word2Synonyms = null)
         {
+            ID = id;
             Word1 = word1;
             Word2 = word2;
             TranslationRules = translationRules;
@@ -79,7 +82,7 @@ namespace SteelQuiz.QuizData
         {
             foreach (var wordProgData in QuizCore.QuizProgress.WordProgDatas)
             {
-                if (wordProgData.WordPair.Equals(this))
+                if (wordProgData.WordPairID == this.ID)
                 {
                     return wordProgData;
                 }

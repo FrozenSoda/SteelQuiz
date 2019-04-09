@@ -28,19 +28,19 @@ namespace SteelQuiz.QuizProgressData
 {
     public class WordProgData : ICloneable
     {
-        public WordPair WordPair { get; set; }
+        public ulong WordPairID { get; set; }
 
-        [JsonProperty]
-        private List<WordTry> WordTries { get; set; } = null;
+        //[JsonProperty]
+        internal List<WordTry> WordTries { get; set; } = null;
 
         private const int WORD_TRIES_TO_KEEP = 5;
 
         public bool AskedThisRound { get; set; } = false;
         public bool SkipThisRound { get; set; } = false;
 
-        public WordProgData(WordPair wordPair)
+        public WordProgData(ulong wordPairID)
         {
-            WordPair = wordPair;
+            WordPairID = wordPairID;
             if (WordTries == null)
             {
                 WordTries = new List<WordTry>();
@@ -76,7 +76,7 @@ namespace SteelQuiz.QuizProgressData
 
         public object Clone()
         {
-            var cpy = new WordProgData(WordPair);
+            var cpy = new WordProgData(WordPairID);
             cpy.WordTries = WordTries;
             cpy.AskedThisRound = AskedThisRound;
             cpy.SkipThisRound = SkipThisRound;

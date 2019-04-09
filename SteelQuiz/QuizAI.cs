@@ -31,11 +31,11 @@ namespace SteelQuiz
     {
         public static bool SkipNextMasterNotice { get; set; } = false;
 
-        public static WordPair GenerateWordPair()
+        public static ulong? GenerateWordPair()
         {
-            if (QuizCore.QuizProgress.CurrentWordPair != null)
+            if (QuizCore.QuizProgress.CurrentWordPairID != null)
             {
-                return QuizCore.QuizProgress.CurrentWordPair;
+                return QuizCore.QuizProgress.CurrentWordPairID;
             }
 
             if (QuizCore.QuizProgress.FullTestInProgress)
@@ -48,7 +48,7 @@ namespace SteelQuiz
             }
         }
 
-        private static WordPair GenerateWordPairWithoutAI()
+        private static ulong? GenerateWordPairWithoutAI()
         {
             var wordsNotToAsk = QuizCore.QuizProgress.WordsNotToAsk();
 
@@ -73,12 +73,12 @@ namespace SteelQuiz
 
             var rndIndex = new Random().RandomNext(0, QuizCore.Quiz.WordPairs.Count, wordsNotToAsk_Indexes.ToArray());
             var wordPair = QuizCore.Quiz.WordPairs[rndIndex];
-            QuizCore.QuizProgress.SetCurrentWordPair(wordPair);
+            QuizCore.QuizProgress.SetCurrentWordPair(wordPair.ID);
             QuizCore.SaveProgress();
-            return wordPair;
+            return wordPair.ID;
         }
 
-        private static WordPair GenerateWordPairAI()
+        private static ulong? GenerateWordPairAI()
         {
             var alreadyAsked = QuizCore.QuizProgress.WordsNotToAsk();
 
@@ -102,13 +102,13 @@ namespace SteelQuiz
             }
 
             // universal probability
-            double u = QuizCore.QuizProgress.WordProgDatas.Where(x => !alreadyAsked.Contains(x.WordPair)).Sum(p => askProb(p.GetSuccessRate()));
+            double u = QuizCore.QuizProgress.WordProgDatas.Where(x => !alreadyAsked.Contains(x.WordPairID)).Sum(p => askProb(p.GetSuccessRate()));
 
             // random number between 0 and u
             double r = new Random().NextDouble() * u;
 
             double sum = 0;
-            foreach (var wordPairData in QuizCore.QuizProgress.WordProgDatas.Where(x => !alreadyAsked.Contains(x.WordPair)))
+            foreach (var wordPairData in QuizCore.QuizProgress.WordProgDatas.Where(x => !alreadyAsked.Contains(x.WordPairID)))
             {
                 var askPrb = askProb(wordPairData.GetSuccessRate());
                 sum += askPrb;
@@ -117,9 +117,9 @@ namespace SteelQuiz
                     // Select which synonym of the word to ask for
 
 
-                    QuizCore.QuizProgress.SetCurrentWordPair(wordPairData.WordPair);
+                    QuizCore.QuizProgress.SetCurrentWordPair(wordPairData.WordPairID);
                     QuizCore.SaveProgress();
-                    return wordPairData.WordPair;
+                    return wordPairData.WordPairID;
                 }
             }
 

@@ -25,6 +25,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using SteelQuiz.QuizData;
+using SteelQuiz.QuizProgressData;
 
 namespace SteelQuiz
 {
@@ -33,13 +34,12 @@ namespace SteelQuiz
         /*
          * Returns quiz if quiz doesn't need to be converted, or if it was converted successfully. Otherwise it returns null
          */
-        public static Quiz ChkUpgradeQuiz(dynamic quiz)
+        public static Quiz ChkUpgradeQuiz(Quiz quiz)
         {
-            Quiz newQuiz = null;
-
             Version fromVer;
 
             var V2 = new Version(1, 1, 0); // changed wordpair synonyms default value from null to new List<string>(), renamed QuizFileFormatVersion to FileFormatVersion
+            var V3 = new Version(2, 0, 0); // implemented wordpair ID system, to avoid storing the whole quiz in the progress file
 
             var fileFormatVersionDefined = SUtil.PropertyDefined(quiz.FileFormatVersion);
             if (fileFormatVersionDefined)
@@ -84,12 +84,7 @@ namespace SteelQuiz
                 // should now be string lists initialized to new List<string>()
                 // QuizFileFormatVersion is renamed to FileFormatVersion
 
-                newQuiz = new Quiz(quiz.Language1, quiz.Language2,
-                    fileFormatVersionDefined ? quiz.FileFormatVersion : quiz.QuizFileFormatVersion,
-                    quiz.GUID);
-                newQuiz.WordPairs = quiz.WordPairs.Clone();
-
-                foreach (var wp in newQuiz.WordPairs)
+                foreach (var wp in quiz.WordPairs)
                 {
                     if (wp.Word1Synonyms == null)
                     {
@@ -101,13 +96,89 @@ namespace SteelQuiz
                         wp.Word2Synonyms = new List<string>();
                     }
                 }
+
+                quiz.FileFormatVersion = V3.ToString();
             }
 
-            if (newQuiz != null)
+            if (V3.CompareTo(fromVer) > 0)
             {
-                newQuiz.FileFormatVersion = MetaData.QUIZ_FILE_FORMAT_VERSION;
+                // add wordpairs to quiz wordpairs
+                for (int i = 0; i < quiz.WordPairs.Count; ++i)
+                {
+                    quiz.WordPairs[i].ID = (ulong)i;
+                }
             }
-            return newQuiz;
+
+            if (quiz != null)
+            {
+                quiz.FileFormatVersion = MetaData.QUIZ_FILE_FORMAT_VERSION;
+            }
+            return quiz;
+        }
+
+        /*
+         * QuizCore.Quiz must be set and converted before calling this function
+         */ 
+        public static QuizProgData UpgradeProgressData(dynamic quizProgData)
+        {
+            var progData = quizProgData;
+
+            Version fromVer;
+            fromVer = new Version(progData.FileFormatVersion);
+
+            if (fromVer.CompareTo(new Version(MetaData.QUIZ_FILE_FORMAT_VERSION)) >= 0)
+            {
+                //conversion not required
+                return progData;
+            }
+
+            var V3 = new Version(2, 0, 0); // implemented wordpair ID system, to avoid storing the whole quiz in the progress file
+
+            if (V3.CompareTo(fromVer) > 0)
+            {
+                // change wordpairs to IDs
+
+                var newQuizProgData = new QuizProgData(QuizCore.Quiz);
+                newQuizProgData.CurrentWordPairID = GetQuizWordPairCompat(progData.CurrentWordPair).ID;
+                newQuizProgData.FullTestInProgress = progData.FullTestInProgress;
+                newQuizProgData.MasterNoticeShowed = progData.MasterNoticeShowed;
+                newQuizProgData.QuizGUID = progData.QuizGUID;
+
+                foreach (var wpData in progData.WordProgDatas)
+                {
+                    var newWp = new WordProgData(GetQuizWordPairCompat(wpData).ID);
+                    newWp.AskedThisRound = wpData.AskedThisRound;
+                    newWp.SkipThisRound = wpData.SkipThisRound;
+                    newWp.WordTries = wpData.WordTries;
+
+                    newQuizProgData.WordProgDatas.Add(newWp);
+                }
+
+                progData = newQuizProgData;
+            }
+
+            if (progData != null)
+            {
+                progData.FileFormatVersion = MetaData.QUIZ_FILE_FORMAT_VERSION;
+            }
+            return progData;
+        }
+
+        private static WordPair GetQuizWordPairCompat(dynamic wordPair)
+        {
+            foreach (var wp in QuizCore.Quiz.WordPairs)
+            {
+                if (wp.Word1 == wordPair.Word1
+                    && wp.Word2 == wordPair.Word2
+                    && wp.Word1Synonyms == wordPair.Word1Synonyms
+                    && wp.Word2Synonyms == wordPair.Word2Synonyms
+                    && wp.TranslationRules == wordPair.TranslationRules)
+                {
+                    return wp;
+                }
+            }
+
+            return null;
         }
 
         public static bool BackupQuiz(Version quizVer)

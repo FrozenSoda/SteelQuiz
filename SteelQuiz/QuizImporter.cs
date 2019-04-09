@@ -288,7 +288,7 @@ namespace SteelQuiz
                 }
             }
 
-            var wordPair = new WordPair(word1, word2, rules);
+            var wordPair = new WordPair(QuizDataUtil.GenerateID(wpList), word1, word2, rules);
             wpList.Add(wordPair);
         }
 

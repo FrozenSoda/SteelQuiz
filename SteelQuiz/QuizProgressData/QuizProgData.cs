@@ -31,8 +31,8 @@ namespace SteelQuiz.QuizProgressData
         public Guid QuizGUID { get; set; }
         public List<WordProgData> WordProgDatas { get; set; } = null;
 
-        [JsonProperty] // required for deserialization of property with private setter
-        public WordPair CurrentWordPair { get; private set; } = null;
+        //[JsonProperty] // required for deserialization of property with private setter
+        internal ulong? CurrentWordPairID { get; set; } = null;
 
         /*
          * True if the question to perform a full test has been asked (during this application instance)
@@ -40,7 +40,6 @@ namespace SteelQuiz.QuizProgressData
          * RESET THIS PROPERTY AFTER LOADING PROGRESS DATA
          */
         public bool MasterNoticeShowed { get; set; } = false;
-
 
         public bool FullTestInProgress { get; set; } = false;
 
@@ -61,7 +60,7 @@ namespace SteelQuiz.QuizProgressData
                 bool found = false;
                 foreach (var wordProgData in WordProgDatas)
                 {
-                    if (wordProgData.WordPair == wordPair)
+                    if (wordProgData.WordPairID == wordPair.ID)
                     {
                         found = true;
                     }
@@ -69,7 +68,7 @@ namespace SteelQuiz.QuizProgressData
 
                 if (!found)
                 {
-                    WordProgDatas.Add(new WordProgData(wordPair));
+                    WordProgDatas.Add(new WordProgData(wordPair.ID));
                 }
             }
 
@@ -77,20 +76,20 @@ namespace SteelQuiz.QuizProgressData
         }
 
         // due to CurrentWordPair not preserving references due to serialization, implement setter through method instead, to avoid confusion regarding references
-        public void SetCurrentWordPair(WordPair wordPair)
+        public void SetCurrentWordPair(ulong? wordPairID)
         {
-            CurrentWordPair = wordPair;
+            CurrentWordPairID = wordPairID;
         }
 
-        public WordPair[] WordsNotToAsk()
+        public ulong[] WordsNotToAsk()
         {
-            // find words already asked this round, return indexes
-            var wordsAlreadyAsked = new List<WordPair>();
+            // find words already asked this round
+            var wordsAlreadyAsked = new List<ulong>();
             for (int i = 0; i < WordProgDatas.Count; ++i)
             {
                 if (WordProgDatas[i].AskedThisRound || WordProgDatas[i].SkipThisRound)
                 {
-                    wordsAlreadyAsked.Add(WordProgDatas[i].WordPair);
+                    wordsAlreadyAsked.Add(WordProgDatas[i].WordPairID);
                 }
             }
 

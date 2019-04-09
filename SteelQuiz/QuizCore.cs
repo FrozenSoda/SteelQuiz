@@ -135,16 +135,16 @@ namespace SteelQuiz
 
         private static bool LoadProgressData()
         {
-            dynamic cfgDz_dyn;
+            dynamic cfgDz;
 
             if (File.Exists(PROGRESS_FILE_PATH))
             {
                 using (var reader = new StreamReader(PROGRESS_FILE_PATH))
                 {
-                    cfgDz_dyn = JsonConvert.DeserializeObject(reader.ReadToEnd());
+                    cfgDz = JsonConvert.DeserializeObject(reader.ReadToEnd());
                 }
-                var progressVer = SUtil.PropertyDefined(cfgDz_dyn.FileFormatVersion) && cfgDz_dyn.FileFormatVersion != null
-                    ? new Version((string)cfgDz_dyn.FileFormatVersion) : new Version(1, 0, 0);
+                var progressVer = SUtil.PropertyDefined(cfgDz.FileFormatVersion) && cfgDz.FileFormatVersion != null
+                    ? new Version((string)cfgDz.FileFormatVersion) : new Version(1, 0, 0);
                 var currVer = new Version(MetaData.QUIZ_FILE_FORMAT_VERSION);
                 if (currVer.CompareTo(progressVer) > 0)
                 {
@@ -166,21 +166,26 @@ namespace SteelQuiz
                     {
                         return false;
                     }
+
+                    
                 }
+
+                /*
                 CfgQuizzesProgressData cfgDz;
                 using (var reader = new StreamReader(PROGRESS_FILE_PATH))
                 {
                     cfgDz = JsonConvert.DeserializeObject<CfgQuizzesProgressData>(reader.ReadToEnd());
                 }
                 cfgDz.FileFormatVersion = MetaData.QUIZ_FILE_FORMAT_VERSION;
+                */
 
                 //find progress for current quiz
                 bool found = false;
-                foreach (QuizProgData progData in cfgDz.QuizProgDatas)
+                foreach (dynamic progData in cfgDz.QuizProgDatas)
                 {
                     if (progData.QuizGUID.Equals(Quiz.GUID))
                     {
-                        QuizProgress = progData;
+                        QuizProgress = QuizCompatibilityConverter.UpgradeProgressData(progData);
                         QuizProgress.MasterNoticeShowed = false;
                         found = true;
                         break;
