@@ -37,7 +37,7 @@ namespace SteelQuiz.QuizData
                 }
             }
 
-            return maxId == null ? 0 : (ulong)maxId;
+            return maxId == null ? 0 : (ulong)maxId + 1;
         }
 
         public static WordPair GetWordPair(this ulong? id)
