@@ -60,7 +60,7 @@ namespace SteelQuiz
 
             QuizPath = quizPath;
 
-            var quizConverted = QuizCompatibilityConverter.ChkUpgradeQuiz(quiz);
+            var quizConverted = QuizCompatibilityConverter.ChkUpgradeQuiz(quiz, QuizPath);
             if (quizConverted != null)
             {
                 //return Load(quiz);
@@ -130,6 +130,8 @@ namespace SteelQuiz
             ConfigManager.Config.LastQuiz = quiz.GUID;
             ConfigManager.SaveConfig();
 
+            //SaveQuiz();
+
             return LoadProgressData();
         }
 
@@ -152,10 +154,11 @@ namespace SteelQuiz
 
                     var msg = MessageBox.Show("The progress data files for SteelQuiz on the computer was made for an older version of SteelQuiz and must be converted to "
                         + "the current format to load it. A backup will be created automatically, meaning that you won't lose anything when converting.\r\n\r\n"
-                        + "Warning! To use older version of SteelQuiz, you must revert the files in %appdata%\\SteelQuiz to the corresponding backups, which are "
+                        + "Warning! Every quiz in the quiz folder will be upgraded as well, as it is required for the conversion.\r\nTo use older version of SteelQuiz, you must revert the files in %appdata%\\SteelQuiz to the corresponding backups, which are "
                         + "created automatically in %appdata%\\SteelQuiz\\Backups"
                         + "\r\n\r\nProceed with conversion?", "Quiz conversion required - SteelQuiz",
                         MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
                     if (msg == DialogResult.No)
                     {
                         return false;
@@ -179,13 +182,21 @@ namespace SteelQuiz
                 cfgDz.FileFormatVersion = MetaData.QUIZ_FILE_FORMAT_VERSION;
                 */
 
+                cfgDz = QuizCompatibilityConverter.ChkUpgradeProgressData(cfgDz);
+                if (cfgDz == null)
+                {
+                    MessageBox.Show("Quiz progress conversion error", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Application.Exit();
+                    return false;
+                }
+
                 //find progress for current quiz
                 bool found = false;
                 foreach (dynamic progData in cfgDz.QuizProgDatas)
                 {
                     if (progData.QuizGUID.Equals(Quiz.GUID))
                     {
-                        QuizProgress = QuizCompatibilityConverter.UpgradeProgressData(progData);
+                        QuizProgress = progData;
                         QuizProgress.MasterNoticeShowed = false;
                         found = true;
                         break;
@@ -195,19 +206,19 @@ namespace SteelQuiz
                 if (!found)
                 {
                     QuizProgress = new QuizProgData(Quiz);
-                    SaveProgress();
+                    SaveQuizProgress();
                 }
             }
             else
             {
                 QuizProgress = new QuizProgData(Quiz);
-                SaveProgress();
+                SaveQuizProgress();
             }
 
             return true;
         }
 
-        public static void SaveProgress()
+        public static void SaveQuizProgress()
         {
             /*
             List<WordProgData> bkpOfCurrent = null;
@@ -266,9 +277,14 @@ namespace SteelQuiz
 
         public static void SaveQuiz()
         {
-            using (var writer = new StreamWriter(QuizPath, false))
+            SaveQuiz(Quiz, QuizPath);
+        }
+
+        public static void SaveQuiz(Quiz quiz, string path)
+        {
+            using (var writer = new StreamWriter(path, false))
             {
-                var quizDz = JsonConvert.SerializeObject(Quiz, Formatting.Indented);
+                var quizDz = JsonConvert.SerializeObject(quiz, Formatting.Indented);
                 writer.Write(quizDz);
             }
         }

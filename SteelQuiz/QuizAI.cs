@@ -74,7 +74,7 @@ namespace SteelQuiz
             var rndIndex = new Random().RandomNext(0, QuizCore.Quiz.WordPairs.Count, wordsNotToAsk_Indexes.ToArray());
             var wordPair = QuizCore.Quiz.WordPairs[rndIndex];
             QuizCore.QuizProgress.SetCurrentWordPair(wordPair.ID);
-            QuizCore.SaveProgress();
+            QuizCore.SaveQuizProgress();
             return wordPair.ID;
         }
 
@@ -118,7 +118,7 @@ namespace SteelQuiz
 
 
                     QuizCore.QuizProgress.SetCurrentWordPair(wordPairData.WordPairID);
-                    QuizCore.SaveProgress();
+                    QuizCore.SaveQuizProgress();
                     return wordPairData.WordPairID;
                 }
             }
@@ -219,7 +219,7 @@ namespace SteelQuiz
 
             QuizCore.QuizProgress.WordProgDatas.QuizRandomize();
 
-            QuizCore.SaveProgress();
+            QuizCore.SaveQuizProgress();
         }
     }
 }

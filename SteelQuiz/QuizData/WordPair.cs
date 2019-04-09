@@ -135,7 +135,7 @@ namespace SteelQuiz.QuizData
             if (updateProgress)
             {
                 GetWordProgData().AddWordTry(new WordTry(bestCharacterMismatch.Correct()));
-                QuizCore.SaveProgress();
+                QuizCore.SaveQuizProgress();
             }
 
             if (bestCharacterMismatch.Correct())

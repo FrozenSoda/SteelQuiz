@@ -24,6 +24,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SteelQuiz.QuizData;
 using SteelQuiz.QuizProgressData;
 
@@ -34,7 +35,7 @@ namespace SteelQuiz
         /*
          * Returns quiz if quiz doesn't need to be converted, or if it was converted successfully. Otherwise it returns null
          */
-        public static Quiz ChkUpgradeQuiz(Quiz quiz)
+        public static Quiz ChkUpgradeQuiz(Quiz quiz, string path, bool askToUpgrade = true)
         {
             Version fromVer;
 
@@ -51,22 +52,27 @@ namespace SteelQuiz
                 fromVer = new Version(1, 0, 0);
             }
 
+            BackupQuiz(path, fromVer);
+
             if (fromVer.CompareTo(new Version(MetaData.QUIZ_FILE_FORMAT_VERSION)) < 0)
             {
                 //conversion required
 
-                var msg = MessageBox.Show("The quiz file you have selected was made for an older version of SteelQuiz and must be converted to "
-                    + "the current format to load it. A backup will be created automatically, meaning that you won't lose anything when converting.\r\n\r\n"
-                    + "Warning! The quiz will probably be incompatible with older versions of SteelQuiz after the conversion. To use the quiz with "
-                    + "older versions of SteelQuiz after the conversion, you must use the backup quiz, which is created automatically."
-                    + "\r\n\r\nProceed with conversion?", "Quiz conversion required - SteelQuiz",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (msg == DialogResult.No)
+                if (askToUpgrade)
                 {
-                    return null;
+                    var msg = MessageBox.Show("The quiz file you have selected was made for an older version of SteelQuiz and must be converted to "
+                        + "the current format to load it. A backup will be created automatically, meaning that you won't lose anything when converting.\r\n\r\n"
+                        + "Warning! The quiz will probably be incompatible with older versions of SteelQuiz after the conversion. To use the quiz with "
+                        + "older versions of SteelQuiz after the conversion, you must use the backup quiz, which is created automatically."
+                        + "\r\n\r\nProceed with conversion?", "Quiz conversion required - SteelQuiz",
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (msg == DialogResult.No)
+                    {
+                        return null;
+                    }
                 }
 
-                var bkp = BackupQuiz(fromVer);
+                var bkp = BackupQuiz(path, fromVer);
                 if (!bkp)
                 {
                     return null;
@@ -113,66 +119,139 @@ namespace SteelQuiz
             {
                 quiz.FileFormatVersion = MetaData.QUIZ_FILE_FORMAT_VERSION;
             }
+
+            QuizCore.SaveQuiz(quiz, path);
+
             return quiz;
         }
 
         /*
          * QuizCore.Quiz must be set and converted before calling this function
          */ 
-        public static QuizProgData UpgradeProgressData(dynamic quizProgData)
+        public static CfgQuizzesProgressData ChkUpgradeProgressData(dynamic _cfgQuizzesProgressData)
         {
-            var progData = quizProgData;
+            var cfgQuizzesProgressData = _cfgQuizzesProgressData;
 
             Version fromVer;
-            fromVer = new Version(progData.FileFormatVersion);
+            fromVer = new Version(cfgQuizzesProgressData.FileFormatVersion.ToString());
 
             if (fromVer.CompareTo(new Version(MetaData.QUIZ_FILE_FORMAT_VERSION)) >= 0)
             {
                 //conversion not required
-                return progData;
+                return JsonConvert.DeserializeObject<CfgQuizzesProgressData>(JsonConvert.SerializeObject(cfgQuizzesProgressData));
             }
 
             var V3 = new Version(2, 0, 0); // implemented wordpair ID system, to avoid storing the whole quiz in the progress file
 
             if (V3.CompareTo(fromVer) > 0)
             {
-                // change wordpairs to IDs
+                // change wordpairs to IDs, for each quiz
 
-                var newQuizProgData = new QuizProgData(QuizCore.Quiz);
-                newQuizProgData.CurrentWordPairID = GetQuizWordPairCompat(progData.CurrentWordPair).ID;
-                newQuizProgData.FullTestInProgress = progData.FullTestInProgress;
-                newQuizProgData.MasterNoticeShowed = progData.MasterNoticeShowed;
-                newQuizProgData.QuizGUID = progData.QuizGUID;
+                var qpdList = new List<QuizProgData>();
 
-                foreach (var wpData in progData.WordProgDatas)
+                bool acceptQuizProgRemovals = false;
+                foreach (var quizProg in cfgQuizzesProgressData.QuizProgDatas)
                 {
-                    var newWp = new WordProgData(GetQuizWordPairCompat(wpData).ID);
-                    newWp.AskedThisRound = wpData.AskedThisRound;
-                    newWp.SkipThisRound = wpData.SkipThisRound;
-                    newWp.WordTries = wpData.WordTries;
+                    Quiz correspondingQuiz = FindQuiz(quizProg);
+                    if (correspondingQuiz == null && !acceptQuizProgRemovals)
+                    {
+                        var msg = MessageBox.Show("Some quizzes referenced by the progress data could not be found. Remove these quizzes from the progress data? (required)\r\n\r\n" +
+                            "If you select No, SteelQuiz will exit as the conversion cannot proceed", "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        if (msg == DialogResult.Yes)
+                        {
+                            acceptQuizProgRemovals = true;
+                            continue;
+                        }
+                        else
+                        {
+                            return null;
+                        }
+                    }
+                    else if (acceptQuizProgRemovals)
+                    {
+                        continue;
+                    }
+                    var newQuizProgData = new QuizProgData(correspondingQuiz);
+                    var wordPair = GetQuizWordPairCompat(correspondingQuiz, quizProg.CurrentWordPair);
+                    newQuizProgData.CurrentWordPairID = wordPair.ID;
+                    newQuizProgData.FullTestInProgress = quizProg.FullTestInProgress;
+                    newQuizProgData.MasterNoticeShowed = quizProg.MasterNoticeShowed;
+                    newQuizProgData.QuizGUID = quizProg.QuizGUID;
 
-                    newQuizProgData.WordProgDatas.Add(newWp);
+                    foreach (var wpData in quizProg.WordProgDatas)
+                    {
+                        var newWp = new WordProgData(GetQuizWordPairCompat(correspondingQuiz, wpData.WordPair).ID);
+                        newWp.AskedThisRound = wpData.AskedThisRound;
+                        newWp.SkipThisRound = wpData.SkipThisRound;
+                        newWp.WordTries = wpData.WordTries.ToObject<List<WordTry>>();
+
+                        newQuizProgData.WordProgDatas.Add(newWp);
+                    }
+
+                    qpdList.Add(newQuizProgData);
                 }
 
-                progData = newQuizProgData;
+                cfgQuizzesProgressData = new CfgQuizzesProgressData();
+                cfgQuizzesProgressData.QuizProgDatas = qpdList;
             }
 
-            if (progData != null)
+            if (cfgQuizzesProgressData != null)
             {
-                progData.FileFormatVersion = MetaData.QUIZ_FILE_FORMAT_VERSION;
+                cfgQuizzesProgressData.FileFormatVersion = MetaData.QUIZ_FILE_FORMAT_VERSION;
             }
-            return progData;
+
+            if (cfgQuizzesProgressData != null)
+            {
+                SaveWholeProgress(cfgQuizzesProgressData);
+            }
+
+            return cfgQuizzesProgressData;
         }
 
-        private static WordPair GetQuizWordPairCompat(dynamic wordPair)
+        public static void SaveWholeProgress(CfgQuizzesProgressData progressData)
         {
-            foreach (var wp in QuizCore.Quiz.WordPairs)
+            using (var writer = new StreamWriter(QuizCore.PROGRESS_FILE_PATH, false))
             {
-                if (wp.Word1 == wordPair.Word1
-                    && wp.Word2 == wordPair.Word2
-                    && wp.Word1Synonyms == wordPair.Word1Synonyms
-                    && wp.Word2Synonyms == wordPair.Word2Synonyms
-                    && wp.TranslationRules == wordPair.TranslationRules)
+                writer.Write(JsonConvert.SerializeObject(progressData));
+            }
+        }
+
+        private static Quiz FindQuiz(dynamic quizProgData)
+        {
+            foreach (var quizPath in Directory.GetFiles(QuizCore.QUIZ_FOLDER))
+            {
+                Quiz quiz;
+                using (var reader = new StreamReader(quizPath))
+                {
+                    quiz = JsonConvert.DeserializeObject<Quiz>(reader.ReadToEnd());
+                }
+
+                if (quiz == null || !SUtil.PropertyDefined(quiz.GUID))
+                {
+                    continue;
+                }
+
+                if (quiz.GUID == Guid.Parse(quizProgData.QuizGUID.ToString()))
+                {
+                    return ChkUpgradeQuiz(quiz, quizPath, false);
+                }
+            }
+
+            return null;
+        }
+
+        private static WordPair GetQuizWordPairCompat(Quiz quiz, dynamic wordPair)
+        {
+            foreach (var wp in quiz.WordPairs)
+            {
+                if (wp.Word1 == wordPair.Word1.ToObject<string>()
+                    && wp.Word2 == wordPair.Word2.ToObject<string>()
+                    &&
+                        ((wp.Word1Synonyms == null && wordPair.Word1Synonyms == null) ||
+                        wp.Word1Synonyms.SequenceEqual((List<string>)wordPair.Word1Synonyms.ToObject<List<string>>()))
+                    && ((wp.Word2Synonyms == null && wordPair.Word2Synonyms == null) ||
+                        wp.Word2Synonyms.SequenceEqual((List<string>)wordPair.Word2Synonyms.ToObject<List<string>>()))
+                    && wp.TranslationRules == wordPair.TranslationRules.ToObject<StringComp.Rules>())
                 {
                     return wp;
                 }
@@ -181,12 +260,12 @@ namespace SteelQuiz
             return null;
         }
 
-        public static bool BackupQuiz(Version quizVer)
+        public static bool BackupQuiz(string quizPath, Version quizVer)
         {
-            var extStartIndex = QuizCore.QuizPath.Length - QuizCore.QUIZ_EXTENSION.Length;
+            var extStartIndex = quizPath.Length - QuizCore.QUIZ_EXTENSION.Length;
             var bkpQuizPath = Path.Combine(
                 QuizCore.QUIZ_BACKUP_FOLDER,
-                Path.GetFileNameWithoutExtension(QuizCore.QuizPath) + "_" + quizVer.ToString() + QuizCore.QUIZ_EXTENSION);
+                Path.GetFileNameWithoutExtension(quizPath) + "_" + quizVer.ToString() + QuizCore.QUIZ_EXTENSION);
             var exCount = 1;
             while (File.Exists(bkpQuizPath))
             {
@@ -194,12 +273,12 @@ namespace SteelQuiz
                 //newQuizPath = QuizPath.Insert(extStartIndex, "_" + quizVer.ToString() + "_" + exCount);
                 bkpQuizPath = Path.Combine(
                     QuizCore.QUIZ_BACKUP_FOLDER,
-                    Path.GetFileNameWithoutExtension(QuizCore.QuizPath) + "_" + quizVer.ToString() + "_" + exCount + QuizCore.QUIZ_EXTENSION);
+                    Path.GetFileNameWithoutExtension(quizPath) + "_" + quizVer.ToString() + "_" + exCount + QuizCore.QUIZ_EXTENSION);
             }
 
             try
             {
-                File.Copy(QuizCore.QuizPath, bkpQuizPath);
+                File.Copy(quizPath, bkpQuizPath);
             }
             catch (Exception ex)
             {

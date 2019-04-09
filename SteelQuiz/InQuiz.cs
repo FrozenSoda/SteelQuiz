@@ -183,7 +183,7 @@ namespace SteelQuiz
                 return;
             }
 
-            QuizCore.SaveProgress();
+            QuizCore.SaveQuizProgress();
             ConfigManager.SaveConfig();
             Application.Exit();
         }
@@ -268,7 +268,7 @@ namespace SteelQuiz
                             );
             Program.frmWelcome.SetControlStates();
             Program.frmWelcome.Show();
-            QuizCore.SaveProgress();
+            QuizCore.SaveQuizProgress();
             ConfigManager.SaveConfig();
             onCloseEvent = false;
             Close();
