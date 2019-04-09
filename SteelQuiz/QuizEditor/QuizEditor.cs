@@ -34,7 +34,7 @@ namespace SteelQuiz.QuizEditor
 {
     public partial class QuizEditor : Form, IUndoRedo
     {
-        public int flp_controls_count => flp_words.Controls.Count;
+        private const int WORD_PAIRS_START_COUNT = 3;
 
         public Stack<UndoRedoFuncPair> UndoStack { get; set; } = new Stack<UndoRedoFuncPair>();
         public Stack<UndoRedoFuncPair> RedoStack { get; set; } = new Stack<UndoRedoFuncPair>();
@@ -48,14 +48,14 @@ namespace SteelQuiz.QuizEditor
             this.Location = new Point(Program.frmWelcome.Location.X + (Program.frmWelcome.Size.Width / 2) - (this.Size.Width / 2),
                               Program.frmWelcome.Location.Y + (Program.frmWelcome.Size.Height / 2) - (this.Size.Height / 2)
                             );
-            AddWordPair(2);
+            AddWordPair(WORD_PAIRS_START_COUNT);
         }
 
         public void AddWordPair(int count = 1)
         {
             for (int i = 0; i < count; ++i)
             {
-                var w = new QuizEditorWordPair(this, flp_controls_count);
+                var w = new QuizEditorWordPair(this, flp_words.Controls.Count);
                 flp_words.Controls.Add(w);
             }
         }
@@ -69,6 +69,38 @@ namespace SteelQuiz.QuizEditor
         {
             flp_words.Controls[flp_words.Controls.Count - 1].Dispose();
             flp_words.Controls.RemoveAt(flp_words.Controls.Count - 1);
+        }
+
+        public void ChkFixWordsCount()
+        {
+#warning Broken
+
+            foreach (var wordpair in flp_words.Controls.OfType<QuizEditorWordPair>())
+            {
+                if (wordpair.Number >= 2)
+                {
+                    if (QEWordEmpty(flp_words.Controls[wordpair.Number] as QuizEditorWordPair)
+                        && QEWordEmpty(flp_words.Controls[wordpair.Number - 1] as QuizEditorWordPair)
+                        && QEWordEmpty(flp_words.Controls[wordpair.Number - 2] as QuizEditorWordPair))
+                    {
+                        if (flp_words.Controls.Count >= WORD_PAIRS_START_COUNT + 1)
+                        {
+                            RemoveQuizEditorWord();
+                        }
+                    }
+                    else
+                    {
+                        AddWordPair(1);
+                    }
+                }
+            }
+        }
+
+        private bool QEWordEmpty(QuizEditorWordPair qew)
+        {
+            return qew != null ?
+                qew.txt_word1.Text == "" && qew.Synonyms1.IsNullOrEmpty() && qew.txt_word2.Text == "" && qew.Synonyms2.IsNullOrEmpty()
+                : false;
         }
 
         private void SetWordPairs(int count)

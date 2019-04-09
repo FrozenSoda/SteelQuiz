@@ -93,7 +93,7 @@ namespace SteelQuiz.QuizEditor
 
         private void txt_word1_TextChanged(object sender, EventArgs e)
         {
-            ChkFixWordsCount();
+            QEOwner.ChkFixWordsCount();
 
             if (ignore_txt_word_change)
             {
@@ -114,7 +114,7 @@ namespace SteelQuiz.QuizEditor
 
         private void txt_word2_TextChanged(object sender, EventArgs e)
         {
-            ChkFixWordsCount();
+            QEOwner.ChkFixWordsCount();
 
             if (ignore_txt_word_change)
             {
@@ -163,37 +163,12 @@ namespace SteelQuiz.QuizEditor
 
         private void txt_word_Click(object sender, EventArgs e)
         {
-            ChkFixWordsCount();
+            QEOwner.ChkFixWordsCount();
         }
 
         private void txt_word1_Enter(object sender, EventArgs e)
         {
-            ChkFixWordsCount();
-        }
-
-        private void ChkFixWordsCount()
-        {
-            if (Number >= QEOwner.flp_controls_count - 1)
-            {
-                var prev1 = QEOwner.PrevWord(Number);
-                var prev2 = QEOwner.PrevWord(Number - 1);
-                if (QEWordEmpty(prev1) && QEWordEmpty(prev2))
-                {
-                    QEOwner.RemoveQuizEditorWord();
-                    return;
-                }
-                else
-                {
-                    QEOwner.AddWordPair(1);
-                }
-            }
-        }
-
-        private bool QEWordEmpty(QuizEditorWordPair qew)
-        {
-            return qew != null ?
-                qew.txt_word1.Text == "" && qew.Synonyms1.IsNullOrEmpty() && qew.txt_word2.Text == "" && qew.Synonyms2.IsNullOrEmpty()
-                : false;
+            QEOwner.ChkFixWordsCount();
         }
     }
 }
