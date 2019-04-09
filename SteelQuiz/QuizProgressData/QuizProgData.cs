@@ -31,7 +31,7 @@ namespace SteelQuiz.QuizProgressData
         public Guid QuizGUID { get; set; }
         public List<WordProgData> WordProgDatas { get; set; } = null;
 
-        //[JsonProperty] // required for deserialization of property with private setter
+        [JsonProperty] // required for deserialization of property with private setter
         internal ulong? CurrentWordPairID { get; set; } = null;
 
         /*
