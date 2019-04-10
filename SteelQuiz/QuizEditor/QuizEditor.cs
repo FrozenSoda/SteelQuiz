@@ -34,7 +34,7 @@ namespace SteelQuiz.QuizEditor
 {
     public partial class QuizEditor : Form, IUndoRedo
     {
-        private const int WORD_PAIRS_START_COUNT = 3;
+        private const int EMPTY_WORD_PAIRS_COUNT = 2;
 
         public Stack<UndoRedoFuncPair> UndoStack { get; set; } = new Stack<UndoRedoFuncPair>();
         public Stack<UndoRedoFuncPair> RedoStack { get; set; } = new Stack<UndoRedoFuncPair>();
@@ -48,7 +48,7 @@ namespace SteelQuiz.QuizEditor
             this.Location = new Point(Program.frmWelcome.Location.X + (Program.frmWelcome.Size.Width / 2) - (this.Size.Width / 2),
                               Program.frmWelcome.Location.Y + (Program.frmWelcome.Size.Height / 2) - (this.Size.Height / 2)
                             );
-            AddWordPair(WORD_PAIRS_START_COUNT);
+            AddWordPair(EMPTY_WORD_PAIRS_COUNT);
         }
 
         public void AddWordPair(int count = 1)
@@ -68,31 +68,22 @@ namespace SteelQuiz.QuizEditor
         public void RemoveQuizEditorWord()
         {
             flp_words.Controls[flp_words.Controls.Count - 1].Dispose();
-            flp_words.Controls.RemoveAt(flp_words.Controls.Count - 1);
         }
 
         public void ChkFixWordsCount()
         {
-#warning Broken
-
-            foreach (var wordpair in flp_words.Controls.OfType<QuizEditorWordPair>())
+            // two empty word pairs should always be present
+            var wps = flp_words.Controls.OfType<QuizEditorWordPair>();
+            int emptyCount = wps.Where(x => QEWordEmpty(x)).Count();
+            while (emptyCount > EMPTY_WORD_PAIRS_COUNT && QEWordEmpty(wps.ElementAt(wps.Count() - 1)))
             {
-                if (wordpair.Number >= 2)
-                {
-                    if (QEWordEmpty(flp_words.Controls[wordpair.Number] as QuizEditorWordPair)
-                        && QEWordEmpty(flp_words.Controls[wordpair.Number - 1] as QuizEditorWordPair)
-                        && QEWordEmpty(flp_words.Controls[wordpair.Number - 2] as QuizEditorWordPair))
-                    {
-                        if (flp_words.Controls.Count >= WORD_PAIRS_START_COUNT + 1)
-                        {
-                            RemoveQuizEditorWord();
-                        }
-                    }
-                    else
-                    {
-                        AddWordPair(1);
-                    }
-                }
+                RemoveQuizEditorWord();
+                emptyCount = wps.Where(x => QEWordEmpty(x)).Count();
+            }
+            while (emptyCount < EMPTY_WORD_PAIRS_COUNT)
+            {
+                AddWordPair();
+                emptyCount = wps.Where(x => QEWordEmpty(x)).Count();
             }
         }
 
@@ -119,7 +110,7 @@ namespace SteelQuiz.QuizEditor
             var quiz = new Quiz(cmb_lang1.Text, cmb_lang2.Text, MetaData.QUIZ_FILE_FORMAT_VERSION);
 
             ulong i = 0;
-            foreach (var wordpair in flp_words.Controls.OfType<QuizEditorWordPair>())
+            foreach (var wordpair in flp_words.Controls.OfType<QuizEditorWordPair>().Where(x => !QEWordEmpty(x)))
             {
                 StringComp.Rules translationRules = StringComp.Rules.None;
                 if (wordpair.chk_ignoreCapitalization.Checked)
