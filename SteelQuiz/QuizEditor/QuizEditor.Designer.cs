@@ -47,10 +47,8 @@ namespace SteelQuiz.QuizEditor
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QuizEditor));
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.cmb_lang1 = new System.Windows.Forms.ComboBox();
-            this.txt_quizName = new System.Windows.Forms.TextBox();
             this.cmb_lang2 = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.flp_words = new System.Windows.Forms.FlowLayoutPanel();
@@ -72,19 +70,10 @@ namespace SteelQuiz.QuizEditor
             this.mns_top.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 34);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(60, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Quiz name:";
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 73);
+            this.label2.Location = new System.Drawing.Point(12, 33);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(67, 13);
             this.label2.TabIndex = 1;
@@ -93,22 +82,15 @@ namespace SteelQuiz.QuizEditor
             // cmb_lang1
             // 
             this.cmb_lang1.FormattingEnabled = true;
-            this.cmb_lang1.Location = new System.Drawing.Point(85, 70);
+            this.cmb_lang1.Location = new System.Drawing.Point(85, 30);
             this.cmb_lang1.Name = "cmb_lang1";
             this.cmb_lang1.Size = new System.Drawing.Size(291, 21);
             this.cmb_lang1.TabIndex = 1;
             // 
-            // txt_quizName
-            // 
-            this.txt_quizName.Location = new System.Drawing.Point(78, 31);
-            this.txt_quizName.Name = "txt_quizName";
-            this.txt_quizName.Size = new System.Drawing.Size(709, 20);
-            this.txt_quizName.TabIndex = 0;
-            // 
             // cmb_lang2
             // 
             this.cmb_lang2.FormattingEnabled = true;
-            this.cmb_lang2.Location = new System.Drawing.Point(455, 70);
+            this.cmb_lang2.Location = new System.Drawing.Point(455, 30);
             this.cmb_lang2.Name = "cmb_lang2";
             this.cmb_lang2.Size = new System.Drawing.Size(291, 21);
             this.cmb_lang2.TabIndex = 2;
@@ -116,7 +98,7 @@ namespace SteelQuiz.QuizEditor
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(382, 73);
+            this.label3.Location = new System.Drawing.Point(382, 33);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(67, 13);
             this.label3.TabIndex = 5;
@@ -126,15 +108,15 @@ namespace SteelQuiz.QuizEditor
             // 
             this.flp_words.AutoScroll = true;
             this.flp_words.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flp_words.Location = new System.Drawing.Point(12, 123);
+            this.flp_words.Location = new System.Drawing.Point(12, 87);
             this.flp_words.Name = "flp_words";
-            this.flp_words.Size = new System.Drawing.Size(776, 315);
+            this.flp_words.Size = new System.Drawing.Size(776, 351);
             this.flp_words.TabIndex = 3;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 107);
+            this.label4.Location = new System.Drawing.Point(12, 71);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(105, 13);
             this.label4.TabIndex = 8;
@@ -143,7 +125,7 @@ namespace SteelQuiz.QuizEditor
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(382, 107);
+            this.label5.Location = new System.Drawing.Point(382, 71);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(105, 13);
             this.label5.TabIndex = 9;
@@ -257,17 +239,15 @@ namespace SteelQuiz.QuizEditor
             this.Controls.Add(this.flp_words);
             this.Controls.Add(this.cmb_lang2);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.txt_quizName);
             this.Controls.Add(this.cmb_lang1);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.mns_top);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MainMenuStrip = this.mns_top;
             this.Name = "QuizEditor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "QuizEditor";
+            this.Text = "Quiz Editor | SteelQuiz";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.QuizEditor_FormClosing);
             this.SizeChanged += new System.EventHandler(this.QuizEditor_SizeChanged);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.QuizEditor_KeyDown);
@@ -279,11 +259,8 @@ namespace SteelQuiz.QuizEditor
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmb_lang1;
-        private System.Windows.Forms.TextBox txt_quizName;
         private System.Windows.Forms.ComboBox cmb_lang2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.FlowLayoutPanel flp_words;

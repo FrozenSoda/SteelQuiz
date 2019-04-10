@@ -39,7 +39,24 @@ namespace SteelQuiz.QuizEditor
         public Stack<UndoRedoFuncPair> UndoStack { get; set; } = new Stack<UndoRedoFuncPair>();
         public Stack<UndoRedoFuncPair> RedoStack { get; set; } = new Stack<UndoRedoFuncPair>();
 
-        private string QuizPath { get; set; } = null;
+        private string _quizPath = null;
+        private string QuizPath
+        {
+            get
+            {
+                return _quizPath;
+            }
+
+            set
+            {
+                _quizPath = value;
+                this.Text = $"{ Path.GetFileName(value) } - Quiz Editor | SteelQuiz";
+            }
+        }
+
+        private Guid QuizGuid { get; set; } = Guid.NewGuid();
+
+        private bool ChangedSinceLastSave { get; set; } = false;
 
         public QuizEditor()
         {
@@ -98,7 +115,6 @@ namespace SteelQuiz.QuizEditor
         {
             UndoStack.Clear();
             RedoStack.Clear();
-            QuizPath = null;
 
             flp_words.Controls.Clear();
 
@@ -108,6 +124,8 @@ namespace SteelQuiz.QuizEditor
         private Quiz ConstructQuiz()
         {
             var quiz = new Quiz(cmb_lang1.Text, cmb_lang2.Text, MetaData.QUIZ_FILE_FORMAT_VERSION);
+
+            quiz.GUID = QuizGuid;
 
             ulong i = 0;
             foreach (var wordpair in flp_words.Controls.OfType<QuizEditorWordPair>().Where(x => !QEWordEmpty(x)))
@@ -150,6 +168,10 @@ namespace SteelQuiz.QuizEditor
             }
 
             SetWordPairs(quiz.WordPairs.Count + 2);
+
+            QuizGuid = quiz.GUID;
+            cmb_lang1.Text = quiz.Language1;
+            cmb_lang2.Text = quiz.Language2;
 
             for (int i = 0; i < quiz.WordPairs.Count; ++i)
             {
@@ -288,6 +310,7 @@ namespace SteelQuiz.QuizEditor
             }
 
             UseWaitCursor = false;
+            ChangedSinceLastSave = false;
             return true;
         }
 
@@ -339,7 +362,7 @@ namespace SteelQuiz.QuizEditor
 
         private void QuizEditor_SizeChanged(object sender, EventArgs e)
         {
-            flp_words.Size = new Size(this.Size.Width - 40, this.Size.Height - 174);
+            flp_words.Size = new Size(this.Size.Width - 40, this.Size.Height - 138);
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
