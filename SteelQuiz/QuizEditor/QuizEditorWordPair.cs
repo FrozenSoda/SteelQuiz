@@ -110,6 +110,7 @@ namespace SteelQuiz.QuizEditor
                 "Change word",
                 new OwnerControlData(this, this.Parent)));
             QEOwner.UpdateUndoRedoTooltips();
+            QEOwner.ChangedSinceLastSave = true;
 
             txt_word1_text_old = txt_word1.Text;
         }
@@ -133,6 +134,7 @@ namespace SteelQuiz.QuizEditor
                 "Change word",
                 new OwnerControlData(this, this.Parent)));
             QEOwner.UpdateUndoRedoTooltips();
+            QEOwner.ChangedSinceLastSave = true;
 
             txt_word2_text_old = txt_word2.Text;
         }
@@ -152,6 +154,7 @@ namespace SteelQuiz.QuizEditor
                 new OwnerControlData(this, this.Parent)
                 ));
             QEOwner.UpdateUndoRedoTooltips();
+            QEOwner.ChangedSinceLastSave = true;
         }
 
         private void chk_ignoreExcl_CheckedChanged(object sender, EventArgs e)
@@ -169,6 +172,7 @@ namespace SteelQuiz.QuizEditor
                 new OwnerControlData(this, this.Parent)
                 ));
             QEOwner.UpdateUndoRedoTooltips();
+            QEOwner.ChangedSinceLastSave = true;
         }
 
         private void txt_word_Click(object sender, EventArgs e)

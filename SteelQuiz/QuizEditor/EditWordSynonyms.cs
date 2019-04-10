@@ -157,6 +157,7 @@ namespace SteelQuiz.QuizEditor
                 "Add synonym(s)",
                 new OwnerControlData(this, this.Parent, Language)));
             UpdateUndoRedoTooltips();
+            QEOwner.ChangedSinceLastSave = true;
 
             txt_wordAdd.Text = "";
             changedTextBox = false;
@@ -236,6 +237,7 @@ namespace SteelQuiz.QuizEditor
 
             QEOwner.UndoStack.Push(new UndoRedoFuncPair(undoes.ToArray(), redoes.ToArray(), "Update synonym(s)", new OwnerControlData(this, this.Parent, Language)));
             UpdateUndoRedoTooltips();
+            QEOwner.ChangedSinceLastSave = true;
 
             txt_wordAdd.Text = "";
             changedTextBox = false;
@@ -263,6 +265,7 @@ namespace SteelQuiz.QuizEditor
 
             QEOwner.UndoStack.Push(new UndoRedoFuncPair(undoes.ToArray(), redoes.ToArray(), "Remove synonym(s)", new OwnerControlData(this, this.Parent, Language)));
             UpdateUndoRedoTooltips();
+            QEOwner.ChangedSinceLastSave = true;
         }
 
         private void lst_synonyms_SelectedIndexChanged(object sender, EventArgs e)
@@ -325,6 +328,7 @@ namespace SteelQuiz.QuizEditor
                 }
                 QEOwner.RedoStack.Push(pop);
                 UpdateUndoRedoTooltips();
+                QEOwner.ChangedSinceLastSave = true;
             }
         }
 
@@ -345,6 +349,7 @@ namespace SteelQuiz.QuizEditor
                 }
                 QEOwner.UndoStack.Push(pop);
                 UpdateUndoRedoTooltips();
+                QEOwner.ChangedSinceLastSave = true;
             }
         }
 

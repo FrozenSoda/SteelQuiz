@@ -39,6 +39,8 @@ namespace SteelQuiz.QuizEditor
         public Stack<UndoRedoFuncPair> UndoStack { get; set; } = new Stack<UndoRedoFuncPair>();
         public Stack<UndoRedoFuncPair> RedoStack { get; set; } = new Stack<UndoRedoFuncPair>();
 
+        public bool ChangedSinceLastSave { get; set; } = false;
+
         private string _quizPath = null;
         private string QuizPath
         {
@@ -56,7 +58,7 @@ namespace SteelQuiz.QuizEditor
 
         private Guid QuizGuid { get; set; } = Guid.NewGuid();
 
-        private bool ChangedSinceLastSave { get; set; } = false;
+        private bool returningToMainMenu = false;
 
         public QuizEditor()
         {
@@ -187,9 +189,34 @@ namespace SteelQuiz.QuizEditor
 
         private void QuizEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (--Program.QuizEditorsOpen == 0)
+            if (ChangedSinceLastSave)
             {
-                Program.frmWelcome.Show();
+                var msg = MessageBox.Show("You have unsaved changes. Save before exiting?", "SteelQuiz", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (msg == DialogResult.Yes)
+                {
+                    if (!SaveQuiz())
+                    {
+                        e.Cancel = true;
+                        return;
+                    }
+                }
+                else if (msg == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+            }
+
+            if (returningToMainMenu)
+            {
+                if (--Program.QuizEditorsOpen == 0)
+                {
+                    Program.frmWelcome.Show();
+                }
+            }
+            else
+            {
+                Application.Exit();
             }
         }
 
@@ -206,7 +233,6 @@ namespace SteelQuiz.QuizEditor
                         undo();
                     }
                     RedoStack.Push(pop);
-                    UpdateUndoRedoTooltips();
                 }
                 else if (peek.OwnerControlData.Control is EditWordSynonyms)
                 {
@@ -230,9 +256,10 @@ namespace SteelQuiz.QuizEditor
                         }
                     }
                 }
-            }
 
-            UpdateUndoRedoTooltips();
+                UpdateUndoRedoTooltips();
+                ChangedSinceLastSave = true;
+            }
         }
 
         public void Redo()
@@ -272,9 +299,10 @@ namespace SteelQuiz.QuizEditor
                         }
                     }
                 }
-            }
 
-            UpdateUndoRedoTooltips();
+                UpdateUndoRedoTooltips();
+                ChangedSinceLastSave = true;
+            }
         }
 
         private bool SaveQuiz(bool saveAs = false)
@@ -367,17 +395,20 @@ namespace SteelQuiz.QuizEditor
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var msg = MessageBox.Show("Save current quiz before creating a new?", "SteelQuiz", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-            if (msg == DialogResult.Yes)
+            if (ChangedSinceLastSave)
             {
-                if (!SaveQuiz())
+                var msg = MessageBox.Show("You have unsaved changes. Save before creating a new?", "SteelQuiz", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (msg == DialogResult.Yes)
+                {
+                    if (!SaveQuiz())
+                    {
+                        return;
+                    }
+                }
+                else if (msg == DialogResult.Cancel)
                 {
                     return;
                 }
-            }
-            else if (msg == DialogResult.Cancel)
-            {
-                return;
             }
 
             //SetWordPairs(2);
@@ -387,6 +418,7 @@ namespace SteelQuiz.QuizEditor
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            returningToMainMenu = true;
             Close();
         }
 
