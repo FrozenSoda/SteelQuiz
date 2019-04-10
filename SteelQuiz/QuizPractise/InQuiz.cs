@@ -27,7 +27,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SteelQuiz.QuizData;
 
-namespace SteelQuiz
+namespace SteelQuiz.QuizPractise
 {
     public partial class InQuiz : Form
     {
