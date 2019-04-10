@@ -30,7 +30,7 @@ namespace SteelQuiz.QuizProgressData
     {
         public ulong WordPairID { get; set; }
 
-        //[JsonProperty]
+        [JsonProperty]
         internal List<WordTry> WordTries { get; set; } = null;
 
         private const int WORD_TRIES_TO_KEEP = 5;
