@@ -49,7 +49,7 @@ namespace SteelQuiz.QuizPractise
 
         private void btn_close_Click(object sender, EventArgs e)
         {
-            Close();
+            DialogResult = DialogResult.OK;
         }
 
         private void btn_editWord1_Click(object sender, EventArgs e)
@@ -58,6 +58,7 @@ namespace SteelQuiz.QuizPractise
             if (editWord.ShowDialog() == DialogResult.OK)
             {
                 WordPair.Word1 = editWord.Word;
+                QuizCore.SaveQuiz();
                 UpdateWordLabels();
             }
         }
@@ -68,6 +69,7 @@ namespace SteelQuiz.QuizPractise
             if (editWord.ShowDialog() == DialogResult.OK)
             {
                 WordPair.Word2 = editWord.Word;
+                QuizCore.SaveQuiz();
                 UpdateWordLabels();
             }
         }
@@ -75,7 +77,7 @@ namespace SteelQuiz.QuizPractise
         private void btn_editWord1synonyms_Click(object sender, EventArgs e)
         {
             var editWordSynonyms = new EditWordSynonyms(WordPair, 1);
-            if (editWordSynonyms.DialogResult == DialogResult.OK)
+            if (editWordSynonyms.ShowDialog() == DialogResult.OK)
             {
                 WordPair.Word1Synonyms = editWordSynonyms.Synonyms;
                 QuizCore.SaveQuiz();
@@ -85,11 +87,16 @@ namespace SteelQuiz.QuizPractise
         private void btn_editWord2synonyms_Click(object sender, EventArgs e)
         {
             var editWordSynonyms = new EditWordSynonyms(WordPair, 2);
-            if (editWordSynonyms.DialogResult == DialogResult.OK)
+            if (editWordSynonyms.ShowDialog() == DialogResult.OK)
             {
                 WordPair.Word2Synonyms = editWordSynonyms.Synonyms;
                 QuizCore.SaveQuiz();
             }
+        }
+
+        private void DontAgreeMenu_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult = DialogResult.OK;
         }
     }
 }

@@ -160,11 +160,13 @@ namespace SteelQuiz.QuizPractise
             this.Controls.Add(this.btn_editWord1synonyms);
             this.Controls.Add(this.btn_editWord1);
             this.Controls.Add(this.lbl_welcome);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "DontAgreeMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Translation disagreement | SteelQuiz";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DontAgreeMenu_FormClosing);
             this.ResumeLayout(false);
 
         }

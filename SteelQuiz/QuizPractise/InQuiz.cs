@@ -38,6 +38,7 @@ namespace SteelQuiz.QuizPractise
         private WordPair.TranslationMode translationMode = WordPair.TranslationMode.L1_to_L2;
         private bool waitingForEnter = false;
         private bool userCopyWord = false;
+        private bool countThisTranslationToProgress = true;
         private bool showingW1synonyms = false;
 
         public InQuiz()
@@ -70,6 +71,7 @@ namespace SteelQuiz.QuizPractise
 
         private void NewWord()
         {
+            countThisTranslationToProgress = true;
             lbl_lang1.Text = QuizCore.Quiz.Language1;
             currentWordPairID = QuizAI.GenerateWordPair();
 
@@ -94,6 +96,7 @@ namespace SteelQuiz.QuizPractise
 
         private void NewRound()
         {
+            countThisTranslationToProgress = true;
             lbl_lang1.Text = "Info";
             lbl_word1.Text = "Round completed! Press enter to continue";
             waitingForEnter = true;
@@ -103,7 +106,7 @@ namespace SteelQuiz.QuizPractise
         private void CheckWord()
         {
             lbl_lang1.Text = "Info";
-            var mismatch = currentWordPairID.GetWordPair().CharacterMismatches(currentInput, translationMode, !userCopyWord);
+            var mismatch = currentWordPairID.GetWordPair().CharacterMismatches(currentInput, translationMode, !userCopyWord && countThisTranslationToProgress);
             userCopyWord = false;
             if (mismatch.Correct())
             {
@@ -277,11 +280,29 @@ namespace SteelQuiz.QuizPractise
 
         private void btn_dontAgree_Click(object sender, EventArgs e)
         {
+            var msg = MessageBox.Show("If you continue, the translation of this word won't be counted this round to the score, to prevent cheating. Continue?",
+                "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (msg == DialogResult.No)
+            {
+                return;
+            }
+
+            countThisTranslationToProgress = false;
             var dontAgreeMenu = new DontAgreeMenu(currentWordPairID.GetWordPair());
             if (dontAgreeMenu.ShowDialog() == DialogResult.OK)
             {
                 QuizCore.SaveQuiz();
+
+                if (translationMode == WordPair.TranslationMode.L1_to_L2)
+                {
+                    lbl_word1.Text = currentWordPairID.GetWordPair().Word1;
+                }
+                else if (translationMode == WordPair.TranslationMode.L2_to_L1)
+                {
+                    lbl_word1.Text = currentWordPairID.GetWordPair().Word2;
+                }
             }
+            lbl_word2.Focus();
         }
     }
 }

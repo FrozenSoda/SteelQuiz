@@ -167,7 +167,7 @@ namespace SteelQuiz
                             return null;
                         }
                     }
-                    else if (acceptQuizProgRemovals)
+                    else if (correspondingQuiz == null && acceptQuizProgRemovals)
                     {
                         continue;
                     }
