@@ -86,6 +86,7 @@ namespace SteelQuiz.QuizEditor
             // 
             // btn_apply
             // 
+            this.btn_apply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_apply.Location = new System.Drawing.Point(591, 415);
             this.btn_apply.Name = "btn_apply";
             this.btn_apply.Size = new System.Drawing.Size(197, 23);
@@ -96,6 +97,7 @@ namespace SteelQuiz.QuizEditor
             // 
             // btn_cancel
             // 
+            this.btn_cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btn_cancel.Location = new System.Drawing.Point(15, 415);
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(121, 23);
@@ -110,10 +112,12 @@ namespace SteelQuiz.QuizEditor
             this.txt_wordAdd.Name = "txt_wordAdd";
             this.txt_wordAdd.Size = new System.Drawing.Size(449, 20);
             this.txt_wordAdd.TabIndex = 0;
+            this.txt_wordAdd.TextChanged += new System.EventHandler(this.txt_wordAdd_TextChanged);
             this.txt_wordAdd.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_wordAdd_KeyPress);
             // 
             // btn_add
             // 
+            this.btn_add.Enabled = false;
             this.btn_add.Location = new System.Drawing.Point(470, 59);
             this.btn_add.Name = "btn_add";
             this.btn_add.Size = new System.Drawing.Size(97, 23);
@@ -192,11 +196,14 @@ namespace SteelQuiz.QuizEditor
             this.Controls.Add(this.lbl_synForWord);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "EditWordSynonyms";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "EditWordSynonyms";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EditWordSynonyms_FormClosing);
+            this.SizeChanged += new System.EventHandler(this.EditWordSynonyms_SizeChanged);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EditWordSynonyms_KeyDown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

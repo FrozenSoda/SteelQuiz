@@ -184,6 +184,7 @@ namespace SteelQuiz.QuizEditor
                         undo();
                     }
                     RedoStack.Push(pop);
+                    UpdateUndoRedoTooltips();
                 }
                 else if (peek.OwnerControlData.Control is EditWordSynonyms)
                 {
@@ -208,6 +209,8 @@ namespace SteelQuiz.QuizEditor
                     }
                 }
             }
+
+            UpdateUndoRedoTooltips();
         }
 
         public void Redo()
@@ -223,6 +226,7 @@ namespace SteelQuiz.QuizEditor
                         redo();
                     }
                     UndoStack.Push(pop);
+                    UpdateUndoRedoTooltips();
                 }
                 else if (peek.OwnerControlData.Control is EditWordSynonyms)
                 {
@@ -247,6 +251,8 @@ namespace SteelQuiz.QuizEditor
                     }
                 }
             }
+
+            UpdateUndoRedoTooltips();
         }
 
         private bool SaveQuiz(bool saveAs = false)
@@ -283,6 +289,27 @@ namespace SteelQuiz.QuizEditor
 
             UseWaitCursor = false;
             return true;
+        }
+
+        public void UpdateUndoRedoTooltips()
+        {
+            if (UndoStack.Count > 0)
+            {
+                undoToolStripMenuItem.Text = $"Undo {UndoStack.Peek().Description}";
+            }
+            else
+            {
+                undoToolStripMenuItem.Text = "Undo";
+            }
+
+            if (RedoStack.Count > 0)
+            {
+                redoToolStripMenuItem.Text = $"Redo {RedoStack.Peek().Description}";
+            }
+            else
+            {
+                redoToolStripMenuItem.Text = "Redo";
+            }
         }
 
         private void undoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -338,6 +365,25 @@ namespace SteelQuiz.QuizEditor
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void QuizEditor_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control)
+            {
+                switch (e.KeyCode)
+                {
+                    case Keys.Z:
+                        e.Handled = true;
+                        Undo();
+                        break;
+
+                    case Keys.Y:
+                        e.Handled = true;
+                        Redo();
+                        break;
+                }
+            }
         }
     }
 }

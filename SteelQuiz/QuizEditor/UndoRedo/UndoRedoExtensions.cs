@@ -42,6 +42,8 @@ namespace SteelQuiz.QuizEditor.UndoRedo
             return () => {
                 beforeRevertAction?.Invoke();
                 textBox.Text = to;
+                textBox.SelectionStart = textBox.Text.Length;
+                textBox.SelectionLength = 0;
                 return textBox;
             };
         }
@@ -56,6 +58,8 @@ namespace SteelQuiz.QuizEditor.UndoRedo
                     return null;
                 }
                 txt.Text = to;
+                textBox.SelectionStart = textBox.Text.Length;
+                textBox.SelectionLength = 0;
                 return txt;
             };
         }

@@ -75,6 +75,7 @@ namespace SteelQuiz.QuizEditor
             if (EditWordSynonyms.ShowDialog() == DialogResult.OK)
             {
                 Synonyms1 = EditWordSynonyms.Synonyms;
+                QEOwner.ChkFixWordsCount();
             }
             DisposeEditWordSynonyms();
         }
@@ -85,6 +86,7 @@ namespace SteelQuiz.QuizEditor
             if (EditWordSynonyms.ShowDialog() == DialogResult.OK)
             {
                 Synonyms2 = EditWordSynonyms.Synonyms;
+                QEOwner.ChkFixWordsCount();
             }
             DisposeEditWordSynonyms();
         }
@@ -105,7 +107,9 @@ namespace SteelQuiz.QuizEditor
             QEOwner.UndoStack.Push(new UndoRedoFuncPair(
                 new Func<object>[] { txt_word1.ChangeText(txt_word1_text_old, () => { ignore_txt_word_change = true; }) },
                 new Func<object>[] { txt_word1.ChangeText(txt_word1.Text, () => { ignore_txt_word_change = true; }) },
+                "Change word",
                 new OwnerControlData(this, this.Parent)));
+            QEOwner.UpdateUndoRedoTooltips();
 
             txt_word1_text_old = txt_word1.Text;
         }
@@ -126,7 +130,9 @@ namespace SteelQuiz.QuizEditor
             QEOwner.UndoStack.Push(new UndoRedoFuncPair(
                 new Func<object>[] { txt_word2.ChangeText(txt_word2_text_old, () => { ignore_txt_word_change = true; }) },
                 new Func<object>[] { txt_word2.ChangeText(txt_word2.Text, () => { ignore_txt_word_change = true; }) },
+                "Change word",
                 new OwnerControlData(this, this.Parent)));
+            QEOwner.UpdateUndoRedoTooltips();
 
             txt_word2_text_old = txt_word2.Text;
         }
@@ -142,8 +148,10 @@ namespace SteelQuiz.QuizEditor
             QEOwner.UndoStack.Push(new UndoRedoFuncPair(
                 new Func<object>[] { chk_ignoreCapitalization.SetChecked(!chk_ignoreCapitalization.Checked, () => { ignore_chk_ignoreCapitalization_change = true; }) },
                 new Func<object>[] { chk_ignoreCapitalization.SetChecked(chk_ignoreCapitalization.Checked, () => { ignore_chk_ignoreCapitalization_change = true; }) },
+                "Checkbox switch",
                 new OwnerControlData(this, this.Parent)
                 ));
+            QEOwner.UpdateUndoRedoTooltips();
         }
 
         private void chk_ignoreExcl_CheckedChanged(object sender, EventArgs e)
@@ -157,8 +165,10 @@ namespace SteelQuiz.QuizEditor
             QEOwner.UndoStack.Push(new UndoRedoFuncPair(
                 new Func<object>[] { chk_ignoreExcl.SetChecked(!chk_ignoreExcl.Checked, () => { ignore_chk_ignoreExcl_change = true; }) },
                 new Func<object>[] { chk_ignoreExcl.SetChecked(chk_ignoreExcl.Checked, () => { ignore_chk_ignoreExcl_change = true; }) },
+                "Checkbox switch",
                 new OwnerControlData(this, this.Parent)
                 ));
+            QEOwner.UpdateUndoRedoTooltips();
         }
 
         private void txt_word_Click(object sender, EventArgs e)

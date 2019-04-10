@@ -154,7 +154,9 @@ namespace SteelQuiz.QuizEditor
             QEOwner.UndoStack.Push(new UndoRedoFuncPair(
                 new Func<object>[] { lst_synonyms.RemoveItem(() => { return this.Parent.EditWordSynonyms; }, lst_synonyms.Name, txt_wordAdd.Text) },
                 new Func<object>[] { lst_synonyms.AddItem(() => { return this.Parent.EditWordSynonyms; }, lst_synonyms.Name, txt_wordAdd.Text) },
+                "Add synonym(s)",
                 new OwnerControlData(this, this.Parent, Language)));
+            UpdateUndoRedoTooltips();
 
             txt_wordAdd.Text = "";
             changedTextBox = false;
@@ -232,7 +234,8 @@ namespace SteelQuiz.QuizEditor
                 redoes.Add(lst_synonyms.ChangeItem(() => { return this.Parent.EditWordSynonyms; }, lst_synonyms.Name, _new, old));
             }
 
-            QEOwner.UndoStack.Push(new UndoRedoFuncPair(undoes.ToArray(), redoes.ToArray(), new OwnerControlData(this, this.Parent, Language)));
+            QEOwner.UndoStack.Push(new UndoRedoFuncPair(undoes.ToArray(), redoes.ToArray(), "Update synonym(s)", new OwnerControlData(this, this.Parent, Language)));
+            UpdateUndoRedoTooltips();
 
             txt_wordAdd.Text = "";
             changedTextBox = false;
@@ -258,7 +261,8 @@ namespace SteelQuiz.QuizEditor
                 redoes.Add(lst_synonyms.RemoveItem(() => { return this.Parent.EditWordSynonyms; }, lst_synonyms.Name, item));
             }
 
-            QEOwner.UndoStack.Push(new UndoRedoFuncPair(undoes.ToArray(), redoes.ToArray(), new OwnerControlData(this, this.Parent, Language)));
+            QEOwner.UndoStack.Push(new UndoRedoFuncPair(undoes.ToArray(), redoes.ToArray(), "Remove synonym(s)", new OwnerControlData(this, this.Parent, Language)));
+            UpdateUndoRedoTooltips();
         }
 
         private void lst_synonyms_SelectedIndexChanged(object sender, EventArgs e)
@@ -320,6 +324,7 @@ namespace SteelQuiz.QuizEditor
                     undo();
                 }
                 QEOwner.RedoStack.Push(pop);
+                UpdateUndoRedoTooltips();
             }
         }
 
@@ -339,6 +344,7 @@ namespace SteelQuiz.QuizEditor
                     redo();
                 }
                 QEOwner.UndoStack.Push(pop);
+                UpdateUndoRedoTooltips();
             }
         }
 
@@ -368,6 +374,60 @@ namespace SteelQuiz.QuizEditor
             {
                 e.Cancel = true;
             }
+        }
+
+        private void txt_wordAdd_TextChanged(object sender, EventArgs e)
+        {
+            var duplicate = lst_synonyms.Items.Contains(txt_wordAdd.Text);
+            btn_add.Enabled = txt_wordAdd.Text.Length > 0 && !duplicate;
+        }
+
+        public void UpdateUndoRedoTooltips()
+        {
+            if (QEOwner.UndoStack.Count > 0)
+            {
+                undoToolStripMenuItem.Text = $"Undo {QEOwner.UndoStack.Peek().Description}";
+            }
+            else
+            {
+                undoToolStripMenuItem.Text = "Undo";
+            }
+
+            if (QEOwner.RedoStack.Count > 0)
+            {
+                redoToolStripMenuItem.Text = $"Redo {QEOwner.RedoStack.Peek().Description}";
+            }
+            else
+            {
+                redoToolStripMenuItem.Text = "Redo";
+            }
+
+            QEOwner.UpdateUndoRedoTooltips();
+        }
+
+
+        private void EditWordSynonyms_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control)
+            {
+                switch (e.KeyCode)
+                {
+                    case Keys.Z:
+                        e.Handled = true;
+                        Undo();
+                        break;
+
+                    case Keys.Y:
+                        e.Handled = true;
+                        Redo();
+                        break;
+                }
+            }
+        }
+
+        private void EditWordSynonyms_SizeChanged(object sender, EventArgs e)
+        {
+            lst_synonyms.Size = new Size(this.Size.Width - 43, this.Size.Height - 173);
         }
     }
 }
