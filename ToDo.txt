@@ -5,6 +5,4 @@
 - Better response after full test
 - You should be prompted to write both synonyms of a word where synonyms are added
 
-- Implement CTRL+Z and CTRL+Y for undo/redo in quiz editor
-- Do not ask if you want to save the quiz if no changes has been made since last save
-- Instead of saving whole wordpairs in quizprogress, save unique identifier
+- better conversion messages
