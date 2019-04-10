@@ -37,11 +37,59 @@ namespace SteelQuiz.QuizPractise
         {
             InitializeComponent();
             WordPair = wordPair;
+
+            UpdateWordLabels();
+        }
+
+        private void UpdateWordLabels()
+        {
+            lbl_word1.Text = $"Word 1: {WordPair.Word1}";
+            lbl_word2.Text = $"Word 2: {WordPair.Word2}";
         }
 
         private void btn_close_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void btn_editWord1_Click(object sender, EventArgs e)
+        {
+            var editWord = new EditWord(WordPair.Word1);
+            if (editWord.ShowDialog() == DialogResult.OK)
+            {
+                WordPair.Word1 = editWord.Word;
+                UpdateWordLabels();
+            }
+        }
+
+        private void btn_editWord2_Click(object sender, EventArgs e)
+        {
+            var editWord = new EditWord(WordPair.Word2);
+            if (editWord.ShowDialog() == DialogResult.OK)
+            {
+                WordPair.Word2 = editWord.Word;
+                UpdateWordLabels();
+            }
+        }
+
+        private void btn_editWord1synonyms_Click(object sender, EventArgs e)
+        {
+            var editWordSynonyms = new EditWordSynonyms(WordPair, 1);
+            if (editWordSynonyms.DialogResult == DialogResult.OK)
+            {
+                WordPair.Word1Synonyms = editWordSynonyms.Synonyms;
+                QuizCore.SaveQuiz();
+            }
+        }
+
+        private void btn_editWord2synonyms_Click(object sender, EventArgs e)
+        {
+            var editWordSynonyms = new EditWordSynonyms(WordPair, 2);
+            if (editWordSynonyms.DialogResult == DialogResult.OK)
+            {
+                WordPair.Word2Synonyms = editWordSynonyms.Synonyms;
+                QuizCore.SaveQuiz();
+            }
         }
     }
 }

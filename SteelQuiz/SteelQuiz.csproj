@@ -81,6 +81,12 @@
     <Compile Include="QuizPractise\EditWord.Designer.cs">
       <DependentUpon>EditWord.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuizPractise\EditWordSynonyms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuizPractise\EditWordSynonyms.Designer.cs">
+      <DependentUpon>EditWordSynonyms.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuizPractise\InQuiz.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -139,6 +145,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="QuizPractise\EditWord.resx">
       <DependentUpon>EditWord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuizPractise\EditWordSynonyms.resx">
+      <DependentUpon>EditWordSynonyms.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuizPractise\InQuiz.resx">
       <DependentUpon>InQuiz.cs</DependentUpon>

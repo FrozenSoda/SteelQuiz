@@ -186,14 +186,14 @@ namespace SteelQuiz.QuizPractise
             // btn_dontAgree
             // 
             this.btn_dontAgree.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_dontAgree.Location = new System.Drawing.Point(544, 35);
+            this.btn_dontAgree.Location = new System.Drawing.Point(352, 35);
             this.btn_dontAgree.Name = "btn_dontAgree";
             this.btn_dontAgree.Size = new System.Drawing.Size(97, 23);
             this.btn_dontAgree.TabIndex = 11;
             this.btn_dontAgree.TabStop = false;
-            this.btn_dontAgree.Text = "I do not agree";
+            this.btn_dontAgree.Text = "Fix quiz errors";
             this.btn_dontAgree.UseVisualStyleBackColor = true;
-            this.btn_dontAgree.Visible = false;
+            this.btn_dontAgree.Click += new System.EventHandler(this.btn_dontAgree_Click);
             // 
             // InQuiz
             // 

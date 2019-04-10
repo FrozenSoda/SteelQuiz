@@ -107,13 +107,11 @@ namespace SteelQuiz.QuizPractise
             userCopyWord = false;
             if (mismatch.Correct())
             {
-                btn_dontAgree.Visible = false;
                 lbl_word1.Text = "Correct! Press enter to continue";
                 waitingForEnter = true;
             }
             else
             {
-                btn_dontAgree.Visible = true;
                 if (translationMode == WordPair.TranslationMode.L1_to_L2)
                 {
                     lbl_word1.Text = $"Wrong\r\n\r\n{QuizCore.Quiz.Language1} word:\r\n"
@@ -275,6 +273,15 @@ namespace SteelQuiz.QuizPractise
             onCloseEvent = false;
             Close();
             Program.frmInQuiz = null;
+        }
+
+        private void btn_dontAgree_Click(object sender, EventArgs e)
+        {
+            var dontAgreeMenu = new DontAgreeMenu(currentWordPairID.GetWordPair());
+            if (dontAgreeMenu.ShowDialog() == DialogResult.OK)
+            {
+                QuizCore.SaveQuiz();
+            }
         }
     }
 }
