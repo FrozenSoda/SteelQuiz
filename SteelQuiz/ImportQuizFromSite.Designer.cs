@@ -101,6 +101,7 @@ namespace SteelQuiz
             // 
             // btn_import
             // 
+            this.btn_import.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_import.Location = new System.Drawing.Point(549, 392);
             this.btn_import.Name = "btn_import";
             this.btn_import.Size = new System.Drawing.Size(239, 46);
@@ -111,6 +112,7 @@ namespace SteelQuiz
             // 
             // btn_cancel
             // 
+            this.btn_cancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_cancel.Location = new System.Drawing.Point(12, 392);
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(162, 46);
@@ -169,6 +171,7 @@ namespace SteelQuiz
             // 
             // btn_urlHowToFind
             // 
+            this.btn_urlHowToFind.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_urlHowToFind.Location = new System.Drawing.Point(713, 53);
             this.btn_urlHowToFind.Name = "btn_urlHowToFind";
             this.btn_urlHowToFind.Size = new System.Drawing.Size(75, 23);

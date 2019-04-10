@@ -58,6 +58,7 @@ namespace SteelQuiz
             this.pnl_word1 = new System.Windows.Forms.Panel();
             this.pnl_word2 = new System.Windows.Forms.Panel();
             this.btn_home = new System.Windows.Forms.Button();
+            this.btn_dontAgree = new System.Windows.Forms.Button();
             this.pnl_word1.SuspendLayout();
             this.pnl_word2.SuspendLayout();
             this.SuspendLayout();
@@ -182,11 +183,24 @@ namespace SteelQuiz
             this.btn_home.UseVisualStyleBackColor = true;
             this.btn_home.Click += new System.EventHandler(this.btn_home_Click);
             // 
+            // btn_dontAgree
+            // 
+            this.btn_dontAgree.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_dontAgree.Location = new System.Drawing.Point(544, 35);
+            this.btn_dontAgree.Name = "btn_dontAgree";
+            this.btn_dontAgree.Size = new System.Drawing.Size(97, 23);
+            this.btn_dontAgree.TabIndex = 11;
+            this.btn_dontAgree.TabStop = false;
+            this.btn_dontAgree.Text = "I do not agree";
+            this.btn_dontAgree.UseVisualStyleBackColor = true;
+            this.btn_dontAgree.Visible = false;
+            // 
             // InQuiz
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btn_dontAgree);
             this.Controls.Add(this.btn_home);
             this.Controls.Add(this.pnl_word2);
             this.Controls.Add(this.pnl_word1);
@@ -227,5 +241,6 @@ namespace SteelQuiz
         private System.Windows.Forms.Panel pnl_word1;
         private System.Windows.Forms.Panel pnl_word2;
         private System.Windows.Forms.Button btn_home;
+        private System.Windows.Forms.Button btn_dontAgree;
     }
 }
