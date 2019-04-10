@@ -60,12 +60,16 @@ namespace SteelQuiz
 
                 if (askToUpgrade)
                 {
+                    /*
                     var msg = MessageBox.Show("The quiz file you have selected was made for an older version of SteelQuiz and must be converted to "
                         + "the current format to load it. A backup will be created automatically, meaning that you won't lose anything when converting.\r\n\r\n"
                         + "Warning! The quiz will probably be incompatible with older versions of SteelQuiz after the conversion. To use the quiz with "
                         + "older versions of SteelQuiz after the conversion, you must use the backup quiz, which is created automatically."
                         + "\r\n\r\nProceed with conversion?", "Quiz conversion required - SteelQuiz",
                         MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        */
+                    var msg = MessageBox.Show("Quiz conversion required. A backup will be created automatically. Convert now?",
+                    "Quiz conversion required - SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (msg == DialogResult.No)
                     {
                         return null;
@@ -218,7 +222,7 @@ namespace SteelQuiz
 
         private static Quiz FindQuiz(dynamic quizProgData)
         {
-            foreach (var quizPath in Directory.GetFiles(QuizCore.QUIZ_FOLDER))
+            foreach (var quizPath in Directory.GetFiles(QuizCore.QUIZ_FOLDER, $"*{QuizCore.QUIZ_EXTENSION}", SearchOption.TopDirectoryOnly))
             {
                 Quiz quiz;
                 using (var reader = new StreamReader(quizPath))

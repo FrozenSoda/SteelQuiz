@@ -185,6 +185,8 @@ namespace SteelQuiz.QuizEditor
                 ctrl.txt_word2.Text = wp.Word2;
                 ctrl.Synonyms2 = wp.Word2Synonyms;
             }
+
+            ChangedSinceLastSave = false;
         }
 
         private void QuizEditor_FormClosing(object sender, FormClosingEventArgs e)
