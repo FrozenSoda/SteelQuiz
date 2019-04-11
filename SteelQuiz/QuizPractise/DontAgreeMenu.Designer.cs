@@ -55,6 +55,7 @@ namespace SteelQuiz.QuizPractise
             this.lbl_word1 = new System.Windows.Forms.Label();
             this.lbl_word2 = new System.Windows.Forms.Label();
             this.btn_close = new System.Windows.Forms.Button();
+            this.btn_editInEditor = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbl_welcome
@@ -73,7 +74,7 @@ namespace SteelQuiz.QuizPractise
             this.btn_editWord1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_editWord1.Location = new System.Drawing.Point(282, 154);
             this.btn_editWord1.Name = "btn_editWord1";
-            this.btn_editWord1.Size = new System.Drawing.Size(237, 45);
+            this.btn_editWord1.Size = new System.Drawing.Size(237, 34);
             this.btn_editWord1.TabIndex = 2;
             this.btn_editWord1.Text = "Word 1 is incorrect";
             this.btn_editWord1.UseVisualStyleBackColor = true;
@@ -83,9 +84,9 @@ namespace SteelQuiz.QuizPractise
             // 
             this.btn_editWord1synonyms.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_editWord1synonyms.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_editWord1synonyms.Location = new System.Drawing.Point(282, 205);
+            this.btn_editWord1synonyms.Location = new System.Drawing.Point(282, 194);
             this.btn_editWord1synonyms.Name = "btn_editWord1synonyms";
-            this.btn_editWord1synonyms.Size = new System.Drawing.Size(237, 45);
+            this.btn_editWord1synonyms.Size = new System.Drawing.Size(237, 34);
             this.btn_editWord1synonyms.TabIndex = 3;
             this.btn_editWord1synonyms.Text = "I want to edit the synonyms for word 1";
             this.btn_editWord1synonyms.UseVisualStyleBackColor = true;
@@ -95,9 +96,9 @@ namespace SteelQuiz.QuizPractise
             // 
             this.btn_editWord2synonyms.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_editWord2synonyms.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_editWord2synonyms.Location = new System.Drawing.Point(282, 307);
+            this.btn_editWord2synonyms.Location = new System.Drawing.Point(282, 274);
             this.btn_editWord2synonyms.Name = "btn_editWord2synonyms";
-            this.btn_editWord2synonyms.Size = new System.Drawing.Size(237, 45);
+            this.btn_editWord2synonyms.Size = new System.Drawing.Size(237, 34);
             this.btn_editWord2synonyms.TabIndex = 4;
             this.btn_editWord2synonyms.Text = "I want to edit the synonyms for word 2";
             this.btn_editWord2synonyms.UseVisualStyleBackColor = true;
@@ -107,9 +108,9 @@ namespace SteelQuiz.QuizPractise
             // 
             this.btn_editWord2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_editWord2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_editWord2.Location = new System.Drawing.Point(282, 256);
+            this.btn_editWord2.Location = new System.Drawing.Point(282, 234);
             this.btn_editWord2.Name = "btn_editWord2";
-            this.btn_editWord2.Size = new System.Drawing.Size(237, 45);
+            this.btn_editWord2.Size = new System.Drawing.Size(237, 34);
             this.btn_editWord2.TabIndex = 5;
             this.btn_editWord2.Text = "Word 2 is incorrect";
             this.btn_editWord2.UseVisualStyleBackColor = true;
@@ -147,11 +148,23 @@ namespace SteelQuiz.QuizPractise
             this.btn_close.UseVisualStyleBackColor = true;
             this.btn_close.Click += new System.EventHandler(this.btn_close_Click);
             // 
+            // btn_editInEditor
+            // 
+            this.btn_editInEditor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_editInEditor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_editInEditor.Location = new System.Drawing.Point(282, 324);
+            this.btn_editInEditor.Name = "btn_editInEditor";
+            this.btn_editInEditor.Size = new System.Drawing.Size(237, 34);
+            this.btn_editInEditor.TabIndex = 9;
+            this.btn_editInEditor.Text = "Too much - edit the quiz in the editor";
+            this.btn_editInEditor.UseVisualStyleBackColor = true;
+            // 
             // DontAgreeMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btn_editInEditor);
             this.Controls.Add(this.btn_close);
             this.Controls.Add(this.lbl_word2);
             this.Controls.Add(this.lbl_word1);
@@ -181,5 +194,6 @@ namespace SteelQuiz.QuizPractise
         private System.Windows.Forms.Label lbl_word1;
         private System.Windows.Forms.Label lbl_word2;
         private System.Windows.Forms.Button btn_close;
+        private System.Windows.Forms.Button btn_editInEditor;
     }
 }

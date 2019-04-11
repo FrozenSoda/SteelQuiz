@@ -69,6 +69,7 @@ namespace SteelQuiz.QuizPractise
             this.lst_recovered.FormattingEnabled = true;
             this.lst_recovered.Location = new System.Drawing.Point(17, 55);
             this.lst_recovered.Name = "lst_recovered";
+            this.lst_recovered.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lst_recovered.Size = new System.Drawing.Size(771, 355);
             this.lst_recovered.TabIndex = 3;
             // 
@@ -80,6 +81,7 @@ namespace SteelQuiz.QuizPractise
             this.btn_load.TabIndex = 4;
             this.btn_load.Text = "Load";
             this.btn_load.UseVisualStyleBackColor = true;
+            this.btn_load.Click += new System.EventHandler(this.btn_load_Click);
             // 
             // btn_delete
             // 
@@ -89,6 +91,7 @@ namespace SteelQuiz.QuizPractise
             this.btn_delete.TabIndex = 5;
             this.btn_delete.Text = "Delete";
             this.btn_delete.UseVisualStyleBackColor = true;
+            this.btn_delete.Click += new System.EventHandler(this.btn_delete_Click);
             // 
             // btn_close
             // 
@@ -98,6 +101,7 @@ namespace SteelQuiz.QuizPractise
             this.btn_close.TabIndex = 6;
             this.btn_close.Text = "Close";
             this.btn_close.UseVisualStyleBackColor = true;
+            this.btn_close.Click += new System.EventHandler(this.btn_close_Click);
             // 
             // QuizRecovery
             // 
