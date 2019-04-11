@@ -246,6 +246,8 @@ namespace SteelQuiz
 
         private static WordPair GetQuizWordPairCompat(Quiz quiz, dynamic wordPair)
         {
+#warning Error when accessing wordPair.Word1
+
             foreach (var wp in quiz.WordPairs)
             {
                 if (wp.Word1 == wordPair.Word1.ToObject<string>()
