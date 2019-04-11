@@ -83,7 +83,8 @@ namespace SteelQuiz.QuizEditor
                 {
                     QuizRecoveryData = quizRecovery.QuizRecoveryData;
                     QuizPath = quizRecovery.QuizRecoveryData.QuizPath;
-                    LoadQuiz(quizRecovery.QuizRecoveryData.Quiz, false);
+                    LoadQuiz(quizRecovery.QuizRecoveryData.Quiz, true);
+                    ChangedSinceLastSave = true;
                 }
             }
         }
@@ -186,6 +187,11 @@ namespace SteelQuiz.QuizEditor
                 }
             }
 
+            if (!fromRecovery)
+            {
+                DeleteRecovery();
+            }
+
             if (quiz == null)
             {
                 var ofd = ofd_quiz.ShowDialog();
@@ -230,6 +236,22 @@ namespace SteelQuiz.QuizEditor
             }
         }
 
+        private void DeleteRecovery()
+        {
+            if (File.Exists(QuizRecoveryData.RecoveryFilePath))
+            {
+                try
+                {
+                    File.Delete(QuizRecoveryData.RecoveryFilePath);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An error occurred while deleting recovery files:\r\n\r\n" + ex.ToString(), "SteelQuiz", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            }
+        }
+
         private void QuizEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (ChangedSinceLastSave)
@@ -252,18 +274,7 @@ namespace SteelQuiz.QuizEditor
                 ChangedSinceLastSave = false;
             }
 
-            if (File.Exists(QuizRecoveryData.RecoveryFilePath))
-            {
-                try
-                {
-                    File.Delete(QuizRecoveryData.RecoveryFilePath);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("An error occurred while deleting recovery files:\r\n\r\n" + ex.ToString(), "SteelQuiz", MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                }
-            }
+            DeleteRecovery();
 
             if (returningToMainMenu)
             {
@@ -478,7 +489,6 @@ namespace SteelQuiz.QuizEditor
                 }
             }
 
-            //SetWordPairs(2);
             var quizEditor = new QuizEditor();
             quizEditor.Show();
         }

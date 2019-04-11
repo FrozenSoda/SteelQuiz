@@ -48,10 +48,8 @@ namespace SteelQuiz.QuizEditor
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QuizRecovery));
             this.lbl_welcome = new System.Windows.Forms.Label();
-            this.lst_recovered = new System.Windows.Forms.ListBox();
-            this.btn_load = new System.Windows.Forms.Button();
-            this.btn_delete = new System.Windows.Forms.Button();
             this.btn_close = new System.Windows.Forms.Button();
+            this.flp_recovery = new System.Windows.Forms.FlowLayoutPanel();
             this.SuspendLayout();
             // 
             // lbl_welcome
@@ -64,40 +62,6 @@ namespace SteelQuiz.QuizEditor
             this.lbl_welcome.Text = "Unsaved projects from last session were recovered";
             this.lbl_welcome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lst_recovered
-            // 
-            this.lst_recovered.FormattingEnabled = true;
-            this.lst_recovered.Location = new System.Drawing.Point(17, 55);
-            this.lst_recovered.Name = "lst_recovered";
-            this.lst_recovered.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lst_recovered.Size = new System.Drawing.Size(771, 355);
-            this.lst_recovered.TabIndex = 3;
-            this.lst_recovered.Click += new System.EventHandler(this.lst_recovered_Click);
-            this.lst_recovered.SelectedIndexChanged += new System.EventHandler(this.lst_recovered_SelectedIndexChanged);
-            this.lst_recovered.DoubleClick += new System.EventHandler(this.lst_recovered_DoubleClick);
-            // 
-            // btn_load
-            // 
-            this.btn_load.Enabled = false;
-            this.btn_load.Location = new System.Drawing.Point(588, 415);
-            this.btn_load.Name = "btn_load";
-            this.btn_load.Size = new System.Drawing.Size(200, 23);
-            this.btn_load.TabIndex = 4;
-            this.btn_load.Text = "Load";
-            this.btn_load.UseVisualStyleBackColor = true;
-            this.btn_load.Click += new System.EventHandler(this.btn_load_Click);
-            // 
-            // btn_delete
-            // 
-            this.btn_delete.Enabled = false;
-            this.btn_delete.Location = new System.Drawing.Point(452, 415);
-            this.btn_delete.Name = "btn_delete";
-            this.btn_delete.Size = new System.Drawing.Size(130, 23);
-            this.btn_delete.TabIndex = 5;
-            this.btn_delete.Text = "Delete";
-            this.btn_delete.UseVisualStyleBackColor = true;
-            this.btn_delete.Click += new System.EventHandler(this.btn_delete_Click);
-            // 
             // btn_close
             // 
             this.btn_close.Location = new System.Drawing.Point(17, 415);
@@ -108,15 +72,20 @@ namespace SteelQuiz.QuizEditor
             this.btn_close.UseVisualStyleBackColor = true;
             this.btn_close.Click += new System.EventHandler(this.btn_close_Click);
             // 
+            // flp_recovery
+            // 
+            this.flp_recovery.Location = new System.Drawing.Point(17, 55);
+            this.flp_recovery.Name = "flp_recovery";
+            this.flp_recovery.Size = new System.Drawing.Size(771, 354);
+            this.flp_recovery.TabIndex = 7;
+            // 
             // QuizRecovery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.flp_recovery);
             this.Controls.Add(this.btn_close);
-            this.Controls.Add(this.btn_delete);
-            this.Controls.Add(this.btn_load);
-            this.Controls.Add(this.lst_recovered);
             this.Controls.Add(this.lbl_welcome);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -131,9 +100,7 @@ namespace SteelQuiz.QuizEditor
         #endregion
 
         private System.Windows.Forms.Label lbl_welcome;
-        private System.Windows.Forms.ListBox lst_recovered;
-        private System.Windows.Forms.Button btn_load;
-        private System.Windows.Forms.Button btn_delete;
         private System.Windows.Forms.Button btn_close;
+        internal System.Windows.Forms.FlowLayoutPanel flp_recovery;
     }
 }
