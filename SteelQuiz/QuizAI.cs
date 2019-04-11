@@ -64,7 +64,7 @@ namespace SteelQuiz
             {
                 for (int j = 0; j < wordsNotToAsk.Length; ++j)
                 {
-                    if (QuizCore.Quiz.WordPairs[i].Equals(wordsNotToAsk[j]))
+                    if (QuizCore.Quiz.WordPairs[i].ID == wordsNotToAsk[j])
                     {
                         wordsNotToAsk_Indexes.Add(i);
                     }
