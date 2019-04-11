@@ -57,7 +57,7 @@ namespace SteelQuiz.QuizEditor
         }
 
         private Guid QuizGuid { get; set; } = Guid.NewGuid();
-        private string RecoveryPath { get; set; } = null;
+        private QuizRecoveryData QuizRecoveryData { get; set; }
 
         private bool returningToMainMenu = false;
 
@@ -69,6 +69,23 @@ namespace SteelQuiz.QuizEditor
                               Program.frmWelcome.Location.Y + (Program.frmWelcome.Size.Height / 2) - (this.Size.Height / 2)
                             );
             AddWordPair(EMPTY_WORD_PAIRS_COUNT);
+            QuizRecoveryData = new QuizRecoveryData(QuizPath);
+            ChkRecovery();
+        }
+
+        public void ChkRecovery()
+        {
+            var recoveryFiles = Directory.GetFiles(QuizCore.QUIZ_RECOVERY_FOLDER);
+            if (recoveryFiles.Length > 0)
+            {
+                var quizRecovery = new QuizRecovery(recoveryFiles);
+                if (quizRecovery.ShowDialog() == DialogResult.OK)
+                {
+                    QuizRecoveryData = quizRecovery.QuizRecoveryData;
+                    QuizPath = quizRecovery.QuizRecoveryData.QuizPath;
+                    LoadQuiz(quizRecovery.QuizRecoveryData.Quiz, false);
+                }
+            }
         }
 
         public void AddWordPair(int count = 1)
@@ -151,7 +168,7 @@ namespace SteelQuiz.QuizEditor
             return quiz;
         }
 
-        private void LoadQuiz()
+        private void LoadQuiz(Quiz quiz = null, bool fromRecovery = false)
         {
             if (ChangedSinceLastSave)
             {
@@ -169,21 +186,22 @@ namespace SteelQuiz.QuizEditor
                 }
             }
 
-            var ofd = ofd_quiz.ShowDialog();
-            if (ofd == DialogResult.OK)
+            if (quiz == null)
             {
-                QuizPath = ofd_quiz.FileName;
-            }
-            else
-            {
-                return;
-            }
+                var ofd = ofd_quiz.ShowDialog();
+                if (ofd == DialogResult.OK)
+                {
+                    QuizPath = ofd_quiz.FileName;
+                }
+                else
+                {
+                    return;
+                }
 
-            Quiz quiz;
-
-            using (var reader = new StreamReader(QuizPath))
-            {
-                quiz = JsonConvert.DeserializeObject<Quiz>(reader.ReadToEnd());
+                using (var reader = new StreamReader(QuizPath))
+                {
+                    quiz = JsonConvert.DeserializeObject<Quiz>(reader.ReadToEnd());
+                }
             }
 
             SetWordPairs(quiz.WordPairs.Count + 2);
@@ -201,9 +219,15 @@ namespace SteelQuiz.QuizEditor
                 ctrl.Synonyms1 = wp.Word1Synonyms;
                 ctrl.txt_word2.Text = wp.Word2;
                 ctrl.Synonyms2 = wp.Word2Synonyms;
+                ctrl.chk_ignoreCapitalization.Checked = wp.TranslationRules.HasFlag(StringComp.Rules.IgnoreCapitalization);
+                ctrl.chk_ignoreExcl.Checked = wp.TranslationRules.HasFlag(StringComp.Rules.IgnoreExclamation);
             }
 
-            ChangedSinceLastSave = false;
+            if (!fromRecovery)
+            {
+                QuizRecoveryData = new QuizRecoveryData(QuizPath);
+                ChangedSinceLastSave = false;
+            }
         }
 
         private void QuizEditor_FormClosing(object sender, FormClosingEventArgs e)
@@ -223,6 +247,21 @@ namespace SteelQuiz.QuizEditor
                 {
                     e.Cancel = true;
                     return;
+                }
+
+                ChangedSinceLastSave = false;
+            }
+
+            if (File.Exists(QuizRecoveryData.RecoveryFilePath))
+            {
+                try
+                {
+                    File.Delete(QuizRecoveryData.RecoveryFilePath);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An error occurred while deleting recovery files:\r\n\r\n" + ex.ToString(), "SteelQuiz", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
                 }
             }
 
@@ -471,31 +510,8 @@ namespace SteelQuiz.QuizEditor
 
         private void UpdateRecoverySave()
         {
-            int untitledCounter = 1;
-            string recoveryFilePath;
-            if (QuizPath == null)
-            {
-                recoveryFilePath = $"{Path.GetFileNameWithoutExtension(QuizPath)}.steelquiz";
-            }
-            else
-            {
-                recoveryFilePath = $"Untitled{untitledCounter.ToString()}.steelquiz";
-            }
-
-            while (File.Exists(recoveryFilePath))
-            {
-                ++untitledCounter;
-                if (QuizPath == null)
-                {
-                    recoveryFilePath = $"{Path.GetFileNameWithoutExtension(QuizPath)}_{ untitledCounter.ToString() }.steelquiz";
-                }
-                else
-                {
-                    recoveryFilePath = $"Untitled{untitledCounter.ToString()}.steelquiz";
-                }
-            }
-
-            SaveQuiz(false, recoveryFilePath);
+            var quiz = ConstructQuiz();
+            QuizRecoveryData.Save(quiz);
         }
 
         private void tmr_autoRecoverySave_Tick(object sender, EventArgs e)

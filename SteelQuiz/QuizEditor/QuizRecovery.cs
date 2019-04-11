@@ -16,6 +16,8 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using Newtonsoft.Json;
+using SteelQuiz.QuizData;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,15 +29,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SteelQuiz.QuizPractise
+namespace SteelQuiz.QuizEditor
 {
     public partial class QuizRecovery : Form
     {
-        public string QuizToLoadPath { get; set; } = null;
+        public QuizRecoveryData QuizRecoveryData { get; set; }
 
-        public QuizRecovery()
+        public QuizRecovery(string[] recoveryFiles)
         {
             InitializeComponent();
+
+            foreach (var file in recoveryFiles)
+            {
+                lst_recovered.Items.Add(file);
+            }
         }
 
         private void btn_delete_Click(object sender, EventArgs e)
@@ -43,7 +50,7 @@ namespace SteelQuiz.QuizPractise
             var msg =
                 MessageBox.Show("Are you sure you want to delete the selected quiz recovery file(s)? " +
                 "If they were not saved, they will be permanently lost if you continue",
-                "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button3);
+                "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
             if (msg == DialogResult.No)
             {
                 return;
@@ -77,13 +84,37 @@ namespace SteelQuiz.QuizPractise
                 MessageBox.Show("Only one quiz can be loaded at a time", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            QuizToLoadPath = (string)lst_recovered.SelectedItems[0];
+            var recoveryFile = File.ReadAllText((string)lst_recovered.SelectedItems[0]);
+            var recovery = JsonConvert.DeserializeObject<QuizRecoveryData>(recoveryFile);
+
+            QuizRecoveryData = recovery;
             DialogResult = DialogResult.OK;
         }
 
         private void btn_close_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
+        }
+
+        private void UpdateButtonStates()
+        {
+            btn_load.Enabled = lst_recovered.SelectedItems.Count == 1;
+            btn_delete.Enabled = lst_recovered.SelectedItems.Count > 0;
+        }
+
+        private void lst_recovered_Click(object sender, EventArgs e)
+        {
+            UpdateButtonStates();
+        }
+
+        private void lst_recovered_DoubleClick(object sender, EventArgs e)
+        {
+            UpdateButtonStates();
+        }
+
+        private void lst_recovered_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateButtonStates();
         }
     }
 }

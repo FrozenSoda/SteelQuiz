@@ -16,7 +16,7 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-namespace SteelQuiz.QuizPractise
+namespace SteelQuiz.QuizEditor
 {
     partial class QuizRecovery
     {
@@ -72,9 +72,13 @@ namespace SteelQuiz.QuizPractise
             this.lst_recovered.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lst_recovered.Size = new System.Drawing.Size(771, 355);
             this.lst_recovered.TabIndex = 3;
+            this.lst_recovered.Click += new System.EventHandler(this.lst_recovered_Click);
+            this.lst_recovered.SelectedIndexChanged += new System.EventHandler(this.lst_recovered_SelectedIndexChanged);
+            this.lst_recovered.DoubleClick += new System.EventHandler(this.lst_recovered_DoubleClick);
             // 
             // btn_load
             // 
+            this.btn_load.Enabled = false;
             this.btn_load.Location = new System.Drawing.Point(588, 415);
             this.btn_load.Name = "btn_load";
             this.btn_load.Size = new System.Drawing.Size(200, 23);
@@ -85,6 +89,7 @@ namespace SteelQuiz.QuizPractise
             // 
             // btn_delete
             // 
+            this.btn_delete.Enabled = false;
             this.btn_delete.Location = new System.Drawing.Point(452, 415);
             this.btn_delete.Name = "btn_delete";
             this.btn_delete.Size = new System.Drawing.Size(130, 23);
@@ -117,6 +122,7 @@ namespace SteelQuiz.QuizPractise
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "QuizRecovery";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Quiz Recovery | SteelQuiz";
             this.ResumeLayout(false);
 

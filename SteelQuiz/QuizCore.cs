@@ -101,6 +101,7 @@ namespace SteelQuiz
                 Directory.CreateDirectory(BACKUP_FOLDER);
                 Directory.CreateDirectory(QUIZ_FOLDER);
                 Directory.CreateDirectory(QUIZ_BACKUP_FOLDER);
+                Directory.CreateDirectory(QUIZ_RECOVERY_FOLDER);
             }
             catch (Exception ex)
             {

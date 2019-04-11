@@ -56,6 +56,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigManager.cs" />
+    <Compile Include="QuizData\QuizRecoveryData.cs" />
+    <Compile Include="QuizEditor\QuizRecoveryUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuizEditor\QuizRecoveryUC.Designer.cs">
+      <DependentUpon>QuizRecoveryUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuizPractise\FixQuizErrors.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,10 +118,10 @@
     </Compile>
     <Compile Include="QuizEditor\UndoRedo\OwnerControlData.cs" />
     <Compile Include="QuizImporter.cs" />
-    <Compile Include="QuizPractise\QuizRecovery.cs">
+    <Compile Include="QuizEditor\QuizRecovery.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="QuizPractise\QuizRecovery.Designer.cs">
+    <Compile Include="QuizEditor\QuizRecovery.Designer.cs">
       <DependentUpon>QuizRecovery.cs</DependentUpon>
     </Compile>
     <Compile Include="QuizProgressData\CfgQuizzesProgressData.cs" />
@@ -143,6 +150,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuizData\WordPair.cs" />
     <Compile Include="QuizProgressData\WordTry.cs" />
+    <EmbeddedResource Include="QuizEditor\QuizRecoveryUC.resx">
+      <DependentUpon>QuizRecoveryUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="QuizPractise\FixQuizErrors.resx">
       <DependentUpon>FixQuizErrors.cs</DependentUpon>
     </EmbeddedResource>
@@ -167,7 +177,7 @@
     <EmbeddedResource Include="QuizEditor\QuizEditorWordPair.resx">
       <DependentUpon>QuizEditorWordPair.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="QuizPractise\QuizRecovery.resx">
+    <EmbeddedResource Include="QuizEditor\QuizRecovery.resx">
       <DependentUpon>QuizRecovery.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TermsOfUse.resx">

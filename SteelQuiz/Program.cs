@@ -46,6 +46,7 @@ namespace SteelQuiz
             Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
+            QuizCore.CheckInitDirectories();
             ConfigManager.LoadConfig();
 
             Application.Run(new TermsOfUse());
