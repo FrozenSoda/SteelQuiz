@@ -154,9 +154,9 @@ namespace SteelQuiz.QuizPractise
             this.btn_editInEditor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_editInEditor.Location = new System.Drawing.Point(282, 324);
             this.btn_editInEditor.Name = "btn_editInEditor";
-            this.btn_editInEditor.Size = new System.Drawing.Size(237, 34);
+            this.btn_editInEditor.Size = new System.Drawing.Size(237, 44);
             this.btn_editInEditor.TabIndex = 9;
-            this.btn_editInEditor.Text = "Too much - edit the quiz in the editor";
+            this.btn_editInEditor.Text = "Too much, edit the entire quiz in the editor";
             this.btn_editInEditor.UseVisualStyleBackColor = true;
             // 
             // DontAgreeMenu
@@ -178,7 +178,7 @@ namespace SteelQuiz.QuizPractise
             this.MaximizeBox = false;
             this.Name = "DontAgreeMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Translation disagreement | SteelQuiz";
+            this.Text = "Fix quiz errors | SteelQuiz";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DontAgreeMenu_FormClosing);
             this.ResumeLayout(false);
 
