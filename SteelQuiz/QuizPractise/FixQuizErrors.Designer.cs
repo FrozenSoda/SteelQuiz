@@ -18,7 +18,7 @@
 
 namespace SteelQuiz.QuizPractise
 {
-    partial class DontAgreeMenu
+    partial class FixQuizErrors
     {
         /// <summary>
         /// Required designer variable.
@@ -46,7 +46,7 @@ namespace SteelQuiz.QuizPractise
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DontAgreeMenu));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FixQuizErrors));
             this.lbl_welcome = new System.Windows.Forms.Label();
             this.btn_editWord1 = new System.Windows.Forms.Button();
             this.btn_editWord1synonyms = new System.Windows.Forms.Button();

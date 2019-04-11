@@ -288,7 +288,7 @@ namespace SteelQuiz.QuizPractise
             }
 
             countThisTranslationToProgress = false;
-            var dontAgreeMenu = new DontAgreeMenu(currentWordPairID.GetWordPair());
+            var dontAgreeMenu = new FixQuizErrors(currentWordPairID.GetWordPair());
             if (dontAgreeMenu.ShowDialog() == DialogResult.OK)
             {
                 QuizCore.SaveQuiz();

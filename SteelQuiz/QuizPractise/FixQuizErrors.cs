@@ -29,11 +29,11 @@ using System.Windows.Forms;
 
 namespace SteelQuiz.QuizPractise
 {
-    public partial class DontAgreeMenu : Form
+    public partial class FixQuizErrors : Form
     {
         public WordPair WordPair { get; set; }
 
-        public DontAgreeMenu(WordPair wordPair)
+        public FixQuizErrors(WordPair wordPair)
         {
             InitializeComponent();
             WordPair = wordPair;
