@@ -134,6 +134,8 @@ namespace SteelQuiz
          */ 
         public static CfgQuizzesProgressData ChkUpgradeProgressData(dynamic _cfgQuizzesProgressData)
         {
+#warning Some wordPair IDs appearing multiple times
+
             var cfgQuizzesProgressData = _cfgQuizzesProgressData;
 
             Version fromVer;
@@ -142,7 +144,7 @@ namespace SteelQuiz
             if (fromVer.CompareTo(new Version(MetaData.QUIZ_FILE_FORMAT_VERSION)) >= 0)
             {
                 //conversion not required
-                return JsonConvert.DeserializeObject<CfgQuizzesProgressData>(JsonConvert.SerializeObject(cfgQuizzesProgressData));
+                return JsonConvert.DeserializeObject<CfgQuizzesProgressData>(JsonConvert.SerializeObject(cfgQuizzesProgressData, Formatting.Indented));
             }
 
             var V3 = new Version(2, 0, 0); // implemented wordpair ID system, to avoid storing the whole quiz in the progress file
@@ -177,7 +179,10 @@ namespace SteelQuiz
                     }
                     var newQuizProgData = new QuizProgData(correspondingQuiz);
                     var wordPair = GetQuizWordPairCompat(correspondingQuiz, quizProg.CurrentWordPair);
-                    newQuizProgData.CurrentWordPairID = wordPair.ID;
+                    if (wordPair != null)
+                    {
+                        newQuizProgData.CurrentWordPairID = wordPair.ID;
+                    }
                     newQuizProgData.FullTestInProgress = quizProg.FullTestInProgress;
                     newQuizProgData.MasterNoticeShowed = quizProg.MasterNoticeShowed;
                     newQuizProgData.QuizGUID = quizProg.QuizGUID;
@@ -216,7 +221,7 @@ namespace SteelQuiz
         {
             using (var writer = new StreamWriter(QuizCore.PROGRESS_FILE_PATH, false))
             {
-                writer.Write(JsonConvert.SerializeObject(progressData));
+                writer.Write(JsonConvert.SerializeObject(progressData, Formatting.Indented));
             }
         }
 
@@ -246,7 +251,10 @@ namespace SteelQuiz
 
         private static WordPair GetQuizWordPairCompat(Quiz quiz, dynamic wordPair)
         {
-#warning Error when accessing wordPair.Word1
+            if (wordPair == null)
+            {
+                return null;
+            }
 
             foreach (var wp in quiz.WordPairs)
             {
