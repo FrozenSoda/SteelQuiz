@@ -111,6 +111,12 @@
     </Compile>
     <Compile Include="QuizEditor\UndoRedo\OwnerControlData.cs" />
     <Compile Include="QuizImporter.cs" />
+    <Compile Include="QuizPractise\QuizRecovery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuizPractise\QuizRecovery.Designer.cs">
+      <DependentUpon>QuizRecovery.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuizProgressData\CfgQuizzesProgressData.cs" />
     <Compile Include="QuizProgressData\QuizProgData.cs" />
     <Compile Include="QuizProgressData\WordProgData.cs" />
@@ -160,6 +166,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="QuizEditor\QuizEditorWordPair.resx">
       <DependentUpon>QuizEditorWordPair.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuizPractise\QuizRecovery.resx">
+      <DependentUpon>QuizRecovery.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TermsOfUse.resx">
       <DependentUpon>TermsOfUse.cs</DependentUpon>

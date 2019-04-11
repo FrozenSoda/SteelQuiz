@@ -46,6 +46,7 @@ namespace SteelQuiz.QuizEditor
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QuizEditor));
             this.label2 = new System.Windows.Forms.Label();
             this.cmb_lang1 = new System.Windows.Forms.ComboBox();
@@ -67,6 +68,7 @@ namespace SteelQuiz.QuizEditor
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sfd_quiz = new System.Windows.Forms.SaveFileDialog();
             this.ofd_quiz = new System.Windows.Forms.OpenFileDialog();
+            this.tmr_autoRecoverySave = new System.Windows.Forms.Timer(this.components);
             this.mns_top.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -229,6 +231,10 @@ namespace SteelQuiz.QuizEditor
             this.ofd_quiz.Filter = "SteelQuiz Quizzes | *.steelquiz";
             this.ofd_quiz.Title = "Select a quiz to edit";
             // 
+            // tmr_autoRecoverySave
+            // 
+            this.tmr_autoRecoverySave.Tick += new System.EventHandler(this.tmr_autoRecoverySave_Tick);
+            // 
             // QuizEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -279,5 +285,6 @@ namespace SteelQuiz.QuizEditor
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.SaveFileDialog sfd_quiz;
         private System.Windows.Forms.OpenFileDialog ofd_quiz;
+        private System.Windows.Forms.Timer tmr_autoRecoverySave;
     }
 }

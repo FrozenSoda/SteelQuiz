@@ -57,6 +57,7 @@ namespace SteelQuiz.QuizEditor
         }
 
         private Guid QuizGuid { get; set; } = Guid.NewGuid();
+        private string RecoveryPath { get; set; } = null;
 
         private bool returningToMainMenu = false;
 
@@ -152,6 +153,22 @@ namespace SteelQuiz.QuizEditor
 
         private void LoadQuiz()
         {
+            if (ChangedSinceLastSave)
+            {
+                var msg = MessageBox.Show("You have unsaved changes. Save before loading a new quiz?", "SteelQuiz", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (msg == DialogResult.Yes)
+                {
+                    if (!SaveQuiz())
+                    {
+                        return;
+                    }
+                }
+                else if (msg == DialogResult.Cancel)
+                {
+                    return;
+                }
+            }
+
             var ofd = ofd_quiz.ShowDialog();
             if (ofd == DialogResult.OK)
             {
@@ -307,40 +324,49 @@ namespace SteelQuiz.QuizEditor
             }
         }
 
-        private bool SaveQuiz(bool saveAs = false)
+        private bool SaveQuiz(bool saveAs = false, string customPath = null)
         {
-            if (QuizPath == null || saveAs)
+            string path = null;
+            if (customPath == null)
             {
-                sfd_quiz.InitialDirectory = QuizCore.QUIZ_FOLDER;
-                int untitledCounter = 1;
-                sfd_quiz.FileName = $"Untitled{ untitledCounter }.steelquiz";
-                while (File.Exists(Path.Combine(QuizCore.QUIZ_FOLDER, sfd_quiz.FileName)))
+                if (QuizPath == null || saveAs)
                 {
-                    ++untitledCounter;
-                    sfd_quiz.FileName = $"Untitled{ untitledCounter }.steelquiz";
-                }
+                    sfd_quiz.InitialDirectory = QuizCore.QUIZ_FOLDER;
+                    int untitledCounter = 1;
+                    path = $"Untitled{ untitledCounter }.steelquiz";
+                    while (File.Exists(Path.Combine(QuizCore.QUIZ_FOLDER, path)))
+                    {
+                        ++untitledCounter;
+                        path = $"Untitled{ untitledCounter }.steelquiz";
+                    }
 
-                var sfd = sfd_quiz.ShowDialog();
-                if (sfd == DialogResult.OK)
-                {
-                    QuizPath = sfd_quiz.FileName;
+                    var sfd = sfd_quiz.ShowDialog();
+                    if (sfd != DialogResult.OK)
+                    {
+                        return false;
+                    }
                 }
-                else
-                {
-                    return false;
-                }
+            }
+            else
+            {
+                path = customPath;
             }
 
             UseWaitCursor = true;
 
             var quiz = ConstructQuiz();
-            using (var writer = new StreamWriter(QuizPath, false))
+            using (var writer = new StreamWriter(path, false))
             {
                 writer.Write(JsonConvert.SerializeObject(quiz, Formatting.Indented));
             }
 
+            if (customPath == null)
+            {
+                QuizPath = path;
+                ChangedSinceLastSave = false;
+            }
+
             UseWaitCursor = false;
-            ChangedSinceLastSave = false;
             return true;
         }
 
@@ -399,7 +425,7 @@ namespace SteelQuiz.QuizEditor
         {
             if (ChangedSinceLastSave)
             {
-                var msg = MessageBox.Show("You have unsaved changes. Save before creating a new?", "SteelQuiz", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                var msg = MessageBox.Show("You have unsaved changes. Save before creating a new quiz?", "SteelQuiz", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (msg == DialogResult.Yes)
                 {
                     if (!SaveQuiz())
@@ -441,6 +467,40 @@ namespace SteelQuiz.QuizEditor
                         break;
                 }
             }
+        }
+
+        private void UpdateRecoverySave()
+        {
+            int untitledCounter = 1;
+            string recoveryFilePath;
+            if (QuizPath == null)
+            {
+                recoveryFilePath = $"{Path.GetFileNameWithoutExtension(QuizPath)}.steelquiz";
+            }
+            else
+            {
+                recoveryFilePath = $"Untitled{untitledCounter.ToString()}.steelquiz";
+            }
+
+            while (File.Exists(recoveryFilePath))
+            {
+                ++untitledCounter;
+                if (QuizPath == null)
+                {
+                    recoveryFilePath = $"{Path.GetFileNameWithoutExtension(QuizPath)}_{ untitledCounter.ToString() }.steelquiz";
+                }
+                else
+                {
+                    recoveryFilePath = $"Untitled{untitledCounter.ToString()}.steelquiz";
+                }
+            }
+
+            SaveQuiz(false, recoveryFilePath);
+        }
+
+        private void tmr_autoRecoverySave_Tick(object sender, EventArgs e)
+        {
+            UpdateRecoverySave();
         }
     }
 }

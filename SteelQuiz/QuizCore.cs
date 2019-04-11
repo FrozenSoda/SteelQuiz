@@ -35,6 +35,7 @@ namespace SteelQuiz
         public static readonly string APP_CFG_FOLDER = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SteelQuiz");
         public static readonly string BACKUP_FOLDER = Path.Combine(APP_CFG_FOLDER, "Backups");
         public static readonly string QUIZ_FOLDER = Path.Combine(APP_CFG_FOLDER, "Quizzes");
+        public static readonly string QUIZ_RECOVERY_FOLDER = Path.Combine(QUIZ_FOLDER, "Recovery");
         public static readonly string QUIZ_BACKUP_FOLDER = Path.Combine(QUIZ_FOLDER, "Backups");
         public static readonly string PROGRESS_FILE_PATH = Path.Combine(APP_CFG_FOLDER, "QuizProgress.json");
 
