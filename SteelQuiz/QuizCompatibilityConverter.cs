@@ -134,7 +134,7 @@ namespace SteelQuiz
          */ 
         public static CfgQuizzesProgressData ChkUpgradeProgressData(dynamic _cfgQuizzesProgressData)
         {
-#warning Some wordPair IDs appearing multiple times
+#warning WordPair ID duplicates after conversion
 
             var cfgQuizzesProgressData = _cfgQuizzesProgressData;
 
