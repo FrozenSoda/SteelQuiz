@@ -134,8 +134,6 @@ namespace SteelQuiz
          */ 
         public static CfgQuizzesProgressData ChkUpgradeProgressData(dynamic _cfgQuizzesProgressData)
         {
-#warning WordPair ID duplicates after conversion
-
             var cfgQuizzesProgressData = _cfgQuizzesProgressData;
 
             Version fromVer;
@@ -178,7 +176,7 @@ namespace SteelQuiz
                     {
                         continue;
                     }
-                    var newQuizProgData = new QuizProgData(correspondingQuiz);
+                    var newQuizProgData = new QuizProgData(correspondingQuiz, false);
                     var wordPair = GetQuizWordPairCompat(correspondingQuiz, quizProg.CurrentWordPair);
                     if (wordPair != null)
                     {
@@ -260,8 +258,8 @@ namespace SteelQuiz
 
             foreach (var wp in quiz.WordPairs)
             {
-                if (wp.Word1 == wordPair.Word1.ToObject<string>()
-                    && wp.Word2 == wordPair.Word2.ToObject<string>()
+                if (wp.Word1 == wordPair.Word1.ToString()
+                    && wp.Word2 == wordPair.Word2.ToString()
                     &&
                         ((wp.Word1Synonyms == null && wordPair.Word1Synonyms == null) ||
                         wp.Word1Synonyms.SequenceEqual((List<string>)wordPair.Word1Synonyms.ToObject<List<string>>()))

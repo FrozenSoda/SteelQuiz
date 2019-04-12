@@ -43,7 +43,7 @@ namespace SteelQuiz.QuizProgressData
 
         public bool FullTestInProgress { get; set; } = false;
 
-        public QuizProgData(Quiz quiz)
+        public QuizProgData(Quiz quiz, bool initWordProgDatas = true)
         {
             if (quiz == null)
             {
@@ -55,20 +55,23 @@ namespace SteelQuiz.QuizProgressData
                 WordProgDatas = new List<WordProgData>();
             }
 
-            foreach (var wordPair in quiz.WordPairs)
+            if (initWordProgDatas)
             {
-                bool found = false;
-                foreach (var wordProgData in WordProgDatas)
+                foreach (var wordPair in quiz.WordPairs)
                 {
-                    if (wordProgData.WordPairID == wordPair.ID)
+                    bool found = false;
+                    foreach (var wordProgData in WordProgDatas)
                     {
-                        found = true;
+                        if (wordProgData.WordPairID == wordPair.ID)
+                        {
+                            found = true;
+                        }
                     }
-                }
 
-                if (!found)
-                {
-                    WordProgDatas.Add(new WordProgData(wordPair.ID));
+                    if (!found)
+                    {
+                        WordProgDatas.Add(new WordProgData(wordPair.ID));
+                    }
                 }
             }
 
