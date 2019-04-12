@@ -135,12 +135,12 @@ namespace SteelQuiz
             Hide();
         }
 
-        public void OpenQuizEditor(Quiz quiz = null)
+        public void OpenQuizEditor(Quiz quiz = null, string quizPath = null)
         {
             var quizEditor = new QuizEditor.QuizEditor();
             if (quiz != null)
             {
-                quizEditor.LoadQuiz(quiz);
+                quizEditor.LoadQuiz(quiz, quizPath);
             }
             quizEditor.Show();
             Hide();

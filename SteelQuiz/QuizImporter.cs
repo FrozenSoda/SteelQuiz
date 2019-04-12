@@ -156,7 +156,8 @@ namespace SteelQuiz
                         {
                             if (foundStr == "true")
                             {
-                                wordPairs.ChkAddWordPair(word1, word2, StringComp.Rules.IgnoreCapitalization | StringComp.Rules.IgnoreExclamation);
+                                wordPairs.ChkAddWordPair(word1, word2,
+                                    StringComp.Rules.None | StringComp.Rules.IgnoreCapitalization | StringComp.Rules.IgnoreExclamation);
                                 word2 = "";
                             }
                             inWordChk = false;
@@ -236,7 +237,8 @@ namespace SteelQuiz
                         {
                             word2 = FixString(foundStr);
                             //wordPairs.Add(new WordPair(word1, word2, WordPair.Rules.IgnoreCapitalization | WordPair.Rules.IgnoreExclamation));
-                            wordPairs.ChkAddWordPair(word1, word2, StringComp.Rules.IgnoreCapitalization | StringComp.Rules.IgnoreExclamation);
+                            wordPairs.ChkAddWordPair(word1, word2,
+                                StringComp.Rules.None | StringComp.Rules.IgnoreCapitalization | StringComp.Rules.IgnoreExclamation);
                             word1 = "";
                             word2 = "";
                             inWord2 = false;

@@ -60,6 +60,7 @@ namespace SteelQuiz
             this.label4 = new System.Windows.Forms.Label();
             this.txt_quizName = new System.Windows.Forms.TextBox();
             this.btn_urlHowToFind = new System.Windows.Forms.Button();
+            this.lbl_studentl_supportedExercises = new System.Windows.Forms.Label();
             this.flp_siteRdo.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -180,11 +181,23 @@ namespace SteelQuiz
             this.btn_urlHowToFind.UseVisualStyleBackColor = true;
             this.btn_urlHowToFind.Click += new System.EventHandler(this.btn_urlHowToFind_Click);
             // 
+            // lbl_studentl_supportedExercises
+            // 
+            this.lbl_studentl_supportedExercises.AutoSize = true;
+            this.lbl_studentl_supportedExercises.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_studentl_supportedExercises.Location = new System.Drawing.Point(12, 208);
+            this.lbl_studentl_supportedExercises.Name = "lbl_studentl_supportedExercises";
+            this.lbl_studentl_supportedExercises.Size = new System.Drawing.Size(446, 80);
+            this.lbl_studentl_supportedExercises.TabIndex = 9;
+            this.lbl_studentl_supportedExercises.Text = "Supported exercises:\r\n- Spelling\r\n- Vocabulary bank\r\n\r\nTrying to import an unsupp" +
+    "orted exercise type will probably cause an error";
+            // 
             // ImportQuizFromSite
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lbl_studentl_supportedExercises);
             this.Controls.Add(this.btn_urlHowToFind);
             this.Controls.Add(this.txt_quizName);
             this.Controls.Add(this.label4);
@@ -225,5 +238,6 @@ namespace SteelQuiz
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txt_quizName;
         private System.Windows.Forms.Button btn_urlHowToFind;
+        private System.Windows.Forms.Label lbl_studentl_supportedExercises;
     }
 }

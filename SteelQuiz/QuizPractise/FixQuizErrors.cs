@@ -108,7 +108,7 @@ namespace SteelQuiz.QuizPractise
         {
             Parent.ExitAppOnClose = false;
             Program.frmWelcome.Show();
-            Program.frmWelcome.OpenQuizEditor(QuizCore.Quiz);
+            Program.frmWelcome.OpenQuizEditor(QuizCore.Quiz, QuizCore.QuizPath);
             DialogResult = DialogResult.Abort;
         }
     }

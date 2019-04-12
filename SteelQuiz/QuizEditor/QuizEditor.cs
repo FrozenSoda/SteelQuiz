@@ -82,7 +82,7 @@ namespace SteelQuiz.QuizEditor
                 if (quizRecovery.ShowDialog() == DialogResult.OK)
                 {
                     QuizRecoveryData = quizRecovery.QuizRecoveryData;
-                    QuizPath = quizRecovery.QuizRecoveryData.QuizPath;
+                    //QuizPath = quizRecovery.QuizRecoveryData.QuizPath;
                     LoadQuiz(quizRecovery.QuizRecoveryData.Quiz, quizRecovery.QuizRecoveryData.QuizPath, true);
                     ChangedSinceLastSave = true;
                 }
