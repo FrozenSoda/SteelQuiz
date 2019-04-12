@@ -288,6 +288,7 @@ namespace SteelQuiz.QuizPractise
                 "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (msg == DialogResult.No)
             {
+                lbl_word2.Focus();
                 return;
             }
 
