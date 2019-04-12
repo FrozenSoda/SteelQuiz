@@ -162,7 +162,8 @@ namespace SteelQuiz
                     if (correspondingQuiz == null && !acceptQuizProgRemovals)
                     {
                         var msg = MessageBox.Show("Some quizzes referenced by the progress data could not be found. Remove these quizzes from the progress data? (required)\r\n\r\n" +
-                            "If you select No, SteelQuiz will exit as the conversion cannot proceed", "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                            "If you have quizzes whose progress data you want to keep, please select No and place them in %appdata%\\SteelQuiz\\Quizzes. " +
+                            "\r\nIf you select No, SteelQuiz will exit as the conversion cannot proceed", "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                         if (msg == DialogResult.Yes)
                         {
                             acceptQuizProgRemovals = true;
@@ -184,7 +185,8 @@ namespace SteelQuiz
                         newQuizProgData.CurrentWordPairID = wordPair.ID;
                     }
                     newQuizProgData.FullTestInProgress = quizProg.FullTestInProgress;
-                    newQuizProgData.MasterNoticeShowed = quizProg.MasterNoticeShowed;
+                    //newQuizProgData.MasterNoticeShowed = quizProg.MasterNoticeShowed;
+                    newQuizProgData.MasterNoticeShowed = false; // should reset after each application restart, so set it to false
                     newQuizProgData.QuizGUID = quizProg.QuizGUID;
 
                     foreach (var wpData in quizProg.WordProgDatas)
