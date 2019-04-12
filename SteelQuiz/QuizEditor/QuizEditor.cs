@@ -83,7 +83,7 @@ namespace SteelQuiz.QuizEditor
                 {
                     QuizRecoveryData = quizRecovery.QuizRecoveryData;
                     QuizPath = quizRecovery.QuizRecoveryData.QuizPath;
-                    LoadQuiz(quizRecovery.QuizRecoveryData.Quiz, true);
+                    LoadQuiz(quizRecovery.QuizRecoveryData.Quiz, quizRecovery.QuizRecoveryData.QuizPath, true);
                     ChangedSinceLastSave = true;
                 }
             }
@@ -169,7 +169,7 @@ namespace SteelQuiz.QuizEditor
             return quiz;
         }
 
-        public void LoadQuiz(Quiz quiz = null, bool fromRecovery = false)
+        public void LoadQuiz(Quiz quiz = null, string quizPath = null, bool fromRecovery = false)
         {
             if (ChangedSinceLastSave)
             {
@@ -208,6 +208,11 @@ namespace SteelQuiz.QuizEditor
                 {
                     quiz = JsonConvert.DeserializeObject<Quiz>(reader.ReadToEnd());
                 }
+            }
+
+            if (quizPath != null)
+            {
+                QuizPath = quizPath;
             }
 
             SetWordPairs(quiz.WordPairs.Count + 2);
