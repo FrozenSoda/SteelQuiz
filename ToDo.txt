@@ -1,8 +1,4 @@
-- Word sounds from Studentlitteratur should be played
-- DONE###############Quiz backups should be placed in separate backup folder
-- Quiz progress should be backupped before upgrade
-- Move config backup to ConfigManager instead of QuizCore
 - Better response after full test
 - You should be prompted to write both synonyms of a word where synonyms are added
 
-- better conversion messages
+- register file associations for .steelquiz
