@@ -32,6 +32,7 @@ namespace SteelQuiz.QuizPractise
     public partial class InQuiz : Form
     {
         public bool ExitAppOnClose { get; set; } = true;
+
         private bool onCloseEvent = true;
         private ulong? currentWordPairID = null;
         private string currentInput = "";
