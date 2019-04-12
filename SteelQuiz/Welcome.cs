@@ -82,30 +82,37 @@ namespace SteelQuiz
             ofd_loadQuiz.InitialDirectory = QuizCore.QUIZ_FOLDER;
             if (ofd_loadQuiz.ShowDialog() == DialogResult.OK)
             {
+                /*
                 if (Path.GetDirectoryName(ofd_loadQuiz.FileName) != QuizCore.QUIZ_FOLDER)
                 {
                     MessageBox.Show("Quizzes can only be opened from %appdata%\\Quizzes", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
+                */
 
-                try
+                LoadQuiz(ofd_loadQuiz.FileName);
+            }
+        }
+
+        private void LoadQuiz(string quizPath)
+        {
+            try
+            {
+                var load = QuizCore.Load(quizPath);
+                if (!load)
                 {
-                    var load = QuizCore.Load(ofd_loadQuiz.FileName);
-                    if (!load)
-                    {
-                        return;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("The quiz file could not be loaded:\r\n\r\n" + ex.ToString(), "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-
-                Program.frmInQuiz = new InQuiz();
-                Program.frmInQuiz.Show();
-                Hide();
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("The quiz file could not be loaded:\r\n\r\n" + ex.ToString(), "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            Program.frmInQuiz = new InQuiz();
+            Program.frmInQuiz.Show();
+            Hide();
         }
 
         private void Welcome_FormClosing(object sender, FormClosingEventArgs e)

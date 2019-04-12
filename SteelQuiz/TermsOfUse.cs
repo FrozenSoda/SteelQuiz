@@ -16,11 +16,13 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using SteelQuiz.QuizPractise;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -58,8 +60,35 @@ namespace SteelQuiz
         private void OpenApplication()
         {
             Program.frmWelcome = new Welcome();
-            Program.frmWelcome.Show();
+            if (Program.Args.Length > 0 && File.Exists(Program.Args[0]) && Program.Args[0].EndsWith(".steelquiz"))
+            {
+                LoadQuiz(Program.Args[0]);
+            }
+            else
+            {
+                Program.frmWelcome.Show();
+            }
             Hide();
+        }
+
+        private void LoadQuiz(string quizPath)
+        {
+            try
+            {
+                var load = QuizCore.Load(quizPath);
+                if (!load)
+                {
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("The quiz file could not be loaded:\r\n\r\n" + ex.ToString(), "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            Program.frmInQuiz = new InQuiz(false);
+            Program.frmInQuiz.Show();
         }
 
         private void timer_agree_unlock_Tick(object sender, EventArgs e)

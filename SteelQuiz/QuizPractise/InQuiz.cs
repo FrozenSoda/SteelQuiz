@@ -41,12 +41,19 @@ namespace SteelQuiz.QuizPractise
         private bool countThisTranslationToProgress = true;
         private bool showingW1synonyms = false;
 
-        public InQuiz()
+        public InQuiz(bool welcomeLocationInitialized = true)
         {
             InitializeComponent();
-            this.Location = new Point(Program.frmWelcome.Location.X + (Program.frmWelcome.Size.Width / 2) - (this.Size.Width / 2),
-                              Program.frmWelcome.Location.Y + (Program.frmWelcome.Size.Height / 2) - (this.Size.Height / 2)
-                            );
+            if (welcomeLocationInitialized)
+            {
+                this.Location = new Point(Program.frmWelcome.Location.X + (Program.frmWelcome.Size.Width / 2) - (this.Size.Width / 2),
+                                  Program.frmWelcome.Location.Y + (Program.frmWelcome.Size.Height / 2) - (this.Size.Height / 2)
+                                );
+            }
+            else
+            {
+                this.StartPosition = FormStartPosition.CenterScreen;
+            }
             lbl_lang1.Text = QuizCore.Quiz.Language1;
             lbl_lang2.Text = QuizCore.Quiz.Language2;
             this.Text += $" | v{Application.ProductVersion}";

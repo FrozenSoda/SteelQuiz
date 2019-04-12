@@ -53,6 +53,19 @@ namespace SteelQuiz
                 throw new FileNotFoundException("The quiz file cannot be found");
             }
 
+            if (Path.GetDirectoryName(quizPath) != QUIZ_FOLDER)
+            {
+                var msg = MessageBox.Show($"Import quiz '{quizPath}'?", "SteelQuiz", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (msg == DialogResult.OK)
+                {
+                    return ImportLocalQuiz(quizPath);
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
             dynamic quiz;
             using (var reader = new StreamReader(quizPath))
             {
@@ -91,6 +104,33 @@ namespace SteelQuiz
             }
 
             return false;
+        }
+
+        public static bool ImportLocalQuiz(string quizPath)
+        {
+            string importedPath;
+            int untitledCounter = 1;
+            importedPath = Path.Combine(QuizCore.QUIZ_FOLDER, $"{Path.GetFileNameWithoutExtension(quizPath)}.steelquiz");
+            while (File.Exists(importedPath))
+            {
+                ++untitledCounter;
+                importedPath = Path.Combine(QuizCore.QUIZ_FOLDER,
+                        $"{Path.GetFileNameWithoutExtension(quizPath)}_{ untitledCounter.ToString() }.steelquiz");
+            }
+
+            try
+            {
+                File.Copy(quizPath, importedPath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while copying the quiz file:\r\n\r\n{ex.ToString()}", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            MessageBox.Show($"Success! The quiz has been imported to '{importedPath}'", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            return Load(importedPath);
         }
 
         public static bool CheckInitDirectories()

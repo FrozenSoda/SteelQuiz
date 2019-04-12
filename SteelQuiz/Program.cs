@@ -28,6 +28,8 @@ namespace SteelQuiz
 {
     static class Program
     {
+        public static string[] Args { get; set; }
+
         public static Welcome frmWelcome = null;
         public static InQuiz frmInQuiz = null;
 
@@ -37,10 +39,12 @@ namespace SteelQuiz
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            Args = args;
 
             Application.ThreadException += Application_ThreadException;
             Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
