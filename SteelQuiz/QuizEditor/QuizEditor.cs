@@ -169,7 +169,7 @@ namespace SteelQuiz.QuizEditor
             return quiz;
         }
 
-        private void LoadQuiz(Quiz quiz = null, bool fromRecovery = false)
+        public void LoadQuiz(Quiz quiz = null, bool fromRecovery = false)
         {
             if (ChangedSinceLastSave)
             {
@@ -395,6 +395,10 @@ namespace SteelQuiz.QuizEditor
                     {
                         return false;
                     }
+                }
+                else
+                {
+                    path = QuizPath;
                 }
             }
             else

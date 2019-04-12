@@ -32,11 +32,13 @@ namespace SteelQuiz.QuizPractise
     public partial class FixQuizErrors : Form
     {
         public WordPair WordPair { get; set; }
+        private new InQuiz Parent { get; set; }
 
-        public FixQuizErrors(WordPair wordPair)
+        public FixQuizErrors(InQuiz parent, WordPair wordPair)
         {
             InitializeComponent();
             WordPair = wordPair;
+            Parent = parent;
 
             UpdateWordLabels();
         }
@@ -96,7 +98,18 @@ namespace SteelQuiz.QuizPractise
 
         private void DontAgreeMenu_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DialogResult = DialogResult.OK;
+            if (DialogResult == DialogResult.Cancel)
+            {
+                DialogResult = DialogResult.OK;
+            }
+        }
+
+        private void btn_editInEditor_Click(object sender, EventArgs e)
+        {
+            Parent.ExitAppOnClose = false;
+            Program.frmWelcome.Show();
+            Program.frmWelcome.OpenQuizEditor(QuizCore.Quiz);
+            DialogResult = DialogResult.Abort;
         }
     }
 }

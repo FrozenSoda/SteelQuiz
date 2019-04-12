@@ -68,7 +68,7 @@ namespace SteelQuiz
                         + "\r\n\r\nProceed with conversion?", "Quiz conversion required - SteelQuiz",
                         MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         */
-                    var msg = MessageBox.Show("Quiz conversion required. A backup will be created automatically. Convert now?",
+                    var msg = MessageBox.Show("Quiz conversion required due to updated file format. A backup will be created automatically. Convert now?",
                     "Quiz conversion required - SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (msg == DialogResult.No)
                     {

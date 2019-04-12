@@ -31,8 +31,8 @@ namespace SteelQuiz.QuizPractise
 {
     public partial class InQuiz : Form
     {
+        public bool ExitAppOnClose { get; set; } = true;
         private bool onCloseEvent = true;
-
         private ulong? currentWordPairID = null;
         private string currentInput = "";
         private WordPair.TranslationMode translationMode = WordPair.TranslationMode.L1_to_L2;
@@ -188,7 +188,11 @@ namespace SteelQuiz.QuizPractise
 
             QuizCore.SaveQuizProgress();
             ConfigManager.SaveConfig();
-            Application.Exit();
+
+            if (ExitAppOnClose)
+            {
+                Application.Exit();
+            }
         }
 
         private void btn_switchTestMode_Click(object sender, EventArgs e)
@@ -288,8 +292,9 @@ namespace SteelQuiz.QuizPractise
             }
 
             countThisTranslationToProgress = false;
-            var dontAgreeMenu = new FixQuizErrors(currentWordPairID.GetWordPair());
-            if (dontAgreeMenu.ShowDialog() == DialogResult.OK)
+            var fixMenu = new FixQuizErrors(this, currentWordPairID.GetWordPair());
+            var result = fixMenu.ShowDialog();
+            if (result == DialogResult.OK)
             {
                 QuizCore.SaveQuiz();
 
@@ -301,6 +306,12 @@ namespace SteelQuiz.QuizPractise
                 {
                     lbl_word1.Text = currentWordPairID.GetWordPair().Word2;
                 }
+            }
+            else if (result == DialogResult.Abort)
+            {
+                Close();
+                Program.frmInQuiz.Dispose();
+                Program.frmInQuiz = null;
             }
             lbl_word2.Focus();
         }

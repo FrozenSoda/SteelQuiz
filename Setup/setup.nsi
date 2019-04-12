@@ -9,7 +9,7 @@
 
 ;--------------------------------
 ;Add version info
-!define PRODUCT_VERSION "0.4.0.2"
+!define PRODUCT_VERSION "0.4.0.3"
 
 VIProductVersion "${PRODUCT_VERSION}"
 VIFileVersion "${PRODUCT_VERSION}"

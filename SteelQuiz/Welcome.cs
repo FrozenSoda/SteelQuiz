@@ -27,6 +27,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AutoUpdaterDotNET;
+using SteelQuiz.QuizData;
 using SteelQuiz.QuizPractise;
 
 namespace SteelQuiz
@@ -134,11 +135,20 @@ namespace SteelQuiz
             Hide();
         }
 
-        private void btn_createQuiz_Click(object sender, EventArgs e)
+        public void OpenQuizEditor(Quiz quiz = null)
         {
             var quizEditor = new QuizEditor.QuizEditor();
+            if (quiz != null)
+            {
+                quizEditor.LoadQuiz(quiz);
+            }
             quizEditor.Show();
             Hide();
+        }
+
+        private void btn_createQuiz_Click(object sender, EventArgs e)
+        {
+            OpenQuizEditor();
         }
     }
 }

@@ -69,6 +69,7 @@ namespace SteelQuiz.QuizEditor
             this.sfd_quiz = new System.Windows.Forms.SaveFileDialog();
             this.ofd_quiz = new System.Windows.Forms.OpenFileDialog();
             this.tmr_autoRecoverySave = new System.Windows.Forms.Timer(this.components);
+            this.sorryThereIsNoneYetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mns_top.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -217,6 +218,8 @@ namespace SteelQuiz.QuizEditor
             // 
             // helpToolStripMenuItem
             // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sorryThereIsNoneYetToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
@@ -236,6 +239,12 @@ namespace SteelQuiz.QuizEditor
             this.tmr_autoRecoverySave.Enabled = true;
             this.tmr_autoRecoverySave.Interval = 10000;
             this.tmr_autoRecoverySave.Tick += new System.EventHandler(this.tmr_autoRecoverySave_Tick);
+            // 
+            // sorryThereIsNoneYetToolStripMenuItem
+            // 
+            this.sorryThereIsNoneYetToolStripMenuItem.Name = "sorryThereIsNoneYetToolStripMenuItem";
+            this.sorryThereIsNoneYetToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.sorryThereIsNoneYetToolStripMenuItem.Text = "Sorry, there is none yet";
             // 
             // QuizEditor
             // 
@@ -288,5 +297,6 @@ namespace SteelQuiz.QuizEditor
         private System.Windows.Forms.SaveFileDialog sfd_quiz;
         private System.Windows.Forms.OpenFileDialog ofd_quiz;
         private System.Windows.Forms.Timer tmr_autoRecoverySave;
+        private System.Windows.Forms.ToolStripMenuItem sorryThereIsNoneYetToolStripMenuItem;
     }
 }
