@@ -289,16 +289,16 @@ namespace SteelQuiz.QuizEditor
 
             DeleteRecovery();
 
-            if (returningToMainMenu)
+            if (--Program.QuizEditorsOpen == 0)
             {
-                if (--Program.QuizEditorsOpen == 0)
+                if (returningToMainMenu)
                 {
                     Program.frmWelcome.Show();
                 }
-            }
-            else
-            {
-                Application.Exit();
+                else
+                {
+                    Application.Exit();
+                }
             }
         }
 
