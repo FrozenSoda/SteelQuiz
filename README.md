@@ -31,5 +31,10 @@ SteelQuiz automatically searches for, and offers to download and install updates
 - **Hard disk space:** Barely anything, a few dozen megabytes at least
 - **Runtime:** Microsoft .NET Framework 4.6.1
 
+### Development tools
+- Microsoft Visual Studio Community 2017
+- Nullsoft Scriptable Install System v3.04
+
+
 ### Contact
 **E-mail:** steel9apps [at] gmail.com
