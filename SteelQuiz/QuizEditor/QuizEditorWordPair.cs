@@ -104,12 +104,15 @@ namespace SteelQuiz.QuizEditor
                 return;
             }
 
-            QEOwner.UndoStack.Push(new UndoRedoFuncPair(
-                new Func<object>[] { txt_word1.ChangeText(txt_word1_text_old, () => { ignore_txt_word_change = true; }) },
-                new Func<object>[] { txt_word1.ChangeText(txt_word1.Text, () => { ignore_txt_word_change = true; }) },
-                "Change word",
-                new OwnerControlData(this, this.Parent)));
-            QEOwner.UpdateUndoRedoTooltips();
+            if (QEOwner.UpdateUndoRedoStacks)
+            {
+                QEOwner.UndoStack.Push(new UndoRedoFuncPair(
+                    new Func<object>[] { txt_word1.ChangeText(txt_word1_text_old, () => { ignore_txt_word_change = true; }) },
+                    new Func<object>[] { txt_word1.ChangeText(txt_word1.Text, () => { ignore_txt_word_change = true; }) },
+                    "Change word",
+                    new OwnerControlData(this, this.Parent)));
+                QEOwner.UpdateUndoRedoTooltips();
+            }
             QEOwner.ChangedSinceLastSave = true;
 
             txt_word1_text_old = txt_word1.Text;
@@ -128,12 +131,15 @@ namespace SteelQuiz.QuizEditor
                 return;
             }
 
-            QEOwner.UndoStack.Push(new UndoRedoFuncPair(
+            if (QEOwner.UpdateUndoRedoStacks)
+            {
+                QEOwner.UndoStack.Push(new UndoRedoFuncPair(
                 new Func<object>[] { txt_word2.ChangeText(txt_word2_text_old, () => { ignore_txt_word_change = true; }) },
                 new Func<object>[] { txt_word2.ChangeText(txt_word2.Text, () => { ignore_txt_word_change = true; }) },
                 "Change word",
                 new OwnerControlData(this, this.Parent)));
-            QEOwner.UpdateUndoRedoTooltips();
+                QEOwner.UpdateUndoRedoTooltips();
+            }
             QEOwner.ChangedSinceLastSave = true;
 
             txt_word2_text_old = txt_word2.Text;
@@ -147,13 +153,16 @@ namespace SteelQuiz.QuizEditor
                 return;
             }
 
-            QEOwner.UndoStack.Push(new UndoRedoFuncPair(
+            if (QEOwner.UpdateUndoRedoStacks)
+            {
+                QEOwner.UndoStack.Push(new UndoRedoFuncPair(
                 new Func<object>[] { chk_ignoreCapitalization.SetChecked(!chk_ignoreCapitalization.Checked, () => { ignore_chk_ignoreCapitalization_change = true; }) },
                 new Func<object>[] { chk_ignoreCapitalization.SetChecked(chk_ignoreCapitalization.Checked, () => { ignore_chk_ignoreCapitalization_change = true; }) },
                 "Checkbox switch",
                 new OwnerControlData(this, this.Parent)
                 ));
-            QEOwner.UpdateUndoRedoTooltips();
+                QEOwner.UpdateUndoRedoTooltips();
+            }
             QEOwner.ChangedSinceLastSave = true;
         }
 
@@ -165,13 +174,16 @@ namespace SteelQuiz.QuizEditor
                 return;
             }
 
-            QEOwner.UndoStack.Push(new UndoRedoFuncPair(
+            if (QEOwner.UpdateUndoRedoStacks)
+            {
+                QEOwner.UndoStack.Push(new UndoRedoFuncPair(
                 new Func<object>[] { chk_ignoreExcl.SetChecked(!chk_ignoreExcl.Checked, () => { ignore_chk_ignoreExcl_change = true; }) },
                 new Func<object>[] { chk_ignoreExcl.SetChecked(chk_ignoreExcl.Checked, () => { ignore_chk_ignoreExcl_change = true; }) },
                 "Checkbox switch",
                 new OwnerControlData(this, this.Parent)
                 ));
-            QEOwner.UpdateUndoRedoTooltips();
+                QEOwner.UpdateUndoRedoTooltips();
+            }
             QEOwner.ChangedSinceLastSave = true;
         }
 

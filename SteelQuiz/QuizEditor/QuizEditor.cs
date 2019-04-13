@@ -39,6 +39,8 @@ namespace SteelQuiz.QuizEditor
         public Stack<UndoRedoFuncPair> UndoStack { get; set; } = new Stack<UndoRedoFuncPair>();
         public Stack<UndoRedoFuncPair> RedoStack { get; set; } = new Stack<UndoRedoFuncPair>();
 
+        public bool UpdateUndoRedoStacks { get; private set; } = true;
+
         public bool ChangedSinceLastSave { get; set; } = false;
 
         private string _quizPath = null;
@@ -187,6 +189,8 @@ namespace SteelQuiz.QuizEditor
                 }
             }
 
+            UpdateUndoRedoStacks = false;
+
             if (!fromRecovery)
             {
                 DeleteRecovery();
@@ -239,6 +243,10 @@ namespace SteelQuiz.QuizEditor
                 QuizRecoveryData = new QuizRecoveryData(QuizPath);
                 ChangedSinceLastSave = false;
             }
+
+            UndoStack.Clear();
+            RedoStack.Clear();
+            UpdateUndoRedoStacks = true;
         }
 
         private void DeleteRecovery()
@@ -296,6 +304,11 @@ namespace SteelQuiz.QuizEditor
 
         public void Undo()
         {
+            if (!UpdateUndoRedoStacks)
+            {
+                return;
+            }
+
             if (UndoStack.Count > 0)
             {
                 var peek = UndoStack.Peek();
@@ -338,6 +351,11 @@ namespace SteelQuiz.QuizEditor
 
         public void Redo()
         {
+            if (!UpdateUndoRedoStacks)
+            {
+                return;
+            }
+
             if (RedoStack.Count > 0)
             {
                 var peek = RedoStack.Peek();

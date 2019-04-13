@@ -8,8 +8,9 @@
   !include "MUI2.nsh"
 
 ;--------------------------------
+
 ;Add version info
-!define PRODUCT_VERSION "0.4.1.0"
+!define PRODUCT_VERSION "0.5.0.0"
 
 VIProductVersion "${PRODUCT_VERSION}"
 VIFileVersion "${PRODUCT_VERSION}"
@@ -108,7 +109,6 @@ SectionEnd
 ;Uninstaller Section
 
 Section "Uninstall"
-
   ;Delete app shortcut
   Delete "$SMPROGRAMS\SteelQuiz\SteelQuiz.lnk"
   
