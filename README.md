@@ -17,6 +17,7 @@ Is there a spelling error in the quiz? Or do you want to add a synonym to a word
 
 ### Automatic updates
 SteelQuiz automatically searches for, and offers to download and install updates. You only need to click one button to update. It is recommended to always install all available updates, as they often contain important bug fixes and improvements.
+**Note:** SteelQuiz might automatically install important updates without asking, if the update is considered especially important.
 
 ### Notes
 - As of now, SteelQuiz will accept any synonym added to the correct translation of a word as the answer when you are asked for the translation. This means that you might not learn all the synonyms to a word.
