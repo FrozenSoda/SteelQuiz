@@ -200,7 +200,7 @@ namespace SteelQuiz.QuizPractise
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "EditWordSynonyms";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "EditWordSynonyms";
+            this.Text = "Edit word synonyms | SteelQuiz";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EditWordSynonyms_FormClosing);
             this.SizeChanged += new System.EventHandler(this.EditWordSynonyms_SizeChanged);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EditWordSynonyms_KeyDown);
