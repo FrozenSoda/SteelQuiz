@@ -28,7 +28,7 @@ SteelQuiz automatically searches for, and offers to download and install updates
 - **Operating system:** Windows 7 SP1 or later
 - **Processor:** Anything that can run on Windows 7
 - **RAM:** Anything that can run on Windows 7
-- **Hard disk space:** Barely anything, a few megabytes at least
+- **Hard disk space:** Barely anything, a few dozen megabytes at least
 - **Runtime:** Microsoft .NET Framework 4.6.1
 
 ### Contact
