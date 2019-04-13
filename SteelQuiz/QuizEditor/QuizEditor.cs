@@ -189,8 +189,6 @@ namespace SteelQuiz.QuizEditor
                 }
             }
 
-            UpdateUndoRedoStacks = false;
-
             if (!fromRecovery)
             {
                 DeleteRecovery();
@@ -218,6 +216,8 @@ namespace SteelQuiz.QuizEditor
             {
                 QuizPath = quizPath;
             }
+
+            UpdateUndoRedoStacks = false;
 
             SetWordPairs(quiz.WordPairs.Count + 2);
 
