@@ -22,5 +22,11 @@ SteelQuiz automatically searches for, and offers to download and install updates
 ### Notes
 - As of now, SteelQuiz will accept any synonym added to the correct translation of a word as the answer when you are asked for the translation. This means that you might not learn all the synonyms to a word.
 
+### System requirements
+- **Operating system:** Windows 7 SP1 or later
+- **Processor:** 1 GHz or faster
+- **RAM:** 1 GB
+- **Runtime:** Microsoft .NET Framework 4.6.1
+
 ### Contact
 **E-mail:** steel9apps [at] gmail.com
