@@ -56,7 +56,7 @@ namespace SteelQuiz
             }
             else
             {
-                wordPairs = FromStudentlitteratur_Wordmatch(quizEncoded);
+                wordPairs = FromStudentlitteratur_Spelling(quizEncoded);
             }
             
 
@@ -206,7 +206,7 @@ namespace SteelQuiz
             return wordPairs;
         }
 
-        private static List<WordPair> FromStudentlitteratur_Wordmatch(string quizEncoded)
+        private static List<WordPair> FromStudentlitteratur_Spelling(string quizEncoded)
         {
             var foundStr = "";
             var inString = false;
