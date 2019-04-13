@@ -26,8 +26,9 @@ SteelQuiz automatically searches for, and offers to download and install updates
 
 ### System requirements
 - **Operating system:** Windows 7 SP1 or later
-- **Processor:** 1 GHz or faster
-- **RAM:** 1 GB
+- **Processor:** Anything that can run on Windows 7
+- **RAM:** Anything that can run on Windows 7
+- **Hard disk space:** Barely anything, a few megabytes at least
 - **Runtime:** Microsoft .NET Framework 4.6.1
 
 ### Contact
