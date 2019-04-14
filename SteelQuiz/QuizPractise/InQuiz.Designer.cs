@@ -216,7 +216,7 @@ namespace SteelQuiz.QuizPractise
             this.MaximizeBox = false;
             this.Name = "InQuiz";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "SteelQuiz | Experimental alpha";
+            this.Text = "SteelQuiz | Pre-Release";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.InQuiz_FormClosing);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.InQuiz_KeyPress);
             this.pnl_word1.ResumeLayout(false);

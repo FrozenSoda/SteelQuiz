@@ -112,9 +112,9 @@ namespace SteelQuiz
             this.lbl_copyright.AutoSize = true;
             this.lbl_copyright.Location = new System.Drawing.Point(12, 428);
             this.lbl_copyright.Name = "lbl_copyright";
-            this.lbl_copyright.Size = new System.Drawing.Size(354, 13);
+            this.lbl_copyright.Size = new System.Drawing.Size(243, 13);
             this.lbl_copyright.TabIndex = 4;
-            this.lbl_copyright.Text = "Experimental software | Copyright (C) 2019 Steel9Apps - All rights reserved";
+            this.lbl_copyright.Text = "Copyright (C) 2019 Steel9Apps - All rights reserved";
             // 
             // btn_continueLast
             // 
@@ -145,7 +145,7 @@ namespace SteelQuiz
             this.MaximizeBox = false;
             this.Name = "Welcome";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "SteelQuiz | Experimental alpha";
+            this.Text = "SteelQuiz | Pre-Release";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Welcome_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
