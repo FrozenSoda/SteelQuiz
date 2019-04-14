@@ -108,6 +108,7 @@ namespace SteelQuiz
 
         public static bool ImportLocalQuiz(string quizPath)
         {
+            // find quiz filename that does not exist
             string importedPath;
             int untitledCounter = 1;
             importedPath = Path.Combine(QuizCore.QUIZ_FOLDER, $"{Path.GetFileNameWithoutExtension(quizPath)}.steelquiz");
@@ -233,7 +234,7 @@ namespace SteelQuiz
                 if (cfgDz == null)
                 {
                     MessageBox.Show("Quiz progress conversion error", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    Application.Exit();
+                    //Application.Exit();
                     return false;
                 }
 

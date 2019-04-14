@@ -159,9 +159,10 @@ namespace SteelQuiz
                     Quiz correspondingQuiz = FindQuiz(quizProg);
                     if (correspondingQuiz == null && !acceptQuizProgRemovals)
                     {
-                        var msg = MessageBox.Show("Some quizzes referenced by the progress data could not be found. Remove these quizzes from the progress data? (required)\r\n\r\n" +
-                            "If you have quizzes whose progress data you want to keep, please select No and place them in %appdata%\\SteelQuiz\\Quizzes. " +
-                            "\r\nIf you select No, SteelQuiz will exit as the conversion cannot proceed", "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        var msg = MessageBox.Show("Some quizzes referenced by the progress data could not be found. Remove these quizzes from the progress data? " +
+                            "(required)\r\n\r\nIf you have quizzes whose progress data you want to keep, please select No, place them in %appdata%\\SteelQuiz\\Quizzes, " +
+                            "and start the conversion again.\r\n\r\nIf you select No, the conversion will not proceed.", "SteelQuiz",
+                            MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
                         if (msg == DialogResult.Yes)
                         {
                             acceptQuizProgRemovals = true;
