@@ -45,8 +45,8 @@ namespace SteelQuiz.QuizPractise
 
         private void UpdateWordLabels()
         {
-            lbl_word1.Text = $"Word 1: {WordPair.Word1}";
-            lbl_word2.Text = $"Word 2: {WordPair.Word2}";
+            lbl_word1.Text = $"Word 1:    {WordPair.Word1}";
+            lbl_word2.Text = $"Word 2:    {WordPair.Word2}";
         }
 
         private void btn_close_Click(object sender, EventArgs e)
