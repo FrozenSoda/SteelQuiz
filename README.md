@@ -7,7 +7,7 @@ SteelQuiz is still in pre-release phase, so expect some bugs and issues.
 
 ### Intelligent Learning
 SteelQuiz contains a feature called _**Intelligent Learning**_, which speeds up the learning process. Words you already know won't be asked as much as words you are unsure about. **This system activates after two rounds**, as it needs to gather some information first, before it can begin sorting out words. To disable Intelligent Learning, just click on the disable button while practising the quiz.
-It is always recommended to do a full test of the quiz after learning everything with Intelligent Learning, as you might have forgotten some words.
+It is always recommended to do a full test of the quiz after learning everything with Intelligent Learning, as you might have forgotten some words. Intelligent Learning also uses randomness, to occasionally ask questions you are sure of, to make sure you don't forget them.
 
 ### Quiz Editor
 You can create and edit quizzes, with the built in quiz editor. It has full support for undo/redo, provides support for adding synonyms to words, and automatically creates recovery saves for your project in case SteelQuiz exits unexpectedly before you save.
