@@ -26,10 +26,12 @@ SteelQuiz automatically searches for, and offers to download and install updates
 
 ### System requirements
 - **Operating system:** Windows 7 SP1 or later
-- **Processor:** Anything that can run on Windows 7
-- **RAM:** Anything that can run on Windows 7
-- **Hard disk space:** Barely anything, a few dozen megabytes at least
 - **Runtime:** Microsoft .NET Framework 4.6.1
+
+## Incompatible software
+- **f.lux Microsoft Store version**   
+Causes problems with installation, updates, and uninstallation of SteelQuiz. The specific cause of the problem is currently unknown.   
+**Solution:** Use the non-Store version of f.lux instead (the one you download from their website).
 
 ### Development tools
 - Microsoft Visual Studio Community 2017
