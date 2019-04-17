@@ -124,7 +124,7 @@
     <Compile Include="QuizEditor\QuizRecovery.Designer.cs">
       <DependentUpon>QuizRecovery.cs</DependentUpon>
     </Compile>
-    <Compile Include="QuizProgressData\CfgQuizzesProgressData.cs" />
+    <Compile Include="QuizProgressData\QuizProgDataRoot.cs" />
     <Compile Include="QuizProgressData\QuizProgData.cs" />
     <Compile Include="QuizProgressData\WordProgData.cs" />
     <Compile Include="QuizCore.cs" />

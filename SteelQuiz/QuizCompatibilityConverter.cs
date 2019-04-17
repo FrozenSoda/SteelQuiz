@@ -132,7 +132,7 @@ namespace SteelQuiz
         /*
          * QuizCore.Quiz must be set and converted before calling this function
          */ 
-        public static CfgQuizzesProgressData ChkUpgradeProgressData(dynamic _cfgQuizzesProgressData)
+        public static QuizProgDataRoot ChkUpgradeProgressData(dynamic _cfgQuizzesProgressData)
         {
             var cfgQuizzesProgressData = _cfgQuizzesProgressData;
 
@@ -142,7 +142,7 @@ namespace SteelQuiz
             if (fromVer.CompareTo(new Version(MetaData.QUIZ_FILE_FORMAT_VERSION)) >= 0)
             {
                 //conversion not required
-                return JsonConvert.DeserializeObject<CfgQuizzesProgressData>(JsonConvert.SerializeObject(cfgQuizzesProgressData, Formatting.Indented));
+                return JsonConvert.DeserializeObject<QuizProgDataRoot>(JsonConvert.SerializeObject(cfgQuizzesProgressData, Formatting.Indented));
             }
 
             var V3 = new Version(2, 0, 0); // implemented wordpair ID system, to avoid storing the whole quiz in the progress file
@@ -201,7 +201,7 @@ namespace SteelQuiz
                     qpdList.Add(newQuizProgData);
                 }
 
-                cfgQuizzesProgressData = new CfgQuizzesProgressData();
+                cfgQuizzesProgressData = new QuizProgDataRoot();
                 cfgQuizzesProgressData.QuizProgDatas = qpdList;
             }
 
@@ -218,7 +218,7 @@ namespace SteelQuiz
             return cfgQuizzesProgressData;
         }
 
-        public static void SaveWholeProgress(CfgQuizzesProgressData progressData)
+        public static void SaveWholeProgress(QuizProgDataRoot progressData)
         {
             using (var writer = new StreamWriter(QuizCore.PROGRESS_FILE_PATH, false))
             {

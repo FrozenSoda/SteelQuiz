@@ -277,12 +277,12 @@ namespace SteelQuiz
             */
 
             // DESERIALIZE AND PROCESS
-            CfgQuizzesProgressData cfgDz;
+            QuizProgDataRoot cfgDz;
             if (File.Exists(PROGRESS_FILE_PATH))
             {
                 using (var reader = new StreamReader(PROGRESS_FILE_PATH))
                 {
-                    cfgDz = JsonConvert.DeserializeObject<CfgQuizzesProgressData>(reader.ReadToEnd());
+                    cfgDz = JsonConvert.DeserializeObject<QuizProgDataRoot>(reader.ReadToEnd());
                 }
 
                 //find progress for current quiz
@@ -304,7 +304,7 @@ namespace SteelQuiz
             }
             else
             {
-                cfgDz = new CfgQuizzesProgressData();
+                cfgDz = new QuizProgDataRoot();
                 cfgDz.QuizProgDatas.Add(QuizProgress);
             }
 
