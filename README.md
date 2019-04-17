@@ -27,7 +27,6 @@ SteelQuiz automatically searches for, and offers to download and install updates
 &NewLine;   
 &NewLine;   
 ### Additional notes
-- As of now, SteelQuiz will accept any synonym added to the correct translation of a word as the answer when you are asked for the translation. This means that you might not learn all the synonyms to a word.
 - The portable version (and the installed version) saves data in '%appdata%\SteelQuiz'.
 - The uninstaller does not remove user data.
 &NewLine;   
