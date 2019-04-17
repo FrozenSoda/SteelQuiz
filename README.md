@@ -1,10 +1,15 @@
 # SteelQuiz
-## A quiz program designed to make learning words easier
-   
+## A quiz program designed to make learning words easier  
+
 Tired of practising vocabulary in the traditional way, or with software/websites that ask the same questions over and over? Then you should take a look at SteelQuiz. SteelQuiz contains a feature (optional) which selects the words to ask based on what you know. Words you already know won't be asked as much as words you are a bit more unsure about.
 
 SteelQuiz is still in pre-release phase, so expect some bugs and issues.
 
+**[Download latest setup (recommended)](https://github.com/steel9/SteelQuiz/releases/latest/download/SteelQuizSetup.exe)**   
+&NewLine;   
+**[Download latest portable version](https://github.com/steel9/SteelQuiz/releases/latest/download/SteelQuizPortable.zip)**   
+&NewLine;   
+&NewLine;   
 ### Intelligent Learning
 SteelQuiz contains a feature called _**Intelligent Learning**_, which speeds up the learning process. Words you already know won't be asked as much as words you are unsure about. **This system activates after two rounds**, as it needs to gather some information first, before it can begin sorting out words. To disable Intelligent Learning, just click on the disable button while practising the quiz.
 It is always recommended to do a full test of the quiz after learning everything with Intelligent Learning, as you might have forgotten some words. Intelligent Learning also uses randomness, to occasionally ask questions you are sure of, to make sure you don't forget them.
@@ -22,7 +27,6 @@ SteelQuiz automatically searches for, and offers to download and install updates
 &NewLine;   
 &NewLine;   
 ### Additional notes
-- As of now, SteelQuiz will accept any synonym added to the correct translation of a word as the answer when you are asked for the translation. This means that you might not learn all the synonyms to a word.
 - The portable version (and the installed version) saves data in '%appdata%\SteelQuiz'.
 - The uninstaller does not remove user data.
 &NewLine;   
@@ -38,8 +42,9 @@ Causes problems with installation, updates, and uninstallation of SteelQuiz. The
 **Solution:** Use the non-Store version of f.lux instead (the one you download from their website).
 
 ### Development tools
-- Microsoft Visual Studio Community 2017
-- Nullsoft Scriptable Install System v3.04
+- Microsoft Visual Studio Community 2019
+- Nullsoft Scriptable Install System v3
+- Git v2
 
 ### Contact
 **E-mail:** steel9apps [at] gmail.com
