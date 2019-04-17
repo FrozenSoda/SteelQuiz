@@ -1,9 +1,11 @@
 # SteelQuiz
-## A quiz program designed to make learning words easier
-   
+## A quiz program designed to make learning words easier  
+
 Tired of practising vocabulary in the traditional way, or with software/websites that ask the same questions over and over? Then you should take a look at SteelQuiz. SteelQuiz contains a feature (optional) which selects the words to ask based on what you know. Words you already know won't be asked as much as words you are a bit more unsure about.
 
 SteelQuiz is still in pre-release phase, so expect some bugs and issues.
+
+**[Download latest release](https://github.com/steel9/SteelQuiz/releases/latest/download/SteelQuizSetup.exe)**
 
 ### Intelligent Learning
 SteelQuiz contains a feature called _**Intelligent Learning**_, which speeds up the learning process. Words you already know won't be asked as much as words you are unsure about. **This system activates after two rounds**, as it needs to gather some information first, before it can begin sorting out words. To disable Intelligent Learning, just click on the disable button while practising the quiz.
