@@ -41,7 +41,8 @@ Causes problems with installation, updates, and uninstallation of SteelQuiz. The
 
 ### Development tools
 - Microsoft Visual Studio Community 2019
-- Nullsoft Scriptable Install System v3.04
+- Nullsoft Scriptable Install System v3
+- Git v2
 
 ### Contact
 **E-mail:** steel9apps [at] gmail.com
