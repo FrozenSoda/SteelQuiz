@@ -40,7 +40,7 @@ Causes problems with installation, updates, and uninstallation of SteelQuiz. The
 **Solution:** Use the non-Store version of f.lux instead (the one you download from their website).
 
 ### Development tools
-- Microsoft Visual Studio Community 2017
+- Microsoft Visual Studio Community 2019
 - Nullsoft Scriptable Install System v3.04
 
 ### Contact
