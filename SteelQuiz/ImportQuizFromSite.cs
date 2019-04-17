@@ -95,7 +95,7 @@ namespace SteelQuiz
             if (rdo_addMultipleTranslationsAsSynonyms.Checked)
             {
                 var msg = MessageBox.Show("Warning! If this option is selected, you will not necessarily learn all the synonyms of the words (which are added" +
-                    " in the quiz). Continue?",
+                    " to the quiz). Continue?",
                     "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
                 if (msg == DialogResult.No)
                 {
