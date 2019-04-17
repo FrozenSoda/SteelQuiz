@@ -29,25 +29,27 @@ namespace SteelQuiz
         [Flags]
         public enum Rules
         {
-            IgnoreCapitalization = 1 << 2,
-            IgnoreExclamation = 1 << 1,
-            None = 1 << 0
+            IgnoreCapitalization        = 1 << 2,
+            IgnoreExclamation           = 1 << 1,
+            None                        = 1 << 0
         }
 
         public class CharacterMismatch
         {
+            public bool AskingForSynonym { get; set; } // true if a synonym for the word was being asked
             public int[] Cmp { get; set; }
             public int[] Input { get; set; }
 
-            public CharacterMismatch(List<int> cmp, List<int> input)
+            public CharacterMismatch(List<int> cmp, List<int> input, bool askingForSynonym = false)
             {
                 Cmp = cmp.ToArray();
                 Input = input.ToArray();
+                AskingForSynonym = askingForSynonym;
             }
 
             public bool Correct()
             {
-                return Cmp.Length == 0 && Input.Length == 0;
+                return AskingForSynonym || (Cmp.Length == 0 && Input.Length == 0);
             }
         }
 

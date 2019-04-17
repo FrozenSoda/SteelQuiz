@@ -91,7 +91,7 @@ namespace SteelQuiz.QuizData
             throw new Exception("No word progress data could be found for this word pair");
         }
 
-        public StringComp.CharacterMismatch CharacterMismatches(string input, TranslationMode translationMode, bool updateProgress = true)
+        public StringComp.CharacterMismatch CharacterMismatches(string input, TranslationMode translationMode, bool updateProgress = true, bool recurse = false)
         {
             var mismatches = new List<StringComp.CharacterMismatch>();
             if (translationMode == TranslationMode.L1_to_L2)
@@ -132,16 +132,57 @@ namespace SteelQuiz.QuizData
                 }
             }
 
-            if (updateProgress)
-            {
-                GetWordProgData().AddWordTry(new WordTry(bestCharacterMismatch.Correct()));
-                QuizCore.SaveQuizProgress();
-            }
-
             if (bestCharacterMismatch.Correct())
             {
-                GetWordProgData().AskedThisRound = true;
-                QuizCore.QuizProgress.SetCurrentWordPair(null);
+                if (!recurse)
+                {
+                    GetWordProgData().AskedThisRound = true;
+                    QuizCore.QuizProgress.SetCurrentWordPair(null);
+                }
+                if (updateProgress)
+                {
+                    GetWordProgData().AddWordTry(new WordTry(true));
+                    QuizCore.SaveQuizProgress();
+                }
+            }
+            else if (!recurse)
+            {
+                // check if a synonym for the was being asked as a separate word
+                foreach (var wordPair in QuizCore.Quiz.WordPairs)
+                {
+                    if (translationMode == TranslationMode.L1_to_L2)
+                    {
+                        if (wordPair.Word1 == Word1 && wordPair.Word2 != Word2)
+                        {
+                            // check if the answer to this wordpair was correct
+                            var mismatch2 = wordPair.CharacterMismatches(input, translationMode, false, true);
+                            if (mismatch2.Correct())
+                            {
+                                // a synonym for this word was being asked, the user could not know this, so don't count it as a miss in the progress
+                                return new StringComp.CharacterMismatch(bestCharacterMismatch.Cmp.ToList(), bestCharacterMismatch.Input.ToList(), true);
+                            }
+                        }
+                    }
+                    else if (translationMode == TranslationMode.L2_to_L1)
+                    {
+                        if (wordPair.Word2 == Word2 && wordPair.Word1 != Word1)
+                        {
+                            // check if the answer to this wordpair was correct
+                            var mismatch2 = wordPair.CharacterMismatches(input, translationMode, false, true);
+                            if (mismatch2.Correct())
+                            {
+                                // a synonym for this word was being asked, the user could not know this, so don't count it as a miss in the progress
+                                return new StringComp.CharacterMismatch(bestCharacterMismatch.Cmp.ToList(), bestCharacterMismatch.Input.ToList(), true);
+                            }
+                        }
+                    }
+                }
+
+                if (updateProgress)
+                {
+                    GetWordProgData().AddWordTry(new WordTry(false));
+                    QuizCore.SaveQuizProgress();
+                }
             }
 
             return bestCharacterMismatch;

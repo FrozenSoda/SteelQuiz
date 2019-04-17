@@ -32,13 +32,14 @@ namespace SteelQuiz.QuizPractise
     public partial class InQuiz : Form
     {
         public bool ExitAppOnClose { get; set; } = true;
+        private bool PerformOnCloseEvents { get; set; } = true;
+        private ulong? CurrentWordPairID { get; set; } = null;
+        private string CurrentInput { get; set; } = "";
+        private WordPair.TranslationMode TranslationMode { get; set; } = WordPair.TranslationMode.L1_to_L2;
 
-        private bool onCloseEvent = true;
-        private ulong? currentWordPairID = null;
-        private string currentInput = "";
-        private WordPair.TranslationMode translationMode = WordPair.TranslationMode.L1_to_L2;
         private bool waitingForEnter = false;
         private bool userCopyWord = false;
+        private bool reAskWord = false; // true if the answer was correct, but a synonym for the word was being asked. let the user try again in that case
         private bool countThisTranslationToProgress = true;
         private bool showingW1synonyms = false;
 
@@ -71,7 +72,7 @@ namespace SteelQuiz.QuizPractise
                 lbl_AI.Text = "Intelligent learning: Enabled";
                 lbl_AI.ForeColor = Color.DarkGreen;
             }
-            if (currentWordPairID.GetWordPair().Word1Synonyms.Count > 0)
+            if (CurrentWordPairID.GetWordPair().Word1Synonyms.Count > 0)
             {
                 btn_w1_synonyms.Enabled = true;
             }
@@ -81,23 +82,23 @@ namespace SteelQuiz.QuizPractise
         {
             countThisTranslationToProgress = true;
             lbl_lang1.Text = QuizCore.Quiz.Language1;
-            currentWordPairID = QuizAI.GenerateWordPair();
+            CurrentWordPairID = QuestionSelector.GenerateWordPair();
 
-            if (currentWordPairID == null)
+            if (CurrentWordPairID == null)
             {
                 NewRound();
                 return;
             }
 
-            if (translationMode == WordPair.TranslationMode.L1_to_L2)
+            if (TranslationMode == WordPair.TranslationMode.L1_to_L2)
             {
-                lbl_word1.Text = currentWordPairID.GetWordPair().Word1;
+                lbl_word1.Text = CurrentWordPairID.GetWordPair().Word1;
             }
-            else if (translationMode == WordPair.TranslationMode.L2_to_L1)
+            else if (TranslationMode == WordPair.TranslationMode.L2_to_L1)
             {
-                lbl_word1.Text = currentWordPairID.GetWordPair().Word2;
+                lbl_word1.Text = CurrentWordPairID.GetWordPair().Word2;
             }
-            currentInput = "";
+            CurrentInput = "";
             lbl_progress.Text = $"Progress this round: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
             lbl_word2.Text = "Enter your answer...";
         }
@@ -114,29 +115,37 @@ namespace SteelQuiz.QuizPractise
         private void CheckWord()
         {
             lbl_lang1.Text = "Info";
-            var mismatch = currentWordPairID.GetWordPair().CharacterMismatches(currentInput, translationMode, !userCopyWord && countThisTranslationToProgress);
+            var mismatch = CurrentWordPairID.GetWordPair().CharacterMismatches(CurrentInput, TranslationMode, !userCopyWord && countThisTranslationToProgress);
             userCopyWord = false;
             if (mismatch.Correct())
             {
-                lbl_word1.Text = "Correct! Press enter to continue";
-                waitingForEnter = true;
+                if (!mismatch.AskingForSynonym)
+                {
+                    lbl_word1.Text = "Correct! Press enter to continue";
+                    waitingForEnter = true;
+                }
+                else
+                {
+                    lbl_word1.Text = "Correct, but a synonym to this word is being asked for.\r\n\r\nPress ENTER to try again.\r\n\r\n(press ENTER then write the answer)";
+                    waitingForEnter = true;
+                }
             }
             else
             {
-                if (translationMode == WordPair.TranslationMode.L1_to_L2)
+                if (TranslationMode == WordPair.TranslationMode.L1_to_L2)
                 {
                     lbl_word1.Text = $"Wrong\r\n\r\n{QuizCore.Quiz.Language1} word:\r\n"
-                        + $"{currentWordPairID.GetWordPair().Word1}\r\n\r\nCorrect {QuizCore.Quiz.Language2} word is:\r\n{currentWordPairID.GetWordPair().Word2}"
+                        + $"{CurrentWordPairID.GetWordPair().Word1}\r\n\r\nCorrect {QuizCore.Quiz.Language2} word is:\r\n{CurrentWordPairID.GetWordPair().Word2}"
                         + $"\r\n\r\nType the {QuizCore.Quiz.Language2} word";
                 }
-                else if (translationMode == WordPair.TranslationMode.L2_to_L1)
+                else if (TranslationMode == WordPair.TranslationMode.L2_to_L1)
                 {
                     lbl_word1.Text = $"Wrong\r\n\r\n{QuizCore.Quiz.Language2} word:\r\n"
-                        + $"{currentWordPairID.GetWordPair().Word2}\r\n\r\nCorrect {QuizCore.Quiz.Language1} word is:\r\n{currentWordPairID.GetWordPair().Word1}"
+                        + $"{CurrentWordPairID.GetWordPair().Word2}\r\n\r\nCorrect {QuizCore.Quiz.Language1} word is:\r\n{CurrentWordPairID.GetWordPair().Word1}"
                         + $"\r\n\r\nType the {QuizCore.Quiz.Language1} word";
                 }
                 userCopyWord = true;
-                currentInput = "";
+                CurrentInput = "";
                 lbl_word2.Text = "Enter your answer...";
             }
         }
@@ -154,9 +163,9 @@ namespace SteelQuiz.QuizPractise
             if (e.KeyChar == '\b')
             {
                 // BACKSPACE
-                if (currentInput.Length > 0)
+                if (CurrentInput.Length > 0)
                 {
-                    currentInput = currentInput.Remove(currentInput.Length - 1);
+                    CurrentInput = CurrentInput.Remove(CurrentInput.Length - 1);
                 }
             }
             else if (e.KeyChar == '\r')
@@ -167,7 +176,24 @@ namespace SteelQuiz.QuizPractise
                 if (waitingForEnter)
                 {
                     waitingForEnter = false;
-                    NewWord();
+                    if (!reAskWord)
+                    {
+                        NewWord();
+                    }
+                    else
+                    {
+                        if (TranslationMode == WordPair.TranslationMode.L1_to_L2)
+                        {
+                            lbl_word1.Text = CurrentWordPairID.GetWordPair().Word1;
+                        }
+                        else if (TranslationMode == WordPair.TranslationMode.L2_to_L1)
+                        {
+                            lbl_word1.Text = CurrentWordPairID.GetWordPair().Word2;
+                        }
+                        CurrentInput = "";
+                        lbl_word2.Text = "Enter your answer...";
+                        reAskWord = false;
+                    }
                 }
                 else
                 {
@@ -176,20 +202,20 @@ namespace SteelQuiz.QuizPractise
 
                 updateInputLbl = false;
             }
-            else
+            else if (!waitingForEnter)
             {
-                currentInput += e.KeyChar.ToString();
+                CurrentInput += e.KeyChar.ToString();
             }
 
             if (updateInputLbl)
             {
-                lbl_word2.Text = currentInput;
+                lbl_word2.Text = CurrentInput;
             }
         }
 
         private void InQuiz_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!onCloseEvent)
+            if (!PerformOnCloseEvents)
             {
                 return;
             }
@@ -216,9 +242,9 @@ namespace SteelQuiz.QuizPractise
 
         public void SwitchAIMode()
         {
-            QuizAI.SkipNextMasterNotice = true;
+            QuestionSelector.SkipNextMasterNotice = true;
             QuizCore.QuizProgress.FullTestInProgress = !QuizCore.QuizProgress.FullTestInProgress;
-            QuizAI.NewRound();
+            QuestionSelector.NewRound();
             NewWord();
 
             if (QuizCore.QuizProgress.FullTestInProgress)
@@ -251,7 +277,7 @@ namespace SteelQuiz.QuizPractise
 
             if (showingW1synonyms)
             {
-                if (currentWordPairID.GetWordPair().Word1Synonyms.Count == 0)
+                if (CurrentWordPairID.GetWordPair().Word1Synonyms.Count == 0)
                 {
                     MessageBox.Show("No synonyms are added for this word!", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     lbl_word2.Focus();
@@ -260,7 +286,7 @@ namespace SteelQuiz.QuizPractise
 
                 lbl_word1.Text += "\r\n\r\n---Synonyms---";
 
-                foreach (var synonym in currentWordPairID.GetWordPair().Word1Synonyms)
+                foreach (var synonym in CurrentWordPairID.GetWordPair().Word1Synonyms)
                 {
                     lbl_word1.Text += "\r\n" + synonym;
                 }
@@ -269,7 +295,7 @@ namespace SteelQuiz.QuizPractise
             }
             else
             {
-                lbl_word1.Text = currentWordPairID.GetWordPair().Word1;
+                lbl_word1.Text = CurrentWordPairID.GetWordPair().Word1;
                 btn_w1_synonyms.Text = "Synonyms";
             }
 
@@ -285,7 +311,7 @@ namespace SteelQuiz.QuizPractise
             Program.frmWelcome.Show();
             QuizCore.SaveQuizProgress();
             ConfigManager.SaveConfig();
-            onCloseEvent = false;
+            PerformOnCloseEvents = false;
             Close();
             Program.frmInQuiz = null;
         }
@@ -301,19 +327,19 @@ namespace SteelQuiz.QuizPractise
             }
 
             countThisTranslationToProgress = false;
-            var fixMenu = new FixQuizErrors(this, currentWordPairID.GetWordPair());
+            var fixMenu = new FixQuizErrors(this, CurrentWordPairID.GetWordPair());
             var result = fixMenu.ShowDialog();
             if (result == DialogResult.OK)
             {
                 QuizCore.SaveQuiz();
 
-                if (translationMode == WordPair.TranslationMode.L1_to_L2)
+                if (TranslationMode == WordPair.TranslationMode.L1_to_L2)
                 {
-                    lbl_word1.Text = currentWordPairID.GetWordPair().Word1;
+                    lbl_word1.Text = CurrentWordPairID.GetWordPair().Word1;
                 }
-                else if (translationMode == WordPair.TranslationMode.L2_to_L1)
+                else if (TranslationMode == WordPair.TranslationMode.L2_to_L1)
                 {
-                    lbl_word1.Text = currentWordPairID.GetWordPair().Word2;
+                    lbl_word1.Text = CurrentWordPairID.GetWordPair().Word2;
                 }
             }
             else if (result == DialogResult.Abort)

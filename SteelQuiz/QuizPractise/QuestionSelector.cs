@@ -25,9 +25,9 @@ using System.Windows.Forms;
 using SteelQuiz.QuizData;
 using SteelQuiz.QuizProgressData;
 
-namespace SteelQuiz
+namespace SteelQuiz.QuizPractise
 {
-    public static class QuizAI
+    public static class QuestionSelector
     {
         public static bool SkipNextMasterNotice { get; set; } = false;
 

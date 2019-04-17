@@ -31,7 +31,7 @@ namespace SteelQuiz
 {
     public static class QuizImporter
     {
-        public static bool FromStudentlitteratur(string url, string lang1, string lang2, string filename)
+        public static bool FromStudentlitteratur(string url, string lang1, string lang2, string filename, bool multipleTranslationsAsDifferentWordPairs)
         {
             string quizEncoded;
             using (var wclient = new WebClient())
@@ -52,11 +52,11 @@ namespace SteelQuiz
 
             if (quizEncoded.Contains("_____"))
             {
-                wordPairs = FromStudentlitteratur_VocabularyBank(quizEncoded);
+                wordPairs = FromStudentlitteratur_VocabularyBank(quizEncoded, multipleTranslationsAsDifferentWordPairs);
             }
             else
             {
-                wordPairs = FromStudentlitteratur_Spelling(quizEncoded);
+                wordPairs = FromStudentlitteratur_Spelling(quizEncoded, multipleTranslationsAsDifferentWordPairs);
             }
             
 
@@ -108,7 +108,7 @@ namespace SteelQuiz
             { ':', InString.Colon }
         };
 
-        private static List<WordPair> FromStudentlitteratur_VocabularyBank(string quizEncoded)
+        private static List<WordPair> FromStudentlitteratur_VocabularyBank(string quizEncoded, bool multipleTranslationsAsDifferentWordPairs)
         {
             var foundStr = "";
             var inString = InString.None;
@@ -157,7 +157,7 @@ namespace SteelQuiz
                             if (foundStr == "true")
                             {
                                 wordPairs.ChkAddWordPair(word1, word2,
-                                    StringComp.Rules.None);
+                                    StringComp.Rules.None, multipleTranslationsAsDifferentWordPairs);
                                 word2 = "";
                             }
                             inWordChk = false;
@@ -206,7 +206,7 @@ namespace SteelQuiz
             return wordPairs;
         }
 
-        private static List<WordPair> FromStudentlitteratur_Spelling(string quizEncoded)
+        private static List<WordPair> FromStudentlitteratur_Spelling(string quizEncoded, bool multipleTranslationsAsDifferentWordPairs)
         {
             var foundStr = "";
             var inString = false;
@@ -238,7 +238,7 @@ namespace SteelQuiz
                             word2 = FixString(foundStr);
                             //wordPairs.Add(new WordPair(word1, word2, WordPair.Rules.IgnoreCapitalization | WordPair.Rules.IgnoreExclamation));
                             wordPairs.ChkAddWordPair(word1, word2,
-                                StringComp.Rules.None);
+                                StringComp.Rules.None, multipleTranslationsAsDifferentWordPairs);
                             word1 = "";
                             word2 = "";
                             inWord2 = false;
@@ -267,7 +267,7 @@ namespace SteelQuiz
             return wordPairs;
         }
 
-        private static void ChkAddWordPair(this IList<WordPair> wpList, string word1, string word2, StringComp.Rules rules)
+        private static void ChkAddWordPair(this IList<WordPair> wpList, string word1, string word2, StringComp.Rules rules, bool multipleTranslationsAsDifferentWordPairs)
         {
             foreach (var wp in wpList)
             {
@@ -277,13 +277,13 @@ namespace SteelQuiz
                     {
                         return;
                     }
-                    else
+                    else if (!multipleTranslationsAsDifferentWordPairs)
                     {
                         wp.Word2Synonyms.Add(word2);
                         return;
                     }
                 }
-                else if (word2 == wp.Word2)
+                else if (word2 == wp.Word2 && !multipleTranslationsAsDifferentWordPairs)
                 {
                     wp.Word1Synonyms.Add(word1);
                     return;

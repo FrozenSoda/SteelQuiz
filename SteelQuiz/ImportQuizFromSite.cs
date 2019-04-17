@@ -66,7 +66,7 @@ namespace SteelQuiz
             var success = false;
             if (rdo_studentlitteratur.Checked)
             {
-                success = QuizImporter.FromStudentlitteratur(url, txt_lang1.Text, txt_lang2.Text, quizFilename);
+                success = QuizImporter.FromStudentlitteratur(url, txt_lang1.Text, txt_lang2.Text, quizFilename, rdo_multipleTranslationsAsDifferentWordPairs.Checked);
             }
 
             if (success)
@@ -87,6 +87,21 @@ namespace SteelQuiz
                 MessageBox.Show("1. Start the exercise.\r\n2. Open developer tools in your browser (Ctrl+Shift+I in Chrome).\r\n" + 
                     "3. Go to the Network tab.\r\n4. Write one word in the exercise and press ENTER.\r\n5. Double click the entry which appeared in the Network tab." +
                     "\r\n6. Copy the URL of the opened tab and paste it in the URL field in SteelQuiz.", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void Rdo_addMultipleTranslationsAsSynonyms_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdo_addMultipleTranslationsAsSynonyms.Checked)
+            {
+                var msg = MessageBox.Show("Warning! If this option is selected, you will not necessarily learn all the synonyms of the words (which are added" +
+                    " in the quiz). Continue?",
+                    "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+                if (msg == DialogResult.No)
+                {
+                    rdo_addMultipleTranslationsAsSynonyms.Checked = false;
+                    rdo_multipleTranslationsAsDifferentWordPairs.Checked = true;
+                }
             }
         }
     }

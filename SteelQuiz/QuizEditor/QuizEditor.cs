@@ -418,6 +418,7 @@ namespace SteelQuiz.QuizEditor
                     {
                         return false;
                     }
+                    path = sfd_quiz.FileName;
                 }
                 else
                 {

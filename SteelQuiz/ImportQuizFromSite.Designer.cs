@@ -61,7 +61,11 @@ namespace SteelQuiz
             this.txt_quizName = new System.Windows.Forms.TextBox();
             this.btn_urlHowToFind = new System.Windows.Forms.Button();
             this.lbl_studentl_supportedExercises = new System.Windows.Forms.Label();
+            this.pnl_multiTranslationOptions = new System.Windows.Forms.Panel();
+            this.rdo_addMultipleTranslationsAsSynonyms = new System.Windows.Forms.RadioButton();
+            this.rdo_multipleTranslationsAsDifferentWordPairs = new System.Windows.Forms.RadioButton();
             this.flp_siteRdo.SuspendLayout();
+            this.pnl_multiTranslationOptions.SuspendLayout();
             this.SuspendLayout();
             // 
             // flp_siteRdo
@@ -185,18 +189,51 @@ namespace SteelQuiz
             // 
             this.lbl_studentl_supportedExercises.AutoSize = true;
             this.lbl_studentl_supportedExercises.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_studentl_supportedExercises.Location = new System.Drawing.Point(12, 208);
+            this.lbl_studentl_supportedExercises.Location = new System.Drawing.Point(9, 294);
             this.lbl_studentl_supportedExercises.Name = "lbl_studentl_supportedExercises";
             this.lbl_studentl_supportedExercises.Size = new System.Drawing.Size(446, 80);
             this.lbl_studentl_supportedExercises.TabIndex = 9;
             this.lbl_studentl_supportedExercises.Text = "Supported exercises:\r\n- Spelling\r\n- Vocabulary bank\r\n\r\nTrying to import an unsupp" +
     "orted exercise type will probably cause an error";
             // 
+            // pnl_multiTranslationOptions
+            // 
+            this.pnl_multiTranslationOptions.Controls.Add(this.rdo_addMultipleTranslationsAsSynonyms);
+            this.pnl_multiTranslationOptions.Controls.Add(this.rdo_multipleTranslationsAsDifferentWordPairs);
+            this.pnl_multiTranslationOptions.Location = new System.Drawing.Point(15, 209);
+            this.pnl_multiTranslationOptions.Name = "pnl_multiTranslationOptions";
+            this.pnl_multiTranslationOptions.Size = new System.Drawing.Size(773, 55);
+            this.pnl_multiTranslationOptions.TabIndex = 10;
+            // 
+            // rdo_addMultipleTranslationsAsSynonyms
+            // 
+            this.rdo_addMultipleTranslationsAsSynonyms.AutoSize = true;
+            this.rdo_addMultipleTranslationsAsSynonyms.Location = new System.Drawing.Point(3, 26);
+            this.rdo_addMultipleTranslationsAsSynonyms.Name = "rdo_addMultipleTranslationsAsSynonyms";
+            this.rdo_addMultipleTranslationsAsSynonyms.Size = new System.Drawing.Size(344, 17);
+            this.rdo_addMultipleTranslationsAsSynonyms.TabIndex = 1;
+            this.rdo_addMultipleTranslationsAsSynonyms.Text = "Add multiple translations of a word as synonyms in a single word pair";
+            this.rdo_addMultipleTranslationsAsSynonyms.UseVisualStyleBackColor = true;
+            this.rdo_addMultipleTranslationsAsSynonyms.CheckedChanged += new System.EventHandler(this.Rdo_addMultipleTranslationsAsSynonyms_CheckedChanged);
+            // 
+            // rdo_multipleTranslationsAsDifferentWordPairs
+            // 
+            this.rdo_multipleTranslationsAsDifferentWordPairs.AutoSize = true;
+            this.rdo_multipleTranslationsAsDifferentWordPairs.Checked = true;
+            this.rdo_multipleTranslationsAsDifferentWordPairs.Location = new System.Drawing.Point(3, 3);
+            this.rdo_multipleTranslationsAsDifferentWordPairs.Name = "rdo_multipleTranslationsAsDifferentWordPairs";
+            this.rdo_multipleTranslationsAsDifferentWordPairs.Size = new System.Drawing.Size(376, 17);
+            this.rdo_multipleTranslationsAsDifferentWordPairs.TabIndex = 0;
+            this.rdo_multipleTranslationsAsDifferentWordPairs.TabStop = true;
+            this.rdo_multipleTranslationsAsDifferentWordPairs.Text = "Add words with multiple translations as separate word pairs (recommended)";
+            this.rdo_multipleTranslationsAsDifferentWordPairs.UseVisualStyleBackColor = true;
+            // 
             // ImportQuizFromSite
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.pnl_multiTranslationOptions);
             this.Controls.Add(this.lbl_studentl_supportedExercises);
             this.Controls.Add(this.btn_urlHowToFind);
             this.Controls.Add(this.txt_quizName);
@@ -218,6 +255,8 @@ namespace SteelQuiz
             this.Text = "Quiz Importer | SteelQuiz";
             this.flp_siteRdo.ResumeLayout(false);
             this.flp_siteRdo.PerformLayout();
+            this.pnl_multiTranslationOptions.ResumeLayout(false);
+            this.pnl_multiTranslationOptions.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -239,5 +278,8 @@ namespace SteelQuiz
         private System.Windows.Forms.TextBox txt_quizName;
         private System.Windows.Forms.Button btn_urlHowToFind;
         private System.Windows.Forms.Label lbl_studentl_supportedExercises;
+        private System.Windows.Forms.Panel pnl_multiTranslationOptions;
+        private System.Windows.Forms.RadioButton rdo_addMultipleTranslationsAsSynonyms;
+        private System.Windows.Forms.RadioButton rdo_multipleTranslationsAsDifferentWordPairs;
     }
 }

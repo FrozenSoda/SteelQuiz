@@ -101,7 +101,7 @@
       <DependentUpon>InQuiz.cs</DependentUpon>
     </Compile>
     <Compile Include="MetaData.cs" />
-    <Compile Include="QuizAI.cs" />
+    <Compile Include="QuizPractise\QuestionSelector.cs" />
     <Compile Include="QuizCompatibilityConverter.cs" />
     <Compile Include="QuizData\Quiz.cs" />
     <Compile Include="QuizEditor\QuizEditor.cs">
