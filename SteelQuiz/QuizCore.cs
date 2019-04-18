@@ -402,12 +402,12 @@ namespace SteelQuiz
             return counter;
         }
 
-        public static void ResetTotalWordCountMemo()
+        public static void ResetTotalWordsThisRoundCountMemo()
         {
             totalWordsThisRoundMemo = -1;
         }
 
-        public static void ResetWordsAskedMemo()
+        public static void ResetWordsAskedThisRoundMemo()
         {
             wordsAskedThisRoundMemo = -1;
         }

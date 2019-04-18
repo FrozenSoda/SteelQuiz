@@ -33,7 +33,7 @@ namespace SteelQuiz.QuizPractise
 
         public static ulong? GenerateWordPair()
         {
-            QuizCore.ResetWordsAskedMemo();
+            QuizCore.ResetWordsAskedThisRoundMemo();
 
             if (QuizCore.QuizProgress.CurrentWordPairID != null)
             {
@@ -150,7 +150,8 @@ namespace SteelQuiz.QuizPractise
                 return prb;
             }
 
-            QuizCore.ResetTotalWordCountMemo();
+            QuizCore.ResetTotalWordsThisRoundCountMemo();
+            QuizCore.ResetWordsAskedThisRoundMemo();
 
             var rnd = new Random();
             var skipCount = 0;
@@ -199,6 +200,10 @@ namespace SteelQuiz.QuizPractise
                             {
                                 Program.frmInQuiz.SwitchAIMode();
                                 return;
+                            }
+                            else
+                            {
+                                SkipNextMasterNotice = true;
                             }
                         }
                         else

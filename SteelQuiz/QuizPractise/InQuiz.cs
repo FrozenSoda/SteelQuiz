@@ -73,7 +73,8 @@ namespace SteelQuiz.QuizPractise
                 lbl_AI.Text = "Intelligent learning: Enabled";
                 lbl_AI.ForeColor = Color.DarkGreen;
             }
-            if (CurrentWordPairID.GetWordPair().Word1Synonyms.Count > 0)
+
+            if (CurrentWordPairID != null && CurrentWordPairID.GetWordPair().Word1Synonyms.Count > 0)
             {
                 btn_w1_synonyms.Enabled = true;
             }
@@ -81,6 +82,7 @@ namespace SteelQuiz.QuizPractise
 
         private void NewWord()
         {
+            WaitingForEnter = false;
             CountThisTranslationToProgress = true;
             lbl_lang1.Text = QuizCore.Quiz.Language1;
             CurrentWordPairID = QuestionSelector.GenerateWordPair();
@@ -113,8 +115,21 @@ namespace SteelQuiz.QuizPractise
             lbl_progress.Text = $"Progress this round: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
             if (QuizCore.QuizProgress.FullTestInProgress)
             {
-                var msg = MessageBox.Show($"Full test results:\r\nCorrect: {CorrectAnswersThisRound} / {QuizCore.GetTotalWordsThisRound()}",
-                    "Full test finished - SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (CorrectAnswersThisRound == QuizCore.GetTotalWordsThisRound())
+                {
+                    var msg = MessageBox.Show($"Full test results:\r\nCorrect: {CorrectAnswersThisRound} / {QuizCore.GetTotalWordsThisRound()}, congratulations!",
+                        "Full test finished - SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    var msg = MessageBox.Show($"Full test results:\r\nCorrect: {CorrectAnswersThisRound} / {QuizCore.GetTotalWordsThisRound()}\r\n\r\n" +
+                        $"Would you like to re-enable Intelligent Learning, to learn the missed words?",
+                        "Full test finished - SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (msg == DialogResult.Yes)
+                    {
+                        SwitchAIMode(false);
+                    }
+                }
             }
             CorrectAnswersThisRound = 0;
             QuestionSelector.NewRound();
@@ -125,13 +140,17 @@ namespace SteelQuiz.QuizPractise
         {
             lbl_lang1.Text = "Info";
             var mismatch = CurrentWordPairID.GetWordPair().CharacterMismatches(CurrentInput, TranslationMode, !UserCopyingWord && CountThisTranslationToProgress);
-            UserCopyingWord = false;
             if (mismatch.Correct())
             {
                 if (!mismatch.AskingForSynonym)
                 {
-                    ++CorrectAnswersThisRound;
+                    if (!UserCopyingWord)
+                    {
+                        ++CorrectAnswersThisRound;
+                    }
                     lbl_word1.Text = "Correct! Press enter to continue";
+                    QuizCore.ResetWordsAskedThisRoundMemo();
+                    lbl_progress.Text = $"Progress this round: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
                     WaitingForEnter = true;
                 }
                 else
@@ -139,6 +158,7 @@ namespace SteelQuiz.QuizPractise
                     lbl_word1.Text = "Correct, but a synonym to this word is being asked for.\r\n\r\nPress ENTER to try again.\r\n\r\n(press ENTER then write the answer)";
                     WaitingForEnter = true;
                 }
+                UserCopyingWord = false;
             }
             else
             {
@@ -233,12 +253,16 @@ namespace SteelQuiz.QuizPractise
             lbl_word2.Focus();
         }
 
-        public void SwitchAIMode()
+        public void SwitchAIMode(bool callGenerationFunctions = true)
         {
-            QuestionSelector.SkipNextMasterNotice = true;
+            QuestionSelector.SkipNextMasterNotice = false;
             QuizCore.QuizProgress.FullTestInProgress = !QuizCore.QuizProgress.FullTestInProgress;
-            QuestionSelector.NewRound();
-            NewWord();
+
+            if (callGenerationFunctions)
+            {
+                QuestionSelector.NewRound();
+                NewWord();
+            }
 
             if (QuizCore.QuizProgress.FullTestInProgress)
             {
