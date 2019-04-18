@@ -106,15 +106,14 @@ namespace SteelQuiz.QuizPractise
             lbl_word2.Text = "Enter your answer...";
         }
 
-        private void NewRound()
+        private bool skipNewRoundMsg = false;
+        private void NewRound(bool newRoundMsg = true)
         {
             CountThisTranslationToProgress = true;
-            lbl_lang1.Text = "Info";
-            lbl_word1.Text = "Round completed! Press ENTER to continue";
-            WaitingForEnter = true;
             lbl_progress.Text = $"Progress this round: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
             if (QuizCore.QuizProgress.FullTestInProgress)
             {
+                newRoundMsg = false;
                 if (CorrectAnswersThisRound == QuizCore.GetTotalWordsThisRound())
                 {
                     var msg = MessageBox.Show($"Full test results:\r\nCorrect: {CorrectAnswersThisRound} / {QuizCore.GetTotalWordsThisRound()}, congratulations!",
@@ -131,8 +130,22 @@ namespace SteelQuiz.QuizPractise
                     }
                 }
             }
+
             CorrectAnswersThisRound = 0;
             QuestionSelector.NewRound();
+
+            if (newRoundMsg && !skipNewRoundMsg)
+            {
+                lbl_lang1.Text = "Info";
+                lbl_word1.Text = "Round completed! Press ENTER to continue";
+                WaitingForEnter = true;
+            }
+            else
+            {
+                skipNewRoundMsg = false;
+                NewWord();
+            }
+
             lbl_progress.Text = $"Progress this round: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
         }
 
@@ -255,8 +268,10 @@ namespace SteelQuiz.QuizPractise
 
         public void SwitchAIMode(bool callGenerationFunctions = true)
         {
-            QuestionSelector.SkipNextMasterNotice = false;
+            skipNewRoundMsg = true;
+            QuizCore.QuizProgress.MasterNoticeShowed = false;
             QuizCore.QuizProgress.FullTestInProgress = !QuizCore.QuizProgress.FullTestInProgress;
+            QuestionSelector.SkipNextMasterNotice = !QuizCore.QuizProgress.FullTestInProgress;
 
             if (callGenerationFunctions)
             {
