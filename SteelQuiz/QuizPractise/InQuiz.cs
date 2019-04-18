@@ -116,7 +116,7 @@ namespace SteelQuiz.QuizPractise
                 newRoundMsg = false;
                 if (CorrectAnswersThisRound == QuizCore.GetTotalWordsThisRound())
                 {
-                    var msg = MessageBox.Show($"Full test results:\r\nCorrect: {CorrectAnswersThisRound} / {QuizCore.GetTotalWordsThisRound()}, congratulations!",
+                    MessageBox.Show($"Full test results:\r\nCorrect: {CorrectAnswersThisRound} / {QuizCore.GetTotalWordsThisRound()}, congratulations!",
                         "Full test finished - SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
