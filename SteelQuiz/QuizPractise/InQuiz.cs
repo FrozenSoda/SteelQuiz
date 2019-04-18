@@ -33,15 +33,16 @@ namespace SteelQuiz.QuizPractise
     {
         public bool ExitAppOnClose { get; set; } = true;
         private bool PerformOnCloseEvents { get; set; } = true;
+
         private ulong? CurrentWordPairID { get; set; } = null;
         private string CurrentInput { get; set; } = "";
         private WordPair.TranslationMode TranslationMode { get; set; } = WordPair.TranslationMode.L1_to_L2;
 
-        private bool waitingForEnter = false;
-        private bool userCopyWord = false;
-        private bool reAskWord = false; // true if the answer was correct, but a synonym for the word was being asked. let the user try again in that case
-        private bool countThisTranslationToProgress = true;
-        private bool showingW1synonyms = false;
+        private bool WaitingForEnter { get; set; } = false;
+        private bool UserCopyingWord { get; set; } = false;
+        private bool CountThisTranslationToProgress { get; set; } = true; // false if the user clicked Fix Quiz Errors, as the answer is displayed there. Will become true as a new word is selected
+        private bool ShowingW1synonyms { get; set; } = false;
+        private int CorrectAnswersThisRound { get; set; } = 0;
 
         public InQuiz(bool welcomeLocationInitialized = true)
         {
@@ -80,7 +81,7 @@ namespace SteelQuiz.QuizPractise
 
         private void NewWord()
         {
-            countThisTranslationToProgress = true;
+            CountThisTranslationToProgress = true;
             lbl_lang1.Text = QuizCore.Quiz.Language1;
             CurrentWordPairID = QuestionSelector.GenerateWordPair();
 
@@ -105,29 +106,38 @@ namespace SteelQuiz.QuizPractise
 
         private void NewRound()
         {
-            countThisTranslationToProgress = true;
+            CountThisTranslationToProgress = true;
             lbl_lang1.Text = "Info";
-            lbl_word1.Text = "Round completed! Press enter to continue";
-            waitingForEnter = true;
+            lbl_word1.Text = "Round completed! Press ENTER to continue";
+            WaitingForEnter = true;
+            lbl_progress.Text = $"Progress this round: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
+            if (QuizCore.QuizProgress.FullTestInProgress)
+            {
+                var msg = MessageBox.Show($"Full test results:\r\nCorrect: {CorrectAnswersThisRound} / {QuizCore.GetTotalWordsThisRound()}",
+                    "Full test finished - SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            }
+            CorrectAnswersThisRound = 0;
+            QuestionSelector.NewRound();
             lbl_progress.Text = $"Progress this round: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
         }
 
         private void CheckWord()
         {
             lbl_lang1.Text = "Info";
-            var mismatch = CurrentWordPairID.GetWordPair().CharacterMismatches(CurrentInput, TranslationMode, !userCopyWord && countThisTranslationToProgress);
-            userCopyWord = false;
+            var mismatch = CurrentWordPairID.GetWordPair().CharacterMismatches(CurrentInput, TranslationMode, !UserCopyingWord && CountThisTranslationToProgress);
+            UserCopyingWord = false;
             if (mismatch.Correct())
             {
                 if (!mismatch.AskingForSynonym)
                 {
+                    ++CorrectAnswersThisRound;
                     lbl_word1.Text = "Correct! Press enter to continue";
-                    waitingForEnter = true;
+                    WaitingForEnter = true;
                 }
                 else
                 {
                     lbl_word1.Text = "Correct, but a synonym to this word is being asked for.\r\n\r\nPress ENTER to try again.\r\n\r\n(press ENTER then write the answer)";
-                    waitingForEnter = true;
+                    WaitingForEnter = true;
                 }
             }
             else
@@ -144,7 +154,7 @@ namespace SteelQuiz.QuizPractise
                         + $"{CurrentWordPairID.GetWordPair().Word2}\r\n\r\nCorrect {QuizCore.Quiz.Language1} word is:\r\n{CurrentWordPairID.GetWordPair().Word1}"
                         + $"\r\n\r\nType the {QuizCore.Quiz.Language1} word";
                 }
-                userCopyWord = true;
+                UserCopyingWord = true;
                 CurrentInput = "";
                 lbl_word2.Text = "Enter your answer...";
             }
@@ -173,27 +183,10 @@ namespace SteelQuiz.QuizPractise
                 e.Handled = true;
 
                 // ENTER
-                if (waitingForEnter)
+                if (WaitingForEnter)
                 {
-                    waitingForEnter = false;
-                    if (!reAskWord)
-                    {
-                        NewWord();
-                    }
-                    else
-                    {
-                        if (TranslationMode == WordPair.TranslationMode.L1_to_L2)
-                        {
-                            lbl_word1.Text = CurrentWordPairID.GetWordPair().Word1;
-                        }
-                        else if (TranslationMode == WordPair.TranslationMode.L2_to_L1)
-                        {
-                            lbl_word1.Text = CurrentWordPairID.GetWordPair().Word2;
-                        }
-                        CurrentInput = "";
-                        lbl_word2.Text = "Enter your answer...";
-                        reAskWord = false;
-                    }
+                    WaitingForEnter = false;
+                    NewWord();
                 }
                 else
                 {
@@ -202,7 +195,7 @@ namespace SteelQuiz.QuizPractise
 
                 updateInputLbl = false;
             }
-            else if (!waitingForEnter)
+            else if (!WaitingForEnter)
             {
                 CurrentInput += e.KeyChar.ToString();
             }
@@ -273,9 +266,9 @@ namespace SteelQuiz.QuizPractise
 
         private void btn_w1_synonyms_Click(object sender, EventArgs e)
         {
-            showingW1synonyms = !showingW1synonyms;
+            ShowingW1synonyms = !ShowingW1synonyms;
 
-            if (showingW1synonyms)
+            if (ShowingW1synonyms)
             {
                 if (CurrentWordPairID.GetWordPair().Word1Synonyms.Count == 0)
                 {
@@ -326,7 +319,7 @@ namespace SteelQuiz.QuizPractise
                 return;
             }
 
-            countThisTranslationToProgress = false;
+            CountThisTranslationToProgress = false;
             var fixMenu = new FixQuizErrors(this, CurrentWordPairID.GetWordPair());
             var result = fixMenu.ShowDialog();
             if (result == DialogResult.OK)

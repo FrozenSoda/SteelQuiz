@@ -33,6 +33,8 @@ namespace SteelQuiz.QuizPractise
 
         public static ulong? GenerateWordPair()
         {
+            QuizCore.ResetWordsAskedMemo();
+
             if (QuizCore.QuizProgress.CurrentWordPairID != null)
             {
                 return QuizCore.QuizProgress.CurrentWordPairID;
@@ -54,7 +56,7 @@ namespace SteelQuiz.QuizPractise
 
             if (wordsNotToAsk.Length == QuizCore.Quiz.WordPairs.Count)
             {
-                NewRound();
+                //NewRound();
                 return null;
             }
 
@@ -85,7 +87,7 @@ namespace SteelQuiz.QuizPractise
             if (alreadyAsked.Length == QuizCore.Quiz.WordPairs.Count)
             {
                 //new round
-                NewRound();
+                //NewRound();
                 return null;
             }
 
@@ -147,6 +149,8 @@ namespace SteelQuiz.QuizPractise
 
                 return prb;
             }
+
+            QuizCore.ResetTotalWordCountMemo();
 
             var rnd = new Random();
             var skipCount = 0;

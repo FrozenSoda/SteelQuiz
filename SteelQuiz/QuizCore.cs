@@ -360,8 +360,14 @@ namespace SteelQuiz
             QuizProgress.WordProgDatas = originalWordProgDataCollection.Clone();
         }
 
+        private static int totalWordsThisRoundMemo = -1;
         public static int GetTotalWordsThisRound()
         {
+            if (totalWordsThisRoundMemo != -1)
+            {
+                return totalWordsThisRoundMemo;
+            }
+
             var counter = 0;
             foreach (var word in QuizProgress.WordProgDatas)
             {
@@ -371,11 +377,18 @@ namespace SteelQuiz
                 }
             }
 
+            totalWordsThisRoundMemo = counter;
             return counter;
         }
 
+        private static int wordsAskedThisRoundMemo = -1;
         public static int GetWordsAskedThisRound()
         {
+            if (wordsAskedThisRoundMemo != -1)
+            {
+                return wordsAskedThisRoundMemo;
+            }
+
             var counter = 0;
             foreach (var word in QuizProgress.WordProgDatas)
             {
@@ -385,7 +398,18 @@ namespace SteelQuiz
                 }
             }
 
+            wordsAskedThisRoundMemo = counter;
             return counter;
+        }
+
+        public static void ResetTotalWordCountMemo()
+        {
+            totalWordsThisRoundMemo = -1;
+        }
+
+        public static void ResetWordsAskedMemo()
+        {
+            wordsAskedThisRoundMemo = -1;
         }
     }
 }
