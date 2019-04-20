@@ -248,7 +248,10 @@ namespace SteelQuiz.QuizImport.Guide
             if (msg == DialogResult.No)
             {
                 e.Cancel = true;
-                Step = 0;
+                if (Step == -1)
+                {
+                    Step = 0;
+                }
             }
         }
     }
