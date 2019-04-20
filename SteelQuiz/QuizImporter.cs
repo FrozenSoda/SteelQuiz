@@ -342,6 +342,12 @@ namespace SteelQuiz
                 }
             }
 
+            // if the unicode character was the last character in the string, add it, as it won't be added in the for loop
+            if (foundString.Length == UNICODE_LENGTH)
+            {
+                foundUnicodeChars.Add(foundString);
+            }
+
             foreach (var unicodeChar in foundUnicodeChars)
             {
                 var unicodeCodeStr = unicodeChar.Substring(2); // remove \u from unicodeChar
