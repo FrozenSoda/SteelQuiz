@@ -27,11 +27,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SteelQuiz.QuizData;
 
-namespace SteelQuiz
+namespace SteelQuiz.QuizImport
 {
     public static class QuizImporter
     {
-        public static bool FromStudentlitteratur(string url, string lang1, string lang2, string filename, bool multipleTranslationsAsDifferentWordPairs)
+        public static bool FromStudentlitteratur(string url, string filename, bool multipleTranslationsAsDifferentWordPairs)
         {
             string quizEncoded;
             using (var wclient = new WebClient())
@@ -69,15 +69,21 @@ namespace SteelQuiz
 
             if (wordPairs.Count == 1)
             {
-                var msg = MessageBox.Show("SteelQuiz might not be able to import this particular quiz correctly. It might contain errors.\r\n\r\nTry anyway?",
-                    "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button3);
+                var msg = MessageBox.Show("SteelQuiz might not be able to import this particular quiz correctly. It looks like the import failed.\r\n\r\nTry anyway?",
+                    "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
                 if (msg == DialogResult.No)
                 {
                     return false;
                 }
             }
 
-            var quiz = new Quiz(lang1, lang2, MetaData.QUIZ_FILE_FORMAT_VERSION);
+            var langSelector = new QuizLanguageSelector(wordPairs);
+            if (langSelector.ShowDialog() != DialogResult.OK)
+            {
+                return false;
+            }
+
+            var quiz = new Quiz(langSelector.Language1, langSelector.Language2, MetaData.QUIZ_FILE_FORMAT_VERSION);
             quiz.WordPairs = wordPairs;
             
             if (filename == "")

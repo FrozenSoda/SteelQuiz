@@ -28,6 +28,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AutoUpdaterDotNET;
 using SteelQuiz.QuizData;
+using SteelQuiz.QuizImport;
 using SteelQuiz.QuizPractise;
 
 namespace SteelQuiz
@@ -68,7 +69,7 @@ namespace SteelQuiz
 
         private void btn_importQuizFromSite_Click(object sender, EventArgs e)
         {
-            var import = new ImportQuizFromSite();
+            var import = new QuizImportGuide();
             if (import.ShowDialog() == DialogResult.OK)
             {
                 Program.frmInQuiz = new InQuiz();

@@ -16,46 +16,21 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using SteelQuiz.QuizData;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
-namespace SteelQuiz.QuizData
+namespace SteelQuiz.QuizImport
 {
-    public static class QuizDataUtil
+    public partial class QuizLanguageSelector : Form
     {
-        public static ulong GenerateID(IEnumerable<WordPair> wordPairs)
-        {
-            ulong? maxId = null;
-            foreach (var wp in wordPairs)
-            {
-                if (maxId == null || wp.ID > maxId)
-                {
-                    maxId = wp.ID;
-                }
-            }
-
-            return maxId == null ? 0 : (ulong)maxId + 1;
-        }
-
-        public static WordPair GetWordPair(this ulong? id)
-        {
-            if (id == null)
-            {
-                return null;
-            }
-
-            foreach (var wp in QuizCore.Quiz.WordPairs)
-            {
-                if (wp.ID == id)
-                {
-                    return wp;
-                }
-            }
-
-            return null;
-        }
+        
     }
 }

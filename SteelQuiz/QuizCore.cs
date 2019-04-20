@@ -359,8 +359,8 @@ namespace SteelQuiz
 
         private static void RevertWordProgDataCollection(out List<WordProgData> bkpOfCurrent)
         {
-            bkpOfCurrent = QuizProgress.WordProgDatas.Clone();
-            QuizProgress.WordProgDatas = originalWordProgDataCollection.Clone();
+            bkpOfCurrent = QuizProgress.WordProgDatas.Clone().ToList();
+            QuizProgress.WordProgDatas = originalWordProgDataCollection.Clone().ToList();
         }
 
         private static int totalWordsThisRoundMemo = -1;
