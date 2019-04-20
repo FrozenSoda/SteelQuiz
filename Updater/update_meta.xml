@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <item>
-	<version>1.1.0.1</version>
+	<version>1.1.1.0</version>
 	<url>https://raw.githubusercontent.com/steel9/SteelQuiz/master/Updater/update_pkg.zip</url>
 	<changelog>https://github.com/steel9/SteelQuiz/releases</changelog>
 	<mandatory>false</mandatory>
-	<checksum algorithm="SHA512">3b5b281c17e4e5142f2dcbfb4a13143485602782dd923c4f4e458a0cbd811b45646a581c180b4192df492e301f073e1afbb824dce8742e784f3ce25bf2c66963</checksum>
+	<checksum algorithm="SHA512">78e2e6f7ceb79332e75388798b469d0cc03baec2a7af20d76c040ca4d5f0bc3809d96f22f7c9513df0b0b4fd94246494074fef7335739d00e63387d0a3422cf8</checksum>
 </item>

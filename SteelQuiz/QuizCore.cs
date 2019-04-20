@@ -157,6 +157,9 @@ namespace SteelQuiz
 
         public static bool Load(Quiz quiz, string quizPath = null)
         {
+            ResetTotalWordsThisRoundCountMemo();
+            ResetWordsAskedThisRoundMemo();
+
             var dirInit = CheckInitDirectories();
             if (!dirInit)
             {
