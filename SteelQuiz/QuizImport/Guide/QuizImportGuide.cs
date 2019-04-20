@@ -106,11 +106,21 @@ namespace SteelQuiz.QuizImport.Guide
             else if (Step == 1)
             {
                 var uc = pnl_steps.Controls[Step] as Step1;
+                if (uc.Language1 == "")
+                {
+                    MessageBox.Show("Language cannot be empty", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 Language1 = uc.Language1;
             }
             else if (Step == 2)
             {
                 var uc = pnl_steps.Controls[Step] as Step2;
+                if (uc.Language2 == "")
+                {
+                    MessageBox.Show("Language cannot be empty", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 Language2 = uc.Language2;
 
                 Finish();
@@ -180,6 +190,7 @@ namespace SteelQuiz.QuizImport.Guide
             {
                 if (s.GetStepNumber() == step)
                 {
+                    // the step usercontrol already exists, so show it instead of creating a new
                     (s as UserControl).Show();
                     return;
                 }
