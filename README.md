@@ -27,7 +27,7 @@ SteelQuiz automatically searches for, and offers to download and install updates
 &NewLine;   
 &NewLine;   
 ### Additional notes
-- The portable version (and the installed version) saves data in '%appdata%\SteelQuiz'.
+- The portable version (and the installed version) saves user data (config, quizzes, quiz progress etc.) in '%appdata%\SteelQuiz'.
 - The uninstaller does not remove user data.
 &NewLine;   
 &NewLine;   
