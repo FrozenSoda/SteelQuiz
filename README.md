@@ -22,7 +22,7 @@ Is there a spelling error in the quiz? Or do you want to add a synonym to a word
 
 ### Automatic updates
 SteelQuiz automatically searches for, and offers to download and install updates. You only need to click one button to update. It is recommended to always install all available updates, as they often contain important bug fixes and improvements.
-**Note:** SteelQuiz might automatically install updates without asking, if it is considered necessary.
+**Note:** SteelQuiz might automatically download and install updates without asking, if it is considered necessary.  
 &NewLine;   
 &NewLine;   
 &NewLine;   
