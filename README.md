@@ -27,7 +27,7 @@ SteelQuiz automatically searches for, and offers to download and install updates
 &NewLine;   
 &NewLine;   
 ### Additional notes
-- The portable version (and the installed version) saves data in '%appdata%\SteelQuiz'.
+- The portable version (and the installed version) saves user data (config, quizzes, quiz progress etc.) in '%appdata%\SteelQuiz'.
 - The uninstaller does not remove user data.
 &NewLine;   
 &NewLine;   
@@ -38,8 +38,8 @@ SteelQuiz automatically searches for, and offers to download and install updates
 
 ### Incompatible software
 - **f.lux Microsoft Store version**   
-Causes problems with installation, updates, and uninstallation of SteelQuiz. The specific cause of the problem is currently unknown.   
-**Solution:** Use the non-Store version of f.lux instead (the one you download from their website).
+Causes problems with installation, updates, and uninstallation of SteelQuiz. The specific cause of the problem is currently unknown. For some reason, it causes System PID 4 to lock SteelQuiz.exe.   
+**Solution:** Uninstall the f.lux Microsoft Store version, and install the non-Store version of f.lux instead (the one you download from their website).
 
 ### Development tools
 - Microsoft Visual Studio Community 2019
