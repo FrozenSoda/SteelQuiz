@@ -161,7 +161,7 @@ namespace SteelQuiz.QuizPractise
                     {
                         ++CorrectAnswersThisRound;
                     }
-                    lbl_word1.Text = "Correct! Press enter to continue";
+                    lbl_word1.Text = "Correct! Press ENTER to continue";
                     QuizCore.ResetWordsAskedThisRoundMemo();
                     lbl_progress.Text = $"Progress this round: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
                     WaitingForEnter = true;
