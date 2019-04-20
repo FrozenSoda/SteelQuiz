@@ -57,7 +57,7 @@ namespace SteelQuiz.QuizImport.Guide
             this.txt_lang.Location = new System.Drawing.Point(145, 334);
             this.txt_lang.Name = "txt_lang";
             this.txt_lang.Size = new System.Drawing.Size(618, 20);
-            this.txt_lang.TabIndex = 3;
+            this.txt_lang.TabIndex = 0;
             // 
             // label1
             // 
@@ -87,7 +87,7 @@ namespace SteelQuiz.QuizImport.Guide
             this.lbl_question.TabIndex = 4;
             this.lbl_question.Text = "Which language are the following words written in?";
             // 
-            // Step2
+            // Step1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -95,7 +95,7 @@ namespace SteelQuiz.QuizImport.Guide
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lst_words);
             this.Controls.Add(this.lbl_question);
-            this.Name = "Step2";
+            this.Name = "Step1";
             this.Size = new System.Drawing.Size(766, 364);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -103,7 +103,7 @@ namespace SteelQuiz.QuizImport.Guide
         }
 
         #endregion
-        private System.Windows.Forms.TextBox txt_lang;
+        internal System.Windows.Forms.TextBox txt_lang;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox lst_words;
         private System.Windows.Forms.Label lbl_question;

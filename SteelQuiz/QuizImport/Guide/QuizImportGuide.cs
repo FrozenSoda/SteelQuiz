@@ -177,6 +177,20 @@ namespace SteelQuiz.QuizImport.Guide
             }
 
             UpdateNavText();
+
+            pnl_steps.Focus();
+            if (Step == 0)
+            {
+                (pnl_steps.Controls[Step] as Step0).rdo_studentlitteratur.Focus();
+            }
+            else if (Step == 1)
+            {
+                (pnl_steps.Controls[Step] as Step1).txt_lang.Focus();
+            }
+            else if (Step == 2)
+            {
+                (pnl_steps.Controls[Step] as Step2).txt_lang.Focus();
+            }
         }
 
         private void InitStep(int step)
@@ -186,6 +200,7 @@ namespace SteelQuiz.QuizImport.Guide
                 ctrl.Hide();
             }
 
+            /*
             foreach (IStep s in pnl_steps.Controls.OfType<IStep>())
             {
                 if (s.GetStepNumber() == step)
@@ -194,6 +209,14 @@ namespace SteelQuiz.QuizImport.Guide
                     (s as UserControl).Show();
                     return;
                 }
+            }
+            */
+
+            if (step < pnl_steps.Controls.Count)
+            {
+                // the step usercontrol already exists, so show it instead of creating a new
+                (pnl_steps.Controls[step] as UserControl).Show();
+                return;
             }
 
             if (step == 0)

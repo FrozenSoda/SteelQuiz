@@ -57,6 +57,7 @@ namespace SteelQuiz.QuizImport.Guide
             this.label1 = new System.Windows.Forms.Label();
             this.flp_siteRdo = new System.Windows.Forms.FlowLayoutPanel();
             this.rdo_studentlitteratur = new System.Windows.Forms.RadioButton();
+            this.label2 = new System.Windows.Forms.Label();
             this.pnl_multiTranslationOptions.SuspendLayout();
             this.flp_siteRdo.SuspendLayout();
             this.SuspendLayout();
@@ -65,7 +66,7 @@ namespace SteelQuiz.QuizImport.Guide
             // 
             this.pnl_multiTranslationOptions.Controls.Add(this.rdo_addMultipleTranslationsAsSynonyms);
             this.pnl_multiTranslationOptions.Controls.Add(this.rdo_multipleTranslationsAsDifferentWordPairs);
-            this.pnl_multiTranslationOptions.Location = new System.Drawing.Point(3, 99);
+            this.pnl_multiTranslationOptions.Location = new System.Drawing.Point(3, 146);
             this.pnl_multiTranslationOptions.Name = "pnl_multiTranslationOptions";
             this.pnl_multiTranslationOptions.Size = new System.Drawing.Size(760, 55);
             this.pnl_multiTranslationOptions.TabIndex = 18;
@@ -76,7 +77,7 @@ namespace SteelQuiz.QuizImport.Guide
             this.rdo_addMultipleTranslationsAsSynonyms.Location = new System.Drawing.Point(3, 26);
             this.rdo_addMultipleTranslationsAsSynonyms.Name = "rdo_addMultipleTranslationsAsSynonyms";
             this.rdo_addMultipleTranslationsAsSynonyms.Size = new System.Drawing.Size(344, 17);
-            this.rdo_addMultipleTranslationsAsSynonyms.TabIndex = 1;
+            this.rdo_addMultipleTranslationsAsSynonyms.TabIndex = 4;
             this.rdo_addMultipleTranslationsAsSynonyms.Text = "Add multiple translations of a word as synonyms in a single word pair";
             this.rdo_addMultipleTranslationsAsSynonyms.UseVisualStyleBackColor = true;
             this.rdo_addMultipleTranslationsAsSynonyms.CheckedChanged += new System.EventHandler(this.Rdo_addMultipleTranslationsAsSynonyms_CheckedChanged);
@@ -88,8 +89,7 @@ namespace SteelQuiz.QuizImport.Guide
             this.rdo_multipleTranslationsAsDifferentWordPairs.Location = new System.Drawing.Point(3, 3);
             this.rdo_multipleTranslationsAsDifferentWordPairs.Name = "rdo_multipleTranslationsAsDifferentWordPairs";
             this.rdo_multipleTranslationsAsDifferentWordPairs.Size = new System.Drawing.Size(376, 17);
-            this.rdo_multipleTranslationsAsDifferentWordPairs.TabIndex = 0;
-            this.rdo_multipleTranslationsAsDifferentWordPairs.TabStop = true;
+            this.rdo_multipleTranslationsAsDifferentWordPairs.TabIndex = 3;
             this.rdo_multipleTranslationsAsDifferentWordPairs.Text = "Add words with multiple translations as separate word pairs (recommended)";
             this.rdo_multipleTranslationsAsDifferentWordPairs.UseVisualStyleBackColor = true;
             // 
@@ -97,7 +97,7 @@ namespace SteelQuiz.QuizImport.Guide
             // 
             this.lbl_studentl_supportedExercises.AutoSize = true;
             this.lbl_studentl_supportedExercises.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_studentl_supportedExercises.Location = new System.Drawing.Point(3, 177);
+            this.lbl_studentl_supportedExercises.Location = new System.Drawing.Point(3, 259);
             this.lbl_studentl_supportedExercises.Name = "lbl_studentl_supportedExercises";
             this.lbl_studentl_supportedExercises.Size = new System.Drawing.Size(446, 80);
             this.lbl_studentl_supportedExercises.TabIndex = 17;
@@ -110,22 +110,22 @@ namespace SteelQuiz.QuizImport.Guide
             this.btn_urlHowToFind.Location = new System.Drawing.Point(688, 44);
             this.btn_urlHowToFind.Name = "btn_urlHowToFind";
             this.btn_urlHowToFind.Size = new System.Drawing.Size(75, 23);
-            this.btn_urlHowToFind.TabIndex = 16;
+            this.btn_urlHowToFind.TabIndex = 3;
             this.btn_urlHowToFind.Text = "How to find";
             this.btn_urlHowToFind.UseVisualStyleBackColor = true;
             this.btn_urlHowToFind.Click += new System.EventHandler(this.btn_urlHowToFind_Click);
             // 
             // txt_quizName
             // 
-            this.txt_quizName.Location = new System.Drawing.Point(69, 73);
+            this.txt_quizName.Location = new System.Drawing.Point(69, 83);
             this.txt_quizName.Name = "txt_quizName";
             this.txt_quizName.Size = new System.Drawing.Size(694, 20);
-            this.txt_quizName.TabIndex = 14;
+            this.txt_quizName.TabIndex = 2;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 76);
+            this.label4.Location = new System.Drawing.Point(3, 86);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(60, 13);
             this.label4.TabIndex = 15;
@@ -136,7 +136,7 @@ namespace SteelQuiz.QuizImport.Guide
             this.txt_url.Location = new System.Drawing.Point(41, 46);
             this.txt_url.Name = "txt_url";
             this.txt_url.Size = new System.Drawing.Size(641, 20);
-            this.txt_url.TabIndex = 12;
+            this.txt_url.TabIndex = 1;
             this.txt_url.DoubleClick += new System.EventHandler(this.Txt_url_DoubleClick);
             // 
             // label1
@@ -151,10 +151,11 @@ namespace SteelQuiz.QuizImport.Guide
             // flp_siteRdo
             // 
             this.flp_siteRdo.Controls.Add(this.rdo_studentlitteratur);
-            this.flp_siteRdo.Location = new System.Drawing.Point(3, 3);
+            this.flp_siteRdo.Location = new System.Drawing.Point(75, 3);
             this.flp_siteRdo.Name = "flp_siteRdo";
-            this.flp_siteRdo.Size = new System.Drawing.Size(760, 27);
-            this.flp_siteRdo.TabIndex = 11;
+            this.flp_siteRdo.Size = new System.Drawing.Size(688, 27);
+            this.flp_siteRdo.TabIndex = 0;
+            this.flp_siteRdo.TabStop = true;
             // 
             // rdo_studentlitteratur
             // 
@@ -168,10 +169,20 @@ namespace SteelQuiz.QuizImport.Guide
             this.rdo_studentlitteratur.Text = "Studentlitteratur";
             this.rdo_studentlitteratur.UseVisualStyleBackColor = true;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 8);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(66, 13);
+            this.label2.TabIndex = 19;
+            this.label2.Text = "Quiz source:";
+            // 
             // Step0
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.pnl_multiTranslationOptions);
             this.Controls.Add(this.lbl_studentl_supportedExercises);
             this.Controls.Add(this.btn_urlHowToFind);
@@ -204,5 +215,6 @@ namespace SteelQuiz.QuizImport.Guide
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.FlowLayoutPanel flp_siteRdo;
         internal System.Windows.Forms.RadioButton rdo_studentlitteratur;
+        private System.Windows.Forms.Label label2;
     }
 }

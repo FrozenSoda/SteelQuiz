@@ -33,7 +33,7 @@ namespace SteelQuiz.QuizImport.Guide
     {
         private const int STEP_NUMBER = 1;
 
-        public string Language1 { get; set; } = "";
+        public string Language1 => txt_lang.Text;
 
         public Step1(IEnumerable<WordPair> wordPairs)
         {

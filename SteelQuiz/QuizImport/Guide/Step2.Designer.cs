@@ -57,7 +57,7 @@ namespace SteelQuiz.QuizImport.Guide
             this.txt_lang.Location = new System.Drawing.Point(145, 334);
             this.txt_lang.Name = "txt_lang";
             this.txt_lang.Size = new System.Drawing.Size(618, 20);
-            this.txt_lang.TabIndex = 3;
+            this.txt_lang.TabIndex = 0;
             // 
             // label1
             // 
@@ -103,7 +103,7 @@ namespace SteelQuiz.QuizImport.Guide
         }
 
         #endregion
-        private System.Windows.Forms.TextBox txt_lang;
+        internal System.Windows.Forms.TextBox txt_lang;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox lst_words;
         private System.Windows.Forms.Label lbl_question;

@@ -57,7 +57,7 @@ namespace SteelQuiz.QuizImport.Guide
             this.btn_next.Location = new System.Drawing.Point(549, 392);
             this.btn_next.Name = "btn_next";
             this.btn_next.Size = new System.Drawing.Size(239, 46);
-            this.btn_next.TabIndex = 5;
+            this.btn_next.TabIndex = 1;
             this.btn_next.Text = "Next";
             this.btn_next.UseVisualStyleBackColor = true;
             this.btn_next.Click += new System.EventHandler(this.btn_next_Click);
@@ -77,7 +77,8 @@ namespace SteelQuiz.QuizImport.Guide
             this.pnl_steps.Location = new System.Drawing.Point(12, 12);
             this.pnl_steps.Name = "pnl_steps";
             this.pnl_steps.Size = new System.Drawing.Size(776, 374);
-            this.pnl_steps.TabIndex = 11;
+            this.pnl_steps.TabIndex = 0;
+            this.pnl_steps.TabStop = true;
             // 
             // QuizImportGuide
             // 
