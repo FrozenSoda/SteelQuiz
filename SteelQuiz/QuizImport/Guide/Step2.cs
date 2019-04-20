@@ -15,14 +15,14 @@ namespace SteelQuiz.QuizImport.Guide
     {
         private const int STEP_NUMBER = 2;
 
-        public string Language { get; set; } = "";
+        public string Language2 { get; set; } = "";
 
         public Step2(IEnumerable<WordPair> wordPairs)
         {
             InitializeComponent();
             foreach (var wordPair in wordPairs)
             {
-                lst_words.Items.Add(wordPair.Word1);
+                lst_words.Items.Add(wordPair.Word2);
             }
         }
 

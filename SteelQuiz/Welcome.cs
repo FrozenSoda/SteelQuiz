@@ -29,6 +29,7 @@ using System.Windows.Forms;
 using AutoUpdaterDotNET;
 using SteelQuiz.QuizData;
 using SteelQuiz.QuizImport;
+using SteelQuiz.QuizImport.Guide;
 using SteelQuiz.QuizPractise;
 
 namespace SteelQuiz

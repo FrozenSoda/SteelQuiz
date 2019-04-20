@@ -31,7 +31,7 @@ namespace SteelQuiz.QuizImport
 {
     public static class QuizImporter
     {
-        public static bool FromStudentlitteratur(string url, string filename, bool multipleTranslationsAsDifferentWordPairs)
+        public static IEnumerable<WordPair> FromStudentlitteratur(string url, string filename, bool multipleTranslationsAsDifferentWordPairs)
         {
             string quizEncoded;
             using (var wclient = new WebClient())
@@ -44,7 +44,7 @@ namespace SteelQuiz.QuizImport
                 {
                     MessageBox.Show("An error occurred while downloading the quiz:\r\n\r\n" + ex.ToString(), "SteelQuiz", MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
-                    return false;
+                    return null;
                 }
             }
 
@@ -52,11 +52,11 @@ namespace SteelQuiz.QuizImport
 
             if (quizEncoded.Contains("_____"))
             {
-                wordPairs = FromStudentlitteratur_VocabularyBank(quizEncoded, multipleTranslationsAsDifferentWordPairs);
+                wordPairs = FromStudentlitteratur_VocabularyBank(quizEncoded, multipleTranslationsAsDifferentWordPairs).ToList();
             }
             else
             {
-                wordPairs = FromStudentlitteratur_Spelling(quizEncoded, multipleTranslationsAsDifferentWordPairs);
+                wordPairs = FromStudentlitteratur_Spelling(quizEncoded, multipleTranslationsAsDifferentWordPairs).ToList();
             }
             
 
@@ -64,7 +64,7 @@ namespace SteelQuiz.QuizImport
             {
                 MessageBox.Show("No quiz could be found in the quiz url specified. Make sure you selected the correct quiz source, and entered the URL correctly",
                     "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
+                return null;
             }
 
             if (wordPairs.Count == 1)
@@ -73,10 +73,13 @@ namespace SteelQuiz.QuizImport
                     "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
                 if (msg == DialogResult.No)
                 {
-                    return false;
+                    return null;
                 }
             }
 
+            return wordPairs;
+
+            /*
             var langSelector = new QuizLanguageSelector(wordPairs);
             if (langSelector.ShowDialog() != DialogResult.OK)
             {
@@ -96,6 +99,7 @@ namespace SteelQuiz.QuizImport
             QuizCore.SaveQuiz();
 
             return true;
+            */
         }
 
         [Flags]
@@ -114,7 +118,7 @@ namespace SteelQuiz.QuizImport
             { ':', InString.Colon }
         };
 
-        private static List<WordPair> FromStudentlitteratur_VocabularyBank(string quizEncoded, bool multipleTranslationsAsDifferentWordPairs)
+        private static IEnumerable<WordPair> FromStudentlitteratur_VocabularyBank(string quizEncoded, bool multipleTranslationsAsDifferentWordPairs)
         {
             var foundStr = "";
             var inString = InString.None;
@@ -212,7 +216,7 @@ namespace SteelQuiz.QuizImport
             return wordPairs;
         }
 
-        private static List<WordPair> FromStudentlitteratur_Spelling(string quizEncoded, bool multipleTranslationsAsDifferentWordPairs)
+        private static IEnumerable<WordPair> FromStudentlitteratur_Spelling(string quizEncoded, bool multipleTranslationsAsDifferentWordPairs)
         {
             var foundStr = "";
             var inString = false;

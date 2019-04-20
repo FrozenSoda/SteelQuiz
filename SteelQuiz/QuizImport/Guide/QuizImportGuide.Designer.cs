@@ -70,7 +70,7 @@ namespace SteelQuiz.QuizImport.Guide
             this.btn_prevCancel.TabIndex = 6;
             this.btn_prevCancel.Text = "Cancel";
             this.btn_prevCancel.UseVisualStyleBackColor = true;
-            this.btn_prevCancel.Click += new System.EventHandler(this.btn_cancel_Click);
+            this.btn_prevCancel.Click += new System.EventHandler(this.btn_prevCancel_Click);
             // 
             // pnl_steps
             // 
@@ -93,6 +93,7 @@ namespace SteelQuiz.QuizImport.Guide
             this.Name = "QuizImportGuide";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Quiz Importer | SteelQuiz";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.QuizImportGuide_FormClosing);
             this.ResumeLayout(false);
 
         }

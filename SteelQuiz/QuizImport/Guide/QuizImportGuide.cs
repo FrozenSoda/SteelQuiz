@@ -32,7 +32,7 @@ namespace SteelQuiz.QuizImport.Guide
 {
     public partial class QuizImportGuide : Form
     {
-        private int _step = 0;
+        private int _step = -1;
         private int Step
         {
             get
@@ -47,7 +47,10 @@ namespace SteelQuiz.QuizImport.Guide
             }
         }
 
-        private Quiz Quiz { get; set; }
+        private IEnumerable<WordPair> WordPairs { get; set; }
+        private string QuizPath { get; set; }
+        private string Language1 { get; set; }
+        private string Language2 { get; set; }
 
         public QuizImportGuide()
         {
@@ -58,53 +61,103 @@ namespace SteelQuiz.QuizImport.Guide
 
         private void btn_next_Click(object sender, EventArgs e)
         {
-            if (Step == 1)
+            if (Step == 0)
             {
-                var uc = pnl_steps.Controls[Step] as Step1;
+                var uc = pnl_steps.Controls[Step] as Step0;
                 var quizFilename = uc.txt_quizName.Text;
                 if (quizFilename == "")
                 {
-                    var msg = MessageBox.Show("If you don't select a file name, a GUID will be used as the quiz name instead, which will make it hard to find."
-                        + " Continue without choosing a name?", "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (msg == DialogResult.No)
-                    {
-                        return;
-                    }
+                    var msg = MessageBox.Show("Quiz name cannot be empty", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
 
                 var quizPath = Path.Combine(QuizCore.QUIZ_FOLDER, quizFilename) + QuizCore.QUIZ_EXTENSION;
 
                 if (File.Exists(quizPath))
                 {
-                    var msg = MessageBox.Show("A quiz with this name already exists. Replace?", "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    var msg = MessageBox.Show("A quiz with this name already exists. Replace?", "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning,
+                        MessageBoxDefaultButton.Button2);
                     if (msg == DialogResult.No)
                     {
                         return;
                     }
                 }
 
+                QuizPath = quizPath;
+
                 var url = uc.txt_url.Text;
-                var success = false;
+                IEnumerable<WordPair> wordPairs;
                 if (uc.rdo_studentlitteratur.Checked)
                 {
-                    success = QuizImporter.FromStudentlitteratur(url, quizFilename, uc.rdo_multipleTranslationsAsDifferentWordPairs.Checked);
+                    wordPairs = QuizImporter.FromStudentlitteratur(url, quizFilename, uc.rdo_multipleTranslationsAsDifferentWordPairs.Checked);
+                }
+                else
+                {
+                    throw new NotImplementedException("Hmm... A radio button for import site source was selected that was not implemented in the code");
                 }
 
-                if (success)
+                if (wordPairs == null)
                 {
-                    ++Step;
+                    return;
                 }
+
+                WordPairs = wordPairs;
             }
+            else if (Step == 1)
+            {
+                var uc = pnl_steps.Controls[Step] as Step1;
+                Language1 = uc.Language1;
+            }
+            else if (Step == 2)
+            {
+                var uc = pnl_steps.Controls[Step] as Step2;
+                Language2 = uc.Language2;
+
+                Finish();
+                return;
+            }
+
+            ++Step;
         }
 
-        private void btn_cancel_Click(object sender, EventArgs e)
+        private void btn_prevCancel_Click(object sender, EventArgs e)
         {
             --Step;
         }
 
+        private void Finish()
+        {
+            var quiz = new Quiz(Language1, Language2, MetaData.QUIZ_FILE_FORMAT_VERSION);
+            quiz.WordPairs = WordPairs.ToList();
+            QuizCore.Load(quiz, QuizPath);
+            QuizCore.SaveQuiz();
+            DialogResult = DialogResult.OK;
+        }
+
+        private void UpdateNavText()
+        {
+            if (Step > 0)
+            {
+                btn_prevCancel.Text = "Previous";
+            }
+            else
+            {
+                btn_prevCancel.Text = "Cancel";
+            }
+
+            if (Step == 2)
+            {
+                btn_next.Text = "Finish";
+            }
+            else
+            {
+                btn_next.Text = "Next";
+            }
+        }
+
         private void SwitchStep()
         {
-            if (Step == 0)
+            if (Step == -1)
             {
                 DialogResult = DialogResult.Cancel;
             }
@@ -112,6 +165,8 @@ namespace SteelQuiz.QuizImport.Guide
             {
                 InitStep(Step);
             }
+
+            UpdateNavText();
         }
 
         private void InitStep(int step)
@@ -130,15 +185,36 @@ namespace SteelQuiz.QuizImport.Guide
                 }
             }
 
-            if (step == 1)
+            if (step == 0)
             {
-                var step1 = new Step1();
+                var step0 = new Step0();
+                pnl_steps.Controls.Add(step0);
+            }
+            else if (step == 1)
+            {
+                var step1 = new Step1(WordPairs);
                 pnl_steps.Controls.Add(step1);
             }
             else if (step == 2)
             {
-                var step2 = new Step3();
+                var step2 = new Step2(WordPairs);
                 pnl_steps.Controls.Add(step2);
+            }
+        }
+
+        private void QuizImportGuide_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (DialogResult == DialogResult.OK)
+            {
+                return;
+            }
+
+            var msg = MessageBox.Show("Are you sure you want to cancel?", "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+                MessageBoxDefaultButton.Button2);
+            if (msg == DialogResult.No)
+            {
+                e.Cancel = true;
+                Step = 0;
             }
         }
     }

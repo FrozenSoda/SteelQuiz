@@ -64,18 +64,6 @@
       <DependentUpon>QuizRecoveryUC.cs</DependentUpon>
     </Compile>
     <Compile Include="QuizImport\Guide\IStep.cs" />
-    <Compile Include="QuizImport\Guide\QuizLanguageSelector.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="QuizImport\Guide\QuizLanguageSelector.Designer.cs">
-      <DependentUpon>QuizLanguageSelector.cs</DependentUpon>
-    </Compile>
-    <Compile Include="QuizImport\Guide\Step3.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="QuizImport\Guide\Step3.Designer.cs">
-      <DependentUpon>Step3.cs</DependentUpon>
-    </Compile>
     <Compile Include="QuizImport\Guide\Step2.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -87,6 +75,12 @@
     </Compile>
     <Compile Include="QuizImport\Guide\Step1.Designer.cs">
       <DependentUpon>Step1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuizImport\Guide\Step0.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuizImport\Guide\Step0.Designer.cs">
+      <DependentUpon>Step0.cs</DependentUpon>
     </Compile>
     <Compile Include="QuizPractise\FixQuizErrors.cs">
       <SubType>Form</SubType>
@@ -178,17 +172,14 @@
     <EmbeddedResource Include="QuizEditor\QuizRecoveryUC.resx">
       <DependentUpon>QuizRecoveryUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="QuizImport\Guide\QuizLanguageSelector.resx">
-      <DependentUpon>QuizLanguageSelector.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="QuizImport\Guide\Step1.resx">
-      <DependentUpon>Step1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="QuizImport\Guide\Step3.resx">
-      <DependentUpon>Step3.cs</DependentUpon>
+    <EmbeddedResource Include="QuizImport\Guide\Step0.resx">
+      <DependentUpon>Step0.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuizImport\Guide\Step2.resx">
       <DependentUpon>Step2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuizImport\Guide\Step1.resx">
+      <DependentUpon>Step1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuizPractise\FixQuizErrors.resx">
       <DependentUpon>FixQuizErrors.cs</DependentUpon>
