@@ -1,4 +1,2 @@
-- Better response after full test
-- You should be prompted to write both synonyms of a word where synonyms are added
-
+- More guide-ish quiz import guide
 - register file associations for .steelquiz
