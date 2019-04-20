@@ -240,6 +240,7 @@ namespace SteelQuiz.QuizImport.Guide
         {
             if (DialogResult == DialogResult.OK)
             {
+                // do not ask if the dialogresult is OK (which means that the exit has been called from the 'Finish' button)
                 return;
             }
 
