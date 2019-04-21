@@ -34,7 +34,7 @@ namespace SteelQuiz.QuizImport.Guide
         {
             InitializeComponent();
 
-            if (importSource == QuizImporter.ImportSource.StudentLitteratur)
+            if (importSource == QuizImporter.ImportSource.Studentlitteratur)
             {
                 lbl_instructions.Text = "To find it:\r\n\r\n1. Start the exercise.\r\n2. Open developer tools in your browser (Ctrl+Shift+I in Chrome).\r\n" +
                     "3. Go to the Network tab.\r\n4. Write/click on one word in the exercise and press ENTER.\r\n5. Double click the entry which appeared in the Network tab." +
@@ -44,7 +44,8 @@ namespace SteelQuiz.QuizImport.Guide
 
         private void Txt_url_DoubleClick(object sender, EventArgs e)
         {
-            txt_url.Text = "";
+            txt_url.SelectAll();
+            txt_url.Focus();
         }
     }
 }

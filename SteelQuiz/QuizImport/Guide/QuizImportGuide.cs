@@ -69,7 +69,7 @@ namespace SteelQuiz.QuizImport.Guide
                 var uc = pnl_steps.Controls[Step] as Step1;
                 if (uc.rdo_studentlitteratur.Checked)
                 {
-                    ImportSource = QuizImporter.ImportSource.StudentLitteratur;
+                    ImportSource = QuizImporter.ImportSource.Studentlitteratur;
                 }
                 else
                 {
@@ -86,7 +86,7 @@ namespace SteelQuiz.QuizImport.Guide
                 var uc = pnl_steps.Controls[Step] as Step3;
                 string url = uc.txt_url.Text;
                 IEnumerable<WordPair> wordPairs;
-                if (ImportSource == QuizImporter.ImportSource.StudentLitteratur)
+                if (ImportSource == QuizImporter.ImportSource.Studentlitteratur)
                 {
                     wordPairs = QuizImporter.FromStudentlitteratur(url, MultipleTranslationsAsDifferentWordPairs);
                 }
