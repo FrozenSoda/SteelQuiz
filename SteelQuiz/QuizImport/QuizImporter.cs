@@ -67,7 +67,7 @@ namespace SteelQuiz.QuizImport
 
             if (wordPairs.Count == 0)
             {
-                MessageBox.Show("No quiz could be found in the quiz url specified. Make sure you selected the correct quiz source, and entered the URL correctly",
+                MessageBox.Show("No quiz could be found in the quiz URL specified. Make sure you selected the correct quiz source, and entered the URL correctly",
                     "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
@@ -83,28 +83,6 @@ namespace SteelQuiz.QuizImport
             }
 
             return wordPairs;
-
-            /*
-            var langSelector = new QuizLanguageSelector(wordPairs);
-            if (langSelector.ShowDialog() != DialogResult.OK)
-            {
-                return false;
-            }
-
-            var quiz = new Quiz(langSelector.Language1, langSelector.Language2, MetaData.QUIZ_FILE_FORMAT_VERSION);
-            quiz.WordPairs = wordPairs;
-            
-            if (filename == "")
-            {
-                //filename = QuizCore.Quiz.GUID.ToString();
-                filename = quiz.GUID.ToString();
-            }
-            var path = Path.Combine(QuizCore.QUIZ_FOLDER, filename + QuizCore.QUIZ_EXTENSION);
-            QuizCore.Load(quiz, path);
-            QuizCore.SaveQuiz();
-
-            return true;
-            */
         }
 
         [Flags]

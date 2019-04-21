@@ -98,7 +98,7 @@ namespace SteelQuiz
             this.btn_importQuizFromSite.Name = "btn_importQuizFromSite";
             this.btn_importQuizFromSite.Size = new System.Drawing.Size(237, 57);
             this.btn_importQuizFromSite.TabIndex = 3;
-            this.btn_importQuizFromSite.Text = "Import quiz from another site";
+            this.btn_importQuizFromSite.Text = "Import quiz from another source";
             this.btn_importQuizFromSite.UseVisualStyleBackColor = true;
             this.btn_importQuizFromSite.Click += new System.EventHandler(this.btn_importQuizFromSite_Click);
             // 
