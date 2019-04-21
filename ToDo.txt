@@ -1,2 +1,0 @@
-- More guide-ish quiz import guide
-- register file associations for .steelquiz
