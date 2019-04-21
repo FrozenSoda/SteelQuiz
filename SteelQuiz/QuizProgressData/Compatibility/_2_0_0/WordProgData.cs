@@ -24,23 +24,27 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using SteelQuiz.QuizData;
 
-namespace SteelQuiz.QuizProgressData
+namespace SteelQuiz.QuizProgressData.Compatibility._2_0_0
 {
     public class WordProgData : ICloneable
     {
-        public WordPair WordPair { get; set; }
+        public ulong WordPairID { get; set; }
+
         [JsonProperty]
-        internal List<WordTry> WordTries { get; set; }
+        internal List<WordTry> WordTries { get; set; } = null;
 
         private const int WORD_TRIES_TO_KEEP = 5;
 
         public bool AskedThisRound { get; set; } = false;
         public bool SkipThisRound { get; set; } = false;
 
-        public WordProgData(WordPair wordPair)
+        public WordProgData(ulong wordPairID)
         {
-            WordTries = new List<WordTry>();
-            WordPair = wordPair;
+            WordPairID = wordPairID;
+            if (WordTries == null)
+            {
+                WordTries = new List<WordTry>();
+            }
         }
 
         public void AddWordTry(WordTry wordTry)
@@ -72,7 +76,7 @@ namespace SteelQuiz.QuizProgressData
 
         public object Clone()
         {
-            var cpy = new WordProgData(WordPair);
+            var cpy = new WordProgData(WordPairID);
             cpy.WordTries = WordTries;
             cpy.AskedThisRound = AskedThisRound;
             cpy.SkipThisRound = SkipThisRound;

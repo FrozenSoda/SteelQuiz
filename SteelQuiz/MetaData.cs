@@ -26,6 +26,6 @@ namespace SteelQuiz
 {
     public static class MetaData
     {
-        public const string QUIZ_FILE_FORMAT_VERSION = "2.0.0";
+        public const string QUIZ_FILE_FORMAT_VERSION = "3.0.0";
     }
 }

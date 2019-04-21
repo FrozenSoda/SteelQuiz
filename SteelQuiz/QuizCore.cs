@@ -74,15 +74,21 @@ namespace SteelQuiz
 
             QuizPath = quizPath;
 
-            var quizConverted = QuizCompatibilityConverter.ChkUpgradeQuiz(quiz, QuizPath);
-            if (quizConverted != null)
+            var quizVer = SUtil.PropertyDefined(quiz.FileFormatVersion) && quiz.FileFormatVersion != null
+                    ? new Version((string)quiz.FileFormatVersion) : new Version(1, 0, 0);
+            var currVer = new Version(MetaData.QUIZ_FILE_FORMAT_VERSION);
+
+            if (currVer.CompareTo(quizVer) > 0)
             {
-                return Load(quizConverted);
+                var msg = MessageBox.Show("The quiz must be converted to load it. A backup will be created automatically.\r\nConvert?",
+                    "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (msg == DialogResult.No)
+                {
+                    return false;
+                }
             }
-            else
-            {
-                return false;
-            }
+
+            return Load(quiz);
         }
 
         public static bool Load(Guid quizGuid)
@@ -176,7 +182,11 @@ namespace SteelQuiz
             ConfigManager.Config.LastQuiz = quiz.GUID;
             ConfigManager.SaveConfig();
 
-            //SaveQuiz();
+            if (new Version(MetaData.QUIZ_FILE_FORMAT_VERSION).CompareTo(new Version(Quiz.FileFormatVersion)) > 0)
+            {
+                Quiz.FileFormatVersion = MetaData.QUIZ_FILE_FORMAT_VERSION;
+                SaveQuiz();
+            }
 
             return LoadProgressData();
         }
@@ -196,54 +206,36 @@ namespace SteelQuiz
                 var currVer = new Version(MetaData.QUIZ_FILE_FORMAT_VERSION);
                 if (currVer.CompareTo(progressVer) > 0)
                 {
-                    //conversion required
-
-                    /*
-                    var msg = MessageBox.Show("The progress data files for SteelQuiz on the computer was made for an older version of SteelQuiz and must be converted to "
-                        + "the current format to load it. A backup will be created automatically, meaning that you won't lose anything when converting.\r\n\r\n"
-                        + "Warning! Every quiz in the quiz folder will be upgraded as well, as it is required for the conversion.\r\nTo use older version of SteelQuiz, you must revert the files in %appdata%\\SteelQuiz to the corresponding backups, which are "
-                        + "created automatically in %appdata%\\SteelQuiz\\Backups"
-                        + "\r\n\r\nProceed with conversion?", "Quiz conversion required - SteelQuiz",
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                        */
-                    var msg = MessageBox.Show("Config conversion, progress data conversion & conversion of all quizzes required due to updated file formats. " +
-                        "Backups will be created automatically. Convert now?",
-                        "Quiz conversion required - SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    var msg = MessageBox.Show("Due to major changes in the quiz progress format, your quiz progress data has to be reset to work with the new version." +
+                            " The old format contained unfixable problems, and a conversion would have been too complex and buggy.\r\n\r\nA backup will automatically" +
+                            " be created in case you wish to revert to an older version later.\r\n\r\nReset progress data?", "SteelQuiz", MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Warning);
 
                     if (msg == DialogResult.No)
                     {
                         return false;
                     }
 
-                    var bkp = QuizCompatibilityConverter.BackupProgress(progressVer);
+                    var bkp = BackupProgress(progressVer);
                     if (!bkp)
                     {
                         return false;
                     }
 
-                    
+                    File.Delete(PROGRESS_FILE_PATH);
+
+                    return LoadProgressData();
                 }
 
-                /*
-                CfgQuizzesProgressData cfgDz;
+                QuizProgDataRoot quizProgDataRoot;
                 using (var reader = new StreamReader(PROGRESS_FILE_PATH))
                 {
-                    cfgDz = JsonConvert.DeserializeObject<CfgQuizzesProgressData>(reader.ReadToEnd());
-                }
-                cfgDz.FileFormatVersion = MetaData.QUIZ_FILE_FORMAT_VERSION;
-                */
-
-                cfgDz = QuizCompatibilityConverter.ChkUpgradeProgressData(cfgDz);
-                if (cfgDz == null)
-                {
-                    MessageBox.Show("Quiz progress conversion error", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //Application.Exit();
-                    return false;
+                    quizProgDataRoot = JsonConvert.DeserializeObject<QuizProgDataRoot>(reader.ReadToEnd());
                 }
 
                 //find progress for current quiz
                 bool found = false;
-                foreach (dynamic progData in cfgDz.QuizProgDatas)
+                foreach (QuizProgData progData in quizProgDataRoot.QuizProgDatas)
                 {
                     if (progData.QuizGUID.Equals(Quiz.GUID))
                     {
@@ -264,6 +256,162 @@ namespace SteelQuiz
             {
                 QuizProgress = new QuizProgData(Quiz);
                 SaveQuizProgress();
+            }
+
+            return FixQuizProgressData();
+        }
+
+        /*
+         * Updates changes to word pairs in quiz progress data, and removes progress data from word pairs that were removed from the quiz
+         */ 
+        public static bool FixQuizProgressData()
+        {
+            // REMOVE WORD PAIRS FROM PROGRESS DATA THAT WERE REMOVED FROM THE QUIZ
+            var findCurrent = FindWordPairInQuiz(QuizProgress.CurrentWordPair);
+            QuizProgress.CurrentWordPair = findCurrent;
+
+            var toRemove = new List<WordProgData>();
+            foreach (var wordProgData in QuizProgress.WordProgDatas)
+            {
+                var find = FindWordPairInQuiz(wordProgData.WordPair);
+                if (find == null)
+                {
+                    toRemove.Add(wordProgData);
+                }
+                else
+                {
+                    wordProgData.WordPair = find;
+                }
+            }
+
+            foreach (var rm in toRemove)
+            {
+                QuizProgress.WordProgDatas.Remove(rm);
+            }
+
+            // ADD WORD PAIRS TO PROGRESS DATA THAT WERE ADDED TO THE QUIZ
+            foreach (var wordPair in Quiz.WordPairs)
+            {
+                if (!WordPairExistsInProgressData(wordPair))
+                {
+                    QuizProgress.WordProgDatas.Add(new WordProgData(wordPair));
+                }
+            }
+
+            SaveQuizProgress();
+
+            return true;
+        }
+
+        private static WordPair FindWordPairInQuiz(WordPair _wordPair)
+        {
+            foreach (var wordPair in Quiz.WordPairs)
+            {
+                if (wordPair.Equals(_wordPair, true, true))
+                {
+                    return wordPair;
+                }
+            }
+
+            return null;
+        }
+
+        private static bool WordPairExistsInProgressData(WordPair _wordPair)
+        {
+            foreach (var wordProgData in QuizProgress.WordProgDatas)
+            {
+                if (wordProgData.WordPair.Equals(_wordPair, true, true))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public static bool BackupQuiz(string quizPath, Version quizVer)
+        {
+            var extStartIndex = quizPath.Length - QuizCore.QUIZ_EXTENSION.Length;
+            var bkpQuizPath = Path.Combine(
+                QuizCore.QUIZ_BACKUP_FOLDER,
+                Path.GetFileNameWithoutExtension(quizPath) + "_" + quizVer.ToString() + QuizCore.QUIZ_EXTENSION);
+            var exCount = 1;
+            while (File.Exists(bkpQuizPath))
+            {
+                ++exCount;
+                //newQuizPath = QuizPath.Insert(extStartIndex, "_" + quizVer.ToString() + "_" + exCount);
+                bkpQuizPath = Path.Combine(
+                    QuizCore.QUIZ_BACKUP_FOLDER,
+                    Path.GetFileNameWithoutExtension(quizPath) + "_" + quizVer.ToString() + "_" + exCount + QuizCore.QUIZ_EXTENSION);
+            }
+
+            try
+            {
+                File.Copy(quizPath, bkpQuizPath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred while backing up the quiz, the conversion will not run:\r\n\r\n" + ex.ToString(), "SteelQuiz", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return false;
+            }
+
+            return true;
+        }
+
+        public static bool BackupProgress(Version progressVer)
+        {
+            var extStartIndex = QuizCore.PROGRESS_FILE_PATH.Length - ".json".Length;
+            var bkpProgressPath = Path.Combine(
+                QuizCore.BACKUP_FOLDER,
+                Path.GetFileNameWithoutExtension(QuizCore.PROGRESS_FILE_PATH) + "_" + progressVer.ToString() + ".json");
+            var exCount = 1;
+            while (File.Exists(bkpProgressPath))
+            {
+                ++exCount;
+                bkpProgressPath = Path.Combine(
+                    QuizCore.BACKUP_FOLDER,
+                    Path.GetFileNameWithoutExtension(QuizCore.PROGRESS_FILE_PATH) + "_" + progressVer.ToString() + "_" + exCount + ".json");
+            }
+
+            try
+            {
+                File.Copy(QuizCore.PROGRESS_FILE_PATH, bkpProgressPath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred while backing up the quiz progress, the conversion will not run:\r\n\r\n" + ex.ToString(),
+                    "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            return true;
+        }
+
+        public static bool BackupConfig(Version cfgVer)
+        {
+            var extStartIndex = ConfigManager.CONFIG_PATH.Length - ".json".Length;
+            var bkpCfgPath = Path.Combine(
+                QuizCore.BACKUP_FOLDER,
+                Path.GetFileNameWithoutExtension(ConfigManager.CONFIG_PATH) + "_" + cfgVer.ToString() + ".json");
+            var exCount = 1;
+            while (File.Exists(bkpCfgPath))
+            {
+                ++exCount;
+                bkpCfgPath = Path.Combine(
+                    QuizCore.BACKUP_FOLDER,
+                    Path.GetFileNameWithoutExtension(ConfigManager.CONFIG_PATH) + "_" + cfgVer.ToString() + "_" + exCount + ".json");
+            }
+
+            try
+            {
+                File.Copy(ConfigManager.CONFIG_PATH, bkpCfgPath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred while backing up the configuration file, the conversion will not run:\r\n\r\n" + ex.ToString(),
+                    "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
 
             return true;
@@ -307,7 +455,7 @@ namespace SteelQuiz
             }
             else
             {
-                cfgDz = new QuizProgDataRoot();
+                cfgDz = new QuizProgDataRoot(MetaData.QUIZ_FILE_FORMAT_VERSION);
                 cfgDz.QuizProgDatas.Add(QuizProgress);
             }
 

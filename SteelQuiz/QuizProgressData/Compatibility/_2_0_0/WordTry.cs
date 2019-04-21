@@ -22,40 +22,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SteelQuiz.QuizData
+namespace SteelQuiz.QuizProgressData.Compatibility._2_0_0
 {
-    public static class QuizDataUtil
+    public class WordTry
     {
-        public static ulong GenerateID(IEnumerable<WordPair> wordPairs)
+        public bool Success { get; set; }
+
+        public WordTry(bool success)
         {
-            ulong? maxId = null;
-            foreach (var wp in wordPairs)
-            {
-                if (maxId == null || wp.ID > maxId)
-                {
-                    maxId = wp.ID;
-                }
-            }
-
-            return maxId == null ? 0 : (ulong)maxId + 1;
-        }
-
-        public static WordPair GetWordPair(this ulong? id)
-        {
-            if (id == null)
-            {
-                return null;
-            }
-
-            foreach (var wp in QuizCore.Quiz.WordPairs)
-            {
-                if (wp.ID == id)
-                {
-                    return wp;
-                }
-            }
-
-            return null;
+            Success = success;
         }
     }
 }

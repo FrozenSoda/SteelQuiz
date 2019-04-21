@@ -163,7 +163,7 @@ namespace SteelQuiz.QuizEditor
                     translationRules |= StringComp.Rules.IgnoreExclamation;
                 }
 
-                var wordPair = new WordPair(i, wordpair.txt_word1.Text, wordpair.txt_word2.Text, translationRules, wordpair.Synonyms1, wordpair.Synonyms2);
+                var wordPair = new WordPair(wordpair.txt_word1.Text, wordpair.txt_word2.Text, translationRules, wordpair.Synonyms1, wordpair.Synonyms2);
                 quiz.WordPairs.Add(wordPair);
                 ++i;
             }
@@ -417,6 +417,11 @@ namespace SteelQuiz.QuizEditor
                     if (sfd != DialogResult.OK)
                     {
                         return false;
+                    }
+
+                    if (QuizPath != sfd_quiz.FileName)
+                    {
+                        QuizGuid = Guid.NewGuid(); // create new guid if path is not the same
                     }
                     path = sfd_quiz.FileName;
                 }

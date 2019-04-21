@@ -31,30 +31,30 @@ namespace SteelQuiz.QuizPractise
     {
         public static bool SkipNextMasterNotice { get; set; } = false;
 
-        public static ulong? GenerateWordPair()
+        public static WordPair GenerateWordPair()
         {
             QuizCore.ResetWordsAskedThisRoundMemo();
 
-            if (QuizCore.QuizProgress.CurrentWordPairID != null)
+            if (QuizCore.QuizProgress.CurrentWordPair != null)
             {
-                return QuizCore.QuizProgress.CurrentWordPairID;
+                return QuizCore.QuizProgress.CurrentWordPair;
             }
 
             if (QuizCore.QuizProgress.FullTestInProgress)
             {
-                return GenerateWordPairWithoutAI();
+                return GenerateWordPair_NoIntelligentLearning();
             }
             else
             {
-                return GenerateWordPairAI();
+                return GenerateWordPair_IntelligentLearning();
             }
         }
 
-        private static ulong? GenerateWordPairWithoutAI()
+        private static WordPair GenerateWordPair_NoIntelligentLearning()
         {
             var wordsNotToAsk = QuizCore.QuizProgress.WordsNotToAsk();
 
-            if (wordsNotToAsk.Length == QuizCore.Quiz.WordPairs.Count)
+            if (wordsNotToAsk.Count() == QuizCore.Quiz.WordPairs.Count)
             {
                 //NewRound();
                 return null;
@@ -64,9 +64,9 @@ namespace SteelQuiz.QuizPractise
 
             for (int i = 0; i < QuizCore.Quiz.WordPairs.Count; ++i)
             {
-                for (int j = 0; j < wordsNotToAsk.Length; ++j)
+                for (int j = 0; j < wordsNotToAsk.Count(); ++j)
                 {
-                    if (QuizCore.Quiz.WordPairs[i].ID == wordsNotToAsk[j])
+                    if (QuizCore.Quiz.WordPairs[i].Equals(wordsNotToAsk.ElementAt(j)))
                     {
                         wordsNotToAsk_Indexes.Add(i);
                     }
@@ -75,19 +75,17 @@ namespace SteelQuiz.QuizPractise
 
             var rndIndex = new Random().RandomNext(0, QuizCore.Quiz.WordPairs.Count, wordsNotToAsk_Indexes.ToArray());
             var wordPair = QuizCore.Quiz.WordPairs[rndIndex];
-            QuizCore.QuizProgress.SetCurrentWordPair(wordPair.ID);
+            QuizCore.QuizProgress.SetCurrentWordPair(wordPair);
             QuizCore.SaveQuizProgress();
-            return wordPair.ID;
+            return wordPair;
         }
 
-        private static ulong? GenerateWordPairAI()
+        private static WordPair GenerateWordPair_IntelligentLearning()
         {
             var alreadyAsked = QuizCore.QuizProgress.WordsNotToAsk();
 
-            if (alreadyAsked.Length == QuizCore.Quiz.WordPairs.Count)
+            if (alreadyAsked.Count() == QuizCore.Quiz.WordPairs.Count)
             {
-                //new round
-                //NewRound();
                 return null;
             }
 
@@ -104,13 +102,13 @@ namespace SteelQuiz.QuizPractise
             }
 
             // universal probability
-            double u = QuizCore.QuizProgress.WordProgDatas.Where(x => !alreadyAsked.Contains(x.WordPairID)).Sum(p => askProb(p.GetSuccessRate()));
+            double u = QuizCore.QuizProgress.WordProgDatas.Where(x => !alreadyAsked.Contains(x.WordPair)).Sum(p => askProb(p.GetSuccessRate()));
 
             // random number between 0 and u
             double r = new Random().NextDouble() * u;
 
             double sum = 0;
-            foreach (var wordPairData in QuizCore.QuizProgress.WordProgDatas.Where(x => !alreadyAsked.Contains(x.WordPairID)))
+            foreach (var wordPairData in QuizCore.QuizProgress.WordProgDatas.Where(x => !alreadyAsked.Contains(x.WordPair)))
             {
                 var askPrb = askProb(wordPairData.GetSuccessRate());
                 sum += askPrb;
@@ -119,9 +117,9 @@ namespace SteelQuiz.QuizPractise
                     // Select which synonym of the word to ask for
 
 
-                    QuizCore.QuizProgress.SetCurrentWordPair(wordPairData.WordPairID);
+                    QuizCore.QuizProgress.SetCurrentWordPair(wordPairData.WordPair);
                     QuizCore.SaveQuizProgress();
-                    return wordPairData.WordPairID;
+                    return wordPairData.WordPair;
                 }
             }
 

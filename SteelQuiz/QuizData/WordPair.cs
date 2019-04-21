@@ -27,8 +27,6 @@ namespace SteelQuiz.QuizData
 {
     public class WordPair
     {
-        public ulong ID { get; set; }
-
         public string Word1 { get; set; }
         public List<string> Word1Synonyms { get; set; }
 
@@ -37,9 +35,8 @@ namespace SteelQuiz.QuizData
 
         public StringComp.Rules TranslationRules { get; set; }
 
-        public WordPair(ulong id, string word1, string word2, StringComp.Rules translationRules, List<string> word1Synonyms = null, List<string> word2Synonyms = null)
+        public WordPair(string word1, string word2, StringComp.Rules translationRules, List<string> word1Synonyms = null, List<string> word2Synonyms = null)
         {
-            ID = id;
             Word1 = word1;
             Word2 = word2;
             TranslationRules = translationRules;
@@ -64,10 +61,10 @@ namespace SteelQuiz.QuizData
         }
         public override bool Equals(object obj)
         {
-            return Equals(obj as WordPair);
+            return Equals(obj as WordPair, true, true);
         }
 
-        public bool Equals(WordPair wp2)
+        public bool Equals(WordPair wp2, bool ignoreSynonyms, bool ignoreTranslationRules)
         {
             if (wp2 == null)
             {
@@ -76,16 +73,15 @@ namespace SteelQuiz.QuizData
 
             return
                 this.Word1 == ((WordPair)wp2).Word1 &&
-                this.Word1Synonyms.SequenceEqual(((WordPair)wp2).Word1Synonyms) &&
+                (ignoreSynonyms || this.Word1Synonyms.SequenceEqual(((WordPair)wp2).Word1Synonyms)) &&
                 this.Word2 == ((WordPair)wp2).Word2 &&
-                this.Word2Synonyms.SequenceEqual(((WordPair)wp2).Word2Synonyms) &&
-                this.TranslationRules == ((WordPair)wp2).TranslationRules;
+                (ignoreSynonyms || this.Word2Synonyms.SequenceEqual(((WordPair)wp2).Word2Synonyms)) &&
+                (ignoreTranslationRules || this.TranslationRules == ((WordPair)wp2).TranslationRules);
         }
 
         public override int GetHashCode()
         {
-            var hashCode = -690155679;
-            hashCode = hashCode * -1521134295 + ID.GetHashCode();
+            var hashCode = -295472895;
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Word1);
             hashCode = hashCode * -1521134295 + EqualityComparer<List<string>>.Default.GetHashCode(Word1Synonyms);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Word2);
@@ -99,7 +95,7 @@ namespace SteelQuiz.QuizData
         {
             foreach (var wordProgData in QuizCore.QuizProgress.WordProgDatas)
             {
-                if (wordProgData.WordPairID == this.ID)
+                if (wordProgData.WordPair.Equals(this, true, true))
                 {
                     return wordProgData;
                 }

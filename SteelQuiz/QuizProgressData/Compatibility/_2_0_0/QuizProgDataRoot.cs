@@ -22,16 +22,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SteelQuiz.QuizProgressData
+namespace SteelQuiz.QuizProgressData.Compatibility._2_0_0
 {
     public class QuizProgDataRoot
     {
         public string FileFormatVersion { get; set; }
         public List<QuizProgData> QuizProgDatas { get; set; }
 
-        public QuizProgDataRoot(string fileFormatVersion)
+        public QuizProgDataRoot()
         {
-            FileFormatVersion = fileFormatVersion;
+            FileFormatVersion = MetaData.QUIZ_FILE_FORMAT_VERSION;
             QuizProgDatas = new List<QuizProgData>();
         }
     }
