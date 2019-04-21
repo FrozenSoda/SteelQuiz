@@ -46,66 +46,101 @@ namespace SteelQuiz.QuizImport.Guide
         /// </summary>
         private void InitializeComponent()
         {
-            this.txt_lang = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lst_words = new System.Windows.Forms.ListBox();
             this.lbl_question = new System.Windows.Forms.Label();
+            this.pnl_multiTranslationOptions = new System.Windows.Forms.Panel();
+            this.rdo_addMultipleTranslationsAsSynonyms = new System.Windows.Forms.RadioButton();
+            this.rdo_multipleTranslationsAsDifferentWordPairs = new System.Windows.Forms.RadioButton();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pnl_multiTranslationOptions.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // txt_lang
-            // 
-            this.txt_lang.Location = new System.Drawing.Point(145, 334);
-            this.txt_lang.Name = "txt_lang";
-            this.txt_lang.Size = new System.Drawing.Size(618, 20);
-            this.txt_lang.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(-1, 335);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(140, 16);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Language (in English):";
-            // 
-            // lst_words
-            // 
-            this.lst_words.FormattingEnabled = true;
-            this.lst_words.Location = new System.Drawing.Point(2, 55);
-            this.lst_words.Name = "lst_words";
-            this.lst_words.Size = new System.Drawing.Size(761, 277);
-            this.lst_words.TabIndex = 6;
-            this.lst_words.TabStop = false;
             // 
             // lbl_question
             // 
             this.lbl_question.Font = new System.Drawing.Font("Segoe UI Semilight", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_question.Location = new System.Drawing.Point(3, 9);
+            this.lbl_question.Location = new System.Drawing.Point(3, 13);
             this.lbl_question.Name = "lbl_question";
-            this.lbl_question.Size = new System.Drawing.Size(775, 43);
-            this.lbl_question.TabIndex = 4;
-            this.lbl_question.Text = "Which language are the following words written in?";
+            this.lbl_question.Size = new System.Drawing.Size(760, 43);
+            this.lbl_question.TabIndex = 20;
+            this.lbl_question.Text = "How should SteelQuiz import words that have multiple definitions?";
             // 
-            // Step2
+            // pnl_multiTranslationOptions
+            // 
+            this.pnl_multiTranslationOptions.Controls.Add(this.label2);
+            this.pnl_multiTranslationOptions.Controls.Add(this.label1);
+            this.pnl_multiTranslationOptions.Controls.Add(this.rdo_addMultipleTranslationsAsSynonyms);
+            this.pnl_multiTranslationOptions.Controls.Add(this.rdo_multipleTranslationsAsDifferentWordPairs);
+            this.pnl_multiTranslationOptions.Location = new System.Drawing.Point(8, 59);
+            this.pnl_multiTranslationOptions.Name = "pnl_multiTranslationOptions";
+            this.pnl_multiTranslationOptions.Size = new System.Drawing.Size(760, 161);
+            this.pnl_multiTranslationOptions.TabIndex = 21;
+            // 
+            // rdo_addMultipleTranslationsAsSynonyms
+            // 
+            this.rdo_addMultipleTranslationsAsSynonyms.AutoSize = true;
+            this.rdo_addMultipleTranslationsAsSynonyms.Location = new System.Drawing.Point(3, 78);
+            this.rdo_addMultipleTranslationsAsSynonyms.Name = "rdo_addMultipleTranslationsAsSynonyms";
+            this.rdo_addMultipleTranslationsAsSynonyms.Size = new System.Drawing.Size(396, 17);
+            this.rdo_addMultipleTranslationsAsSynonyms.TabIndex = 4;
+            this.rdo_addMultipleTranslationsAsSynonyms.Text = "Add multiple definitions/translations of a word as synonyms in a single word pair" +
+    "";
+            this.rdo_addMultipleTranslationsAsSynonyms.UseVisualStyleBackColor = true;
+            this.rdo_addMultipleTranslationsAsSynonyms.CheckedChanged += new System.EventHandler(this.Rdo_addMultipleTranslationsAsSynonyms_CheckedChanged);
+            // 
+            // rdo_multipleTranslationsAsDifferentWordPairs
+            // 
+            this.rdo_multipleTranslationsAsDifferentWordPairs.AutoSize = true;
+            this.rdo_multipleTranslationsAsDifferentWordPairs.Checked = true;
+            this.rdo_multipleTranslationsAsDifferentWordPairs.Location = new System.Drawing.Point(3, 3);
+            this.rdo_multipleTranslationsAsDifferentWordPairs.Name = "rdo_multipleTranslationsAsDifferentWordPairs";
+            this.rdo_multipleTranslationsAsDifferentWordPairs.Size = new System.Drawing.Size(428, 17);
+            this.rdo_multipleTranslationsAsDifferentWordPairs.TabIndex = 3;
+            this.rdo_multipleTranslationsAsDifferentWordPairs.TabStop = true;
+            this.rdo_multipleTranslationsAsDifferentWordPairs.Text = "Add words with multiple definitions/translations as separate word pairs (recommen" +
+    "ded)";
+            this.rdo_multipleTranslationsAsDifferentWordPairs.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(20, 110);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(735, 32);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "With this selected, any definition of the word will be accepted when you are prom" +
+    "pted to enter it. You will not necessarily learn all of the definitions of the w" +
+    "ords.";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(20, 33);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(438, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "With this selected, SteelQuiz will make sure that you learn all of the definition" +
+    "s, of the words.";
+            // 
+            // Step4
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.txt_lang);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.lst_words);
+            this.Controls.Add(this.pnl_multiTranslationOptions);
             this.Controls.Add(this.lbl_question);
-            this.Name = "Step2";
+            this.Name = "Step4";
             this.Size = new System.Drawing.Size(766, 364);
+            this.pnl_multiTranslationOptions.ResumeLayout(false);
+            this.pnl_multiTranslationOptions.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-        internal System.Windows.Forms.TextBox txt_lang;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListBox lst_words;
+
         private System.Windows.Forms.Label lbl_question;
+        private System.Windows.Forms.Panel pnl_multiTranslationOptions;
+        internal System.Windows.Forms.RadioButton rdo_addMultipleTranslationsAsSynonyms;
+        internal System.Windows.Forms.RadioButton rdo_multipleTranslationsAsDifferentWordPairs;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }

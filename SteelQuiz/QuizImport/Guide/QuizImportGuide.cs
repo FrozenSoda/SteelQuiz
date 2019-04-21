@@ -27,6 +27,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
 using SteelQuiz.QuizData;
+using System.Text.RegularExpressions;
 
 namespace SteelQuiz.QuizImport.Guide
 {
@@ -47,6 +48,8 @@ namespace SteelQuiz.QuizImport.Guide
             }
         }
 
+        private QuizImporter.ImportSource ImportSource { get; set; }
+        private bool MultipleTranslationsAsDifferentWordPairs { get; set; }
         private IEnumerable<WordPair> WordPairs { get; set; }
         private string QuizPath { get; set; }
         private string Language1 { get; set; }
@@ -61,9 +64,104 @@ namespace SteelQuiz.QuizImport.Guide
 
         private void btn_next_Click(object sender, EventArgs e)
         {
+            if (Step == 1)
+            {
+                var uc = pnl_steps.Controls[Step] as Step1;
+                if (uc.rdo_studentlitteratur.Checked)
+                {
+                    ImportSource = QuizImporter.ImportSource.StudentLitteratur;
+                }
+                else
+                {
+                    throw new NotImplementedException("Hmm... A radio button for import site source was selected that was not implemented in the code");
+                }
+            }
+            else if (Step == 2)
+            {
+                var uc = pnl_steps.Controls[Step] as Step2;
+                MultipleTranslationsAsDifferentWordPairs = uc.rdo_multipleTranslationsAsDifferentWordPairs.Checked;
+            }
+            else if (Step == 3)
+            {
+                var uc = pnl_steps.Controls[Step] as Step3;
+                string url = uc.txt_url.Text;
+                IEnumerable<WordPair> wordPairs;
+                if (ImportSource == QuizImporter.ImportSource.StudentLitteratur)
+                {
+                    wordPairs = QuizImporter.FromStudentlitteratur(url, MultipleTranslationsAsDifferentWordPairs);
+                }
+                else
+                {
+                    throw new NotImplementedException("Hmm... A radio button for import site source was selected that was not implemented in the code (enum)");
+                }
+
+                if (wordPairs == null)
+                {
+                    return;
+                }
+
+                WordPairs = wordPairs;
+            }
+            else if (Step == 4)
+            {
+                var uc = pnl_steps.Controls[Step] as Step4;
+                var quizFilename = uc.txt_quizName.Text;
+                if (quizFilename == "")
+                {
+                    var msg = MessageBox.Show("Quiz name cannot be empty", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                var forbiddenCharacters = Path.GetInvalidFileNameChars();
+                var isValid = quizFilename.IndexOfAny(forbiddenCharacters) < 0;
+                if (!isValid)
+                {
+                    var msg = MessageBox.Show("Quiz name contains forbidden characters",
+                        "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                var quizPath = Path.Combine(QuizCore.QUIZ_FOLDER, quizFilename) + QuizCore.QUIZ_EXTENSION;
+
+                if (File.Exists(quizPath))
+                {
+                    var msg = MessageBox.Show("A quiz with this name already exists. Replace?", "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning,
+                        MessageBoxDefaultButton.Button2);
+                    if (msg == DialogResult.No)
+                    {
+                        return;
+                    }
+                }
+
+                QuizPath = quizPath;
+            }
+            else if (Step == 5)
+            {
+                var uc = pnl_steps.Controls[Step] as Step5;
+                if (uc.Language1 == "")
+                {
+                    MessageBox.Show("Language cannot be empty", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                Language1 = uc.Language1;
+            }
+            else if (Step == 6)
+            {
+                var uc = pnl_steps.Controls[Step] as Step6;
+                if (uc.Language2 == "")
+                {
+                    MessageBox.Show("Language cannot be empty", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                Language2 = uc.Language2;
+
+                Finish();
+                return;
+            }
+            /*
             if (Step == 0)
             {
-                var uc = pnl_steps.Controls[Step] as Step0;
+                var uc = pnl_steps.Controls[Step] as Step0_old;
                 var quizFilename = uc.txt_quizName.Text;
                 if (quizFilename == "")
                 {
@@ -105,7 +203,7 @@ namespace SteelQuiz.QuizImport.Guide
             }
             else if (Step == 1)
             {
-                var uc = pnl_steps.Controls[Step] as Step1;
+                var uc = pnl_steps.Controls[Step] as Step5;
                 if (uc.Language1 == "")
                 {
                     MessageBox.Show("Language cannot be empty", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -115,7 +213,7 @@ namespace SteelQuiz.QuizImport.Guide
             }
             else if (Step == 2)
             {
-                var uc = pnl_steps.Controls[Step] as Step2;
+                var uc = pnl_steps.Controls[Step] as Step6;
                 if (uc.Language2 == "")
                 {
                     MessageBox.Show("Language cannot be empty", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -126,6 +224,7 @@ namespace SteelQuiz.QuizImport.Guide
                 Finish();
                 return;
             }
+            */
 
             ++Step;
         }
@@ -155,7 +254,7 @@ namespace SteelQuiz.QuizImport.Guide
                 btn_prevCancel.Text = "Cancel";
             }
 
-            if (Step == 2)
+            if (Step == 6)
             {
                 btn_next.Text = "Finish";
             }
@@ -179,17 +278,29 @@ namespace SteelQuiz.QuizImport.Guide
             UpdateNavText();
 
             pnl_steps.Focus();
-            if (Step == 0)
+            if (Step == 1)
             {
-                (pnl_steps.Controls[Step] as Step0).rdo_studentlitteratur.Focus();
-            }
-            else if (Step == 1)
-            {
-                (pnl_steps.Controls[Step] as Step1).txt_lang.Focus();
+                (pnl_steps.Controls[Step] as Step1).Focus();
             }
             else if (Step == 2)
             {
-                (pnl_steps.Controls[Step] as Step2).txt_lang.Focus();
+                (pnl_steps.Controls[Step] as Step2).Focus();
+            }
+            else if (Step == 3)
+            {
+                (pnl_steps.Controls[Step] as Step3).txt_url.Focus();
+            }
+            else if (Step == 4)
+            {
+                (pnl_steps.Controls[Step] as Step4).txt_quizName.Focus();
+            }
+            else if (Step == 5)
+            {
+                (pnl_steps.Controls[Step] as Step5).txt_lang.Focus();
+            }
+            else if (Step == 6)
+            {
+                (pnl_steps.Controls[Step] as Step6).txt_lang.Focus();
             }
         }
 
@@ -226,13 +337,33 @@ namespace SteelQuiz.QuizImport.Guide
             }
             else if (step == 1)
             {
-                var step1 = new Step1(WordPairs);
+                var step1 = new Step1();
                 pnl_steps.Controls.Add(step1);
             }
             else if (step == 2)
             {
-                var step2 = new Step2(WordPairs);
+                var step2 = new Step2();
                 pnl_steps.Controls.Add(step2);
+            }
+            else if (step == 3)
+            {
+                var step3 = new Step3(ImportSource);
+                pnl_steps.Controls.Add(step3);
+            }
+            else if (step == 4)
+            {
+                var step4 = new Step4();
+                pnl_steps.Controls.Add(step4);
+            }
+            else if (step == 5)
+            {
+                var step5 = new Step5(WordPairs);
+                pnl_steps.Controls.Add(step5);
+            }
+            else if (step == 6)
+            {
+                var step6 = new Step6(WordPairs);
+                pnl_steps.Controls.Add(step6);
             }
         }
 

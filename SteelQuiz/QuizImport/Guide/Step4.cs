@@ -28,9 +28,9 @@ using System.Windows.Forms;
 
 namespace SteelQuiz.QuizImport.Guide
 {
-    public partial class Step0 : UserControl
+    public partial class Step4 : UserControl
     {
-        public Step0()
+        public Step4()
         {
             InitializeComponent();
         }

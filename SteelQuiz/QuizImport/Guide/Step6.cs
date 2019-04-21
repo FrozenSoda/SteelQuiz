@@ -25,14 +25,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SteelQuiz.QuizData;
 
 namespace SteelQuiz.QuizImport.Guide
 {
-    public partial class Step0 : UserControl
+    public partial class Step6 : UserControl
     {
-        public Step0()
+        public string Language2 => txt_lang.Text;
+
+        public Step6(IEnumerable<WordPair> wordPairs)
         {
             InitializeComponent();
+            foreach (var wordPair in wordPairs)
+            {
+                lst_words.Items.Add(wordPair.Word2);
+            }
         }
     }
 }

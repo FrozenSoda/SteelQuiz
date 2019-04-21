@@ -31,7 +31,12 @@ namespace SteelQuiz.QuizImport
 {
     public static class QuizImporter
     {
-        public static IEnumerable<WordPair> FromStudentlitteratur(string url, string filename, bool multipleTranslationsAsDifferentWordPairs)
+        public enum ImportSource
+        {
+            StudentLitteratur
+        }
+
+        public static IEnumerable<WordPair> FromStudentlitteratur(string url, bool multipleTranslationsAsDifferentWordPairs)
         {
             string quizEncoded;
             using (var wclient = new WebClient())

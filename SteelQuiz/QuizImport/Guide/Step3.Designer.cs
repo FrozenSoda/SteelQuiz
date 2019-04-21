@@ -18,7 +18,7 @@
 
 namespace SteelQuiz.QuizImport.Guide
 {
-    partial class Step0
+    partial class Step3
     {
         /// <summary> 
         /// Required designer variable.
@@ -46,32 +46,67 @@ namespace SteelQuiz.QuizImport.Guide
         /// </summary>
         private void InitializeComponent()
         {
+            this.txt_url = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.lbl_question = new System.Windows.Forms.Label();
+            this.lbl_instructions = new System.Windows.Forms.Label();
             this.SuspendLayout();
+            // 
+            // txt_url
+            // 
+            this.txt_url.Location = new System.Drawing.Point(48, 330);
+            this.txt_url.Name = "txt_url";
+            this.txt_url.Size = new System.Drawing.Size(715, 20);
+            this.txt_url.TabIndex = 14;
+            this.txt_url.DoubleClick += new System.EventHandler(this.Txt_url_DoubleClick);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(10, 333);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(32, 13);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "URL:";
             // 
             // lbl_question
             // 
             this.lbl_question.Font = new System.Drawing.Font("Segoe UI Semilight", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_question.Location = new System.Drawing.Point(3, 13);
             this.lbl_question.Name = "lbl_question";
-            this.lbl_question.Size = new System.Drawing.Size(760, 73);
-            this.lbl_question.TabIndex = 5;
-            this.lbl_question.Text = "Welcome! This guide will help you through the process of importing a quiz from an" +
-    "other source than SteelQuiz.";
+            this.lbl_question.Size = new System.Drawing.Size(760, 43);
+            this.lbl_question.TabIndex = 16;
+            this.lbl_question.Text = "Enter the URL containing the quiz data";
             // 
-            // Step0
+            // lbl_instructions
+            // 
+            this.lbl_instructions.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_instructions.Location = new System.Drawing.Point(27, 56);
+            this.lbl_instructions.Name = "lbl_instructions";
+            this.lbl_instructions.Size = new System.Drawing.Size(736, 271);
+            this.lbl_instructions.TabIndex = 17;
+            this.lbl_instructions.Text = "To find it:";
+            // 
+            // Step3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.lbl_instructions);
             this.Controls.Add(this.lbl_question);
-            this.Name = "Step0";
+            this.Controls.Add(this.txt_url);
+            this.Controls.Add(this.label1);
+            this.Name = "Step3";
             this.Size = new System.Drawing.Size(766, 364);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
+        internal System.Windows.Forms.TextBox txt_url;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lbl_question;
+        private System.Windows.Forms.Label lbl_instructions;
     }
 }

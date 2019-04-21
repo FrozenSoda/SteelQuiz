@@ -18,7 +18,7 @@
 
 namespace SteelQuiz.QuizImport.Guide
 {
-    partial class Step0
+    partial class Step5
     {
         /// <summary> 
         /// Required designer variable.
@@ -46,32 +46,66 @@ namespace SteelQuiz.QuizImport.Guide
         /// </summary>
         private void InitializeComponent()
         {
+            this.txt_lang = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lst_words = new System.Windows.Forms.ListBox();
             this.lbl_question = new System.Windows.Forms.Label();
             this.SuspendLayout();
+            // 
+            // txt_lang
+            // 
+            this.txt_lang.Location = new System.Drawing.Point(145, 334);
+            this.txt_lang.Name = "txt_lang";
+            this.txt_lang.Size = new System.Drawing.Size(618, 20);
+            this.txt_lang.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(-1, 335);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(140, 16);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Language (in English):";
+            // 
+            // lst_words
+            // 
+            this.lst_words.FormattingEnabled = true;
+            this.lst_words.Location = new System.Drawing.Point(2, 55);
+            this.lst_words.Name = "lst_words";
+            this.lst_words.Size = new System.Drawing.Size(761, 277);
+            this.lst_words.TabIndex = 6;
+            this.lst_words.TabStop = false;
             // 
             // lbl_question
             // 
             this.lbl_question.Font = new System.Drawing.Font("Segoe UI Semilight", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_question.Location = new System.Drawing.Point(3, 13);
             this.lbl_question.Name = "lbl_question";
-            this.lbl_question.Size = new System.Drawing.Size(760, 73);
-            this.lbl_question.TabIndex = 5;
-            this.lbl_question.Text = "Welcome! This guide will help you through the process of importing a quiz from an" +
-    "other source than SteelQuiz.";
+            this.lbl_question.Size = new System.Drawing.Size(760, 43);
+            this.lbl_question.TabIndex = 4;
+            this.lbl_question.Text = "Which language are the following words written in?";
             // 
-            // Step0
+            // Step5
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.txt_lang);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lst_words);
             this.Controls.Add(this.lbl_question);
-            this.Name = "Step0";
+            this.Name = "Step5";
             this.Size = new System.Drawing.Size(766, 364);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
+        internal System.Windows.Forms.TextBox txt_lang;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ListBox lst_words;
         private System.Windows.Forms.Label lbl_question;
     }
 }

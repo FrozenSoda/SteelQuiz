@@ -18,7 +18,7 @@
 
 namespace SteelQuiz.QuizImport.Guide
 {
-    partial class Step1
+    partial class Step4
     {
         /// <summary> 
         /// Required designer variable.
@@ -47,9 +47,10 @@ namespace SteelQuiz.QuizImport.Guide
         private void InitializeComponent()
         {
             this.lbl_question = new System.Windows.Forms.Label();
-            this.flp_siteRdo = new System.Windows.Forms.FlowLayoutPanel();
-            this.rdo_studentlitteratur = new System.Windows.Forms.RadioButton();
-            this.flp_siteRdo.SuspendLayout();
+            this.txt_quizName = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lbl_question
@@ -58,49 +59,65 @@ namespace SteelQuiz.QuizImport.Guide
             this.lbl_question.Location = new System.Drawing.Point(3, 13);
             this.lbl_question.Name = "lbl_question";
             this.lbl_question.Size = new System.Drawing.Size(760, 43);
-            this.lbl_question.TabIndex = 6;
-            this.lbl_question.Text = "Select the source from which you are going to import the quiz";
+            this.lbl_question.TabIndex = 19;
+            this.lbl_question.Text = "Choose a name for the quiz";
             // 
-            // flp_siteRdo
+            // txt_quizName
             // 
-            this.flp_siteRdo.Controls.Add(this.rdo_studentlitteratur);
-            this.flp_siteRdo.Location = new System.Drawing.Point(8, 69);
-            this.flp_siteRdo.Name = "flp_siteRdo";
-            this.flp_siteRdo.Size = new System.Drawing.Size(755, 62);
-            this.flp_siteRdo.TabIndex = 7;
-            this.flp_siteRdo.TabStop = true;
+            this.txt_quizName.Location = new System.Drawing.Point(76, 332);
+            this.txt_quizName.Name = "txt_quizName";
+            this.txt_quizName.Size = new System.Drawing.Size(687, 20);
+            this.txt_quizName.TabIndex = 17;
             // 
-            // rdo_studentlitteratur
+            // label1
             // 
-            this.rdo_studentlitteratur.AutoSize = true;
-            this.rdo_studentlitteratur.Checked = true;
-            this.rdo_studentlitteratur.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdo_studentlitteratur.Location = new System.Drawing.Point(3, 3);
-            this.rdo_studentlitteratur.Name = "rdo_studentlitteratur";
-            this.rdo_studentlitteratur.Size = new System.Drawing.Size(142, 24);
-            this.rdo_studentlitteratur.TabIndex = 0;
-            this.rdo_studentlitteratur.TabStop = true;
-            this.rdo_studentlitteratur.Text = "Studentlitteratur";
-            this.rdo_studentlitteratur.UseVisualStyleBackColor = true;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(10, 335);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(60, 13);
+            this.label1.TabIndex = 18;
+            this.label1.Text = "Quiz name:";
             // 
-            // Step1
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(3, 56);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(760, 43);
+            this.label2.TabIndex = 20;
+            this.label2.Text = "Suggestions:\r\n    eg. p308, homework-2019-05-01, EuropeCapitals, ...";
+            // 
+            // label3
+            // 
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(4, 120);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(760, 43);
+            this.label3.TabIndex = 21;
+            this.label3.Text = "This name will be used as the filename for the quiz";
+            // 
+            // Step4
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.flp_siteRdo);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.lbl_question);
-            this.Name = "Step1";
+            this.Controls.Add(this.txt_quizName);
+            this.Controls.Add(this.label1);
+            this.Name = "Step4";
             this.Size = new System.Drawing.Size(766, 364);
-            this.flp_siteRdo.ResumeLayout(false);
-            this.flp_siteRdo.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.Label lbl_question;
-        private System.Windows.Forms.FlowLayoutPanel flp_siteRdo;
-        internal System.Windows.Forms.RadioButton rdo_studentlitteratur;
+        internal System.Windows.Forms.TextBox txt_quizName;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }

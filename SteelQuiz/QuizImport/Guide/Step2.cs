@@ -25,28 +25,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SteelQuiz.QuizData;
 
 namespace SteelQuiz.QuizImport.Guide
 {
-    public partial class Step2 : UserControl, IStep
+    public partial class Step2 : UserControl
     {
-        private const int STEP_NUMBER = 2;
-
-        public string Language2 => txt_lang.Text;
-
-        public Step2(IEnumerable<WordPair> wordPairs)
+        public Step2()
         {
             InitializeComponent();
-            foreach (var wordPair in wordPairs)
-            {
-                lst_words.Items.Add(wordPair.Word2);
-            }
         }
 
-        public int GetStepNumber()
+        private void Rdo_addMultipleTranslationsAsSynonyms_CheckedChanged(object sender, EventArgs e)
         {
-            return STEP_NUMBER;
+            if (rdo_addMultipleTranslationsAsSynonyms.Checked)
+            {
+                var msg = MessageBox.Show("Warning! If this option is selected, you will not necessarily learn all the synonyms of the words (which are added" +
+                    " to the quiz). Continue?",
+                    "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+                if (msg == DialogResult.No)
+                {
+                    rdo_addMultipleTranslationsAsSynonyms.Checked = false;
+                    rdo_multipleTranslationsAsDifferentWordPairs.Checked = true;
+                }
+            }
         }
     }
 }

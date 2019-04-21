@@ -18,14 +18,33 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SteelQuiz.QuizImport.Guide
 {
-    interface IStep
+    public partial class Step3 : UserControl
     {
-        int GetStepNumber();
+        public Step3(QuizImporter.ImportSource importSource)
+        {
+            InitializeComponent();
+
+            if (importSource == QuizImporter.ImportSource.StudentLitteratur)
+            {
+                lbl_instructions.Text = "To find it:\r\n\r\n1. Start the exercise.\r\n2. Open developer tools in your browser (Ctrl+Shift+I in Chrome).\r\n" +
+                    "3. Go to the Network tab.\r\n4. Write/click on one word in the exercise and press ENTER.\r\n5. Double click the entry which appeared in the Network tab." +
+                    "\r\n6. Copy the URL of the opened tab and paste it in the URL field in SteelQuiz.";
+            }
+        }
+
+        private void Txt_url_DoubleClick(object sender, EventArgs e)
+        {
+            txt_url.Text = "";
+        }
     }
 }
