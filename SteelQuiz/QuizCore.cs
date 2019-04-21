@@ -77,7 +77,6 @@ namespace SteelQuiz
             var quizConverted = QuizCompatibilityConverter.ChkUpgradeQuiz(quiz, QuizPath);
             if (quizConverted != null)
             {
-                //return Load(quiz);
                 return Load(quizConverted);
             }
             else
@@ -103,6 +102,7 @@ namespace SteelQuiz
                 }
             }
 
+            MessageBox.Show("The quiz file could not be found", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return false;
         }
 

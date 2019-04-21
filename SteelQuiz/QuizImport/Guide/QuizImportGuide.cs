@@ -326,5 +326,10 @@ namespace SteelQuiz.QuizImport.Guide
                 }
             }
         }
+
+        private void QuizImportGuide_Shown(object sender, EventArgs e)
+        {
+            btn_next.Focus();
+        }
     }
 }

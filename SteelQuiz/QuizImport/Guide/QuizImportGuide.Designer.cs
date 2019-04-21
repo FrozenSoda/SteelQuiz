@@ -97,6 +97,7 @@ namespace SteelQuiz.QuizImport.Guide
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Quiz Importer | SteelQuiz";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.QuizImportGuide_FormClosing);
+            this.Shown += new System.EventHandler(this.QuizImportGuide_Shown);
             this.ResumeLayout(false);
 
         }
