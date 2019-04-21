@@ -177,11 +177,11 @@ namespace SteelQuiz.QuizEditor
             if (QEOwner.UpdateUndoRedoStacks)
             {
                 QEOwner.UndoStack.Push(new UndoRedoFuncPair(
-                new Func<object>[] { chk_ignoreExcl.SetChecked(!chk_ignoreExcl.Checked, () => { ignore_chk_ignoreExcl_change = true; }) },
-                new Func<object>[] { chk_ignoreExcl.SetChecked(chk_ignoreExcl.Checked, () => { ignore_chk_ignoreExcl_change = true; }) },
-                "Checkbox switch",
-                new OwnerControlData(this, this.Parent)
-                ));
+                    new Func<object>[] { chk_ignoreExcl.SetChecked(!chk_ignoreExcl.Checked, () => { ignore_chk_ignoreExcl_change = true; }) },
+                    new Func<object>[] { chk_ignoreExcl.SetChecked(chk_ignoreExcl.Checked, () => { ignore_chk_ignoreExcl_change = true; }) },
+                    "Checkbox switch",
+                    new OwnerControlData(this, this.Parent)
+                    ));
                 QEOwner.UpdateUndoRedoTooltips();
             }
             QEOwner.ChangedSinceLastSave = true;
@@ -195,6 +195,23 @@ namespace SteelQuiz.QuizEditor
         private void txt_word1_Enter(object sender, EventArgs e)
         {
             QEOwner.ChkFixWordsCount();
+        }
+
+        private void Btn_delete_Click(object sender, EventArgs e)
+        {
+            if (QEOwner.UpdateUndoRedoStacks)
+            {
+                QEOwner.UndoStack.Push(new UndoRedoFuncPair(
+                    new Func<object>[] { QEOwner.AddWordPair(this, QEOwner.flp_words.Controls.GetChildIndex(this)) },
+                    new Func<object>[] { QEOwner.RemoveWordPair(this) },
+                    "Remove word pair",
+                    new OwnerControlData(this, this.Parent)
+                    ));
+            }
+            QEOwner.UpdateUndoRedoTooltips();
+            QEOwner.flp_words.Controls.Remove(this);
+            QEOwner.ChkFixWordsCount();
+            QEOwner.ChangedSinceLastSave = true;
         }
     }
 }

@@ -142,7 +142,10 @@ namespace SteelQuiz
 
                 if (!found)
                 {
-                    mismatchInput.Add(i);
+                    if (!rules.HasFlag(Rules.IgnoreExclamation) || input[i] != '!')
+                    {
+                        mismatchInput.Add(i);
+                    }
                 }
             }
 

@@ -136,5 +136,26 @@ namespace SteelQuiz.QuizEditor.UndoRedo
                 return checkBox;
             };
         }
+
+        public static Func<QuizEditorWordPair> RemoveWordPair(this QuizEditor quizEditor, QuizEditorWordPair wordPair)
+        {
+            return () =>
+            {
+                quizEditor.flp_words.Controls.Remove(wordPair);
+                quizEditor.ChkFixWordsCount();
+                return wordPair;
+            };
+        }
+
+        public static Func<QuizEditorWordPair> AddWordPair(this QuizEditor quizEditor, QuizEditorWordPair wordPair, int index)
+        {
+            return () =>
+            {
+                quizEditor.flp_words.Controls.Add(wordPair);
+                quizEditor.flp_words.Controls.SetChildIndex(wordPair, index);
+                quizEditor.ChkFixWordsCount();
+                return wordPair;
+            };
+        }
     }
 }

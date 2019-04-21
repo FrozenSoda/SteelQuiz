@@ -63,7 +63,7 @@ namespace SteelQuiz.QuizEditor
 
         private bool returningToMainMenu = false;
 
-        public QuizEditor()
+        public QuizEditor(bool chkRecovery = true)
         {
             InitializeComponent();
             ++Program.QuizEditorsOpen;
@@ -72,7 +72,10 @@ namespace SteelQuiz.QuizEditor
                             );
             AddWordPair(EMPTY_WORD_PAIRS_COUNT);
             QuizRecoveryData = new QuizRecoveryData(QuizPath);
-            ChkRecovery();
+            if (chkRecovery)
+            {
+                ChkRecovery();
+            }
         }
 
         public void ChkRecovery()
@@ -522,7 +525,7 @@ namespace SteelQuiz.QuizEditor
                 }
             }
 
-            var quizEditor = new QuizEditor();
+            var quizEditor = new QuizEditor(false);
             quizEditor.Show();
         }
 

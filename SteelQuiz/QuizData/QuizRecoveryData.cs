@@ -60,11 +60,11 @@ namespace SteelQuiz.QuizData
             int untitledCounter = 1;
             if (QuizPath != null)
             {
-                recoveryFilePath = Path.Combine(QuizCore.QUIZ_RECOVERY_FOLDER, $"{Path.GetFileNameWithoutExtension(QuizPath)}.steelquiz");
+                recoveryFilePath = Path.Combine(QuizCore.QUIZ_RECOVERY_FOLDER, $"{Path.GetFileNameWithoutExtension(QuizPath)}.steelquizrecovery");
             }
             else
             {
-                recoveryFilePath = Path.Combine(QuizCore.QUIZ_RECOVERY_FOLDER, $"Untitled{untitledCounter.ToString()}.steelquiz");
+                recoveryFilePath = Path.Combine(QuizCore.QUIZ_RECOVERY_FOLDER, $"Untitled{untitledCounter.ToString()}.steelquizrecovery");
             }
 
             while (File.Exists(recoveryFilePath))
@@ -73,11 +73,11 @@ namespace SteelQuiz.QuizData
                 if (QuizPath != null)
                 {
                     recoveryFilePath = Path.Combine(QuizCore.QUIZ_RECOVERY_FOLDER,
-                        $"{Path.GetFileNameWithoutExtension(QuizPath)}_{ untitledCounter.ToString() }.steelquiz");
+                        $"{Path.GetFileNameWithoutExtension(QuizPath)}_{ untitledCounter.ToString() }.steelquizrecovery");
                 }
                 else
                 {
-                    recoveryFilePath = Path.Combine(QuizCore.QUIZ_RECOVERY_FOLDER, $"Untitled{untitledCounter.ToString()}.steelquiz");
+                    recoveryFilePath = Path.Combine(QuizCore.QUIZ_RECOVERY_FOLDER, $"Untitled{untitledCounter.ToString()}.steelquizrecovery");
                 }
             }
 

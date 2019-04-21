@@ -54,6 +54,7 @@ namespace SteelQuiz.QuizEditor
             this.btn_editSynonyms_w1 = new System.Windows.Forms.Button();
             this.txt_word2 = new System.Windows.Forms.TextBox();
             this.btn_editSynonyms_w2 = new System.Windows.Forms.Button();
+            this.btn_delete = new System.Windows.Forms.Button();
             this.pnl_translationRules.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -133,7 +134,7 @@ namespace SteelQuiz.QuizEditor
             // 
             // btn_editSynonyms_w2
             // 
-            this.btn_editSynonyms_w2.Location = new System.Drawing.Point(652, 29);
+            this.btn_editSynonyms_w2.Location = new System.Drawing.Point(650, 30);
             this.btn_editSynonyms_w2.Name = "btn_editSynonyms_w2";
             this.btn_editSynonyms_w2.Size = new System.Drawing.Size(75, 39);
             this.btn_editSynonyms_w2.TabIndex = 6;
@@ -142,11 +143,22 @@ namespace SteelQuiz.QuizEditor
             this.btn_editSynonyms_w2.UseVisualStyleBackColor = true;
             this.btn_editSynonyms_w2.Click += new System.EventHandler(this.btn_editSynonyms_w2_Click);
             // 
+            // btn_delete
+            // 
+            this.btn_delete.Location = new System.Drawing.Point(650, 69);
+            this.btn_delete.Name = "btn_delete";
+            this.btn_delete.Size = new System.Drawing.Size(75, 23);
+            this.btn_delete.TabIndex = 7;
+            this.btn_delete.Text = "Delete";
+            this.btn_delete.UseVisualStyleBackColor = true;
+            this.btn_delete.Click += new System.EventHandler(this.Btn_delete_Click);
+            // 
             // QuizEditorWordPair
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.btn_delete);
             this.Controls.Add(this.btn_editSynonyms_w2);
             this.Controls.Add(this.txt_word2);
             this.Controls.Add(this.btn_editSynonyms_w1);
@@ -171,5 +183,6 @@ namespace SteelQuiz.QuizEditor
         private System.Windows.Forms.Button btn_editSynonyms_w1;
         internal System.Windows.Forms.TextBox txt_word2;
         private System.Windows.Forms.Button btn_editSynonyms_w2;
+        private System.Windows.Forms.Button btn_delete;
     }
 }

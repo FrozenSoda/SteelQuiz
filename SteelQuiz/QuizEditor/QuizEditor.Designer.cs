@@ -280,7 +280,7 @@ namespace SteelQuiz.QuizEditor
         private System.Windows.Forms.ComboBox cmb_lang1;
         private System.Windows.Forms.ComboBox cmb_lang2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.FlowLayoutPanel flp_words;
+        internal System.Windows.Forms.FlowLayoutPanel flp_words;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.MenuStrip mns_top;
