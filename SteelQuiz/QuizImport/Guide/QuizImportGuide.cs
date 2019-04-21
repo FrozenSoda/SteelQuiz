@@ -50,7 +50,7 @@ namespace SteelQuiz.QuizImport.Guide
 
         private QuizImporter.ImportSource ImportSource { get; set; }
         private bool MultipleTranslationsAsDifferentWordPairs { get; set; }
-        private IEnumerable<WordPair> WordPairs { get; set; }
+        private IEnumerable<WordPair> WordPairs { get; set; } = null;
         private string QuizPath { get; set; }
         private string Language1 { get; set; }
         private string Language2 { get; set; }
@@ -98,6 +98,12 @@ namespace SteelQuiz.QuizImport.Guide
                 if (wordPairs == null)
                 {
                     return;
+                }
+
+                if (WordPairs != null && !WordPairs.SequenceEqual(wordPairs))
+                {
+                    // if another quiz was selected, reset steps afterwards
+                    ResetSteps(4);
                 }
 
                 WordPairs = wordPairs;
@@ -158,75 +164,22 @@ namespace SteelQuiz.QuizImport.Guide
                 Finish();
                 return;
             }
-            /*
-            if (Step == 0)
-            {
-                var uc = pnl_steps.Controls[Step] as Step0_old;
-                var quizFilename = uc.txt_quizName.Text;
-                if (quizFilename == "")
-                {
-                    var msg = MessageBox.Show("Quiz name cannot be empty", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                var quizPath = Path.Combine(QuizCore.QUIZ_FOLDER, quizFilename) + QuizCore.QUIZ_EXTENSION;
-
-                if (File.Exists(quizPath))
-                {
-                    var msg = MessageBox.Show("A quiz with this name already exists. Replace?", "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning,
-                        MessageBoxDefaultButton.Button2);
-                    if (msg == DialogResult.No)
-                    {
-                        return;
-                    }
-                }
-
-                QuizPath = quizPath;
-
-                var url = uc.txt_url.Text;
-                IEnumerable<WordPair> wordPairs;
-                if (uc.rdo_studentlitteratur.Checked)
-                {
-                    wordPairs = QuizImporter.FromStudentlitteratur(url, quizFilename, uc.rdo_multipleTranslationsAsDifferentWordPairs.Checked);
-                }
-                else
-                {
-                    throw new NotImplementedException("Hmm... A radio button for import site source was selected that was not implemented in the code");
-                }
-
-                if (wordPairs == null)
-                {
-                    return;
-                }
-
-                WordPairs = wordPairs;
-            }
-            else if (Step == 1)
-            {
-                var uc = pnl_steps.Controls[Step] as Step5;
-                if (uc.Language1 == "")
-                {
-                    MessageBox.Show("Language cannot be empty", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                Language1 = uc.Language1;
-            }
-            else if (Step == 2)
-            {
-                var uc = pnl_steps.Controls[Step] as Step6;
-                if (uc.Language2 == "")
-                {
-                    MessageBox.Show("Language cannot be empty", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                Language2 = uc.Language2;
-
-                Finish();
-                return;
-            }
-            */
 
             ++Step;
+        }
+
+        private void ResetSteps(int start)
+        {
+            var toRemove = new List<Control>();
+            for (int i = start; i < pnl_steps.Controls.Count; ++i)
+            {
+                toRemove.Add(pnl_steps.Controls[i]);
+            }
+
+            foreach (var ctrl in toRemove)
+            {
+                ctrl.Dispose();
+            }
         }
 
         private void btn_prevCancel_Click(object sender, EventArgs e)
@@ -310,18 +263,6 @@ namespace SteelQuiz.QuizImport.Guide
             {
                 ctrl.Hide();
             }
-
-            /*
-            foreach (IStep s in pnl_steps.Controls.OfType<IStep>())
-            {
-                if (s.GetStepNumber() == step)
-                {
-                    // the step usercontrol already exists, so show it instead of creating a new
-                    (s as UserControl).Show();
-                    return;
-                }
-            }
-            */
 
             if (step < pnl_steps.Controls.Count)
             {

@@ -48,10 +48,10 @@ namespace SteelQuiz.QuizImport.Guide
         {
             this.lbl_question = new System.Windows.Forms.Label();
             this.pnl_multiTranslationOptions = new System.Windows.Forms.Panel();
-            this.rdo_addMultipleTranslationsAsSynonyms = new System.Windows.Forms.RadioButton();
-            this.rdo_multipleTranslationsAsDifferentWordPairs = new System.Windows.Forms.RadioButton();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.rdo_addMultipleTranslationsAsSynonyms = new System.Windows.Forms.RadioButton();
+            this.rdo_multipleTranslationsAsDifferentWordPairs = new System.Windows.Forms.RadioButton();
             this.pnl_multiTranslationOptions.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,33 +75,9 @@ namespace SteelQuiz.QuizImport.Guide
             this.pnl_multiTranslationOptions.Size = new System.Drawing.Size(760, 161);
             this.pnl_multiTranslationOptions.TabIndex = 21;
             // 
-            // rdo_addMultipleTranslationsAsSynonyms
-            // 
-            this.rdo_addMultipleTranslationsAsSynonyms.AutoSize = true;
-            this.rdo_addMultipleTranslationsAsSynonyms.Location = new System.Drawing.Point(3, 78);
-            this.rdo_addMultipleTranslationsAsSynonyms.Name = "rdo_addMultipleTranslationsAsSynonyms";
-            this.rdo_addMultipleTranslationsAsSynonyms.Size = new System.Drawing.Size(396, 17);
-            this.rdo_addMultipleTranslationsAsSynonyms.TabIndex = 4;
-            this.rdo_addMultipleTranslationsAsSynonyms.Text = "Add multiple definitions/translations of a word as synonyms in a single word pair" +
-    "";
-            this.rdo_addMultipleTranslationsAsSynonyms.UseVisualStyleBackColor = true;
-            this.rdo_addMultipleTranslationsAsSynonyms.CheckedChanged += new System.EventHandler(this.Rdo_addMultipleTranslationsAsSynonyms_CheckedChanged);
-            // 
-            // rdo_multipleTranslationsAsDifferentWordPairs
-            // 
-            this.rdo_multipleTranslationsAsDifferentWordPairs.AutoSize = true;
-            this.rdo_multipleTranslationsAsDifferentWordPairs.Checked = true;
-            this.rdo_multipleTranslationsAsDifferentWordPairs.Location = new System.Drawing.Point(3, 3);
-            this.rdo_multipleTranslationsAsDifferentWordPairs.Name = "rdo_multipleTranslationsAsDifferentWordPairs";
-            this.rdo_multipleTranslationsAsDifferentWordPairs.Size = new System.Drawing.Size(428, 17);
-            this.rdo_multipleTranslationsAsDifferentWordPairs.TabIndex = 3;
-            this.rdo_multipleTranslationsAsDifferentWordPairs.TabStop = true;
-            this.rdo_multipleTranslationsAsDifferentWordPairs.Text = "Add words with multiple definitions/translations as separate word pairs (recommen" +
-    "ded)";
-            this.rdo_multipleTranslationsAsDifferentWordPairs.UseVisualStyleBackColor = true;
-            // 
             // label2
             // 
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(20, 110);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(735, 32);
@@ -113,20 +89,48 @@ namespace SteelQuiz.QuizImport.Guide
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(20, 33);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(438, 13);
+            this.label1.Size = new System.Drawing.Size(539, 16);
             this.label1.TabIndex = 5;
             this.label1.Text = "With this selected, SteelQuiz will make sure that you learn all of the definition" +
     "s, of the words.";
             // 
-            // Step4
+            // rdo_addMultipleTranslationsAsSynonyms
+            // 
+            this.rdo_addMultipleTranslationsAsSynonyms.AutoSize = true;
+            this.rdo_addMultipleTranslationsAsSynonyms.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdo_addMultipleTranslationsAsSynonyms.Location = new System.Drawing.Point(3, 78);
+            this.rdo_addMultipleTranslationsAsSynonyms.Name = "rdo_addMultipleTranslationsAsSynonyms";
+            this.rdo_addMultipleTranslationsAsSynonyms.Size = new System.Drawing.Size(495, 20);
+            this.rdo_addMultipleTranslationsAsSynonyms.TabIndex = 4;
+            this.rdo_addMultipleTranslationsAsSynonyms.Text = "Add multiple definitions/translations of a word as synonyms in a single word pair" +
+    "";
+            this.rdo_addMultipleTranslationsAsSynonyms.UseVisualStyleBackColor = true;
+            this.rdo_addMultipleTranslationsAsSynonyms.CheckedChanged += new System.EventHandler(this.Rdo_addMultipleTranslationsAsSynonyms_CheckedChanged);
+            // 
+            // rdo_multipleTranslationsAsDifferentWordPairs
+            // 
+            this.rdo_multipleTranslationsAsDifferentWordPairs.AutoSize = true;
+            this.rdo_multipleTranslationsAsDifferentWordPairs.Checked = true;
+            this.rdo_multipleTranslationsAsDifferentWordPairs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdo_multipleTranslationsAsDifferentWordPairs.Location = new System.Drawing.Point(3, 3);
+            this.rdo_multipleTranslationsAsDifferentWordPairs.Name = "rdo_multipleTranslationsAsDifferentWordPairs";
+            this.rdo_multipleTranslationsAsDifferentWordPairs.Size = new System.Drawing.Size(538, 20);
+            this.rdo_multipleTranslationsAsDifferentWordPairs.TabIndex = 3;
+            this.rdo_multipleTranslationsAsDifferentWordPairs.TabStop = true;
+            this.rdo_multipleTranslationsAsDifferentWordPairs.Text = "Add words with multiple definitions/translations as separate word pairs (recommen" +
+    "ded)";
+            this.rdo_multipleTranslationsAsDifferentWordPairs.UseVisualStyleBackColor = true;
+            // 
+            // Step2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pnl_multiTranslationOptions);
             this.Controls.Add(this.lbl_question);
-            this.Name = "Step4";
+            this.Name = "Step2";
             this.Size = new System.Drawing.Size(766, 364);
             this.pnl_multiTranslationOptions.ResumeLayout(false);
             this.pnl_multiTranslationOptions.PerformLayout();

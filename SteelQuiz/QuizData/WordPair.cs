@@ -63,19 +63,19 @@ namespace SteelQuiz.QuizData
             L2_to_L1
         }
 
-        public bool Equals(WordPair wp2)
+        public override bool Equals(object wp2)
         {
-            if (wp2 == null)
+            if (wp2.GetType() != this.GetType())
             {
                 return false;
             }
 
             return
-                this.Word1 == wp2.Word1 &&
-                this.Word1Synonyms.SequenceEqual(wp2.Word1Synonyms) &&
-                this.Word2 == wp2.Word2 &&
-                this.Word2Synonyms.SequenceEqual(wp2.Word2Synonyms) &&
-                this.TranslationRules == wp2.TranslationRules;
+                this.Word1 == ((WordPair)wp2).Word1 &&
+                this.Word1Synonyms.SequenceEqual(((WordPair)wp2).Word1Synonyms) &&
+                this.Word2 == ((WordPair)wp2).Word2 &&
+                this.Word2Synonyms.SequenceEqual(((WordPair)wp2).Word2Synonyms) &&
+                this.TranslationRules == ((WordPair)wp2).TranslationRules;
         }
 
         public WordProgData GetWordProgData()
