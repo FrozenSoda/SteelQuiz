@@ -62,10 +62,14 @@ namespace SteelQuiz.QuizData
             L1_to_L2,
             L2_to_L1
         }
-
-        public override bool Equals(object wp2)
+        public override bool Equals(object obj)
         {
-            if (wp2.GetType() != this.GetType())
+            return Equals(obj as WordPair);
+        }
+
+        public bool Equals(WordPair wp2)
+        {
+            if (wp2 == null)
             {
                 return false;
             }
@@ -77,6 +81,19 @@ namespace SteelQuiz.QuizData
                 this.Word2Synonyms.SequenceEqual(((WordPair)wp2).Word2Synonyms) &&
                 this.TranslationRules == ((WordPair)wp2).TranslationRules;
         }
+
+        public override int GetHashCode()
+        {
+            var hashCode = -690155679;
+            hashCode = hashCode * -1521134295 + ID.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Word1);
+            hashCode = hashCode * -1521134295 + EqualityComparer<List<string>>.Default.GetHashCode(Word1Synonyms);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Word2);
+            hashCode = hashCode * -1521134295 + EqualityComparer<List<string>>.Default.GetHashCode(Word2Synonyms);
+            hashCode = hashCode * -1521134295 + TranslationRules.GetHashCode();
+            return hashCode;
+        }
+
 
         public WordProgData GetWordProgData()
         {
