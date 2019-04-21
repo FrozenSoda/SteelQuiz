@@ -27,7 +27,6 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
 using SteelQuiz.QuizData;
-using System.Text.RegularExpressions;
 
 namespace SteelQuiz.QuizImport.Guide
 {
