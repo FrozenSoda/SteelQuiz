@@ -190,9 +190,12 @@ namespace SteelQuiz.QuizImport.Guide
         {
             var quiz = new Quiz(Language1, Language2, MetaData.QUIZ_FILE_FORMAT_VERSION);
             quiz.WordPairs = WordPairs.ToList();
-            QuizCore.Load(quiz, QuizPath);
-            QuizCore.SaveQuiz();
-            DialogResult = DialogResult.OK;
+            bool loadSuccess = QuizCore.Load(quiz, QuizPath);
+            if (loadSuccess)
+            {
+                QuizCore.SaveQuiz();
+                DialogResult = DialogResult.OK;
+            }
         }
 
         private void UpdateNavText()
