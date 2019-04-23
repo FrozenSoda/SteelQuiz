@@ -77,8 +77,8 @@ namespace SteelQuiz
             var quizVer = SUtil.PropertyDefined(quiz.FileFormatVersion) && quiz.FileFormatVersion != null
                     ? new Version((string)quiz.FileFormatVersion) : new Version(1, 0, 0);
             var currVer = new Version(MetaData.QUIZ_FILE_FORMAT_VERSION);
-
-            if (currVer.CompareTo(quizVer) > 0)
+            int cmp = currVer.CompareTo(quizVer);
+            if (cmp > 0)
             {
                 var msg = MessageBox.Show("The quiz must be converted to load it. A backup will be created automatically.\r\nConvert?",
                     "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -86,6 +86,24 @@ namespace SteelQuiz
                 {
                     return false;
                 }
+            }
+            else if (cmp < 0)
+            {
+                var msg = MessageBox.Show("SteelQuiz must be updated to load this quiz.\r\n\r\nUpdating will make sure you get the latest features, " +
+                    "improvements and bug fixes.\r\n\r\nUpdate now? (recommended)",
+                    "Update required - SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (msg == DialogResult.Yes)
+                {
+                    if (AutoUpdaterDotNET.AutoUpdater.DownloadUpdate())
+                    {
+                        Application.Exit();
+                    }
+                    else
+                    {
+                        MessageBox.Show("An error occurred while updating", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                return false;
             }
 
             return Load(quiz);
@@ -204,7 +222,8 @@ namespace SteelQuiz
                 var progressVer = SUtil.PropertyDefined(cfgDz.FileFormatVersion) && cfgDz.FileFormatVersion != null
                     ? new Version((string)cfgDz.FileFormatVersion) : new Version(1, 0, 0);
                 var currVer = new Version(MetaData.QUIZ_FILE_FORMAT_VERSION);
-                if (currVer.CompareTo(progressVer) > 0)
+                int cmp = currVer.CompareTo(progressVer);
+                if (cmp > 0)
                 {
                     var msg = MessageBox.Show("Due to major changes in the quiz progress format, your quiz progress data has to be reset to work with the new version." +
                             " The old format contained unfixable problems, and a conversion would have been too complex and buggy.\r\n\r\nA backup will automatically" +
@@ -224,6 +243,63 @@ namespace SteelQuiz
 
                     File.Delete(PROGRESS_FILE_PATH);
 
+                    return LoadProgressData();
+                }
+                else if (cmp < 0)
+                {
+                    var msg = MessageBox.Show("Your progress data file is made for a newer version of SteelQuiz. Revert from backup?",
+                        "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                    if (msg == DialogResult.No)
+                    {
+                        return false;
+                    }
+
+                    var bkp = BackupProgress(progressVer);
+                    if (!bkp)
+                    {
+                        return false;
+                    }
+
+                    File.Delete(PROGRESS_FILE_PATH);
+
+                    // find backup
+                    int latestBackupNum = -1;
+                    string latestBackup = null;
+                    foreach (var file in Directory.GetFiles(BACKUP_FOLDER).Where(x => x.Contains(MetaData.QUIZ_FILE_FORMAT_VERSION)))
+                    {
+                        string bkpNumStr = file.Split('_').Last();
+                        int bkpNum;
+                        if (int.TryParse(bkpNumStr, out bkpNum))
+                        {
+                            if (bkpNum > latestBackupNum)
+                            {
+                                latestBackupNum = bkpNum;
+                            }
+                        }
+                        else
+                        {
+                            // the first backup does not have a number (xxxxxxx_2.0.0_num)
+                            latestBackupNum = 1;
+                            latestBackup = file;
+                        }
+                    }
+
+                    if (latestBackup != null)
+                    {
+                        File.Copy(latestBackup, PROGRESS_FILE_PATH);
+                    }
+                    else
+                    {
+                        var msg2 = MessageBox.Show("A backup could not be found. Try looking for them yourselves in %appdata%\\SteelQuiz\\Backups. " +
+                            "Start over with a new progress data?",
+                            "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+
+                        if (msg2 == DialogResult.No)
+                        {
+                            return false;
+                        }
+                    }
                     return LoadProgressData();
                 }
 
