@@ -247,7 +247,7 @@ namespace SteelQuiz
                 }
                 else if (cmp < 0)
                 {
-                    var msg = MessageBox.Show("Your progress data file is made for a newer version of SteelQuiz. Revert from backup?",
+                    var msg = MessageBox.Show("Your progress data file is made for a newer version of SteelQuiz. Revert progress data from backup?",
                         "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                     if (msg == DialogResult.No)
@@ -255,20 +255,19 @@ namespace SteelQuiz
                         return false;
                     }
 
-                    var bkp = BackupProgress(progressVer);
+                    bool bkp = BackupProgress(progressVer);
                     if (!bkp)
                     {
                         return false;
                     }
 
-                    File.Delete(PROGRESS_FILE_PATH);
-
                     // find backup
                     int latestBackupNum = -1;
                     string latestBackup = null;
-                    foreach (var file in Directory.GetFiles(BACKUP_FOLDER).Where(x => x.Contains(MetaData.QUIZ_FILE_FORMAT_VERSION)))
+                    foreach (var file in Directory.GetFiles(BACKUP_FOLDER).Where(x => Path.GetFileName(x).StartsWith("QuizProgress")
+                        && x.Contains(MetaData.QUIZ_FILE_FORMAT_VERSION)))
                     {
-                        string bkpNumStr = file.Split('_').Last();
+                        string bkpNumStr = Path.GetFileNameWithoutExtension(file).Split('_').Last();
                         int bkpNum;
                         if (int.TryParse(bkpNumStr, out bkpNum))
                         {
@@ -287,6 +286,7 @@ namespace SteelQuiz
 
                     if (latestBackup != null)
                     {
+                        File.Delete(PROGRESS_FILE_PATH);
                         File.Copy(latestBackup, PROGRESS_FILE_PATH);
                     }
                     else
