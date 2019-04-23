@@ -299,6 +299,8 @@ namespace SteelQuiz
                         {
                             return false;
                         }
+
+                        File.Delete(PROGRESS_FILE_PATH);
                     }
                     return LoadProgressData();
                 }
