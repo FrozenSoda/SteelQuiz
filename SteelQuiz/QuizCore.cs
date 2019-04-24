@@ -274,6 +274,7 @@ namespace SteelQuiz
                             if (bkpNum > latestBackupNum)
                             {
                                 latestBackupNum = bkpNum;
+                                latestBackup = file;
                             }
                         }
                         else
