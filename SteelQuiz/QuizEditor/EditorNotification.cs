@@ -90,6 +90,9 @@ namespace SteelQuiz.QuizEditor
             else
             {
                 lbl_timeStamp.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+                // we show the exact date the message was created, no need to update it anymore.
+                tmr_timeStamp.Stop();
             }
         }
 
