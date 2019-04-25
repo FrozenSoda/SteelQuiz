@@ -57,7 +57,14 @@ namespace SteelQuiz.QuizImport
 
             if (quizEncoded.Contains("_____"))
             {
-                wordPairs = FromStudentlitteratur_VocabularyBank(quizEncoded, multipleTranslationsAsDifferentWordPairs).ToList();
+                if (quizEncoded.Contains("<i>") && quizEncoded.Contains(@"<\/i>)"))
+                {
+                    wordPairs = FromStudentlitteratur_VocabularyBank(quizEncoded, multipleTranslationsAsDifferentWordPairs).ToList();
+                }
+                else
+                {
+                    wordPairs = FromStudentlitteratur_Idioms(quizEncoded, multipleTranslationsAsDifferentWordPairs).ToList();
+                }
             }
             else
             {
@@ -100,6 +107,103 @@ namespace SteelQuiz.QuizImport
             { '\'', InString.SingleQuote },
             { ':', InString.Colon }
         };
+
+        private static IEnumerable<WordPair> FromStudentlitteratur_Idioms(string quizEncoded, bool multipleTranslationsAsDifferentWordPairs)
+        {
+            var foundStr = "";
+            var inString = InString.None;
+
+            var inQuiz = false;
+            var inWordChk = false;
+            var word1 = "";
+            var word2 = "";
+            var inWord = false;
+
+            var wordPairs = new List<WordPair>();
+
+            for (int i = 0; i < quizEncoded.Length; ++i)
+            {
+                var ch = quizEncoded[i];
+                if (ch == '"' || (!inString.HasFlag(InString.DoubleQuote) && (ch == ':' || ch == ',')))
+                {
+                    if (ch == ',')
+                    {
+                        inString &= ~InString.Colon;
+                    }
+                    else
+                    {
+                        if (inString.HasFlag(InStringForChars[ch]))
+                        {
+                            inString &= ~InStringForChars[ch];
+                            if (ch == '"')
+                            {
+                                inString &= ~InString.Colon;
+                            }
+                        }
+                        else
+                        {
+                            inString |= InStringForChars[ch];
+                            if (ch == '"')
+                            {
+                                foundStr = foundStr.Replace("{", "").Replace("[", "");
+                            }
+                        }
+                    }
+
+                    if (inString == InString.None)
+                    {
+                        if (inWordChk)
+                        {
+                            if (foundStr == "true")
+                            {
+                                wordPairs.ChkAddWordPair(word1, word2,
+                                    StringComp.Rules.None, multipleTranslationsAsDifferentWordPairs);
+                                word2 = "";
+                            }
+                            inWordChk = false;
+                        }
+                        else if (inWord)
+                        {
+                            if (foundStr.Contains("_____"))
+                            {
+                                word1 = FixString(foundStr);
+                            }
+                            else
+                            {
+                                word2 = FixString(foundStr);
+                            }
+                            inWord = false;
+                        }
+                        else
+                        {
+                            if (foundStr == "parts")
+                            {
+                                inQuiz = true;
+                            }
+                            else if (inQuiz)
+                            {
+                                if (foundStr == "text")
+                                {
+                                    inWord = true;
+                                }
+                                else if (foundStr == "correct")
+                                {
+                                    inWordChk = true;
+                                }
+                            }
+                        }
+
+                        foundStr = "";
+                    }
+                }
+                else if (inString != InString.None)
+                {
+                    foundStr += ch;
+                }
+            }
+
+            return wordPairs;
+        }
 
         private static IEnumerable<WordPair> FromStudentlitteratur_VocabularyBank(string quizEncoded, bool multipleTranslationsAsDifferentWordPairs)
         {

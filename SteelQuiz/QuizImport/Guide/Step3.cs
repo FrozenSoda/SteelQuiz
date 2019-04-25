@@ -38,7 +38,7 @@ namespace SteelQuiz.QuizImport.Guide
             {
                 lbl_instructions.Text = "To find it:\r\n\r\n1. Start the exercise.\r\n2. Open developer tools in your browser (Ctrl+Shift+I in Chrome).\r\n" +
                     "3. Go to the Network tab.\r\n4. Write/click on one word in the exercise and press ENTER.\r\n5. Double click the entry which appeared in the Network tab." +
-                    "\r\n6. Copy the URL of the opened tab and paste it in the URL field in SteelQuiz.\r\n\r\nSupported exercises: Spelling, Vocabulary bank" +
+                    "\r\n6. Copy the URL of the opened tab and paste it in the URL field in SteelQuiz.\r\n\r\nSupported exercises: Spelling, Vocabulary bank and Idioms" +
                     "\r\nTrying to import an unsupported exercise might cause an error, or undefined behavior.";
             }
         }
