@@ -59,6 +59,12 @@
     <Compile Include="QuizData\Quiz.cs" />
     <Compile Include="QuizData\QuizRecoveryData.cs" />
     <Compile Include="QuizData\WordPair.cs" />
+    <Compile Include="QuizEditor\EditorNotification.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuizEditor\EditorNotification.Designer.cs">
+      <DependentUpon>EditorNotification.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuizEditor\QuizRecoveryUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -190,6 +196,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuizProgressData\WordTry.cs" />
+    <EmbeddedResource Include="QuizEditor\EditorNotification.resx">
+      <DependentUpon>EditorNotification.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="QuizEditor\QuizRecoveryUC.resx">
       <DependentUpon>QuizRecoveryUC.cs</DependentUpon>
     </EmbeddedResource>
