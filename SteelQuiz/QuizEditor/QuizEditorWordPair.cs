@@ -50,6 +50,7 @@ namespace SteelQuiz.QuizEditor
             InitializeComponent();
             QEOwner = owner;
             Number = number;
+            RemoveSynonymsEqualToWords();
         }
 
         public void InitEditWordSynonyms(int language)
@@ -212,6 +213,36 @@ namespace SteelQuiz.QuizEditor
             QEOwner.flp_words.Controls.Remove(this);
             QEOwner.ChkFixWordsCount();
             QEOwner.ChangedSinceLastSave = true;
+        }
+
+        public void RemoveSynonymsEqualToWords(int word = -1)
+        {
+            // check if synonyms contains word entered
+
+            if ((word == -1 || word == 1) && Synonyms1 != null && Synonyms1.Contains(Word1))
+            {
+                Synonyms1.Remove(Word1);
+#warning dont use messageboxes
+                var msg = MessageBox.Show($"A synonym to {Word1} has been removed, that was equal to the word", "SteelQuiz",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            if ((word == -1 || word == 2) && Synonyms2 != null && Synonyms2.Contains(Word2))
+            {
+                Synonyms2.Remove(Word2);
+                var msg = MessageBox.Show($"A synonym to word {Word2} has been removed, that was equal to the word", "SteelQuiz",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void Txt_word1_Leave(object sender, EventArgs e)
+        {
+            RemoveSynonymsEqualToWords(1);
+        }
+
+        private void Txt_word2_Leave(object sender, EventArgs e)
+        {
+            RemoveSynonymsEqualToWords(2);
         }
     }
 }

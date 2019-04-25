@@ -75,9 +75,9 @@ namespace SteelQuiz.QuizEditor
 
         private void btn_apply_Click(object sender, EventArgs e)
         {
-            if (txt_wordAdd.Text != "")
+            if (txt_wordAdd.Text != "" && !lst_synonyms.Items.Contains(txt_wordAdd.Text))
             {
-                var msg = MessageBox.Show("Warning! The textbox contains text not added to the list. Add it to the list and exit?", "SteelQuiz",
+                var msg = MessageBox.Show("Warning! The textbox contains text not added to the list. Add it to the list before exiting?", "SteelQuiz",
                     MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
                 if (msg == DialogResult.Yes)
                 {
@@ -115,6 +115,23 @@ namespace SteelQuiz.QuizEditor
             {
                 MessageBox.Show("Duplicates are not allowed", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
+            }
+
+            if (Language == 1)
+            {
+                if (txt_wordAdd.Text == Parent.Word1)
+                {
+                    MessageBox.Show("You can't add a synonym equal to the word you are adding synonyms for", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            else if (Language == 2)
+            {
+                if (txt_wordAdd.Text == Parent.Word2)
+                {
+                    MessageBox.Show("You can't add a synonym equal to the word you are adding synonyms for", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
             }
 
             if (txt_wordAdd.Text.StartsWith(" ") || txt_wordAdd.Text.EndsWith(" "))

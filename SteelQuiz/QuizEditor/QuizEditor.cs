@@ -154,20 +154,22 @@ namespace SteelQuiz.QuizEditor
             quiz.GUID = QuizGuid;
 
             ulong i = 0;
-            foreach (var wordpair in flp_words.Controls.OfType<QuizEditorWordPair>().Where(x => !QEWordEmpty(x)))
+            foreach (var wordPair in flp_words.Controls.OfType<QuizEditorWordPair>().Where(x => !QEWordEmpty(x)))
             {
+                wordPair.RemoveSynonymsEqualToWords();
+
                 StringComp.Rules translationRules = StringComp.Rules.None;
-                if (wordpair.chk_ignoreCapitalization.Checked)
+                if (wordPair.chk_ignoreCapitalization.Checked)
                 {
                     translationRules |= StringComp.Rules.IgnoreCapitalization;
                 }
-                if (wordpair.chk_ignoreExcl.Checked)
+                if (wordPair.chk_ignoreExcl.Checked)
                 {
                     translationRules |= StringComp.Rules.IgnoreExclamation;
                 }
 
-                var wordPair = new WordPair(wordpair.txt_word1.Text, wordpair.txt_word2.Text, translationRules, wordpair.Synonyms1, wordpair.Synonyms2);
-                quiz.WordPairs.Add(wordPair);
+                var wp = new WordPair(wordPair.txt_word1.Text, wordPair.txt_word2.Text, translationRules, wordPair.Synonyms1, wordPair.Synonyms2);
+                quiz.WordPairs.Add(wp);
                 ++i;
             }
 

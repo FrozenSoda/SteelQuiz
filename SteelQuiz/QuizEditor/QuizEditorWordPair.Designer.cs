@@ -110,6 +110,7 @@ namespace SteelQuiz.QuizEditor
             this.txt_word1.Click += new System.EventHandler(this.txt_word_Click);
             this.txt_word1.TextChanged += new System.EventHandler(this.txt_word1_TextChanged);
             this.txt_word1.Enter += new System.EventHandler(this.txt_word1_Enter);
+            this.txt_word1.Leave += new System.EventHandler(this.Txt_word1_Leave);
             // 
             // btn_editSynonyms_w1
             // 
@@ -131,6 +132,7 @@ namespace SteelQuiz.QuizEditor
             this.txt_word2.Click += new System.EventHandler(this.txt_word_Click);
             this.txt_word2.TextChanged += new System.EventHandler(this.txt_word2_TextChanged);
             this.txt_word2.Enter += new System.EventHandler(this.txt_word1_Enter);
+            this.txt_word2.Leave += new System.EventHandler(this.Txt_word2_Leave);
             // 
             // btn_editSynonyms_w2
             // 
