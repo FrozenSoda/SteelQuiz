@@ -30,7 +30,7 @@ namespace SteelQuiz.QuizEditor
 {
     public partial class EditorNotification : UserControl
     {
-        DateTime CreationDate { get; set; }
+        private DateTime CreationDate { get; set; }
 
         public EditorNotification(string msg, int showMillis = 0)
         {
