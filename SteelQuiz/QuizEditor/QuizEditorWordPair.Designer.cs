@@ -55,6 +55,8 @@ namespace SteelQuiz.QuizEditor
             this.txt_word2 = new System.Windows.Forms.TextBox();
             this.btn_editSynonyms_w2 = new System.Windows.Forms.Button();
             this.btn_delete = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.pnl_translationRules.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -103,9 +105,9 @@ namespace SteelQuiz.QuizEditor
             // 
             // txt_word1
             // 
-            this.txt_word1.Location = new System.Drawing.Point(3, 3);
+            this.txt_word1.Location = new System.Drawing.Point(25, 3);
             this.txt_word1.Name = "txt_word1";
-            this.txt_word1.Size = new System.Drawing.Size(357, 20);
+            this.txt_word1.Size = new System.Drawing.Size(335, 20);
             this.txt_word1.TabIndex = 0;
             this.txt_word1.Click += new System.EventHandler(this.txt_word_Click);
             this.txt_word1.TextChanged += new System.EventHandler(this.txt_word1_TextChanged);
@@ -125,9 +127,9 @@ namespace SteelQuiz.QuizEditor
             // 
             // txt_word2
             // 
-            this.txt_word2.Location = new System.Drawing.Point(368, 3);
+            this.txt_word2.Location = new System.Drawing.Point(390, 3);
             this.txt_word2.Name = "txt_word2";
-            this.txt_word2.Size = new System.Drawing.Size(357, 20);
+            this.txt_word2.Size = new System.Drawing.Size(335, 20);
             this.txt_word2.TabIndex = 5;
             this.txt_word2.Click += new System.EventHandler(this.txt_word_Click);
             this.txt_word2.TextChanged += new System.EventHandler(this.txt_word2_TextChanged);
@@ -155,11 +157,31 @@ namespace SteelQuiz.QuizEditor
             this.btn_delete.UseVisualStyleBackColor = true;
             this.btn_delete.Click += new System.EventHandler(this.Btn_delete_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 6);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(16, 13);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "1:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(368, 6);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(16, 13);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "2:";
+            // 
             // QuizEditorWordPair
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_delete);
             this.Controls.Add(this.btn_editSynonyms_w2);
             this.Controls.Add(this.txt_word2);
@@ -186,5 +208,7 @@ namespace SteelQuiz.QuizEditor
         internal System.Windows.Forms.TextBox txt_word2;
         private System.Windows.Forms.Button btn_editSynonyms_w2;
         private System.Windows.Forms.Button btn_delete;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }

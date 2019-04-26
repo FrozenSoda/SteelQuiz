@@ -556,6 +556,8 @@ namespace SteelQuiz.QuizEditor
         {
             if (e.Control)
             {
+                // CTRL is pressed
+
                 switch (e.KeyCode)
                 {
                     case Keys.Z:

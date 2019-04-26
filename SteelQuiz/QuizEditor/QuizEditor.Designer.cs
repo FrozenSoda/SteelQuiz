@@ -53,8 +53,6 @@ namespace SteelQuiz.QuizEditor
             this.cmb_lang2 = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.flp_words = new System.Windows.Forms.FlowLayoutPanel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.mns_top = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -116,24 +114,6 @@ namespace SteelQuiz.QuizEditor
             this.flp_words.Name = "flp_words";
             this.flp_words.Size = new System.Drawing.Size(776, 351);
             this.flp_words.TabIndex = 3;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 71);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(105, 13);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Words in language 1";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(382, 71);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(105, 13);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "Words in language 2";
             // 
             // mns_top
             // 
@@ -269,8 +249,6 @@ namespace SteelQuiz.QuizEditor
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.pnl_msg);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.flp_words);
             this.Controls.Add(this.cmb_lang2);
             this.Controls.Add(this.label3);
@@ -299,8 +277,6 @@ namespace SteelQuiz.QuizEditor
         private System.Windows.Forms.ComboBox cmb_lang2;
         private System.Windows.Forms.Label label3;
         internal System.Windows.Forms.FlowLayoutPanel flp_words;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.MenuStrip mns_top;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
