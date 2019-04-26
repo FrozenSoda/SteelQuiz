@@ -45,12 +45,16 @@ namespace SteelQuiz.QuizEditor
             }
         }
 
-        public SaveDontSave(Icon icon, bool confirmDoNotSave, string msg = null)
+        public SaveDontSave(Icon icon, bool confirmDoNotSave, string msg = null, string title = null)
         {
             InitializeComponent();
             if (msg != null)
             {
                 lbl_msg.Text = msg;
+            }
+            if (title != null)
+            {
+                Text = title;
             }
             pic_icon.Image = icon.ToBitmap();
             if (!confirmDoNotSave)

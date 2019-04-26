@@ -180,15 +180,18 @@ namespace SteelQuiz.QuizEditor
         {
             if (ChangedSinceLastSave)
             {
-                var msg = MessageBox.Show("You have unsaved changes. Save before loading a new quiz?", "SteelQuiz", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                if (msg == DialogResult.Yes)
+                //var msg = MessageBox.Show("You have unsaved changes. Save before loading a new quiz?", "SteelQuiz", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                var saveDontSave = new SaveDontSave(SystemIcons.Warning, true, "The project contains unsaved changes. Save before loading a new quiz?",
+                    "Save before loading new quiz? - SteelQuiz");
+                saveDontSave.ShowDialog();
+                if (saveDontSave.SaveDialogResult == SaveDontSave.SaveResult.Save)
                 {
                     if (!SaveQuiz())
                     {
                         return;
                     }
                 }
-                else if (msg == DialogResult.Cancel)
+                else if (saveDontSave.SaveDialogResult == SaveDontSave.SaveResult.Cancel)
                 {
                     return;
                 }
@@ -276,8 +279,8 @@ namespace SteelQuiz.QuizEditor
             {
                 //var msg = MessageBox.Show("You have unsaved changes. Save before exiting?", "SteelQuiz", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 var saveDontSave = new SaveDontSave(SystemIcons.Warning, true);
-                var result = saveDontSave.ShowDialog();
-                if (result == DialogResult.OK && saveDontSave.SaveDialogResult == SaveDontSave.SaveResult.Save)
+                saveDontSave.ShowDialog();
+                if (saveDontSave.SaveDialogResult == SaveDontSave.SaveResult.Save)
                 {
                     if (!SaveQuiz())
                     {
@@ -285,7 +288,7 @@ namespace SteelQuiz.QuizEditor
                         return;
                     }
                 }
-                else if (result == DialogResult.OK && saveDontSave.SaveDialogResult == SaveDontSave.SaveResult.Cancel)
+                else if (saveDontSave.SaveDialogResult == SaveDontSave.SaveResult.Cancel)
                 {
                     e.Cancel = true;
                     return;
@@ -530,15 +533,18 @@ namespace SteelQuiz.QuizEditor
         {
             if (ChangedSinceLastSave)
             {
-                var msg = MessageBox.Show("You have unsaved changes. Save before creating a new quiz?", "SteelQuiz", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                if (msg == DialogResult.Yes)
+                //var msg = MessageBox.Show("You have unsaved changes. Save before creating a new quiz?", "SteelQuiz", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                var saveDontSave = new SaveDontSave(SystemIcons.Warning, true, "The project contains unsaved changes. Save before creating a new quiz?",
+                    "Save before creating new quiz? - SteelQuiz");
+                saveDontSave.ShowDialog();
+                if (saveDontSave.SaveDialogResult == SaveDontSave.SaveResult.Save)
                 {
                     if (!SaveQuiz())
                     {
                         return;
                     }
                 }
-                else if (msg == DialogResult.Cancel)
+                else if (saveDontSave.SaveDialogResult == SaveDontSave.SaveResult.Cancel)
                 {
                     return;
                 }
