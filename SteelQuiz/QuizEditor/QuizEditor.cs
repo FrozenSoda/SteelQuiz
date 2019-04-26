@@ -455,6 +455,8 @@ namespace SteelQuiz.QuizEditor
             }
 
             UseWaitCursor = false;
+
+            ShowNotification("Quiz has been saved", 3000);
             return true;
         }
 
@@ -506,10 +508,23 @@ namespace SteelQuiz.QuizEditor
 
         private void QuizEditor_SizeChanged(object sender, EventArgs e)
         {
+            // resize wordpair collection
             flp_words.Size = new Size(this.Size.Width - 40, this.Size.Height - 138);
+
+            /*
+            // resize notification
+            int msgWidth = Convert.ToInt32(Size.Width * (277D / 816D));
+            int msgHeight = Convert.ToInt32(Size.Height * (100D / 489D));
+            pnl_msg.Size = new Size(msgWidth, msgHeight);
+            */
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NewQuiz();
+        }
+
+        private void NewQuiz()
         {
             if (ChangedSinceLastSave)
             {
@@ -544,13 +559,33 @@ namespace SteelQuiz.QuizEditor
                 switch (e.KeyCode)
                 {
                     case Keys.Z:
-                        e.Handled = true;
                         Undo();
+                        e.Handled = true;
+                        e.SuppressKeyPress = true;
                         break;
 
                     case Keys.Y:
-                        e.Handled = true;
                         Redo();
+                        e.Handled = true;
+                        e.SuppressKeyPress = true;
+                        break;
+
+                    case Keys.S:
+                        SaveQuiz();
+                        e.Handled = true;
+                        e.SuppressKeyPress = true;
+                        break;
+
+                    case Keys.N:
+                        NewQuiz();
+                        e.Handled = true;
+                        e.SuppressKeyPress = true;
+                        break;
+
+                    case Keys.O:
+                        LoadQuiz();
+                        e.Handled = true;
+                        e.SuppressKeyPress = true;
                         break;
                 }
             }
@@ -565,6 +600,38 @@ namespace SteelQuiz.QuizEditor
         private void tmr_autoRecoverySave_Tick(object sender, EventArgs e)
         {
             UpdateRecoverySave();
+        }
+
+        public void ShowNotification(string msg, int showMillis)
+        {
+            pnl_msg.Visible = true;
+            var notif = new EditorNotification(msg, showMillis);
+            notif.Dock = DockStyle.Fill;
+            pnl_msg.Controls.Add(notif);
+            notif.BringToFront();
+        }
+
+        public bool RemoveNotification(Guid guid)
+        {
+            foreach (var notif in pnl_msg.Controls.OfType<EditorNotification>())
+            {
+                if (notif.GUID == guid)
+                {
+                    notif.Dispose();
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private void Pnl_msg_SizeChanged(object sender, EventArgs e)
+        {
+            /*
+            int locXanchor = Size.Width - 305;
+            int locYanchor = Size.Height - 151;
+            pnl_msg.Location = new Point(locXanchor + (277 - pnl_msg.Size.Width), locYanchor + (100 - pnl_msg.Size.Height));
+            */
         }
     }
 }

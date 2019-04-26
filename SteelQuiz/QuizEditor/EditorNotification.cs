@@ -30,11 +30,13 @@ namespace SteelQuiz.QuizEditor
 {
     public partial class EditorNotification : UserControl
     {
+        public Guid GUID = Guid.NewGuid();
         private DateTime CreationDate { get; set; }
 
         public EditorNotification(string msg, int showMillis = 0)
         {
             InitializeComponent();
+
             lbl_msg.Text = msg;
             if (showMillis > 0)
             {
@@ -55,6 +57,12 @@ namespace SteelQuiz.QuizEditor
             // disposal effects
 
 
+            // hide notification panel if no messages are there anymore
+            if (Parent.Controls.Count == 1) // == 1 instead of 0 because this notification still exists
+            {
+                Parent.Visible = false;
+            }
+
             // dispose
             base.Dispose();
         }
@@ -67,25 +75,43 @@ namespace SteelQuiz.QuizEditor
         private void Tmr_timeStamp_Tick(object sender, EventArgs e)
         {
             TimeSpan dateDiff = DateTime.Now.Subtract(CreationDate);
-            if (dateDiff.TotalSeconds < 15)
+
+            double s_round = Math.Round(dateDiff.TotalSeconds);
+            double m_round = Math.Round(dateDiff.TotalMinutes);
+            double h_round = Math.Round(dateDiff.TotalHours);
+            double d_round = Math.Round(dateDiff.TotalDays);
+
+            if (s_round < 15)
             {
                 lbl_timeStamp.Text = "Just now";
             }
-            else if (dateDiff.TotalSeconds < 60)
+            else if (s_round < 60)
             {
-                lbl_timeStamp.Text = $"{dateDiff.TotalSeconds}s ago";
+                lbl_timeStamp.Text = $"{s_round}s ago";
             }
-            else if (dateDiff.TotalMinutes < 60)
+            else if (m_round < 2)
             {
-                lbl_timeStamp.Text = $"{dateDiff.TotalMinutes} minutes ago";
+                lbl_timeStamp.Text = $"{m_round} minute ago";
             }
-            else if (dateDiff.TotalHours < 60)
+            else if (m_round < 60)
             {
-                lbl_timeStamp.Text = $"{dateDiff.TotalHours} hours ago";
+                lbl_timeStamp.Text = $"{m_round} minutes ago";
             }
-            else if (dateDiff.TotalDays < 365)
+            else if (h_round < 2)
             {
-                lbl_timeStamp.Text = $"{dateDiff.TotalDays} days ago";
+                lbl_timeStamp.Text = $"{h_round} hour ago";
+            }
+            else if (h_round < 24)
+            {
+                lbl_timeStamp.Text = $"{h_round} hours ago";
+            }
+            else if (d_round < 2)
+            {
+                lbl_timeStamp.Text = $"{d_round} day ago";
+            }
+            else if (d_round < 365)
+            {
+                lbl_timeStamp.Text = $"{d_round} days ago";
             }
             else
             {
@@ -99,6 +125,26 @@ namespace SteelQuiz.QuizEditor
         private void Tmr_autoDestruction_Tick(object sender, EventArgs e)
         {
             Dispose();
+        }
+
+        private void EditorNotification_SizeChanged(object sender, EventArgs e)
+        {
+            /*
+            lbl_msg.Size = new Size(Size.Width - 41, Size.Height - 36);
+            lbl_timeStamp.Size = new Size(Size.Width - 41, lbl_timeStamp.Size.Height);
+
+            // resize message font size
+            while (lbl_msg.Height * lbl_msg.Width > TextRenderer.MeasureText(lbl_msg.Text,
+                new Font(lbl_msg.Font.FontFamily, lbl_msg.Font.Size, lbl_msg.Font.Style)).Width)
+            {
+                lbl_msg.Font = new Font(lbl_msg.Font.FontFamily, lbl_msg.Font.Size + 0.5f, lbl_msg.Font.Style);
+            }
+            while (lbl_msg.Height * lbl_msg.Width < TextRenderer.MeasureText(lbl_msg.Text,
+                new Font(lbl_msg.Font.FontFamily, lbl_msg.Font.Size, lbl_msg.Font.Style)).Width)
+            {
+                lbl_msg.Font = new Font(lbl_msg.Font.FontFamily, lbl_msg.Font.Size - 0.5f, lbl_msg.Font.Style);
+            }
+            */
         }
     }
 }

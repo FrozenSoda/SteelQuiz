@@ -221,17 +221,37 @@ namespace SteelQuiz.QuizEditor
 
             if ((word == -1 || word == 1) && Synonyms1 != null && Synonyms1.Contains(Word1))
             {
+                QEOwner.UndoStack.Push(new UndoRedoFuncPair(
+                    new Func<object>[] { Synonyms1.AddItem(Word1) },
+                    new Func<object>[] { Synonyms1.RemoveItem(Word1) },
+                    "Auto-remove synonym",
+                    new OwnerControlData(this, this.Parent)
+                    ));
+                QEOwner.UpdateUndoRedoTooltips();
                 Synonyms1.Remove(Word1);
+                /*
 #warning dont use messageboxes
                 var msg = MessageBox.Show($"A synonym to {Word1} has been removed, that was equal to the word", "SteelQuiz",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    */
+                QEOwner.ShowNotification($"A synonym to '{Word1}' has been removed, due to it being equal to the word itself", 0);
             }
 
             if ((word == -1 || word == 2) && Synonyms2 != null && Synonyms2.Contains(Word2))
             {
+                QEOwner.UndoStack.Push(new UndoRedoFuncPair(
+                    new Func<object>[] { Synonyms2.AddItem(Word2) },
+                    new Func<object>[] { Synonyms2.RemoveItem(Word2) },
+                    "Auto-remove synonym",
+                    new OwnerControlData(this, this.Parent)
+                    ));
+                QEOwner.UpdateUndoRedoTooltips();
                 Synonyms2.Remove(Word2);
+                /*
                 var msg = MessageBox.Show($"A synonym to word {Word2} has been removed, that was equal to the word", "SteelQuiz",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    */
+                QEOwner.ShowNotification($"A synonym to '{Word2}' has been removed, due to it being equal to the word itself", 0);
             }
         }
 

@@ -157,5 +157,23 @@ namespace SteelQuiz.QuizEditor.UndoRedo
                 return wordPair;
             };
         }
+
+        public static Func<T> RemoveItem<T>(this IList<T> lst, T item)
+        {
+            return () =>
+            {
+                lst.Remove(item);
+                return item;
+            };
+        }
+
+        public static Func<T> AddItem<T>(this IList<T> lst, T item)
+        {
+            return () =>
+            {
+                lst.Add(item);
+                return item;
+            };
+        }
     }
 }

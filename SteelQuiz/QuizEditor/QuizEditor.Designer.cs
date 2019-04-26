@@ -162,35 +162,38 @@ namespace SteelQuiz.QuizEditor
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.newToolStripMenuItem.ShortcutKeyDisplayString = "CTRL+N";
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.newToolStripMenuItem.Text = "New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.openToolStripMenuItem.ShortcutKeyDisplayString = "CTRL+O";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.saveToolStripMenuItem.ShortcutKeyDisplayString = "CTRL+S";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveAsToolStripMenuItem.Text = "Save as";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // closeMenuToolStripMenuItem
             // 
             this.closeMenuToolStripMenuItem.Name = "closeMenuToolStripMenuItem";
-            this.closeMenuToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.closeMenuToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.closeMenuToolStripMenuItem.Text = "Close";
             this.closeMenuToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -206,14 +209,16 @@ namespace SteelQuiz.QuizEditor
             // undoToolStripMenuItem
             // 
             this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
-            this.undoToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.undoToolStripMenuItem.ShortcutKeyDisplayString = "CTRL+Z";
+            this.undoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.undoToolStripMenuItem.Text = "Undo";
             this.undoToolStripMenuItem.Click += new System.EventHandler(this.undoToolStripMenuItem_Click);
             // 
             // redoToolStripMenuItem
             // 
             this.redoToolStripMenuItem.Name = "redoToolStripMenuItem";
-            this.redoToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.redoToolStripMenuItem.ShortcutKeyDisplayString = "CTRL+Y";
+            this.redoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.redoToolStripMenuItem.Text = "Redo";
             this.redoToolStripMenuItem.Click += new System.EventHandler(this.redoToolStripMenuItem_Click);
             // 
@@ -249,10 +254,14 @@ namespace SteelQuiz.QuizEditor
             // 
             // pnl_msg
             // 
+            this.pnl_msg.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnl_msg.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.pnl_msg.Location = new System.Drawing.Point(511, 338);
             this.pnl_msg.Name = "pnl_msg";
             this.pnl_msg.Size = new System.Drawing.Size(277, 100);
             this.pnl_msg.TabIndex = 0;
+            this.pnl_msg.Visible = false;
+            this.pnl_msg.SizeChanged += new System.EventHandler(this.Pnl_msg_SizeChanged);
             // 
             // QuizEditor
             // 

@@ -56,9 +56,12 @@ namespace SteelQuiz.QuizEditor
             // 
             // btn_close
             // 
-            this.btn_close.Location = new System.Drawing.Point(3, 3);
+            this.btn_close.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_close.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_close.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btn_close.Location = new System.Drawing.Point(249, 3);
             this.btn_close.Name = "btn_close";
-            this.btn_close.Size = new System.Drawing.Size(56, 23);
+            this.btn_close.Size = new System.Drawing.Size(23, 23);
             this.btn_close.TabIndex = 5;
             this.btn_close.Text = "X";
             this.btn_close.UseVisualStyleBackColor = true;
@@ -66,23 +69,25 @@ namespace SteelQuiz.QuizEditor
             // 
             // lbl_timeStamp
             // 
-            this.lbl_timeStamp.Font = new System.Drawing.Font("Segoe UI Semilight", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_timeStamp.Location = new System.Drawing.Point(7, 76);
+            this.lbl_timeStamp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbl_timeStamp.Font = new System.Drawing.Font("Segoe UI Semilight", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_timeStamp.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lbl_timeStamp.Location = new System.Drawing.Point(7, 65);
             this.lbl_timeStamp.Name = "lbl_timeStamp";
-            this.lbl_timeStamp.Size = new System.Drawing.Size(262, 22);
+            this.lbl_timeStamp.Size = new System.Drawing.Size(236, 22);
             this.lbl_timeStamp.TabIndex = 4;
             this.lbl_timeStamp.Text = "Just now";
             this.lbl_timeStamp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lbl_msg
             // 
-            this.lbl_msg.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_msg.Location = new System.Drawing.Point(6, 26);
+            this.lbl_msg.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_msg.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lbl_msg.Location = new System.Drawing.Point(6, 13);
             this.lbl_msg.Name = "lbl_msg";
-            this.lbl_msg.Size = new System.Drawing.Size(266, 50);
+            this.lbl_msg.Size = new System.Drawing.Size(234, 52);
             this.lbl_msg.TabIndex = 3;
             this.lbl_msg.Text = "Message here";
-            this.lbl_msg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tmr_timeStamp
             // 
@@ -98,12 +103,14 @@ namespace SteelQuiz.QuizEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.btn_close);
             this.Controls.Add(this.lbl_timeStamp);
             this.Controls.Add(this.lbl_msg);
             this.Name = "EditorNotification";
             this.Size = new System.Drawing.Size(275, 98);
+            this.SizeChanged += new System.EventHandler(this.EditorNotification_SizeChanged);
             this.ResumeLayout(false);
 
         }
