@@ -71,6 +71,12 @@
     <Compile Include="QuizEditor\QuizRecoveryUC.Designer.cs">
       <DependentUpon>QuizRecoveryUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuizEditor\SaveDontSave.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuizEditor\SaveDontSave.Designer.cs">
+      <DependentUpon>SaveDontSave.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuizImport\Guide\Step0.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -201,6 +207,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="QuizEditor\QuizRecoveryUC.resx">
       <DependentUpon>QuizRecoveryUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuizEditor\SaveDontSave.resx">
+      <DependentUpon>SaveDontSave.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuizImport\Guide\Step0.resx">
       <DependentUpon>Step0.cs</DependentUpon>

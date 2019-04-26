@@ -1,0 +1,4 @@
+- Fixed issues #11, #14
+- Added more keyboard shortcuts to quiz editor
+- New notification system in the quiz editor
+- Additional bug fixes and improvements in the quiz editor
