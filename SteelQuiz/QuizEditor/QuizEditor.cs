@@ -274,8 +274,10 @@ namespace SteelQuiz.QuizEditor
         {
             if (ChangedSinceLastSave)
             {
-                var msg = MessageBox.Show("You have unsaved changes. Save before exiting?", "SteelQuiz", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                if (msg == DialogResult.Yes)
+                //var msg = MessageBox.Show("You have unsaved changes. Save before exiting?", "SteelQuiz", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                var saveDontSave = new SaveDontSave(SystemIcons.Warning, true);
+                var result = saveDontSave.ShowDialog();
+                if (result == DialogResult.OK && saveDontSave.SaveDialogResult == SaveDontSave.SaveResult.Save)
                 {
                     if (!SaveQuiz())
                     {
@@ -283,7 +285,7 @@ namespace SteelQuiz.QuizEditor
                         return;
                     }
                 }
-                else if (msg == DialogResult.Cancel)
+                else if (result == DialogResult.OK && saveDontSave.SaveDialogResult == SaveDontSave.SaveResult.Cancel)
                 {
                     e.Cancel = true;
                     return;

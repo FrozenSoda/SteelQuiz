@@ -1,4 +1,22 @@
-﻿namespace SteelQuiz.QuizEditor
+﻿/*
+    SteelQuiz - A quiz program designed to make learning words easier
+    Copyright (C) 2019  Steel9Apps
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
+namespace SteelQuiz.QuizEditor
 {
     partial class SaveDontSave
     {
@@ -61,6 +79,7 @@
             this.pic_icon.Location = new System.Drawing.Point(12, 12);
             this.pic_icon.Name = "pic_icon";
             this.pic_icon.Size = new System.Drawing.Size(60, 60);
+            this.pic_icon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pic_icon.TabIndex = 2;
             this.pic_icon.TabStop = false;
             // 
@@ -94,6 +113,7 @@
             this.chk_doNotSave.TabIndex = 5;
             this.chk_doNotSave.Text = "Do not save confirmation";
             this.chk_doNotSave.UseVisualStyleBackColor = true;
+            this.chk_doNotSave.CheckedChanged += new System.EventHandler(this.Chk_doNotSave_CheckedChanged);
             // 
             // SaveDontSave
             // 
