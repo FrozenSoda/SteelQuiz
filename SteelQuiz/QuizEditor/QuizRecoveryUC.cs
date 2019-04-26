@@ -70,7 +70,16 @@ namespace SteelQuiz.QuizEditor
             try
             {
                 File.Delete(RecoveryPath);
-                this.Dispose();
+                var parentQR = ParentForm as QuizRecovery;
+                if (parentQR.flp_recovery.Controls.Count == 1) // 1, not 0, on purpose, as this usercontrol has not been disposed yet
+                {
+                    // if no more items are present, close the dialog
+                    parentQR.DialogResult = DialogResult.Cancel;
+                }
+                else
+                {
+                    this.Dispose();
+                }
             }
             catch (Exception ex)
             {

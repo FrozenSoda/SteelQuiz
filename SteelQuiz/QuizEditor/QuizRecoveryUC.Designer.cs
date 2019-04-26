@@ -85,7 +85,7 @@ namespace SteelQuiz.QuizEditor
             // 
             // btn_load
             // 
-            this.btn_load.Location = new System.Drawing.Point(608, 93);
+            this.btn_load.Location = new System.Drawing.Point(572, 93);
             this.btn_load.Name = "btn_load";
             this.btn_load.Size = new System.Drawing.Size(148, 23);
             this.btn_load.TabIndex = 3;
@@ -95,7 +95,7 @@ namespace SteelQuiz.QuizEditor
             // 
             // btn_delete
             // 
-            this.btn_delete.Location = new System.Drawing.Point(469, 93);
+            this.btn_delete.Location = new System.Drawing.Point(433, 93);
             this.btn_delete.Name = "btn_delete";
             this.btn_delete.Size = new System.Drawing.Size(133, 23);
             this.btn_delete.TabIndex = 4;
@@ -114,7 +114,7 @@ namespace SteelQuiz.QuizEditor
             this.Controls.Add(this.lbl_quizPath);
             this.Controls.Add(this.lbl_recoveryPath);
             this.Name = "QuizRecoveryUC";
-            this.Size = new System.Drawing.Size(767, 126);
+            this.Size = new System.Drawing.Size(737, 126);
             this.ResumeLayout(false);
             this.PerformLayout();
 

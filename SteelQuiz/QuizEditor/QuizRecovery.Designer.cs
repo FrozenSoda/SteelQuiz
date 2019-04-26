@@ -74,6 +74,7 @@ namespace SteelQuiz.QuizEditor
             // 
             // flp_recovery
             // 
+            this.flp_recovery.AutoScroll = true;
             this.flp_recovery.Location = new System.Drawing.Point(17, 55);
             this.flp_recovery.Name = "flp_recovery";
             this.flp_recovery.Size = new System.Drawing.Size(771, 354);

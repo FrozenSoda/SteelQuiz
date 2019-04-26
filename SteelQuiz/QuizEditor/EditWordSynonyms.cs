@@ -96,7 +96,8 @@ namespace SteelQuiz.QuizEditor
 
         private void btn_cancel_Click(object sender, EventArgs e)
         {
-            if (!ListBoxChanged() || MessageBox.Show("Are you sure you want to cancel? The changes will not be applied", "SteelQuiz", MessageBoxButtons.YesNo,
+            if (((txt_wordAdd.Text == "" || lst_synonyms.Items.Contains(txt_wordAdd.Text)) && !ListBoxChanged())
+                || MessageBox.Show("Are you sure you want to cancel? The changes will not be applied", "SteelQuiz", MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 closeWarning = false;
