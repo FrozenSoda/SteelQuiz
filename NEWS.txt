@@ -1,6 +1,0 @@
-- Fixed issues #11, #14, #16.
-- Added more keyboard shortcuts to quiz editor.
-- New notification system in the quiz editor.
-- Better save/don't save dialogs in the quiz editor.
-- Setup now adds desktop shortcuts.
-- Additional bug fixes and improvements, included but not limited to the quiz editor.
