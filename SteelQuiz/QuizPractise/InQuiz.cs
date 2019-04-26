@@ -111,24 +111,10 @@ namespace SteelQuiz.QuizPractise
         {
             CountThisTranslationToProgress = true;
             lbl_progress.Text = $"Progress this round: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
+
             if (QuizCore.QuizProgress.FullTestInProgress)
             {
                 newRoundMsg = false;
-                if (CorrectAnswersThisRound == QuizCore.GetTotalWordsThisRound())
-                {
-                    MessageBox.Show($"Full test results:\r\nCorrect: {CorrectAnswersThisRound} / {QuizCore.GetTotalWordsThisRound()}, congratulations!",
-                        "Full test finished - SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    var msg = MessageBox.Show($"Full test results:\r\nCorrect: {CorrectAnswersThisRound} / {QuizCore.GetTotalWordsThisRound()}\r\n\r\n" +
-                        $"Would you like to re-enable Intelligent Learning, to learn the missed words?",
-                        "Full test finished - SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (msg == DialogResult.Yes)
-                    {
-                        SwitchAIMode(false);
-                    }
-                }
             }
 
             CorrectAnswersThisRound = 0;
@@ -164,6 +150,25 @@ namespace SteelQuiz.QuizPractise
                     lbl_word1.Text = "Correct! Press ENTER to continue";
                     QuizCore.ResetWordsAskedThisRoundMemo();
                     lbl_progress.Text = $"Progress this round: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
+
+                    if (QuizCore.QuizProgress.FullTestInProgress && QuizCore.GetWordsAskedThisRound() == QuizCore.GetTotalWordsThisRound())
+                    {
+                        if (CorrectAnswersThisRound == QuizCore.GetTotalWordsThisRound())
+                        {
+                            MessageBox.Show($"Full test results:\r\nCorrect: {CorrectAnswersThisRound} / {QuizCore.GetTotalWordsThisRound()}, congratulations!",
+                                "Full test finished - SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            var msg = MessageBox.Show($"Full test results:\r\nCorrect: {CorrectAnswersThisRound} / {QuizCore.GetTotalWordsThisRound()}\r\n\r\n" +
+                                $"Would you like to re-enable Intelligent Learning, to learn the missed words?",
+                                "Full test finished - SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (msg == DialogResult.Yes)
+                            {
+                                SwitchAIMode(false);
+                            }
+                        }
+                    }
                     WaitingForEnter = true;
                 }
                 else
