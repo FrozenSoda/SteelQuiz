@@ -10,7 +10,7 @@
 ;--------------------------------
 
 ;Add version info
-!define PRODUCT_VERSION "2.1.0.0"
+!define PRODUCT_VERSION "2.2.0.1"
 
 VIProductVersion "${PRODUCT_VERSION}"
 VIFileVersion "${PRODUCT_VERSION}"
@@ -92,24 +92,31 @@ Section "Start Menu Shortcuts" SecStartMenuShortcuts
   
 SectionEnd
 
+Section "Desktop Shortcut" SecDesktopShortcut
+   CreateShortcut "$DESKTOP\SteelQuiz.lnk" "$INSTDIR\SteelQuiz.exe" "" "$INSTDIR\SteelQuiz.exe" 0
+SectionEnd
+
 ;--------------------------------
 ;Descriptions
 
   ;Language strings
   LangString DESC_SecSteelQuiz ${LANG_ENGLISH} "SteelQuiz (required)"
   LangString DESC_SecStartMenuShortcuts ${LANG_ENGLISH} "Start Menu Shortcuts"
+  LangString DESC_SecDesktopShortcut ${LANG_ENGLISH} "Desktop Shortcut"
 
   ;Assign language strings to sections
   !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
     !insertmacro MUI_DESCRIPTION_TEXT ${SecSteelQuiz} $(DESC_SecSteelQuiz)
     !insertmacro MUI_DESCRIPTION_TEXT ${SecStartMenuShortcuts} $(DESC_SecStartMenuShortcuts)
+	!insertmacro MUI_DESCRIPTION_TEXT ${SecDesktopShortcut} $(DESC_SecDesktopShortcut)
   !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
 ;--------------------------------
 ;Uninstaller Section
 
 Section "Uninstall"
-  ;Delete app shortcut
+  ;Delete app shortcuts
+  Delete "$DESKTOP\SteelQuiz.lnk"
   Delete "$SMPROGRAMS\SteelQuiz\SteelQuiz.lnk"
   
   ;Delete files
