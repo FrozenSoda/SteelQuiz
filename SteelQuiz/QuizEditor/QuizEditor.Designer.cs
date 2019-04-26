@@ -110,9 +110,9 @@ namespace SteelQuiz.QuizEditor
             // 
             this.flp_words.AutoScroll = true;
             this.flp_words.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flp_words.Location = new System.Drawing.Point(12, 87);
+            this.flp_words.Location = new System.Drawing.Point(12, 73);
             this.flp_words.Name = "flp_words";
-            this.flp_words.Size = new System.Drawing.Size(776, 351);
+            this.flp_words.Size = new System.Drawing.Size(776, 365);
             this.flp_words.TabIndex = 3;
             // 
             // mns_top

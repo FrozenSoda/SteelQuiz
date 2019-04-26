@@ -81,7 +81,10 @@ namespace SteelQuiz.QuizEditor
                     MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
                 if (msg == DialogResult.Yes)
                 {
-                    AddSynonym();
+                    if (!AddSynonym())
+                    {
+                        return;
+                    }
                 }
                 else if (msg == DialogResult.Cancel)
                 {
@@ -110,12 +113,18 @@ namespace SteelQuiz.QuizEditor
             AddSynonym();
         }
 
-        private void AddSynonym()
+        private bool SynonymChk()
         {
+            if (txt_wordAdd.Text == "")
+            {
+                MessageBox.Show("Synonym cannot be empty", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
             if (lst_synonyms.Items.Contains(txt_wordAdd.Text))
             {
                 MessageBox.Show("Duplicates are not allowed", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                return false;
             }
 
             if (Language == 1)
@@ -123,7 +132,7 @@ namespace SteelQuiz.QuizEditor
                 if (txt_wordAdd.Text == Parent.Word1)
                 {
                     MessageBox.Show("You can't add a synonym equal to the word you are adding synonyms for", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                    return false;
                 }
             }
             else if (Language == 2)
@@ -131,8 +140,18 @@ namespace SteelQuiz.QuizEditor
                 if (txt_wordAdd.Text == Parent.Word2)
                 {
                     MessageBox.Show("You can't add a synonym equal to the word you are adding synonyms for", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                    return false;
                 }
+            }
+
+            return true;
+        }
+
+        private bool AddSynonym()
+        {
+            if (!SynonymChk())
+            {
+                return false;
             }
 
             if (txt_wordAdd.Text.StartsWith(" ") || txt_wordAdd.Text.EndsWith(" "))
@@ -146,7 +165,7 @@ namespace SteelQuiz.QuizEditor
                 }
                 else if (msg == DialogResult.Cancel)
                 {
-                    return;
+                    return false;
                 }
             }
 
@@ -163,7 +182,7 @@ namespace SteelQuiz.QuizEditor
                 }
                 else if (msg == DialogResult.Cancel)
                 {
-                    return;
+                    return false;
                 }
             }
 
@@ -179,13 +198,14 @@ namespace SteelQuiz.QuizEditor
 
             txt_wordAdd.Text = "";
             changedTextBox = false;
+
+            return true;
         }
 
         private void btn_update_Click(object sender, EventArgs e)
         {
-            if (lst_synonyms.Items.Contains(txt_wordAdd.Text))
+            if (!SynonymChk())
             {
-                MessageBox.Show("Duplicates are not allowed", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 

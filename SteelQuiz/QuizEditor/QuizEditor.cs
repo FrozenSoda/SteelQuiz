@@ -509,7 +509,7 @@ namespace SteelQuiz.QuizEditor
         private void QuizEditor_SizeChanged(object sender, EventArgs e)
         {
             // resize wordpair collection
-            flp_words.Size = new Size(this.Size.Width - 40, this.Size.Height - 138);
+            flp_words.Size = new Size(this.Size.Width - 40, this.Size.Height - 124);
 
             /*
             // resize notification
