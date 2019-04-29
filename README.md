@@ -5,9 +5,9 @@ Tired of practising vocabulary in the traditional way, or with software/websites
 
 SteelQuiz is still in pre-release phase, so expect some bugs and issues.
 
-**[Download latest setup (recommended)](https://github.com/steel9/SteelQuiz/releases/latest/download/SteelQuizSetup.exe)**   
+**[Download latest stable setup (recommended)](https://github.com/steel9/SteelQuiz/releases/latest/download/SteelQuizSetup.exe)**   
 &NewLine;   
-**[Download latest portable version](https://github.com/steel9/SteelQuiz/releases/latest/download/SteelQuizPortable.zip)**   
+**[Download latest stable portable version](https://github.com/steel9/SteelQuiz/releases/latest/download/SteelQuizPortable.zip)**   
 &NewLine;   
 &NewLine;   
 ### Intelligent Learning
