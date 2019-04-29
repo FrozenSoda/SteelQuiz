@@ -46,6 +46,7 @@ namespace SteelQuiz
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Welcome));
             this.lbl_welcome = new System.Windows.Forms.Label();
             this.btn_createQuiz = new System.Windows.Forms.Button();
@@ -54,6 +55,7 @@ namespace SteelQuiz
             this.ofd_loadQuiz = new System.Windows.Forms.OpenFileDialog();
             this.lbl_copyright = new System.Windows.Forms.Label();
             this.btn_continueLast = new System.Windows.Forms.Button();
+            this.tmr_chkUpdate = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // lbl_welcome
@@ -129,6 +131,12 @@ namespace SteelQuiz
             this.btn_continueLast.UseVisualStyleBackColor = true;
             this.btn_continueLast.Click += new System.EventHandler(this.btn_continueLast_Click);
             // 
+            // tmr_chkUpdate
+            // 
+            this.tmr_chkUpdate.Enabled = true;
+            this.tmr_chkUpdate.Interval = 120000;
+            this.tmr_chkUpdate.Tick += new System.EventHandler(this.Tmr_chkUpdate_Tick);
+            // 
             // Welcome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -161,6 +169,7 @@ namespace SteelQuiz
         private System.Windows.Forms.OpenFileDialog ofd_loadQuiz;
         private System.Windows.Forms.Label lbl_copyright;
         private System.Windows.Forms.Button btn_continueLast;
+        private System.Windows.Forms.Timer tmr_chkUpdate;
     }
 }
 

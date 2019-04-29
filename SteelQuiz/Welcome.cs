@@ -42,6 +42,13 @@ namespace SteelQuiz
             this.Text += $" | v{Application.ProductVersion}";
             SetControlStates();
 
+            ChkUpdate();
+        }
+
+        public void ChkUpdate(bool unobtrusive = false)
+        {
+            // if unobtrusive == true, an update dialog should not be showed, but a notification message should instead be shown to not distrupt the user
+
             if (SUtil.InternetConnectionAvailable())
             {
                 try
@@ -158,6 +165,12 @@ namespace SteelQuiz
         private void btn_createQuiz_Click(object sender, EventArgs e)
         {
             OpenQuizEditor();
+        }
+
+        private void Tmr_chkUpdate_Tick(object sender, EventArgs e)
+        {
+            // ChkUpdate(true);
+            // disabled until update notification system is implemented
         }
     }
 }
