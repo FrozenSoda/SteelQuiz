@@ -52,7 +52,7 @@ namespace SteelQuiz.QuizEditor
             this.cmb_lang1 = new System.Windows.Forms.ComboBox();
             this.cmb_lang2 = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.flp_words = new System.Windows.Forms.FlowLayoutPanel();
+            this.flp_words = new SteelQuiz.Controls.SmoothFlowLayoutPanel();
             this.mns_top = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -190,7 +190,7 @@ namespace SteelQuiz.QuizEditor
             // 
             this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
             this.undoToolStripMenuItem.ShortcutKeyDisplayString = "CTRL+Z";
-            this.undoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.undoToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.undoToolStripMenuItem.Text = "Undo";
             this.undoToolStripMenuItem.Click += new System.EventHandler(this.undoToolStripMenuItem_Click);
             // 
@@ -198,7 +198,7 @@ namespace SteelQuiz.QuizEditor
             // 
             this.redoToolStripMenuItem.Name = "redoToolStripMenuItem";
             this.redoToolStripMenuItem.ShortcutKeyDisplayString = "CTRL+Y";
-            this.redoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.redoToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.redoToolStripMenuItem.Text = "Redo";
             this.redoToolStripMenuItem.Click += new System.EventHandler(this.redoToolStripMenuItem_Click);
             // 
@@ -228,9 +228,9 @@ namespace SteelQuiz.QuizEditor
             // 
             // tmr_autoRecoverySave
             // 
-            this.tmr_autoRecoverySave.Enabled = true;
             this.tmr_autoRecoverySave.Interval = 30000;
             this.tmr_autoRecoverySave.Tick += new System.EventHandler(this.tmr_autoRecoverySave_Tick);
+#warning auto recovery save timer is disabled
             // 
             // pnl_msg
             // 
@@ -276,7 +276,7 @@ namespace SteelQuiz.QuizEditor
         private System.Windows.Forms.ComboBox cmb_lang1;
         private System.Windows.Forms.ComboBox cmb_lang2;
         private System.Windows.Forms.Label label3;
-        internal System.Windows.Forms.FlowLayoutPanel flp_words;
+        internal SteelQuiz.Controls.SmoothFlowLayoutPanel flp_words;
         private System.Windows.Forms.MenuStrip mns_top;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
