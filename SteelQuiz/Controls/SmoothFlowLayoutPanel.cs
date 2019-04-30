@@ -20,6 +20,7 @@ namespace SteelQuiz.Controls
 
         protected override void OnMouseWheel(MouseEventArgs e)
         {
+#warning application freezes frequently when scrolling
             // smooth scrolling
 
             if (scrollTimer != null && scrollTimer.Enabled)
