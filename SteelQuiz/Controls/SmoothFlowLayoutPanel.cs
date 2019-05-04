@@ -34,15 +34,7 @@ namespace SteelQuiz.Controls
 
         public SmoothFlowLayoutPanel() : base()
         {
-            /*
-            this.SetStyle(ControlStyles.AllPaintingInWmPaint |
-                ControlStyles.UserPaint |
-                ControlStyles.OptimizedDoubleBuffer,
-                true);
-                */
-            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-            this.SetStyle(ControlStyles.UserPaint, true);
-            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            DoubleBuffered = true;
         }
 
         protected override void OnScroll(ScrollEventArgs se)
