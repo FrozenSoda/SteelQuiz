@@ -32,6 +32,19 @@ namespace SteelQuiz.Controls
         private int scrollElapsed = 0;
         private bool animationRunning = false;
 
+        public SmoothFlowLayoutPanel() : base()
+        {
+            /*
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint |
+                ControlStyles.UserPaint |
+                ControlStyles.OptimizedDoubleBuffer,
+                true);
+                */
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            this.SetStyle(ControlStyles.UserPaint, true);
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+        }
+
         protected override void OnScroll(ScrollEventArgs se)
         {
             base.OnScroll(se);
