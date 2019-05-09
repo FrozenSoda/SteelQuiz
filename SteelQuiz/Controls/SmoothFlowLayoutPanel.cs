@@ -128,7 +128,8 @@ namespace SteelQuiz.Controls
         private double DeltaScroll(long millis)
         {
             //double d = -0.00032D * millis * (millis - 50.0D);
-            double d = -0.000016D * millis * (millis - 500.0D);
+            //double d = -0.000016D * millis * (millis - 500.0D);
+            double d = -0.000008D * millis * (millis - 500.0D);
             if (d >= 0)
             {
                 return d;
