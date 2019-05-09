@@ -186,8 +186,8 @@
     <Compile Include="QuizCore.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="QuizPractise\StringComp.cs" />
+    <Compile Include="SuperStopwatch.cs" />
     <Compile Include="SUtil.cs" />
-    <Compile Include="Synchronizer.cs" />
     <Compile Include="TermsOfUse.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -20,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -27,15 +28,16 @@ namespace SteelQuiz.Controls
 {
     public class SmoothFlowLayoutPanel : FlowLayoutPanel
     {
-        private Synchronizer synchronizer = new Synchronizer();
-        private System.Timers.Timer scrollTimer = null;
-        private int scrollElapsed = 0;
+        private SuperStopwatch scrollElapsedStopwatch = new SuperStopwatch();
+        private System.Timers.Timer scrollAnimationTimer = null;
         private bool animationRunning = false;
 
+        /*
         public SmoothFlowLayoutPanel() : base()
         {
             DoubleBuffered = true;
         }
+        */
 
         protected override void OnScroll(ScrollEventArgs se)
         {
@@ -49,15 +51,15 @@ namespace SteelQuiz.Controls
 
             if (animationRunning)
             {
-                scrollElapsed = 25;
+                scrollElapsedStopwatch.Reset(new TimeSpan(0, 0, 0, 0, 250));
                 return;
             }
 
             animationRunning = true;
 
-            if (scrollTimer == null)
+            if (scrollAnimationTimer == null)
             {
-                scrollTimer = new System.Timers.Timer
+                scrollAnimationTimer = new System.Timers.Timer
                 {
                     Interval = 8,
                     SynchronizingObject = this,
@@ -65,63 +67,68 @@ namespace SteelQuiz.Controls
                 };
             }
 
-            scrollTimer.Elapsed += delegate
+            System.Diagnostics.Debug.Print("\r\nStarting new scroll timer actions");
+
+            scrollAnimationTimer.Elapsed += delegate
             {
-                lock (synchronizer[scrollElapsed])
+                System.Diagnostics.Debug.Print("\r\nscrollAnimationTimer elapsed START");
+                bool stop = false;
+                try
                 {
-                    System.Diagnostics.Debug.Print("\r\nscrollTimer elapsed START");
-                    try
+                    double deltaScrollD = DeltaScroll(scrollElapsedStopwatch.ElapsedMilliseconds);
+                    System.Diagnostics.Debug.Print($"deltaScrollD: {deltaScrollD}");
+                    System.Diagnostics.Debug.Print($"scrollElapsed: {scrollElapsedStopwatch.ElapsedMilliseconds}");
+                    if (scrollElapsedStopwatch.ElapsedMilliseconds > 0 && deltaScrollD == 0D)
                     {
-                        double deltaScrollD = DeltaScroll(scrollElapsed);
-                        if (scrollElapsed > 0 && deltaScrollD == 0)
-                        {
-                            scrollElapsed = 0;
-                            scrollTimer.Stop();
-                            animationRunning = false;
-                            return;
-                        }
-                        int deltaScroll = Convert.ToInt32(Math.Ceiling(deltaScrollD * e.Delta)) * -1;
-                        if (this.VerticalScroll.Value + deltaScroll < this.VerticalScroll.Minimum)
-                        {
-                            this.VerticalScroll.Value = this.VerticalScroll.Minimum;
-
-                            scrollElapsed = 0;
-                            scrollTimer.Stop();
-                            animationRunning = false;
-                            return;
-                        }
-                        else if (this.VerticalScroll.Value + deltaScroll > this.VerticalScroll.Maximum)
-                        {
-                            this.VerticalScroll.Value = this.VerticalScroll.Maximum;
-
-                            scrollElapsed = 0;
-                            scrollTimer.Stop();
-                            animationRunning = false;
-                            return;
-                        }
-                        else
-                        {
-                            this.VerticalScroll.Value += deltaScroll;
-                        }
-                        ++scrollElapsed;
+                        stop = true;
+                        return;
                     }
-                    finally
+                    int deltaScroll = Convert.ToInt32(Math.Ceiling(deltaScrollD * e.Delta)) * -1;
+                    if (this.VerticalScroll.Value + deltaScroll < this.VerticalScroll.Minimum)
                     {
-                        if (scrollElapsed > 0)
-                        {
-                            scrollTimer.Enabled = true;
-                        }
-                        System.Diagnostics.Debug.Print("scrollTimer elapsed STOP");
+                        this.VerticalScroll.Value = this.VerticalScroll.Minimum;
+
+                        stop = true;
+                        return;
                     }
+                    else if (this.VerticalScroll.Value + deltaScroll > this.VerticalScroll.Maximum)
+                    {
+                        this.VerticalScroll.Value = this.VerticalScroll.Maximum;
+
+                        stop = true;
+                        return;
+                    }
+                    else
+                    {
+                        this.VerticalScroll.Value += deltaScroll;
+                    }
+                }
+                finally
+                {
+                    if (!stop)
+                    {
+                        scrollAnimationTimer.Enabled = true;
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.Print("Stopping scroll animation");
+                        scrollElapsedStopwatch.Reset();
+                        scrollAnimationTimer.Stop();
+                        animationRunning = false;
+                        System.Diagnostics.Debug.Print("Stopped scroll animation");
+                    }
+                    System.Diagnostics.Debug.Print("scrollAnimationTimer elapsed STOP");
                 }
             };
 
-            scrollTimer.Start();
+            scrollElapsedStopwatch.Restart();
+            scrollAnimationTimer.Start();
         }
 
-        private double DeltaScroll(int millis)
+        private double DeltaScroll(long millis)
         {
-            double d = -0.00032D * millis * (millis - 50.0D);
+            //double d = -0.00032D * millis * (millis - 50.0D);
+            double d = -0.000016D * millis * (millis - 500.0D);
             if (d >= 0)
             {
                 return d;

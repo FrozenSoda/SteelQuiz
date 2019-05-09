@@ -48,6 +48,7 @@ namespace SteelQuiz.QuizEditor
         public QuizEditorWordPair(QuizEditor owner, int number)
         {
             InitializeComponent();
+            DoubleBuffered = true;
             QEOwner = owner;
             Number = number;
             RemoveSynonymsEqualToWords();
