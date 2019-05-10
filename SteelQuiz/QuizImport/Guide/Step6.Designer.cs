@@ -54,6 +54,7 @@ namespace SteelQuiz.QuizImport.Guide
             // 
             // txt_lang
             // 
+            this.txt_lang.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_lang.Location = new System.Drawing.Point(145, 334);
             this.txt_lang.Name = "txt_lang";
             this.txt_lang.Size = new System.Drawing.Size(618, 20);
@@ -64,6 +65,7 @@ namespace SteelQuiz.QuizImport.Guide
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(-1, 335);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(140, 16);
@@ -72,16 +74,20 @@ namespace SteelQuiz.QuizImport.Guide
             // 
             // lst_words
             // 
+            this.lst_words.BackColor = System.Drawing.Color.LightSlateGray;
+            this.lst_words.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lst_words.ForeColor = System.Drawing.Color.White;
             this.lst_words.FormattingEnabled = true;
             this.lst_words.Location = new System.Drawing.Point(2, 55);
             this.lst_words.Name = "lst_words";
-            this.lst_words.Size = new System.Drawing.Size(761, 277);
+            this.lst_words.Size = new System.Drawing.Size(761, 273);
             this.lst_words.TabIndex = 6;
             this.lst_words.TabStop = false;
             // 
             // lbl_question
             // 
             this.lbl_question.Font = new System.Drawing.Font("Segoe UI Semilight", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_question.ForeColor = System.Drawing.Color.White;
             this.lbl_question.Location = new System.Drawing.Point(3, 13);
             this.lbl_question.Name = "lbl_question";
             this.lbl_question.Size = new System.Drawing.Size(760, 43);
@@ -92,6 +98,7 @@ namespace SteelQuiz.QuizImport.Guide
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.SlateGray;
             this.Controls.Add(this.txt_lang);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lst_words);

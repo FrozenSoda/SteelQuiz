@@ -54,24 +54,32 @@ namespace SteelQuiz.QuizImport.Guide
             // 
             // btn_next
             // 
+            this.btn_next.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btn_next.FlatAppearance.BorderSize = 0;
+            this.btn_next.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_next.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_next.ForeColor = System.Drawing.Color.White;
             this.btn_next.Location = new System.Drawing.Point(549, 392);
             this.btn_next.Name = "btn_next";
             this.btn_next.Size = new System.Drawing.Size(239, 46);
             this.btn_next.TabIndex = 1;
             this.btn_next.Text = "Next";
-            this.btn_next.UseVisualStyleBackColor = true;
+            this.btn_next.UseVisualStyleBackColor = false;
             this.btn_next.Click += new System.EventHandler(this.btn_next_Click);
             // 
             // btn_prevCancel
             // 
+            this.btn_prevCancel.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btn_prevCancel.FlatAppearance.BorderSize = 0;
+            this.btn_prevCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_prevCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_prevCancel.ForeColor = System.Drawing.Color.White;
             this.btn_prevCancel.Location = new System.Drawing.Point(12, 392);
             this.btn_prevCancel.Name = "btn_prevCancel";
             this.btn_prevCancel.Size = new System.Drawing.Size(162, 46);
             this.btn_prevCancel.TabIndex = 6;
             this.btn_prevCancel.Text = "Cancel";
-            this.btn_prevCancel.UseVisualStyleBackColor = true;
+            this.btn_prevCancel.UseVisualStyleBackColor = false;
             this.btn_prevCancel.Click += new System.EventHandler(this.btn_prevCancel_Click);
             // 
             // pnl_steps
@@ -86,6 +94,7 @@ namespace SteelQuiz.QuizImport.Guide
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.pnl_steps);
             this.Controls.Add(this.btn_prevCancel);

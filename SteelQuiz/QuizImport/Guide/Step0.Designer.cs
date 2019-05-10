@@ -52,6 +52,7 @@ namespace SteelQuiz.QuizImport.Guide
             // lbl_question
             // 
             this.lbl_question.Font = new System.Drawing.Font("Segoe UI Semilight", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_question.ForeColor = System.Drawing.Color.White;
             this.lbl_question.Location = new System.Drawing.Point(3, 13);
             this.lbl_question.Name = "lbl_question";
             this.lbl_question.Size = new System.Drawing.Size(760, 73);
@@ -63,6 +64,7 @@ namespace SteelQuiz.QuizImport.Guide
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.SlateGray;
             this.Controls.Add(this.lbl_question);
             this.Name = "Step0";
             this.Size = new System.Drawing.Size(766, 364);

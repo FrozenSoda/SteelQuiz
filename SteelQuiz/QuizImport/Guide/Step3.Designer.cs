@@ -54,6 +54,7 @@ namespace SteelQuiz.QuizImport.Guide
             // 
             // txt_url
             // 
+            this.txt_url.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_url.Location = new System.Drawing.Point(48, 330);
             this.txt_url.Name = "txt_url";
             this.txt_url.Size = new System.Drawing.Size(715, 20);
@@ -63,6 +64,7 @@ namespace SteelQuiz.QuizImport.Guide
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(10, 333);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(32, 13);
@@ -72,6 +74,7 @@ namespace SteelQuiz.QuizImport.Guide
             // lbl_question
             // 
             this.lbl_question.Font = new System.Drawing.Font("Segoe UI Semilight", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_question.ForeColor = System.Drawing.Color.White;
             this.lbl_question.Location = new System.Drawing.Point(3, 13);
             this.lbl_question.Name = "lbl_question";
             this.lbl_question.Size = new System.Drawing.Size(760, 43);
@@ -81,6 +84,7 @@ namespace SteelQuiz.QuizImport.Guide
             // lbl_instructions
             // 
             this.lbl_instructions.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_instructions.ForeColor = System.Drawing.Color.White;
             this.lbl_instructions.Location = new System.Drawing.Point(27, 56);
             this.lbl_instructions.Name = "lbl_instructions";
             this.lbl_instructions.Size = new System.Drawing.Size(736, 271);
@@ -91,6 +95,7 @@ namespace SteelQuiz.QuizImport.Guide
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.SlateGray;
             this.Controls.Add(this.lbl_instructions);
             this.Controls.Add(this.lbl_question);
             this.Controls.Add(this.txt_url);

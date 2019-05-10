@@ -55,6 +55,7 @@ namespace SteelQuiz.QuizImport.Guide
             // lbl_question
             // 
             this.lbl_question.Font = new System.Drawing.Font("Segoe UI Semilight", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_question.ForeColor = System.Drawing.Color.White;
             this.lbl_question.Location = new System.Drawing.Point(3, 13);
             this.lbl_question.Name = "lbl_question";
             this.lbl_question.Size = new System.Drawing.Size(760, 43);
@@ -75,6 +76,7 @@ namespace SteelQuiz.QuizImport.Guide
             this.rdo_studentlitteratur.AutoSize = true;
             this.rdo_studentlitteratur.Checked = true;
             this.rdo_studentlitteratur.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdo_studentlitteratur.ForeColor = System.Drawing.Color.White;
             this.rdo_studentlitteratur.Location = new System.Drawing.Point(3, 3);
             this.rdo_studentlitteratur.Name = "rdo_studentlitteratur";
             this.rdo_studentlitteratur.Size = new System.Drawing.Size(142, 24);
@@ -87,6 +89,7 @@ namespace SteelQuiz.QuizImport.Guide
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.SlateGray;
             this.Controls.Add(this.flp_siteRdo);
             this.Controls.Add(this.lbl_question);
             this.Name = "Step1";
