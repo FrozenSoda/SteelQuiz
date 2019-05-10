@@ -33,10 +33,10 @@ namespace SteelQuiz
             base.Reset();
         }
 
-        public void Reset(TimeSpan startOffset)
+        public void Restart(TimeSpan startOffset)
         {
             StartOffset = startOffset;
-            base.Reset();
+            base.Restart();
         }
     }
 }

@@ -31,43 +31,16 @@ namespace SteelQuiz.Controls
         private SuperStopwatch scrollElapsedStopwatch = new SuperStopwatch();
         private System.Timers.Timer scrollAnimationTimer = null;
         private bool animationRunning = false;
+        private int deltaScrollWheel = 0;
 
-        /*
         public SmoothFlowLayoutPanel() : base()
         {
-            DoubleBuffered = true;
-        }
-        */
-
-        protected override void OnScroll(ScrollEventArgs se)
-        {
-            base.OnScroll(se);
-        }
-
-        protected override void OnMouseWheel(MouseEventArgs e)
-        {
-#warning application and the whole Windows system freezes frequently when scrolling
-            // smooth scrolling
-
-            if (animationRunning)
+            scrollAnimationTimer = new System.Timers.Timer
             {
-                scrollElapsedStopwatch.Reset(new TimeSpan(0, 0, 0, 0, 250));
-                return;
-            }
-
-            animationRunning = true;
-
-            if (scrollAnimationTimer == null)
-            {
-                scrollAnimationTimer = new System.Timers.Timer
-                {
-                    Interval = 8,
-                    SynchronizingObject = this,
-                    AutoReset = false
-                };
-            }
-
-            System.Diagnostics.Debug.Print("\r\nStarting new scroll timer actions");
+                Interval = Math.Ceiling(1000D / 144D),
+                SynchronizingObject = this,
+                AutoReset = false
+            };
 
             scrollAnimationTimer.Elapsed += delegate
             {
@@ -75,15 +48,16 @@ namespace SteelQuiz.Controls
                 bool stop = false;
                 try
                 {
-                    double deltaScrollD = DeltaScroll(scrollElapsedStopwatch.ElapsedMilliseconds);
+                    long ms = scrollElapsedStopwatch.ElapsedMilliseconds;
+                    double deltaScrollD = DeltaScroll(ms);
                     System.Diagnostics.Debug.Print($"deltaScrollD: {deltaScrollD}");
-                    System.Diagnostics.Debug.Print($"scrollElapsed: {scrollElapsedStopwatch.ElapsedMilliseconds}");
-                    if (scrollElapsedStopwatch.ElapsedMilliseconds > 0 && deltaScrollD == 0D)
+                    System.Diagnostics.Debug.Print($"scrollElapsed: {ms}");
+                    if (ms > 0 && deltaScrollD == 0D)
                     {
                         stop = true;
                         return;
                     }
-                    int deltaScroll = Convert.ToInt32(Math.Ceiling(deltaScrollD * e.Delta)) * -1;
+                    int deltaScroll = Convert.ToInt32(Math.Ceiling(deltaScrollD * deltaScrollWheel)) * -1;
                     if (this.VerticalScroll.Value + deltaScroll < this.VerticalScroll.Minimum)
                     {
                         this.VerticalScroll.Value = this.VerticalScroll.Minimum;
@@ -115,16 +89,35 @@ namespace SteelQuiz.Controls
                         scrollElapsedStopwatch.Reset();
                         scrollAnimationTimer.Stop();
                         animationRunning = false;
-                        scrollAnimationTimer.Dispose();
-                        scrollAnimationTimer = null;
                         System.Diagnostics.Debug.Print("Stopped scroll animation");
                     }
                     System.Diagnostics.Debug.Print("scrollAnimationTimer elapsed STOP");
                 }
             };
+        }
 
-            scrollElapsedStopwatch.Restart();
-            scrollAnimationTimer.Start();
+        protected override void OnScroll(ScrollEventArgs se)
+        {
+            base.OnScroll(se);
+        }
+
+        protected override void OnMouseWheel(MouseEventArgs e)
+        {
+            // smooth scrolling
+
+            deltaScrollWheel = e.Delta;
+
+            if (animationRunning)
+            {
+                scrollElapsedStopwatch.Restart(new TimeSpan(0, 0, 0, 0, 250));
+            }
+            else
+            {
+                animationRunning = true;
+
+                scrollElapsedStopwatch.Restart();
+                scrollAnimationTimer.Start();
+            }
         }
 
         private double DeltaScroll(long millis)
