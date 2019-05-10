@@ -115,6 +115,8 @@ namespace SteelQuiz.Controls
                         scrollElapsedStopwatch.Reset();
                         scrollAnimationTimer.Stop();
                         animationRunning = false;
+                        scrollAnimationTimer.Dispose();
+                        scrollAnimationTimer = null;
                         System.Diagnostics.Debug.Print("Stopped scroll animation");
                     }
                     System.Diagnostics.Debug.Print("scrollAnimationTimer elapsed STOP");
