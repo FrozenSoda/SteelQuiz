@@ -195,7 +195,7 @@ namespace SteelQuiz.QuizPractise
             this.btn_home.Size = new System.Drawing.Size(68, 23);
             this.btn_home.TabIndex = 10;
             this.btn_home.TabStop = false;
-            this.btn_home.Text = "<---";
+            this.btn_home.Text = "←";
             this.btn_home.UseVisualStyleBackColor = false;
             this.btn_home.Click += new System.EventHandler(this.btn_home_Click);
             // 

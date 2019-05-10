@@ -56,6 +56,7 @@ namespace SteelQuiz
             this.lbl_copyright = new System.Windows.Forms.Label();
             this.btn_continueLast = new System.Windows.Forms.Button();
             this.tmr_chkUpdate = new System.Windows.Forms.Timer(this.components);
+            this.btn_chkUpdates = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbl_welcome
@@ -151,12 +152,28 @@ namespace SteelQuiz
             this.tmr_chkUpdate.Interval = 120000;
             this.tmr_chkUpdate.Tick += new System.EventHandler(this.Tmr_chkUpdate_Tick);
             // 
+            // btn_chkUpdates
+            // 
+            this.btn_chkUpdates.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.btn_chkUpdates.FlatAppearance.BorderSize = 0;
+            this.btn_chkUpdates.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_chkUpdates.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_chkUpdates.ForeColor = System.Drawing.Color.White;
+            this.btn_chkUpdates.Location = new System.Drawing.Point(670, 415);
+            this.btn_chkUpdates.Name = "btn_chkUpdates";
+            this.btn_chkUpdates.Size = new System.Drawing.Size(118, 23);
+            this.btn_chkUpdates.TabIndex = 6;
+            this.btn_chkUpdates.Text = "Check for updates";
+            this.btn_chkUpdates.UseVisualStyleBackColor = false;
+            this.btn_chkUpdates.Click += new System.EventHandler(this.Btn_chkUpdates_Click);
+            // 
             // Welcome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btn_chkUpdates);
             this.Controls.Add(this.btn_continueLast);
             this.Controls.Add(this.lbl_copyright);
             this.Controls.Add(this.btn_importQuizFromSite);
@@ -185,6 +202,7 @@ namespace SteelQuiz
         private System.Windows.Forms.Label lbl_copyright;
         private System.Windows.Forms.Button btn_continueLast;
         private System.Windows.Forms.Timer tmr_chkUpdate;
+        private System.Windows.Forms.Button btn_chkUpdates;
     }
 }
 

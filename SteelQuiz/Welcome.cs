@@ -172,5 +172,37 @@ namespace SteelQuiz
             // ChkUpdate(true);
             // disabled until update notification system is implemented
         }
+
+        private void AutoUpdaterOnCheckForUpdateEvent(UpdateInfoEventArgs args)
+        {
+            if (args != null)
+            {
+                if (args.IsUpdateAvailable)
+                {
+                    AutoUpdater.ShowUpdateForm();
+                }
+                else
+                {
+                    MessageBox.Show($"No updates are available\r\n\r\nYou are running SteelQuiz v{Application.ProductVersion}", @"SteelQuiz",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else
+            {
+                MessageBox.Show(
+                        @"There was a problem reaching the update server. Please check your internet connection and try again later",
+                        @"Update check failed - SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            AutoUpdater.CheckForUpdateEvent -= AutoUpdaterOnCheckForUpdateEvent;
+            tmr_chkUpdate.Start();
+        }
+
+        private void Btn_chkUpdates_Click(object sender, EventArgs e)
+        {
+            tmr_chkUpdate.Stop();
+
+            AutoUpdater.CheckForUpdateEvent += AutoUpdaterOnCheckForUpdateEvent;
+            AutoUpdater.Start("https://raw.githubusercontent.com/steel9/SteelQuiz/master/Updater/update_meta.xml");
+        }
     }
 }
