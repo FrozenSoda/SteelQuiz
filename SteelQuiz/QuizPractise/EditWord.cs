@@ -36,6 +36,7 @@ namespace SteelQuiz.QuizPractise
         {
             InitializeComponent();
             label1.Text = $"Enter new value for word '{word}':";
+            toolTip1.SetToolTip(label1, $"Word: '{word}'");
         }
 
         private void btn_ok_Click(object sender, EventArgs e)

@@ -78,7 +78,7 @@ namespace SteelQuiz
             this.btn_createQuiz.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.btn_createQuiz.Location = new System.Drawing.Point(13, 84);
             this.btn_createQuiz.Name = "btn_createQuiz";
-            this.btn_createQuiz.Size = new System.Drawing.Size(237, 57);
+            this.btn_createQuiz.Size = new System.Drawing.Size(263, 57);
             this.btn_createQuiz.TabIndex = 1;
             this.btn_createQuiz.Text = "Create / edit quiz";
             this.btn_createQuiz.UseVisualStyleBackColor = false;
@@ -106,9 +106,9 @@ namespace SteelQuiz
             this.btn_importQuizFromSite.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_importQuizFromSite.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_importQuizFromSite.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btn_importQuizFromSite.Location = new System.Drawing.Point(551, 84);
+            this.btn_importQuizFromSite.Location = new System.Drawing.Point(525, 84);
             this.btn_importQuizFromSite.Name = "btn_importQuizFromSite";
-            this.btn_importQuizFromSite.Size = new System.Drawing.Size(237, 57);
+            this.btn_importQuizFromSite.Size = new System.Drawing.Size(263, 57);
             this.btn_importQuizFromSite.TabIndex = 3;
             this.btn_importQuizFromSite.Text = "Import quiz from another source";
             this.btn_importQuizFromSite.UseVisualStyleBackColor = false;

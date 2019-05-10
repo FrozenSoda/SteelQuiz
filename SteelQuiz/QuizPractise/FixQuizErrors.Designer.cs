@@ -61,6 +61,7 @@ namespace SteelQuiz.QuizPractise
             // lbl_welcome
             // 
             this.lbl_welcome.Font = new System.Drawing.Font("Segoe UI Semilight", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_welcome.ForeColor = System.Drawing.Color.White;
             this.lbl_welcome.Location = new System.Drawing.Point(12, 9);
             this.lbl_welcome.Name = "lbl_welcome";
             this.lbl_welcome.Size = new System.Drawing.Size(776, 43);
@@ -70,55 +71,68 @@ namespace SteelQuiz.QuizPractise
             // 
             // btn_editWord1
             // 
+            this.btn_editWord1.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btn_editWord1.FlatAppearance.BorderSize = 0;
             this.btn_editWord1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_editWord1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_editWord1.ForeColor = System.Drawing.Color.White;
             this.btn_editWord1.Location = new System.Drawing.Point(282, 154);
             this.btn_editWord1.Name = "btn_editWord1";
             this.btn_editWord1.Size = new System.Drawing.Size(237, 34);
             this.btn_editWord1.TabIndex = 2;
             this.btn_editWord1.Text = "Word 1 is incorrect";
-            this.btn_editWord1.UseVisualStyleBackColor = true;
+            this.btn_editWord1.UseVisualStyleBackColor = false;
             this.btn_editWord1.Click += new System.EventHandler(this.btn_editWord1_Click);
             // 
             // btn_editWord1synonyms
             // 
+            this.btn_editWord1synonyms.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btn_editWord1synonyms.FlatAppearance.BorderSize = 0;
             this.btn_editWord1synonyms.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_editWord1synonyms.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_editWord1synonyms.ForeColor = System.Drawing.Color.White;
             this.btn_editWord1synonyms.Location = new System.Drawing.Point(282, 194);
             this.btn_editWord1synonyms.Name = "btn_editWord1synonyms";
             this.btn_editWord1synonyms.Size = new System.Drawing.Size(237, 34);
             this.btn_editWord1synonyms.TabIndex = 3;
             this.btn_editWord1synonyms.Text = "I want to edit the synonyms for word 1";
-            this.btn_editWord1synonyms.UseVisualStyleBackColor = true;
+            this.btn_editWord1synonyms.UseVisualStyleBackColor = false;
             this.btn_editWord1synonyms.Click += new System.EventHandler(this.btn_editWord1synonyms_Click);
             // 
             // btn_editWord2synonyms
             // 
+            this.btn_editWord2synonyms.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btn_editWord2synonyms.FlatAppearance.BorderSize = 0;
             this.btn_editWord2synonyms.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_editWord2synonyms.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_editWord2synonyms.ForeColor = System.Drawing.Color.White;
             this.btn_editWord2synonyms.Location = new System.Drawing.Point(282, 274);
             this.btn_editWord2synonyms.Name = "btn_editWord2synonyms";
             this.btn_editWord2synonyms.Size = new System.Drawing.Size(237, 34);
             this.btn_editWord2synonyms.TabIndex = 4;
             this.btn_editWord2synonyms.Text = "I want to edit the synonyms for word 2";
-            this.btn_editWord2synonyms.UseVisualStyleBackColor = true;
+            this.btn_editWord2synonyms.UseVisualStyleBackColor = false;
             this.btn_editWord2synonyms.Click += new System.EventHandler(this.btn_editWord2synonyms_Click);
             // 
             // btn_editWord2
             // 
+            this.btn_editWord2.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btn_editWord2.FlatAppearance.BorderSize = 0;
             this.btn_editWord2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_editWord2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_editWord2.ForeColor = System.Drawing.Color.White;
             this.btn_editWord2.Location = new System.Drawing.Point(282, 234);
             this.btn_editWord2.Name = "btn_editWord2";
             this.btn_editWord2.Size = new System.Drawing.Size(237, 34);
             this.btn_editWord2.TabIndex = 5;
             this.btn_editWord2.Text = "Word 2 is incorrect";
-            this.btn_editWord2.UseVisualStyleBackColor = true;
+            this.btn_editWord2.UseVisualStyleBackColor = false;
             this.btn_editWord2.Click += new System.EventHandler(this.btn_editWord2_Click);
             // 
             // lbl_word1
             // 
             this.lbl_word1.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_word1.ForeColor = System.Drawing.Color.White;
             this.lbl_word1.Location = new System.Drawing.Point(12, 52);
             this.lbl_word1.Name = "lbl_word1";
             this.lbl_word1.Size = new System.Drawing.Size(776, 43);
@@ -129,6 +143,7 @@ namespace SteelQuiz.QuizPractise
             // lbl_word2
             // 
             this.lbl_word2.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_word2.ForeColor = System.Drawing.Color.White;
             this.lbl_word2.Location = new System.Drawing.Point(12, 95);
             this.lbl_word2.Name = "lbl_word2";
             this.lbl_word2.Size = new System.Drawing.Size(776, 43);
@@ -138,32 +153,39 @@ namespace SteelQuiz.QuizPractise
             // 
             // btn_close
             // 
+            this.btn_close.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btn_close.FlatAppearance.BorderSize = 0;
             this.btn_close.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_close.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_close.ForeColor = System.Drawing.Color.White;
             this.btn_close.Location = new System.Drawing.Point(282, 393);
             this.btn_close.Name = "btn_close";
             this.btn_close.Size = new System.Drawing.Size(237, 45);
             this.btn_close.TabIndex = 8;
             this.btn_close.Text = "Close";
-            this.btn_close.UseVisualStyleBackColor = true;
+            this.btn_close.UseVisualStyleBackColor = false;
             this.btn_close.Click += new System.EventHandler(this.btn_close_Click);
             // 
             // btn_editInEditor
             // 
+            this.btn_editInEditor.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btn_editInEditor.FlatAppearance.BorderSize = 0;
             this.btn_editInEditor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_editInEditor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_editInEditor.ForeColor = System.Drawing.Color.White;
             this.btn_editInEditor.Location = new System.Drawing.Point(282, 324);
             this.btn_editInEditor.Name = "btn_editInEditor";
             this.btn_editInEditor.Size = new System.Drawing.Size(237, 44);
             this.btn_editInEditor.TabIndex = 9;
             this.btn_editInEditor.Text = "Too much, edit the entire quiz in the editor";
-            this.btn_editInEditor.UseVisualStyleBackColor = true;
+            this.btn_editInEditor.UseVisualStyleBackColor = false;
             this.btn_editInEditor.Click += new System.EventHandler(this.btn_editInEditor_Click);
             // 
             // FixQuizErrors
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.btn_editInEditor);
             this.Controls.Add(this.btn_close);

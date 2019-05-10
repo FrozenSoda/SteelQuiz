@@ -66,6 +66,7 @@ namespace SteelQuiz.QuizPractise
             // 
             this.lbl_synForWord.AutoSize = true;
             this.lbl_synForWord.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_synForWord.ForeColor = System.Drawing.Color.White;
             this.lbl_synForWord.Location = new System.Drawing.Point(12, 35);
             this.lbl_synForWord.Name = "lbl_synForWord";
             this.lbl_synForWord.Size = new System.Drawing.Size(124, 16);
@@ -74,6 +75,8 @@ namespace SteelQuiz.QuizPractise
             // 
             // lst_synonyms
             // 
+            this.lst_synonyms.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.lst_synonyms.ForeColor = System.Drawing.Color.White;
             this.lst_synonyms.FormattingEnabled = true;
             this.lst_synonyms.Location = new System.Drawing.Point(15, 87);
             this.lst_synonyms.Name = "lst_synonyms";
@@ -87,27 +90,38 @@ namespace SteelQuiz.QuizPractise
             // btn_apply
             // 
             this.btn_apply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_apply.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.btn_apply.FlatAppearance.BorderSize = 0;
+            this.btn_apply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_apply.ForeColor = System.Drawing.Color.White;
             this.btn_apply.Location = new System.Drawing.Point(591, 415);
             this.btn_apply.Name = "btn_apply";
             this.btn_apply.Size = new System.Drawing.Size(197, 23);
             this.btn_apply.TabIndex = 5;
             this.btn_apply.Text = "Apply";
-            this.btn_apply.UseVisualStyleBackColor = true;
+            this.btn_apply.UseVisualStyleBackColor = false;
             this.btn_apply.Click += new System.EventHandler(this.btn_apply_Click);
             // 
             // btn_cancel
             // 
             this.btn_cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btn_cancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.btn_cancel.FlatAppearance.BorderSize = 0;
+            this.btn_cancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_cancel.ForeColor = System.Drawing.Color.White;
             this.btn_cancel.Location = new System.Drawing.Point(15, 415);
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(121, 23);
             this.btn_cancel.TabIndex = 6;
             this.btn_cancel.Text = "Cancel";
-            this.btn_cancel.UseVisualStyleBackColor = true;
+            this.btn_cancel.UseVisualStyleBackColor = false;
             this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
             // 
             // txt_wordAdd
             // 
+            this.txt_wordAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.txt_wordAdd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_wordAdd.ForeColor = System.Drawing.Color.White;
             this.txt_wordAdd.Location = new System.Drawing.Point(15, 61);
             this.txt_wordAdd.Name = "txt_wordAdd";
             this.txt_wordAdd.Size = new System.Drawing.Size(449, 20);
@@ -117,39 +131,52 @@ namespace SteelQuiz.QuizPractise
             // 
             // btn_add
             // 
+            this.btn_add.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.btn_add.Enabled = false;
+            this.btn_add.FlatAppearance.BorderSize = 0;
+            this.btn_add.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_add.ForeColor = System.Drawing.Color.White;
             this.btn_add.Location = new System.Drawing.Point(470, 59);
             this.btn_add.Name = "btn_add";
             this.btn_add.Size = new System.Drawing.Size(97, 23);
             this.btn_add.TabIndex = 1;
             this.btn_add.Text = "Add new";
-            this.btn_add.UseVisualStyleBackColor = true;
+            this.btn_add.UseVisualStyleBackColor = false;
             this.btn_add.Click += new System.EventHandler(this.btn_add_Click);
             // 
             // btn_update
             // 
+            this.btn_update.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.btn_update.Enabled = false;
+            this.btn_update.FlatAppearance.BorderSize = 0;
+            this.btn_update.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_update.ForeColor = System.Drawing.Color.White;
             this.btn_update.Location = new System.Drawing.Point(573, 59);
             this.btn_update.Name = "btn_update";
             this.btn_update.Size = new System.Drawing.Size(97, 23);
             this.btn_update.TabIndex = 2;
             this.btn_update.Text = "Update selected";
-            this.btn_update.UseVisualStyleBackColor = true;
+            this.btn_update.UseVisualStyleBackColor = false;
             this.btn_update.Click += new System.EventHandler(this.btn_update_Click);
             // 
             // btn_remove
             // 
+            this.btn_remove.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.btn_remove.Enabled = false;
+            this.btn_remove.FlatAppearance.BorderSize = 0;
+            this.btn_remove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_remove.ForeColor = System.Drawing.Color.White;
             this.btn_remove.Location = new System.Drawing.Point(676, 59);
             this.btn_remove.Name = "btn_remove";
             this.btn_remove.Size = new System.Drawing.Size(112, 23);
             this.btn_remove.TabIndex = 3;
             this.btn_remove.Text = "Remove selected";
-            this.btn_remove.UseVisualStyleBackColor = true;
+            this.btn_remove.UseVisualStyleBackColor = false;
             this.btn_remove.Click += new System.EventHandler(this.btn_remove_Click);
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.editToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -163,6 +190,7 @@ namespace SteelQuiz.QuizPractise
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.undoToolStripMenuItem,
             this.redoToolStripMenuItem});
+            this.editToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
             this.editToolStripMenuItem.Text = "Edit";
@@ -170,14 +198,14 @@ namespace SteelQuiz.QuizPractise
             // undoToolStripMenuItem
             // 
             this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
-            this.undoToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.undoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.undoToolStripMenuItem.Text = "Undo";
             this.undoToolStripMenuItem.Click += new System.EventHandler(this.undoToolStripMenuItem_Click);
             // 
             // redoToolStripMenuItem
             // 
             this.redoToolStripMenuItem.Name = "redoToolStripMenuItem";
-            this.redoToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.redoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.redoToolStripMenuItem.Text = "Redo";
             this.redoToolStripMenuItem.Click += new System.EventHandler(this.redoToolStripMenuItem_Click);
             // 
@@ -185,6 +213,7 @@ namespace SteelQuiz.QuizPractise
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.btn_remove);
             this.Controls.Add(this.btn_update);

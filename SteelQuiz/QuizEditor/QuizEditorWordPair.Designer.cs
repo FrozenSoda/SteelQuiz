@@ -73,7 +73,7 @@ namespace SteelQuiz.QuizEditor
             // chk_ignoreExcl
             // 
             this.chk_ignoreExcl.AutoSize = true;
-            this.chk_ignoreExcl.ForeColor = System.Drawing.Color.White;
+            this.chk_ignoreExcl.ForeColor = System.Drawing.Color.LightGray;
             this.chk_ignoreExcl.Location = new System.Drawing.Point(129, 22);
             this.chk_ignoreExcl.Name = "chk_ignoreExcl";
             this.chk_ignoreExcl.Size = new System.Drawing.Size(146, 17);
@@ -85,7 +85,7 @@ namespace SteelQuiz.QuizEditor
             // 
             // label4
             // 
-            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.ForeColor = System.Drawing.Color.LightGray;
             this.label4.Location = new System.Drawing.Point(-3, 1);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(282, 13);
@@ -96,7 +96,7 @@ namespace SteelQuiz.QuizEditor
             // chk_ignoreCapitalization
             // 
             this.chk_ignoreCapitalization.AutoSize = true;
-            this.chk_ignoreCapitalization.ForeColor = System.Drawing.Color.White;
+            this.chk_ignoreCapitalization.ForeColor = System.Drawing.Color.LightGray;
             this.chk_ignoreCapitalization.Location = new System.Drawing.Point(3, 22);
             this.chk_ignoreCapitalization.Name = "chk_ignoreCapitalization";
             this.chk_ignoreCapitalization.Size = new System.Drawing.Size(120, 17);
@@ -108,6 +108,9 @@ namespace SteelQuiz.QuizEditor
             // 
             // txt_word1
             // 
+            this.txt_word1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.txt_word1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_word1.ForeColor = System.Drawing.Color.White;
             this.txt_word1.Location = new System.Drawing.Point(25, 3);
             this.txt_word1.Name = "txt_word1";
             this.txt_word1.Size = new System.Drawing.Size(335, 20);
@@ -119,7 +122,7 @@ namespace SteelQuiz.QuizEditor
             // 
             // btn_editSynonyms_w1
             // 
-            this.btn_editSynonyms_w1.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btn_editSynonyms_w1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
             this.btn_editSynonyms_w1.FlatAppearance.BorderSize = 0;
             this.btn_editSynonyms_w1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_editSynonyms_w1.ForeColor = System.Drawing.Color.White;
@@ -134,6 +137,9 @@ namespace SteelQuiz.QuizEditor
             // 
             // txt_word2
             // 
+            this.txt_word2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.txt_word2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_word2.ForeColor = System.Drawing.Color.White;
             this.txt_word2.Location = new System.Drawing.Point(390, 3);
             this.txt_word2.Name = "txt_word2";
             this.txt_word2.Size = new System.Drawing.Size(335, 20);
@@ -145,7 +151,7 @@ namespace SteelQuiz.QuizEditor
             // 
             // btn_editSynonyms_w2
             // 
-            this.btn_editSynonyms_w2.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btn_editSynonyms_w2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
             this.btn_editSynonyms_w2.FlatAppearance.BorderSize = 0;
             this.btn_editSynonyms_w2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_editSynonyms_w2.ForeColor = System.Drawing.Color.White;
@@ -160,7 +166,7 @@ namespace SteelQuiz.QuizEditor
             // 
             // btn_delete
             // 
-            this.btn_delete.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btn_delete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
             this.btn_delete.FlatAppearance.BorderSize = 0;
             this.btn_delete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_delete.ForeColor = System.Drawing.Color.White;

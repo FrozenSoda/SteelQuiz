@@ -84,6 +84,9 @@ namespace SteelQuiz.QuizEditor
             // 
             // cmb_lang1
             // 
+            this.cmb_lang1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.cmb_lang1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmb_lang1.ForeColor = System.Drawing.Color.White;
             this.cmb_lang1.FormattingEnabled = true;
             this.cmb_lang1.Location = new System.Drawing.Point(85, 30);
             this.cmb_lang1.Name = "cmb_lang1";
@@ -92,6 +95,9 @@ namespace SteelQuiz.QuizEditor
             // 
             // cmb_lang2
             // 
+            this.cmb_lang2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.cmb_lang2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmb_lang2.ForeColor = System.Drawing.Color.White;
             this.cmb_lang2.FormattingEnabled = true;
             this.cmb_lang2.Location = new System.Drawing.Point(455, 30);
             this.cmb_lang2.Name = "cmb_lang2";
@@ -139,6 +145,7 @@ namespace SteelQuiz.QuizEditor
             this.saveToolStripMenuItem,
             this.saveAsToolStripMenuItem,
             this.closeMenuToolStripMenuItem});
+            this.fileToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -186,6 +193,7 @@ namespace SteelQuiz.QuizEditor
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.undoToolStripMenuItem,
             this.redoToolStripMenuItem});
+            this.editToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
             this.editToolStripMenuItem.Text = "Edit";
@@ -210,6 +218,7 @@ namespace SteelQuiz.QuizEditor
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sorryThereIsNoneYetToolStripMenuItem});
+            this.helpToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
