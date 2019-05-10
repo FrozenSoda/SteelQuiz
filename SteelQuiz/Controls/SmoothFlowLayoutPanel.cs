@@ -39,11 +39,13 @@ namespace SteelQuiz.Controls
             {
                 Interval = Math.Ceiling(1000D / 144D),
                 SynchronizingObject = this,
-                AutoReset = false
             };
 
             scrollAnimationTimer.Elapsed += delegate
             {
+
+#warning scrolling behaviour not consistent, and freezes the app when scrolling fast
+
                 System.Diagnostics.Debug.Print("\r\nscrollAnimationTimer elapsed START");
                 bool stop = false;
                 try
@@ -79,11 +81,7 @@ namespace SteelQuiz.Controls
                 }
                 finally
                 {
-                    if (!stop)
-                    {
-                        scrollAnimationTimer.Enabled = true;
-                    }
-                    else
+                    if (stop)
                     {
                         System.Diagnostics.Debug.Print("Stopping scroll animation");
                         scrollElapsedStopwatch.Reset();
