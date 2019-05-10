@@ -67,6 +67,7 @@ namespace SteelQuiz.QuizPractise
             // 
             this.lbl_word1.AutoSize = true;
             this.lbl_word1.Font = new System.Drawing.Font("Segoe UI Semilight", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_word1.ForeColor = System.Drawing.Color.White;
             this.lbl_word1.Location = new System.Drawing.Point(0, 0);
             this.lbl_word1.MaximumSize = new System.Drawing.Size(325, 0);
             this.lbl_word1.MinimumSize = new System.Drawing.Size(325, 345);
@@ -81,6 +82,7 @@ namespace SteelQuiz.QuizPractise
             // 
             this.lbl_word2.AutoSize = true;
             this.lbl_word2.Font = new System.Drawing.Font("Segoe UI Semilight", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_word2.ForeColor = System.Drawing.Color.White;
             this.lbl_word2.Location = new System.Drawing.Point(0, 0);
             this.lbl_word2.MaximumSize = new System.Drawing.Size(387, 0);
             this.lbl_word2.MinimumSize = new System.Drawing.Size(387, 345);
@@ -94,6 +96,7 @@ namespace SteelQuiz.QuizPractise
             // lbl_progress
             // 
             this.lbl_progress.AutoSize = true;
+            this.lbl_progress.ForeColor = System.Drawing.Color.LightGray;
             this.lbl_progress.Location = new System.Drawing.Point(12, 428);
             this.lbl_progress.Name = "lbl_progress";
             this.lbl_progress.Size = new System.Drawing.Size(100, 13);
@@ -102,18 +105,23 @@ namespace SteelQuiz.QuizPractise
             // 
             // btn_switchTestMode
             // 
+            this.btn_switchTestMode.BackColor = System.Drawing.Color.Gray;
+            this.btn_switchTestMode.FlatAppearance.BorderSize = 0;
+            this.btn_switchTestMode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_switchTestMode.ForeColor = System.Drawing.Color.White;
             this.btn_switchTestMode.Location = new System.Drawing.Point(580, 415);
             this.btn_switchTestMode.Name = "btn_switchTestMode";
             this.btn_switchTestMode.Size = new System.Drawing.Size(208, 23);
             this.btn_switchTestMode.TabIndex = 3;
             this.btn_switchTestMode.TabStop = false;
             this.btn_switchTestMode.Text = "Disable Intelligent Learning (do full test)";
-            this.btn_switchTestMode.UseVisualStyleBackColor = true;
+            this.btn_switchTestMode.UseVisualStyleBackColor = false;
             this.btn_switchTestMode.Click += new System.EventHandler(this.btn_switchTestMode_Click);
             // 
             // lbl_AI
             // 
             this.lbl_AI.AutoSize = true;
+            this.lbl_AI.ForeColor = System.Drawing.Color.LightGray;
             this.lbl_AI.Location = new System.Drawing.Point(276, 428);
             this.lbl_AI.Name = "lbl_AI";
             this.lbl_AI.Size = new System.Drawing.Size(205, 13);
@@ -123,6 +131,7 @@ namespace SteelQuiz.QuizPractise
             // lbl_lang1
             // 
             this.lbl_lang1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_lang1.ForeColor = System.Drawing.Color.LightGray;
             this.lbl_lang1.Location = new System.Drawing.Point(12, 9);
             this.lbl_lang1.Name = "lbl_lang1";
             this.lbl_lang1.Size = new System.Drawing.Size(331, 23);
@@ -133,6 +142,7 @@ namespace SteelQuiz.QuizPractise
             // lbl_lang2
             // 
             this.lbl_lang2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_lang2.ForeColor = System.Drawing.Color.LightGray;
             this.lbl_lang2.Location = new System.Drawing.Point(398, 12);
             this.lbl_lang2.Name = "lbl_lang2";
             this.lbl_lang2.Size = new System.Drawing.Size(390, 23);
@@ -142,15 +152,18 @@ namespace SteelQuiz.QuizPractise
             // 
             // btn_w1_synonyms
             // 
+            this.btn_w1_synonyms.BackColor = System.Drawing.Color.Gray;
             this.btn_w1_synonyms.Enabled = false;
+            this.btn_w1_synonyms.FlatAppearance.BorderSize = 0;
             this.btn_w1_synonyms.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_w1_synonyms.ForeColor = System.Drawing.Color.White;
             this.btn_w1_synonyms.Location = new System.Drawing.Point(140, 35);
             this.btn_w1_synonyms.Name = "btn_w1_synonyms";
             this.btn_w1_synonyms.Size = new System.Drawing.Size(75, 23);
             this.btn_w1_synonyms.TabIndex = 7;
             this.btn_w1_synonyms.TabStop = false;
             this.btn_w1_synonyms.Text = "Synonyms";
-            this.btn_w1_synonyms.UseVisualStyleBackColor = true;
+            this.btn_w1_synonyms.UseVisualStyleBackColor = false;
             this.btn_w1_synonyms.Click += new System.EventHandler(this.btn_w1_synonyms_Click);
             // 
             // pnl_word1
@@ -173,32 +186,39 @@ namespace SteelQuiz.QuizPractise
             // 
             // btn_home
             // 
+            this.btn_home.BackColor = System.Drawing.Color.Gray;
+            this.btn_home.FlatAppearance.BorderSize = 0;
             this.btn_home.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_home.ForeColor = System.Drawing.Color.White;
             this.btn_home.Location = new System.Drawing.Point(12, 35);
             this.btn_home.Name = "btn_home";
             this.btn_home.Size = new System.Drawing.Size(68, 23);
             this.btn_home.TabIndex = 10;
             this.btn_home.TabStop = false;
             this.btn_home.Text = "<---";
-            this.btn_home.UseVisualStyleBackColor = true;
+            this.btn_home.UseVisualStyleBackColor = false;
             this.btn_home.Click += new System.EventHandler(this.btn_home_Click);
             // 
             // btn_dontAgree
             // 
+            this.btn_dontAgree.BackColor = System.Drawing.Color.Gray;
+            this.btn_dontAgree.FlatAppearance.BorderSize = 0;
             this.btn_dontAgree.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_dontAgree.ForeColor = System.Drawing.Color.White;
             this.btn_dontAgree.Location = new System.Drawing.Point(352, 35);
             this.btn_dontAgree.Name = "btn_dontAgree";
             this.btn_dontAgree.Size = new System.Drawing.Size(97, 23);
             this.btn_dontAgree.TabIndex = 11;
             this.btn_dontAgree.TabStop = false;
             this.btn_dontAgree.Text = "Fix quiz errors";
-            this.btn_dontAgree.UseVisualStyleBackColor = true;
+            this.btn_dontAgree.UseVisualStyleBackColor = false;
             this.btn_dontAgree.Click += new System.EventHandler(this.btn_dontAgree_Click);
             // 
             // InQuiz
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.btn_dontAgree);
             this.Controls.Add(this.btn_home);

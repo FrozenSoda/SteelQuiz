@@ -65,13 +65,13 @@ namespace SteelQuiz.QuizPractise
             {
                 btn_switchTestMode.Text = "Enable Intelligent Learning";
                 lbl_AI.Text = "Intelligent learning: Disabled";
-                lbl_AI.ForeColor = Color.Gray;
+                //lbl_AI.ForeColor = Color.Gray;
             }
             else
             {
                 btn_switchTestMode.Text = "Disable Intelligent Learning (do full test)";
                 lbl_AI.Text = "Intelligent learning: Enabled";
-                lbl_AI.ForeColor = Color.DarkGreen;
+                //lbl_AI.ForeColor = Color.DarkGreen;
             }
 
             if (CurrentWordPair != null && CurrentWordPair.Word1Synonyms.Count > 0)
@@ -288,13 +288,13 @@ namespace SteelQuiz.QuizPractise
             {
                 btn_switchTestMode.Text = "Enable Intelligent Learning";
                 lbl_AI.Text = "Intelligent learning: Disabled";
-                lbl_AI.ForeColor = Color.Gray;
+                //lbl_AI.ForeColor = Color.Gray;
             }
             else
             {
                 btn_switchTestMode.Text = "Disable Intelligent Learning (do full test)";
                 lbl_AI.Text = "Intelligent learning: Enabled";
-                lbl_AI.ForeColor = Color.DarkGreen;
+                //lbl_AI.ForeColor = Color.DarkGreen;
             }
         }
 

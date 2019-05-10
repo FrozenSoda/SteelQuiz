@@ -71,7 +71,7 @@ namespace SteelQuiz
             // 
             // btn_createQuiz
             // 
-            this.btn_createQuiz.BackColor = System.Drawing.Color.SlateBlue;
+            this.btn_createQuiz.BackColor = System.Drawing.Color.RoyalBlue;
             this.btn_createQuiz.FlatAppearance.BorderSize = 0;
             this.btn_createQuiz.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_createQuiz.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -86,7 +86,7 @@ namespace SteelQuiz
             // 
             // btn_loadQuiz
             // 
-            this.btn_loadQuiz.BackColor = System.Drawing.Color.SlateBlue;
+            this.btn_loadQuiz.BackColor = System.Drawing.Color.RoyalBlue;
             this.btn_loadQuiz.FlatAppearance.BorderSize = 0;
             this.btn_loadQuiz.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_loadQuiz.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -101,7 +101,7 @@ namespace SteelQuiz
             // 
             // btn_importQuizFromSite
             // 
-            this.btn_importQuizFromSite.BackColor = System.Drawing.Color.SlateBlue;
+            this.btn_importQuizFromSite.BackColor = System.Drawing.Color.RoyalBlue;
             this.btn_importQuizFromSite.FlatAppearance.BorderSize = 0;
             this.btn_importQuizFromSite.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_importQuizFromSite.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -122,6 +122,7 @@ namespace SteelQuiz
             // lbl_copyright
             // 
             this.lbl_copyright.AutoSize = true;
+            this.lbl_copyright.ForeColor = System.Drawing.Color.LightGray;
             this.lbl_copyright.Location = new System.Drawing.Point(12, 428);
             this.lbl_copyright.Name = "lbl_copyright";
             this.lbl_copyright.Size = new System.Drawing.Size(243, 13);
@@ -130,7 +131,7 @@ namespace SteelQuiz
             // 
             // btn_continueLast
             // 
-            this.btn_continueLast.BackColor = System.Drawing.Color.SlateBlue;
+            this.btn_continueLast.BackColor = System.Drawing.Color.RoyalBlue;
             this.btn_continueLast.Enabled = false;
             this.btn_continueLast.FlatAppearance.BorderSize = 0;
             this.btn_continueLast.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
