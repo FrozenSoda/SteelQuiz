@@ -73,6 +73,7 @@ namespace SteelQuiz.QuizEditor
             // chk_ignoreExcl
             // 
             this.chk_ignoreExcl.AutoSize = true;
+            this.chk_ignoreExcl.ForeColor = System.Drawing.Color.White;
             this.chk_ignoreExcl.Location = new System.Drawing.Point(129, 22);
             this.chk_ignoreExcl.Name = "chk_ignoreExcl";
             this.chk_ignoreExcl.Size = new System.Drawing.Size(146, 17);
@@ -84,6 +85,7 @@ namespace SteelQuiz.QuizEditor
             // 
             // label4
             // 
+            this.label4.ForeColor = System.Drawing.Color.White;
             this.label4.Location = new System.Drawing.Point(-3, 1);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(282, 13);
@@ -94,6 +96,7 @@ namespace SteelQuiz.QuizEditor
             // chk_ignoreCapitalization
             // 
             this.chk_ignoreCapitalization.AutoSize = true;
+            this.chk_ignoreCapitalization.ForeColor = System.Drawing.Color.White;
             this.chk_ignoreCapitalization.Location = new System.Drawing.Point(3, 22);
             this.chk_ignoreCapitalization.Name = "chk_ignoreCapitalization";
             this.chk_ignoreCapitalization.Size = new System.Drawing.Size(120, 17);
@@ -116,13 +119,17 @@ namespace SteelQuiz.QuizEditor
             // 
             // btn_editSynonyms_w1
             // 
+            this.btn_editSynonyms_w1.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btn_editSynonyms_w1.FlatAppearance.BorderSize = 0;
+            this.btn_editSynonyms_w1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_editSynonyms_w1.ForeColor = System.Drawing.Color.White;
             this.btn_editSynonyms_w1.Location = new System.Drawing.Point(3, 29);
             this.btn_editSynonyms_w1.Name = "btn_editSynonyms_w1";
             this.btn_editSynonyms_w1.Size = new System.Drawing.Size(75, 39);
             this.btn_editSynonyms_w1.TabIndex = 4;
             this.btn_editSynonyms_w1.TabStop = false;
             this.btn_editSynonyms_w1.Text = "Edit synonyms";
-            this.btn_editSynonyms_w1.UseVisualStyleBackColor = true;
+            this.btn_editSynonyms_w1.UseVisualStyleBackColor = false;
             this.btn_editSynonyms_w1.Click += new System.EventHandler(this.btn_editSynonyms_w1_Click);
             // 
             // txt_word2
@@ -138,29 +145,38 @@ namespace SteelQuiz.QuizEditor
             // 
             // btn_editSynonyms_w2
             // 
-            this.btn_editSynonyms_w2.Location = new System.Drawing.Point(650, 30);
+            this.btn_editSynonyms_w2.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btn_editSynonyms_w2.FlatAppearance.BorderSize = 0;
+            this.btn_editSynonyms_w2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_editSynonyms_w2.ForeColor = System.Drawing.Color.White;
+            this.btn_editSynonyms_w2.Location = new System.Drawing.Point(650, 29);
             this.btn_editSynonyms_w2.Name = "btn_editSynonyms_w2";
-            this.btn_editSynonyms_w2.Size = new System.Drawing.Size(75, 39);
+            this.btn_editSynonyms_w2.Size = new System.Drawing.Size(75, 34);
             this.btn_editSynonyms_w2.TabIndex = 6;
             this.btn_editSynonyms_w2.TabStop = false;
             this.btn_editSynonyms_w2.Text = "Edit synonyms";
-            this.btn_editSynonyms_w2.UseVisualStyleBackColor = true;
+            this.btn_editSynonyms_w2.UseVisualStyleBackColor = false;
             this.btn_editSynonyms_w2.Click += new System.EventHandler(this.btn_editSynonyms_w2_Click);
             // 
             // btn_delete
             // 
+            this.btn_delete.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btn_delete.FlatAppearance.BorderSize = 0;
+            this.btn_delete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_delete.ForeColor = System.Drawing.Color.White;
             this.btn_delete.Location = new System.Drawing.Point(650, 69);
             this.btn_delete.Name = "btn_delete";
             this.btn_delete.Size = new System.Drawing.Size(75, 23);
             this.btn_delete.TabIndex = 7;
             this.btn_delete.TabStop = false;
             this.btn_delete.Text = "Delete";
-            this.btn_delete.UseVisualStyleBackColor = true;
+            this.btn_delete.UseVisualStyleBackColor = false;
             this.btn_delete.Click += new System.EventHandler(this.Btn_delete_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(3, 6);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(16, 13);
@@ -170,6 +186,7 @@ namespace SteelQuiz.QuizEditor
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(368, 6);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(16, 13);
@@ -180,6 +197,7 @@ namespace SteelQuiz.QuizEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
