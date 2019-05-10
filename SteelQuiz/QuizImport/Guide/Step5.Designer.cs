@@ -48,8 +48,8 @@ namespace SteelQuiz.QuizImport.Guide
         {
             this.txt_lang = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.lst_words = new System.Windows.Forms.ListBox();
             this.lbl_question = new System.Windows.Forms.Label();
+            this.lst_words = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // txt_lang
@@ -72,18 +72,6 @@ namespace SteelQuiz.QuizImport.Guide
             this.label1.TabIndex = 8;
             this.label1.Text = "Language (in English):";
             // 
-            // lst_words
-            // 
-            this.lst_words.BackColor = System.Drawing.Color.LightSlateGray;
-            this.lst_words.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lst_words.ForeColor = System.Drawing.Color.White;
-            this.lst_words.FormattingEnabled = true;
-            this.lst_words.Location = new System.Drawing.Point(2, 55);
-            this.lst_words.Name = "lst_words";
-            this.lst_words.Size = new System.Drawing.Size(761, 273);
-            this.lst_words.TabIndex = 6;
-            this.lst_words.TabStop = false;
-            // 
             // lbl_question
             // 
             this.lbl_question.Font = new System.Drawing.Font("Segoe UI Semilight", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -94,11 +82,23 @@ namespace SteelQuiz.QuizImport.Guide
             this.lbl_question.TabIndex = 4;
             this.lbl_question.Text = "Which language are the following words written in?";
             // 
+            // lst_words
+            // 
+            this.lst_words.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lst_words.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lst_words.ForeColor = System.Drawing.Color.White;
+            this.lst_words.FormattingEnabled = true;
+            this.lst_words.Location = new System.Drawing.Point(2, 55);
+            this.lst_words.Name = "lst_words";
+            this.lst_words.Size = new System.Drawing.Size(761, 275);
+            this.lst_words.TabIndex = 6;
+            this.lst_words.TabStop = false;
+            // 
             // Step5
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.SlateGray;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.Controls.Add(this.txt_lang);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lst_words);
@@ -113,7 +113,7 @@ namespace SteelQuiz.QuizImport.Guide
         #endregion
         internal System.Windows.Forms.TextBox txt_lang;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListBox lst_words;
         private System.Windows.Forms.Label lbl_question;
+        private System.Windows.Forms.ListBox lst_words;
     }
 }

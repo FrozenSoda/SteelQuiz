@@ -74,13 +74,13 @@ namespace SteelQuiz.QuizImport.Guide
             // 
             // lst_words
             // 
-            this.lst_words.BackColor = System.Drawing.Color.LightSlateGray;
-            this.lst_words.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lst_words.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lst_words.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lst_words.ForeColor = System.Drawing.Color.White;
             this.lst_words.FormattingEnabled = true;
             this.lst_words.Location = new System.Drawing.Point(2, 55);
             this.lst_words.Name = "lst_words";
-            this.lst_words.Size = new System.Drawing.Size(761, 273);
+            this.lst_words.Size = new System.Drawing.Size(761, 275);
             this.lst_words.TabIndex = 6;
             this.lst_words.TabStop = false;
             // 
@@ -98,7 +98,7 @@ namespace SteelQuiz.QuizImport.Guide
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.SlateGray;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.Controls.Add(this.txt_lang);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lst_words);

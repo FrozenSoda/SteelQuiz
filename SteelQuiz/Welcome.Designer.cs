@@ -122,6 +122,7 @@ namespace SteelQuiz
             // lbl_copyright
             // 
             this.lbl_copyright.AutoSize = true;
+            this.lbl_copyright.ForeColor = System.Drawing.Color.LightGray;
             this.lbl_copyright.Location = new System.Drawing.Point(12, 428);
             this.lbl_copyright.Name = "lbl_copyright";
             this.lbl_copyright.Size = new System.Drawing.Size(243, 13);
@@ -154,7 +155,7 @@ namespace SteelQuiz
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.LightSlateGray;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.btn_continueLast);
             this.Controls.Add(this.lbl_copyright);
