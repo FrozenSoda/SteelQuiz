@@ -24,9 +24,9 @@ using System.Threading.Tasks;
 using System.Drawing;
 using static SteelQuiz.ThemeManager.ThemeCore;
 
-namespace SteelQuiz.ThemeManager.ThemeColors
+namespace SteelQuiz.ThemeManager.Colors
 {
-    public static partial class Colors
+    public static partial class ThemeColor
     {
         public static Color GetPreferenceBackColor()
         {

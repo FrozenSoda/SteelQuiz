@@ -208,8 +208,8 @@
     <Compile Include="ThemedForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ThemeManager\ThemeColors\General.cs" />
-    <Compile Include="ThemeManager\ThemeColors\Preferences.cs" />
+    <Compile Include="ThemeManager\Colors\General.cs" />
+    <Compile Include="ThemeManager\Colors\Preferences.cs" />
     <Compile Include="ThemeManager\ThemeCore.cs" />
     <Compile Include="Preferences\PrefCategory.cs">
       <SubType>UserControl</SubType>

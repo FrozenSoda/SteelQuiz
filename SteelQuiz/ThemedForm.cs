@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SteelQuiz.ThemeManager;
+using SteelQuiz.ThemeManager.Colors;
 
 namespace SteelQuiz
 {
@@ -15,9 +15,19 @@ namespace SteelQuiz
         {
             foreach (var control in GetAll(this))
             {
-                if (control.BackColor == Color.FromArgb(60, 60, 60))
+                if (control is Button)
                 {
-                    control.BackColor = ThemeCore.
+                    if (control.BackColor == Color.FromArgb(80, 80, 80))
+                    {
+                        control.BackColor = ThemeColor.GetButtonBackColor();
+                    }
+                }
+                else
+                {
+                    if (control.BackColor == Color.FromArgb(60, 60, 60))
+                    {
+                        control.BackColor = ThemeColor.GetBackColor();
+                    }
                 }
             }
         }
