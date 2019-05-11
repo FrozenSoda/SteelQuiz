@@ -55,6 +55,7 @@ namespace SteelQuiz.QuizEditor
             // lbl_welcome
             // 
             this.lbl_welcome.Font = new System.Drawing.Font("Segoe UI Semilight", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_welcome.ForeColor = System.Drawing.Color.White;
             this.lbl_welcome.Location = new System.Drawing.Point(12, 9);
             this.lbl_welcome.Name = "lbl_welcome";
             this.lbl_welcome.Size = new System.Drawing.Size(776, 43);
@@ -64,12 +65,17 @@ namespace SteelQuiz.QuizEditor
             // 
             // btn_close
             // 
+            this.btn_close.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.btn_close.FlatAppearance.BorderSize = 0;
+            this.btn_close.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_close.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_close.ForeColor = System.Drawing.Color.White;
             this.btn_close.Location = new System.Drawing.Point(17, 415);
             this.btn_close.Name = "btn_close";
             this.btn_close.Size = new System.Drawing.Size(130, 23);
             this.btn_close.TabIndex = 6;
             this.btn_close.Text = "Close";
-            this.btn_close.UseVisualStyleBackColor = true;
+            this.btn_close.UseVisualStyleBackColor = false;
             this.btn_close.Click += new System.EventHandler(this.btn_close_Click);
             // 
             // flp_recovery
@@ -84,6 +90,7 @@ namespace SteelQuiz.QuizEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.flp_recovery);
             this.Controls.Add(this.btn_close);

@@ -108,6 +108,7 @@ namespace SteelQuiz.QuizPractise
             this.btn_switchTestMode.BackColor = System.Drawing.Color.Gray;
             this.btn_switchTestMode.FlatAppearance.BorderSize = 0;
             this.btn_switchTestMode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_switchTestMode.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_switchTestMode.ForeColor = System.Drawing.Color.White;
             this.btn_switchTestMode.Location = new System.Drawing.Point(580, 415);
             this.btn_switchTestMode.Name = "btn_switchTestMode";
@@ -156,6 +157,7 @@ namespace SteelQuiz.QuizPractise
             this.btn_w1_synonyms.Enabled = false;
             this.btn_w1_synonyms.FlatAppearance.BorderSize = 0;
             this.btn_w1_synonyms.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_w1_synonyms.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_w1_synonyms.ForeColor = System.Drawing.Color.White;
             this.btn_w1_synonyms.Location = new System.Drawing.Point(140, 35);
             this.btn_w1_synonyms.Name = "btn_w1_synonyms";
@@ -204,6 +206,7 @@ namespace SteelQuiz.QuizPractise
             this.btn_dontAgree.BackColor = System.Drawing.Color.Gray;
             this.btn_dontAgree.FlatAppearance.BorderSize = 0;
             this.btn_dontAgree.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_dontAgree.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_dontAgree.ForeColor = System.Drawing.Color.White;
             this.btn_dontAgree.Location = new System.Drawing.Point(352, 35);
             this.btn_dontAgree.Name = "btn_dontAgree";

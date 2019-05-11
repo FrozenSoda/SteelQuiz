@@ -103,11 +103,11 @@
     <Compile Include="QuizEditor\EditorNotification.Designer.cs">
       <DependentUpon>EditorNotification.cs</DependentUpon>
     </Compile>
-    <Compile Include="QuizEditor\QuizRecoveryUC.cs">
+    <Compile Include="QuizEditor\QuizRecoveryItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="QuizEditor\QuizRecoveryUC.Designer.cs">
-      <DependentUpon>QuizRecoveryUC.cs</DependentUpon>
+    <Compile Include="QuizEditor\QuizRecoveryItem.Designer.cs">
+      <DependentUpon>QuizRecoveryItem.cs</DependentUpon>
     </Compile>
     <Compile Include="QuizEditor\SaveDontSave.cs">
       <SubType>Form</SubType>
@@ -273,8 +273,8 @@
     <EmbeddedResource Include="QuizEditor\EditorNotification.resx">
       <DependentUpon>EditorNotification.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="QuizEditor\QuizRecoveryUC.resx">
-      <DependentUpon>QuizRecoveryUC.cs</DependentUpon>
+    <EmbeddedResource Include="QuizEditor\QuizRecoveryItem.resx">
+      <DependentUpon>QuizRecoveryItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuizEditor\SaveDontSave.resx">
       <DependentUpon>SaveDontSave.cs</DependentUpon>

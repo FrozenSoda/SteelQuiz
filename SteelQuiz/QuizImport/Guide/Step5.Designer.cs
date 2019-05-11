@@ -55,20 +55,21 @@ namespace SteelQuiz.QuizImport.Guide
             // txt_lang
             // 
             this.txt_lang.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txt_lang.Location = new System.Drawing.Point(145, 334);
+            this.txt_lang.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_lang.Location = new System.Drawing.Point(144, 334);
             this.txt_lang.Name = "txt_lang";
-            this.txt_lang.Size = new System.Drawing.Size(618, 20);
+            this.txt_lang.Size = new System.Drawing.Size(619, 22);
             this.txt_lang.TabIndex = 0;
             this.txt_lang.TextChanged += new System.EventHandler(this.Txt_lang_TextChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(-1, 335);
+            this.label1.Location = new System.Drawing.Point(3, 334);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(140, 16);
+            this.label1.Size = new System.Drawing.Size(135, 17);
             this.label1.TabIndex = 8;
             this.label1.Text = "Language (in English):";
             // 

@@ -18,7 +18,7 @@
 
 namespace SteelQuiz.QuizEditor
 {
-    partial class QuizRecoveryUC
+    partial class QuizRecoveryItem
     {
         /// <summary> 
         /// Required designer variable.
@@ -56,64 +56,78 @@ namespace SteelQuiz.QuizEditor
             // lbl_recoveryPath
             // 
             this.lbl_recoveryPath.AutoSize = true;
-            this.lbl_recoveryPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_recoveryPath.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_recoveryPath.ForeColor = System.Drawing.Color.White;
             this.lbl_recoveryPath.Location = new System.Drawing.Point(12, 11);
             this.lbl_recoveryPath.Name = "lbl_recoveryPath";
-            this.lbl_recoveryPath.Size = new System.Drawing.Size(99, 16);
+            this.lbl_recoveryPath.Size = new System.Drawing.Size(94, 17);
             this.lbl_recoveryPath.TabIndex = 0;
             this.lbl_recoveryPath.Text = "Recovery path:";
             // 
             // lbl_quizPath
             // 
             this.lbl_quizPath.AutoSize = true;
-            this.lbl_quizPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_quizPath.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_quizPath.ForeColor = System.Drawing.Color.White;
             this.lbl_quizPath.Location = new System.Drawing.Point(12, 37);
             this.lbl_quizPath.Name = "lbl_quizPath";
-            this.lbl_quizPath.Size = new System.Drawing.Size(66, 16);
+            this.lbl_quizPath.Size = new System.Drawing.Size(67, 17);
             this.lbl_quizPath.TabIndex = 1;
             this.lbl_quizPath.Text = "Quiz path:";
             // 
             // lbl_date
             // 
             this.lbl_date.AutoSize = true;
-            this.lbl_date.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_date.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_date.ForeColor = System.Drawing.Color.White;
             this.lbl_date.Location = new System.Drawing.Point(12, 63);
             this.lbl_date.Name = "lbl_date";
-            this.lbl_date.Size = new System.Drawing.Size(159, 16);
+            this.lbl_date.Size = new System.Drawing.Size(154, 17);
             this.lbl_date.TabIndex = 2;
             this.lbl_date.Text = "Auto-recovery-save date:";
             // 
             // btn_load
             // 
+            this.btn_load.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.btn_load.FlatAppearance.BorderSize = 0;
+            this.btn_load.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_load.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_load.ForeColor = System.Drawing.Color.White;
             this.btn_load.Location = new System.Drawing.Point(572, 93);
             this.btn_load.Name = "btn_load";
             this.btn_load.Size = new System.Drawing.Size(148, 23);
             this.btn_load.TabIndex = 3;
             this.btn_load.Text = "Load";
-            this.btn_load.UseVisualStyleBackColor = true;
+            this.btn_load.UseVisualStyleBackColor = false;
             this.btn_load.Click += new System.EventHandler(this.btn_load_Click);
             // 
             // btn_delete
             // 
+            this.btn_delete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.btn_delete.FlatAppearance.BorderSize = 0;
+            this.btn_delete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_delete.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_delete.ForeColor = System.Drawing.Color.White;
             this.btn_delete.Location = new System.Drawing.Point(433, 93);
             this.btn_delete.Name = "btn_delete";
             this.btn_delete.Size = new System.Drawing.Size(133, 23);
             this.btn_delete.TabIndex = 4;
             this.btn_delete.Text = "Delete";
-            this.btn_delete.UseVisualStyleBackColor = true;
+            this.btn_delete.UseVisualStyleBackColor = false;
             this.btn_delete.Click += new System.EventHandler(this.btn_delete_Click);
             // 
-            // QuizRecoveryUC
+            // QuizRecoveryItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.btn_delete);
             this.Controls.Add(this.btn_load);
             this.Controls.Add(this.lbl_date);
             this.Controls.Add(this.lbl_quizPath);
             this.Controls.Add(this.lbl_recoveryPath);
-            this.Name = "QuizRecoveryUC";
+            this.Name = "QuizRecoveryItem";
             this.Size = new System.Drawing.Size(737, 126);
             this.ResumeLayout(false);
             this.PerformLayout();

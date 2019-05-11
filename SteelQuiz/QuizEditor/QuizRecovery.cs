@@ -41,7 +41,7 @@ namespace SteelQuiz.QuizEditor
 
             foreach (var file in recoveryFiles)
             {
-                var recoveryUC = new QuizRecoveryUC(file);
+                var recoveryUC = new QuizRecoveryItem(file);
                 flp_recovery.Controls.Add(recoveryUC);
             }
 

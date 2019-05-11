@@ -55,9 +55,10 @@ namespace SteelQuiz.QuizImport.Guide
             // txt_url
             // 
             this.txt_url.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_url.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_url.Location = new System.Drawing.Point(48, 330);
             this.txt_url.Name = "txt_url";
-            this.txt_url.Size = new System.Drawing.Size(715, 20);
+            this.txt_url.Size = new System.Drawing.Size(715, 22);
             this.txt_url.TabIndex = 14;
             this.txt_url.DoubleClick += new System.EventHandler(this.Txt_url_DoubleClick);
             // 

@@ -75,7 +75,7 @@ namespace SteelQuiz.QuizImport.Guide
             // 
             this.rdo_studentlitteratur.AutoSize = true;
             this.rdo_studentlitteratur.Checked = true;
-            this.rdo_studentlitteratur.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdo_studentlitteratur.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdo_studentlitteratur.ForeColor = System.Drawing.Color.White;
             this.rdo_studentlitteratur.Location = new System.Drawing.Point(3, 3);
             this.rdo_studentlitteratur.Name = "rdo_studentlitteratur";

@@ -75,10 +75,11 @@ namespace SteelQuiz.QuizEditor
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(12, 33);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(67, 13);
+            this.label2.Size = new System.Drawing.Size(70, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Language 1:";
             // 
@@ -86,31 +87,34 @@ namespace SteelQuiz.QuizEditor
             // 
             this.cmb_lang1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
             this.cmb_lang1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmb_lang1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmb_lang1.ForeColor = System.Drawing.Color.White;
             this.cmb_lang1.FormattingEnabled = true;
-            this.cmb_lang1.Location = new System.Drawing.Point(85, 30);
+            this.cmb_lang1.Location = new System.Drawing.Point(88, 30);
             this.cmb_lang1.Name = "cmb_lang1";
-            this.cmb_lang1.Size = new System.Drawing.Size(291, 21);
+            this.cmb_lang1.Size = new System.Drawing.Size(288, 21);
             this.cmb_lang1.TabIndex = 1;
             // 
             // cmb_lang2
             // 
             this.cmb_lang2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
             this.cmb_lang2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmb_lang2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmb_lang2.ForeColor = System.Drawing.Color.White;
             this.cmb_lang2.FormattingEnabled = true;
-            this.cmb_lang2.Location = new System.Drawing.Point(455, 30);
+            this.cmb_lang2.Location = new System.Drawing.Point(458, 30);
             this.cmb_lang2.Name = "cmb_lang2";
-            this.cmb_lang2.Size = new System.Drawing.Size(291, 21);
+            this.cmb_lang2.Size = new System.Drawing.Size(288, 21);
             this.cmb_lang2.TabIndex = 2;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(382, 33);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(67, 13);
+            this.label3.Size = new System.Drawing.Size(70, 13);
             this.label3.TabIndex = 5;
             this.label3.Text = "Language 2:";
             // 
@@ -154,7 +158,7 @@ namespace SteelQuiz.QuizEditor
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.ShortcutKeyDisplayString = "CTRL+N";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.newToolStripMenuItem.Text = "New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
@@ -162,7 +166,7 @@ namespace SteelQuiz.QuizEditor
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeyDisplayString = "CTRL+O";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -170,21 +174,21 @@ namespace SteelQuiz.QuizEditor
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeyDisplayString = "CTRL+S";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.saveAsToolStripMenuItem.Text = "Save as";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // closeMenuToolStripMenuItem
             // 
             this.closeMenuToolStripMenuItem.Name = "closeMenuToolStripMenuItem";
-            this.closeMenuToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.closeMenuToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.closeMenuToolStripMenuItem.Text = "Close";
             this.closeMenuToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -202,7 +206,7 @@ namespace SteelQuiz.QuizEditor
             // 
             this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
             this.undoToolStripMenuItem.ShortcutKeyDisplayString = "CTRL+Z";
-            this.undoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.undoToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.undoToolStripMenuItem.Text = "Undo";
             this.undoToolStripMenuItem.Click += new System.EventHandler(this.undoToolStripMenuItem_Click);
             // 
@@ -210,7 +214,7 @@ namespace SteelQuiz.QuizEditor
             // 
             this.redoToolStripMenuItem.Name = "redoToolStripMenuItem";
             this.redoToolStripMenuItem.ShortcutKeyDisplayString = "CTRL+Y";
-            this.redoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.redoToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.redoToolStripMenuItem.Text = "Redo";
             this.redoToolStripMenuItem.Click += new System.EventHandler(this.redoToolStripMenuItem_Click);
             // 

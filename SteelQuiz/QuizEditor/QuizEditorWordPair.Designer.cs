@@ -65,18 +65,19 @@ namespace SteelQuiz.QuizEditor
             this.pnl_translationRules.Controls.Add(this.chk_ignoreExcl);
             this.pnl_translationRules.Controls.Add(this.label4);
             this.pnl_translationRules.Controls.Add(this.chk_ignoreCapitalization);
-            this.pnl_translationRules.Location = new System.Drawing.Point(237, 29);
+            this.pnl_translationRules.Location = new System.Drawing.Point(217, 29);
             this.pnl_translationRules.Name = "pnl_translationRules";
-            this.pnl_translationRules.Size = new System.Drawing.Size(279, 65);
+            this.pnl_translationRules.Size = new System.Drawing.Size(299, 65);
             this.pnl_translationRules.TabIndex = 2;
             // 
             // chk_ignoreExcl
             // 
             this.chk_ignoreExcl.AutoSize = true;
+            this.chk_ignoreExcl.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chk_ignoreExcl.ForeColor = System.Drawing.Color.LightGray;
-            this.chk_ignoreExcl.Location = new System.Drawing.Point(129, 22);
+            this.chk_ignoreExcl.Location = new System.Drawing.Point(141, 22);
             this.chk_ignoreExcl.Name = "chk_ignoreExcl";
-            this.chk_ignoreExcl.Size = new System.Drawing.Size(146, 17);
+            this.chk_ignoreExcl.Size = new System.Drawing.Size(157, 17);
             this.chk_ignoreExcl.TabIndex = 2;
             this.chk_ignoreExcl.TabStop = false;
             this.chk_ignoreExcl.Text = "Ignore exclamation marks";
@@ -85,6 +86,7 @@ namespace SteelQuiz.QuizEditor
             // 
             // label4
             // 
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.LightGray;
             this.label4.Location = new System.Drawing.Point(-3, 1);
             this.label4.Name = "label4";
@@ -96,10 +98,11 @@ namespace SteelQuiz.QuizEditor
             // chk_ignoreCapitalization
             // 
             this.chk_ignoreCapitalization.AutoSize = true;
+            this.chk_ignoreCapitalization.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chk_ignoreCapitalization.ForeColor = System.Drawing.Color.LightGray;
             this.chk_ignoreCapitalization.Location = new System.Drawing.Point(3, 22);
             this.chk_ignoreCapitalization.Name = "chk_ignoreCapitalization";
-            this.chk_ignoreCapitalization.Size = new System.Drawing.Size(120, 17);
+            this.chk_ignoreCapitalization.Size = new System.Drawing.Size(132, 17);
             this.chk_ignoreCapitalization.TabIndex = 0;
             this.chk_ignoreCapitalization.TabStop = false;
             this.chk_ignoreCapitalization.Text = "Ignore capitalization";
@@ -110,10 +113,11 @@ namespace SteelQuiz.QuizEditor
             // 
             this.txt_word1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
             this.txt_word1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_word1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_word1.ForeColor = System.Drawing.Color.White;
             this.txt_word1.Location = new System.Drawing.Point(25, 3);
             this.txt_word1.Name = "txt_word1";
-            this.txt_word1.Size = new System.Drawing.Size(335, 20);
+            this.txt_word1.Size = new System.Drawing.Size(335, 22);
             this.txt_word1.TabIndex = 0;
             this.txt_word1.Click += new System.EventHandler(this.txt_word_Click);
             this.txt_word1.TextChanged += new System.EventHandler(this.txt_word1_TextChanged);
@@ -125,6 +129,7 @@ namespace SteelQuiz.QuizEditor
             this.btn_editSynonyms_w1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
             this.btn_editSynonyms_w1.FlatAppearance.BorderSize = 0;
             this.btn_editSynonyms_w1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_editSynonyms_w1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_editSynonyms_w1.ForeColor = System.Drawing.Color.White;
             this.btn_editSynonyms_w1.Location = new System.Drawing.Point(3, 29);
             this.btn_editSynonyms_w1.Name = "btn_editSynonyms_w1";
@@ -139,10 +144,11 @@ namespace SteelQuiz.QuizEditor
             // 
             this.txt_word2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
             this.txt_word2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_word2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_word2.ForeColor = System.Drawing.Color.White;
             this.txt_word2.Location = new System.Drawing.Point(390, 3);
             this.txt_word2.Name = "txt_word2";
-            this.txt_word2.Size = new System.Drawing.Size(335, 20);
+            this.txt_word2.Size = new System.Drawing.Size(335, 22);
             this.txt_word2.TabIndex = 5;
             this.txt_word2.Click += new System.EventHandler(this.txt_word_Click);
             this.txt_word2.TextChanged += new System.EventHandler(this.txt_word2_TextChanged);
@@ -154,6 +160,7 @@ namespace SteelQuiz.QuizEditor
             this.btn_editSynonyms_w2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
             this.btn_editSynonyms_w2.FlatAppearance.BorderSize = 0;
             this.btn_editSynonyms_w2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_editSynonyms_w2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_editSynonyms_w2.ForeColor = System.Drawing.Color.White;
             this.btn_editSynonyms_w2.Location = new System.Drawing.Point(650, 29);
             this.btn_editSynonyms_w2.Name = "btn_editSynonyms_w2";
@@ -169,6 +176,7 @@ namespace SteelQuiz.QuizEditor
             this.btn_delete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
             this.btn_delete.FlatAppearance.BorderSize = 0;
             this.btn_delete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_delete.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_delete.ForeColor = System.Drawing.Color.White;
             this.btn_delete.Location = new System.Drawing.Point(650, 69);
             this.btn_delete.Name = "btn_delete";
@@ -182,6 +190,7 @@ namespace SteelQuiz.QuizEditor
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(3, 6);
             this.label1.Name = "label1";
@@ -192,6 +201,7 @@ namespace SteelQuiz.QuizEditor
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(368, 6);
             this.label2.Name = "label2";

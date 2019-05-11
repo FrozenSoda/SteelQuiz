@@ -78,7 +78,7 @@ namespace SteelQuiz.QuizImport.Guide
             // 
             // label2
             // 
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Gainsboro;
             this.label2.Location = new System.Drawing.Point(20, 110);
             this.label2.Name = "label2";
@@ -91,7 +91,7 @@ namespace SteelQuiz.QuizImport.Guide
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Gainsboro;
             this.label1.Location = new System.Drawing.Point(20, 33);
             this.label1.Name = "label1";
@@ -103,7 +103,7 @@ namespace SteelQuiz.QuizImport.Guide
             // rdo_addMultipleTranslationsAsSynonyms
             // 
             this.rdo_addMultipleTranslationsAsSynonyms.AutoSize = true;
-            this.rdo_addMultipleTranslationsAsSynonyms.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdo_addMultipleTranslationsAsSynonyms.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdo_addMultipleTranslationsAsSynonyms.ForeColor = System.Drawing.Color.White;
             this.rdo_addMultipleTranslationsAsSynonyms.Location = new System.Drawing.Point(3, 78);
             this.rdo_addMultipleTranslationsAsSynonyms.Name = "rdo_addMultipleTranslationsAsSynonyms";
@@ -118,7 +118,7 @@ namespace SteelQuiz.QuizImport.Guide
             // 
             this.rdo_multipleTranslationsAsDifferentWordPairs.AutoSize = true;
             this.rdo_multipleTranslationsAsDifferentWordPairs.Checked = true;
-            this.rdo_multipleTranslationsAsDifferentWordPairs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdo_multipleTranslationsAsDifferentWordPairs.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdo_multipleTranslationsAsDifferentWordPairs.ForeColor = System.Drawing.Color.White;
             this.rdo_multipleTranslationsAsDifferentWordPairs.Location = new System.Drawing.Point(3, 3);
             this.rdo_multipleTranslationsAsDifferentWordPairs.Name = "rdo_multipleTranslationsAsDifferentWordPairs";

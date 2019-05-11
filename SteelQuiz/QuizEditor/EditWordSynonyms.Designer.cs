@@ -65,7 +65,7 @@ namespace SteelQuiz.QuizEditor
             // lbl_synForWord
             // 
             this.lbl_synForWord.AutoSize = true;
-            this.lbl_synForWord.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_synForWord.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_synForWord.ForeColor = System.Drawing.Color.White;
             this.lbl_synForWord.Location = new System.Drawing.Point(12, 35);
             this.lbl_synForWord.Name = "lbl_synForWord";

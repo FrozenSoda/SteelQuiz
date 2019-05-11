@@ -31,13 +31,13 @@ using SteelQuiz.QuizData;
 
 namespace SteelQuiz.QuizEditor
 {
-    public partial class QuizRecoveryUC : AutoThemeableUserControl
+    public partial class QuizRecoveryItem : AutoThemeableUserControl
     {
         public string RecoveryPath { get; set; }
         public string QuizPath { get; set; }
         public DateTime Date { get; set; }
 
-        public QuizRecoveryUC(string recoveryPath)
+        public QuizRecoveryItem(string recoveryPath)
         {
             InitializeComponent();
 

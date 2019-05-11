@@ -74,7 +74,7 @@ namespace SteelQuiz.QuizPractise
             this.btn_editWord1.BackColor = System.Drawing.Color.RoyalBlue;
             this.btn_editWord1.FlatAppearance.BorderSize = 0;
             this.btn_editWord1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_editWord1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_editWord1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_editWord1.ForeColor = System.Drawing.Color.White;
             this.btn_editWord1.Location = new System.Drawing.Point(282, 154);
             this.btn_editWord1.Name = "btn_editWord1";
@@ -89,7 +89,7 @@ namespace SteelQuiz.QuizPractise
             this.btn_editWord1synonyms.BackColor = System.Drawing.Color.RoyalBlue;
             this.btn_editWord1synonyms.FlatAppearance.BorderSize = 0;
             this.btn_editWord1synonyms.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_editWord1synonyms.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_editWord1synonyms.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_editWord1synonyms.ForeColor = System.Drawing.Color.White;
             this.btn_editWord1synonyms.Location = new System.Drawing.Point(282, 194);
             this.btn_editWord1synonyms.Name = "btn_editWord1synonyms";
@@ -104,7 +104,7 @@ namespace SteelQuiz.QuizPractise
             this.btn_editWord2synonyms.BackColor = System.Drawing.Color.RoyalBlue;
             this.btn_editWord2synonyms.FlatAppearance.BorderSize = 0;
             this.btn_editWord2synonyms.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_editWord2synonyms.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_editWord2synonyms.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_editWord2synonyms.ForeColor = System.Drawing.Color.White;
             this.btn_editWord2synonyms.Location = new System.Drawing.Point(282, 274);
             this.btn_editWord2synonyms.Name = "btn_editWord2synonyms";
@@ -119,7 +119,7 @@ namespace SteelQuiz.QuizPractise
             this.btn_editWord2.BackColor = System.Drawing.Color.RoyalBlue;
             this.btn_editWord2.FlatAppearance.BorderSize = 0;
             this.btn_editWord2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_editWord2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_editWord2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_editWord2.ForeColor = System.Drawing.Color.White;
             this.btn_editWord2.Location = new System.Drawing.Point(282, 234);
             this.btn_editWord2.Name = "btn_editWord2";
@@ -156,7 +156,7 @@ namespace SteelQuiz.QuizPractise
             this.btn_close.BackColor = System.Drawing.Color.RoyalBlue;
             this.btn_close.FlatAppearance.BorderSize = 0;
             this.btn_close.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_close.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_close.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_close.ForeColor = System.Drawing.Color.White;
             this.btn_close.Location = new System.Drawing.Point(282, 393);
             this.btn_close.Name = "btn_close";
@@ -171,7 +171,7 @@ namespace SteelQuiz.QuizPractise
             this.btn_editInEditor.BackColor = System.Drawing.Color.RoyalBlue;
             this.btn_editInEditor.FlatAppearance.BorderSize = 0;
             this.btn_editInEditor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_editInEditor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_editInEditor.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_editInEditor.ForeColor = System.Drawing.Color.White;
             this.btn_editInEditor.Location = new System.Drawing.Point(282, 324);
             this.btn_editInEditor.Name = "btn_editInEditor";

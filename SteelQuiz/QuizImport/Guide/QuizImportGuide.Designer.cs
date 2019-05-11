@@ -57,7 +57,7 @@ namespace SteelQuiz.QuizImport.Guide
             this.btn_next.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.btn_next.FlatAppearance.BorderSize = 0;
             this.btn_next.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_next.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_next.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_next.ForeColor = System.Drawing.Color.White;
             this.btn_next.Location = new System.Drawing.Point(549, 392);
             this.btn_next.Name = "btn_next";
@@ -72,7 +72,7 @@ namespace SteelQuiz.QuizImport.Guide
             this.btn_prevCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.btn_prevCancel.FlatAppearance.BorderSize = 0;
             this.btn_prevCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_prevCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_prevCancel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_prevCancel.ForeColor = System.Drawing.Color.White;
             this.btn_prevCancel.Location = new System.Drawing.Point(12, 392);
             this.btn_prevCancel.Name = "btn_prevCancel";
