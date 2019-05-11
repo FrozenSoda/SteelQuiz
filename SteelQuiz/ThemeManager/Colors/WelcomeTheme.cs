@@ -8,9 +8,9 @@ using static SteelQuiz.ThemeManager.ThemeCore;
 
 namespace SteelQuiz.ThemeManager.Colors
 {
-    public static class WelcomeTheme
+    public class WelcomeTheme : GeneralTheme
     {
-        public static Color GetBackColor()
+        public override Color GetBackColor()
         {
             if (ConfigManager.Config == null || ConfigManager.Config.Theme == Theme.Dark)
             {
@@ -22,7 +22,7 @@ namespace SteelQuiz.ThemeManager.Colors
             }
         }
 
-        public static Color GetTitleForeColor()
+        public Color GetTitleForeColor()
         {
             if (ConfigManager.Config == null || ConfigManager.Config.Theme == Theme.Dark)
             {
@@ -34,7 +34,7 @@ namespace SteelQuiz.ThemeManager.Colors
             }
         }
 
-        public static Color GetLabelForeColor()
+        public override Color GetLabelForeColor()
         {
             if (ConfigManager.Config == null || ConfigManager.Config.Theme == Theme.Dark)
             {
@@ -46,7 +46,7 @@ namespace SteelQuiz.ThemeManager.Colors
             }
         }
 
-        public static Color GetMainButtonBackColor()
+        public Color GetMainButtonBackColor()
         {
             if (ConfigManager.Config == null || ConfigManager.Config.Theme == Theme.Dark)
             {
@@ -58,7 +58,7 @@ namespace SteelQuiz.ThemeManager.Colors
             }
         }
 
-        public static Color GetMainButtonForeColor()
+        public Color GetMainButtonForeColor()
         {
             if (ConfigManager.Config == null || ConfigManager.Config.Theme == Theme.Dark)
             {
@@ -70,7 +70,7 @@ namespace SteelQuiz.ThemeManager.Colors
             }
         }
 
-        public static Color GetButtonBackColor()
+        public override Color GetButtonBackColor()
         {
             if (ConfigManager.Config == null || ConfigManager.Config.Theme == Theme.Dark)
             {
@@ -80,11 +80,6 @@ namespace SteelQuiz.ThemeManager.Colors
             {
                 return Color.FromArgb(150, 150, 150);
             }
-        }
-
-        public static Color GetButtonForeColor()
-        {
-            return GeneralTheme.GetButtonForeColor();
         }
     }
 }

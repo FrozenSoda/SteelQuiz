@@ -26,24 +26,10 @@ using static SteelQuiz.ThemeManager.ThemeCore;
 
 namespace SteelQuiz.ThemeManager.Colors
 {
-    public static class PreferencesTheme
+    public class PreferencesTheme : GeneralTheme
     {
-        public static Color GetBackColor()
-        {
-            return GeneralTheme.GetBackColor();
-        }
 
-        public static Color GetButtonBackColor()
-        {
-            return GeneralTheme.GetButtonBackColor();
-        }
-
-        public static Color GetButtonForeColor()
-        {
-            return GeneralTheme.GetButtonForeColor();
-        }
-
-        public static Color GetPrefCatPanelBackColor()
+        public Color GetPrefCatPanelBackColor()
         {
             if (ConfigManager.Config == null || ConfigManager.Config.Theme == Theme.Dark)
             {
@@ -55,7 +41,7 @@ namespace SteelQuiz.ThemeManager.Colors
             }
         }
 
-        public static Color GetPrefBackColor()
+        public Color GetPrefBackColor()
         {
             if (ConfigManager.Config == null || ConfigManager.Config.Theme == Theme.Dark)
             {
@@ -67,12 +53,12 @@ namespace SteelQuiz.ThemeManager.Colors
             }
         }
 
-        public static Color GetPrefForeColor()
+        public Color GetPrefForeColor()
         {
             return GetButtonForeColor();
         }
 
-        public static Color GetPrefSelectedBackColor()
+        public Color GetPrefSelectedBackColor()
         {
             if (ConfigManager.Config == null || ConfigManager.Config.Theme == Theme.Dark)
             {
@@ -84,7 +70,7 @@ namespace SteelQuiz.ThemeManager.Colors
             }
         }
 
-        public static Color GetPreferenceHoverBackColor()
+        public Color GetPreferenceHoverBackColor()
         {
             if (ConfigManager.Config == null || ConfigManager.Config.Theme == Theme.Dark)
             {
@@ -96,7 +82,7 @@ namespace SteelQuiz.ThemeManager.Colors
             }
         }
 
-        public static Color GetPrefSelectedHoverBackColor()
+        public Color GetPrefSelectedHoverBackColor()
         {
             if (ConfigManager.Config == null || ConfigManager.Config.Theme == Theme.Dark)
             {

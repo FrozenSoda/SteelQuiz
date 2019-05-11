@@ -31,6 +31,8 @@ namespace SteelQuiz
 {
     public partial class PrefCategory : UserControl, ThemeManager.IThemeable
     {
+        private PreferencesTheme PreferencesTheme = new PreferencesTheme();
+
         public event EventHandler OnPrefSelected;
 
         private bool _selected = false;
@@ -102,6 +104,8 @@ namespace SteelQuiz
         {
             lbl_text.BackColor = PreferencesTheme.GetPrefBackColor();
             lbl_text.ForeColor = PreferencesTheme.GetPrefForeColor();
+
+            lbl_selectedIndicator.BackColor = PreferencesTheme.GetPrefBackColor();
         }
 
         private void StartHover()

@@ -31,6 +31,8 @@ namespace SteelQuiz.Preferences
 {
     public partial class Preferences : Form, ThemeManager.IThemeable
     {
+        private PreferencesTheme PreferencesTheme = new PreferencesTheme();
+
         public Preferences()
         {
             InitializeComponent();

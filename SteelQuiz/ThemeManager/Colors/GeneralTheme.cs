@@ -45,5 +45,17 @@ namespace SteelQuiz.ThemeManager.Colors
                 return Color.FromArgb(0, 0, 0);
             }
         }
+
+        public virtual Color GetLabelForeColor()
+        {
+            if (ConfigManager.Config == null || ConfigManager.Config.Theme == Theme.Dark)
+            {
+                return Color.FromArgb(255, 255, 255);
+            }
+            else
+            {
+                return Color.FromArgb(0, 0, 0);
+            }
+        }
     }
 }

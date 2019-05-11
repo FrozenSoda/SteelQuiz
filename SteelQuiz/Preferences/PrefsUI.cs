@@ -32,6 +32,8 @@ namespace SteelQuiz.Preferences
 {
     public partial class PrefsUI : UserControl, IPreferenceCategory, ThemeManager.IThemeable
     {
+        private PreferencesTheme PreferencesTheme = new PreferencesTheme();
+
         public PrefsUI()
         {
             InitializeComponent();
@@ -60,7 +62,12 @@ namespace SteelQuiz.Preferences
 
             foreach (var lbl in this.GetAllChildrenRecursive(typeof(Label)))
             {
-                lbl.BackColor = 
+                lbl.ForeColor = PreferencesTheme.GetLabelForeColor();
+            }
+
+            foreach (var rdo in this.GetAllChildrenRecursive(typeof(RadioButton)))
+            {
+                rdo.ForeColor = PreferencesTheme.GetLabelForeColor();
             }
         }
     }

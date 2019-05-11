@@ -37,6 +37,8 @@ namespace SteelQuiz
 {
     public partial class Welcome : Form, ThemeManager.IThemeable
     {
+        private WelcomeTheme WelcomeTheme = new WelcomeTheme();
+
         public Welcome()
         {
             InitializeComponent();
