@@ -31,6 +31,7 @@ using SteelQuiz.QuizProgressData;
 using System.IO;
 using Newtonsoft.Json;
 using SteelQuiz.QuizData;
+using System.Threading;
 
 namespace SteelQuiz.Preferences
 {
@@ -67,26 +68,99 @@ namespace SteelQuiz.Preferences
 
         private void Btn_analyze_Click(object sender, EventArgs e)
         {
-            var toRemove = QuizProgDatasToRemove();
-            var count = toRemove.Count();
-            if (count == 0)
+            var t = new Thread(() =>
             {
-                lbl_analysisResult.Text = "Analysis result: Progress data for 0 quizzes can be removed";
-            }
-            else if (count == 1)
-            {
-                lbl_analysisResult.Text = "Analysis result: Progress data for 1 quiz can be removed";
-            }
-            else if (count > 1)
-            {
-                lbl_analysisResult.Text = $"Analysis result: Progress data for {count} quizzes can be removed";
-            }
-            lbl_analysisResult.Visible = true;
+                this.Invoke(new Action(() =>
+                {
+                    ParentForm.Enabled = false;
+                    btn_analyze.Text = "Please wait...";
+                }));
+
+                var toRemove = QuizProgDatasToRemove();
+                var count = toRemove.Count();
+
+                this.Invoke(new Action(() =>
+                {
+                    if (count == 0)
+                    {
+                        lbl_analysisResult.Text = "Analysis result: Progress data for 0 quizzes can be removed";
+                    }
+                    else if (count == 1)
+                    {
+                        lbl_analysisResult.Text = "Analysis result: Progress data for 1 quiz can be removed";
+                    }
+                    else if (count > 1)
+                    {
+                        lbl_analysisResult.Text = $"Analysis result: Progress data for {count} quizzes can be removed";
+                    }
+                    lbl_analysisResult.Visible = true;
+
+                    btn_analyze.Text = "Analyze";
+                    ParentForm.Enabled = true;
+                }));
+            });
+            t.Start();
         }
 
         private void Btn_cleanUp_Click(object sender, EventArgs e)
         {
+            var t = new Thread(() =>
+            {
+                this.Invoke(new Action(() =>
+                {
+                    ParentForm.Enabled = false;
+                    btn_cleanUp.Text = "Please wait...";
+                }));
 
+                var bkp = QuizCore.BackupProgress(new Version(MetaData.QUIZ_FILE_FORMAT_VERSION));
+                if (!bkp)
+                {
+                    return;
+                }
+
+                CleanUp();
+
+                this.Invoke(new Action(() =>
+                {
+                    lbl_analysisResult.Text = "Clean up finished!";
+                    lbl_analysisResult.Visible = true;
+
+                    btn_cleanUp.Text = "Clean up";
+                    ParentForm.Enabled = true;
+                }));
+            });
+            t.Start();
+        }
+
+        private void CleanUp()
+        {
+            IEnumerable<Guid> guidsToRemove = QuizProgDatasToRemove();
+            QuizProgDataRoot progDataRoot;
+            using (var reader = new StreamReader(QuizCore.PROGRESS_FILE_PATH))
+            {
+                progDataRoot = JsonConvert.DeserializeObject<QuizProgDataRoot>(reader.ReadToEnd());
+            }
+
+            var progDatasToRemove = new List<QuizProgData>();
+
+            foreach (var quizProg in progDataRoot.QuizProgDatas)
+            {
+                var guid = quizProg.QuizGUID;
+                if (guidsToRemove.Contains(guid))
+                {
+                    progDatasToRemove.Add(quizProg);
+                }
+            }
+
+            foreach (var quizProg in progDatasToRemove)
+            {
+                progDataRoot.QuizProgDatas.Remove(quizProg);
+            }
+
+            using (var writer = new StreamWriter(QuizCore.PROGRESS_FILE_PATH, false))
+            {
+                writer.Write(JsonConvert.SerializeObject(progDataRoot, Formatting.Indented));
+            }
         }
 
         private IEnumerable<Guid> QuizProgDatasToRemove()
