@@ -30,7 +30,7 @@ using SteelQuiz.Extensions;
 
 namespace SteelQuiz.Preferences
 {
-    public partial class PrefsUI : UserControl, IPreferenceCategory, ThemeManager.IThemeable
+    public partial class PrefsUI : AutoThemeableUserControl, IPreferenceCategory
     {
         private PreferencesTheme PreferencesTheme = new PreferencesTheme();
 
@@ -56,6 +56,7 @@ namespace SteelQuiz.Preferences
             }
         }
 
+        /*
         public void SetTheme()
         {
             BackColor = PreferencesTheme.GetBackColor();
@@ -70,5 +71,6 @@ namespace SteelQuiz.Preferences
                 rdo.ForeColor = PreferencesTheme.GetMainLabelForeColor();
             }
         }
+        */
     }
 }

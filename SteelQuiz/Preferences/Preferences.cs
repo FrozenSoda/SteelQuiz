@@ -115,5 +115,10 @@ namespace SteelQuiz.Preferences
         {
             SwitchCategory(typeof(PrefsUI));
         }
+
+        private void Prefs_updates_OnPrefSelected(object sender, EventArgs e)
+        {
+            SwitchCategory(typeof(PrefsProgDataCleanUp));
+        }
     }
 }

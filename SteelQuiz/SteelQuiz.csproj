@@ -67,6 +67,12 @@
     <Compile Include="Preferences\Preferences.Designer.cs">
       <DependentUpon>Preferences.cs</DependentUpon>
     </Compile>
+    <Compile Include="Preferences\PrefsProgDataCleanUp.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Preferences\PrefsProgDataCleanUp.Designer.cs">
+      <DependentUpon>PrefsProgDataCleanUp.cs</DependentUpon>
+    </Compile>
     <Compile Include="Preferences\PrefsUI.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -236,6 +242,9 @@
     <Compile Include="QuizProgressData\WordTry.cs" />
     <EmbeddedResource Include="Preferences\Preferences.resx">
       <DependentUpon>Preferences.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Preferences\PrefsProgDataCleanUp.resx">
+      <DependentUpon>PrefsProgDataCleanUp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Preferences\PrefsUI.resx">
       <DependentUpon>PrefsUI.cs</DependentUpon>

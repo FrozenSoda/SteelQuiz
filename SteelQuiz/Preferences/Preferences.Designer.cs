@@ -50,9 +50,9 @@ namespace SteelQuiz.Preferences
             this.btn_apply = new System.Windows.Forms.Button();
             this.btn_cancel = new System.Windows.Forms.Button();
             this.pnl_prefCategories = new System.Windows.Forms.Panel();
+            this.pnl_prefs = new System.Windows.Forms.Panel();
             this.prefs_updates = new SteelQuiz.PrefCategory();
             this.prefs_UI = new SteelQuiz.PrefCategory();
-            this.pnl_prefs = new System.Windows.Forms.Panel();
             this.pnl_prefCategories.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -97,31 +97,32 @@ namespace SteelQuiz.Preferences
             this.pnl_prefCategories.Size = new System.Drawing.Size(130, 450);
             this.pnl_prefCategories.TabIndex = 11;
             // 
-            // prefs_updates
-            // 
-            this.prefs_updates.Location = new System.Drawing.Point(0, 47);
-            this.prefs_updates.Name = "prefs_updates";
-            this.prefs_updates.PrefText = "Updates";
-            this.prefs_updates.Selected = false;
-            this.prefs_updates.Size = new System.Drawing.Size(130, 29);
-            this.prefs_updates.TabIndex = 11;
-            // 
-            // prefs_UI
-            // 
-            this.prefs_UI.Location = new System.Drawing.Point(0, 12);
-            this.prefs_UI.Name = "prefs_UI";
-            this.prefs_UI.PrefText = "User Interface";
-            this.prefs_UI.Selected = true;
-            this.prefs_UI.Size = new System.Drawing.Size(130, 29);
-            this.prefs_UI.TabIndex = 10;
-            this.prefs_UI.OnPrefSelected += new System.EventHandler(this.Prefs_UI_OnPrefSelected);
-            // 
             // pnl_prefs
             // 
             this.pnl_prefs.Location = new System.Drawing.Point(136, 0);
             this.pnl_prefs.Name = "pnl_prefs";
             this.pnl_prefs.Size = new System.Drawing.Size(652, 409);
             this.pnl_prefs.TabIndex = 12;
+            // 
+            // prefs_updates
+            // 
+            this.prefs_updates.Location = new System.Drawing.Point(0, 47);
+            this.prefs_updates.Name = "prefs_updates";
+            this.prefs_updates.PrefText = "Maintenance";
+            this.prefs_updates.Selected = false;
+            this.prefs_updates.Size = new System.Drawing.Size(130, 29);
+            this.prefs_updates.TabIndex = 11;
+            this.prefs_updates.OnPrefSelected += new System.EventHandler(this.Prefs_updates_OnPrefSelected);
+            // 
+            // prefs_UI
+            // 
+            this.prefs_UI.Location = new System.Drawing.Point(0, 12);
+            this.prefs_UI.Name = "prefs_UI";
+            this.prefs_UI.PrefText = "General";
+            this.prefs_UI.Selected = true;
+            this.prefs_UI.Size = new System.Drawing.Size(130, 29);
+            this.prefs_UI.TabIndex = 10;
+            this.prefs_UI.OnPrefSelected += new System.EventHandler(this.Prefs_UI_OnPrefSelected);
             // 
             // Preferences
             // 
