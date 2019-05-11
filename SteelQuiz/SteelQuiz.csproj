@@ -207,6 +207,9 @@
     <Compile Include="QuizEditor\UndoRedo\IUndoRedo.cs" />
     <Compile Include="QuizEditor\UndoRedo\UndoRedoExtensions.cs" />
     <Compile Include="QuizEditor\UndoRedo\UndoRedoFuncPair.cs" />
+    <Compile Include="AutoThemeableForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ThemeManager\Colors\GeneralTheme.cs" />
     <Compile Include="ThemeManager\Colors\PreferencesTheme.cs" />
     <Compile Include="ThemeManager\Colors\WelcomeTheme.cs" />

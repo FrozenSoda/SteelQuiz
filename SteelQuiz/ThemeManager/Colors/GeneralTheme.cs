@@ -32,7 +32,7 @@ namespace SteelQuiz.ThemeManager.Colors
         {
             if (ConfigManager.Config == null || ConfigManager.Config.Theme == Theme.Dark)
             {
-                return Color.FromArgb(60, 60, 60);
+                return Color.FromArgb(64, 64, 64);
             }
             else
             {
