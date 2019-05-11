@@ -46,8 +46,8 @@ namespace SteelQuiz.Preferences
         /// </summary>
         private void InitializeComponent()
         {
-            this.prefs_troubleshooting = new SteelQuiz.PrefCategory();
-            this.prefs_cleanUp = new SteelQuiz.PrefCategory();
+            this.prefs_troubleshooting = new SteelQuiz.PrefCategoryItem();
+            this.prefs_cleanUp = new SteelQuiz.PrefCategoryItem();
             this.SuspendLayout();
             // 
             // prefs_troubleshooting
@@ -59,6 +59,7 @@ namespace SteelQuiz.Preferences
             this.prefs_troubleshooting.Selected = false;
             this.prefs_troubleshooting.Size = new System.Drawing.Size(130, 29);
             this.prefs_troubleshooting.TabIndex = 13;
+            this.prefs_troubleshooting.OnPrefSelected += new System.EventHandler(this.Prefs_troubleshooting_OnPrefSelected);
             // 
             // prefs_cleanUp
             // 
@@ -79,6 +80,7 @@ namespace SteelQuiz.Preferences
             this.Controls.Add(this.prefs_troubleshooting);
             this.Controls.Add(this.prefs_cleanUp);
             this.IsSubCategory = true;
+            this.Location = new System.Drawing.Point(0, 0);
             this.Name = "CategoriesMaintenance";
             this.Size = new System.Drawing.Size(130, 409);
             this.ResumeLayout(false);
@@ -87,7 +89,7 @@ namespace SteelQuiz.Preferences
 
         #endregion
 
-        private PrefCategory prefs_troubleshooting;
-        private PrefCategory prefs_cleanUp;
+        private PrefCategoryItem prefs_troubleshooting;
+        private PrefCategoryItem prefs_cleanUp;
     }
 }

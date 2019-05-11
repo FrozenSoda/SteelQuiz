@@ -303,7 +303,7 @@ namespace SteelQuiz.QuizEditor
 
             if (--Program.QuizEditorsOpen == 0)
             {
-                if (returningToMainMenu)
+                if (returningToMainMenu || !ConfigManager.Config.QuizEditorConfig.CloseApplicationOnEditorClose)
                 {
                     Program.frmWelcome.Show();
                 }

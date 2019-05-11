@@ -85,7 +85,7 @@ namespace SteelQuiz.QuizPractise
             SetTheme();
         }
 
-        protected override void SetTheme()
+        public override void SetTheme()
         {
             base.SetTheme();
 

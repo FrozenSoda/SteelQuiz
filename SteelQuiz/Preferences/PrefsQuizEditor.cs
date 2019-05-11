@@ -18,30 +18,44 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SteelQuiz.Extensions
+namespace SteelQuiz.Preferences
 {
-    public static class ControlExtensions
+    public partial class PrefsQuizEditor : AutoThemeableUserControl, IPreferenceCategory
     {
-        public static IEnumerable<Control> GetAllChildrenRecursive(this Control control, Type type)
-        {
-            var controls = control.Controls.Cast<Control>();
+        public bool ConfigChanged { get; set; }
 
-            return controls.SelectMany(ctrl => GetAllChildrenRecursive(ctrl, type))
-                                      .Concat(controls)
-                                      .Where(c => c.GetType() == type);
+        public PrefsQuizEditor()
+        {
+            InitializeComponent();
+
+            LoadPreferences();
+            SetTheme();
         }
 
-        public static IEnumerable<Control> GetAllChildrenRecursive(this Control control)
+        public void LoadPreferences()
         {
-            var controls = control.Controls.Cast<Control>();
+            if (ConfigManager.Config.QuizEditorConfig.CloseApplicationOnEditorClose)
+            {
+                rdo_closeApp.Checked = true;
+            }
+            else
+            {
+                rdo_returnToWelcome.Checked = true;
+            }
+            ConfigChanged = false;
+        }
 
-            return controls.SelectMany(ctrl => GetAllChildrenRecursive(ctrl))
-                                      .Concat(controls);
+        private void Rdo_editorCloseBehaviour_CheckedChanged(object sender, EventArgs e)
+        {
+            ConfigChanged = true;
         }
     }
 }

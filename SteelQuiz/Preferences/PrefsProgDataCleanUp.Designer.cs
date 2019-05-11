@@ -60,6 +60,7 @@ namespace SteelQuiz.Preferences
             this.btn_cleanUp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.btn_cleanUp.FlatAppearance.BorderSize = 0;
             this.btn_cleanUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_cleanUp.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_cleanUp.ForeColor = System.Drawing.Color.White;
             this.btn_cleanUp.Location = new System.Drawing.Point(329, 347);
             this.btn_cleanUp.Name = "btn_cleanUp";
@@ -96,6 +97,7 @@ namespace SteelQuiz.Preferences
             this.btn_analyze.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.btn_analyze.FlatAppearance.BorderSize = 0;
             this.btn_analyze.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_analyze.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_analyze.ForeColor = System.Drawing.Color.White;
             this.btn_analyze.Location = new System.Drawing.Point(199, 347);
             this.btn_analyze.Name = "btn_analyze";

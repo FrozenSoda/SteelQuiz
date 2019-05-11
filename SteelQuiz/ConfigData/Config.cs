@@ -16,32 +16,26 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using SteelQuiz.ThemeManager;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
-namespace SteelQuiz.Extensions
+namespace SteelQuiz.ConfigData
 {
-    public static class ControlExtensions
+    public class Config
     {
-        public static IEnumerable<Control> GetAllChildrenRecursive(this Control control, Type type)
+        public string FileFormatVersion { get; set; }
+        public bool AcceptedTermsOfUse { get; set; } = false;
+        public Guid LastQuiz { get; set; } = Guid.Empty;
+        public ThemeCore.Theme Theme { get; set; } = ThemeCore.Theme.Light;
+        public QuizEditorConfig QuizEditorConfig { get; set; } = new QuizEditorConfig();
+
+        public Config()
         {
-            var controls = control.Controls.Cast<Control>();
-
-            return controls.SelectMany(ctrl => GetAllChildrenRecursive(ctrl, type))
-                                      .Concat(controls)
-                                      .Where(c => c.GetType() == type);
-        }
-
-        public static IEnumerable<Control> GetAllChildrenRecursive(this Control control)
-        {
-            var controls = control.Controls.Cast<Control>();
-
-            return controls.SelectMany(ctrl => GetAllChildrenRecursive(ctrl))
-                                      .Concat(controls);
+            FileFormatVersion = MetaData.QUIZ_FILE_FORMAT_VERSION;
         }
     }
 }

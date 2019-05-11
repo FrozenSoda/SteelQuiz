@@ -10,7 +10,7 @@ namespace SteelQuiz
 {
     public class AutoThemeableUserControl : UserControl
     {
-        protected virtual void SetTheme()
+        public virtual void SetTheme()
         {
             AutoTheme.AutoSetTheme(this);
         }

@@ -26,6 +26,7 @@ namespace SteelQuiz.Preferences
 {
     public interface IPreferenceCategory
     {
+        bool ConfigChanged { get; set; }
         void LoadPreferences();
     }
 }

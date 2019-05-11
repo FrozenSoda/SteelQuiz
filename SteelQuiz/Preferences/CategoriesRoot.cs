@@ -48,5 +48,10 @@ namespace SteelQuiz.Preferences
         {
             (ParentForm as Preferences).SwitchCategoryCollection(typeof(CategoriesMaintenance));
         }
+
+        private void Pcat_quizEditor_OnPrefSelected(object sender, EventArgs e)
+        {
+            (ParentForm as Preferences).SwitchCategory(typeof(PrefsQuizEditor));
+        }
     }
 }

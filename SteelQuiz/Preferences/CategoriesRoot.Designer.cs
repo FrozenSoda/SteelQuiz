@@ -46,39 +46,53 @@ namespace SteelQuiz.Preferences
         /// </summary>
         private void InitializeComponent()
         {
-            this.prefs_maintenance = new SteelQuiz.PrefCategory();
-            this.prefs_general = new SteelQuiz.PrefCategory();
+            this.pcat_maintenance = new SteelQuiz.PrefCategoryItem();
+            this.pcat_general = new SteelQuiz.PrefCategoryItem();
+            this.pcat_quizEditor = new SteelQuiz.PrefCategoryItem();
             this.SuspendLayout();
             // 
-            // prefs_maintenance
+            // pcat_maintenance
             // 
-            this.prefs_maintenance.Location = new System.Drawing.Point(0, 48);
-            this.prefs_maintenance.Name = "prefs_maintenance";
-            this.prefs_maintenance.PrefText = "Maintenance >";
-            this.prefs_maintenance.Selectable = false;
-            this.prefs_maintenance.Selected = false;
-            this.prefs_maintenance.Size = new System.Drawing.Size(130, 29);
-            this.prefs_maintenance.TabIndex = 13;
-            this.prefs_maintenance.OnPrefSelected += new System.EventHandler(this.Prefs_maintenance_OnPrefSelected);
+            this.pcat_maintenance.Location = new System.Drawing.Point(0, 83);
+            this.pcat_maintenance.Name = "pcat_maintenance";
+            this.pcat_maintenance.PrefText = "Maintenance >";
+            this.pcat_maintenance.Selectable = false;
+            this.pcat_maintenance.Selected = false;
+            this.pcat_maintenance.Size = new System.Drawing.Size(130, 29);
+            this.pcat_maintenance.TabIndex = 13;
+            this.pcat_maintenance.OnPrefSelected += new System.EventHandler(this.Prefs_maintenance_OnPrefSelected);
             // 
-            // prefs_general
+            // pcat_general
             // 
-            this.prefs_general.Location = new System.Drawing.Point(0, 13);
-            this.prefs_general.Name = "prefs_general";
-            this.prefs_general.PrefText = "General";
-            this.prefs_general.Selectable = true;
-            this.prefs_general.Selected = true;
-            this.prefs_general.Size = new System.Drawing.Size(130, 29);
-            this.prefs_general.TabIndex = 12;
-            this.prefs_general.OnPrefSelected += new System.EventHandler(this.Prefs_general_OnPrefSelected);
+            this.pcat_general.Location = new System.Drawing.Point(0, 13);
+            this.pcat_general.Name = "pcat_general";
+            this.pcat_general.PrefText = "General";
+            this.pcat_general.Selectable = true;
+            this.pcat_general.Selected = true;
+            this.pcat_general.Size = new System.Drawing.Size(130, 29);
+            this.pcat_general.TabIndex = 12;
+            this.pcat_general.OnPrefSelected += new System.EventHandler(this.Prefs_general_OnPrefSelected);
+            // 
+            // pcat_quizEditor
+            // 
+            this.pcat_quizEditor.Location = new System.Drawing.Point(0, 48);
+            this.pcat_quizEditor.Name = "pcat_quizEditor";
+            this.pcat_quizEditor.PrefText = "Quiz Editor";
+            this.pcat_quizEditor.Selectable = true;
+            this.pcat_quizEditor.Selected = false;
+            this.pcat_quizEditor.Size = new System.Drawing.Size(130, 29);
+            this.pcat_quizEditor.TabIndex = 14;
+            this.pcat_quizEditor.OnPrefSelected += new System.EventHandler(this.Pcat_quizEditor_OnPrefSelected);
             // 
             // CategoriesRoot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
-            this.Controls.Add(this.prefs_maintenance);
-            this.Controls.Add(this.prefs_general);
+            this.Controls.Add(this.pcat_quizEditor);
+            this.Controls.Add(this.pcat_maintenance);
+            this.Controls.Add(this.pcat_general);
+            this.Location = new System.Drawing.Point(0, 0);
             this.Name = "CategoriesRoot";
             this.Size = new System.Drawing.Size(130, 409);
             this.ResumeLayout(false);
@@ -87,7 +101,8 @@ namespace SteelQuiz.Preferences
 
         #endregion
 
-        private PrefCategory prefs_maintenance;
-        private PrefCategory prefs_general;
+        private PrefCategoryItem pcat_maintenance;
+        private PrefCategoryItem pcat_general;
+        private PrefCategoryItem pcat_quizEditor;
     }
 }

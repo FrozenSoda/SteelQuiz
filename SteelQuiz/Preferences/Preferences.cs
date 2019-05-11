@@ -16,6 +16,7 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using SteelQuiz.Extensions;
 using SteelQuiz.ThemeManager.Colors;
 using System;
 using System.Collections.Generic;
@@ -31,9 +32,11 @@ namespace SteelQuiz.Preferences
 {
     public partial class Preferences : AutoThemeableForm
     {
+        public PrefCategoryItem lastSelectedCategory = null;
+
         private PreferencesTheme PreferencesTheme = new PreferencesTheme();
 
-        public Preferences()
+        public Preferences(Type selectedCategory = null, Type selectedCategoryCollection = null)
         {
             InitializeComponent();
             pnl_prefs.Controls.Add(new PrefsGeneral());
@@ -42,9 +45,28 @@ namespace SteelQuiz.Preferences
             catRoot.Show();
 
             SetTheme();
+
+            if (selectedCategory != null)
+            {
+                SwitchCategoryCollection(selectedCategoryCollection);
+                SwitchCategory(selectedCategory);
+            }
         }
 
-        protected override void SetTheme()
+        private bool ConfigChanged()
+        {
+            foreach (var pcat in pnl_prefs.Controls.OfType<IPreferenceCategory>())
+            {
+                if (pcat.ConfigChanged)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public override void SetTheme()
         {
             base.SetTheme();
 
@@ -70,6 +92,19 @@ namespace SteelQuiz.Preferences
 
                     Program.frmWelcome.SetTheme();
                 }
+                else if (_prefs is PrefsQuizEditor)
+                {
+                    var prefs = _prefs as PrefsQuizEditor;
+
+                    if (prefs.rdo_closeApp.Checked)
+                    {
+                        ConfigManager.Config.QuizEditorConfig.CloseApplicationOnEditorClose = true;
+                    }
+                    else
+                    {
+                        ConfigManager.Config.QuizEditorConfig.CloseApplicationOnEditorClose = false;
+                    }
+                }
             }
 
             ConfigManager.SaveConfig();
@@ -78,24 +113,24 @@ namespace SteelQuiz.Preferences
         public void SwitchCategoryCollection(Type category)
         {
             var found = false;
-            foreach (var cat in pnl_prefCategories.Controls.OfType<CategoryCollection>())
+            foreach (var pcatc in pnl_prefCategories.Controls.OfType<CategoryCollection>())
             {
-                if (cat.GetType() == category)
+                if (pcatc.GetType() == category)
                 {
-                    cat.Show();
-                    cat.BringToFront();
-                    cat.InvokeSelectedEvent();
+                    pcatc.Show();
+                    pcatc.BringToFront();
+                    pcatc.InvokeSelectedEvent();
                     found = true;
                 }
             }
 
             if (!found)
             {
-                var cat = (CategoryCollection)Activator.CreateInstance(category);
-                pnl_prefCategories.Controls.Add(cat);
-                cat.Show();
-                cat.BringToFront();
-                cat.InvokeSelectedEvent();
+                var pcatc = (CategoryCollection)Activator.CreateInstance(category);
+                pnl_prefCategories.Controls.Add(pcatc);
+                pcatc.Show();
+                pcatc.BringToFront();
+                pcatc.InvokeSelectedEvent();
             }
         }
 
@@ -109,6 +144,43 @@ namespace SteelQuiz.Preferences
 
         public void SwitchCategory(Type category)
         {
+            if (category == typeof(PrefsTroubleshooting))
+            {
+                if (ConfigChanged())
+                {
+                    var msg = MessageBox.Show("Config must be applied before proceeding to this section. Apply settings?", "Apply settings - SteelQuiz", MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question);
+                    if (msg == DialogResult.Yes)
+                    {
+                        Apply();
+                        DialogResult = DialogResult.OK;
+                        Program.frmWelcome.ShowPreferences(typeof(PrefsTroubleshooting), typeof(CategoriesMaintenance));
+                    }
+                    else
+                    {
+                        if (lastSelectedCategory != null)
+                        {
+                            lastSelectedCategory.Selected = true;
+                        }
+                    }
+                    return;
+                }
+
+                // select pref category item for this category, as it is required when the preferences window was reshown
+                foreach (var _prefCategoryItem in this.GetAllChildrenRecursive())
+                {
+                    var prefCategoryItem = _prefCategoryItem as PrefCategoryItem;
+                    if (prefCategoryItem != null)
+                    {
+                        if (prefCategoryItem.Name == "prefs_troubleshooting")
+                        {
+                            prefCategoryItem.SelectWithoutInvokeEvent();
+                            break;
+                        }
+                    }
+                }
+            }
+
             var found = false;
             foreach (var prefs in pnl_prefs.Controls.OfType<UserControl>())
             {

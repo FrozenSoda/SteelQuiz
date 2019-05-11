@@ -202,6 +202,14 @@ namespace SteelQuiz
             // disabled until update notification system is implemented
         }
 
+        public void CheckForUpdates()
+        {
+            tmr_chkUpdate.Stop();
+
+            AutoUpdater.CheckForUpdateEvent += AutoUpdaterOnCheckForUpdateEvent;
+            AutoUpdater.Start("https://raw.githubusercontent.com/steel9/SteelQuiz/master/Updater/update_meta.xml");
+        }
+
         private void AutoUpdaterOnCheckForUpdateEvent(UpdateInfoEventArgs args)
         {
             if (args != null)
@@ -228,16 +236,20 @@ namespace SteelQuiz
 
         private void Btn_chkUpdates_Click(object sender, EventArgs e)
         {
-            tmr_chkUpdate.Stop();
+            CheckForUpdates();
+        }
 
-            AutoUpdater.CheckForUpdateEvent += AutoUpdaterOnCheckForUpdateEvent;
-            AutoUpdater.Start("https://raw.githubusercontent.com/steel9/SteelQuiz/master/Updater/update_meta.xml");
+        public void ShowPreferences(Type selectedCategory = null, Type selectedCategoryCollection = null)
+        {
+            Program.frmPreferences?.Dispose();
+            this.Focus();
+            Program.frmPreferences = new Preferences.Preferences(selectedCategory, selectedCategoryCollection);
+            Program.frmPreferences.ShowDialog();
         }
 
         private void Btn_preferences_Click(object sender, EventArgs e)
         {
-            var pref = new Preferences.Preferences();
-            pref.ShowDialog();
+            ShowPreferences();
         }
     }
 }

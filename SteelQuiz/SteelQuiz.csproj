@@ -58,6 +58,7 @@
     <Compile Include="AutoThemeableUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ConfigData\QuizEditorConfig.cs" />
     <Compile Include="ConfigManager.cs" />
     <Compile Include="Extensions\ControlExtensions.cs" />
     <Compile Include="Preferences\CategoriesMaintenance.cs">
@@ -93,6 +94,18 @@
     </Compile>
     <Compile Include="Preferences\PrefsGeneral.Designer.cs">
       <DependentUpon>PrefsGeneral.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Preferences\PrefsQuizEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Preferences\PrefsQuizEditor.Designer.cs">
+      <DependentUpon>PrefsQuizEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Preferences\PrefsTroubleshooting.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Preferences\PrefsTroubleshooting.Designer.cs">
+      <DependentUpon>PrefsTroubleshooting.cs</DependentUpon>
     </Compile>
     <Compile Include="QuizData\Quiz.cs" />
     <Compile Include="QuizData\QuizRecoveryData.cs" />
@@ -219,7 +232,7 @@
     <Compile Include="QuizProgressData\QuizProgData.cs" />
     <Compile Include="QuizProgressData\WordProgData.cs" />
     <Compile Include="QuizCore.cs" />
-    <Compile Include="Config.cs" />
+    <Compile Include="ConfigData\Config.cs" />
     <Compile Include="QuizPractise\StringComp.cs" />
     <Compile Include="SUtil.cs" />
     <Compile Include="TermsOfUse.cs">
@@ -240,11 +253,11 @@
     <Compile Include="ThemeManager\Colors\WelcomeTheme.cs" />
     <Compile Include="ThemeManager\IThemeable.cs" />
     <Compile Include="ThemeManager\ThemeCore.cs" />
-    <Compile Include="Preferences\PrefCategory.cs">
+    <Compile Include="Preferences\PrefCategoryItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Preferences\PrefCategory.Designer.cs">
-      <DependentUpon>PrefCategory.cs</DependentUpon>
+    <Compile Include="Preferences\PrefCategoryItem.Designer.cs">
+      <DependentUpon>PrefCategoryItem.cs</DependentUpon>
     </Compile>
     <Compile Include="Welcome.cs">
       <SubType>Form</SubType>
@@ -269,6 +282,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Preferences\PrefsGeneral.resx">
       <DependentUpon>PrefsGeneral.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Preferences\PrefsQuizEditor.resx">
+      <DependentUpon>PrefsQuizEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Preferences\PrefsTroubleshooting.resx">
+      <DependentUpon>PrefsTroubleshooting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuizEditor\EditorNotification.resx">
       <DependentUpon>EditorNotification.cs</DependentUpon>
@@ -330,8 +349,8 @@
     <EmbeddedResource Include="TermsOfUse.resx">
       <DependentUpon>TermsOfUse.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Preferences\PrefCategory.resx">
-      <DependentUpon>PrefCategory.cs</DependentUpon>
+    <EmbeddedResource Include="Preferences\PrefCategoryItem.resx">
+      <DependentUpon>PrefCategoryItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Welcome.resx">
       <DependentUpon>Welcome.cs</DependentUpon>

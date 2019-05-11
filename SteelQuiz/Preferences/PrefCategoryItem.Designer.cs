@@ -18,7 +18,7 @@
 
 namespace SteelQuiz
 {
-    partial class PrefCategory
+    partial class PrefCategoryItem
     {
         /// <summary> 
         /// Required designer variable.
@@ -53,6 +53,7 @@ namespace SteelQuiz
             // lbl_text
             // 
             this.lbl_text.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.lbl_text.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_text.ForeColor = System.Drawing.Color.White;
             this.lbl_text.Location = new System.Drawing.Point(8, 0);
             this.lbl_text.Name = "lbl_text";

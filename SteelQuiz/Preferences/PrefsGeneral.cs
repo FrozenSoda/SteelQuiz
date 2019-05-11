@@ -32,7 +32,7 @@ namespace SteelQuiz.Preferences
 {
     public partial class PrefsGeneral : AutoThemeableUserControl, IPreferenceCategory
     {
-        private PreferencesTheme PreferencesTheme = new PreferencesTheme();
+        public bool ConfigChanged { get; set; }
 
         public PrefsGeneral()
         {
@@ -54,23 +54,12 @@ namespace SteelQuiz.Preferences
                     rdo_themeLight.Checked = true;
                     break;
             }
+            ConfigChanged = false;
         }
 
-        /*
-        public void SetTheme()
+        private void Rdo_theme_CheckedChanged(object sender, EventArgs e)
         {
-            BackColor = PreferencesTheme.GetBackColor();
-
-            foreach (var lbl in this.GetAllChildrenRecursive(typeof(Label)))
-            {
-                lbl.ForeColor = PreferencesTheme.GetMainLabelForeColor();
-            }
-
-            foreach (var rdo in this.GetAllChildrenRecursive(typeof(RadioButton)))
-            {
-                rdo.ForeColor = PreferencesTheme.GetMainLabelForeColor();
-            }
+            ConfigChanged = true;
         }
-        */
     }
 }

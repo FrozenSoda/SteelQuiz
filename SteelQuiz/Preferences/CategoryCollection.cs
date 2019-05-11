@@ -76,7 +76,7 @@ namespace SteelQuiz.Preferences
             (ParentForm as Preferences).PopCategoryCollection(this);
         }
 
-        protected override void SetTheme()
+        public override void SetTheme()
         {
             base.SetTheme();
 
@@ -89,17 +89,18 @@ namespace SteelQuiz.Preferences
 
         public void InvokeSelectedEvent()
         {
-            foreach (var cat in Controls.OfType<PrefCategory>())
+            foreach (var pcat in Controls.OfType<PrefCategoryItem>())
             {
-                if (cat.Selected)
+                if (pcat.Selected)
                 {
-                    cat.InvokePrefSelected();
+                    pcat.InvokePrefSelected();
                 }
             }
         }
 
         public new void Show()
         {
+            Location = new System.Drawing.Point(Width, Location.Y);
             base.Show();
 
             // animation

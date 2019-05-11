@@ -35,19 +35,17 @@ using System.Threading;
 
 namespace SteelQuiz.Preferences
 {
-    public partial class PrefsProgDataCleanUp : AutoThemeableUserControl, IPreferenceCategory
+    public partial class PrefsProgDataCleanUp : AutoThemeableUserControl
     {
-        private PreferencesTheme PreferencesTheme = new PreferencesTheme();
 
         public PrefsProgDataCleanUp()
         {
             InitializeComponent();
 
-            LoadPreferences();
             SetTheme();
         }
 
-        protected override void SetTheme()
+        public override void SetTheme()
         {
             base.SetTheme();
 
@@ -59,11 +57,6 @@ namespace SteelQuiz.Preferences
             {
                 lbl_analysisResult.ForeColor = Color.FromArgb(0, 191, 255);
             }
-        }
-
-        public void LoadPreferences()
-        {
-            
         }
 
         private void Btn_analyze_Click(object sender, EventArgs e)

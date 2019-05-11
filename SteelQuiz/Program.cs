@@ -34,6 +34,7 @@ namespace SteelQuiz
 
         public static Welcome frmWelcome = null;
         public static InQuiz frmInQuiz = null;
+        public static Preferences.Preferences frmPreferences = null;
 
         public static int QuizEditorsOpen { get; set; } = 0;
 

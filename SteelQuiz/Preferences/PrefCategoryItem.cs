@@ -29,7 +29,7 @@ using SteelQuiz.ThemeManager.Colors;
 
 namespace SteelQuiz
 {
-    public partial class PrefCategory : UserControl, ThemeManager.IThemeable
+    public partial class PrefCategoryItem : UserControl, ThemeManager.IThemeable
     {
         private PreferencesTheme PreferencesTheme = new PreferencesTheme();
 
@@ -56,30 +56,17 @@ namespace SteelQuiz
                 // update color and eventually call selected events
                 if (value)
                 {
-                    this.lbl_text.BackColor = PreferencesTheme.GetPrefSelectedBackColor();
-                    this.lbl_selectedIndicator.BackColor = Color.FromArgb(255, 128, 0);
-
-                    if (Parent != null)
-                    {
-                        // deselect other categories
-                        foreach (var cat in Parent.Controls.OfType<PrefCategory>())
-                        {
-                            if (cat != this)
-                            {
-                                cat.Selected = false;
-                            }
-                        }
-                    }
+                    SelectWithoutInvokeEvent();
+                    _selected = value;
 
                     InvokePrefSelected();
                 }
                 else
                 {
+                    _selected = value;
                     this.lbl_text.BackColor = PreferencesTheme.GetPrefBackColor();
                     this.lbl_selectedIndicator.BackColor = PreferencesTheme.GetPrefBackColor();
                 }
-
-                _selected = value;
             }
         }
 
@@ -96,10 +83,36 @@ namespace SteelQuiz
             }
         }
 
-        public PrefCategory()
+        public PrefCategoryItem()
         {
             InitializeComponent();
             SetTheme();
+        }
+
+        public void SelectWithoutInvokeEvent()
+        {
+            if (_selected)
+            {
+                return;
+            }
+
+            _selected = true;
+
+            this.lbl_text.BackColor = PreferencesTheme.GetPrefSelectedBackColor();
+            this.lbl_selectedIndicator.BackColor = Color.FromArgb(255, 128, 0);
+
+            if (Parent != null)
+            {
+                // deselect other categories
+                foreach (var pcat in Parent.Controls.OfType<PrefCategoryItem>())
+                {
+                    if (pcat != this && pcat.Selected)
+                    {
+                        (this.ParentForm as Preferences.Preferences).lastSelectedCategory = pcat;
+                        pcat.Selected = false;
+                    }
+                }
+            }
         }
 
         public void InvokePrefSelected()

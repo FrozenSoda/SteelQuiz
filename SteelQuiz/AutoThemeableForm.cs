@@ -10,7 +10,7 @@ namespace SteelQuiz
 {
     public class AutoThemeableForm : Form
     {
-        protected virtual void SetTheme()
+        public virtual void SetTheme()
         {
             AutoTheme.AutoSetTheme(this);
         }
