@@ -79,6 +79,7 @@
             this.btn_update.TabIndex = 5;
             this.btn_update.Text = "Please wait...";
             this.btn_update.UseVisualStyleBackColor = false;
+            this.btn_update.Click += new System.EventHandler(this.Btn_update_Click);
             // 
             // label1
             // 

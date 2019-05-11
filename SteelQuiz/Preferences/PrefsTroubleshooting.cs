@@ -110,5 +110,10 @@ namespace SteelQuiz.Preferences
                 }
             }
         }
+
+        private void Btn_update_Click(object sender, EventArgs e)
+        {
+            AutoUpdater.Start("https://raw.githubusercontent.com/steel9/SteelQuiz/master/Updater/update_meta.xml");
+        }
     }
 }
