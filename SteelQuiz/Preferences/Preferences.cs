@@ -16,6 +16,7 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using SteelQuiz.ThemeManager.Colors;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,12 +29,27 @@ using System.Windows.Forms;
 
 namespace SteelQuiz.Preferences
 {
-    public partial class Preferences : Form
+    public partial class Preferences : Form, ThemeManager.IThemeable
     {
         public Preferences()
         {
             InitializeComponent();
             pnl_prefs.Controls.Add(new PrefsUI());
+
+            SetTheme();
+        }
+
+        public void SetTheme()
+        {
+            BackColor = PreferencesTheme.GetBackColor();
+
+            btn_apply.BackColor = PreferencesTheme.GetButtonBackColor();
+            btn_cancel.BackColor = PreferencesTheme.GetButtonBackColor();
+
+            btn_apply.ForeColor = PreferencesTheme.GetButtonForeColor();
+            btn_cancel.ForeColor = PreferencesTheme.GetButtonForeColor();
+
+            pnl_prefCategories.BackColor = PreferencesTheme.GetPrefCatPanelBackColor();
         }
 
         private void Apply()

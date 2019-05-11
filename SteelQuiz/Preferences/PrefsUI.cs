@@ -25,15 +25,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SteelQuiz.ThemeManager.Colors;
+using SteelQuiz.Extensions;
 
 namespace SteelQuiz.Preferences
 {
-    public partial class PrefsUI : UserControl
+    public partial class PrefsUI : UserControl, IPreferenceCategory, ThemeManager.IThemeable
     {
         public PrefsUI()
         {
             InitializeComponent();
-            
+
+            LoadPreferences();
+            SetTheme();
+        }
+
+        public void LoadPreferences()
+        {
             switch (ConfigManager.Config.Theme)
             {
                 case ThemeManager.ThemeCore.Theme.Dark:
@@ -43,6 +51,16 @@ namespace SteelQuiz.Preferences
                 case ThemeManager.ThemeCore.Theme.Light:
                     rdo_themeLight.Checked = true;
                     break;
+            }
+        }
+
+        public void SetTheme()
+        {
+            BackColor = PreferencesTheme.GetBackColor();
+
+            foreach (var lbl in this.GetAllChildrenRecursive(typeof(Label)))
+            {
+                lbl.BackColor = 
             }
         }
     }

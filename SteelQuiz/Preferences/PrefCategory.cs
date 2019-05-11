@@ -29,7 +29,7 @@ using SteelQuiz.ThemeManager.Colors;
 
 namespace SteelQuiz
 {
-    public partial class PrefCategory : UserControl
+    public partial class PrefCategory : UserControl, ThemeManager.IThemeable
     {
         public event EventHandler OnPrefSelected;
 
@@ -52,7 +52,7 @@ namespace SteelQuiz
                 // update color
                 if (value)
                 {
-                    this.lbl_text.BackColor = ThemeColor.GetPreferenceSelectedBackColor();
+                    this.lbl_text.BackColor = PreferencesTheme.GetPrefSelectedBackColor();
                     this.lbl_selectedIndicator.BackColor = Color.FromArgb(255, 128, 0);
 
                     if (Parent != null)
@@ -71,8 +71,8 @@ namespace SteelQuiz
                 }
                 else
                 {
-                    this.lbl_text.BackColor = ThemeColor.GetPreferenceBackColor();
-                    this.lbl_selectedIndicator.BackColor = ThemeColor.GetPreferenceBackColor();
+                    this.lbl_text.BackColor = PreferencesTheme.GetPrefBackColor();
+                    this.lbl_selectedIndicator.BackColor = PreferencesTheme.GetPrefBackColor();
                 }
 
                 _selected = value;
@@ -95,18 +95,25 @@ namespace SteelQuiz
         public PrefCategory()
         {
             InitializeComponent();
+            SetTheme();
+        }
+
+        public void SetTheme()
+        {
+            lbl_text.BackColor = PreferencesTheme.GetPrefBackColor();
+            lbl_text.ForeColor = PreferencesTheme.GetPrefForeColor();
         }
 
         private void StartHover()
         {
             if (Selected)
             {
-                this.lbl_text.BackColor = ThemeColor.GetPreferenceSelectedHoverBackColor();
+                this.lbl_text.BackColor = PreferencesTheme.GetPrefSelectedHoverBackColor();
             }
             else
             {
-                this.lbl_text.BackColor = ThemeColor.GetPreferenceHoverBackColor();
-                this.lbl_selectedIndicator.BackColor = ThemeColor.GetPreferenceHoverBackColor();
+                this.lbl_text.BackColor = PreferencesTheme.GetPreferenceHoverBackColor();
+                this.lbl_selectedIndicator.BackColor = PreferencesTheme.GetPreferenceHoverBackColor();
             }
         }
 
@@ -114,12 +121,12 @@ namespace SteelQuiz
         {
             if (Selected)
             {
-                this.lbl_text.BackColor = ThemeColor.GetPreferenceSelectedBackColor();
+                this.lbl_text.BackColor = PreferencesTheme.GetPrefSelectedBackColor();
             }
             else
             {
-                this.lbl_text.BackColor = ThemeColor.GetPreferenceBackColor();
-                this.lbl_selectedIndicator.BackColor = ThemeColor.GetPreferenceBackColor();
+                this.lbl_text.BackColor = PreferencesTheme.GetPrefBackColor();
+                this.lbl_selectedIndicator.BackColor = PreferencesTheme.GetPrefBackColor();
             }
         }
 

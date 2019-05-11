@@ -35,7 +35,7 @@ using SteelQuiz.ThemeManager.Colors;
 
 namespace SteelQuiz
 {
-    public partial class Welcome : Form
+    public partial class Welcome : Form, ThemeManager.IThemeable
     {
         public Welcome()
         {

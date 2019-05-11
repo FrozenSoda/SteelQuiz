@@ -19,14 +19,14 @@ namespace SteelQuiz
                 {
                     if (control.BackColor == Color.FromArgb(80, 80, 80))
                     {
-                        control.BackColor = ThemeColor.GetButtonBackColor();
+                        control.BackColor = GeneralTheme.GetButtonBackColor();
                     }
                 }
                 else
                 {
                     if (control.BackColor == Color.FromArgb(60, 60, 60))
                     {
-                        control.BackColor = ThemeColor.GetBackColor();
+                        control.BackColor = GeneralTheme.GetBackColor();
                     }
                 }
             }

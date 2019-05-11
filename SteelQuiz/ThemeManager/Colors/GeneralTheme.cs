@@ -8,9 +8,9 @@ using static SteelQuiz.ThemeManager.ThemeCore;
 
 namespace SteelQuiz.ThemeManager.Colors
 {
-    public static partial class ThemeColor
+    public class GeneralTheme
     {
-        public static Color GetBackColor()
+        public virtual Color GetBackColor()
         {
             if (ConfigManager.Config == null || ConfigManager.Config.Theme == Theme.Dark)
             {
@@ -22,7 +22,7 @@ namespace SteelQuiz.ThemeManager.Colors
             }
         }
 
-        public static Color GetButtonBackColor()
+        public virtual Color GetButtonBackColor()
         {
             if (ConfigManager.Config == null || ConfigManager.Config.Theme == Theme.Dark)
             {
@@ -31,6 +31,18 @@ namespace SteelQuiz.ThemeManager.Colors
             else
             {
                 return Color.FromArgb(192, 192, 192);
+            }
+        }
+
+        public virtual Color GetButtonForeColor()
+        {
+            if (ConfigManager.Config == null || ConfigManager.Config.Theme == Theme.Dark)
+            {
+                return Color.FromArgb(255, 255, 255);
+            }
+            else
+            {
+                return Color.FromArgb(0, 0, 0);
             }
         }
     }

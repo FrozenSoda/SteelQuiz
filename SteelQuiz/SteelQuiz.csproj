@@ -56,6 +56,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigManager.cs" />
+    <Compile Include="Extensions\ControlExtensions.cs" />
+    <Compile Include="Preferences\IPreferenceCategory.cs" />
     <Compile Include="Preferences\Preferences.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -208,9 +210,10 @@
     <Compile Include="ThemedForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ThemeManager\Colors\General.cs" />
-    <Compile Include="ThemeManager\Colors\Preferences.cs" />
+    <Compile Include="ThemeManager\Colors\GeneralTheme.cs" />
+    <Compile Include="ThemeManager\Colors\PreferencesTheme.cs" />
     <Compile Include="ThemeManager\Colors\WelcomeTheme.cs" />
+    <Compile Include="ThemeManager\IThemeable.cs" />
     <Compile Include="ThemeManager\ThemeCore.cs" />
     <Compile Include="Preferences\PrefCategory.cs">
       <SubType>UserControl</SubType>

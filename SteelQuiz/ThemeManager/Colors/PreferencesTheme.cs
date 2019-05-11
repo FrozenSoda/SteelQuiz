@@ -26,9 +26,24 @@ using static SteelQuiz.ThemeManager.ThemeCore;
 
 namespace SteelQuiz.ThemeManager.Colors
 {
-    public static partial class ThemeColor
+    public static class PreferencesTheme
     {
-        public static Color GetPreferenceBackColor()
+        public static Color GetBackColor()
+        {
+            return GeneralTheme.GetBackColor();
+        }
+
+        public static Color GetButtonBackColor()
+        {
+            return GeneralTheme.GetButtonBackColor();
+        }
+
+        public static Color GetButtonForeColor()
+        {
+            return GeneralTheme.GetButtonForeColor();
+        }
+
+        public static Color GetPrefCatPanelBackColor()
         {
             if (ConfigManager.Config == null || ConfigManager.Config.Theme == Theme.Dark)
             {
@@ -36,11 +51,28 @@ namespace SteelQuiz.ThemeManager.Colors
             }
             else
             {
-                throw new NotImplementedException();
+                return Color.FromArgb(214, 214, 214);
             }
         }
 
-        public static Color GetPreferenceSelectedBackColor()
+        public static Color GetPrefBackColor()
+        {
+            if (ConfigManager.Config == null || ConfigManager.Config.Theme == Theme.Dark)
+            {
+                return Color.FromArgb(70, 70, 70);
+            }
+            else
+            {
+                return Color.FromArgb(214, 214, 214);
+            }
+        }
+
+        public static Color GetPrefForeColor()
+        {
+            return GetButtonForeColor();
+        }
+
+        public static Color GetPrefSelectedBackColor()
         {
             if (ConfigManager.Config == null || ConfigManager.Config.Theme == Theme.Dark)
             {
@@ -48,7 +80,7 @@ namespace SteelQuiz.ThemeManager.Colors
             }
             else
             {
-                throw new NotImplementedException();
+                return Color.FromArgb(204, 204, 204);
             }
         }
 
@@ -60,11 +92,11 @@ namespace SteelQuiz.ThemeManager.Colors
             }
             else
             {
-                throw new NotImplementedException();
+                return Color.FromArgb(209, 209, 209);
             }
         }
 
-        public static Color GetPreferenceSelectedHoverBackColor()
+        public static Color GetPrefSelectedHoverBackColor()
         {
             if (ConfigManager.Config == null || ConfigManager.Config.Theme == Theme.Dark)
             {
@@ -72,7 +104,7 @@ namespace SteelQuiz.ThemeManager.Colors
             }
             else
             {
-                throw new NotImplementedException();
+                return Color.FromArgb(199, 199, 199);
             }
         }
     }
