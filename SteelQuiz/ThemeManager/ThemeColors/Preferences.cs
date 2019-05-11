@@ -22,10 +22,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using static SteelQuiz.ThemeManager.ThemeCore;
 
-namespace SteelQuiz.ThemeManager
+namespace SteelQuiz.ThemeManager.ThemeColors
 {
-    public static partial class ThemeCore
+    public static partial class Colors
     {
         public static Color GetPreferenceBackColor()
         {

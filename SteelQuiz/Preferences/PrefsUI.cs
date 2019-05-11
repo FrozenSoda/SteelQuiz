@@ -33,6 +33,17 @@ namespace SteelQuiz.Preferences
         public PrefsUI()
         {
             InitializeComponent();
+            
+            switch (ConfigManager.Config.Theme)
+            {
+                case ThemeManager.ThemeCore.Theme.Dark:
+                    rdo_themeDark.Checked = true;
+                    break;
+
+                case ThemeManager.ThemeCore.Theme.Light:
+                    rdo_themeLight.Checked = true;
+                    break;
+            }
         }
     }
 }

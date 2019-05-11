@@ -24,7 +24,7 @@ using System.Threading.Tasks;
 
 namespace SteelQuiz.ThemeManager
 {
-    public static partial class ThemeCore
+    public static class ThemeCore
     {
         public enum Theme
         {
