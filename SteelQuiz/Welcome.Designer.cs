@@ -57,6 +57,7 @@ namespace SteelQuiz
             this.btn_continueLast = new System.Windows.Forms.Button();
             this.tmr_chkUpdate = new System.Windows.Forms.Timer(this.components);
             this.btn_chkUpdates = new System.Windows.Forms.Button();
+            this.btn_preferences = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbl_welcome
@@ -159,7 +160,7 @@ namespace SteelQuiz
             this.btn_chkUpdates.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_chkUpdates.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_chkUpdates.ForeColor = System.Drawing.Color.White;
-            this.btn_chkUpdates.Location = new System.Drawing.Point(670, 415);
+            this.btn_chkUpdates.Location = new System.Drawing.Point(546, 415);
             this.btn_chkUpdates.Name = "btn_chkUpdates";
             this.btn_chkUpdates.Size = new System.Drawing.Size(118, 23);
             this.btn_chkUpdates.TabIndex = 6;
@@ -167,12 +168,28 @@ namespace SteelQuiz
             this.btn_chkUpdates.UseVisualStyleBackColor = false;
             this.btn_chkUpdates.Click += new System.EventHandler(this.Btn_chkUpdates_Click);
             // 
+            // btn_preferences
+            // 
+            this.btn_preferences.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.btn_preferences.FlatAppearance.BorderSize = 0;
+            this.btn_preferences.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_preferences.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_preferences.ForeColor = System.Drawing.Color.White;
+            this.btn_preferences.Location = new System.Drawing.Point(670, 415);
+            this.btn_preferences.Name = "btn_preferences";
+            this.btn_preferences.Size = new System.Drawing.Size(118, 23);
+            this.btn_preferences.TabIndex = 7;
+            this.btn_preferences.Text = "Preferences";
+            this.btn_preferences.UseVisualStyleBackColor = false;
+            this.btn_preferences.Click += new System.EventHandler(this.Btn_preferences_Click);
+            // 
             // Welcome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btn_preferences);
             this.Controls.Add(this.btn_chkUpdates);
             this.Controls.Add(this.btn_continueLast);
             this.Controls.Add(this.lbl_copyright);
@@ -203,6 +220,7 @@ namespace SteelQuiz
         private System.Windows.Forms.Button btn_continueLast;
         private System.Windows.Forms.Timer tmr_chkUpdate;
         private System.Windows.Forms.Button btn_chkUpdates;
+        private System.Windows.Forms.Button btn_preferences;
     }
 }
 

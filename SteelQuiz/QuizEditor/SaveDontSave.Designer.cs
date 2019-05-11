@@ -58,6 +58,7 @@ namespace SteelQuiz.QuizEditor
             // lbl_msg
             // 
             this.lbl_msg.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_msg.ForeColor = System.Drawing.Color.White;
             this.lbl_msg.Location = new System.Drawing.Point(78, 12);
             this.lbl_msg.Name = "lbl_msg";
             this.lbl_msg.Size = new System.Drawing.Size(314, 36);
@@ -66,12 +67,16 @@ namespace SteelQuiz.QuizEditor
             // 
             // btn_save
             // 
+            this.btn_save.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.btn_save.FlatAppearance.BorderSize = 0;
+            this.btn_save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_save.ForeColor = System.Drawing.Color.White;
             this.btn_save.Location = new System.Drawing.Point(12, 81);
             this.btn_save.Name = "btn_save";
             this.btn_save.Size = new System.Drawing.Size(115, 23);
             this.btn_save.TabIndex = 0;
             this.btn_save.Text = "Save";
-            this.btn_save.UseVisualStyleBackColor = true;
+            this.btn_save.UseVisualStyleBackColor = false;
             this.btn_save.Click += new System.EventHandler(this.Btn_save_Click);
             // 
             // pic_icon
@@ -85,28 +90,37 @@ namespace SteelQuiz.QuizEditor
             // 
             // btn_doNotSave
             // 
+            this.btn_doNotSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.btn_doNotSave.Enabled = false;
+            this.btn_doNotSave.FlatAppearance.BorderSize = 0;
+            this.btn_doNotSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_doNotSave.ForeColor = System.Drawing.Color.White;
             this.btn_doNotSave.Location = new System.Drawing.Point(133, 81);
             this.btn_doNotSave.Name = "btn_doNotSave";
             this.btn_doNotSave.Size = new System.Drawing.Size(115, 23);
             this.btn_doNotSave.TabIndex = 3;
             this.btn_doNotSave.Text = "Do not save";
-            this.btn_doNotSave.UseVisualStyleBackColor = true;
+            this.btn_doNotSave.UseVisualStyleBackColor = false;
             this.btn_doNotSave.Click += new System.EventHandler(this.Btn_doNotSave_Click);
             // 
             // btn_cancel
             // 
+            this.btn_cancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.btn_cancel.FlatAppearance.BorderSize = 0;
+            this.btn_cancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_cancel.ForeColor = System.Drawing.Color.White;
             this.btn_cancel.Location = new System.Drawing.Point(277, 81);
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(115, 23);
             this.btn_cancel.TabIndex = 1;
             this.btn_cancel.Text = "Cancel";
-            this.btn_cancel.UseVisualStyleBackColor = true;
+            this.btn_cancel.UseVisualStyleBackColor = false;
             this.btn_cancel.Click += new System.EventHandler(this.Btn_cancel_Click);
             // 
             // chk_doNotSave
             // 
             this.chk_doNotSave.AutoSize = true;
+            this.chk_doNotSave.ForeColor = System.Drawing.Color.White;
             this.chk_doNotSave.Location = new System.Drawing.Point(81, 51);
             this.chk_doNotSave.Name = "chk_doNotSave";
             this.chk_doNotSave.Size = new System.Drawing.Size(144, 17);
@@ -119,7 +133,8 @@ namespace SteelQuiz.QuizEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(400, 112);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.ClientSize = new System.Drawing.Size(396, 108);
             this.ControlBox = false;
             this.Controls.Add(this.chk_doNotSave);
             this.Controls.Add(this.btn_cancel);

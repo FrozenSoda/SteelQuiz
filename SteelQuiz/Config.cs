@@ -29,6 +29,7 @@ namespace SteelQuiz
         public string FileFormatVersion { get; set; }
         public bool AcceptedTermsOfUse { get; set; } = false;
         public Guid LastQuiz { get; set; } = Guid.Empty;
+        public ThemeManager.Theme Theme { get; set; } = ThemeManager.Theme.Dark;
 
         public Config()
         {

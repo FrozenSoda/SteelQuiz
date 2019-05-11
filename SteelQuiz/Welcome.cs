@@ -204,5 +204,11 @@ namespace SteelQuiz
             AutoUpdater.CheckForUpdateEvent += AutoUpdaterOnCheckForUpdateEvent;
             AutoUpdater.Start("https://raw.githubusercontent.com/steel9/SteelQuiz/master/Updater/update_meta.xml");
         }
+
+        private void Btn_preferences_Click(object sender, EventArgs e)
+        {
+            var pref = new Preferences.Preferences();
+            pref.ShowDialog();
+        }
     }
 }
