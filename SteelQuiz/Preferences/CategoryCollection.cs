@@ -54,30 +54,22 @@ namespace SteelQuiz.Preferences
                     this.backButton.Text = "←";
                     this.backButton.UseVisualStyleBackColor = false;
                     Controls.Add(backButton);
-
-                    /*
-                    foreach (var prefCategory in Controls.OfType<PrefCategory>())
-                    {
-                        prefCategory.Location = new System.Drawing.Point(prefCategory.Location.X, prefCategory.Location.Y + 35);
-                    }
-                    */
                 }
                 else
                 {
                     backButton.Dispose();
-
-                    /*
-                    foreach (var prefCategory in Controls.OfType<PrefCategory>())
-                    {
-                        prefCategory.Location = new System.Drawing.Point(prefCategory.Location.X, prefCategory.Location.Y - 35);
-                    }
-                    */
+                    backButton = null;
                 }
                 _isSubCategory = value;
             }
         }
 
         private PreferencesTheme PreferencesTheme = new PreferencesTheme();
+
+        public CategoryCollection() : base()
+        {
+            Location = new System.Drawing.Point(Width, Location.Y);
+        }
 
         private void BackButton_Click(object sender, EventArgs e)
         {
@@ -111,14 +103,52 @@ namespace SteelQuiz.Preferences
             base.Show();
 
             // animation
+            var tmr = new System.Timers.Timer
+            {
+                Interval = 1,
+                SynchronizingObject = this
+            };
+            tmr.Elapsed += delegate
+            {
+                if (Location.X <= 0)
+                {
+                    Location = new System.Drawing.Point(0, Location.Y);
+                    tmr.Stop();
+                    return;
+                }
+                Location = new System.Drawing.Point(Location.X - 10, Location.Y);
+            };
+            tmr.Start();
         }
 
         public new void Hide()
         {
-            base.Hide();
+            Hide(false);
+        }
 
+        public void Hide(bool dispose = false)
+        {
             // animation
-
+            var tmr = new System.Timers.Timer
+            {
+                Interval = 1,
+                SynchronizingObject = this
+            };
+            tmr.Elapsed += delegate
+            {
+                if (Location.X >= Width)
+                {
+                    tmr.Stop();
+                    base.Hide();
+                    if (dispose)
+                    {
+                        base.Dispose();
+                    }
+                    return;
+                }
+                Location = new System.Drawing.Point(Location.X + 10, Location.Y);
+            };
+            tmr.Start();
         }
     }
 }

@@ -37,7 +37,9 @@ namespace SteelQuiz.Preferences
         {
             InitializeComponent();
             pnl_prefs.Controls.Add(new PrefsGeneral());
-            pnl_prefCategories.Controls.Add(new CategoriesRoot());
+            var catRoot = new CategoriesRoot();
+            pnl_prefCategories.Controls.Add(catRoot);
+            catRoot.Show();
 
             SetTheme();
         }
@@ -91,6 +93,7 @@ namespace SteelQuiz.Preferences
             {
                 var cat = (CategoryCollection)Activator.CreateInstance(category);
                 pnl_prefCategories.Controls.Add(cat);
+                cat.Show();
                 cat.BringToFront();
                 cat.InvokeSelectedEvent();
             }
@@ -98,9 +101,9 @@ namespace SteelQuiz.Preferences
 
         public void PopCategoryCollection(CategoryCollection categoryCollection)
         {
-            categoryCollection.Dispose();
             var collections = pnl_prefCategories.Controls.OfType<CategoryCollection>();
             var currCollection = collections.ElementAt(collections.Count() - 1);
+            categoryCollection.Hide(true);
             currCollection.InvokeSelectedEvent();
         }
 
