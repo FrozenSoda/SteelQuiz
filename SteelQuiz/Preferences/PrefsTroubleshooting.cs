@@ -18,6 +18,7 @@ namespace SteelQuiz.Preferences
             InitializeComponent();
 
             SetTheme();
+            this.Enabled = false;
             CheckForUpdates();
         }
 
@@ -59,6 +60,12 @@ namespace SteelQuiz.Preferences
             }
             AutoUpdater.CheckForUpdateEvent -= AutoUpdaterOnCheckForUpdateEvent;
             Program.frmWelcome.tmr_chkUpdate.Start();
+            this.Invoke(new Action(() =>
+            {
+                this.Enabled = true;
+                btn_resetAppConfig.Text = "Continue";
+                btn_resetProgData.Text = "Continue";
+            }));
         }
 
         private void Btn_resetAppConfig_Click(object sender, EventArgs e)

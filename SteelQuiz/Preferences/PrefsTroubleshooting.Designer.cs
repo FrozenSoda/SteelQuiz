@@ -77,7 +77,7 @@
             this.btn_update.Name = "btn_update";
             this.btn_update.Size = new System.Drawing.Size(124, 40);
             this.btn_update.TabIndex = 5;
-            this.btn_update.Text = "Searching for updates...";
+            this.btn_update.Text = "Please wait...";
             this.btn_update.UseVisualStyleBackColor = false;
             // 
             // label1
@@ -111,7 +111,7 @@
             this.btn_resetProgData.Name = "btn_resetProgData";
             this.btn_resetProgData.Size = new System.Drawing.Size(124, 40);
             this.btn_resetProgData.TabIndex = 5;
-            this.btn_resetProgData.Text = "Continue";
+            this.btn_resetProgData.Text = "Please wait...";
             this.btn_resetProgData.UseVisualStyleBackColor = false;
             this.btn_resetProgData.Click += new System.EventHandler(this.Btn_resetProgData_Click);
             // 
@@ -146,7 +146,7 @@
             this.btn_resetAppConfig.Name = "btn_resetAppConfig";
             this.btn_resetAppConfig.Size = new System.Drawing.Size(124, 40);
             this.btn_resetAppConfig.TabIndex = 5;
-            this.btn_resetAppConfig.Text = "Continue";
+            this.btn_resetAppConfig.Text = "Please wait...";
             this.btn_resetAppConfig.UseVisualStyleBackColor = false;
             this.btn_resetAppConfig.Click += new System.EventHandler(this.Btn_resetAppConfig_Click);
             // 
