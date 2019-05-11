@@ -37,6 +37,7 @@ namespace SteelQuiz.Preferences
         {
             InitializeComponent();
             pnl_prefs.Controls.Add(new PrefsUI());
+            pnl_prefCategories.Controls.Add(new CategoriesRoot());
 
             SetTheme();
         }
@@ -78,7 +79,7 @@ namespace SteelQuiz.Preferences
             ConfigManager.SaveConfig();
         }
 
-        private void SwitchCategory(Type category)
+        public void SwitchCategory(Type category)
         {
             var found = false;
             foreach (var prefs in pnl_prefs.Controls.OfType<UserControl>())
@@ -109,16 +110,6 @@ namespace SteelQuiz.Preferences
         {
             Apply();
             DialogResult = DialogResult.OK;
-        }
-
-        private void Prefs_UI_OnPrefSelected(object sender, EventArgs e)
-        {
-            SwitchCategory(typeof(PrefsUI));
-        }
-
-        private void Prefs_updates_OnPrefSelected(object sender, EventArgs e)
-        {
-            SwitchCategory(typeof(PrefsProgDataCleanUp));
         }
     }
 }
