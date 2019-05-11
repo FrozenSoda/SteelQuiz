@@ -219,9 +219,9 @@ namespace SteelQuiz
         private System.Windows.Forms.OpenFileDialog ofd_loadQuiz;
         private System.Windows.Forms.Label lbl_copyright;
         private System.Windows.Forms.Button btn_continueLast;
-        private System.Windows.Forms.Timer tmr_chkUpdate;
         private System.Windows.Forms.Button btn_chkUpdates;
         private System.Windows.Forms.Button btn_preferences;
+        internal System.Windows.Forms.Timer tmr_chkUpdate;
     }
 }
 

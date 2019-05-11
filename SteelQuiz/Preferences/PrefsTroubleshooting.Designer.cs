@@ -29,18 +29,20 @@
         private void InitializeComponent()
         {
             this.lbl_welcome = new System.Windows.Forms.Label();
-            this.pnl_closeBehaviour = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.pnl_update = new System.Windows.Forms.Panel();
             this.btn_update = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pnl_resetProgData = new System.Windows.Forms.Panel();
+            this.btn_resetProgData = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
+            this.pnl_resetAppConfig = new System.Windows.Forms.Panel();
+            this.btn_resetAppConfig = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.pnl_closeBehaviour.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.flp_solutions = new System.Windows.Forms.FlowLayoutPanel();
+            this.pnl_update.SuspendLayout();
+            this.pnl_resetProgData.SuspendLayout();
+            this.pnl_resetAppConfig.SuspendLayout();
+            this.flp_solutions.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl_welcome
@@ -54,14 +56,29 @@
             this.lbl_welcome.Text = "Do you experience problems? Try any of these solutions";
             this.lbl_welcome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // pnl_closeBehaviour
+            // pnl_update
             // 
-            this.pnl_closeBehaviour.Controls.Add(this.btn_update);
-            this.pnl_closeBehaviour.Controls.Add(this.label1);
-            this.pnl_closeBehaviour.Location = new System.Drawing.Point(0, 58);
-            this.pnl_closeBehaviour.Name = "pnl_closeBehaviour";
-            this.pnl_closeBehaviour.Size = new System.Drawing.Size(652, 80);
-            this.pnl_closeBehaviour.TabIndex = 3;
+            this.pnl_update.Controls.Add(this.btn_update);
+            this.pnl_update.Controls.Add(this.label1);
+            this.pnl_update.Location = new System.Drawing.Point(3, 3);
+            this.pnl_update.Name = "pnl_update";
+            this.pnl_update.Size = new System.Drawing.Size(652, 80);
+            this.pnl_update.TabIndex = 3;
+            // 
+            // btn_update
+            // 
+            this.btn_update.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.btn_update.Enabled = false;
+            this.btn_update.FlatAppearance.BorderSize = 0;
+            this.btn_update.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_update.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_update.ForeColor = System.Drawing.Color.White;
+            this.btn_update.Location = new System.Drawing.Point(261, 31);
+            this.btn_update.Name = "btn_update";
+            this.btn_update.Size = new System.Drawing.Size(124, 40);
+            this.btn_update.TabIndex = 5;
+            this.btn_update.Text = "Searching for updates...";
+            this.btn_update.UseVisualStyleBackColor = false;
             // 
             // label1
             // 
@@ -74,42 +91,29 @@
             this.label1.Text = "Update SteelQuiz";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // btn_update
+            // pnl_resetProgData
             // 
-            this.btn_update.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.btn_update.FlatAppearance.BorderSize = 0;
-            this.btn_update.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_update.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_update.ForeColor = System.Drawing.Color.White;
-            this.btn_update.Location = new System.Drawing.Point(261, 31);
-            this.btn_update.Name = "btn_update";
-            this.btn_update.Size = new System.Drawing.Size(124, 40);
-            this.btn_update.TabIndex = 5;
-            this.btn_update.Text = "Continue";
-            this.btn_update.UseVisualStyleBackColor = false;
+            this.pnl_resetProgData.Controls.Add(this.btn_resetProgData);
+            this.pnl_resetProgData.Controls.Add(this.label2);
+            this.pnl_resetProgData.Location = new System.Drawing.Point(3, 89);
+            this.pnl_resetProgData.Name = "pnl_resetProgData";
+            this.pnl_resetProgData.Size = new System.Drawing.Size(652, 80);
+            this.pnl_resetProgData.TabIndex = 4;
             // 
-            // panel1
+            // btn_resetProgData
             // 
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Location = new System.Drawing.Point(0, 160);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(652, 80);
-            this.panel1.TabIndex = 4;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(261, 31);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(124, 40);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Continue";
-            this.button1.UseVisualStyleBackColor = false;
+            this.btn_resetProgData.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.btn_resetProgData.FlatAppearance.BorderSize = 0;
+            this.btn_resetProgData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_resetProgData.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_resetProgData.ForeColor = System.Drawing.Color.White;
+            this.btn_resetProgData.Location = new System.Drawing.Point(261, 31);
+            this.btn_resetProgData.Name = "btn_resetProgData";
+            this.btn_resetProgData.Size = new System.Drawing.Size(124, 40);
+            this.btn_resetProgData.TabIndex = 5;
+            this.btn_resetProgData.Text = "Continue";
+            this.btn_resetProgData.UseVisualStyleBackColor = false;
+            this.btn_resetProgData.Click += new System.EventHandler(this.Btn_resetProgData_Click);
             // 
             // label2
             // 
@@ -122,28 +126,29 @@
             this.label2.Text = "Reset progress data";
             this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // panel2
+            // pnl_resetAppConfig
             // 
-            this.panel2.Controls.Add(this.button2);
-            this.panel2.Controls.Add(this.label3);
-            this.panel2.Location = new System.Drawing.Point(0, 262);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(652, 80);
-            this.panel2.TabIndex = 5;
+            this.pnl_resetAppConfig.Controls.Add(this.btn_resetAppConfig);
+            this.pnl_resetAppConfig.Controls.Add(this.label3);
+            this.pnl_resetAppConfig.Location = new System.Drawing.Point(3, 175);
+            this.pnl_resetAppConfig.Name = "pnl_resetAppConfig";
+            this.pnl_resetAppConfig.Size = new System.Drawing.Size(652, 80);
+            this.pnl_resetAppConfig.TabIndex = 5;
             // 
-            // button2
+            // btn_resetAppConfig
             // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(261, 31);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(124, 40);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "Continue";
-            this.button2.UseVisualStyleBackColor = false;
+            this.btn_resetAppConfig.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.btn_resetAppConfig.FlatAppearance.BorderSize = 0;
+            this.btn_resetAppConfig.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_resetAppConfig.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_resetAppConfig.ForeColor = System.Drawing.Color.White;
+            this.btn_resetAppConfig.Location = new System.Drawing.Point(261, 31);
+            this.btn_resetAppConfig.Name = "btn_resetAppConfig";
+            this.btn_resetAppConfig.Size = new System.Drawing.Size(124, 40);
+            this.btn_resetAppConfig.TabIndex = 5;
+            this.btn_resetAppConfig.Text = "Continue";
+            this.btn_resetAppConfig.UseVisualStyleBackColor = false;
+            this.btn_resetAppConfig.Click += new System.EventHandler(this.Btn_resetAppConfig_Click);
             // 
             // label3
             // 
@@ -156,20 +161,29 @@
             this.label3.Text = "Reset application configuration";
             this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // flp_solutions
+            // 
+            this.flp_solutions.Controls.Add(this.pnl_update);
+            this.flp_solutions.Controls.Add(this.pnl_resetProgData);
+            this.flp_solutions.Controls.Add(this.pnl_resetAppConfig);
+            this.flp_solutions.Location = new System.Drawing.Point(0, 72);
+            this.flp_solutions.Name = "flp_solutions";
+            this.flp_solutions.Size = new System.Drawing.Size(652, 337);
+            this.flp_solutions.TabIndex = 6;
+            // 
             // PrefsTroubleshooting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.pnl_closeBehaviour);
+            this.Controls.Add(this.flp_solutions);
             this.Controls.Add(this.lbl_welcome);
             this.Name = "PrefsTroubleshooting";
             this.Size = new System.Drawing.Size(652, 409);
-            this.pnl_closeBehaviour.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
+            this.pnl_update.ResumeLayout(false);
+            this.pnl_resetProgData.ResumeLayout(false);
+            this.pnl_resetAppConfig.ResumeLayout(false);
+            this.flp_solutions.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -177,14 +191,15 @@
         #endregion
 
         private System.Windows.Forms.Label lbl_welcome;
-        private System.Windows.Forms.Panel pnl_closeBehaviour;
+        private System.Windows.Forms.Panel pnl_update;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btn_update;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Panel pnl_resetProgData;
+        private System.Windows.Forms.Button btn_resetProgData;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Panel pnl_resetAppConfig;
+        private System.Windows.Forms.Button btn_resetAppConfig;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.FlowLayoutPanel flp_solutions;
     }
 }
