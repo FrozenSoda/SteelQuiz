@@ -56,14 +56,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigManager.cs" />
-    <Compile Include="Preferences\PrefCategory_old.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Preferences\Preferences.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Preferences\Preferences.Designer.cs">
       <DependentUpon>Preferences.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Preferences\PrefsUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Preferences\PrefsUI.Designer.cs">
+      <DependentUpon>PrefsUI.cs</DependentUpon>
     </Compile>
     <Compile Include="QuizData\Quiz.cs" />
     <Compile Include="QuizData\QuizRecoveryData.cs" />
@@ -202,7 +205,8 @@
     <Compile Include="QuizEditor\UndoRedo\IUndoRedo.cs" />
     <Compile Include="QuizEditor\UndoRedo\UndoRedoExtensions.cs" />
     <Compile Include="QuizEditor\UndoRedo\UndoRedoFuncPair.cs" />
-    <Compile Include="ThemeManager.cs" />
+    <Compile Include="ThemeManager\Preferences.cs" />
+    <Compile Include="ThemeManager\ThemeCore.cs" />
     <Compile Include="Preferences\PrefCategory.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -220,6 +224,9 @@
     <Compile Include="QuizProgressData\WordTry.cs" />
     <EmbeddedResource Include="Preferences\Preferences.resx">
       <DependentUpon>Preferences.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Preferences\PrefsUI.resx">
+      <DependentUpon>PrefsUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuizEditor\EditorNotification.resx">
       <DependentUpon>EditorNotification.cs</DependentUpon>

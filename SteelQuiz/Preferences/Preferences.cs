@@ -16,5 +16,26 @@ namespace SteelQuiz.Preferences
         {
             InitializeComponent();
         }
+
+        private void Apply()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Btn_cancel_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+        }
+
+        private void Btn_apply_Click(object sender, EventArgs e)
+        {
+            Apply();
+            DialogResult = DialogResult.OK;
+        }
+
+        private void Prefs_UI_OnPrefSelected(object sender, EventArgs e)
+        {
+
+        }
     }
 }

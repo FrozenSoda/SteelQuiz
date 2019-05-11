@@ -32,7 +32,9 @@
             this.btn_apply = new System.Windows.Forms.Button();
             this.btn_cancel = new System.Windows.Forms.Button();
             this.pnl_prefCategories = new System.Windows.Forms.Panel();
-            this.prefCategory1 = new SteelQuiz.PrefCategory();
+            this.prefs_updates = new SteelQuiz.PrefCategory();
+            this.prefs_UI = new SteelQuiz.PrefCategory();
+            this.pnl_prefs = new System.Windows.Forms.Panel();
             this.pnl_prefCategories.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,6 +51,7 @@
             this.btn_apply.TabIndex = 8;
             this.btn_apply.Text = "Apply";
             this.btn_apply.UseVisualStyleBackColor = false;
+            this.btn_apply.Click += new System.EventHandler(this.Btn_apply_Click);
             // 
             // btn_cancel
             // 
@@ -59,28 +62,48 @@
             this.btn_cancel.ForeColor = System.Drawing.Color.White;
             this.btn_cancel.Location = new System.Drawing.Point(12, 415);
             this.btn_cancel.Name = "btn_cancel";
-            this.btn_cancel.Size = new System.Drawing.Size(115, 23);
+            this.btn_cancel.Size = new System.Drawing.Size(102, 23);
             this.btn_cancel.TabIndex = 9;
             this.btn_cancel.Text = "Cancel";
             this.btn_cancel.UseVisualStyleBackColor = false;
+            this.btn_cancel.Click += new System.EventHandler(this.Btn_cancel_Click);
             // 
             // pnl_prefCategories
             // 
             this.pnl_prefCategories.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
-            this.pnl_prefCategories.Controls.Add(this.prefCategory1);
+            this.pnl_prefCategories.Controls.Add(this.prefs_updates);
+            this.pnl_prefCategories.Controls.Add(this.prefs_UI);
             this.pnl_prefCategories.Controls.Add(this.btn_cancel);
             this.pnl_prefCategories.Location = new System.Drawing.Point(0, 0);
             this.pnl_prefCategories.Name = "pnl_prefCategories";
             this.pnl_prefCategories.Size = new System.Drawing.Size(130, 450);
             this.pnl_prefCategories.TabIndex = 11;
             // 
-            // prefCategory1
+            // prefs_updates
             // 
-            this.prefCategory1.Location = new System.Drawing.Point(0, 12);
-            this.prefCategory1.Name = "prefCategory1";
-            this.prefCategory1.Selected = false;
-            this.prefCategory1.Size = new System.Drawing.Size(130, 29);
-            this.prefCategory1.TabIndex = 10;
+            this.prefs_updates.Location = new System.Drawing.Point(0, 47);
+            this.prefs_updates.Name = "prefs_updates";
+            this.prefs_updates.PrefText = "Updates";
+            this.prefs_updates.Selected = false;
+            this.prefs_updates.Size = new System.Drawing.Size(130, 29);
+            this.prefs_updates.TabIndex = 11;
+            // 
+            // prefs_UI
+            // 
+            this.prefs_UI.Location = new System.Drawing.Point(0, 12);
+            this.prefs_UI.Name = "prefs_UI";
+            this.prefs_UI.PrefText = "User Interface";
+            this.prefs_UI.Selected = true;
+            this.prefs_UI.Size = new System.Drawing.Size(130, 29);
+            this.prefs_UI.TabIndex = 10;
+            this.prefs_UI.OnPrefSelected += new System.EventHandler(this.Prefs_UI_OnPrefSelected);
+            // 
+            // pnl_prefs
+            // 
+            this.pnl_prefs.Location = new System.Drawing.Point(136, 0);
+            this.pnl_prefs.Name = "pnl_prefs";
+            this.pnl_prefs.Size = new System.Drawing.Size(652, 409);
+            this.pnl_prefs.TabIndex = 12;
             // 
             // Preferences
             // 
@@ -88,6 +111,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.pnl_prefs);
             this.Controls.Add(this.pnl_prefCategories);
             this.Controls.Add(this.btn_apply);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -106,6 +130,8 @@
         private System.Windows.Forms.Button btn_apply;
         private System.Windows.Forms.Button btn_cancel;
         private System.Windows.Forms.Panel pnl_prefCategories;
-        private PrefCategory prefCategory1;
+        private PrefCategory prefs_UI;
+        private PrefCategory prefs_updates;
+        private System.Windows.Forms.Panel pnl_prefs;
     }
 }

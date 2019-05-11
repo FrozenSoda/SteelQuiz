@@ -31,7 +31,7 @@ namespace SteelQuiz
     {
         public static readonly string CONFIG_PATH = Path.Combine(QuizCore.APP_CFG_FOLDER, "Config.json");
 
-        public static Config Config { get; set; }
+        public static Config Config { get; set; } = null;
 
         public static void LoadConfig()
         {

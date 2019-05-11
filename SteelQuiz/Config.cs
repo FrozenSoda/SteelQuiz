@@ -16,6 +16,7 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using SteelQuiz.ThemeManager;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,7 @@ namespace SteelQuiz
         public string FileFormatVersion { get; set; }
         public bool AcceptedTermsOfUse { get; set; } = false;
         public Guid LastQuiz { get; set; } = Guid.Empty;
-        public ThemeManager.Theme Theme { get; set; } = ThemeManager.Theme.Dark;
+        public ThemeCore.Theme Theme { get; set; } = ThemeCore.Theme.Dark;
 
         public Config()
         {

@@ -42,6 +42,9 @@
             this.lbl_text.TabIndex = 3;
             this.lbl_text.Text = "User Interface";
             this.lbl_text.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_text.Click += new System.EventHandler(this.Lbl_text_Click);
+            this.lbl_text.MouseEnter += new System.EventHandler(this.Lbl_text_MouseEnter);
+            this.lbl_text.MouseLeave += new System.EventHandler(this.Lbl_text_MouseLeave);
             // 
             // lbl_selectedIndicator
             // 
@@ -51,6 +54,9 @@
             this.lbl_selectedIndicator.Name = "lbl_selectedIndicator";
             this.lbl_selectedIndicator.Size = new System.Drawing.Size(8, 29);
             this.lbl_selectedIndicator.TabIndex = 2;
+            this.lbl_selectedIndicator.Click += new System.EventHandler(this.Lbl_selectedIndicator_Click);
+            this.lbl_selectedIndicator.MouseEnter += new System.EventHandler(this.Lbl_selectedIndicator_MouseEnter);
+            this.lbl_selectedIndicator.MouseLeave += new System.EventHandler(this.Lbl_selectedIndicator_MouseLeave);
             // 
             // PrefCategory
             // 
