@@ -28,7 +28,7 @@ using System.Windows.Forms;
 
 namespace SteelQuiz.QuizPractise
 {
-    public partial class EditWord : Form
+    public partial class EditWord : AutoThemeableForm
     {
         public string Word { get; set; }
 
@@ -37,6 +37,8 @@ namespace SteelQuiz.QuizPractise
             InitializeComponent();
             label1.Text = $"Enter new value for word '{word}':";
             toolTip1.SetToolTip(label1, $"Word: '{word}'");
+
+            SetTheme();
         }
 
         private void btn_ok_Click(object sender, EventArgs e)

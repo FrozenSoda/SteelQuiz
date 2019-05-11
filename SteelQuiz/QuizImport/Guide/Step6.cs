@@ -29,7 +29,7 @@ using SteelQuiz.QuizData;
 
 namespace SteelQuiz.QuizImport.Guide
 {
-    public partial class Step6 : UserControl
+    public partial class Step6 : AutoThemeableUserControl
     {
         public string Language2 => txt_lang.Text;
 
@@ -40,6 +40,8 @@ namespace SteelQuiz.QuizImport.Guide
             {
                 lst_words.Items.Add(wordPair.Word2);
             }
+
+            SetTheme();
         }
 
         private void Txt_lang_TextChanged(object sender, EventArgs e)

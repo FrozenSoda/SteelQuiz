@@ -30,7 +30,7 @@ using SteelQuiz.QuizData;
 
 namespace SteelQuiz.QuizImport.Guide
 {
-    public partial class QuizImportGuide : Form
+    public partial class QuizImportGuide : AutoThemeableForm
     {
         private int _step = -1;
         private int Step
@@ -59,6 +59,8 @@ namespace SteelQuiz.QuizImport.Guide
             InitializeComponent();
             //this.Text += $" | v{Application.ProductVersion}";
             ++Step;
+
+            SetTheme();
         }
 
         private void btn_next_Click(object sender, EventArgs e)

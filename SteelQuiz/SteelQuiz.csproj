@@ -55,6 +55,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoThemeableUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ConfigManager.cs" />
     <Compile Include="Extensions\ControlExtensions.cs" />
     <Compile Include="Preferences\IPreferenceCategory.cs" />
@@ -210,6 +213,7 @@
     <Compile Include="AutoThemeableForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ThemeManager\AutoTheme.cs" />
     <Compile Include="ThemeManager\Colors\GeneralTheme.cs" />
     <Compile Include="ThemeManager\Colors\PreferencesTheme.cs" />
     <Compile Include="ThemeManager\Colors\WelcomeTheme.cs" />

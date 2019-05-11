@@ -51,7 +51,7 @@ namespace SteelQuiz.QuizPractise
             this.lbl_word2 = new System.Windows.Forms.Label();
             this.lbl_progress = new System.Windows.Forms.Label();
             this.btn_switchTestMode = new System.Windows.Forms.Button();
-            this.lbl_AI = new System.Windows.Forms.Label();
+            this.lbl_intelligentLearning = new System.Windows.Forms.Label();
             this.lbl_lang1 = new System.Windows.Forms.Label();
             this.lbl_lang2 = new System.Windows.Forms.Label();
             this.btn_w1_synonyms = new System.Windows.Forms.Button();
@@ -118,15 +118,15 @@ namespace SteelQuiz.QuizPractise
             this.btn_switchTestMode.UseVisualStyleBackColor = false;
             this.btn_switchTestMode.Click += new System.EventHandler(this.btn_switchTestMode_Click);
             // 
-            // lbl_AI
+            // lbl_intelligentLearning
             // 
-            this.lbl_AI.AutoSize = true;
-            this.lbl_AI.ForeColor = System.Drawing.Color.LightGray;
-            this.lbl_AI.Location = new System.Drawing.Point(276, 428);
-            this.lbl_AI.Name = "lbl_AI";
-            this.lbl_AI.Size = new System.Drawing.Size(205, 13);
-            this.lbl_AI.TabIndex = 4;
-            this.lbl_AI.Text = "Intelligent learning: STATUS_UNKNOWN";
+            this.lbl_intelligentLearning.AutoSize = true;
+            this.lbl_intelligentLearning.ForeColor = System.Drawing.Color.LightGray;
+            this.lbl_intelligentLearning.Location = new System.Drawing.Point(276, 428);
+            this.lbl_intelligentLearning.Name = "lbl_intelligentLearning";
+            this.lbl_intelligentLearning.Size = new System.Drawing.Size(205, 13);
+            this.lbl_intelligentLearning.TabIndex = 4;
+            this.lbl_intelligentLearning.Text = "Intelligent learning: STATUS_UNKNOWN";
             // 
             // lbl_lang1
             // 
@@ -227,7 +227,7 @@ namespace SteelQuiz.QuizPractise
             this.Controls.Add(this.btn_w1_synonyms);
             this.Controls.Add(this.lbl_lang2);
             this.Controls.Add(this.lbl_lang1);
-            this.Controls.Add(this.lbl_AI);
+            this.Controls.Add(this.lbl_intelligentLearning);
             this.Controls.Add(this.btn_switchTestMode);
             this.Controls.Add(this.lbl_progress);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -254,7 +254,7 @@ namespace SteelQuiz.QuizPractise
         private System.Windows.Forms.Label lbl_word2;
         private System.Windows.Forms.Label lbl_progress;
         private System.Windows.Forms.Button btn_switchTestMode;
-        private System.Windows.Forms.Label lbl_AI;
+        private System.Windows.Forms.Label lbl_intelligentLearning;
         private System.Windows.Forms.Label lbl_lang1;
         private System.Windows.Forms.Label lbl_lang2;
         private System.Windows.Forms.Button btn_w1_synonyms;

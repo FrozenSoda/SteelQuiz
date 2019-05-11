@@ -64,7 +64,43 @@ namespace SteelQuiz.ThemeManager.Colors
             }
         }
 
-        public virtual Color GetLabelForeColor()
+        public virtual Color GetMainLabelForeColor()
+        {
+            if (ConfigManager.Config == null || ConfigManager.Config.Theme == Theme.Dark)
+            {
+                return Color.FromArgb(255, 255, 255);
+            }
+            else
+            {
+                return Color.FromArgb(0, 0, 0);
+            }
+        }
+
+        public virtual Color GetBackgroundLabelForeColor()
+        {
+            if (ConfigManager.Config == null || ConfigManager.Config.Theme == Theme.Dark)
+            {
+                return Color.FromArgb(211, 211, 211);
+            }
+            else
+            {
+                return Color.FromArgb(105, 105, 105);
+            }
+        }
+
+        public virtual Color GetTextBoxBackColor()
+        {
+            if (ConfigManager.Config == null || ConfigManager.Config.Theme == Theme.Dark)
+            {
+                return Color.FromArgb(70, 70, 70);
+            }
+            else
+            {
+                return Color.FromArgb(255, 255, 255);
+            }
+        }
+
+        public virtual Color GetTextBoxForeColor()
         {
             if (ConfigManager.Config == null || ConfigManager.Config.Theme == Theme.Dark)
             {

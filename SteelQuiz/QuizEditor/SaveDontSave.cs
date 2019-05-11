@@ -28,7 +28,7 @@ using System.Windows.Forms;
 
 namespace SteelQuiz.QuizEditor
 {
-    public partial class SaveDontSave : Form
+    public partial class SaveDontSave : AutoThemeableForm
     {
         private SaveResult _saveDialogResult;
         public SaveResult SaveDialogResult
@@ -62,6 +62,8 @@ namespace SteelQuiz.QuizEditor
                 btn_doNotSave.Enabled = true;
                 chk_doNotSave.Visible = false;
             }
+
+            SetTheme();
         }
 
         public enum SaveResult

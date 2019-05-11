@@ -40,7 +40,7 @@ namespace SteelQuiz.ThemeManager.Colors
             }
         }
 
-        public Color GetTitleForeColor()
+        public override Color GetMainLabelForeColor()
         {
             if (ConfigManager.Config == null || ConfigManager.Config.Theme == Theme.Dark)
             {
@@ -49,18 +49,6 @@ namespace SteelQuiz.ThemeManager.Colors
             else
             {
                 return Color.FromArgb(0, 0, 0);
-            }
-        }
-
-        public override Color GetLabelForeColor()
-        {
-            if (ConfigManager.Config == null || ConfigManager.Config.Theme == Theme.Dark)
-            {
-                return Color.FromArgb(211, 211, 211);
-            }
-            else
-            {
-                return Color.FromArgb(105, 105, 105);
             }
         }
 

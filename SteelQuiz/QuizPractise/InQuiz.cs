@@ -26,11 +26,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SteelQuiz.QuizData;
+using SteelQuiz.ThemeManager.Colors;
 
 namespace SteelQuiz.QuizPractise
 {
-    public partial class InQuiz : Form
+    public partial class InQuiz : AutoThemeableForm
     {
+        private GeneralTheme GeneralTheme = new GeneralTheme();
+
         public bool ExitAppOnClose { get; set; } = true;
         private bool PerformOnCloseEvents { get; set; } = true;
 
@@ -64,13 +67,13 @@ namespace SteelQuiz.QuizPractise
             if (QuizCore.QuizProgress.FullTestInProgress)
             {
                 btn_switchTestMode.Text = "Enable Intelligent Learning";
-                lbl_AI.Text = "Intelligent learning: Disabled";
+                lbl_intelligentLearning.Text = "Intelligent learning: Disabled";
                 //lbl_AI.ForeColor = Color.Gray;
             }
             else
             {
                 btn_switchTestMode.Text = "Disable Intelligent Learning (do full test)";
-                lbl_AI.Text = "Intelligent learning: Enabled";
+                lbl_intelligentLearning.Text = "Intelligent learning: Enabled";
                 //lbl_AI.ForeColor = Color.DarkGreen;
             }
 
@@ -78,6 +81,18 @@ namespace SteelQuiz.QuizPractise
             {
                 btn_w1_synonyms.Enabled = true;
             }
+
+            SetTheme();
+        }
+
+        protected override void SetTheme()
+        {
+            base.SetTheme();
+
+            lbl_intelligentLearning.ForeColor = GeneralTheme.GetBackgroundLabelForeColor();
+            lbl_progress.ForeColor = GeneralTheme.GetBackgroundLabelForeColor();
+            lbl_lang1.ForeColor = GeneralTheme.GetBackgroundLabelForeColor();
+            lbl_lang2.ForeColor = GeneralTheme.GetBackgroundLabelForeColor();
         }
 
         private void NewWord()
@@ -287,13 +302,13 @@ namespace SteelQuiz.QuizPractise
             if (QuizCore.QuizProgress.FullTestInProgress)
             {
                 btn_switchTestMode.Text = "Enable Intelligent Learning";
-                lbl_AI.Text = "Intelligent learning: Disabled";
+                lbl_intelligentLearning.Text = "Intelligent learning: Disabled";
                 //lbl_AI.ForeColor = Color.Gray;
             }
             else
             {
                 btn_switchTestMode.Text = "Disable Intelligent Learning (do full test)";
-                lbl_AI.Text = "Intelligent learning: Enabled";
+                lbl_intelligentLearning.Text = "Intelligent learning: Enabled";
                 //lbl_AI.ForeColor = Color.DarkGreen;
             }
         }

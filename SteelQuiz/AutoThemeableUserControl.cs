@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace SteelQuiz
 {
-    public class AutoThemeableForm : Form
+    public class AutoThemeableUserControl : UserControl
     {
         protected virtual void SetTheme()
         {

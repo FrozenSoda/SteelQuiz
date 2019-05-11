@@ -30,7 +30,7 @@ using SteelQuiz.QuizEditor.UndoRedo;
 
 namespace SteelQuiz.QuizPractise
 {
-    public partial class EditWordSynonyms : Form, IUndoRedo
+    public partial class EditWordSynonyms : AutoThemeableForm, IUndoRedo
     {
         public List<string> Synonyms { get; set; }
         public int Language { get; set; }
@@ -66,6 +66,8 @@ namespace SteelQuiz.QuizPractise
 
             initialListBoxCollection = new object[lst_synonyms.Items.Count];
             lst_synonyms.Items.CopyTo(initialListBoxCollection, 0);
+
+            SetTheme();
         }
 
         private bool ListBoxChanged()

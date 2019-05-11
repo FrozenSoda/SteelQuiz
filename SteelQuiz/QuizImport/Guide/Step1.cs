@@ -28,11 +28,13 @@ using System.Windows.Forms;
 
 namespace SteelQuiz.QuizImport.Guide
 {
-    public partial class Step1 : UserControl
+    public partial class Step1 : AutoThemeableUserControl
     {
         public Step1()
         {
             InitializeComponent();
+
+            SetTheme();
         }
     }
 }

@@ -28,7 +28,7 @@ using System.Windows.Forms;
 
 namespace SteelQuiz.QuizImport.Guide
 {
-    public partial class Step3 : UserControl
+    public partial class Step3 : AutoThemeableUserControl
     {
         public Step3(QuizImporter.ImportSource importSource)
         {
@@ -41,6 +41,8 @@ namespace SteelQuiz.QuizImport.Guide
                     "\r\n6. Copy the URL of the opened tab and paste it in the URL field in SteelQuiz.\r\n\r\nSupported exercises: Spelling, Vocabulary bank and Idioms" +
                     "\r\nTrying to import an unsupported exercise might cause an error, or undefined behavior.";
             }
+
+            SetTheme();
         }
 
         private void Txt_url_DoubleClick(object sender, EventArgs e)

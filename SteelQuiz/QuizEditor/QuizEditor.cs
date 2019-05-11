@@ -32,7 +32,7 @@ using SteelQuiz.QuizEditor.UndoRedo;
 
 namespace SteelQuiz.QuizEditor
 {
-    public partial class QuizEditor : Form, IUndoRedo
+    public partial class QuizEditor : AutoThemeableForm, IUndoRedo
     {
         private const int EMPTY_WORD_PAIRS_COUNT = 2;
 
@@ -76,6 +76,8 @@ namespace SteelQuiz.QuizEditor
             {
                 ChkRecovery();
             }
+
+            SetTheme();
         }
 
         public void ChkRecovery()

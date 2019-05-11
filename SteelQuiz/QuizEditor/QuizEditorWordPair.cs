@@ -29,7 +29,7 @@ using SteelQuiz.QuizEditor.UndoRedo;
 
 namespace SteelQuiz.QuizEditor
 {
-    public partial class QuizEditorWordPair : UserControl
+    public partial class QuizEditorWordPair : AutoThemeableUserControl
     {
         public int Number { get; set; } // number in flowlayoutpanel, the first one has number 0 for instance
         public string Word1 => txt_word1.Text;
@@ -51,6 +51,8 @@ namespace SteelQuiz.QuizEditor
             QEOwner = owner;
             Number = number;
             RemoveSynonymsEqualToWords();
+
+            SetTheme();
         }
 
         public void InitEditWordSynonyms(int language)

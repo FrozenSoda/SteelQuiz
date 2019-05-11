@@ -28,11 +28,13 @@ using System.Windows.Forms;
 
 namespace SteelQuiz.QuizImport.Guide
 {
-    public partial class Step2 : UserControl
+    public partial class Step2 : AutoThemeableUserControl
     {
         public Step2()
         {
             InitializeComponent();
+
+            SetTheme();
         }
 
         private void Rdo_addMultipleTranslationsAsSynonyms_CheckedChanged(object sender, EventArgs e)

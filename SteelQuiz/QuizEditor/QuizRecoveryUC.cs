@@ -31,7 +31,7 @@ using SteelQuiz.QuizData;
 
 namespace SteelQuiz.QuizEditor
 {
-    public partial class QuizRecoveryUC : UserControl
+    public partial class QuizRecoveryUC : AutoThemeableUserControl
     {
         public string RecoveryPath { get; set; }
         public string QuizPath { get; set; }
@@ -43,6 +43,8 @@ namespace SteelQuiz.QuizEditor
 
             RecoveryPath = recoveryPath;
             LoadProperties();
+
+            SetTheme();
         }
 
         private void LoadProperties()

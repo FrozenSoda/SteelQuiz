@@ -31,7 +31,7 @@ using System.Windows.Forms;
 
 namespace SteelQuiz.QuizEditor
 {
-    public partial class QuizRecovery : Form
+    public partial class QuizRecovery : AutoThemeableForm
     {
         public QuizRecoveryData QuizRecoveryData { get; set; }
 
@@ -44,6 +44,8 @@ namespace SteelQuiz.QuizEditor
                 var recoveryUC = new QuizRecoveryUC(file);
                 flp_recovery.Controls.Add(recoveryUC);
             }
+
+            SetTheme();
         }
 
         private void btn_close_Click(object sender, EventArgs e)

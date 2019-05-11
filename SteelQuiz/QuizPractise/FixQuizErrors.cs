@@ -29,7 +29,7 @@ using System.Windows.Forms;
 
 namespace SteelQuiz.QuizPractise
 {
-    public partial class FixQuizErrors : Form
+    public partial class FixQuizErrors : AutoThemeableForm
     {
         public WordPair WordPair { get; set; }
         private new InQuiz Parent { get; set; }
@@ -41,6 +41,8 @@ namespace SteelQuiz.QuizPractise
             Parent = parent;
 
             UpdateWordLabels();
+
+            SetTheme();
         }
 
         private void UpdateWordLabels()

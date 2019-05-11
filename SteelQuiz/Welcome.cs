@@ -53,7 +53,7 @@ namespace SteelQuiz
         {
             this.BackColor = WelcomeTheme.GetBackColor();
 
-            lbl_welcome.ForeColor = WelcomeTheme.GetTitleForeColor();
+            lbl_welcome.ForeColor = WelcomeTheme.GetMainLabelForeColor();
 
             btn_createQuiz.BackColor = WelcomeTheme.GetMainButtonBackColor();
             btn_loadQuiz.BackColor = WelcomeTheme.GetMainButtonBackColor();
@@ -65,7 +65,7 @@ namespace SteelQuiz
             btn_importQuizFromSite.ForeColor = WelcomeTheme.GetMainButtonForeColor();
             btn_continueLast.ForeColor = WelcomeTheme.GetMainButtonForeColor();
 
-            lbl_copyright.ForeColor = WelcomeTheme.GetLabelForeColor();
+            lbl_copyright.ForeColor = WelcomeTheme.GetBackgroundLabelForeColor();
 
             btn_chkUpdates.BackColor = WelcomeTheme.GetButtonBackColor();
             btn_preferences.BackColor = WelcomeTheme.GetButtonBackColor();

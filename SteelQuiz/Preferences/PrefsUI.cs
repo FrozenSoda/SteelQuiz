@@ -62,12 +62,12 @@ namespace SteelQuiz.Preferences
 
             foreach (var lbl in this.GetAllChildrenRecursive(typeof(Label)))
             {
-                lbl.ForeColor = PreferencesTheme.GetLabelForeColor();
+                lbl.ForeColor = PreferencesTheme.GetMainLabelForeColor();
             }
 
             foreach (var rdo in this.GetAllChildrenRecursive(typeof(RadioButton)))
             {
-                rdo.ForeColor = PreferencesTheme.GetLabelForeColor();
+                rdo.ForeColor = PreferencesTheme.GetMainLabelForeColor();
             }
         }
     }
