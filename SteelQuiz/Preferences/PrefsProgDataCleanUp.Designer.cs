@@ -109,7 +109,7 @@ namespace SteelQuiz.Preferences
             // 
             this.lbl_analysisResult.Font = new System.Drawing.Font("Segoe UI Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_analysisResult.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.lbl_analysisResult.Location = new System.Drawing.Point(3, 266);
+            this.lbl_analysisResult.Location = new System.Drawing.Point(3, 282);
             this.lbl_analysisResult.Name = "lbl_analysisResult";
             this.lbl_analysisResult.Size = new System.Drawing.Size(646, 32);
             this.lbl_analysisResult.TabIndex = 5;
@@ -123,13 +123,13 @@ namespace SteelQuiz.Preferences
             this.label4.ForeColor = System.Drawing.Color.White;
             this.label4.Location = new System.Drawing.Point(3, 188);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(646, 51);
+            this.label4.Size = new System.Drawing.Size(646, 68);
             this.label4.TabIndex = 6;
             this.label4.Text = "Warning! Quizzes removed from the quiz folder, will have its progress data remove" +
-    "d.";
+    "d.\r\nPressing \"Cancel\" will NOT undo the clean up after it is finished.";
             this.label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // PrefsMaintenance
+            // PrefsProgDataCleanUp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -140,7 +140,7 @@ namespace SteelQuiz.Preferences
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_cleanUp);
-            this.Name = "PrefsMaintenance";
+            this.Name = "PrefsProgDataCleanUp";
             this.Size = new System.Drawing.Size(652, 409);
             this.ResumeLayout(false);
 

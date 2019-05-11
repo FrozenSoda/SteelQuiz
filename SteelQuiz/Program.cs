@@ -54,8 +54,8 @@ namespace SteelQuiz
 
             QuizCore.CheckInitDirectories();
             ConfigManager.LoadConfig();
-            var progDataLoad = QuizCore.LoadProgressData();
-            if (!progDataLoad)
+            var progDataUpgrade = QuizCore.ChkUpgradeProgressData();
+            if (progDataUpgrade == QuizCore.ChkUpgradeProgressDataResult.Fail)
             {
                 return;
             }
