@@ -31,6 +31,7 @@ using SteelQuiz.QuizData;
 using SteelQuiz.QuizImport;
 using SteelQuiz.QuizImport.Guide;
 using SteelQuiz.QuizPractise;
+using SteelQuiz.ThemeManager.Colors;
 
 namespace SteelQuiz
 {
@@ -41,8 +42,34 @@ namespace SteelQuiz
             InitializeComponent();
             this.Text += $" | v{Application.ProductVersion}";
             SetControlStates();
+            SetTheme();
 
             ChkUpdate();
+        }
+
+        public void SetTheme()
+        {
+            this.BackColor = WelcomeTheme.GetBackColor();
+
+            lbl_welcome.ForeColor = WelcomeTheme.GetTitleForeColor();
+
+            btn_createQuiz.BackColor = WelcomeTheme.GetMainButtonBackColor();
+            btn_loadQuiz.BackColor = WelcomeTheme.GetMainButtonBackColor();
+            btn_importQuizFromSite.BackColor = WelcomeTheme.GetMainButtonBackColor();
+            btn_continueLast.BackColor = WelcomeTheme.GetMainButtonBackColor();
+
+            btn_createQuiz.ForeColor = WelcomeTheme.GetMainButtonForeColor();
+            btn_loadQuiz.ForeColor = WelcomeTheme.GetMainButtonForeColor();
+            btn_importQuizFromSite.ForeColor = WelcomeTheme.GetMainButtonForeColor();
+            btn_continueLast.ForeColor = WelcomeTheme.GetMainButtonForeColor();
+
+            lbl_copyright.ForeColor = WelcomeTheme.GetLabelForeColor();
+
+            btn_chkUpdates.BackColor = WelcomeTheme.GetButtonBackColor();
+            btn_preferences.BackColor = WelcomeTheme.GetButtonBackColor();
+
+            btn_chkUpdates.ForeColor = WelcomeTheme.GetButtonForeColor();
+            btn_preferences.ForeColor = WelcomeTheme.GetButtonForeColor();
         }
 
         public void ChkUpdate(bool unobtrusive = false)

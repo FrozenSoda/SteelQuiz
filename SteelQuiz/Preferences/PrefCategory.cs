@@ -25,7 +25,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SteelQuiz.ThemeManager;
+using SteelQuiz.ThemeManager.Colors;
 
 namespace SteelQuiz
 {
@@ -52,7 +52,7 @@ namespace SteelQuiz
                 // update color
                 if (value)
                 {
-                    this.lbl_text.BackColor = ThemeCore.GetPreferenceSelectedBackColor();
+                    this.lbl_text.BackColor = ThemeColor.GetPreferenceSelectedBackColor();
                     this.lbl_selectedIndicator.BackColor = Color.FromArgb(255, 128, 0);
 
                     if (Parent != null)
@@ -71,8 +71,8 @@ namespace SteelQuiz
                 }
                 else
                 {
-                    this.lbl_text.BackColor = ThemeCore.GetPreferenceBackColor();
-                    this.lbl_selectedIndicator.BackColor = ThemeCore.GetPreferenceBackColor();
+                    this.lbl_text.BackColor = ThemeColor.GetPreferenceBackColor();
+                    this.lbl_selectedIndicator.BackColor = ThemeColor.GetPreferenceBackColor();
                 }
 
                 _selected = value;
@@ -101,12 +101,12 @@ namespace SteelQuiz
         {
             if (Selected)
             {
-                this.lbl_text.BackColor = ThemeCore.GetPreferenceSelectedHoverBackColor();
+                this.lbl_text.BackColor = ThemeColor.GetPreferenceSelectedHoverBackColor();
             }
             else
             {
-                this.lbl_text.BackColor = ThemeCore.GetPreferenceHoverBackColor();
-                this.lbl_selectedIndicator.BackColor = ThemeCore.GetPreferenceHoverBackColor();
+                this.lbl_text.BackColor = ThemeColor.GetPreferenceHoverBackColor();
+                this.lbl_selectedIndicator.BackColor = ThemeColor.GetPreferenceHoverBackColor();
             }
         }
 
@@ -114,12 +114,12 @@ namespace SteelQuiz
         {
             if (Selected)
             {
-                this.lbl_text.BackColor = ThemeCore.GetPreferenceSelectedBackColor();
+                this.lbl_text.BackColor = ThemeColor.GetPreferenceSelectedBackColor();
             }
             else
             {
-                this.lbl_text.BackColor = ThemeCore.GetPreferenceBackColor();
-                this.lbl_selectedIndicator.BackColor = ThemeCore.GetPreferenceBackColor();
+                this.lbl_text.BackColor = ThemeColor.GetPreferenceBackColor();
+                this.lbl_selectedIndicator.BackColor = ThemeColor.GetPreferenceBackColor();
             }
         }
 

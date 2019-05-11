@@ -210,6 +210,7 @@
     </Compile>
     <Compile Include="ThemeManager\Colors\General.cs" />
     <Compile Include="ThemeManager\Colors\Preferences.cs" />
+    <Compile Include="ThemeManager\Colors\WelcomeTheme.cs" />
     <Compile Include="ThemeManager\ThemeCore.cs" />
     <Compile Include="Preferences\PrefCategory.cs">
       <SubType>UserControl</SubType>

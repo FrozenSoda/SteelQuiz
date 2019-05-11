@@ -38,7 +38,26 @@ namespace SteelQuiz.Preferences
 
         private void Apply()
         {
-            throw new NotImplementedException();
+            foreach (var _prefs in pnl_prefs.Controls)
+            {
+                if (_prefs is PrefsUI)
+                {
+                    var prefs = _prefs as PrefsUI;
+
+                    if (prefs.rdo_themeDark.Checked)
+                    {
+                        ConfigManager.Config.Theme = ThemeManager.ThemeCore.Theme.Dark;
+                    }
+                    else if (prefs.rdo_themeLight.Checked)
+                    {
+                        ConfigManager.Config.Theme = ThemeManager.ThemeCore.Theme.Light;
+                    }
+
+                    Program.frmWelcome.SetTheme();
+                }
+            }
+
+            ConfigManager.SaveConfig();
         }
 
         private void SwitchCategory(Type category)

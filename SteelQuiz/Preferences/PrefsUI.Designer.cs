@@ -48,8 +48,8 @@ namespace SteelQuiz.Preferences
         {
             this.label1 = new System.Windows.Forms.Label();
             this.pnl_rdoTheme = new System.Windows.Forms.Panel();
-            this.rdo_themeLight = new System.Windows.Forms.RadioButton();
             this.rdo_themeDark = new System.Windows.Forms.RadioButton();
+            this.rdo_themeLight = new System.Windows.Forms.RadioButton();
             this.pnl_rdoTheme.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,18 +73,6 @@ namespace SteelQuiz.Preferences
             this.pnl_rdoTheme.Size = new System.Drawing.Size(200, 100);
             this.pnl_rdoTheme.TabIndex = 1;
             // 
-            // rdo_themeLight
-            // 
-            this.rdo_themeLight.AutoSize = true;
-            this.rdo_themeLight.ForeColor = System.Drawing.Color.White;
-            this.rdo_themeLight.Location = new System.Drawing.Point(3, 3);
-            this.rdo_themeLight.Name = "rdo_themeLight";
-            this.rdo_themeLight.Size = new System.Drawing.Size(48, 17);
-            this.rdo_themeLight.TabIndex = 0;
-            this.rdo_themeLight.TabStop = true;
-            this.rdo_themeLight.Text = "Light";
-            this.rdo_themeLight.UseVisualStyleBackColor = true;
-            // 
             // rdo_themeDark
             // 
             this.rdo_themeDark.AutoSize = true;
@@ -96,6 +84,18 @@ namespace SteelQuiz.Preferences
             this.rdo_themeDark.TabStop = true;
             this.rdo_themeDark.Text = "Dark";
             this.rdo_themeDark.UseVisualStyleBackColor = true;
+            // 
+            // rdo_themeLight
+            // 
+            this.rdo_themeLight.AutoSize = true;
+            this.rdo_themeLight.ForeColor = System.Drawing.Color.White;
+            this.rdo_themeLight.Location = new System.Drawing.Point(3, 3);
+            this.rdo_themeLight.Name = "rdo_themeLight";
+            this.rdo_themeLight.Size = new System.Drawing.Size(48, 17);
+            this.rdo_themeLight.TabIndex = 0;
+            this.rdo_themeLight.TabStop = true;
+            this.rdo_themeLight.Text = "Light";
+            this.rdo_themeLight.UseVisualStyleBackColor = true;
             // 
             // PrefsUI
             // 
@@ -117,7 +117,7 @@ namespace SteelQuiz.Preferences
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel pnl_rdoTheme;
-        private System.Windows.Forms.RadioButton rdo_themeLight;
-        private System.Windows.Forms.RadioButton rdo_themeDark;
+        internal System.Windows.Forms.RadioButton rdo_themeLight;
+        internal System.Windows.Forms.RadioButton rdo_themeDark;
     }
 }
