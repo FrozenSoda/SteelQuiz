@@ -18,7 +18,7 @@
 
 namespace SteelQuiz.Preferences
 {
-    partial class PrefsUI
+    partial class PrefsGeneral
     {
         /// <summary> 
         /// Required designer variable.

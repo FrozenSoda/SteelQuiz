@@ -35,6 +35,8 @@ namespace SteelQuiz
 
         public event EventHandler OnPrefSelected;
 
+        public bool Selectable { get; set; } = true;
+
         private bool _selected = false;
         public bool Selected
         {
@@ -51,7 +53,7 @@ namespace SteelQuiz
                     return;
                 }
 
-                // update color
+                // update color and eventually call selected events
                 if (value)
                 {
                     this.lbl_text.BackColor = PreferencesTheme.GetPrefSelectedBackColor();
@@ -69,7 +71,7 @@ namespace SteelQuiz
                         }
                     }
 
-                    this.OnPrefSelected?.Invoke(this, null);
+                    InvokePrefSelected();
                 }
                 else
                 {
@@ -98,6 +100,11 @@ namespace SteelQuiz
         {
             InitializeComponent();
             SetTheme();
+        }
+
+        public void InvokePrefSelected()
+        {
+            this.OnPrefSelected?.Invoke(this, null);
         }
 
         public void SetTheme()
@@ -156,12 +163,26 @@ namespace SteelQuiz
 
         private void Lbl_text_Click(object sender, EventArgs e)
         {
-            Selected = true;
+            if (Selectable)
+            {
+                Selected = true;
+            }
+            else
+            {
+                InvokePrefSelected();
+            }
         }
 
         private void Lbl_selectedIndicator_Click(object sender, EventArgs e)
         {
-            Selected = true;
+            if (Selectable)
+            {
+                Selected = true;
+            }
+            else
+            {
+                InvokePrefSelected();
+            }
         }
     }
 }

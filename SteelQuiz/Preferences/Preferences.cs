@@ -29,28 +29,22 @@ using System.Windows.Forms;
 
 namespace SteelQuiz.Preferences
 {
-    public partial class Preferences : Form, ThemeManager.IThemeable
+    public partial class Preferences : AutoThemeableForm
     {
         private PreferencesTheme PreferencesTheme = new PreferencesTheme();
 
         public Preferences()
         {
             InitializeComponent();
-            pnl_prefs.Controls.Add(new PrefsUI());
+            pnl_prefs.Controls.Add(new PrefsGeneral());
             pnl_prefCategories.Controls.Add(new CategoriesRoot());
 
             SetTheme();
         }
 
-        public void SetTheme()
+        protected override void SetTheme()
         {
-            BackColor = PreferencesTheme.GetBackColor();
-
-            btn_apply.BackColor = PreferencesTheme.GetButtonBackColor();
-            btn_cancel.BackColor = PreferencesTheme.GetButtonBackColor();
-
-            btn_apply.ForeColor = PreferencesTheme.GetButtonForeColor();
-            btn_cancel.ForeColor = PreferencesTheme.GetButtonForeColor();
+            base.SetTheme();
 
             pnl_prefCategories.BackColor = PreferencesTheme.GetPrefCatPanelBackColor();
         }
@@ -59,9 +53,9 @@ namespace SteelQuiz.Preferences
         {
             foreach (var _prefs in pnl_prefs.Controls)
             {
-                if (_prefs is PrefsUI)
+                if (_prefs is PrefsGeneral)
                 {
-                    var prefs = _prefs as PrefsUI;
+                    var prefs = _prefs as PrefsGeneral;
 
                     if (prefs.rdo_themeDark.Checked)
                     {
@@ -77,6 +71,37 @@ namespace SteelQuiz.Preferences
             }
 
             ConfigManager.SaveConfig();
+        }
+
+        public void SwitchCategoryCollection(Type category)
+        {
+            var found = false;
+            foreach (var cat in pnl_prefCategories.Controls.OfType<CategoryCollection>())
+            {
+                if (cat.GetType() == category)
+                {
+                    cat.Show();
+                    cat.BringToFront();
+                    cat.InvokeSelectedEvent();
+                    found = true;
+                }
+            }
+
+            if (!found)
+            {
+                var cat = (CategoryCollection)Activator.CreateInstance(category);
+                pnl_prefCategories.Controls.Add(cat);
+                cat.BringToFront();
+                cat.InvokeSelectedEvent();
+            }
+        }
+
+        public void PopCategoryCollection(CategoryCollection categoryCollection)
+        {
+            categoryCollection.Dispose();
+            var collections = pnl_prefCategories.Controls.OfType<CategoryCollection>();
+            var currCollection = collections.ElementAt(collections.Count() - 1);
+            currCollection.InvokeSelectedEvent();
         }
 
         public void SwitchCategory(Type category)

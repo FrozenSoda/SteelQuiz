@@ -28,37 +28,39 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.prefs_updates = new SteelQuiz.PrefCategory();
-            this.prefs_UI = new SteelQuiz.PrefCategory();
+            this.prefs_maintenance = new SteelQuiz.PrefCategory();
+            this.prefs_general = new SteelQuiz.PrefCategory();
             this.SuspendLayout();
             // 
-            // prefs_updates
+            // prefs_maintenance
             // 
-            this.prefs_updates.Location = new System.Drawing.Point(0, 38);
-            this.prefs_updates.Name = "prefs_updates";
-            this.prefs_updates.PrefText = "Maintenance";
-            this.prefs_updates.Selected = false;
-            this.prefs_updates.Size = new System.Drawing.Size(130, 29);
-            this.prefs_updates.TabIndex = 13;
-            this.prefs_updates.OnPrefSelected += new System.EventHandler(this.Prefs_updates_OnPrefSelected);
+            this.prefs_maintenance.Location = new System.Drawing.Point(0, 48);
+            this.prefs_maintenance.Name = "prefs_maintenance";
+            this.prefs_maintenance.PrefText = "Maintenance >";
+            this.prefs_maintenance.Selectable = false;
+            this.prefs_maintenance.Selected = false;
+            this.prefs_maintenance.Size = new System.Drawing.Size(130, 29);
+            this.prefs_maintenance.TabIndex = 13;
+            this.prefs_maintenance.OnPrefSelected += new System.EventHandler(this.Prefs_maintenance_OnPrefSelected);
             // 
-            // prefs_UI
+            // prefs_general
             // 
-            this.prefs_UI.Location = new System.Drawing.Point(0, 3);
-            this.prefs_UI.Name = "prefs_UI";
-            this.prefs_UI.PrefText = "General";
-            this.prefs_UI.Selected = true;
-            this.prefs_UI.Size = new System.Drawing.Size(130, 29);
-            this.prefs_UI.TabIndex = 12;
-            this.prefs_UI.OnPrefSelected += new System.EventHandler(this.Prefs_UI_OnPrefSelected);
+            this.prefs_general.Location = new System.Drawing.Point(0, 13);
+            this.prefs_general.Name = "prefs_general";
+            this.prefs_general.PrefText = "General";
+            this.prefs_general.Selectable = true;
+            this.prefs_general.Selected = true;
+            this.prefs_general.Size = new System.Drawing.Size(130, 29);
+            this.prefs_general.TabIndex = 12;
+            this.prefs_general.OnPrefSelected += new System.EventHandler(this.Prefs_general_OnPrefSelected);
             // 
             // CategoriesRoot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
-            this.Controls.Add(this.prefs_updates);
-            this.Controls.Add(this.prefs_UI);
+            this.Controls.Add(this.prefs_maintenance);
+            this.Controls.Add(this.prefs_general);
             this.Name = "CategoriesRoot";
             this.Size = new System.Drawing.Size(130, 409);
             this.ResumeLayout(false);
@@ -67,7 +69,7 @@
 
         #endregion
 
-        private PrefCategory prefs_updates;
-        private PrefCategory prefs_UI;
+        private PrefCategory prefs_maintenance;
+        private PrefCategory prefs_general;
     }
 }

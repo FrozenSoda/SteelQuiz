@@ -60,11 +60,20 @@
     </Compile>
     <Compile Include="ConfigManager.cs" />
     <Compile Include="Extensions\ControlExtensions.cs" />
+    <Compile Include="Preferences\CategoriesMaintenance.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Preferences\CategoriesMaintenance.Designer.cs">
+      <DependentUpon>CategoriesMaintenance.cs</DependentUpon>
+    </Compile>
     <Compile Include="Preferences\CategoriesRoot.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Preferences\CategoriesRoot.Designer.cs">
       <DependentUpon>CategoriesRoot.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Preferences\CategoryCollection.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Preferences\IPreferenceCategory.cs" />
     <Compile Include="Preferences\Preferences.cs">
@@ -79,11 +88,11 @@
     <Compile Include="Preferences\PrefsProgDataCleanUp.Designer.cs">
       <DependentUpon>PrefsProgDataCleanUp.cs</DependentUpon>
     </Compile>
-    <Compile Include="Preferences\PrefsUI.cs">
+    <Compile Include="Preferences\PrefsGeneral.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Preferences\PrefsUI.Designer.cs">
-      <DependentUpon>PrefsUI.cs</DependentUpon>
+    <Compile Include="Preferences\PrefsGeneral.Designer.cs">
+      <DependentUpon>PrefsGeneral.cs</DependentUpon>
     </Compile>
     <Compile Include="QuizData\Quiz.cs" />
     <Compile Include="QuizData\QuizRecoveryData.cs" />
@@ -246,6 +255,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuizProgressData\WordTry.cs" />
+    <EmbeddedResource Include="Preferences\CategoriesMaintenance.resx">
+      <DependentUpon>CategoriesMaintenance.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Preferences\CategoriesRoot.resx">
       <DependentUpon>CategoriesRoot.cs</DependentUpon>
     </EmbeddedResource>
@@ -255,8 +267,8 @@
     <EmbeddedResource Include="Preferences\PrefsProgDataCleanUp.resx">
       <DependentUpon>PrefsProgDataCleanUp.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Preferences\PrefsUI.resx">
-      <DependentUpon>PrefsUI.cs</DependentUpon>
+    <EmbeddedResource Include="Preferences\PrefsGeneral.resx">
+      <DependentUpon>PrefsGeneral.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuizEditor\EditorNotification.resx">
       <DependentUpon>EditorNotification.cs</DependentUpon>

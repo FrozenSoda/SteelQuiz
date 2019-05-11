@@ -30,11 +30,11 @@ using SteelQuiz.Extensions;
 
 namespace SteelQuiz.Preferences
 {
-    public partial class PrefsUI : AutoThemeableUserControl, IPreferenceCategory
+    public partial class PrefsGeneral : AutoThemeableUserControl, IPreferenceCategory
     {
         private PreferencesTheme PreferencesTheme = new PreferencesTheme();
 
-        public PrefsUI()
+        public PrefsGeneral()
         {
             InitializeComponent();
 

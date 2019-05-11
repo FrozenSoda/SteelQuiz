@@ -7,11 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SteelQuiz.ThemeManager.Colors;
 
 namespace SteelQuiz.Preferences
 {
-    public partial class CategoriesRoot : AutoThemeableUserControl
+    public partial class CategoriesRoot : CategoryCollection
     {
+
         public CategoriesRoot()
         {
             InitializeComponent();
@@ -19,14 +21,14 @@ namespace SteelQuiz.Preferences
             SetTheme();
         }
 
-        private void Prefs_UI_OnPrefSelected(object sender, EventArgs e)
+        private void Prefs_general_OnPrefSelected(object sender, EventArgs e)
         {
-            (ParentForm as Preferences).SwitchCategory(typeof(PrefsUI));
+            (ParentForm as Preferences).SwitchCategory(typeof(PrefsGeneral));
         }
 
-        private void Prefs_updates_OnPrefSelected(object sender, EventArgs e)
+        private void Prefs_maintenance_OnPrefSelected(object sender, EventArgs e)
         {
-            (ParentForm as Preferences).SwitchCategory(typeof(PrefsProgDataCleanUp));
+            (ParentForm as Preferences).SwitchCategoryCollection(typeof(CategoriesMaintenance));
         }
     }
 }
