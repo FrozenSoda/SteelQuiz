@@ -30,7 +30,7 @@ using System.Windows.Forms;
 
 namespace SteelQuiz
 {
-    public partial class TermsOfUse : Form
+    public partial class TermsOfUse : AutoThemeableForm
     {
         private const int AGREE_UNLOCK_DELAY_S = 20;
         private int unlockTimerCount = 0;
@@ -47,6 +47,7 @@ namespace SteelQuiz
             {
                 InitializeComponent();
                 this.Text += $" | v{Application.ProductVersion}";
+                SetTheme();
             }
         }
 

@@ -32,7 +32,7 @@ namespace SteelQuiz.Preferences
 {
     public partial class PrefsGeneral : AutoThemeableUserControl, IPreferenceCategory
     {
-        public bool ConfigChanged { get; set; }
+        private bool skipConfigApply = true;
 
         public PrefsGeneral()
         {
@@ -40,6 +40,7 @@ namespace SteelQuiz.Preferences
 
             LoadPreferences();
             SetTheme();
+            skipConfigApply = false;
         }
 
         public void LoadPreferences()
@@ -54,12 +55,42 @@ namespace SteelQuiz.Preferences
                     rdo_themeLight.Checked = true;
                     break;
             }
-            ConfigChanged = false;
         }
 
-        private void Rdo_theme_CheckedChanged(object sender, EventArgs e)
+        private void Rdo_themeLight_CheckedChanged(object sender, EventArgs e)
         {
-            ConfigChanged = true;
+            if (skipConfigApply)
+            {
+                return;
+            }
+
+            if (rdo_themeLight.Checked)
+            {
+                ConfigManager.Config.Theme = ThemeManager.ThemeCore.Theme.Light;
+                ConfigManager.SaveConfig();
+
+                //reshow preferences window, to use new theme
+                Program.frmPreferences.DialogResult = DialogResult.OK;
+                Program.frmWelcome.ShowPreferences();
+            }
+        }
+
+        private void Rdo_themeDark_CheckedChanged(object sender, EventArgs e)
+        {
+            if (skipConfigApply)
+            {
+                return;
+            }
+
+            if (rdo_themeDark.Checked)
+            {
+                ConfigManager.Config.Theme = ThemeManager.ThemeCore.Theme.Dark;
+                ConfigManager.SaveConfig();
+
+                //reshow preferences window, to use new theme
+                Program.frmPreferences.DialogResult = DialogResult.OK;
+                Program.frmWelcome.ShowPreferences();
+            }
         }
     }
 }

@@ -54,7 +54,11 @@ namespace SteelQuiz
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
             QuizCore.CheckInitDirectories();
-            ConfigManager.LoadConfig();
+            if (!ConfigManager.LoadConfig())
+            {
+                return;
+            }
+
             var progDataUpgrade = QuizCore.ChkUpgradeProgressData();
             if (progDataUpgrade == QuizCore.ChkUpgradeProgressDataResult.Fail)
             {

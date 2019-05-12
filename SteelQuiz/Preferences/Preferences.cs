@@ -53,19 +53,6 @@ namespace SteelQuiz.Preferences
             }
         }
 
-        private bool ConfigChanged()
-        {
-            foreach (var pcat in pnl_prefs.Controls.OfType<IPreferenceCategory>())
-            {
-                if (pcat.ConfigChanged)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
         public override void SetTheme()
         {
             base.SetTheme();
@@ -144,28 +131,9 @@ namespace SteelQuiz.Preferences
 
         public void SwitchCategory(Type category)
         {
+            /*
             if (category == typeof(PrefsTroubleshooting))
             {
-                if (ConfigChanged())
-                {
-                    var msg = MessageBox.Show("Config must be applied before proceeding to this section. Apply settings?", "Apply settings - SteelQuiz", MessageBoxButtons.YesNo,
-                        MessageBoxIcon.Question);
-                    if (msg == DialogResult.Yes)
-                    {
-                        Apply();
-                        DialogResult = DialogResult.OK;
-                        Program.frmWelcome.ShowPreferences(typeof(PrefsTroubleshooting), typeof(CategoriesMaintenance));
-                    }
-                    else
-                    {
-                        if (lastSelectedCategory != null)
-                        {
-                            lastSelectedCategory.Selected = true;
-                        }
-                    }
-                    return;
-                }
-
                 // select pref category item for this category, as it is required when the preferences window was reshown
                 foreach (var _prefCategoryItem in this.GetAllChildrenRecursive())
                 {
@@ -180,7 +148,7 @@ namespace SteelQuiz.Preferences
                     }
                 }
             }
-
+            */
             var found = false;
             foreach (var prefs in pnl_prefs.Controls.OfType<UserControl>())
             {

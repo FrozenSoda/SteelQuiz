@@ -74,7 +74,7 @@ namespace SteelQuiz.Preferences
             this.rdo_returnToWelcome.TabIndex = 1;
             this.rdo_returnToWelcome.Text = "Return to Welcome screen";
             this.rdo_returnToWelcome.UseVisualStyleBackColor = true;
-            this.rdo_returnToWelcome.CheckedChanged += new System.EventHandler(this.Rdo_editorCloseBehaviour_CheckedChanged);
+            this.rdo_returnToWelcome.CheckedChanged += new System.EventHandler(this.Rdo_returnToWelcome_CheckedChanged);
             // 
             // label1
             // 
@@ -100,7 +100,7 @@ namespace SteelQuiz.Preferences
             this.rdo_closeApp.TabStop = true;
             this.rdo_closeApp.Text = "Exit SteelQuiz";
             this.rdo_closeApp.UseVisualStyleBackColor = true;
-            this.rdo_closeApp.CheckedChanged += new System.EventHandler(this.Rdo_editorCloseBehaviour_CheckedChanged);
+            this.rdo_closeApp.CheckedChanged += new System.EventHandler(this.Rdo_closeApp_CheckedChanged);
             // 
             // PrefsQuizEditor
             // 

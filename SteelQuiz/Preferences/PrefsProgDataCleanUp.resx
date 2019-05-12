@@ -120,7 +120,7 @@
   <data name="label1.Text" xml:space="preserve">
     <value>To reduce the file size of the quiz progress data file, reduce RAM usage, and to speed up the application, you can perform a clean up of the quiz progress data file.
 
-A clean up will remove quiz data for quizzes that are no longer present in the quiz folder.
+A clean up will remove progress data for quizzes that are no longer present in the quiz folder.
 
 The clean up will only affect progress data in your user account.</value>
   </data>

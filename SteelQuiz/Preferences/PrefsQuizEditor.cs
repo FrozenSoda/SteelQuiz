@@ -30,7 +30,6 @@ namespace SteelQuiz.Preferences
 {
     public partial class PrefsQuizEditor : AutoThemeableUserControl, IPreferenceCategory
     {
-        public bool ConfigChanged { get; set; }
 
         public PrefsQuizEditor()
         {
@@ -50,12 +49,24 @@ namespace SteelQuiz.Preferences
             {
                 rdo_returnToWelcome.Checked = true;
             }
-            ConfigChanged = false;
         }
 
-        private void Rdo_editorCloseBehaviour_CheckedChanged(object sender, EventArgs e)
+        private void Rdo_closeApp_CheckedChanged(object sender, EventArgs e)
         {
-            ConfigChanged = true;
+            if (rdo_closeApp.Checked)
+            {
+                ConfigManager.Config.QuizEditorConfig.CloseApplicationOnEditorClose = true;
+                ConfigManager.SaveConfig();
+            }
+        }
+
+        private void Rdo_returnToWelcome_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdo_returnToWelcome.Checked)
+            {
+                ConfigManager.Config.QuizEditorConfig.CloseApplicationOnEditorClose = false;
+                ConfigManager.SaveConfig();
+            }
         }
     }
 }

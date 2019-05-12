@@ -85,7 +85,7 @@ namespace SteelQuiz.Preferences
             this.rdo_themeDark.TabIndex = 1;
             this.rdo_themeDark.Text = "Dark";
             this.rdo_themeDark.UseVisualStyleBackColor = true;
-            this.rdo_themeDark.CheckedChanged += new System.EventHandler(this.Rdo_theme_CheckedChanged);
+            this.rdo_themeDark.CheckedChanged += new System.EventHandler(this.Rdo_themeDark_CheckedChanged);
             // 
             // rdo_themeLight
             // 
@@ -100,7 +100,7 @@ namespace SteelQuiz.Preferences
             this.rdo_themeLight.TabStop = true;
             this.rdo_themeLight.Text = "Light";
             this.rdo_themeLight.UseVisualStyleBackColor = true;
-            this.rdo_themeLight.CheckedChanged += new System.EventHandler(this.Rdo_theme_CheckedChanged);
+            this.rdo_themeLight.CheckedChanged += new System.EventHandler(this.Rdo_themeLight_CheckedChanged);
             // 
             // PrefsGeneral
             // 

@@ -128,7 +128,7 @@ namespace SteelQuiz.Preferences
             this.label4.Size = new System.Drawing.Size(646, 68);
             this.label4.TabIndex = 6;
             this.label4.Text = "Warning! Quizzes removed from the quiz folder, will have its progress data remove" +
-    "d.\r\nPressing \"Cancel\" will NOT undo the clean up after it is finished.";
+    "d.";
             this.label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // PrefsProgDataCleanUp

@@ -34,12 +34,12 @@ namespace SteelQuiz
 
         public static Config Config { get; set; } = null;
 
-        public static void LoadConfig()
+        public static bool LoadConfig()
         {
             var dirInit = QuizCore.CheckInitDirectories();
             if (!dirInit)
             {
-                return;
+                return false;
             }
 
             if (File.Exists(CONFIG_PATH))
@@ -50,19 +50,40 @@ namespace SteelQuiz
                     {
                         Config = JsonConvert.DeserializeObject<Config>(reader.ReadToEnd());
                     }
+                    if (Config == null)
+                    {
+                        var msg = MessageBox.Show("The configuration file for SteelQuiz is corrupted, and must be reset. Reset configuration?", "SteelQuiz", MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Error);
+                        if (msg == DialogResult.Yes)
+                        {
+                            var bkp = QuizCore.BackupConfig(new Version(0, 0, 0));
+                            if (!bkp)
+                            {
+                                return false;
+                            }
+                            File.Delete(CONFIG_PATH);
+                            return LoadConfig();
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                    return true;
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("An error occurred while loading the config:\r\n\r\n" + ex.ToString(), "SteelQuiz", MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                     Application.Exit();
-                    return;
+                    return false;
                 }
             }
             else
             {
                 Config = new Config();
                 SaveConfig();
+                return true;
             }
         }
 

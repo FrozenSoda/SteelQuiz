@@ -58,6 +58,7 @@ namespace SteelQuiz
             // lbl_notice
             // 
             this.lbl_notice.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_notice.ForeColor = System.Drawing.Color.White;
             this.lbl_notice.Location = new System.Drawing.Point(12, 9);
             this.lbl_notice.Name = "lbl_notice";
             this.lbl_notice.Size = new System.Drawing.Size(776, 57);
@@ -67,6 +68,10 @@ namespace SteelQuiz
             // 
             // rtb_license
             // 
+            this.rtb_license.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.rtb_license.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.rtb_license.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtb_license.ForeColor = System.Drawing.Color.White;
             this.rtb_license.Location = new System.Drawing.Point(16, 69);
             this.rtb_license.Name = "rtb_license";
             this.rtb_license.ReadOnly = true;
@@ -76,24 +81,33 @@ namespace SteelQuiz
             // 
             // btn_agree
             // 
+            this.btn_agree.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.btn_agree.Enabled = false;
+            this.btn_agree.FlatAppearance.BorderSize = 0;
+            this.btn_agree.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_agree.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_agree.ForeColor = System.Drawing.Color.White;
             this.btn_agree.Location = new System.Drawing.Point(647, 415);
             this.btn_agree.Name = "btn_agree";
             this.btn_agree.Size = new System.Drawing.Size(141, 23);
             this.btn_agree.TabIndex = 2;
             this.btn_agree.Text = "I agree";
-            this.btn_agree.UseVisualStyleBackColor = true;
+            this.btn_agree.UseVisualStyleBackColor = false;
             this.btn_agree.Click += new System.EventHandler(this.btn_agree_Click);
             // 
             // btn_cancel
             // 
+            this.btn_cancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.btn_cancel.FlatAppearance.BorderSize = 0;
+            this.btn_cancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_cancel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_cancel.ForeColor = System.Drawing.Color.White;
             this.btn_cancel.Location = new System.Drawing.Point(16, 415);
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(75, 23);
             this.btn_cancel.TabIndex = 3;
             this.btn_cancel.Text = "Cancel";
-            this.btn_cancel.UseVisualStyleBackColor = true;
+            this.btn_cancel.UseVisualStyleBackColor = false;
             this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
             // 
             // timer_agree_unlock
@@ -106,6 +120,7 @@ namespace SteelQuiz
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.btn_cancel);
             this.Controls.Add(this.btn_agree);
