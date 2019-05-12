@@ -70,8 +70,17 @@ namespace SteelQuiz.QuizEditor
             return !currentListBoxCollection.SequenceEqual(initialListBoxCollection);
         }
 
-        public bool ApplyChanges()
+        public bool ApplyChanges(bool ask = false)
         {
+            if (ask)
+            {
+                var msg = MessageBox.Show("Apply changes to synonyms?", "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (msg == DialogResult.No)
+                {
+                    return false;
+                }
+            }
+
             if (txt_wordAdd.Text != "" && !lst_synonyms.Items.Contains(txt_wordAdd.Text))
             {
                 var msg = MessageBox.Show("Warning! The textbox contains text not added to the list. Add it to the list before applying?", "SteelQuiz",
@@ -89,6 +98,11 @@ namespace SteelQuiz.QuizEditor
                 }
             }
             Synonyms = lst_synonyms.Items.OfType<string>().ToList();
+
+            // update last saved state
+            initialListBoxCollection = new object[lst_synonyms.Items.Count];
+            lst_synonyms.Items.CopyTo(initialListBoxCollection, 0);
+
             return true;
         }
 

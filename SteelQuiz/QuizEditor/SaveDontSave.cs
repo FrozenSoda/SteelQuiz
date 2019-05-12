@@ -45,9 +45,16 @@ namespace SteelQuiz.QuizEditor
             }
         }
 
-        public SaveDontSave(Icon icon, bool confirmDoNotSave, string msg = null, string title = null)
+        public SaveDontSave(Form owner, Icon icon, bool confirmDoNotSave, string msg = null, string title = null)
         {
             InitializeComponent();
+
+            this.Location = new Point(owner.Location.X + (owner.Size.Width / 2) - (this.Size.Width / 2),
+                              owner.Location.Y + (owner.Size.Height / 2) - (this.Size.Height / 2)
+                            );
+            // for some reason, the size gets changed automatically when centering with the parent. change the size back
+            this.Size = new Size(411, 157);
+
             if (msg != null)
             {
                 lbl_msg.Text = msg;

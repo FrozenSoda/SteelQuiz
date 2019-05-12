@@ -183,7 +183,7 @@ namespace SteelQuiz.QuizEditor
             if (ChangedSinceLastSave)
             {
                 //var msg = MessageBox.Show("You have unsaved changes. Save before loading a new quiz?", "SteelQuiz", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                var saveDontSave = new SaveDontSave(SystemIcons.Warning, true, "The project contains unsaved changes. Save before loading a new quiz?",
+                var saveDontSave = new SaveDontSave(this, SystemIcons.Warning, true, "The project contains unsaved changes. Save before loading a new quiz?",
                     "Save before loading new quiz? - SteelQuiz");
                 saveDontSave.ShowDialog();
                 if (saveDontSave.SaveDialogResult == SaveDontSave.SaveResult.Save)
@@ -281,7 +281,7 @@ namespace SteelQuiz.QuizEditor
             {
                 if (wordPair.EditWordSynonyms != null)
                 {
-                    if (!wordPair.EditWordSynonyms.ApplyChanges())
+                    if (!wordPair.EditWordSynonyms.ApplyChanges(true))
                     {
                         return false;
                     }
@@ -289,7 +289,7 @@ namespace SteelQuiz.QuizEditor
                 }
             }
 
-            var saveDontSave = new SaveDontSave(SystemIcons.Warning, true);
+            var saveDontSave = new SaveDontSave(this, SystemIcons.Warning, true);
             saveDontSave.ShowDialog();
             if (saveDontSave.SaveDialogResult == SaveDontSave.SaveResult.Save)
             {
@@ -314,6 +314,7 @@ namespace SteelQuiz.QuizEditor
                 if (!SaveBeforeExit())
                 {
                     e.Cancel = true;
+                    return;
                 }
             }
 
@@ -560,7 +561,7 @@ namespace SteelQuiz.QuizEditor
             if (ChangedSinceLastSave)
             {
                 //var msg = MessageBox.Show("You have unsaved changes. Save before creating a new quiz?", "SteelQuiz", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                var saveDontSave = new SaveDontSave(SystemIcons.Warning, true, "The project contains unsaved changes. Save before creating a new quiz?",
+                var saveDontSave = new SaveDontSave(this, SystemIcons.Warning, true, "The project contains unsaved changes. Save before creating a new quiz?",
                     "Save before creating new quiz? - SteelQuiz");
                 saveDontSave.ShowDialog();
                 if (saveDontSave.SaveDialogResult == SaveDontSave.SaveResult.Save)

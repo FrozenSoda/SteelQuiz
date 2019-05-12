@@ -61,7 +61,7 @@ namespace SteelQuiz.QuizEditor
             this.lbl_msg.ForeColor = System.Drawing.Color.White;
             this.lbl_msg.Location = new System.Drawing.Point(78, 12);
             this.lbl_msg.Name = "lbl_msg";
-            this.lbl_msg.Size = new System.Drawing.Size(314, 36);
+            this.lbl_msg.Size = new System.Drawing.Size(309, 36);
             this.lbl_msg.TabIndex = 0;
             this.lbl_msg.Text = "The project contains unsaved changes. Save before quitting?";
             // 
@@ -70,8 +70,9 @@ namespace SteelQuiz.QuizEditor
             this.btn_save.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.btn_save.FlatAppearance.BorderSize = 0;
             this.btn_save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_save.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_save.ForeColor = System.Drawing.Color.White;
-            this.btn_save.Location = new System.Drawing.Point(12, 81);
+            this.btn_save.Location = new System.Drawing.Point(12, 87);
             this.btn_save.Name = "btn_save";
             this.btn_save.Size = new System.Drawing.Size(115, 23);
             this.btn_save.TabIndex = 0;
@@ -94,8 +95,9 @@ namespace SteelQuiz.QuizEditor
             this.btn_doNotSave.Enabled = false;
             this.btn_doNotSave.FlatAppearance.BorderSize = 0;
             this.btn_doNotSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_doNotSave.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_doNotSave.ForeColor = System.Drawing.Color.White;
-            this.btn_doNotSave.Location = new System.Drawing.Point(133, 81);
+            this.btn_doNotSave.Location = new System.Drawing.Point(133, 87);
             this.btn_doNotSave.Name = "btn_doNotSave";
             this.btn_doNotSave.Size = new System.Drawing.Size(115, 23);
             this.btn_doNotSave.TabIndex = 3;
@@ -108,8 +110,9 @@ namespace SteelQuiz.QuizEditor
             this.btn_cancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.btn_cancel.FlatAppearance.BorderSize = 0;
             this.btn_cancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_cancel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_cancel.ForeColor = System.Drawing.Color.White;
-            this.btn_cancel.Location = new System.Drawing.Point(277, 81);
+            this.btn_cancel.Location = new System.Drawing.Point(272, 87);
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(115, 23);
             this.btn_cancel.TabIndex = 1;
@@ -120,10 +123,11 @@ namespace SteelQuiz.QuizEditor
             // chk_doNotSave
             // 
             this.chk_doNotSave.AutoSize = true;
+            this.chk_doNotSave.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chk_doNotSave.ForeColor = System.Drawing.Color.White;
-            this.chk_doNotSave.Location = new System.Drawing.Point(81, 51);
+            this.chk_doNotSave.Location = new System.Drawing.Point(81, 55);
             this.chk_doNotSave.Name = "chk_doNotSave";
-            this.chk_doNotSave.Size = new System.Drawing.Size(144, 17);
+            this.chk_doNotSave.Size = new System.Drawing.Size(156, 17);
             this.chk_doNotSave.TabIndex = 2;
             this.chk_doNotSave.Text = "Do not save confirmation";
             this.chk_doNotSave.UseVisualStyleBackColor = true;
@@ -134,7 +138,7 @@ namespace SteelQuiz.QuizEditor
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.ClientSize = new System.Drawing.Size(396, 108);
+            this.ClientSize = new System.Drawing.Size(395, 118);
             this.ControlBox = false;
             this.Controls.Add(this.chk_doNotSave);
             this.Controls.Add(this.btn_cancel);
@@ -146,7 +150,7 @@ namespace SteelQuiz.QuizEditor
             this.Name = "SaveDontSave";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Save before exiting? - SteelQuiz";
             this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.pic_icon)).EndInit();
