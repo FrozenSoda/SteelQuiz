@@ -29,6 +29,7 @@ namespace SteelQuiz.Preferences
     public class CategoryCollection : AutoThemeableUserControl
     {
         private Button backButton;
+
         private bool _isSubCategory = false;
         public bool IsSubCategory
         {

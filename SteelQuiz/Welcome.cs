@@ -248,6 +248,7 @@ namespace SteelQuiz
                     notifyIcon.BalloonTipClosed += (sender, args) => Dispose(notifyIcon);
                     notifyIcon.BalloonTipClicked += (sender, args) => UpdateNotificationClick(notifyIcon);
                     notifyIcon.ShowBalloonTip(10000);
+#warning the update window is minimized when it opens
                 }
             }
             AutoUpdater.CheckForUpdateEvent -= CheckUpdatesNotification;
