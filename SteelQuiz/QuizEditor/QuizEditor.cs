@@ -636,6 +636,8 @@ namespace SteelQuiz.QuizEditor
 
         private void tmr_autoRecoverySave_Tick(object sender, EventArgs e)
         {
+#warning incorrect timer interval
+#warning timer interval should be set to a longer one after clicking "Not now" in update dialog
             UpdateRecoverySave();
         }
 
