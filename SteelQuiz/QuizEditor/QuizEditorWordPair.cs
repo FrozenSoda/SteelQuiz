@@ -67,6 +67,7 @@ namespace SteelQuiz.QuizEditor
         {
             if (EditWordSynonyms != null)
             {
+                EditWordSynonyms.DialogResult = DialogResult.Cancel;
                 EditWordSynonyms.Dispose();
                 EditWordSynonyms = null;
             }

@@ -70,31 +70,34 @@ namespace SteelQuiz.QuizEditor
             return !currentListBoxCollection.SequenceEqual(initialListBoxCollection);
         }
 
-        public void ApplyChanges()
-        {
-            Synonyms = lst_synonyms.Items.OfType<string>().ToList();
-        }
-
-        private void btn_apply_Click(object sender, EventArgs e)
+        public bool ApplyChanges()
         {
             if (txt_wordAdd.Text != "" && !lst_synonyms.Items.Contains(txt_wordAdd.Text))
             {
-                var msg = MessageBox.Show("Warning! The textbox contains text not added to the list. Add it to the list before exiting?", "SteelQuiz",
+                var msg = MessageBox.Show("Warning! The textbox contains text not added to the list. Add it to the list before applying?", "SteelQuiz",
                     MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
                 if (msg == DialogResult.Yes)
                 {
                     if (!AddSynonym())
                     {
-                        return;
+                        return false;
                     }
                 }
                 else if (msg == DialogResult.Cancel)
                 {
-                    return;
+                    return false;
                 }
             }
+            Synonyms = lst_synonyms.Items.OfType<string>().ToList();
+            return true;
+        }
 
-            ApplyChanges();
+        private void btn_apply_Click(object sender, EventArgs e)
+        {
+            if (!ApplyChanges())
+            {
+                return;
+            }
             closeWarning = false;
             DialogResult = DialogResult.OK;
         }
@@ -405,7 +408,7 @@ namespace SteelQuiz.QuizEditor
 
         private void EditWordSynonyms_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!closeWarning || !ListBoxChanged())
+            if (!closeWarning || (!ListBoxChanged() && (txt_wordAdd.Text == "" || lst_synonyms.Items.Contains(txt_wordAdd.Text))))
             {
                 return;
             }

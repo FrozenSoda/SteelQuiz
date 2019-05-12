@@ -370,7 +370,7 @@ namespace SteelQuiz.QuizPractise
 
         private void EditWordSynonyms_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!closeWarning || !ListBoxChanged())
+            if (!closeWarning || (!ListBoxChanged() && (txt_wordAdd.Text == "" || lst_synonyms.Items.Contains(txt_wordAdd.Text))))
             {
                 return;
             }

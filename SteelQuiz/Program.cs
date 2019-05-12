@@ -23,6 +23,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AutoUpdaterDotNET;
+using SteelQuiz.QuizData;
 using SteelQuiz.QuizEditor;
 using SteelQuiz.QuizPractise;
 
@@ -35,6 +36,7 @@ namespace SteelQuiz
         public static Welcome frmWelcome = null;
         public static InQuiz frmInQuiz = null;
         public static Preferences.Preferences frmPreferences = null;
+        public static List<QuizEditor.QuizEditor> openQuizEditors = new List<QuizEditor.QuizEditor>();
 
         public static int QuizEditorsOpen { get; set; } = 0;
 
@@ -66,6 +68,31 @@ namespace SteelQuiz
             }
 
             Application.Run(new TermsOfUse());
+        }
+
+        public static bool CloseQuizEditors()
+        {
+            foreach (var quizEditor in openQuizEditors)
+            {
+                if (!quizEditor.SaveBeforeExit())
+                {
+                    return false;
+                }
+                quizEditor.Close();
+            }
+
+            return true;
+        }
+
+        public static void OpenQuizEditor(Quiz quiz = null, string quizPath = null)
+        {
+            var quizEditor = new QuizEditor.QuizEditor();
+            openQuizEditors.Add(quizEditor);
+            if (quiz != null)
+            {
+                quizEditor.LoadQuiz(quiz, quizPath);
+            }
+            quizEditor.Show();
         }
 
         private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)

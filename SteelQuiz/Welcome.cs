@@ -165,12 +165,7 @@ namespace SteelQuiz
 
         public void OpenQuizEditor(Quiz quiz = null, string quizPath = null)
         {
-            var quizEditor = new QuizEditor.QuizEditor();
-            if (quiz != null)
-            {
-                quizEditor.LoadQuiz(quiz, quizPath);
-            }
-            quizEditor.Show();
+            Program.OpenQuizEditor(quiz, quizPath);
             Hide();
         }
 

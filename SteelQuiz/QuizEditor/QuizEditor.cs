@@ -275,38 +275,61 @@ namespace SteelQuiz.QuizEditor
             }
         }
 
+        public bool SaveBeforeExit()
+        {
+            foreach (var wordPair in flp_words.Controls.OfType<QuizEditorWordPair>())
+            {
+                if (wordPair.EditWordSynonyms != null)
+                {
+                    if (!wordPair.EditWordSynonyms.ApplyChanges())
+                    {
+                        return false;
+                    }
+                    wordPair.DisposeEditWordSynonyms();
+                }
+            }
+
+            var saveDontSave = new SaveDontSave(SystemIcons.Warning, true);
+            saveDontSave.ShowDialog();
+            if (saveDontSave.SaveDialogResult == SaveDontSave.SaveResult.Save)
+            {
+                if (!SaveQuiz())
+                {
+                    return false;
+                }
+            }
+            else if (saveDontSave.SaveDialogResult == SaveDontSave.SaveResult.Cancel)
+            {
+                return false;
+            }
+
+            ChangedSinceLastSave = false;
+            return true;
+        }
+
         private void QuizEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (ChangedSinceLastSave)
             {
-                //var msg = MessageBox.Show("You have unsaved changes. Save before exiting?", "SteelQuiz", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                var saveDontSave = new SaveDontSave(SystemIcons.Warning, true);
-                saveDontSave.ShowDialog();
-                if (saveDontSave.SaveDialogResult == SaveDontSave.SaveResult.Save)
-                {
-                    if (!SaveQuiz())
-                    {
-                        e.Cancel = true;
-                        return;
-                    }
-                }
-                else if (saveDontSave.SaveDialogResult == SaveDontSave.SaveResult.Cancel)
+                if (!SaveBeforeExit())
                 {
                     e.Cancel = true;
-                    return;
                 }
-
-                ChangedSinceLastSave = false;
             }
 
             DeleteRecovery();
 
             if (--Program.QuizEditorsOpen == 0)
             {
-                if (returningToMainMenu || !ConfigManager.Config.QuizEditorConfig.CloseApplicationOnEditorClose)
+                if (Updater.UpdateInProgress)
+                {
+                    // do nothing
+                }
+                else if (returningToMainMenu || !ConfigManager.Config.QuizEditorConfig.CloseApplicationOnEditorClose)
                 {
                     Hide();
                     Program.frmWelcome.Show();
+                    Program.openQuizEditors.Remove(this);
                 }
                 else
                 {

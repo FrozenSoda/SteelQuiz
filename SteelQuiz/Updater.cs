@@ -29,6 +29,8 @@ namespace SteelQuiz
 {
     public static class Updater
     {
+        public static bool UpdateInProgress { get; set; } = false;
+
         private static UpdateMode CurrentUpdateMode { get; set; }
 
         static Updater()
@@ -55,14 +57,32 @@ namespace SteelQuiz
                             "update, or Cancel to exit", "SteelQuiz", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
                         if (msg == DialogResult.OK)
                         {
-                            AutoUpdater.DownloadUpdate();
+                            UpdateInProgress = true;
+                            if (Program.CloseQuizEditors())
+                            {
+                                AutoUpdater.DownloadUpdate();
+                            }
+                            UpdateInProgress = false;
                         }
-                        Application.Exit();
+                        else
+                        {
+                            UpdateInProgress = true;
+                            if (Program.CloseQuizEditors())
+                            {
+                                Application.Exit();
+                            }
+                            UpdateInProgress = false;
+                        }
                     }
                     else if (uargs.Mandatory && uargs.UpdateMode == Mode.ForcedDownload)
                     {
-                        AutoUpdater.DownloadUpdate();
-                        Application.Exit();
+                        UpdateInProgress = true;
+                        if (Program.CloseQuizEditors())
+                        {
+                            AutoUpdater.DownloadUpdate();
+                            Application.Exit();
+                        }
+                        UpdateInProgress = false;
                     }
                     else
                     {
@@ -70,8 +90,13 @@ namespace SteelQuiz
                         var result = frmUpdate.ShowDialog();
                         if (result == DialogResult.OK)
                         {
-                            AutoUpdater.DownloadUpdate();
-                            Application.Exit();
+                            UpdateInProgress = true;
+                            if (Program.CloseQuizEditors())
+                            {
+                                AutoUpdater.DownloadUpdate();
+                                Application.Exit();
+                            }
+                            UpdateInProgress = false;
                         }
                     }
                 }
