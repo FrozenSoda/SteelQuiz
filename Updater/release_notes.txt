@@ -1,0 +1,6 @@
+v3.0.0:
+- Redesigned the UI
+- Added dark mode
+- Added preferences
+- Better animations
+- Bug fixes and improvements
