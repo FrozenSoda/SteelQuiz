@@ -60,10 +60,15 @@ namespace SteelQuiz
             btn_importQuizFromSite.BackColor = WelcomeTheme.GetMainButtonBackColor();
             btn_continueLast.BackColor = WelcomeTheme.GetMainButtonBackColor();
 
-            btn_createQuiz.ForeColor = WelcomeTheme.GetMainButtonForeColor();
-            btn_loadQuiz.ForeColor = WelcomeTheme.GetMainButtonForeColor();
-            btn_importQuizFromSite.ForeColor = WelcomeTheme.GetMainButtonForeColor();
-            btn_continueLast.ForeColor = WelcomeTheme.GetMainButtonForeColor();
+            //btn_createQuiz.ForeColor = WelcomeTheme.GetMainButtonForeColor();
+            //btn_loadQuiz.ForeColor = WelcomeTheme.GetMainButtonForeColor();
+            //btn_importQuizFromSite.ForeColor = WelcomeTheme.GetMainButtonForeColor();
+            //btn_continueLast.ForeColor = WelcomeTheme.GetMainButtonForeColor();
+
+            btn_createQuiz.ForeColor = WelcomeTheme.GetButtonForeColor();
+            btn_loadQuiz.ForeColor = WelcomeTheme.GetButtonForeColor();
+            btn_importQuizFromSite.ForeColor = WelcomeTheme.GetButtonForeColor();
+            btn_continueLast.ForeColor = WelcomeTheme.GetButtonForeColor();
 
             lbl_copyright.ForeColor = WelcomeTheme.GetBackgroundLabelForeColor();
 

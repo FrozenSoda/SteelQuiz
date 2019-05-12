@@ -169,7 +169,7 @@
             this.flp_solutions.Controls.Add(this.pnl_resetAppConfig);
             this.flp_solutions.Location = new System.Drawing.Point(0, 72);
             this.flp_solutions.Name = "flp_solutions";
-            this.flp_solutions.Size = new System.Drawing.Size(652, 337);
+            this.flp_solutions.Size = new System.Drawing.Size(652, 378);
             this.flp_solutions.TabIndex = 6;
             // 
             // PrefsTroubleshooting

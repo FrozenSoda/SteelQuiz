@@ -60,43 +60,6 @@ namespace SteelQuiz.Preferences
             pnl_prefCategories.BackColor = PreferencesTheme.GetPrefCatPanelBackColor();
         }
 
-        private void Apply()
-        {
-            foreach (var _prefs in pnl_prefs.Controls)
-            {
-                if (_prefs is PrefsGeneral)
-                {
-                    var prefs = _prefs as PrefsGeneral;
-
-                    if (prefs.rdo_themeDark.Checked)
-                    {
-                        ConfigManager.Config.Theme = ThemeManager.ThemeCore.Theme.Dark;
-                    }
-                    else if (prefs.rdo_themeLight.Checked)
-                    {
-                        ConfigManager.Config.Theme = ThemeManager.ThemeCore.Theme.Light;
-                    }
-
-                    Program.frmWelcome.SetTheme();
-                }
-                else if (_prefs is PrefsQuizEditor)
-                {
-                    var prefs = _prefs as PrefsQuizEditor;
-
-                    if (prefs.rdo_closeApp.Checked)
-                    {
-                        ConfigManager.Config.QuizEditorConfig.CloseApplicationOnEditorClose = true;
-                    }
-                    else
-                    {
-                        ConfigManager.Config.QuizEditorConfig.CloseApplicationOnEditorClose = false;
-                    }
-                }
-            }
-
-            ConfigManager.SaveConfig();
-        }
-
         public void SwitchCategoryCollection(Type category)
         {
             var found = false;
@@ -167,17 +130,6 @@ namespace SteelQuiz.Preferences
             {
                 pnl_prefs.Controls.Add((UserControl)Activator.CreateInstance(category));
             }
-        }
-
-        private void Btn_cancel_Click(object sender, EventArgs e)
-        {
-            DialogResult = DialogResult.Cancel;
-        }
-
-        private void Btn_apply_Click(object sender, EventArgs e)
-        {
-            Apply();
-            DialogResult = DialogResult.OK;
         }
     }
 }

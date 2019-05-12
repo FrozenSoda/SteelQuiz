@@ -69,6 +69,7 @@ namespace SteelQuiz.Preferences
                 ConfigManager.Config.Theme = ThemeManager.ThemeCore.Theme.Light;
                 ConfigManager.SaveConfig();
 
+                Program.frmWelcome.SetTheme();
                 //reshow preferences window, to use new theme
                 Program.frmPreferences.DialogResult = DialogResult.OK;
                 Program.frmWelcome.ShowPreferences();
@@ -87,6 +88,7 @@ namespace SteelQuiz.Preferences
                 ConfigManager.Config.Theme = ThemeManager.ThemeCore.Theme.Dark;
                 ConfigManager.SaveConfig();
 
+                Program.frmWelcome.SetTheme();
                 //reshow preferences window, to use new theme
                 Program.frmPreferences.DialogResult = DialogResult.OK;
                 Program.frmWelcome.ShowPreferences();
