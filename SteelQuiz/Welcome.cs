@@ -180,9 +180,9 @@ namespace SteelQuiz
                 return;
             }
 
+            Hide();
             Program.frmInQuiz = new InQuiz();
             Program.frmInQuiz.Show();
-            Hide();
         }
 
         public void OpenQuizEditor(Quiz quiz = null, string quizPath = null)

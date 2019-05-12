@@ -305,6 +305,7 @@ namespace SteelQuiz.QuizEditor
             {
                 if (returningToMainMenu || !ConfigManager.Config.QuizEditorConfig.CloseApplicationOnEditorClose)
                 {
+                    Hide();
                     Program.frmWelcome.Show();
                 }
                 else

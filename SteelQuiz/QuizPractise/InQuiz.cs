@@ -356,6 +356,7 @@ namespace SteelQuiz.QuizPractise
 
         private void btn_home_Click(object sender, EventArgs e)
         {
+            Hide();
             Program.frmWelcome.Location = new Point(Location.X + (Size.Width / 2) - (Program.frmWelcome.Size.Width / 2),
                               Location.Y + (Size.Height / 2) - (Program.frmWelcome.Size.Height / 2)
                             );
