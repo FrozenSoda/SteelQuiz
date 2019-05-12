@@ -57,19 +57,22 @@ namespace SteelQuiz
                         {
                             AutoUpdater.DownloadUpdate();
                         }
-                        else
-                        {
-                            Application.Exit();
-                            return;
-                        }
+                        Application.Exit();
                     }
                     else if (uargs.Mandatory && uargs.UpdateMode == Mode.ForcedDownload)
                     {
                         AutoUpdater.DownloadUpdate();
+                        Application.Exit();
                     }
-                    else if (new UpdateAvailable(uargs.InstalledVersion, uargs.CurrentVersion).ShowDialog() == DialogResult.OK)
+                    else
                     {
-                        AutoUpdater.DownloadUpdate();
+                        var frmUpdate = new UpdateAvailable(uargs.InstalledVersion, uargs.CurrentVersion);
+                        var result = frmUpdate.ShowDialog();
+                        if (result == DialogResult.OK)
+                        {
+                            AutoUpdater.DownloadUpdate();
+                            Application.Exit();
+                        }
                     }
                 }
             }
@@ -103,12 +106,13 @@ namespace SteelQuiz
                     if (uargs.Mandatory || new UpdateAvailable(uargs.InstalledVersion, uargs.CurrentVersion).ShowDialog() == DialogResult.OK)
                     {
                         AutoUpdater.DownloadUpdate();
+                        Application.Exit();
                     }
                 }
                 else
                 {
                     MessageBox.Show($"No updates are available.\r\n\r\nYou are running SteelQuiz {Application.ProductVersion}",
-                        "Update Check Failed - SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        "Update Check - SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }

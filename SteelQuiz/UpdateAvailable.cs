@@ -40,7 +40,16 @@ namespace SteelQuiz
             lbl_installedVer.Text = $"Current version: v{installedVersion.ToString()}";
             using (var client = new WebClient())
             {
-
+                try
+                {
+                    string releaseNotes = client.DownloadString("https://raw.githubusercontent.com/steel9/SteelQuiz/master/Updater/release_notes.txt");
+                    rtf_releaseNotes.Text = releaseNotes;
+                }
+                catch
+                {
+                    System.Diagnostics.Debug.Print("Release notes could not be downloaded");
+                    rtf_releaseNotes.Text = "Release notes could not be downloaded";
+                }
             }
         }
 
@@ -52,6 +61,12 @@ namespace SteelQuiz
         private void Btn_update_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
+        }
+
+        private void UpdateAvailable_Shown(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Normal;
+            Focus();
         }
     }
 }

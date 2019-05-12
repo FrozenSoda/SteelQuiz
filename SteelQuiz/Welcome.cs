@@ -181,8 +181,8 @@ namespace SteelQuiz
 
         private void Tmr_chkUpdate_Tick(object sender, EventArgs e)
         {
-            Updater.Update(Updater.UpdateMode.Notification);
             tmr_chkUpdate.Interval = 120000;
+            Updater.Update(Updater.UpdateMode.Notification);
         }
 
         public void ShowPreferences(Type selectedCategory = null, Type selectedCategoryCollection = null)

@@ -117,9 +117,10 @@ namespace SteelQuiz
             this.rtf_releaseNotes.ForeColor = System.Drawing.Color.White;
             this.rtf_releaseNotes.Location = new System.Drawing.Point(12, 140);
             this.rtf_releaseNotes.Name = "rtf_releaseNotes";
+            this.rtf_releaseNotes.ReadOnly = true;
             this.rtf_releaseNotes.Size = new System.Drawing.Size(776, 246);
             this.rtf_releaseNotes.TabIndex = 5;
-            this.rtf_releaseNotes.Text = "v3.0.0\n- Redesigned UI\n- Added preferences\n- Bug fixes and improvements";
+            this.rtf_releaseNotes.Text = "Please wait...";
             // 
             // label2
             // 
@@ -162,6 +163,7 @@ namespace SteelQuiz
             this.Name = "UpdateAvailable";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Software Update Available - SteelQuiz";
+            this.Shown += new System.EventHandler(this.UpdateAvailable_Shown);
             this.ResumeLayout(false);
 
         }
