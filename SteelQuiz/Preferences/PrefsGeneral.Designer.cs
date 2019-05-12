@@ -109,7 +109,7 @@ namespace SteelQuiz.Preferences
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.Controls.Add(this.pnl_rdoTheme);
             this.Name = "PrefsGeneral";
-            this.Size = new System.Drawing.Size(652, 409);
+            this.Size = new System.Drawing.Size(652, 450);
             this.pnl_rdoTheme.ResumeLayout(false);
             this.pnl_rdoTheme.PerformLayout();
             this.ResumeLayout(false);

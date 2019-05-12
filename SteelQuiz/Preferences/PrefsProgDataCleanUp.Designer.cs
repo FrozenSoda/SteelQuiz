@@ -49,7 +49,6 @@ namespace SteelQuiz.Preferences
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PrefsProgDataCleanUp));
             this.btn_cleanUp = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.btn_analyze = new System.Windows.Forms.Button();
             this.lbl_analysisResult = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -62,7 +61,7 @@ namespace SteelQuiz.Preferences
             this.btn_cleanUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_cleanUp.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_cleanUp.ForeColor = System.Drawing.Color.White;
-            this.btn_cleanUp.Location = new System.Drawing.Point(329, 347);
+            this.btn_cleanUp.Location = new System.Drawing.Point(329, 388);
             this.btn_cleanUp.Name = "btn_cleanUp";
             this.btn_cleanUp.Size = new System.Drawing.Size(124, 40);
             this.btn_cleanUp.TabIndex = 1;
@@ -81,17 +80,6 @@ namespace SteelQuiz.Preferences
             this.label1.Text = resources.GetString("label1.Text");
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // label2
-            // 
-            this.label2.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(0, 390);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(652, 19);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "――――――――――――――――――――――――――――――――――――――――――――――――――――――――――";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
             // btn_analyze
             // 
             this.btn_analyze.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
@@ -99,7 +87,7 @@ namespace SteelQuiz.Preferences
             this.btn_analyze.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_analyze.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_analyze.ForeColor = System.Drawing.Color.White;
-            this.btn_analyze.Location = new System.Drawing.Point(199, 347);
+            this.btn_analyze.Location = new System.Drawing.Point(199, 388);
             this.btn_analyze.Name = "btn_analyze";
             this.btn_analyze.Size = new System.Drawing.Size(124, 40);
             this.btn_analyze.TabIndex = 4;
@@ -127,8 +115,8 @@ namespace SteelQuiz.Preferences
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(646, 68);
             this.label4.TabIndex = 6;
-            this.label4.Text = "Warning! Quizzes removed from the quiz folder, will have its progress data remove" +
-    "d.";
+            this.label4.Text = "Warning! Quizzes removed from the quiz folder, will have their progress data remo" +
+    "ved.";
             this.label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // PrefsProgDataCleanUp
@@ -139,11 +127,10 @@ namespace SteelQuiz.Preferences
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lbl_analysisResult);
             this.Controls.Add(this.btn_analyze);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_cleanUp);
             this.Name = "PrefsProgDataCleanUp";
-            this.Size = new System.Drawing.Size(652, 409);
+            this.Size = new System.Drawing.Size(652, 450);
             this.ResumeLayout(false);
 
         }
@@ -151,7 +138,6 @@ namespace SteelQuiz.Preferences
         #endregion
         private System.Windows.Forms.Button btn_cleanUp;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btn_analyze;
         private System.Windows.Forms.Label lbl_analysisResult;
         private System.Windows.Forms.Label label4;

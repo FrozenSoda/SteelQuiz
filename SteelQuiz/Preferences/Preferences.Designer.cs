@@ -63,7 +63,7 @@ namespace SteelQuiz.Preferences
             // 
             this.pnl_prefs.Location = new System.Drawing.Point(136, 0);
             this.pnl_prefs.Name = "pnl_prefs";
-            this.pnl_prefs.Size = new System.Drawing.Size(652, 409);
+            this.pnl_prefs.Size = new System.Drawing.Size(652, 450);
             this.pnl_prefs.TabIndex = 12;
             // 
             // Preferences

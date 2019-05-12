@@ -62,7 +62,7 @@
             this.pnl_update.Controls.Add(this.label1);
             this.pnl_update.Location = new System.Drawing.Point(3, 3);
             this.pnl_update.Name = "pnl_update";
-            this.pnl_update.Size = new System.Drawing.Size(652, 80);
+            this.pnl_update.Size = new System.Drawing.Size(652, 90);
             this.pnl_update.TabIndex = 3;
             // 
             // btn_update
@@ -96,9 +96,9 @@
             // 
             this.pnl_resetProgData.Controls.Add(this.btn_resetProgData);
             this.pnl_resetProgData.Controls.Add(this.label2);
-            this.pnl_resetProgData.Location = new System.Drawing.Point(3, 89);
+            this.pnl_resetProgData.Location = new System.Drawing.Point(3, 99);
             this.pnl_resetProgData.Name = "pnl_resetProgData";
-            this.pnl_resetProgData.Size = new System.Drawing.Size(652, 80);
+            this.pnl_resetProgData.Size = new System.Drawing.Size(652, 90);
             this.pnl_resetProgData.TabIndex = 4;
             // 
             // btn_resetProgData
@@ -124,16 +124,16 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(645, 28);
             this.label2.TabIndex = 0;
-            this.label2.Text = "Reset progress data";
+            this.label2.Text = "Reset quiz progress data";
             this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // pnl_resetAppConfig
             // 
             this.pnl_resetAppConfig.Controls.Add(this.btn_resetAppConfig);
             this.pnl_resetAppConfig.Controls.Add(this.label3);
-            this.pnl_resetAppConfig.Location = new System.Drawing.Point(3, 175);
+            this.pnl_resetAppConfig.Location = new System.Drawing.Point(3, 195);
             this.pnl_resetAppConfig.Name = "pnl_resetAppConfig";
-            this.pnl_resetAppConfig.Size = new System.Drawing.Size(652, 80);
+            this.pnl_resetAppConfig.Size = new System.Drawing.Size(652, 90);
             this.pnl_resetAppConfig.TabIndex = 5;
             // 
             // btn_resetAppConfig
@@ -180,7 +180,7 @@
             this.Controls.Add(this.flp_solutions);
             this.Controls.Add(this.lbl_welcome);
             this.Name = "PrefsTroubleshooting";
-            this.Size = new System.Drawing.Size(652, 409);
+            this.Size = new System.Drawing.Size(652, 450);
             this.pnl_update.ResumeLayout(false);
             this.pnl_resetProgData.ResumeLayout(false);
             this.pnl_resetAppConfig.ResumeLayout(false);

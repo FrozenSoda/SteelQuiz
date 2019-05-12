@@ -109,7 +109,7 @@ namespace SteelQuiz.Preferences
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.Controls.Add(this.pnl_closeBehaviour);
             this.Name = "PrefsQuizEditor";
-            this.Size = new System.Drawing.Size(652, 409);
+            this.Size = new System.Drawing.Size(652, 450);
             this.pnl_closeBehaviour.ResumeLayout(false);
             this.pnl_closeBehaviour.PerformLayout();
             this.ResumeLayout(false);
