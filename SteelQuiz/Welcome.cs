@@ -79,10 +79,8 @@ namespace SteelQuiz
             btn_preferences.ForeColor = WelcomeTheme.GetButtonForeColor();
         }
 
-        public void ChkUpdate(bool unobtrusive = false)
+        public void ChkUpdate()
         {
-            // if unobtrusive == true, an update dialog should not be showed, but a notification message should instead be shown to not distrupt the user
-
             if (SUtil.InternetConnectionAvailable())
             {
                 try
@@ -203,25 +201,65 @@ namespace SteelQuiz
 
         private void Tmr_chkUpdate_Tick(object sender, EventArgs e)
         {
-            // ChkUpdate(true);
-            // disabled until update notification system is implemented
+            CheckForUpdatesNotification();
+            tmr_chkUpdate.Interval = 120000;
         }
 
-        public void CheckForUpdates()
+        private void UpdateNotificationClick(NotifyIcon notifyIcon)
+        {
+            ChkUpdate();
+            Dispose(notifyIcon);
+        }
+
+        private void Dispose(NotifyIcon notifyIcon)
+        {
+            // do not check for updates again for 1 hour if one was found
+            tmr_chkUpdate.Interval = 1 * 60 * 60 * 1000;
+            notifyIcon.Dispose();
+        }
+
+        public void CheckForUpdatesMsgBox()
         {
             tmr_chkUpdate.Stop();
 
-            AutoUpdater.CheckForUpdateEvent += AutoUpdaterOnCheckForUpdateEvent;
+            AutoUpdater.CheckForUpdateEvent += CheckUpdatesMessageBox;
             AutoUpdater.Start("https://raw.githubusercontent.com/steel9/SteelQuiz/master/Updater/update_meta.xml");
         }
 
-        private void AutoUpdaterOnCheckForUpdateEvent(UpdateInfoEventArgs args)
+        public void CheckForUpdatesNotification()
+        {
+            AutoUpdater.CheckForUpdateEvent += CheckUpdatesNotification;
+            AutoUpdater.Start("https://raw.githubusercontent.com/steel9/SteelQuiz/master/Updater/update_meta.xml");
+        }
+
+        private void CheckUpdatesNotification(UpdateInfoEventArgs uargs)
+        {
+            if (uargs != null)
+            {
+                if (uargs.IsUpdateAvailable)
+                {
+                    var notifyIcon = new NotifyIcon
+                    {
+                        Visible = true,
+                        Icon = Properties.Resources.Logo
+                    };
+                    notifyIcon.BalloonTipTitle = "SteelQuiz";
+                    notifyIcon.BalloonTipText = "A software update is available. Click here for more info";
+                    notifyIcon.BalloonTipClosed += (sender, args) => Dispose(notifyIcon);
+                    notifyIcon.BalloonTipClicked += (sender, args) => UpdateNotificationClick(notifyIcon);
+                    notifyIcon.ShowBalloonTip(10000);
+                }
+            }
+            AutoUpdater.CheckForUpdateEvent -= CheckUpdatesNotification;
+        }
+
+        private void CheckUpdatesMessageBox(UpdateInfoEventArgs args)
         {
             if (args != null)
             {
                 if (args.IsUpdateAvailable)
                 {
-                    AutoUpdater.ShowUpdateForm();
+                    ChkUpdate();
                 }
                 else
                 {
@@ -235,13 +273,13 @@ namespace SteelQuiz
                         @"There was a problem reaching the update server. Please check your internet connection and try again later",
                         @"Update check failed - SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            AutoUpdater.CheckForUpdateEvent -= AutoUpdaterOnCheckForUpdateEvent;
+            AutoUpdater.CheckForUpdateEvent -= CheckUpdatesMessageBox;
             tmr_chkUpdate.Start();
         }
 
         private void Btn_chkUpdates_Click(object sender, EventArgs e)
         {
-            CheckForUpdates();
+            CheckForUpdatesMsgBox();
         }
 
         public void ShowPreferences(Type selectedCategory = null, Type selectedCategoryCollection = null)
