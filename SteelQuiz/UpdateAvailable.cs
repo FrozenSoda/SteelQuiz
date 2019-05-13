@@ -40,7 +40,7 @@ namespace SteelQuiz
             SetTheme();
 
             lbl_top.Text = $"A new version of SteelQuiz is available (v{newVersion.ToString()})";
-            lbl_installedVer.Text = $"Current version: v{installedVersion.ToString()}";
+            lbl_installedVer.Text = $"Installed version: v{installedVersion.ToString()}";
             using (var client = new WebClient())
             {
                 try
