@@ -126,7 +126,7 @@ namespace SteelQuiz.QuizEditor
             this.txt_wordAdd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_wordAdd.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_wordAdd.ForeColor = System.Drawing.Color.White;
-            this.txt_wordAdd.Location = new System.Drawing.Point(15, 62);
+            this.txt_wordAdd.Location = new System.Drawing.Point(15, 59);
             this.txt_wordAdd.Name = "txt_wordAdd";
             this.txt_wordAdd.Size = new System.Drawing.Size(443, 22);
             this.txt_wordAdd.TabIndex = 0;

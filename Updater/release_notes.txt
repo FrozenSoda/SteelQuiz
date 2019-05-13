@@ -1,3 +1,6 @@
+v3.0.1:
+- UI fix in synonyms editor
+
 v3.0.0:
 - Redesigned the UI
 - Added dark mode
