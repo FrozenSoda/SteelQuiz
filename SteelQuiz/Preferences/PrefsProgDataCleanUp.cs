@@ -106,21 +106,30 @@ namespace SteelQuiz.Preferences
                 }));
 
                 var bkp = QuizCore.BackupProgress(new Version(MetaData.QUIZ_FILE_FORMAT_VERSION));
-                if (!bkp)
+                if (bkp)
                 {
-                    return;
+                    CleanUp();
+
+                    this.Invoke(new Action(() =>
+                    {
+                        lbl_analysisResult.Text = "Clean up finished!";
+                        lbl_analysisResult.Visible = true;
+
+                        btn_cleanUp.Text = "Clean up";
+                        ParentForm.Enabled = true;
+                    }));
                 }
-
-                CleanUp();
-
-                this.Invoke(new Action(() =>
+                else
                 {
-                    lbl_analysisResult.Text = "Clean up finished!";
-                    lbl_analysisResult.Visible = true;
+                    this.Invoke(new Action(() =>
+                    {
+                        lbl_analysisResult.Text = "Clean up could not start";
+                        lbl_analysisResult.Visible = true;
 
-                    btn_cleanUp.Text = "Clean up";
-                    ParentForm.Enabled = true;
-                }));
+                        btn_cleanUp.Text = "Clean up";
+                        ParentForm.Enabled = true;
+                    }));
+                }
             });
             t.Start();
         }
