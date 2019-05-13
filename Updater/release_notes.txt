@@ -1,3 +1,6 @@
+v3.0.3:
+- UI fix
+
 v3.0.2:
 - UI fixes
 - Bug fixes
