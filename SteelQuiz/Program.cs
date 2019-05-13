@@ -84,9 +84,9 @@ namespace SteelQuiz
             return true;
         }
 
-        public static void OpenQuizEditor(Quiz quiz = null, string quizPath = null)
+        public static void OpenQuizEditor(Quiz quiz = null, string quizPath = null, bool chkRecovery = true)
         {
-            var quizEditor = new QuizEditor.QuizEditor();
+            var quizEditor = new QuizEditor.QuizEditor(chkRecovery);
             openQuizEditors.Add(quizEditor);
             if (quiz != null)
             {

@@ -124,10 +124,11 @@ namespace SteelQuiz.QuizPractise
             // 
             this.txt_wordAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
             this.txt_wordAdd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_wordAdd.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_wordAdd.ForeColor = System.Drawing.Color.White;
-            this.txt_wordAdd.Location = new System.Drawing.Point(15, 61);
+            this.txt_wordAdd.Location = new System.Drawing.Point(15, 62);
             this.txt_wordAdd.Name = "txt_wordAdd";
-            this.txt_wordAdd.Size = new System.Drawing.Size(449, 20);
+            this.txt_wordAdd.Size = new System.Drawing.Size(443, 22);
             this.txt_wordAdd.TabIndex = 0;
             this.txt_wordAdd.TextChanged += new System.EventHandler(this.txt_wordAdd_TextChanged);
             this.txt_wordAdd.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_wordAdd_KeyPress);
@@ -140,9 +141,9 @@ namespace SteelQuiz.QuizPractise
             this.btn_add.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_add.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_add.ForeColor = System.Drawing.Color.White;
-            this.btn_add.Location = new System.Drawing.Point(470, 59);
+            this.btn_add.Location = new System.Drawing.Point(464, 59);
             this.btn_add.Name = "btn_add";
-            this.btn_add.Size = new System.Drawing.Size(97, 23);
+            this.btn_add.Size = new System.Drawing.Size(104, 23);
             this.btn_add.TabIndex = 1;
             this.btn_add.Text = "Add new";
             this.btn_add.UseVisualStyleBackColor = false;
@@ -156,9 +157,9 @@ namespace SteelQuiz.QuizPractise
             this.btn_update.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_update.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_update.ForeColor = System.Drawing.Color.White;
-            this.btn_update.Location = new System.Drawing.Point(573, 59);
+            this.btn_update.Location = new System.Drawing.Point(574, 59);
             this.btn_update.Name = "btn_update";
-            this.btn_update.Size = new System.Drawing.Size(97, 23);
+            this.btn_update.Size = new System.Drawing.Size(104, 23);
             this.btn_update.TabIndex = 2;
             this.btn_update.Text = "Update selected";
             this.btn_update.UseVisualStyleBackColor = false;
@@ -172,9 +173,9 @@ namespace SteelQuiz.QuizPractise
             this.btn_remove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_remove.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_remove.ForeColor = System.Drawing.Color.White;
-            this.btn_remove.Location = new System.Drawing.Point(676, 59);
+            this.btn_remove.Location = new System.Drawing.Point(684, 59);
             this.btn_remove.Name = "btn_remove";
-            this.btn_remove.Size = new System.Drawing.Size(112, 23);
+            this.btn_remove.Size = new System.Drawing.Size(104, 23);
             this.btn_remove.TabIndex = 3;
             this.btn_remove.Text = "Remove selected";
             this.btn_remove.UseVisualStyleBackColor = false;

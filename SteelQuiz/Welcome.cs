@@ -176,6 +176,8 @@ namespace SteelQuiz
 
         private void Tmr_chkUpdate_Tick(object sender, EventArgs e)
         {
+#warning incorrect timer interval
+#warning timer interval should be set to a longer one after clicking "Not now" in update dialog
             tmr_chkUpdate.Interval = 120000;
             Updater.Update(Updater.UpdateMode.Notification);
         }

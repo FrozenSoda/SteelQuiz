@@ -577,8 +577,9 @@ namespace SteelQuiz.QuizEditor
                 }
             }
 
-            var quizEditor = new QuizEditor(false);
-            quizEditor.Show();
+            Program.OpenQuizEditor(null, null, false);
+            //var quizEditor = new QuizEditor(false);
+            //quizEditor.Show();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -636,8 +637,6 @@ namespace SteelQuiz.QuizEditor
 
         private void tmr_autoRecoverySave_Tick(object sender, EventArgs e)
         {
-#warning incorrect timer interval
-#warning timer interval should be set to a longer one after clicking "Not now" in update dialog
             UpdateRecoverySave();
         }
 
