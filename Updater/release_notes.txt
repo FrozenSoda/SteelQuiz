@@ -1,3 +1,7 @@
+v3.0.2:
+- UI fixes
+- Bug fixes
+
 v3.0.1:
 - UI fix in synonyms editor
 
