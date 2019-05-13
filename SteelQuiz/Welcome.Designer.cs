@@ -151,7 +151,7 @@ namespace SteelQuiz
             // tmr_chkUpdate
             // 
             this.tmr_chkUpdate.Enabled = true;
-            this.tmr_chkUpdate.Interval = 15000;
+            this.tmr_chkUpdate.Interval = 120000;
             this.tmr_chkUpdate.Tick += new System.EventHandler(this.Tmr_chkUpdate_Tick);
             // 
             // btn_chkUpdates

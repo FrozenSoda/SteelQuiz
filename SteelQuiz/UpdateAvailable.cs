@@ -36,7 +36,7 @@ namespace SteelQuiz
             InitializeComponent();
             SetTheme();
 
-            lbl_top.Text = $"A software update for SteelQuiz is available (v{newVersion.ToString()})";
+            lbl_top.Text = $"A new version of SteelQuiz is available (v{newVersion.ToString()})";
             lbl_installedVer.Text = $"Current version: v{installedVersion.ToString()}";
             using (var client = new WebClient())
             {
@@ -67,6 +67,14 @@ namespace SteelQuiz
         {
             WindowState = FormWindowState.Normal;
             Focus();
+        }
+
+        private void UpdateAvailable_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (DialogResult == DialogResult.Cancel)
+            {
+                Program.frmWelcome.tmr_chkUpdate.Interval = 2 * 60 * 60 * 1000; // if user does not update, wait 2h before showing update alert again
+            }
         }
     }
 }

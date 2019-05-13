@@ -64,7 +64,7 @@ namespace SteelQuiz
             this.lbl_top.Name = "lbl_top";
             this.lbl_top.Size = new System.Drawing.Size(776, 43);
             this.lbl_top.TabIndex = 1;
-            this.lbl_top.Text = "A software update for SteelQuiz is available (v0.0.0)";
+            this.lbl_top.Text = "A new version of SteelQuiz is available (v0.0.0)";
             this.lbl_top.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label1
@@ -163,6 +163,7 @@ namespace SteelQuiz
             this.Name = "UpdateAvailable";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Software Update Available - SteelQuiz";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UpdateAvailable_FormClosing);
             this.Shown += new System.EventHandler(this.UpdateAvailable_Shown);
             this.ResumeLayout(false);
 

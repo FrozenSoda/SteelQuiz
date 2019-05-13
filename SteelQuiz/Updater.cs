@@ -176,8 +176,6 @@ namespace SteelQuiz
 
         private static void Dispose(NotifyIcon notifyIcon)
         {
-            // do not check for updates again for 1 hour if one was found
-            Program.frmWelcome.tmr_chkUpdate.Interval = 1 * 60 * 60 * 1000;
             notifyIcon.Dispose();
         }
     }

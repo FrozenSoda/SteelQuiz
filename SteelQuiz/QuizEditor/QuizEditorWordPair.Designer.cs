@@ -164,7 +164,7 @@ namespace SteelQuiz.QuizEditor
             this.btn_editSynonyms_w2.ForeColor = System.Drawing.Color.White;
             this.btn_editSynonyms_w2.Location = new System.Drawing.Point(650, 29);
             this.btn_editSynonyms_w2.Name = "btn_editSynonyms_w2";
-            this.btn_editSynonyms_w2.Size = new System.Drawing.Size(75, 34);
+            this.btn_editSynonyms_w2.Size = new System.Drawing.Size(75, 39);
             this.btn_editSynonyms_w2.TabIndex = 6;
             this.btn_editSynonyms_w2.TabStop = false;
             this.btn_editSynonyms_w2.Text = "Edit synonyms";
@@ -178,9 +178,9 @@ namespace SteelQuiz.QuizEditor
             this.btn_delete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_delete.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_delete.ForeColor = System.Drawing.Color.White;
-            this.btn_delete.Location = new System.Drawing.Point(650, 69);
+            this.btn_delete.Location = new System.Drawing.Point(569, 29);
             this.btn_delete.Name = "btn_delete";
-            this.btn_delete.Size = new System.Drawing.Size(75, 23);
+            this.btn_delete.Size = new System.Drawing.Size(75, 39);
             this.btn_delete.TabIndex = 7;
             this.btn_delete.TabStop = false;
             this.btn_delete.Text = "Delete";
