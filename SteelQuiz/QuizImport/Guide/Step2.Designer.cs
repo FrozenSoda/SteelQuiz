@@ -82,7 +82,7 @@ namespace SteelQuiz.QuizImport.Guide
             this.label2.ForeColor = System.Drawing.Color.Gainsboro;
             this.label2.Location = new System.Drawing.Point(20, 110);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(735, 32);
+            this.label2.Size = new System.Drawing.Size(735, 51);
             this.label2.TabIndex = 6;
             this.label2.Text = "With this selected, any definition of the word will be accepted when you are prom" +
     "pted to enter it. You will not necessarily learn all of the definitions of the w" +
@@ -95,7 +95,7 @@ namespace SteelQuiz.QuizImport.Guide
             this.label1.ForeColor = System.Drawing.Color.Gainsboro;
             this.label1.Location = new System.Drawing.Point(20, 33);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(539, 16);
+            this.label1.Size = new System.Drawing.Size(544, 17);
             this.label1.TabIndex = 5;
             this.label1.Text = "With this selected, SteelQuiz will make sure that you learn all of the definition" +
     "s, of the words.";
@@ -107,7 +107,7 @@ namespace SteelQuiz.QuizImport.Guide
             this.rdo_addMultipleTranslationsAsSynonyms.ForeColor = System.Drawing.Color.White;
             this.rdo_addMultipleTranslationsAsSynonyms.Location = new System.Drawing.Point(3, 78);
             this.rdo_addMultipleTranslationsAsSynonyms.Name = "rdo_addMultipleTranslationsAsSynonyms";
-            this.rdo_addMultipleTranslationsAsSynonyms.Size = new System.Drawing.Size(495, 20);
+            this.rdo_addMultipleTranslationsAsSynonyms.Size = new System.Drawing.Size(499, 21);
             this.rdo_addMultipleTranslationsAsSynonyms.TabIndex = 4;
             this.rdo_addMultipleTranslationsAsSynonyms.Text = "Add multiple definitions/translations of a word as synonyms in a single word pair" +
     "";
@@ -122,7 +122,7 @@ namespace SteelQuiz.QuizImport.Guide
             this.rdo_multipleTranslationsAsDifferentWordPairs.ForeColor = System.Drawing.Color.White;
             this.rdo_multipleTranslationsAsDifferentWordPairs.Location = new System.Drawing.Point(3, 3);
             this.rdo_multipleTranslationsAsDifferentWordPairs.Name = "rdo_multipleTranslationsAsDifferentWordPairs";
-            this.rdo_multipleTranslationsAsDifferentWordPairs.Size = new System.Drawing.Size(538, 20);
+            this.rdo_multipleTranslationsAsDifferentWordPairs.Size = new System.Drawing.Size(539, 21);
             this.rdo_multipleTranslationsAsDifferentWordPairs.TabIndex = 3;
             this.rdo_multipleTranslationsAsDifferentWordPairs.TabStop = true;
             this.rdo_multipleTranslationsAsDifferentWordPairs.Text = "Add words with multiple definitions/translations as separate word pairs (recommen" +
