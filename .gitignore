@@ -3,6 +3,7 @@
 
 Setup/setup.nsi.old
 Res/Icons/old/
+Updater/test_server/
 
 # User-specific files
 *.suo

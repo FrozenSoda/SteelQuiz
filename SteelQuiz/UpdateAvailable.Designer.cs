@@ -46,6 +46,7 @@ namespace SteelQuiz
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UpdateAvailable));
             this.lbl_top = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -54,6 +55,7 @@ namespace SteelQuiz
             this.rtf_releaseNotes = new System.Windows.Forms.RichTextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.lbl_installedVer = new System.Windows.Forms.Label();
+            this.tmr_btnEnable = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // lbl_top
@@ -82,6 +84,7 @@ namespace SteelQuiz
             // btn_update
             // 
             this.btn_update.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.btn_update.Enabled = false;
             this.btn_update.FlatAppearance.BorderSize = 0;
             this.btn_update.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_update.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -89,14 +92,15 @@ namespace SteelQuiz
             this.btn_update.Location = new System.Drawing.Point(481, 392);
             this.btn_update.Name = "btn_update";
             this.btn_update.Size = new System.Drawing.Size(307, 46);
-            this.btn_update.TabIndex = 3;
-            this.btn_update.Text = "Update now (recommended)";
+            this.btn_update.TabIndex = 0;
+            this.btn_update.Text = "(3s) Update now (recommended)";
             this.btn_update.UseVisualStyleBackColor = false;
             this.btn_update.Click += new System.EventHandler(this.Btn_update_Click);
             // 
             // btn_notNow
             // 
             this.btn_notNow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.btn_notNow.Enabled = false;
             this.btn_notNow.FlatAppearance.BorderSize = 0;
             this.btn_notNow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_notNow.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -104,8 +108,8 @@ namespace SteelQuiz
             this.btn_notNow.Location = new System.Drawing.Point(12, 392);
             this.btn_notNow.Name = "btn_notNow";
             this.btn_notNow.Size = new System.Drawing.Size(140, 46);
-            this.btn_notNow.TabIndex = 4;
-            this.btn_notNow.Text = "Not now";
+            this.btn_notNow.TabIndex = 2;
+            this.btn_notNow.Text = "(3s) Not now";
             this.btn_notNow.UseVisualStyleBackColor = false;
             this.btn_notNow.Click += new System.EventHandler(this.Btn_notNow_Click);
             // 
@@ -119,7 +123,7 @@ namespace SteelQuiz
             this.rtf_releaseNotes.Name = "rtf_releaseNotes";
             this.rtf_releaseNotes.ReadOnly = true;
             this.rtf_releaseNotes.Size = new System.Drawing.Size(776, 246);
-            this.rtf_releaseNotes.TabIndex = 5;
+            this.rtf_releaseNotes.TabIndex = 1;
             this.rtf_releaseNotes.Text = "Please wait...";
             // 
             // label2
@@ -143,6 +147,12 @@ namespace SteelQuiz
             this.lbl_installedVer.TabIndex = 7;
             this.lbl_installedVer.Text = "Installed version: v0.0.0";
             this.lbl_installedVer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tmr_btnEnable
+            // 
+            this.tmr_btnEnable.Enabled = true;
+            this.tmr_btnEnable.Interval = 1000;
+            this.tmr_btnEnable.Tick += new System.EventHandler(this.Tmr_btnEnable_Tick);
             // 
             // UpdateAvailable
             // 
@@ -178,5 +188,6 @@ namespace SteelQuiz
         private System.Windows.Forms.RichTextBox rtf_releaseNotes;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lbl_installedVer;
+        private System.Windows.Forms.Timer tmr_btnEnable;
     }
 }

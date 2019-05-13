@@ -42,14 +42,15 @@ namespace SteelQuiz
         {
             Startup,
             Notification,
-            Verbose
+            Verbose,
+            Manual
         }
 
         private static void AutoUpdater_CheckForUpdateEvent(UpdateInfoEventArgs uargs)
         {
             if (CurrentUpdateMode == UpdateMode.Startup)
             {
-                if (uargs.IsUpdateAvailable)
+                if (uargs != null && uargs.IsUpdateAvailable)
                 {
                     if (uargs.Mandatory && uargs.UpdateMode == Mode.Forced)
                     {
@@ -61,6 +62,7 @@ namespace SteelQuiz
                             if (Program.CloseQuizEditors())
                             {
                                 AutoUpdater.DownloadUpdate();
+                                Application.Exit();
                             }
                             UpdateInProgress = false;
                         }
@@ -103,7 +105,7 @@ namespace SteelQuiz
             }
             else if (CurrentUpdateMode == UpdateMode.Notification)
             {
-                if (uargs.IsUpdateAvailable)
+                if (uargs != null && uargs.IsUpdateAvailable)
                 {
                     var notifyIcon = new NotifyIcon
                     {
@@ -126,7 +128,7 @@ namespace SteelQuiz
             }
             else if (CurrentUpdateMode == UpdateMode.Verbose)
             {
-                if (uargs.IsUpdateAvailable)
+                if (uargs != null && uargs.IsUpdateAvailable)
                 {
                     if (uargs.Mandatory || new UpdateAvailable(uargs.InstalledVersion, uargs.CurrentVersion).ShowDialog() == DialogResult.OK)
                     {
@@ -156,6 +158,7 @@ namespace SteelQuiz
                         AutoUpdater.RunUpdateAsAdmin = false;
                     }
                     AutoUpdater.Start("https://raw.githubusercontent.com/steel9/SteelQuiz/master/Updater/update_meta.xml");
+                    //AutoUpdater.Start("http://localhost:8000/update_meta.xml");
                 }
                 catch (Exception ex)
                 {

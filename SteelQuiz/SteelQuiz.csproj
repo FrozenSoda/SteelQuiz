@@ -266,6 +266,7 @@
       <DependentUpon>UpdateAvailable.cs</DependentUpon>
     </Compile>
     <Compile Include="Updater.cs" />
+    <Compile Include="Util\Display.cs" />
     <Compile Include="Welcome.cs">
       <SubType>Form</SubType>
     </Compile>

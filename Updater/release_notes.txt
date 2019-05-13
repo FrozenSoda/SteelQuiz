@@ -3,4 +3,5 @@ v3.0.0:
 - Added dark mode
 - Added preferences
 - Better animations
+- Better update system
 - Bug fixes and improvements

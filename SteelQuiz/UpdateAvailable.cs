@@ -31,6 +31,9 @@ namespace SteelQuiz
 {
     public partial class UpdateAvailable : AutoThemeableForm
     {
+        private const int BUTTON_ENABLE_DELAY_S = 3;
+        private int secondsSinceStart = 0;
+
         public UpdateAvailable(Version installedVersion, Version newVersion)
         {
             InitializeComponent();
@@ -71,9 +74,36 @@ namespace SteelQuiz
 
         private void UpdateAvailable_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (secondsSinceStart < BUTTON_ENABLE_DELAY_S)
+            {
+                e.Cancel = true;
+                MessageBox.Show($"Please wait {BUTTON_ENABLE_DELAY_S - secondsSinceStart}s before closing", "SteelQuiz", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
+
             if (DialogResult == DialogResult.Cancel)
             {
                 Program.frmWelcome.tmr_chkUpdate.Interval = 2 * 60 * 60 * 1000; // if user does not update, wait 2h before showing update alert again
+            }
+        }
+
+        private void Tmr_btnEnable_Tick(object sender, EventArgs e)
+        {
+            ++secondsSinceStart;
+            if (secondsSinceStart >= BUTTON_ENABLE_DELAY_S)
+            {
+                btn_update.Text = "Update now (recommended)";
+                btn_update.Enabled = true;
+
+                btn_notNow.Text = "Not now";
+                btn_notNow.Enabled = true;
+
+                tmr_btnEnable.Stop();
+            }
+            else
+            {
+                btn_update.Text = $"({BUTTON_ENABLE_DELAY_S - secondsSinceStart}s) Update now (recommended)";
+                btn_notNow.Text = $"({BUTTON_ENABLE_DELAY_S - secondsSinceStart}s) Not now";
             }
         }
     }

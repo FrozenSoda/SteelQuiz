@@ -72,7 +72,7 @@ namespace SteelQuiz.QuizEditor
             this.btn_save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_save.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_save.ForeColor = System.Drawing.Color.White;
-            this.btn_save.Location = new System.Drawing.Point(12, 87);
+            this.btn_save.Location = new System.Drawing.Point(12, 83);
             this.btn_save.Name = "btn_save";
             this.btn_save.Size = new System.Drawing.Size(115, 23);
             this.btn_save.TabIndex = 0;
@@ -97,7 +97,7 @@ namespace SteelQuiz.QuizEditor
             this.btn_doNotSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_doNotSave.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_doNotSave.ForeColor = System.Drawing.Color.White;
-            this.btn_doNotSave.Location = new System.Drawing.Point(133, 87);
+            this.btn_doNotSave.Location = new System.Drawing.Point(133, 83);
             this.btn_doNotSave.Name = "btn_doNotSave";
             this.btn_doNotSave.Size = new System.Drawing.Size(115, 23);
             this.btn_doNotSave.TabIndex = 3;
@@ -112,7 +112,7 @@ namespace SteelQuiz.QuizEditor
             this.btn_cancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_cancel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_cancel.ForeColor = System.Drawing.Color.White;
-            this.btn_cancel.Location = new System.Drawing.Point(272, 87);
+            this.btn_cancel.Location = new System.Drawing.Point(264, 83);
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(115, 23);
             this.btn_cancel.TabIndex = 1;
@@ -138,7 +138,7 @@ namespace SteelQuiz.QuizEditor
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.ClientSize = new System.Drawing.Size(395, 118);
+            this.ClientSize = new System.Drawing.Size(391, 118);
             this.ControlBox = false;
             this.Controls.Add(this.chk_doNotSave);
             this.Controls.Add(this.btn_cancel);
