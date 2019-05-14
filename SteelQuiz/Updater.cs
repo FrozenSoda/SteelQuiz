@@ -33,6 +33,8 @@ namespace SteelQuiz
 
         private static UpdateMode CurrentUpdateMode { get; set; }
 
+        private static readonly object updateLock = new object();
+
         static Updater()
         {
             AutoUpdater.CheckForUpdateEvent += AutoUpdater_CheckForUpdateEvent;
@@ -146,28 +148,31 @@ namespace SteelQuiz
 
         public static void Update(UpdateMode updateMode)
         {
-            CurrentUpdateMode = updateMode;
+            lock (updateLock)
+            {
+                CurrentUpdateMode = updateMode;
 
-            if (SUtil.InternetConnectionAvailable())
-            {
-                try
+                if (SUtil.InternetConnectionAvailable())
                 {
-                    if (SUtil.IsDirectoryWritable(Path.GetDirectoryName(Application.ExecutablePath)))
+                    try
                     {
-                        // if application has write permissions to application folder, admin is not required
-                        AutoUpdater.RunUpdateAsAdmin = false;
+                        if (SUtil.IsDirectoryWritable(Path.GetDirectoryName(Application.ExecutablePath)))
+                        {
+                            // if application has write permissions to application folder, admin is not required
+                            AutoUpdater.RunUpdateAsAdmin = false;
+                        }
+                        AutoUpdater.Start("https://raw.githubusercontent.com/steel9/SteelQuiz/master/Updater/update_meta.xml");
+                        //AutoUpdater.Start("http://localhost:8000/update_meta.xml");
                     }
-                    AutoUpdater.Start("https://raw.githubusercontent.com/steel9/SteelQuiz/master/Updater/update_meta.xml");
-                    //AutoUpdater.Start("http://localhost:8000/update_meta.xml");
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("An error occurred during the update/update check:\r\n\r\n" + ex.ToString(), "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-                catch (Exception ex)
+                else if (CurrentUpdateMode == UpdateMode.Verbose || CurrentUpdateMode == UpdateMode.Notification)
                 {
-                    MessageBox.Show("An error occurred during the update/update check:\r\n\r\n" + ex.ToString(), "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Internet connection could not be established", "Update Check Failed - SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            }
-            else if (CurrentUpdateMode == UpdateMode.Verbose || CurrentUpdateMode == UpdateMode.Notification)
-            {
-                MessageBox.Show("Internet connection could not be established", "Update Check Failed - SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
