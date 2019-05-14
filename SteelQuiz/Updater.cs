@@ -40,15 +40,15 @@ namespace SteelQuiz
 
         public enum UpdateMode
         {
-            Startup,
-            Notification,
-            Verbose,
-            Manual
+            DialogIfUpdateAvailable,        // show update dialog if an update is available, otherwise do nothing
+            Verbose,                        // show update dialog if an update is available, otherwise show a message stating no updates are available
+            Notification,                   // show a notification if an update is available, otherwise do nothing
+            Manual                          // do nothing (used when a custom eventhandler for update checking is used)
         }
 
         private static void AutoUpdater_CheckForUpdateEvent(UpdateInfoEventArgs uargs)
         {
-            if (CurrentUpdateMode == UpdateMode.Startup)
+            if (CurrentUpdateMode == UpdateMode.DialogIfUpdateAvailable)
             {
                 if (uargs != null && uargs.IsUpdateAvailable)
                 {
@@ -173,7 +173,7 @@ namespace SteelQuiz
 
         private static void UpdateNotificationClick(NotifyIcon notifyIcon)
         {
-            Update(UpdateMode.Startup);
+            Update(UpdateMode.DialogIfUpdateAvailable);
             Dispose(notifyIcon);
         }
 

@@ -46,7 +46,7 @@ namespace SteelQuiz
             SetControlStates();
             SetTheme();
 
-            Updater.Update(Updater.UpdateMode.Startup);
+            Updater.Update(Updater.UpdateMode.DialogIfUpdateAvailable);
         }
 
         public void SetTheme()
