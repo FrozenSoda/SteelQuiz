@@ -29,7 +29,7 @@ namespace SteelQuiz
 {
     public static class Updater
     {
-        public static bool UpdateInProgress { get; set; } = false;
+        public static bool UpdateInProgress { get; private set; } = false;
 
         private static UpdateMode CurrentUpdateMode { get; set; }
 
