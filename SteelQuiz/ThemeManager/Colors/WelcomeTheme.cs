@@ -84,7 +84,7 @@ namespace SteelQuiz.ThemeManager.Colors
             }
             else
             {
-                return Color.FromArgb(150, 150, 150);
+                return Color.FromArgb(192, 192, 192);
             }
         }
     }
