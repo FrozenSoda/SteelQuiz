@@ -148,7 +148,7 @@ namespace SteelQuiz
                 }
                 else
                 {
-                    MessageBox.Show($"No updates are available.\r\n\r\nYou are running SteelQuiz {Application.ProductVersion}",
+                    MessageBox.Show($"No updates are available.\r\n\r\nYou are running SteelQuiz v{Application.ProductVersion}",
                         "Update Check - SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
