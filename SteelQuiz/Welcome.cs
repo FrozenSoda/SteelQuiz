@@ -165,8 +165,8 @@ namespace SteelQuiz
 
         public void OpenQuizEditor(Quiz quiz = null, string quizPath = null)
         {
-            Program.OpenQuizEditor(quiz, quizPath);
             Hide();
+            Program.OpenQuizEditor(quiz, quizPath);
         }
 
         private void btn_createQuiz_Click(object sender, EventArgs e)
