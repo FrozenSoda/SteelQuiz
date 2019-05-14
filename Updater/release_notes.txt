@@ -1,6 +1,6 @@
 v3.0.4:
 - Fixed bug causing SteelQuiz to be displayed incorrectly in the taskbar when opening the quiz editor
-- Fixed some messages in the application
+- Updated some of the messages in the application
 - Bug fixes and improvements
 
 v3.0.3:
