@@ -117,7 +117,14 @@ namespace SteelQuiz
                     notifyIcon.BalloonTipTitle = "SteelQuiz";
                     if (uargs.Mandatory)
                     {
-                        notifyIcon.BalloonTipText = "Mandatory software update is available. Click here to update now";
+                        if (uargs.UpdateMode == Mode.Forced)
+                        {
+                            notifyIcon.BalloonTipText = "Mandatory software update is available. Click here to update now";
+                        }
+                        else // automatic download and installation (at startup of app)
+                        {
+                            notifyIcon.BalloonTipText = "A software update is available. Click here to update now";
+                        }
                     }
                     else
                     {
