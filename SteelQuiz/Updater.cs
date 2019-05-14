@@ -112,9 +112,10 @@ namespace SteelQuiz
                     var notifyIcon = new NotifyIcon
                     {
                         Visible = true,
-                        Icon = Properties.Resources.Logo
+                        Icon = Properties.Resources.Logo,
+                        BalloonTipTitle = "SteelQuiz"
                     };
-                    notifyIcon.BalloonTipTitle = "SteelQuiz";
+
                     if (uargs.Mandatory)
                     {
                         if (uargs.UpdateMode == Mode.Forced)
