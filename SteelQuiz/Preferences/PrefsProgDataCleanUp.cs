@@ -97,6 +97,13 @@ namespace SteelQuiz.Preferences
 
         private void Btn_cleanUp_Click(object sender, EventArgs e)
         {
+            var msg = MessageBox.Show("Perform clean up?\r\n\r\nWarning: Quizzes removed from the quiz folder, will have their progress data removed", "SteelQuiz",
+                MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            if (msg == DialogResult.Cancel)
+            {
+                return;
+            }
+
             var t = new Thread(() =>
             {
                 this.Invoke(new Action(() =>
@@ -108,11 +115,11 @@ namespace SteelQuiz.Preferences
                 var bkp = QuizCore.BackupProgress(new Version(MetaData.QUIZ_FILE_FORMAT_VERSION));
                 if (bkp)
                 {
-                    CleanUp();
+                    int removalCount = CleanUp();
 
                     this.Invoke(new Action(() =>
                     {
-                        lbl_analysisResult.Text = "Clean up finished!";
+                        lbl_analysisResult.Text = $"Clean up finished! Progress data for {removalCount} quizzes were removed";
                         lbl_analysisResult.Visible = true;
 
                         btn_cleanUp.Text = "Clean up";
@@ -134,7 +141,7 @@ namespace SteelQuiz.Preferences
             t.Start();
         }
 
-        private void CleanUp()
+        private int CleanUp()
         {
             IEnumerable<Guid> guidsToRemove = QuizProgDatasToRemove();
             QuizProgDataRoot progDataRoot;
@@ -145,12 +152,14 @@ namespace SteelQuiz.Preferences
 
             var progDatasToRemove = new List<QuizProgData>();
 
+            int removalCount = 0;
             foreach (var quizProg in progDataRoot.QuizProgDatas)
             {
                 var guid = quizProg.QuizGUID;
                 if (guidsToRemove.Contains(guid))
                 {
                     progDatasToRemove.Add(quizProg);
+                    ++removalCount;
                 }
             }
 
@@ -163,6 +172,8 @@ namespace SteelQuiz.Preferences
             {
                 writer.Write(JsonConvert.SerializeObject(progDataRoot, Formatting.Indented));
             }
+
+            return removalCount;
         }
 
         private IEnumerable<Guid> QuizProgDatasToRemove()
