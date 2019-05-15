@@ -76,7 +76,7 @@ namespace SteelQuiz.Preferences
                 {
                     if (count == 0)
                     {
-                        lbl_analysisResult.Text = "Analysis result: Progress data for 0 quizzes can be removed";
+                        lbl_analysisResult.Text = "Analysis result: Clean up is not required - there is nothing to clean up";
                     }
                     else if (count == 1)
                     {
@@ -119,7 +119,18 @@ namespace SteelQuiz.Preferences
 
                     this.Invoke(new Action(() =>
                     {
-                        lbl_analysisResult.Text = $"Clean up finished! Progress data for {removalCount} quizzes were removed";
+                        if (removalCount == 0)
+                        {
+                            lbl_analysisResult.Text = $"Clean up not required - there is nothing to clean up";
+                        }
+                        else if (removalCount == 1)
+                        {
+                            lbl_analysisResult.Text = $"Clean up finished! Progress data for {removalCount} quiz were removed";
+                        }
+                        else if (removalCount > 1)
+                        {
+                            lbl_analysisResult.Text = $"Clean up finished! Progress data for {removalCount} quizzes were removed";
+                        }
                         lbl_analysisResult.Visible = true;
 
                         btn_cleanUp.Text = "Clean up";
