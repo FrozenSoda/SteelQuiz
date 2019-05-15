@@ -481,6 +481,7 @@ namespace SteelQuiz
             }
             catch (Exception ex)
             {
+#warning make this message more general (than "conversion will not run")
                 MessageBox.Show("An error occurred while backing up the quiz progress, the conversion will not run:\r\n\r\n" + ex.ToString(),
                     "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
