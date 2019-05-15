@@ -121,7 +121,7 @@ namespace SteelQuiz.Preferences
                     {
                         if (removalCount == 0)
                         {
-                            lbl_analysisResult.Text = $"Clean up not required - there is nothing to clean up";
+                            lbl_analysisResult.Text = $"Clean up not required - there is nothing to remove";
                         }
                         else if (removalCount == 1)
                         {
