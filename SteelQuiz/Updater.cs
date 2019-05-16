@@ -45,6 +45,7 @@ namespace SteelQuiz
             Normal,         // update automatically (if mandatory option), or show update dialog if an update is available, otherwise do nothing
             Verbose,        // show update dialog if an update is available, otherwise show a message stating no updates are available
             Notification,   // show a notification if an update is available, otherwise do nothing
+            Force,          // update even if no update is available (force update)
             Manual          // do nothing (used when a custom eventhandler for update checking is used)
         }
 
@@ -109,6 +110,8 @@ namespace SteelQuiz
             {
                 if (uargs != null && uargs.IsUpdateAvailable)
                 {
+                    Program.frmWelcome.tmr_chkUpdate.Interval = 2 * 60 * 60 * 1000; // dont check for updates again for 2h
+
                     var notifyIcon = new NotifyIcon
                     {
                         Visible = true,
@@ -142,14 +145,25 @@ namespace SteelQuiz
                 {
                     if (uargs.Mandatory || new UpdateAvailable(uargs.InstalledVersion, uargs.CurrentVersion).ShowDialog() == DialogResult.OK)
                     {
-                        AutoUpdater.DownloadUpdate();
-                        Application.Exit();
+                        if (Program.CloseQuizEditors())
+                        {
+                            AutoUpdater.DownloadUpdate();
+                            Application.Exit();
+                        }
                     }
                 }
                 else
                 {
                     MessageBox.Show($"No updates are available.\r\n\r\nYou are running SteelQuiz v{Application.ProductVersion}",
                         "Update Check - SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else if (CurrentUpdateMode == UpdateMode.Force)
+            {
+                if (Program.CloseQuizEditors())
+                {
+                    AutoUpdater.DownloadUpdate();
+                    Application.Exit();
                 }
             }
         }

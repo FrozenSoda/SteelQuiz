@@ -49,7 +49,7 @@ namespace SteelQuiz.Preferences
             this.lbl_welcome = new System.Windows.Forms.Label();
             this.pnl_update = new System.Windows.Forms.Panel();
             this.btn_update = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lbl_update = new System.Windows.Forms.Label();
             this.pnl_resetProgData = new System.Windows.Forms.Panel();
             this.btn_resetProgData = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -77,7 +77,7 @@ namespace SteelQuiz.Preferences
             // pnl_update
             // 
             this.pnl_update.Controls.Add(this.btn_update);
-            this.pnl_update.Controls.Add(this.label1);
+            this.pnl_update.Controls.Add(this.lbl_update);
             this.pnl_update.Location = new System.Drawing.Point(3, 3);
             this.pnl_update.Name = "pnl_update";
             this.pnl_update.Size = new System.Drawing.Size(652, 90);
@@ -99,16 +99,16 @@ namespace SteelQuiz.Preferences
             this.btn_update.UseVisualStyleBackColor = false;
             this.btn_update.Click += new System.EventHandler(this.Btn_update_Click);
             // 
-            // label1
+            // lbl_update
             // 
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(-1, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(645, 28);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Update SteelQuiz";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lbl_update.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_update.ForeColor = System.Drawing.Color.White;
+            this.lbl_update.Location = new System.Drawing.Point(-1, 0);
+            this.lbl_update.Name = "lbl_update";
+            this.lbl_update.Size = new System.Drawing.Size(645, 28);
+            this.lbl_update.TabIndex = 0;
+            this.lbl_update.Text = "Update SteelQuiz";
+            this.lbl_update.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // pnl_resetProgData
             // 
@@ -130,7 +130,7 @@ namespace SteelQuiz.Preferences
             this.btn_resetProgData.Name = "btn_resetProgData";
             this.btn_resetProgData.Size = new System.Drawing.Size(124, 40);
             this.btn_resetProgData.TabIndex = 5;
-            this.btn_resetProgData.Text = "Please wait...";
+            this.btn_resetProgData.Text = "Continue";
             this.btn_resetProgData.UseVisualStyleBackColor = false;
             this.btn_resetProgData.Click += new System.EventHandler(this.Btn_resetProgData_Click);
             // 
@@ -165,7 +165,7 @@ namespace SteelQuiz.Preferences
             this.btn_resetAppConfig.Name = "btn_resetAppConfig";
             this.btn_resetAppConfig.Size = new System.Drawing.Size(124, 40);
             this.btn_resetAppConfig.TabIndex = 5;
-            this.btn_resetAppConfig.Text = "Please wait...";
+            this.btn_resetAppConfig.Text = "Continue";
             this.btn_resetAppConfig.UseVisualStyleBackColor = false;
             this.btn_resetAppConfig.Click += new System.EventHandler(this.Btn_resetAppConfig_Click);
             // 
@@ -211,7 +211,7 @@ namespace SteelQuiz.Preferences
 
         private System.Windows.Forms.Label lbl_welcome;
         private System.Windows.Forms.Panel pnl_update;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbl_update;
         private System.Windows.Forms.Button btn_update;
         private System.Windows.Forms.Panel pnl_resetProgData;
         private System.Windows.Forms.Button btn_resetProgData;

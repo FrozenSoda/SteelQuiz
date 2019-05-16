@@ -36,7 +36,6 @@ namespace SteelQuiz.Preferences
             InitializeComponent();
 
             SetTheme();
-            this.Enabled = false;
             CheckForUpdates();
         }
 
@@ -55,14 +54,19 @@ namespace SteelQuiz.Preferences
             {
                 if (args.IsUpdateAvailable)
                 {
-                    btn_update.Enabled = true;
-                    btn_update.Text = "Continue";
+                    this.Invoke(new Action(() =>
+                    {
+                        btn_update.Enabled = true;
+                        btn_update.Text = "Continue";
+                    }));
                 }
                 else
                 {
                     this.Invoke(new Action(() =>
                     {
-                        pnl_update.Dispose();
+                        lbl_update.Text = "Force update SteelQuiz";
+                        btn_update.Enabled = true;
+                        btn_update.Text = "Continue";
                     }));
                 }
             }
@@ -79,12 +83,6 @@ namespace SteelQuiz.Preferences
             }
             AutoUpdater.CheckForUpdateEvent -= AutoUpdaterOnCheckForUpdateEvent;
             Program.frmWelcome.tmr_chkUpdate.Start();
-            this.Invoke(new Action(() =>
-            {
-                this.Enabled = true;
-                btn_resetAppConfig.Text = "Continue";
-                btn_resetProgData.Text = "Continue";
-            }));
         }
 
         private void Btn_resetAppConfig_Click(object sender, EventArgs e)
@@ -133,7 +131,7 @@ namespace SteelQuiz.Preferences
         private void Btn_update_Click(object sender, EventArgs e)
         {
             //AutoUpdater.Start("https://raw.githubusercontent.com/steel9/SteelQuiz/master/Updater/update_meta.xml");
-            Updater.Update(Updater.UpdateMode.Verbose);
+            Updater.Update(Updater.UpdateMode.Force);
         }
     }
 }

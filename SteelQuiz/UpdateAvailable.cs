@@ -80,11 +80,6 @@ namespace SteelQuiz
                 MessageBox.Show($"Please wait {BUTTON_ENABLE_DELAY_S - secondsSinceStart}s before closing", "SteelQuiz", MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
             }
-
-            if (DialogResult == DialogResult.Cancel)
-            {
-                Program.frmWelcome.tmr_chkUpdate.Interval = 2 * 60 * 60 * 1000; // if user does not update, wait 2h before showing update alert again
-            }
         }
 
         private void Tmr_btnEnable_Tick(object sender, EventArgs e)
