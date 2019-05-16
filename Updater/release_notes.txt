@@ -1,3 +1,10 @@
+v3.0.5:
+- Fixed messages in application
+- Improvements in troubleshooting menu
+- Fixed excessive update notifications
+- Changed some colors in light/dark mode to better match the theme
+- Bug fixes and improvements
+
 v3.0.4:
 - Fixed bug causing SteelQuiz to be displayed incorrectly in the taskbar when opening the quiz editor
 - Updated some of the messages in the application
