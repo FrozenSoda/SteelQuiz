@@ -1,3 +1,6 @@
+v3.0.6:
+- Fixed issue causing SteelQuiz to crash when QuizProgress.json is not present. This issue prevented new users from launching SteelQuiz.
+
 v3.0.5:
 - Fixed messages in application
 - Improvements in troubleshooting menu

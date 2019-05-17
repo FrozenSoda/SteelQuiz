@@ -61,10 +61,13 @@ namespace SteelQuiz
                 return;
             }
 
-            var progDataUpgrade = QuizCore.ChkUpgradeProgressData();
-            if (progDataUpgrade == QuizCore.ChkUpgradeProgressDataResult.Fail)
+            if (File.Exists(QuizCore.PROGRESS_FILE_PATH))
             {
-                return;
+                var progDataUpgrade = QuizCore.ChkUpgradeProgressData();
+                if (progDataUpgrade == QuizCore.ChkUpgradeProgressDataResult.Fail)
+                {
+                    return;
+                }
             }
 
             Application.Run(new TermsOfUse());
