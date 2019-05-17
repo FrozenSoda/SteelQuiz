@@ -20,10 +20,12 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.DirectoryServices.AccountManagement;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AutoUpdaterDotNET;
@@ -47,6 +49,26 @@ namespace SteelQuiz
             SetTheme();
 
             Updater.Update(Updater.UpdateMode.Normal);
+
+            RunInNewThread(new StartupLoading(), true);
+            lbl_welcome.Text = $"Welcome {UserPrincipal.Current.DisplayName.Split(' ')[0]}!";
+        }
+
+        private static void ApplicationRunProc(object state)
+        {
+            Application.Run(state as Form);
+        }
+
+        public static void RunInNewThread(Form form, bool isBackground)
+        {
+            if (form == null)
+                throw new ArgumentNullException("form");
+            if (form.IsHandleCreated)
+                throw new InvalidOperationException("Form is already running.");
+            Thread thread = new Thread(ApplicationRunProc);
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.IsBackground = isBackground;
+            thread.Start(form);
         }
 
         public void SetTheme()
