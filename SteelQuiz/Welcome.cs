@@ -40,6 +40,7 @@ namespace SteelQuiz
     public partial class Welcome : Form, ThemeManager.IThemeable
     {
         private WelcomeTheme WelcomeTheme = new WelcomeTheme();
+        private StartupLoading startupLoading;
 
         public Welcome()
         {
@@ -50,8 +51,19 @@ namespace SteelQuiz
 
             Updater.Update(Updater.UpdateMode.Normal);
 
-            RunInNewThread(new StartupLoading(), true);
-            lbl_welcome.Text = $"Welcome {UserPrincipal.Current.DisplayName.Split(' ')[0]}!";
+            startupLoading = new StartupLoading();
+
+#warning name should be cached in config
+            RunInNewThread(startupLoading, true);
+            lbl_welcome.Text = $"Welcome back {UserPrincipal.Current.DisplayName.Split(' ')[0]}!";
+
+            startupLoading.Invoke(new Action(() =>
+            {
+                startupLoading.AnimationResetEvent.WaitOne();
+                startupLoading.AnimationResetEvent.Close();
+                startupLoading.AnimTimer.Stop();
+                startupLoading.Dispose();
+            }));
         }
 
         private static void ApplicationRunProc(object state)
@@ -218,6 +230,11 @@ namespace SteelQuiz
         private void Btn_chkUpdates_Click(object sender, EventArgs e)
         {
             Updater.Update(Updater.UpdateMode.Verbose);
+        }
+
+        private void Welcome_Shown(object sender, EventArgs e)
+        {
+            Activate();
         }
     }
 }

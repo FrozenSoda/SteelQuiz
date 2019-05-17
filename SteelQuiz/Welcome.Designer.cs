@@ -62,11 +62,11 @@ namespace SteelQuiz
             // 
             // lbl_welcome
             // 
-            this.lbl_welcome.Font = new System.Drawing.Font("Segoe UI Semilight", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_welcome.Font = new System.Drawing.Font("Segoe UI Light", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_welcome.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.lbl_welcome.Location = new System.Drawing.Point(12, 9);
             this.lbl_welcome.Name = "lbl_welcome";
-            this.lbl_welcome.Size = new System.Drawing.Size(776, 43);
+            this.lbl_welcome.Size = new System.Drawing.Size(776, 59);
             this.lbl_welcome.TabIndex = 0;
             this.lbl_welcome.Text = "Welcome! What do you want to do?";
             this.lbl_welcome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -205,6 +205,7 @@ namespace SteelQuiz
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SteelQuiz";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Welcome_FormClosing);
+            this.Shown += new System.EventHandler(this.Welcome_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
