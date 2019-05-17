@@ -59,6 +59,7 @@ namespace SteelQuiz
 
             startupLoading.Invoke(new Action(() =>
             {
+#warning problems with resetevent
                 startupLoading.AnimationResetEvent.WaitOne();
                 startupLoading.AnimationResetEvent.Close();
                 startupLoading.AnimTimer.Stop();
