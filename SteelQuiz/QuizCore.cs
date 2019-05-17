@@ -315,6 +315,20 @@ namespace SteelQuiz
             }
         }
 
+        public static bool ChkCreateQuizProgress()
+        {
+            if (!File.Exists(PROGRESS_FILE_PATH))
+            {
+                var cfgDz = new QuizProgDataRoot(MetaData.QUIZ_FILE_FORMAT_VERSION);
+                var cfgSz = JsonConvert.SerializeObject(cfgDz, Formatting.Indented);
+                using (var writer = new StreamWriter(PROGRESS_FILE_PATH, false))
+                {
+                    writer.Write(cfgSz);
+                }
+            }
+            return true;
+        }
+
         private static bool LoadProgressData()
         {
             if (File.Exists(PROGRESS_FILE_PATH))
@@ -364,7 +378,7 @@ namespace SteelQuiz
 
         /*
          * Updates changes to word pairs in quiz progress data, and removes progress data from word pairs that were removed from the quiz
-         */ 
+         */
         public static bool FixQuizProgressData()
         {
             // REMOVE WORD PAIRS FROM PROGRESS DATA THAT WERE REMOVED FROM THE QUIZ
@@ -557,7 +571,10 @@ namespace SteelQuiz
             else
             {
                 cfgDz = new QuizProgDataRoot(MetaData.QUIZ_FILE_FORMAT_VERSION);
-                cfgDz.QuizProgDatas.Add(QuizProgress);
+                if (QuizProgress != null)
+                {
+                    cfgDz.QuizProgDatas.Add(QuizProgress);
+                }
             }
 
             // SERIALIZE AND SAVE

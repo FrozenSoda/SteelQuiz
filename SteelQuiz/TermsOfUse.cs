@@ -69,6 +69,21 @@ namespace SteelQuiz
             {
                 Program.frmWelcome.Show();
             }
+
+            if (!QuizCore.ChkCreateQuizProgress())
+            {
+                // open troubleshooting
+                Program.frmWelcome.ShowPreferences(typeof(Preferences.PrefsTroubleshooting), typeof(Preferences.CategoriesMaintenance));
+            }
+            else
+            {
+                var progDataUpgrade = QuizCore.ChkUpgradeProgressData();
+                if (progDataUpgrade == QuizCore.ChkUpgradeProgressDataResult.Fail)
+                {
+                    return;
+                }
+            }
+
             Hide();
         }
 
