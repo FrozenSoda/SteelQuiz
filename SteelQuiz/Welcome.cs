@@ -43,13 +43,21 @@ namespace SteelQuiz
         private WelcomeTheme WelcomeTheme = new WelcomeTheme();
         private WelcomeMessage[] welcomeMessages = new WelcomeMessage[]
         {
-            new WelcomeMessage(@"Welcome \firstname!", true),
-            new WelcomeMessage(@"Ready for some studying \firstname?", true),
-            new WelcomeMessage(@"Welcome back \firstname!", ConfigManager.Config.Statistics.LaunchCount.Data > 1),
-            new WelcomeMessage(@"Good morning \firstname!", DateTime.Now.Hour >= 5 && DateTime.Now.Hour < 12),
-            new WelcomeMessage(@"Good afternoon \firstname!", DateTime.Now.Hour >= 12 && DateTime.Now.Hour <= 17),
-            new WelcomeMessage(@"Good evening \firstname!", DateTime.Now.Hour > 17 && DateTime.Now.Hour <= 22)
+            new WelcomeMessage(@"Ready for some studying \firstname?",
+                new Func<bool>(() => { return true; })),
+            new WelcomeMessage(@"Welcome \firstname!",
+                new Func<bool>(() => { return Program.frmWelcome == null || !Program.frmWelcome.firstWelcomeMsgEvalCompleted; })),
+            new WelcomeMessage(@"Welcome back \firstname!",
+                new Func<bool>(() => { return Program.frmWelcome == null || !Program.frmWelcome.firstWelcomeMsgEvalCompleted; })),
+            new WelcomeMessage(@"Good morning \firstname!",
+                new Func<bool>(() => { return DateTime.Now.Hour >= 5 && DateTime.Now.Hour < 12; })),
+            new WelcomeMessage(@"Good afternoon \firstname!",
+                new Func<bool>(() => { return DateTime.Now.Hour >= 12 && DateTime.Now.Hour <= 17; })),
+            new WelcomeMessage(@"Good evening \firstname!",
+                new Func<bool>(() => { return DateTime.Now.Hour > 17 && DateTime.Now.Hour <= 22; }))
         };
+        private WelcomeMessage CurrentWelcomeMessage { get; set; }
+        public bool firstWelcomeMsgEvalCompleted = false;
 
         public Welcome()
         {
@@ -67,7 +75,14 @@ namespace SteelQuiz
 
         public void UpdateCfg()
         {
-            lbl_welcome.Text = welcomeMessages.SelectWelcomeMessage();
+            GenerateWelcomeMsg();
+        }
+
+        public void GenerateWelcomeMsg()
+        {
+            CurrentWelcomeMessage = welcomeMessages.SelectWelcomeMessage();
+            lbl_welcome.Text = CurrentWelcomeMessage.Message;
+            firstWelcomeMsgEvalCompleted = true;
         }
 
         public void SetTheme()
@@ -222,6 +237,14 @@ namespace SteelQuiz
         private void Welcome_Shown(object sender, EventArgs e)
         {
             Activate();
+        }
+
+        private void Tmr_welcomeMsg_Tick(object sender, EventArgs e)
+        {
+            if (!CurrentWelcomeMessage.Conditions())
+            {
+                GenerateWelcomeMsg();
+            }
         }
     }
 }

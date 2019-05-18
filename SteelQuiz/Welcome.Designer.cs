@@ -58,6 +58,7 @@ namespace SteelQuiz
             this.tmr_chkUpdate = new System.Windows.Forms.Timer(this.components);
             this.btn_chkUpdates = new System.Windows.Forms.Button();
             this.btn_preferences = new System.Windows.Forms.Button();
+            this.tmr_welcomeMsg = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // lbl_welcome
@@ -184,6 +185,12 @@ namespace SteelQuiz
             this.btn_preferences.UseVisualStyleBackColor = false;
             this.btn_preferences.Click += new System.EventHandler(this.Btn_preferences_Click);
             // 
+            // tmr_welcomeMsg
+            // 
+            this.tmr_welcomeMsg.Enabled = true;
+            this.tmr_welcomeMsg.Interval = 10000;
+            this.tmr_welcomeMsg.Tick += new System.EventHandler(this.Tmr_welcomeMsg_Tick);
+            // 
             // Welcome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -223,6 +230,7 @@ namespace SteelQuiz
         private System.Windows.Forms.Button btn_chkUpdates;
         private System.Windows.Forms.Button btn_preferences;
         internal System.Windows.Forms.Timer tmr_chkUpdate;
+        private System.Windows.Forms.Timer tmr_welcomeMsg;
     }
 }
 

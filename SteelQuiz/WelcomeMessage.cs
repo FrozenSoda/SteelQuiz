@@ -46,13 +46,12 @@ namespace SteelQuiz
                 _message = value;
             }
         }
-        public bool[] Conditions { get; set; }
+        public Func<bool> Conditions { get; set; }
 
-        public WelcomeMessage(string msg, params bool[] conditions)
+        public WelcomeMessage(string msg, Func<bool> conditions)
         {
             Message = msg;
             Conditions = conditions;
-#warning conditions should be reevaluated at selection
         }
     }
 }

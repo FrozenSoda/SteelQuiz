@@ -163,10 +163,10 @@ namespace SteelQuiz.Preferences
             // txt_name
             // 
             this.txt_name.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txt_name.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_name.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_name.Location = new System.Drawing.Point(129, 34);
             this.txt_name.Name = "txt_name";
-            this.txt_name.Size = new System.Drawing.Size(503, 22);
+            this.txt_name.Size = new System.Drawing.Size(503, 23);
             this.txt_name.TabIndex = 1;
             this.txt_name.TextChanged += new System.EventHandler(this.Txt_name_TextChanged);
             this.txt_name.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Txt_name_KeyPress);

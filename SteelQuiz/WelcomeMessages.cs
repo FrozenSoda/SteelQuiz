@@ -26,29 +26,19 @@ namespace SteelQuiz
 {
     public static class WelcomeMessages
     {
-        public static string SelectWelcomeMessage(this WelcomeMessage[] welcomeMessages)
+        public static WelcomeMessage SelectWelcomeMessage(this WelcomeMessage[] welcomeMessages)
         {
             var possible = new List<WelcomeMessage>();
             foreach (var msg in welcomeMessages)
             {
-                var conditionsFilled = true;
-                foreach (var condition in msg.Conditions)
-                {
-                    if (!condition)
-                    {
-                        conditionsFilled = false;
-                        break;
-                    }
-                }
-
-                if (conditionsFilled)
+                if (msg.Conditions())
                 {
                     possible.Add(msg);
                 }
             }
 
             int rnd = new Random().Next(0, possible.Count);
-            return possible[rnd].Message;
+            return possible[rnd];
         }
     }
 }
