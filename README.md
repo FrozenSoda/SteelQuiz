@@ -35,6 +35,10 @@ SteelQuiz automatically searches for, and offers to download and install updates
 ### System requirements
 - **Operating system:** Windows 7 SP1 or later
 - **Runtime:** Microsoft .NET Framework 4.6.1
+   
+SteelQuiz should be able to run on Mac and Linux, in CrossOver/Wine, but nothing is guaranteed.
+SteelQuiz has been tested in CrossOver on Ubuntu 18.04.2 LTS, and worked acceptably, but as said before, nothing is guaranteed to work.
+Make sure you install .NET Framework in CrossOver/Wine before installing SteelQuiz!
 
 ### Incompatible software
 - **f.lux Microsoft Store version**   
