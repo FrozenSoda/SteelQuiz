@@ -43,6 +43,10 @@ namespace SteelQuiz
         private WelcomeTheme WelcomeTheme = new WelcomeTheme();
         private WelcomeMessage[] welcomeMessages = new WelcomeMessage[]
         {
+            new WelcomeMessage(@"Hi \firstname!",
+                new Func<bool>(() => { return ConfigManager.Config.ShowNameOnWelcomeScreen; })),
+            new WelcomeMessage(@"Hello \firstname!",
+                new Func<bool>(() => { return ConfigManager.Config.ShowNameOnWelcomeScreen; })),
             new WelcomeMessage(@"Ready for some studying \firstname?",
                 new Func<bool>(() => { return true; })),
             new WelcomeMessage(@"Welcome \firstname!",
