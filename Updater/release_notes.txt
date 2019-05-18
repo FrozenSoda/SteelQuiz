@@ -1,3 +1,9 @@
+v3.1.0:
+- Better welcome messages
+- UI improvements
+- Improved CrossOver/Wine compatibility
+- Bug fixes and other improvements
+
 v3.0.6:
 - Fixed issue causing SteelQuiz to crash when QuizProgress.json is not present. This issue prevented new users from launching SteelQuiz.
 
