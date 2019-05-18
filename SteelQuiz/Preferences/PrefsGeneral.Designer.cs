@@ -140,9 +140,9 @@ namespace SteelQuiz.Preferences
             this.rdo_dontShowNameOnWelcome.ForeColor = System.Drawing.Color.White;
             this.rdo_dontShowNameOnWelcome.Location = new System.Drawing.Point(15, 104);
             this.rdo_dontShowNameOnWelcome.Name = "rdo_dontShowNameOnWelcome";
-            this.rdo_dontShowNameOnWelcome.Size = new System.Drawing.Size(283, 24);
+            this.rdo_dontShowNameOnWelcome.Size = new System.Drawing.Size(409, 24);
             this.rdo_dontShowNameOnWelcome.TabIndex = 3;
-            this.rdo_dontShowNameOnWelcome.Text = "Do not show name on welcome screen";
+            this.rdo_dontShowNameOnWelcome.Text = "Do not allow name to be displayed in welcome messages";
             this.rdo_dontShowNameOnWelcome.UseVisualStyleBackColor = true;
             // 
             // rdo_showNameOnWelcome
@@ -153,10 +153,10 @@ namespace SteelQuiz.Preferences
             this.rdo_showNameOnWelcome.ForeColor = System.Drawing.Color.White;
             this.rdo_showNameOnWelcome.Location = new System.Drawing.Point(15, 74);
             this.rdo_showNameOnWelcome.Name = "rdo_showNameOnWelcome";
-            this.rdo_showNameOnWelcome.Size = new System.Drawing.Size(235, 24);
+            this.rdo_showNameOnWelcome.Size = new System.Drawing.Size(361, 24);
             this.rdo_showNameOnWelcome.TabIndex = 2;
             this.rdo_showNameOnWelcome.TabStop = true;
-            this.rdo_showNameOnWelcome.Text = "Show name on welcome screen";
+            this.rdo_showNameOnWelcome.Text = "Allow name to be displayed in welcome messages";
             this.rdo_showNameOnWelcome.UseVisualStyleBackColor = true;
             this.rdo_showNameOnWelcome.CheckedChanged += new System.EventHandler(this.Rdo_showNameOnWelcome_CheckedChanged);
             // 
