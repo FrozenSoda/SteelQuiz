@@ -52,6 +52,7 @@ namespace SteelQuiz
         {
             Message = msg;
             Conditions = conditions;
+#warning conditions should be reevaluated at selection
         }
     }
 }
