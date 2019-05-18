@@ -140,6 +140,8 @@ namespace SteelQuiz.Preferences
                     MessageBox.Show($"An error occurred while resetting quiz progress data:\r\n\r\n{ex.ToString()}", "SteelQuiz",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+
+                Application.Restart();
             }
         }
 

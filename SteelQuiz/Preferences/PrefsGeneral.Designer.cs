@@ -65,7 +65,7 @@ namespace SteelQuiz.Preferences
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(-2, 0);
+            this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(75, 25);
             this.label1.TabIndex = 0;
@@ -87,7 +87,7 @@ namespace SteelQuiz.Preferences
             this.rdo_themeDark.AutoSize = true;
             this.rdo_themeDark.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdo_themeDark.ForeColor = System.Drawing.Color.White;
-            this.rdo_themeDark.Location = new System.Drawing.Point(15, 69);
+            this.rdo_themeDark.Location = new System.Drawing.Point(15, 70);
             this.rdo_themeDark.Name = "rdo_themeDark";
             this.rdo_themeDark.Size = new System.Drawing.Size(58, 24);
             this.rdo_themeDark.TabIndex = 1;
@@ -100,7 +100,7 @@ namespace SteelQuiz.Preferences
             this.rdo_themeLight.Checked = true;
             this.rdo_themeLight.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdo_themeLight.ForeColor = System.Drawing.Color.White;
-            this.rdo_themeLight.Location = new System.Drawing.Point(15, 39);
+            this.rdo_themeLight.Location = new System.Drawing.Point(15, 40);
             this.rdo_themeLight.Name = "rdo_themeLight";
             this.rdo_themeLight.Size = new System.Drawing.Size(60, 24);
             this.rdo_themeLight.TabIndex = 0;
@@ -127,7 +127,7 @@ namespace SteelQuiz.Preferences
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(-2, 0);
+            this.label3.Location = new System.Drawing.Point(0, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(89, 25);
             this.label3.TabIndex = 4;
@@ -138,7 +138,7 @@ namespace SteelQuiz.Preferences
             this.rdo_dontShowNameOnWelcome.AutoSize = true;
             this.rdo_dontShowNameOnWelcome.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdo_dontShowNameOnWelcome.ForeColor = System.Drawing.Color.White;
-            this.rdo_dontShowNameOnWelcome.Location = new System.Drawing.Point(15, 103);
+            this.rdo_dontShowNameOnWelcome.Location = new System.Drawing.Point(15, 104);
             this.rdo_dontShowNameOnWelcome.Name = "rdo_dontShowNameOnWelcome";
             this.rdo_dontShowNameOnWelcome.Size = new System.Drawing.Size(283, 24);
             this.rdo_dontShowNameOnWelcome.TabIndex = 3;
@@ -151,7 +151,7 @@ namespace SteelQuiz.Preferences
             this.rdo_showNameOnWelcome.Checked = true;
             this.rdo_showNameOnWelcome.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdo_showNameOnWelcome.ForeColor = System.Drawing.Color.White;
-            this.rdo_showNameOnWelcome.Location = new System.Drawing.Point(15, 73);
+            this.rdo_showNameOnWelcome.Location = new System.Drawing.Point(15, 74);
             this.rdo_showNameOnWelcome.Name = "rdo_showNameOnWelcome";
             this.rdo_showNameOnWelcome.Size = new System.Drawing.Size(235, 24);
             this.rdo_showNameOnWelcome.TabIndex = 2;
