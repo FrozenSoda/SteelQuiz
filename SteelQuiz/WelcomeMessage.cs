@@ -46,12 +46,38 @@ namespace SteelQuiz
                 _message = value;
             }
         }
+
+        /*
+         * Evaluated at: Selection, Re-evaluation (timer)
+         */ 
         public Func<bool> Conditions { get; set; }
 
-        public WelcomeMessage(string msg, Func<bool> conditions)
+        /*
+         * Evaluated at: Selection
+         */ 
+        public Func<bool> ConditionsSelection { get; set; }
+
+        public WelcomeMessage(string msg, Func<bool> conditions, Func<bool> conditionsSelection = null)
         {
             Message = msg;
-            Conditions = conditions;
+
+            if (conditions != null)
+            {
+                Conditions = conditions;
+            }
+            else
+            {
+                Conditions = new Func<bool>(() => { return true; });
+            }
+
+            if (conditionsSelection != null)
+            {
+                ConditionsSelection = conditionsSelection;
+            }
+            else
+            {
+                ConditionsSelection = new Func<bool>(() => { return true; });
+            }
         }
     }
 }

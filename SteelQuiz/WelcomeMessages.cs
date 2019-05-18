@@ -31,7 +31,7 @@ namespace SteelQuiz
             var possible = new List<WelcomeMessage>();
             foreach (var msg in welcomeMessages)
             {
-                if (msg.Conditions())
+                if (msg.Conditions() && msg.ConditionsSelection())
                 {
                     possible.Add(msg);
                 }
