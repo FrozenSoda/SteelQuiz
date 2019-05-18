@@ -29,6 +29,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AutoUpdaterDotNET;
+using SteelQuiz.Extensions;
 using SteelQuiz.QuizData;
 using SteelQuiz.QuizImport;
 using SteelQuiz.QuizImport.Guide;
@@ -40,8 +41,6 @@ namespace SteelQuiz
     public partial class Welcome : Form, ThemeManager.IThemeable
     {
         private WelcomeTheme WelcomeTheme = new WelcomeTheme();
-        private StartupLoading startupLoading;
-
         public Welcome()
         {
             InitializeComponent();
@@ -51,37 +50,9 @@ namespace SteelQuiz
 
             Updater.Update(Updater.UpdateMode.Normal);
 
-            startupLoading = new StartupLoading();
+            ConfigManager.ChkSetupForFirstUse();
 
-#warning name should be cached in config
-            RunInNewThread(startupLoading, true);
-            lbl_welcome.Text = $"Welcome back {UserPrincipal.Current.DisplayName.Split(' ')[0]}!";
-
-            startupLoading.Invoke(new Action(() =>
-            {
-#warning problems with resetevent
-                startupLoading.AnimationResetEvent.WaitOne();
-                startupLoading.AnimationResetEvent.Close();
-                startupLoading.AnimTimer.Stop();
-                startupLoading.Dispose();
-            }));
-        }
-
-        private static void ApplicationRunProc(object state)
-        {
-            Application.Run(state as Form);
-        }
-
-        public static void RunInNewThread(Form form, bool isBackground)
-        {
-            if (form == null)
-                throw new ArgumentNullException("form");
-            if (form.IsHandleCreated)
-                throw new InvalidOperationException("Form is already running.");
-            Thread thread = new Thread(ApplicationRunProc);
-            thread.SetApartmentState(ApartmentState.STA);
-            thread.IsBackground = isBackground;
-            thread.Start(form);
+            lbl_welcome.Text = $"Welcome back {ConfigManager.Config.Name.Split(' ')[0]}!";
         }
 
         public void SetTheme()

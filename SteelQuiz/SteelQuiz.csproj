@@ -60,6 +60,7 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ConfigData\QuizEditorConfig.cs" />
+    <Compile Include="Extensions\FormExtensions.cs" />
     <Compile Include="StartupLoading.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -241,7 +242,7 @@
     <Compile Include="QuizCore.cs" />
     <Compile Include="ConfigData\Config.cs" />
     <Compile Include="QuizPractise\StringComp.cs" />
-    <Compile Include="SUtil.cs" />
+    <Compile Include="Util\SUtil.cs" />
     <Compile Include="TermsOfUse.cs">
       <SubType>Form</SubType>
     </Compile>

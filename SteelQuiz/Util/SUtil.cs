@@ -29,7 +29,7 @@ using System.Security.Principal;
 using System.IO;
 using System.Net;
 
-namespace SteelQuiz
+namespace SteelQuiz.Util
 {
     public static class SUtil
     {

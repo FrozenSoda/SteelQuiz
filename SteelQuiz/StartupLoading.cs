@@ -13,7 +13,8 @@ namespace SteelQuiz
 {
     public partial class StartupLoading : AutoThemeableForm
     {
-        public ManualResetEvent AnimationResetEvent { get; set; } = new ManualResetEvent(false);
+        public bool StopAnimation { get; set; } = false;
+        public bool AnimationStopped { get; private set; } = false;
         public System.Timers.Timer AnimTimer { get; set; }
         private int animElapsed = 0;
 
@@ -48,7 +49,14 @@ namespace SteelQuiz
             }));
 
             ++animElapsed;
-            AnimationResetEvent.Set();
+            if (!StopAnimation)
+            {
+                AnimTimer.Enabled = true;
+            }
+            else
+            {
+                AnimationStopped = true;
+            }
         }
 
         private void StartupLoading_Shown(object sender, EventArgs e)
@@ -56,7 +64,8 @@ namespace SteelQuiz
             AnimTimer = new System.Timers.Timer()
             {
                 Interval = 1,
-                SynchronizingObject = this
+                SynchronizingObject = this,
+                AutoReset = false
             };
             AnimTimer.Elapsed += AnimTimer_Elapsed;
             AnimTimer.Start();

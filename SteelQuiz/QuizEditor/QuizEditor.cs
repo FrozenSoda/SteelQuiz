@@ -29,6 +29,7 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using SteelQuiz.QuizData;
 using SteelQuiz.QuizEditor.UndoRedo;
+using SteelQuiz.Util;
 
 namespace SteelQuiz.QuizEditor
 {

@@ -18,13 +18,16 @@
 
 using System;
 using System.Collections.Generic;
+using System.DirectoryServices.AccountManagement;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using SteelQuiz.ConfigData;
+using SteelQuiz.Extensions;
 
 namespace SteelQuiz
 {
@@ -107,6 +110,31 @@ namespace SteelQuiz
                 MessageBox.Show("An error occurred while saving the config:\r\n\r\n" + ex.ToString(), "SteelQuiz", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
+        }
+
+        public static void ChkSetupForFirstUse()
+        {
+            if (Config.Name != null)
+            {
+                return;
+            }
+
+            var startupLoading = new StartupLoading("Getting things ready...");
+            startupLoading.RunInNewThread(true);
+
+            Config.Name = UserPrincipal.Current.DisplayName;
+
+            SaveConfig();
+
+            startupLoading.StopAnimation = true;
+            while (!startupLoading.AnimationStopped)
+            {
+                Thread.Sleep(1);
+            }
+            startupLoading.Invoke(new Action(() =>
+            {
+                startupLoading.Dispose();
+            }));
         }
     }
 }

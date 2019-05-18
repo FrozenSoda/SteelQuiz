@@ -16,27 +16,33 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-using SteelQuiz.ThemeManager;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
-namespace SteelQuiz.ConfigData
+namespace SteelQuiz.Extensions
 {
-    public class Config
+    public static class FormExtensions
     {
-        public string FileFormatVersion { get; set; }
-        public bool AcceptedTermsOfUse { get; set; } = false;
-        public Guid LastQuiz { get; set; } = Guid.Empty;
-        public ThemeCore.Theme Theme { get; set; } = ThemeCore.Theme.Light;
-        public string Name { get; set; }
-        public QuizEditorConfig QuizEditorConfig { get; set; } = new QuizEditorConfig();
-
-        public Config()
+        private static void ApplicationRunProc(object state)
         {
-            FileFormatVersion = MetaData.QUIZ_FILE_FORMAT_VERSION;
+            Application.Run(state as Form);
+        }
+
+        public static void RunInNewThread(this Form form, bool isBackground)
+        {
+            if (form == null)
+                throw new ArgumentNullException("form");
+            if (form.IsHandleCreated)
+                throw new InvalidOperationException("Form is already running.");
+            Thread thread = new Thread(ApplicationRunProc);
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.IsBackground = isBackground;
+            thread.Start(form);
         }
     }
 }
