@@ -41,6 +41,16 @@ namespace SteelQuiz
     public partial class Welcome : Form, ThemeManager.IThemeable
     {
         private WelcomeTheme WelcomeTheme = new WelcomeTheme();
+        private WelcomeMessage[] welcomeMessages = new WelcomeMessage[]
+        {
+            new WelcomeMessage(@"Welcome \firstname!", true),
+            new WelcomeMessage(@"Ready for some studying \firstname?", true),
+            new WelcomeMessage(@"Welcome back \firstname!", ConfigManager.Config.Statistics.LaunchCount.Data > 1),
+            new WelcomeMessage(@"Good morning \firstname!", DateTime.Now.Hour >= 5 && DateTime.Now.Hour < 12),
+            new WelcomeMessage(@"Good afternoon \firstname!", DateTime.Now.Hour >= 12 && DateTime.Now.Hour <= 17),
+            new WelcomeMessage(@"Good evening \firstname!", DateTime.Now.Hour > 17 && DateTime.Now.Hour <= 22)
+        };
+
         public Welcome()
         {
             InitializeComponent();
@@ -52,7 +62,12 @@ namespace SteelQuiz
 
             ConfigManager.ChkSetupForFirstUse();
 
-            lbl_welcome.Text = $"Welcome back {ConfigManager.Config.Name.Split(' ')[0]}!";
+            UpdateCfg();
+        }
+
+        public void UpdateCfg()
+        {
+            lbl_welcome.Text = welcomeMessages.SelectWelcomeMessage();
         }
 
         public void SetTheme()

@@ -60,18 +60,20 @@ namespace SteelQuiz.Preferences
             this.pnl_closeBehaviour.Controls.Add(this.rdo_closeApp);
             this.pnl_closeBehaviour.Location = new System.Drawing.Point(14, 14);
             this.pnl_closeBehaviour.Name = "pnl_closeBehaviour";
-            this.pnl_closeBehaviour.Size = new System.Drawing.Size(358, 130);
+            this.pnl_closeBehaviour.Size = new System.Drawing.Size(635, 130);
             this.pnl_closeBehaviour.TabIndex = 2;
             // 
             // rdo_returnToWelcome
             // 
             this.rdo_returnToWelcome.AutoSize = true;
+            this.rdo_returnToWelcome.Checked = true;
             this.rdo_returnToWelcome.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdo_returnToWelcome.ForeColor = System.Drawing.Color.White;
-            this.rdo_returnToWelcome.Location = new System.Drawing.Point(3, 66);
+            this.rdo_returnToWelcome.Location = new System.Drawing.Point(15, 40);
             this.rdo_returnToWelcome.Name = "rdo_returnToWelcome";
             this.rdo_returnToWelcome.Size = new System.Drawing.Size(200, 24);
             this.rdo_returnToWelcome.TabIndex = 1;
+            this.rdo_returnToWelcome.TabStop = true;
             this.rdo_returnToWelcome.Text = "Return to Welcome screen";
             this.rdo_returnToWelcome.UseVisualStyleBackColor = true;
             this.rdo_returnToWelcome.CheckedChanged += new System.EventHandler(this.Rdo_returnToWelcome_CheckedChanged);
@@ -79,25 +81,23 @@ namespace SteelQuiz.Preferences
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(-1, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(356, 21);
+            this.label1.Size = new System.Drawing.Size(440, 25);
             this.label1.TabIndex = 0;
             this.label1.Text = "Behaviour when closing editor (with close button):";
             // 
             // rdo_closeApp
             // 
             this.rdo_closeApp.AutoSize = true;
-            this.rdo_closeApp.Checked = true;
             this.rdo_closeApp.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdo_closeApp.ForeColor = System.Drawing.Color.White;
-            this.rdo_closeApp.Location = new System.Drawing.Point(3, 36);
+            this.rdo_closeApp.Location = new System.Drawing.Point(15, 70);
             this.rdo_closeApp.Name = "rdo_closeApp";
             this.rdo_closeApp.Size = new System.Drawing.Size(118, 24);
             this.rdo_closeApp.TabIndex = 0;
-            this.rdo_closeApp.TabStop = true;
             this.rdo_closeApp.Text = "Exit SteelQuiz";
             this.rdo_closeApp.UseVisualStyleBackColor = true;
             this.rdo_closeApp.CheckedChanged += new System.EventHandler(this.Rdo_closeApp_CheckedChanged);

@@ -80,6 +80,7 @@ namespace SteelQuiz.Preferences
             this.Name = "Preferences";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Preferences - SteelQuiz";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Preferences_FormClosing);
             this.ResumeLayout(false);
 
         }

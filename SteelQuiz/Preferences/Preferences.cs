@@ -131,5 +131,11 @@ namespace SteelQuiz.Preferences
                 pnl_prefs.Controls.Add((UserControl)Activator.CreateInstance(category));
             }
         }
+
+        private void Preferences_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ConfigManager.SaveConfig();
+            Program.frmWelcome.UpdateCfg();
+        }
     }
 }

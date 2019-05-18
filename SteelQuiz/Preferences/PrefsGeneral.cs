@@ -32,6 +32,7 @@ namespace SteelQuiz.Preferences
 {
     public partial class PrefsGeneral : AutoThemeableUserControl, IPreferenceCategory
     {
+        private PreferencesTheme PreferencesTheme = new PreferencesTheme();
         private bool skipConfigApply = true;
 
         public PrefsGeneral()
@@ -55,6 +56,10 @@ namespace SteelQuiz.Preferences
                     rdo_themeLight.Checked = true;
                     break;
             }
+
+            rdo_showNameOnWelcome.Checked = ConfigManager.Config.ShowNameOnWelcomeScreen;
+            rdo_dontShowNameOnWelcome.Checked = !rdo_showNameOnWelcome.Checked;
+            txt_name.Text = ConfigManager.Config.Name;
         }
 
         private void Rdo_themeLight_CheckedChanged(object sender, EventArgs e)
@@ -68,30 +73,71 @@ namespace SteelQuiz.Preferences
             {
                 ConfigManager.Config.Theme = ThemeManager.ThemeCore.Theme.Light;
                 ConfigManager.SaveConfig();
-
-                Program.frmWelcome.SetTheme();
-                //reshow preferences window, to use new theme
-                Program.frmPreferences.DialogResult = DialogResult.OK;
-                Program.frmWelcome.ShowPreferences();
             }
+            else
+            {
+                ConfigManager.Config.Theme = ThemeManager.ThemeCore.Theme.Dark;
+            }
+
+            ConfigManager.SaveConfig();
+
+            Program.frmWelcome.SetTheme();
+            //reshow preferences window, to use new theme
+            Program.frmPreferences.DialogResult = DialogResult.OK;
+            Program.frmWelcome.ShowPreferences();
         }
 
-        private void Rdo_themeDark_CheckedChanged(object sender, EventArgs e)
+        private void Txt_name_TextChanged(object sender, EventArgs e)
         {
             if (skipConfigApply)
             {
                 return;
             }
 
-            if (rdo_themeDark.Checked)
+            ConfigManager.Config.Name = txt_name.Text;
+            if (txt_name.Text == "")
             {
-                ConfigManager.Config.Theme = ThemeManager.ThemeCore.Theme.Dark;
-                ConfigManager.SaveConfig();
+                rdo_dontShowNameOnWelcome.Checked = true;
+            }
+        }
 
-                Program.frmWelcome.SetTheme();
-                //reshow preferences window, to use new theme
-                Program.frmPreferences.DialogResult = DialogResult.OK;
-                Program.frmWelcome.ShowPreferences();
+        private void Rdo_showNameOnWelcome_CheckedChanged(object sender, EventArgs e)
+        {
+            if (skipConfigApply)
+            {
+                return;
+            }
+
+            if (rdo_showNameOnWelcome.Checked && txt_name.Text == "")
+            {
+                MessageBox.Show("Please enter your name first", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                rdo_dontShowNameOnWelcome.Checked = true;
+                return;
+            }
+
+            ConfigManager.Config.ShowNameOnWelcomeScreen = rdo_showNameOnWelcome.Checked;
+            ConfigManager.SaveConfig();
+            Program.frmWelcome.UpdateCfg();
+        }
+
+        private void Txt_name_Leave(object sender, EventArgs e)
+        {
+            if (skipConfigApply)
+            {
+                return;
+            }
+
+            ConfigManager.SaveConfig();
+            Program.frmWelcome.UpdateCfg();
+        }
+
+        private void Txt_name_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                e.Handled = true;
+                ConfigManager.SaveConfig();
+                Program.frmWelcome.UpdateCfg();
             }
         }
     }

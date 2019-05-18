@@ -16,29 +16,39 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-using SteelQuiz.ThemeManager;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SteelQuiz.ConfigData
+namespace SteelQuiz
 {
-    public class Config
+    public static class WelcomeMessages
     {
-        public string FileFormatVersion { get; set; }
-        public bool AcceptedTermsOfUse { get; set; } = false;
-        public Guid LastQuiz { get; set; } = Guid.Empty;
-        public ThemeCore.Theme Theme { get; set; } = ThemeCore.Theme.Light;
-        public string Name { get; set; }
-        public bool ShowNameOnWelcomeScreen { get; set; } = true;
-        public QuizEditorConfig QuizEditorConfig { get; set; } = new QuizEditorConfig();
-        public Statistics Statistics { get; set; } = new Statistics();
-
-        public Config()
+        public static string SelectWelcomeMessage(this WelcomeMessage[] welcomeMessages)
         {
-            FileFormatVersion = MetaData.QUIZ_FILE_FORMAT_VERSION;
+            var possible = new List<WelcomeMessage>();
+            foreach (var msg in welcomeMessages)
+            {
+                var conditionsFilled = true;
+                foreach (var condition in msg.Conditions)
+                {
+                    if (!condition)
+                    {
+                        conditionsFilled = false;
+                        break;
+                    }
+                }
+
+                if (conditionsFilled)
+                {
+                    possible.Add(msg);
+                }
+            }
+
+            int rnd = new Random().Next(0, possible.Count);
+            return possible[rnd].Message;
         }
     }
 }

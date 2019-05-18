@@ -60,6 +60,8 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ConfigData\QuizEditorConfig.cs" />
+    <Compile Include="ConfigData\Statistic.cs" />
+    <Compile Include="ConfigData\Statistics.cs" />
     <Compile Include="Extensions\FormExtensions.cs" />
     <Compile Include="StartupLoading.cs">
       <SubType>Form</SubType>
@@ -284,6 +286,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuizProgressData\WordTry.cs" />
+    <Compile Include="WelcomeMessage.cs" />
+    <Compile Include="WelcomeMessages.cs" />
     <EmbeddedResource Include="StartupLoading.resx">
       <DependentUpon>StartupLoading.cs</DependentUpon>
     </EmbeddedResource>

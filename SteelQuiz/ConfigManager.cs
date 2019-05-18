@@ -122,7 +122,16 @@ namespace SteelQuiz
             var startupLoading = new StartupLoading("Getting things ready...");
             startupLoading.RunInNewThread(true);
 
-            Config.Name = UserPrincipal.Current.DisplayName;
+            try
+            {
+                Config.Name = UserPrincipal.Current.DisplayName;
+            }
+            catch (EntryPointNotFoundException)
+            {
+                // Can't access user info, if running in Wine for instance
+                Config.Name = "";
+                Config.ShowNameOnWelcomeScreen = false;
+            }
 
             SaveConfig();
 

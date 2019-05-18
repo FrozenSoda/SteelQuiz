@@ -16,7 +16,6 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-using SteelQuiz.ThemeManager;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,20 +24,15 @@ using System.Threading.Tasks;
 
 namespace SteelQuiz.ConfigData
 {
-    public class Config
+    public class Statistic<T>
     {
-        public string FileFormatVersion { get; set; }
-        public bool AcceptedTermsOfUse { get; set; } = false;
-        public Guid LastQuiz { get; set; } = Guid.Empty;
-        public ThemeCore.Theme Theme { get; set; } = ThemeCore.Theme.Light;
-        public string Name { get; set; }
-        public bool ShowNameOnWelcomeScreen { get; set; } = true;
-        public QuizEditorConfig QuizEditorConfig { get; set; } = new QuizEditorConfig();
-        public Statistics Statistics { get; set; } = new Statistics();
+        public DateTime MeasureStart { get; private set; }
+        public T Data { get; set; }
 
-        public Config()
+        public Statistic(T data)
         {
-            FileFormatVersion = MetaData.QUIZ_FILE_FORMAT_VERSION;
+            MeasureStart = DateTime.Now;
+            Data = data;
         }
     }
 }

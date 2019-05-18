@@ -61,6 +61,9 @@ namespace SteelQuiz
                 return;
             }
 
+            ++ConfigManager.Config.Statistics.LaunchCount.Data;
+            ConfigManager.SaveConfig();
+
             Application.Run(new TermsOfUse());
         }
 

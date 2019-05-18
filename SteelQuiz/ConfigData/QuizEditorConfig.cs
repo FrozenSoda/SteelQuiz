@@ -26,6 +26,6 @@ namespace SteelQuiz.ConfigData
 {
     public class QuizEditorConfig
     {
-        public bool CloseApplicationOnEditorClose { get; set; } = true;
+        public bool CloseApplicationOnEditorClose { get; set; } = false;
     }
 }
