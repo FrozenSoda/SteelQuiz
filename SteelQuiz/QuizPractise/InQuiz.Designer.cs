@@ -110,9 +110,9 @@ namespace SteelQuiz.QuizPractise
             this.btn_switchTestMode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_switchTestMode.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_switchTestMode.ForeColor = System.Drawing.Color.White;
-            this.btn_switchTestMode.Location = new System.Drawing.Point(563, 415);
+            this.btn_switchTestMode.Location = new System.Drawing.Point(513, 415);
             this.btn_switchTestMode.Name = "btn_switchTestMode";
-            this.btn_switchTestMode.Size = new System.Drawing.Size(225, 23);
+            this.btn_switchTestMode.Size = new System.Drawing.Size(275, 23);
             this.btn_switchTestMode.TabIndex = 3;
             this.btn_switchTestMode.TabStop = false;
             this.btn_switchTestMode.Text = "Disable Intelligent Learning (do full test)";

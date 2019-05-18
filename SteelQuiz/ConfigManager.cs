@@ -132,6 +132,12 @@ namespace SteelQuiz
                 Config.Name = "";
                 Config.ShowNameOnWelcomeScreen = false;
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Could not get full name from username:\r\n\r\n{ex.ToString()}", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Config.Name = "";
+                Config.ShowNameOnWelcomeScreen = false;
+            }
 
             SaveConfig();
 

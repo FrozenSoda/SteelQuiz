@@ -97,7 +97,22 @@ namespace SteelQuiz.Preferences
                     return;
                 }
 
+                var msg2 = MessageBox.Show("Keep statistics (launch count etc.)? This is recommended unless you still experience problems. If you are unsure, select Yes",
+                    "Keep Statistics - SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
+
+                ConfigData.Statistics statistics = null;
+                if (msg2 == DialogResult.Yes)
+                {
+                    statistics = ConfigManager.Config.Statistics;
+                }
+
                 ConfigManager.Config = new ConfigData.Config();
+
+                if (statistics != null)
+                {
+                    ConfigManager.Config.Statistics = statistics;
+                }
+
                 ConfigManager.SaveConfig();
                 Application.Restart();
             }

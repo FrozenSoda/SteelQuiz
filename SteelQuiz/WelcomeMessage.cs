@@ -31,7 +31,7 @@ namespace SteelQuiz
         {
             get
             {
-                if (ConfigManager.Config.ShowNameOnWelcomeScreen)
+                if (ConfigManager.Config.ShowNameOnWelcomeScreen && ConfigManager.Config.Name != null)
                 {
                     return _message.Replace(@"\firstname", ConfigManager.Config.Name.Split(' ')[0]);
                 }

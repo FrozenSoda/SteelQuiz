@@ -60,6 +60,8 @@ namespace SteelQuiz
 
         private void OpenApplication()
         {
+            Hide();
+
             Program.frmWelcome = new Welcome();
             if (Program.Args.Length > 0 && File.Exists(Program.Args[0]) && Program.Args[0].EndsWith(".steelquiz"))
             {
@@ -83,8 +85,6 @@ namespace SteelQuiz
                     return;
                 }
             }
-
-            Hide();
         }
 
         private void LoadQuiz(string quizPath)
