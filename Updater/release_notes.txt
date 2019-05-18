@@ -1,3 +1,6 @@
+v3.1.1:
+- Fixed issue causing SteelQuiz to launch minimized after upgrading
+
 v3.1.0:
 - Better welcome messages
 - UI improvements

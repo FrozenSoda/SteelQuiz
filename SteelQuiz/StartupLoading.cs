@@ -61,6 +61,7 @@ namespace SteelQuiz
 
         private void StartupLoading_Shown(object sender, EventArgs e)
         {
+            Activate();
             AnimTimer = new System.Timers.Timer()
             {
                 Interval = 1,
