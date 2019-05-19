@@ -26,6 +26,7 @@ namespace SteelQuiz.ConfigData
 {
     public class Statistic<T>
     {
+#warning measurestart gets replaced to latest date every time
         public DateTime MeasureStart { get; private set; }
         public T Data { get; set; }
 
