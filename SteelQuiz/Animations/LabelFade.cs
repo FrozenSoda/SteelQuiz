@@ -120,6 +120,7 @@ namespace SteelQuiz.Animations
                 else
                 {
                     LabelsFading.Remove(lbl);
+                    LabelFadeCancel.Remove(lbl);
                 }
             };
             tmr.Start();
