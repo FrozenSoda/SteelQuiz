@@ -164,9 +164,9 @@ namespace SteelQuiz.Preferences
             // 
             this.txt_name.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_name.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_name.Location = new System.Drawing.Point(134, 34);
+            this.txt_name.Location = new System.Drawing.Point(129, 34);
             this.txt_name.Name = "txt_name";
-            this.txt_name.Size = new System.Drawing.Size(498, 23);
+            this.txt_name.Size = new System.Drawing.Size(503, 23);
             this.txt_name.TabIndex = 1;
             this.txt_name.TextChanged += new System.EventHandler(this.Txt_name_TextChanged);
             this.txt_name.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Txt_name_KeyPress);
@@ -179,9 +179,9 @@ namespace SteelQuiz.Preferences
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(9, 34);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(119, 21);
+            this.label2.Size = new System.Drawing.Size(114, 21);
             this.label2.TabIndex = 0;
-            this.label2.Text = "Your first name:";
+            this.label2.Text = "Your full name:";
             // 
             // PrefsGeneral
             // 

@@ -1,3 +1,6 @@
+v3.1.3:
+- Fixed incorrect label in preferences
+
 v3.1.2:
 - Fixed issues with welcome messages
 - Fixed issues with getting name

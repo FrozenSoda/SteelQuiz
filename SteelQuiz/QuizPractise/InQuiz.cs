@@ -361,6 +361,7 @@ namespace SteelQuiz.QuizPractise
                               Location.Y + (Size.Height / 2) - (Program.frmWelcome.Size.Height / 2)
                             );
             Program.frmWelcome.SetControlStates();
+            Program.frmWelcome.GenerateWelcomeMsg();
             Program.frmWelcome.Show();
             QuizCore.SaveQuizProgress();
             ConfigManager.SaveConfig();
