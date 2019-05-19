@@ -129,12 +129,14 @@ namespace SteelQuiz
             catch (EntryPointNotFoundException)
             {
                 // Can't access user info, if running in Wine for instance
-                Config.Name = "";
-                Config.ShowNameOnWelcomeScreen = false;
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Could not get full name from username:\r\n\r\n{ex.ToString()}", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            if (Config.Name == null)
+            {
                 Config.Name = "";
                 Config.ShowNameOnWelcomeScreen = false;
             }
