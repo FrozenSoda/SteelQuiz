@@ -98,10 +98,10 @@
             this.lbl_notice.ForeColor = System.Drawing.Color.White;
             this.lbl_notice.Location = new System.Drawing.Point(12, 126);
             this.lbl_notice.Name = "lbl_notice";
-            this.lbl_notice.Size = new System.Drawing.Size(427, 24);
+            this.lbl_notice.Size = new System.Drawing.Size(427, 47);
             this.lbl_notice.TabIndex = 5;
             this.lbl_notice.Text = "This should take no longer than one minute";
-            this.lbl_notice.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.lbl_notice.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lbl_notice.Visible = false;
             // 
             // StartupLoading

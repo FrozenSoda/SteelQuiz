@@ -52,10 +52,15 @@ namespace SteelQuiz
             }
         }
 
-        public void CloseDispose()
+        /// <summary>
+        /// Stops all animations in the form, and then calls the Dispose() method. Do not call Dispose() directly; use this method, or the program will crash.
+        /// <para>Do not call this function from the same thread as StartupLoading is running on! Doing so will cause an exception.</para>
+        /// </summary>
+        public void SafeDispose()
         {
             if (!InvokeRequired)
             {
+                // The application will freeze if we continue
                 throw new Exception("CloseDispose() should not be called from the same thread as StartupLoading");
             }
 
