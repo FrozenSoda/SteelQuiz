@@ -26,6 +26,8 @@ namespace SteelQuiz
             {
                 lbl_msg.Text = msg;
             }
+
+#warning time notice should not be shown until after a few seconds
         }
 
         private void AnimTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
