@@ -13,16 +13,6 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (SteelQuiz.Animations.LabelFade.LabelsFading.Contains(lbl_notice))
-            {
-                tmr_notice.Stop();
-                SteelQuiz.Animations.LabelFade.LabelFadeCancel.Add(lbl_notice);
-                while (SteelQuiz.Animations.LabelFade.LabelsFading.Contains(lbl_notice))
-                {
-                    System.Threading.Thread.Sleep(1);
-                }
-            }
-
             if (disposing && (components != null))
             {
                 components.Dispose();

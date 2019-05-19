@@ -157,15 +157,7 @@ namespace SteelQuiz
 
             SaveConfig();
 
-            startupLoading.StopAnimation = true;
-            while (!startupLoading.AnimationStopped)
-            {
-                Thread.Sleep(1);
-            }
-            startupLoading.Invoke(new Action(() =>
-            {
-                startupLoading.Dispose();
-            }));
+            startupLoading.CloseDispose();
         }
     }
 }

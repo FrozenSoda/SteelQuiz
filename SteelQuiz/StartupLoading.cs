@@ -52,6 +52,37 @@ namespace SteelQuiz
             }
         }
 
+        public void CloseDispose()
+        {
+            if (!InvokeRequired)
+            {
+                throw new Exception("CloseDispose() should not be called from the same thread as StartupLoading");
+            }
+
+            if (LabelFade.LabelsFading.Contains(lbl_notice))
+            {
+                // Stop notice fade
+                tmr_notice.Stop();
+                LabelFade.LabelFadeCancel.Add(lbl_notice);
+                while (LabelFade.LabelsFading.Contains(lbl_notice))
+                {
+                    Thread.Sleep(10);
+                }
+            }
+
+            // Stop loading animation
+            StopAnimation = true;
+            while (!AnimationStopped)
+            {
+                Thread.Sleep(10);
+            }
+
+            Invoke(new Action(() =>
+            {
+                Dispose();
+            }));
+        }
+
         private void AnimTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             if (lbl_dot1.Location.X > Width)
