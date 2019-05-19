@@ -13,6 +13,16 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
+            if (SteelQuiz.Animations.LabelFade.LabelsFading.Contains(lbl_notice))
+            {
+                tmr_notice.Stop();
+                SteelQuiz.Animations.LabelFade.LabelFadeCancel.Add(lbl_notice);
+                while (SteelQuiz.Animations.LabelFade.LabelsFading.Contains(lbl_notice))
+                {
+                    System.Threading.Thread.Sleep(1);
+                }
+            }
+
             if (disposing && (components != null))
             {
                 components.Dispose();
@@ -28,15 +38,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StartupLoading));
             this.lbl_msg = new System.Windows.Forms.Label();
             this.lbl_dot1 = new System.Windows.Forms.Label();
             this.lbl_dot2 = new System.Windows.Forms.Label();
             this.lbl_dot3 = new System.Windows.Forms.Label();
             this.lbl_title = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.lbl_notice = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lbl_msg
@@ -54,7 +62,7 @@
             // 
             this.lbl_dot1.Font = new System.Drawing.Font("Segoe UI Black", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_dot1.ForeColor = System.Drawing.Color.White;
-            this.lbl_dot1.Location = new System.Drawing.Point(195, 110);
+            this.lbl_dot1.Location = new System.Drawing.Point(195, 80);
             this.lbl_dot1.Name = "lbl_dot1";
             this.lbl_dot1.Size = new System.Drawing.Size(16, 30);
             this.lbl_dot1.TabIndex = 1;
@@ -65,7 +73,7 @@
             // 
             this.lbl_dot2.Font = new System.Drawing.Font("Segoe UI Black", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_dot2.ForeColor = System.Drawing.Color.White;
-            this.lbl_dot2.Location = new System.Drawing.Point(217, 110);
+            this.lbl_dot2.Location = new System.Drawing.Point(217, 80);
             this.lbl_dot2.Name = "lbl_dot2";
             this.lbl_dot2.Size = new System.Drawing.Size(16, 30);
             this.lbl_dot2.TabIndex = 2;
@@ -76,7 +84,7 @@
             // 
             this.lbl_dot3.Font = new System.Drawing.Font("Segoe UI Black", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_dot3.ForeColor = System.Drawing.Color.White;
-            this.lbl_dot3.Location = new System.Drawing.Point(239, 110);
+            this.lbl_dot3.Location = new System.Drawing.Point(239, 80);
             this.lbl_dot3.Name = "lbl_dot3";
             this.lbl_dot3.Size = new System.Drawing.Size(16, 30);
             this.lbl_dot3.TabIndex = 3;
@@ -94,17 +102,17 @@
             this.lbl_title.Text = "SteelQuiz";
             this.lbl_title.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label1
+            // lbl_notice
             // 
-            this.label1.Font = new System.Drawing.Font("Segoe UI Light", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(12, 86);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(427, 24);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "This should take no longer than one minute";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label1.Visible = false;
+            this.lbl_notice.Font = new System.Drawing.Font("Segoe UI Light", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_notice.ForeColor = System.Drawing.Color.White;
+            this.lbl_notice.Location = new System.Drawing.Point(12, 126);
+            this.lbl_notice.Name = "lbl_notice";
+            this.lbl_notice.Size = new System.Drawing.Size(427, 24);
+            this.lbl_notice.TabIndex = 5;
+            this.lbl_notice.Text = "This should take no longer than one minute";
+            this.lbl_notice.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.lbl_notice.Visible = false;
             // 
             // StartupLoading
             // 
@@ -112,7 +120,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.ClientSize = new System.Drawing.Size(451, 182);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lbl_notice);
             this.Controls.Add(this.lbl_title);
             this.Controls.Add(this.lbl_dot3);
             this.Controls.Add(this.lbl_dot2);
@@ -135,7 +143,6 @@
         private System.Windows.Forms.Label lbl_dot2;
         private System.Windows.Forms.Label lbl_dot3;
         private System.Windows.Forms.Label lbl_title;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label lbl_notice;
     }
 }

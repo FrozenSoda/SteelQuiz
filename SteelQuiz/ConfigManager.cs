@@ -119,7 +119,7 @@ namespace SteelQuiz
                 return;
             }
 
-            var startupLoading = new StartupLoading("Getting things ready...");
+            var startupLoading = new StartupLoading("Getting things ready...", "This should take no longer than one minute", 8000);
             startupLoading.RunInNewThread(true);
 
             try

@@ -64,6 +64,7 @@
     <Compile Include="ConfigData\Statistic.cs" />
     <Compile Include="ConfigData\Statistics.cs" />
     <Compile Include="Extensions\FormExtensions.cs" />
+    <Compile Include="Extensions\IntegerExtensions.cs" />
     <Compile Include="StartupLoading.cs">
       <SubType>Form</SubType>
     </Compile>

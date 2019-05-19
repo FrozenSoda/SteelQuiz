@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SteelQuiz.Animations;
+using SteelQuiz.ThemeManager.Colors;
 
 namespace SteelQuiz
 {
@@ -17,8 +19,10 @@ namespace SteelQuiz
         public bool AnimationStopped { get; private set; } = false;
         public System.Timers.Timer AnimTimer { get; set; }
         private int animElapsed = 0;
+        private GeneralTheme GeneralTheme = new GeneralTheme();
+        private System.Timers.Timer tmr_notice = new System.Timers.Timer();
 
-        public StartupLoading(string msg = null)
+        public StartupLoading(string msg = null, string notice = null, int noticeDelay = -1)
         {
             InitializeComponent();
             SetTheme();
@@ -26,8 +30,26 @@ namespace SteelQuiz
             {
                 lbl_msg.Text = msg;
             }
-
-#warning time notice should not be shown until after a few seconds
+            if (notice != null)
+            {
+                lbl_notice.Text = notice;
+                lbl_notice.Visible = true;
+            }
+            if (noticeDelay > -1)
+            {
+                lbl_notice.Visible = false;
+                tmr_notice = new System.Timers.Timer()
+                {
+                    Interval = noticeDelay,
+                    SynchronizingObject = this,
+                    AutoReset = false
+                };
+                tmr_notice.Elapsed += delegate
+                {
+                    lbl_notice.Fade(BackColor, GeneralTheme.GetMainLabelForeColor(), 500);
+                };
+                tmr_notice.Start();
+            }
         }
 
         private void AnimTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -45,9 +67,9 @@ namespace SteelQuiz
 
             this.Invoke(new Action(() =>
             {
-                lbl_dot1.Location = new Point(lbl_dot1.Location.X + 3 + animElapsed / 9, lbl_dot1.Location.Y);
-                lbl_dot2.Location = new Point(lbl_dot2.Location.X + 3 + animElapsed / 6, lbl_dot2.Location.Y);
-                lbl_dot3.Location = new Point(lbl_dot3.Location.X + 3 + animElapsed / 3, lbl_dot3.Location.Y);
+                lbl_dot1.Location = new Point(lbl_dot1.Location.X + animElapsed / 9, lbl_dot1.Location.Y);
+                lbl_dot2.Location = new Point(lbl_dot2.Location.X + animElapsed / 6, lbl_dot2.Location.Y);
+                lbl_dot3.Location = new Point(lbl_dot3.Location.X + animElapsed / 3, lbl_dot3.Location.Y);
             }));
 
             ++animElapsed;
