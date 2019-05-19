@@ -130,6 +130,10 @@ namespace SteelQuiz
                 {
                     Config.FullName = givenName + " " + surname;
                 }
+                else if (givenName != null)
+                {
+                    Config.FullName = givenName;
+                }
                 else
                 {
                     Config.FullName = UserPrincipal.Current.DisplayName;
