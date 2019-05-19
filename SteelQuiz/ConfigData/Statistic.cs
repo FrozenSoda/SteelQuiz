@@ -16,6 +16,7 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace SteelQuiz.ConfigData
 {
     public class Statistic<T>
     {
-#warning measurestart gets replaced to latest date every time
+        [JsonProperty]
         public DateTime MeasureStart { get; private set; }
         public T Data { get; set; }
 

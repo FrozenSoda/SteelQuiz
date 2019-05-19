@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StartupLoading));
             this.lbl_msg = new System.Windows.Forms.Label();
             this.lbl_dot1 = new System.Windows.Forms.Label();
@@ -35,6 +36,7 @@
             this.lbl_dot3 = new System.Windows.Forms.Label();
             this.lbl_title = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // lbl_msg
@@ -102,6 +104,7 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "This should take no longer than one minute";
             this.label1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.label1.Visible = false;
             // 
             // StartupLoading
             // 
@@ -133,5 +136,6 @@
         private System.Windows.Forms.Label lbl_dot3;
         private System.Windows.Forms.Label lbl_title;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Timer timer1;
     }
 }
