@@ -114,7 +114,7 @@ namespace SteelQuiz
 
         public static void ChkSetupForFirstUse()
         {
-            if (Config.Name != null)
+            if (Config.FullName != null)
             {
                 return;
             }
@@ -124,20 +124,30 @@ namespace SteelQuiz
 
             try
             {
-                Config.Name = UserPrincipal.Current.DisplayName;
+                var givenName = UserPrincipal.Current.GivenName;
+                var surname = UserPrincipal.Current.Surname;
+                if (givenName != null && surname != null)
+                {
+                    Config.FullName = givenName + " " + surname;
+                }
+                else
+                {
+                    Config.FullName = UserPrincipal.Current.DisplayName;
+                }
             }
             catch (EntryPointNotFoundException)
             {
                 // Can't access user info, if running in Wine for instance
+                ;
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Could not get full name from username:\r\n\r\n{ex.ToString()}", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            if (Config.Name == null)
+            if (Config.FullName == null)
             {
-                Config.Name = "";
+                Config.FullName = "";
                 Config.ShowNameOnWelcomeScreen = false;
             }
 

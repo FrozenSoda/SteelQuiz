@@ -31,7 +31,7 @@ namespace SteelQuiz.ConfigData
         public bool AcceptedTermsOfUse { get; set; } = false;
         public Guid LastQuiz { get; set; } = Guid.Empty;
         public ThemeCore.Theme Theme { get; set; } = ThemeCore.Theme.Light;
-        public string Name { get; set; }
+        public string FullName { get; set; }
         public bool ShowNameOnWelcomeScreen { get; set; } = true;
         public QuizEditorConfig QuizEditorConfig { get; set; } = new QuizEditorConfig();
         public Statistics Statistics { get; set; } = new Statistics();

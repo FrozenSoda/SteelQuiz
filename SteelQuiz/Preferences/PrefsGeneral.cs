@@ -59,7 +59,7 @@ namespace SteelQuiz.Preferences
 
             rdo_showNameOnWelcome.Checked = ConfigManager.Config.ShowNameOnWelcomeScreen;
             rdo_dontShowNameOnWelcome.Checked = !rdo_showNameOnWelcome.Checked;
-            txt_name.Text = ConfigManager.Config.Name;
+            txt_name.Text = ConfigManager.Config.FullName;
         }
 
         private void Rdo_themeLight_CheckedChanged(object sender, EventArgs e)
@@ -94,7 +94,7 @@ namespace SteelQuiz.Preferences
                 return;
             }
 
-            ConfigManager.Config.Name = txt_name.Text;
+            ConfigManager.Config.FullName = txt_name.Text;
             if (txt_name.Text == "")
             {
                 rdo_dontShowNameOnWelcome.Checked = true;
