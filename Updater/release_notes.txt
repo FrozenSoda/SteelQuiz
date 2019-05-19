@@ -1,3 +1,9 @@
+v3.1.2:
+- Fixed issues with welcome messages
+- Fixed issues with getting name
+- Fixed some messages in the application
+- Other bug fixes and improvements
+
 v3.1.1:
 - Fixed issue causing SteelQuiz to launch minimized after upgrading
 
