@@ -46,68 +46,19 @@ namespace SteelQuiz.Preferences
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.pnl_rdoTheme = new System.Windows.Forms.Panel();
-            this.rdo_themeDark = new System.Windows.Forms.RadioButton();
-            this.rdo_themeLight = new System.Windows.Forms.RadioButton();
             this.pnl_name = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.rdo_dontShowNameOnWelcome = new System.Windows.Forms.RadioButton();
             this.rdo_showNameOnWelcome = new System.Windows.Forms.RadioButton();
             this.txt_name = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.pnl_rdoTheme.SuspendLayout();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.rdo_themeDark = new System.Windows.Forms.RadioButton();
+            this.label4 = new System.Windows.Forms.Label();
+            this.rdo_themeLight = new System.Windows.Forms.RadioButton();
             this.pnl_name.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(75, 25);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Theme:";
-            // 
-            // pnl_rdoTheme
-            // 
-            this.pnl_rdoTheme.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.pnl_rdoTheme.Controls.Add(this.rdo_themeDark);
-            this.pnl_rdoTheme.Controls.Add(this.label1);
-            this.pnl_rdoTheme.Controls.Add(this.rdo_themeLight);
-            this.pnl_rdoTheme.Location = new System.Drawing.Point(14, 14);
-            this.pnl_rdoTheme.Name = "pnl_rdoTheme";
-            this.pnl_rdoTheme.Size = new System.Drawing.Size(635, 130);
-            this.pnl_rdoTheme.TabIndex = 1;
-            // 
-            // rdo_themeDark
-            // 
-            this.rdo_themeDark.AutoSize = true;
-            this.rdo_themeDark.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdo_themeDark.ForeColor = System.Drawing.Color.White;
-            this.rdo_themeDark.Location = new System.Drawing.Point(15, 70);
-            this.rdo_themeDark.Name = "rdo_themeDark";
-            this.rdo_themeDark.Size = new System.Drawing.Size(58, 24);
-            this.rdo_themeDark.TabIndex = 1;
-            this.rdo_themeDark.Text = "Dark";
-            this.rdo_themeDark.UseVisualStyleBackColor = true;
-            // 
-            // rdo_themeLight
-            // 
-            this.rdo_themeLight.AutoSize = true;
-            this.rdo_themeLight.Checked = true;
-            this.rdo_themeLight.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdo_themeLight.ForeColor = System.Drawing.Color.White;
-            this.rdo_themeLight.Location = new System.Drawing.Point(15, 40);
-            this.rdo_themeLight.Name = "rdo_themeLight";
-            this.rdo_themeLight.Size = new System.Drawing.Size(60, 24);
-            this.rdo_themeLight.TabIndex = 0;
-            this.rdo_themeLight.TabStop = true;
-            this.rdo_themeLight.Text = "Light";
-            this.rdo_themeLight.UseVisualStyleBackColor = true;
-            this.rdo_themeLight.CheckedChanged += new System.EventHandler(this.Rdo_themeLight_CheckedChanged);
             // 
             // pnl_name
             // 
@@ -120,7 +71,7 @@ namespace SteelQuiz.Preferences
             this.pnl_name.Location = new System.Drawing.Point(14, 150);
             this.pnl_name.Name = "pnl_name";
             this.pnl_name.Size = new System.Drawing.Size(635, 130);
-            this.pnl_name.TabIndex = 2;
+            this.pnl_name.TabIndex = 4;
             // 
             // label3
             // 
@@ -169,7 +120,6 @@ namespace SteelQuiz.Preferences
             this.txt_name.Size = new System.Drawing.Size(503, 23);
             this.txt_name.TabIndex = 1;
             this.txt_name.TextChanged += new System.EventHandler(this.Txt_name_TextChanged);
-            this.txt_name.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Txt_name_KeyPress);
             this.txt_name.Leave += new System.EventHandler(this.Txt_name_Leave);
             // 
             // label2
@@ -183,34 +133,83 @@ namespace SteelQuiz.Preferences
             this.label2.TabIndex = 0;
             this.label2.Text = "Your full name:";
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.panel1.Controls.Add(this.rdo_themeDark);
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.rdo_themeLight);
+            this.panel1.Location = new System.Drawing.Point(14, 14);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(635, 130);
+            this.panel1.TabIndex = 3;
+            // 
+            // rdo_themeDark
+            // 
+            this.rdo_themeDark.AutoSize = true;
+            this.rdo_themeDark.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdo_themeDark.ForeColor = System.Drawing.Color.White;
+            this.rdo_themeDark.Location = new System.Drawing.Point(15, 70);
+            this.rdo_themeDark.Name = "rdo_themeDark";
+            this.rdo_themeDark.Size = new System.Drawing.Size(58, 24);
+            this.rdo_themeDark.TabIndex = 1;
+            this.rdo_themeDark.Text = "Dark";
+            this.rdo_themeDark.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.Location = new System.Drawing.Point(0, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(75, 25);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Theme:";
+            // 
+            // rdo_themeLight
+            // 
+            this.rdo_themeLight.AutoSize = true;
+            this.rdo_themeLight.Checked = true;
+            this.rdo_themeLight.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdo_themeLight.ForeColor = System.Drawing.Color.White;
+            this.rdo_themeLight.Location = new System.Drawing.Point(15, 40);
+            this.rdo_themeLight.Name = "rdo_themeLight";
+            this.rdo_themeLight.Size = new System.Drawing.Size(60, 24);
+            this.rdo_themeLight.TabIndex = 0;
+            this.rdo_themeLight.TabStop = true;
+            this.rdo_themeLight.Text = "Light";
+            this.rdo_themeLight.UseVisualStyleBackColor = true;
+            this.rdo_themeLight.CheckedChanged += new System.EventHandler(this.Rdo_themeLight_CheckedChanged);
+            // 
             // PrefsGeneral
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.Controls.Add(this.pnl_name);
-            this.Controls.Add(this.pnl_rdoTheme);
+            this.Controls.Add(this.panel1);
             this.Name = "PrefsGeneral";
             this.Size = new System.Drawing.Size(652, 450);
-            this.pnl_rdoTheme.ResumeLayout(false);
-            this.pnl_rdoTheme.PerformLayout();
             this.pnl_name.ResumeLayout(false);
             this.pnl_name.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel pnl_rdoTheme;
-        internal System.Windows.Forms.RadioButton rdo_themeLight;
-        internal System.Windows.Forms.RadioButton rdo_themeDark;
         private System.Windows.Forms.Panel pnl_name;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txt_name;
-        private System.Windows.Forms.RadioButton rdo_showNameOnWelcome;
-        private System.Windows.Forms.RadioButton rdo_dontShowNameOnWelcome;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.RadioButton rdo_dontShowNameOnWelcome;
+        private System.Windows.Forms.RadioButton rdo_showNameOnWelcome;
+        private System.Windows.Forms.TextBox txt_name;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Panel panel1;
+        internal System.Windows.Forms.RadioButton rdo_themeDark;
+        private System.Windows.Forms.Label label4;
+        internal System.Windows.Forms.RadioButton rdo_themeLight;
     }
 }

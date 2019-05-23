@@ -26,37 +26,38 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SteelQuiz.ThemeManager.Colors;
+using SteelQuiz.Extensions;
 
 namespace SteelQuiz.Preferences
 {
-    public partial class CategoriesRoot : CategoryCollection
+    public partial class PrefsUpdates : AutoThemeableUserControl, IPreferenceCategory
     {
+        private bool skipConfigApply = true;
 
-        public CategoriesRoot()
+        public PrefsUpdates()
         {
             InitializeComponent();
 
+            LoadPreferences();
             SetTheme();
+            skipConfigApply = false;
         }
 
-        private void Prefs_general_OnPrefSelected(object sender, EventArgs e)
+        public void LoadPreferences()
         {
-            (ParentForm as Preferences).SwitchCategory(typeof(PrefsGeneral));
+            rdo_autoUpdate.Checked = ConfigManager.Config.UpdateConfig.AutoUpdate;
+            rdo_notifyUpdate.Checked = !rdo_autoUpdate.Checked;
         }
 
-        private void Prefs_maintenance_OnPrefSelected(object sender, EventArgs e)
+        private void Rdo_autoUpdate_CheckedChanged(object sender, EventArgs e)
         {
-            (ParentForm as Preferences).SwitchCategoryCollection(typeof(CategoriesMaintenance));
-        }
+            if (skipConfigApply)
+            {
+                return;
+            }
 
-        private void Pcat_quizEditor_OnPrefSelected(object sender, EventArgs e)
-        {
-            (ParentForm as Preferences).SwitchCategory(typeof(PrefsQuizEditor));
-        }
-
-        private void Pcat_updates_OnPrefSelected(object sender, EventArgs e)
-        {
-            (ParentForm as Preferences).SwitchCategory(typeof(PrefsUpdates));
+            ConfigManager.Config.UpdateConfig.AutoUpdate = rdo_autoUpdate.Checked;
+            ConfigManager.SaveConfig();
         }
     }
 }

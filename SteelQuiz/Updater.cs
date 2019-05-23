@@ -43,7 +43,7 @@ namespace SteelQuiz
 
         public enum UpdateMode
         {
-            Normal,         // update automatically (if mandatory option), or show update dialog if an update is available, otherwise do nothing
+            Normal,         // update automatically (if mandatory option), or show update dialog if an update is available (or update if autoupdate), otherwise do nothing
             Verbose,        // show update dialog if an update is available, otherwise show a message stating no updates are available
             Notification,   // show a notification if an update is available, otherwise do nothing
             Force,          // update even if no update is available (force update)
@@ -92,18 +92,23 @@ namespace SteelQuiz
                     }
                     else
                     {
-                        var frmUpdate = new UpdateAvailable(uargs.InstalledVersion, uargs.CurrentVersion);
-                        var result = frmUpdate.ShowDialog();
-                        if (result == DialogResult.OK)
+                        if (!ConfigManager.Config.UpdateConfig.AutoUpdate)
                         {
-                            UpdateInProgress = true;
-                            if (Program.CloseQuizEditors())
+                            var frmUpdate = new UpdateAvailable(uargs.InstalledVersion, uargs.CurrentVersion);
+                            var result = frmUpdate.ShowDialog();
+                            if (result != DialogResult.OK)
                             {
-                                AutoUpdater.DownloadUpdate();
-                                Application.Exit();
+                                return;
                             }
-                            UpdateInProgress = false;
                         }
+
+                        UpdateInProgress = true;
+                        if (Program.CloseQuizEditors())
+                        {
+                            AutoUpdater.DownloadUpdate();
+                            Application.Exit();
+                        }
+                        UpdateInProgress = false;
                     }
                 }
             }

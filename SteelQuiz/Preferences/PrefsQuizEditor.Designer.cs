@@ -76,7 +76,6 @@ namespace SteelQuiz.Preferences
             this.rdo_returnToWelcome.TabStop = true;
             this.rdo_returnToWelcome.Text = "Return to Welcome screen";
             this.rdo_returnToWelcome.UseVisualStyleBackColor = true;
-            this.rdo_returnToWelcome.CheckedChanged += new System.EventHandler(this.Rdo_returnToWelcome_CheckedChanged);
             // 
             // label1
             // 

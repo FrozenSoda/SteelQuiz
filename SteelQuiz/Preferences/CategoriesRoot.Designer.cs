@@ -49,11 +49,12 @@ namespace SteelQuiz.Preferences
             this.pcat_maintenance = new SteelQuiz.PrefCategoryItem();
             this.pcat_general = new SteelQuiz.PrefCategoryItem();
             this.pcat_quizEditor = new SteelQuiz.PrefCategoryItem();
+            this.pcat_updates = new SteelQuiz.PrefCategoryItem();
             this.SuspendLayout();
             // 
             // pcat_maintenance
             // 
-            this.pcat_maintenance.Location = new System.Drawing.Point(0, 83);
+            this.pcat_maintenance.Location = new System.Drawing.Point(0, 118);
             this.pcat_maintenance.Name = "pcat_maintenance";
             this.pcat_maintenance.PrefText = "Maintenance >";
             this.pcat_maintenance.Selectable = false;
@@ -84,11 +85,23 @@ namespace SteelQuiz.Preferences
             this.pcat_quizEditor.TabIndex = 14;
             this.pcat_quizEditor.OnPrefSelected += new System.EventHandler(this.Pcat_quizEditor_OnPrefSelected);
             // 
+            // pcat_updates
+            // 
+            this.pcat_updates.Location = new System.Drawing.Point(0, 83);
+            this.pcat_updates.Name = "pcat_updates";
+            this.pcat_updates.PrefText = "Updates";
+            this.pcat_updates.Selectable = true;
+            this.pcat_updates.Selected = false;
+            this.pcat_updates.Size = new System.Drawing.Size(130, 29);
+            this.pcat_updates.TabIndex = 15;
+            this.pcat_updates.OnPrefSelected += new System.EventHandler(this.Pcat_updates_OnPrefSelected);
+            // 
             // CategoriesRoot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.Controls.Add(this.pcat_updates);
             this.Controls.Add(this.pcat_quizEditor);
             this.Controls.Add(this.pcat_maintenance);
             this.Controls.Add(this.pcat_general);
@@ -104,5 +117,6 @@ namespace SteelQuiz.Preferences
         private PrefCategoryItem pcat_maintenance;
         private PrefCategoryItem pcat_general;
         private PrefCategoryItem pcat_quizEditor;
+        private PrefCategoryItem pcat_updates;
     }
 }

@@ -56,6 +56,7 @@ namespace SteelQuiz
             this.label2 = new System.Windows.Forms.Label();
             this.lbl_installedVer = new System.Windows.Forms.Label();
             this.tmr_btnEnable = new System.Windows.Forms.Timer(this.components);
+            this.chk_autoUpdateInFuture = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // lbl_top
@@ -154,12 +155,24 @@ namespace SteelQuiz
             this.tmr_btnEnable.Interval = 1000;
             this.tmr_btnEnable.Tick += new System.EventHandler(this.Tmr_btnEnable_Tick);
             // 
+            // chk_autoUpdateInFuture
+            // 
+            this.chk_autoUpdateInFuture.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chk_autoUpdateInFuture.ForeColor = System.Drawing.Color.White;
+            this.chk_autoUpdateInFuture.Location = new System.Drawing.Point(219, 392);
+            this.chk_autoUpdateInFuture.Name = "chk_autoUpdateInFuture";
+            this.chk_autoUpdateInFuture.Size = new System.Drawing.Size(256, 46);
+            this.chk_autoUpdateInFuture.TabIndex = 8;
+            this.chk_autoUpdateInFuture.Text = "In the future, update automatically";
+            this.chk_autoUpdateInFuture.UseVisualStyleBackColor = true;
+            // 
             // UpdateAvailable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.chk_autoUpdateInFuture);
             this.Controls.Add(this.lbl_installedVer);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.rtf_releaseNotes);
@@ -189,5 +202,6 @@ namespace SteelQuiz
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lbl_installedVer;
         private System.Windows.Forms.Timer tmr_btnEnable;
+        private System.Windows.Forms.CheckBox chk_autoUpdateInFuture;
     }
 }

@@ -72,7 +72,6 @@ namespace SteelQuiz.Preferences
             if (rdo_themeLight.Checked)
             {
                 ConfigManager.Config.Theme = ThemeManager.ThemeCore.Theme.Light;
-                ConfigManager.SaveConfig();
             }
             else
             {
