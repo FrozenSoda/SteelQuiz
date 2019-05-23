@@ -165,6 +165,7 @@ namespace SteelQuiz
             this.chk_autoUpdateInFuture.TabIndex = 8;
             this.chk_autoUpdateInFuture.Text = "In the future, update automatically";
             this.chk_autoUpdateInFuture.UseVisualStyleBackColor = true;
+            this.chk_autoUpdateInFuture.CheckedChanged += new System.EventHandler(this.Chk_autoUpdateInFuture_CheckedChanged);
             // 
             // UpdateAvailable
             // 

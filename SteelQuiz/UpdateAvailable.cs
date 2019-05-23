@@ -101,5 +101,11 @@ namespace SteelQuiz
                 btn_notNow.Text = $"({BUTTON_ENABLE_DELAY_S - secondsSinceStart}s) Not now";
             }
         }
+
+        private void Chk_autoUpdateInFuture_CheckedChanged(object sender, EventArgs e)
+        {
+            ConfigManager.Config.UpdateConfig.AutoUpdate = chk_autoUpdateInFuture.Checked;
+            ConfigManager.SaveConfig();
+        }
     }
 }
