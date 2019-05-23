@@ -72,10 +72,10 @@ namespace SteelQuiz.Preferences
             this.rdo_notifyUpdate.ForeColor = System.Drawing.Color.White;
             this.rdo_notifyUpdate.Location = new System.Drawing.Point(15, 70);
             this.rdo_notifyUpdate.Name = "rdo_notifyUpdate";
-            this.rdo_notifyUpdate.Size = new System.Drawing.Size(476, 24);
+            this.rdo_notifyUpdate.Size = new System.Drawing.Size(528, 24);
             this.rdo_notifyUpdate.TabIndex = 1;
             this.rdo_notifyUpdate.TabStop = true;
-            this.rdo_notifyUpdate.Text = "Automatically check for updates, and notify if an update is available";
+            this.rdo_notifyUpdate.Text = "Check for updates, but let me choose whether to download and install them";
             this.rdo_notifyUpdate.UseVisualStyleBackColor = true;
             // 
             // label1
@@ -96,9 +96,9 @@ namespace SteelQuiz.Preferences
             this.rdo_autoUpdate.ForeColor = System.Drawing.Color.White;
             this.rdo_autoUpdate.Location = new System.Drawing.Point(15, 40);
             this.rdo_autoUpdate.Name = "rdo_autoUpdate";
-            this.rdo_autoUpdate.Size = new System.Drawing.Size(493, 24);
+            this.rdo_autoUpdate.Size = new System.Drawing.Size(319, 24);
             this.rdo_autoUpdate.TabIndex = 0;
-            this.rdo_autoUpdate.Text = "Automatically download and install updates when launching SteelQuiz";
+            this.rdo_autoUpdate.Text = "Automatically download and install updates";
             this.rdo_autoUpdate.UseVisualStyleBackColor = true;
             this.rdo_autoUpdate.CheckedChanged += new System.EventHandler(this.Rdo_autoUpdate_CheckedChanged);
             // 

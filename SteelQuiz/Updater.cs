@@ -138,7 +138,14 @@ namespace SteelQuiz
                     }
                     else
                     {
-                        notifyIcon.BalloonTipText = "A software update is available. Click here for more info";
+                        if (ConfigManager.Config.UpdateConfig.AutoUpdate)
+                        {
+                            notifyIcon.BalloonTipText = "A software update is available. Click here to update now";
+                        }
+                        else
+                        {
+                            notifyIcon.BalloonTipText = "A software update is available. Click here for more info";
+                        }
                     }
                     notifyIcon.BalloonTipClosed += (sender, args) => Dispose(notifyIcon);
                     notifyIcon.BalloonTipClicked += (sender, args) => UpdateNotificationClick(notifyIcon);
