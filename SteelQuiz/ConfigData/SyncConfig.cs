@@ -27,7 +27,7 @@ namespace SteelQuiz.ConfigData
 {
     public class SyncConfig
     {
-        public string QuizProgressPath { get; set; } = QuizCore.QUIZ_FOLDER;
+        public string QuizProgressPath { get; set; } = QuizCore.PROGRESS_FILE_PATH;
 
         [JsonProperty("QuizFolders", ObjectCreationHandling = ObjectCreationHandling.Replace)] // replace list instead of appending to it (otherwise, QUIZ_FOLDER will be added to the list every deserialization)
         public List<string> QuizFolders { get; set; } = new List<string>()
