@@ -59,7 +59,7 @@ namespace SteelQuiz
             this.lbl_text.Name = "lbl_text";
             this.lbl_text.Size = new System.Drawing.Size(122, 29);
             this.lbl_text.TabIndex = 3;
-            this.lbl_text.Text = "User Interface";
+            this.lbl_text.Text = "CATEGORY";
             this.lbl_text.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lbl_text.Click += new System.EventHandler(this.Lbl_text_Click);
             this.lbl_text.MouseEnter += new System.EventHandler(this.Lbl_text_MouseEnter);
@@ -77,13 +77,13 @@ namespace SteelQuiz
             this.lbl_selectedIndicator.MouseEnter += new System.EventHandler(this.Lbl_selectedIndicator_MouseEnter);
             this.lbl_selectedIndicator.MouseLeave += new System.EventHandler(this.Lbl_selectedIndicator_MouseLeave);
             // 
-            // PrefCategory
+            // PrefCategoryItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.lbl_text);
             this.Controls.Add(this.lbl_selectedIndicator);
-            this.Name = "PrefCategory";
+            this.Name = "PrefCategoryItem";
             this.Size = new System.Drawing.Size(130, 29);
             this.ResumeLayout(false);
 

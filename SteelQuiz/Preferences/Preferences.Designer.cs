@@ -61,6 +61,7 @@ namespace SteelQuiz.Preferences
             // 
             // pnl_prefs
             // 
+            this.pnl_prefs.AutoScroll = true;
             this.pnl_prefs.Location = new System.Drawing.Point(136, 0);
             this.pnl_prefs.Name = "pnl_prefs";
             this.pnl_prefs.Size = new System.Drawing.Size(652, 450);

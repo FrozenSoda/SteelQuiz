@@ -80,9 +80,9 @@ namespace SteelQuiz.Preferences
             this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(0, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(89, 25);
+            this.label3.Size = new System.Drawing.Size(84, 25);
             this.label3.TabIndex = 4;
-            this.label3.Text = "Personal:";
+            this.label3.Text = "Personal";
             // 
             // rdo_dontShowNameOnWelcome
             // 
@@ -163,9 +163,9 @@ namespace SteelQuiz.Preferences
             this.label4.ForeColor = System.Drawing.Color.White;
             this.label4.Location = new System.Drawing.Point(0, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(75, 25);
+            this.label4.Size = new System.Drawing.Size(70, 25);
             this.label4.TabIndex = 0;
-            this.label4.Text = "Theme:";
+            this.label4.Text = "Theme";
             // 
             // rdo_themeLight
             // 

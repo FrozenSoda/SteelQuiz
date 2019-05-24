@@ -25,43 +25,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SteelQuiz.ThemeManager.Colors;
 
 namespace SteelQuiz.Preferences
 {
-    public partial class CategoriesRoot : CategoryCollection
+    public partial class CategoriesSync : CategoryCollection
     {
-
-        public CategoriesRoot()
+        public CategoriesSync()
         {
             InitializeComponent();
 
             SetTheme();
         }
 
-        private void Prefs_general_OnPrefSelected(object sender, EventArgs e)
+        private void Pcat_quizFolders_OnPrefSelected(object sender, EventArgs e)
         {
-            (ParentForm as Preferences).SwitchCategory(typeof(PrefsGeneral));
-        }
-
-        private void Prefs_maintenance_OnPrefSelected(object sender, EventArgs e)
-        {
-            (ParentForm as Preferences).SwitchCategoryCollection(typeof(CategoriesMaintenance));
-        }
-
-        private void Pcat_quizEditor_OnPrefSelected(object sender, EventArgs e)
-        {
-            (ParentForm as Preferences).SwitchCategory(typeof(PrefsQuizEditor));
-        }
-
-        private void Pcat_updates_OnPrefSelected(object sender, EventArgs e)
-        {
-            (ParentForm as Preferences).SwitchCategory(typeof(PrefsUpdates));
-        }
-
-        private void Pcat_sync_OnPrefSelected(object sender, EventArgs e)
-        {
-            (ParentForm as Preferences).SwitchCategoryCollection(typeof(CategoriesSync));
+            (ParentForm as Preferences).SwitchCategory(typeof(PrefsQuizFolders));
         }
     }
 }

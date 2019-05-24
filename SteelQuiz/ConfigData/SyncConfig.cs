@@ -16,7 +16,7 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-using SteelQuiz.ThemeManager;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,22 +25,14 @@ using System.Threading.Tasks;
 
 namespace SteelQuiz.ConfigData
 {
-    public class Config
+    public class SyncConfig
     {
-        public string FileFormatVersion { get; set; }
-        public bool AcceptedTermsOfUse { get; set; } = false;
-        public Guid LastQuiz { get; set; } = Guid.Empty;
-        public ThemeCore.Theme Theme { get; set; } = ThemeCore.Theme.Light;
-        public string FullName { get; set; }
-        public bool ShowNameOnWelcomeScreen { get; set; } = true;
-        public QuizEditorConfig QuizEditorConfig { get; set; } = new QuizEditorConfig();
-        public UpdateConfig UpdateConfig { get; set; } = new UpdateConfig();
-        public SyncConfig SyncConfig { get; set; } = new SyncConfig();
-        public Statistics Statistics { get; set; } = new Statistics();
+        public string QuizProgressPath { get; set; } = QuizCore.QUIZ_FOLDER;
 
-        public Config()
+        [JsonProperty("QuizFolders", ObjectCreationHandling = ObjectCreationHandling.Replace)] // replace list instead of appending to it (otherwise, QUIZ_FOLDER will be added to the list every deserialization)
+        public List<string> QuizFolders { get; set; } = new List<string>()
         {
-            FileFormatVersion = MetaData.QUIZ_FILE_FORMAT_VERSION;
-        }
+            QuizCore.QUIZ_FOLDER
+        };
     }
 }

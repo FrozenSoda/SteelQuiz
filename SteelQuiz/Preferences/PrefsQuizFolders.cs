@@ -26,42 +26,35 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SteelQuiz.ThemeManager.Colors;
+using SteelQuiz.Extensions;
 
 namespace SteelQuiz.Preferences
 {
-    public partial class CategoriesRoot : CategoryCollection
+    public partial class PrefsQuizFolders : AutoThemeableUserControl, IPreferenceCategory
     {
+        private PreferencesTheme PreferencesTheme = new PreferencesTheme();
+        private bool skipConfigApply = true;
 
-        public CategoriesRoot()
+        public PrefsQuizFolders()
         {
             InitializeComponent();
 
+            LoadPreferences();
             SetTheme();
+            skipConfigApply = false;
         }
 
-        private void Prefs_general_OnPrefSelected(object sender, EventArgs e)
+        public void LoadPreferences()
         {
-            (ParentForm as Preferences).SwitchCategory(typeof(PrefsGeneral));
+            foreach (var quizFolder in ConfigManager.Config.SyncConfig.QuizFolders)
+            {
+                flp_folders.Controls.Add(new QuizFolder(quizFolder));
+            }
         }
 
-        private void Prefs_maintenance_OnPrefSelected(object sender, EventArgs e)
+        private void Btn_add_Click(object sender, EventArgs e)
         {
-            (ParentForm as Preferences).SwitchCategoryCollection(typeof(CategoriesMaintenance));
-        }
-
-        private void Pcat_quizEditor_OnPrefSelected(object sender, EventArgs e)
-        {
-            (ParentForm as Preferences).SwitchCategory(typeof(PrefsQuizEditor));
-        }
-
-        private void Pcat_updates_OnPrefSelected(object sender, EventArgs e)
-        {
-            (ParentForm as Preferences).SwitchCategory(typeof(PrefsUpdates));
-        }
-
-        private void Pcat_sync_OnPrefSelected(object sender, EventArgs e)
-        {
-            (ParentForm as Preferences).SwitchCategoryCollection(typeof(CategoriesSync));
+            flp_folders.Controls.Add(new QuizFolder());
         }
     }
 }
