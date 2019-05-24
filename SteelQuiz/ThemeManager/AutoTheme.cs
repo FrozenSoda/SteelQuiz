@@ -78,6 +78,12 @@ namespace SteelQuiz.ThemeManager
                 txt.ForeColor = GeneralTheme.GetTextBoxForeColor();
             }
 
+            foreach (var nud in control.GetAllChildrenRecursive(typeof(NumericUpDown)))
+            {
+                nud.BackColor = GeneralTheme.GetTextBoxBackColor();
+                nud.ForeColor = GeneralTheme.GetTextBoxForeColor();
+            }
+
             foreach (var rtf in control.GetAllChildrenRecursive(typeof(RichTextBox)))
             {
                 rtf.BackColor = GeneralTheme.GetTextBoxBackColor();

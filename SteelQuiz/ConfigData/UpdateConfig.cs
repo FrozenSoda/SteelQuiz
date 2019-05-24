@@ -27,5 +27,6 @@ namespace SteelQuiz.ConfigData
     public class UpdateConfig
     {
         public bool AutoUpdate { get; set; } = false;
+        public int UpdateAvailableButtonEnableDelay_s { get; set; } = 3;
     }
 }

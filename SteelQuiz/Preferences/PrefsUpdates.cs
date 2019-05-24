@@ -47,6 +47,7 @@ namespace SteelQuiz.Preferences
         {
             rdo_autoUpdate.Checked = ConfigManager.Config.UpdateConfig.AutoUpdate;
             rdo_notifyUpdate.Checked = !rdo_autoUpdate.Checked;
+            nud_buttonEnableDelay.Value = ConfigManager.Config.UpdateConfig.UpdateAvailableButtonEnableDelay_s;
         }
 
         private void Rdo_autoUpdate_CheckedChanged(object sender, EventArgs e)
@@ -57,6 +58,17 @@ namespace SteelQuiz.Preferences
             }
 
             ConfigManager.Config.UpdateConfig.AutoUpdate = rdo_autoUpdate.Checked;
+            ConfigManager.SaveConfig();
+        }
+
+        private void Nud_buttonEnableDelay_ValueChanged(object sender, EventArgs e)
+        {
+            if (skipConfigApply)
+            {
+                return;
+            }
+
+            ConfigManager.Config.UpdateConfig.UpdateAvailableButtonEnableDelay_s = (int)nud_buttonEnableDelay.Value;
             ConfigManager.SaveConfig();
         }
     }
