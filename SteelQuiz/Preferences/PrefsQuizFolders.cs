@@ -27,10 +27,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SteelQuiz.ThemeManager.Colors;
 using SteelQuiz.Extensions;
+using System.IO;
 
 namespace SteelQuiz.Preferences
 {
-    public partial class PrefsQuizFolders : AutoThemeableUserControl, IPreferenceCategory
+    public partial class PrefsQuizFolders : AutoThemeableUserControl, IPreferenceCategory, ICustomSaveCategory
     {
         private PreferencesTheme PreferencesTheme = new PreferencesTheme();
         private bool skipConfigApply = true;
@@ -48,13 +49,44 @@ namespace SteelQuiz.Preferences
         {
             foreach (var quizFolder in ConfigManager.Config.SyncConfig.QuizFolders)
             {
-                flp_folders.Controls.Add(new QuizFolder(quizFolder));
+                flp_folders.Controls.Add(new QuizFolder(this, quizFolder));
+            }
+        }
+
+        public void Save(bool saveConfig)
+        {
+            var quizFolders = new List<string>();
+            var qfDispose = new List<QuizFolder>();
+
+            foreach (var qf in flp_folders.Controls.OfType<QuizFolder>())
+            {
+                if (Directory.Exists(qf.QuizFolderPath))
+                {
+                    quizFolders.Add(qf.QuizFolderPath);
+                }
+                else
+                {
+                    MessageBox.Show($"Folder '{qf.QuizFolderPath}' does not exist; it will be removed from the list", "SteelQuiz", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    qfDispose.Add(qf);
+                }
+            }
+
+            ConfigManager.Config.SyncConfig.QuizFolders = quizFolders;
+            if (saveConfig)
+            {
+                ConfigManager.SaveConfig();
+            }
+
+            foreach (var qf in qfDispose)
+            {
+                qf.Dispose();
             }
         }
 
         private void Btn_add_Click(object sender, EventArgs e)
         {
-            flp_folders.Controls.Add(new QuizFolder());
+            flp_folders.Controls.Add(new QuizFolder(this));
         }
     }
 }

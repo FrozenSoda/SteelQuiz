@@ -132,9 +132,18 @@ namespace SteelQuiz.Preferences
             }
         }
 
+        private void Save()
+        {
+            foreach (var prefs in pnl_prefs.Controls.OfType<ICustomSaveCategory>())
+            {
+                prefs.Save(false);
+            }
+            ConfigManager.SaveConfig();
+        }
+
         private void Preferences_FormClosing(object sender, FormClosingEventArgs e)
         {
-            ConfigManager.SaveConfig();
+            Save();
             Program.frmWelcome.UpdateCfg();
         }
     }

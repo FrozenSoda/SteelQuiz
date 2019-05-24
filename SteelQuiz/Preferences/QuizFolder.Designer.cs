@@ -43,6 +43,7 @@
             this.txt_path.Name = "txt_path";
             this.txt_path.Size = new System.Drawing.Size(574, 22);
             this.txt_path.TabIndex = 0;
+            this.txt_path.Leave += new System.EventHandler(this.Txt_path_Leave);
             // 
             // btn_del
             // 

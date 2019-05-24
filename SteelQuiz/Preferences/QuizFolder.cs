@@ -44,9 +44,14 @@ namespace SteelQuiz.Preferences
             }
         }
 
-        public QuizFolder(string path = null)
+        private PrefsQuizFolders ParentUC { get; set; }
+
+        public QuizFolder(PrefsQuizFolders parentUC, string path = null)
         {
             InitializeComponent();
+
+            ParentUC = parentUC;
+
             if (path == null)
             {
                 if (fbd_path.ShowDialog() == DialogResult.OK)
@@ -82,6 +87,11 @@ namespace SteelQuiz.Preferences
             {
                 txt_path.Text = fbd_path.SelectedPath;
             }
+        }
+
+        private void Txt_path_Leave(object sender, EventArgs e)
+        {
+            ParentUC.Save(true);
         }
     }
 }

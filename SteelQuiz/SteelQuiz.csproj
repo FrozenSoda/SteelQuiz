@@ -73,6 +73,7 @@
     <Compile Include="Preferences\CategoriesSync.Designer.cs">
       <DependentUpon>CategoriesSync.cs</DependentUpon>
     </Compile>
+    <Compile Include="Preferences\ICustomSaveCategory.cs" />
     <Compile Include="Preferences\PrefsQuizFolders.cs">
       <SubType>UserControl</SubType>
     </Compile>
