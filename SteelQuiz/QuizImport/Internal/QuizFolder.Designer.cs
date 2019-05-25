@@ -54,7 +54,7 @@
             // 
             // lbl_folderPath
             // 
-            this.lbl_folderPath.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_folderPath.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_folderPath.Location = new System.Drawing.Point(4, 4);
             this.lbl_folderPath.Name = "lbl_folderPath";
             this.lbl_folderPath.Size = new System.Drawing.Size(573, 42);
