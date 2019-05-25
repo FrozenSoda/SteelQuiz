@@ -202,18 +202,28 @@ namespace SteelQuiz.Preferences
                 var guid = quizProg.QuizGUID;
                 var quizFound = false;
 
-                foreach (var quizFile in Directory.GetFiles(QuizCore.QUIZ_FOLDER, $"*{QuizCore.QUIZ_EXTENSION}", SearchOption.TopDirectoryOnly))
+                var breakQuizFolders = false;
+                foreach (var quizFolder in ConfigManager.Config.SyncConfig.QuizFolders)
                 {
-                    Quiz quiz;
-                    using (var reader = new StreamReader(quizFile))
+                    if (breakQuizFolders)
                     {
-                        quiz = JsonConvert.DeserializeObject<Quiz>(reader.ReadToEnd());
+                        break;
                     }
 
-                    if (quiz.GUID.Equals(guid))
+                    foreach (var quizFile in Directory.GetFiles(quizFolder, $"*{QuizCore.QUIZ_EXTENSION}", SearchOption.TopDirectoryOnly))
                     {
-                        quizFound = true;
-                        break;
+                        Quiz quiz;
+                        using (var reader = new StreamReader(quizFile))
+                        {
+                            quiz = JsonConvert.DeserializeObject<Quiz>(reader.ReadToEnd());
+                        }
+
+                        if (quiz.GUID.Equals(guid))
+                        {
+                            quizFound = true;
+                            breakQuizFolders = true;
+                            break;
+                        }
                     }
                 }
 

@@ -16,23 +16,45 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.IO;
 
-namespace SteelQuiz.ConfigData
+namespace SteelQuiz.QuizImport.Guide
 {
-    public class SyncConfig
+    public partial class QuizFolder : AutoThemeableUserControl
     {
-        public string QuizProgressPath { get; set; } = QuizCore.PROGRESS_FILE_PATH;
-
-        [JsonProperty("QuizFolders", ObjectCreationHandling = ObjectCreationHandling.Replace)] // replace list instead of appending to it (otherwise, QUIZ_FOLDER_DEFAULT will be added to the list every deserialization)
-        public List<string> QuizFolders { get; set; } = new List<string>()
+        private string QuizFolderPath
         {
-            QuizCore.QUIZ_FOLDER_DEFAULT
-        };
+            get
+            {
+                return lbl_folderPath.Text;
+            }
+
+            set
+            {
+                lbl_folderPath.Text = value;
+            }
+        }
+
+        public QuizFolder(string path)
+        {
+            InitializeComponent();
+
+            QuizFolderPath = path;
+            SetTheme();
+        }
+
+        private void SelectFolder()
+        {
+            
+        }
     }
 }

@@ -443,10 +443,10 @@ namespace SteelQuiz.QuizEditor
             {
                 if (QuizPath == null || saveAs)
                 {
-                    sfd_quiz.InitialDirectory = QuizCore.QUIZ_FOLDER;
+                    sfd_quiz.InitialDirectory = QuizCore.QUIZ_FOLDER_DEFAULT;
                     int untitledCounter = 1;
                     path = $"Untitled{ untitledCounter }.steelquiz";
-                    while (File.Exists(Path.Combine(QuizCore.QUIZ_FOLDER, path)))
+                    while (File.Exists(Path.Combine(QuizCore.QUIZ_FOLDER_DEFAULT, path)))
                     {
                         ++untitledCounter;
                         path = $"Untitled{ untitledCounter }.steelquiz";

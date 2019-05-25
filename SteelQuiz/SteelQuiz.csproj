@@ -92,6 +92,24 @@
     <Compile Include="Preferences\QuizFolder.Designer.cs">
       <DependentUpon>QuizFolder.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuizImport\Guide\QuizFolder.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuizImport\Guide\QuizFolder.Designer.cs">
+      <DependentUpon>QuizFolder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuizImport\Internal\QuizFolder.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuizImport\Internal\QuizFolder.Designer.cs">
+      <DependentUpon>QuizFolder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuizImport\Internal\QuizFolderSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuizImport\Internal\QuizFolderSelect.Designer.cs">
+      <DependentUpon>QuizFolderSelect.cs</DependentUpon>
+    </Compile>
     <Compile Include="StartupLoading.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -328,6 +346,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Preferences\QuizFolder.resx">
       <DependentUpon>QuizFolder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuizImport\Guide\QuizFolder.resx">
+      <DependentUpon>QuizFolder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuizImport\Internal\QuizFolder.resx">
+      <DependentUpon>QuizFolder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuizImport\Internal\QuizFolderSelect.resx">
+      <DependentUpon>QuizFolderSelect.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StartupLoading.resx">
       <DependentUpon>StartupLoading.cs</DependentUpon>

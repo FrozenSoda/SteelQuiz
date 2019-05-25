@@ -140,7 +140,7 @@ namespace SteelQuiz
 
         private void btn_loadQuiz_Click(object sender, EventArgs e)
         {
-            ofd_loadQuiz.InitialDirectory = QuizCore.QUIZ_FOLDER;
+            ofd_loadQuiz.InitialDirectory = QuizCore.QUIZ_FOLDER_DEFAULT;
             if (ofd_loadQuiz.ShowDialog() == DialogResult.OK)
             {
                 /*

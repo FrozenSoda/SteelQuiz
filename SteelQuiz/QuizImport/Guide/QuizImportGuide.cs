@@ -128,7 +128,8 @@ namespace SteelQuiz.QuizImport.Guide
                     return;
                 }
 
-                var quizPath = Path.Combine(QuizCore.QUIZ_FOLDER, quizFilename) + QuizCore.QUIZ_EXTENSION;
+#warning add folder select
+                var quizPath = Path.Combine(QuizCore.QUIZ_FOLDER_DEFAULT, quizFilename) + QuizCore.QUIZ_EXTENSION;
 
                 if (File.Exists(quizPath))
                 {

@@ -27,6 +27,7 @@ using SteelQuiz.QuizProgressData;
 using SteelQuiz.Util;
 using Newtonsoft.Json;
 using System.Windows.Forms;
+using SteelQuiz.QuizImport.Internal;
 
 namespace SteelQuiz
 {
@@ -35,9 +36,9 @@ namespace SteelQuiz
         public const string QUIZ_EXTENSION = ".steelquiz";
         public static readonly string APP_CFG_FOLDER = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SteelQuiz");
         public static readonly string BACKUP_FOLDER = Path.Combine(APP_CFG_FOLDER, "Backups");
-        public static readonly string QUIZ_FOLDER = Path.Combine(APP_CFG_FOLDER, "Quizzes");
-        public static readonly string QUIZ_RECOVERY_FOLDER = Path.Combine(QUIZ_FOLDER, "Recovery");
-        public static readonly string QUIZ_BACKUP_FOLDER = Path.Combine(QUIZ_FOLDER, "Backups");
+        public static readonly string QUIZ_FOLDER_DEFAULT = Path.Combine(APP_CFG_FOLDER, "Quizzes");
+        public static readonly string QUIZ_RECOVERY_FOLDER = Path.Combine(QUIZ_FOLDER_DEFAULT, "Recovery");
+        public static readonly string QUIZ_BACKUP_FOLDER = Path.Combine(QUIZ_FOLDER_DEFAULT, "Backups");
         public static readonly string PROGRESS_FILE_PATH = Path.Combine(APP_CFG_FOLDER, "QuizProgress.json");
 
         public static Quiz Quiz { get; set; }
@@ -54,7 +55,7 @@ namespace SteelQuiz
                 throw new FileNotFoundException("The quiz file cannot be found");
             }
 
-            if (Path.GetDirectoryName(quizPath) != QUIZ_FOLDER)
+            if (!ConfigManager.Config.SyncConfig.QuizFolders.Contains(Path.GetDirectoryName(quizPath)))
             {
                 var msg = MessageBox.Show($"Import quiz '{quizPath}'?", "SteelQuiz", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                 if (msg == DialogResult.OK)
@@ -114,16 +115,19 @@ namespace SteelQuiz
         {
             Quiz quiz;
 
-            foreach (var file in Directory.GetFiles(QUIZ_FOLDER).Where(x => x.EndsWith(QUIZ_EXTENSION)))
+            foreach (var quizFolder in ConfigManager.Config.SyncConfig.QuizFolders)
             {
-                using (var reader = new StreamReader(file))
+                foreach (var file in Directory.GetFiles(quizFolder).Where(x => x.EndsWith(QUIZ_EXTENSION)))
                 {
-                    quiz = JsonConvert.DeserializeObject<Quiz>(reader.ReadToEnd());
-                }
+                    using (var reader = new StreamReader(file))
+                    {
+                        quiz = JsonConvert.DeserializeObject<Quiz>(reader.ReadToEnd());
+                    }
 
-                if (quiz != null && quiz.GUID == quizGuid)
-                {
-                    return Load(file);
+                    if (quiz != null && quiz.GUID == quizGuid)
+                    {
+                        return Load(file);
+                    }
                 }
             }
 
@@ -136,11 +140,18 @@ namespace SteelQuiz
             // find quiz filename that does not exist
             string importedPath;
             int untitledCounter = 1;
-            importedPath = Path.Combine(QuizCore.QUIZ_FOLDER, $"{Path.GetFileNameWithoutExtension(quizPath)}.steelquiz");
+
+            var selectQuizFolder = new QuizFolderSelect();
+            if (selectQuizFolder.ShowDialog() != DialogResult.OK)
+            {
+                return false;
+            }
+
+            importedPath = Path.Combine(selectQuizFolder.QuizFolderPath, $"{Path.GetFileNameWithoutExtension(quizPath)}.steelquiz");
             while (File.Exists(importedPath))
             {
                 ++untitledCounter;
-                importedPath = Path.Combine(QuizCore.QUIZ_FOLDER,
+                importedPath = Path.Combine(selectQuizFolder.QuizFolderPath,
                         $"{Path.GetFileNameWithoutExtension(quizPath)}_{ untitledCounter.ToString() }.steelquiz");
             }
 
@@ -165,7 +176,7 @@ namespace SteelQuiz
             {
                 Directory.CreateDirectory(APP_CFG_FOLDER);
                 Directory.CreateDirectory(BACKUP_FOLDER);
-                Directory.CreateDirectory(QUIZ_FOLDER);
+                Directory.CreateDirectory(QUIZ_FOLDER_DEFAULT);
                 Directory.CreateDirectory(QUIZ_BACKUP_FOLDER);
                 Directory.CreateDirectory(QUIZ_RECOVERY_FOLDER);
             }
