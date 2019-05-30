@@ -31,6 +31,10 @@ namespace SteelQuiz.ConfigData
         public DateTime MeasureStart { get; private set; }
         public T Data { get; set; }
 
+        /// <summary>
+        /// A class used for storing a statistic
+        /// </summary>
+        /// <param name="data">The statistic data to store</param>
         public Statistic(T data)
         {
             MeasureStart = DateTime.Now;

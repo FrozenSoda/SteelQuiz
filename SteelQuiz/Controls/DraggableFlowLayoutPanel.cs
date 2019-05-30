@@ -35,9 +35,14 @@ namespace SteelQuiz.Controls
 
         private void DraggableFlowLayoutPanel_ControlRemoved(object sender, ControlEventArgs e)
         {
-            
+            AlignAll();
         }
 
+        /// <summary>
+        /// Returns the closest control to a control
+        /// </summary>
+        /// <param name="control">The control (being dragged)</param>
+        /// <returns></returns>
         private Control ClosestControl(Control control)
         {
             Control closestControl = null;
@@ -52,6 +57,10 @@ namespace SteelQuiz.Controls
             return closestControl;
         }
 
+        /// <summary>
+        /// Alligns a dragged control in the panel
+        /// </summary>
+        /// <param name="control">The control being dragged</param>
         public void Align(Control control)
         {
             var closestControl = ClosestControl(control);
@@ -65,13 +74,36 @@ namespace SteelQuiz.Controls
                 control.Left = Padding.Left;
 
                 int dY = control.Top - closestControl.Top;
-                if (dY > 0)
+                if (dY > 1)
                 {
                     control.Top = closestControl.Bottom + Padding.Top;
                 }
                 else
                 {
                     control.Top = -control.Size.Height + closestControl.Top - Padding.Bottom;
+                }
+            }
+
+            AlignAll();
+        }
+
+        /// <summary>
+        /// Aligns all the controls in the panel
+        /// </summary>
+        /// <param name="draggedControl">The control being dragged, if being dragged</param>
+        public void AlignAll(Control draggedControl = null)
+        {
+            List<Control> controlsAligned = Controls.Cast<Control>().OrderBy(x => x.Location.Y).ToList();
+
+            // the dragged control should be put first if it has the same Y-position as another control
+
+
+            controlsAligned[0].Location = new Point(Padding.Left, Padding.Top);
+            for (int i = 1; i < controlsAligned.Count; ++i)
+            {
+                if (controlsAligned[i] != draggedControl)
+                {
+                    controlsAligned[i].Top = controlsAligned[i - 1].Bottom + Padding.Top;
                 }
             }
         }

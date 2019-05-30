@@ -27,6 +27,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using SteelQuiz.Controls;
+using System.Diagnostics;
 
 namespace SteelQuiz.Preferences
 {
@@ -102,12 +103,15 @@ namespace SteelQuiz.Preferences
         }
 
         private Point MouseDownLocation { get; set; }
+        private Stopwatch hoverStopwatch = new Stopwatch();
 
         private void Pnl_drag_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
+                hoverStopwatch.Start();
                 MouseDownLocation = e.Location;
+                BringToFront();
             }
         }
 
@@ -126,11 +130,18 @@ namespace SteelQuiz.Preferences
                 {
                     Top = top;
                 }
+
+                if (hoverStopwatch.ElapsedMilliseconds > 100)
+                {
+                    (Parent as DraggableFlowLayoutPanel).AlignAll(this);
+                    hoverStopwatch.Restart();
+                }
             }
         }
 
         private void Pnl_drag_MouseUp(object sender, MouseEventArgs e)
         {
+            hoverStopwatch.Reset();
             (Parent as DraggableFlowLayoutPanel).Align(this);
         }
     }

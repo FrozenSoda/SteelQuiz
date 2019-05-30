@@ -26,6 +26,14 @@ namespace SteelQuiz.Extensions
 {
     public static class IntegerExtensions
     {
+        /// <summary>
+        /// Limits an integer to entered bounds
+        /// </summary>
+        /// <param name="num">The integer to limit</param>
+        /// <param name="min">The minimum value for the integer</param>
+        /// <param name="max">The maximum value for the integer</param>
+        /// <returns>Returns the integer if it is within the bounds, otherwise returns the minimum value if the integer is lower than it,
+        /// or returns the maximum value of the integer is greater than it</returns>
         public static int FixBounds(this int num, int min, int max)
         {
             if (num < min)

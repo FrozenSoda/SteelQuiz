@@ -60,6 +60,10 @@ namespace SteelQuiz.Preferences
             pnl_prefCategories.BackColor = PreferencesTheme.GetPrefCatPanelBackColor();
         }
 
+        /// <summary>
+        /// Switches category collection
+        /// </summary>
+        /// <param name="category">The category collection type to switch to</param>
         public void SwitchCategoryCollection(Type category)
         {
             var found = false;
@@ -84,6 +88,10 @@ namespace SteelQuiz.Preferences
             }
         }
 
+        /// <summary>
+        /// Returns from a category collection to the previous one
+        /// </summary>
+        /// <param name="categoryCollection">The category collection to return from</param>
         public void PopCategoryCollection(CategoryCollection categoryCollection)
         {
             var collections = pnl_prefCategories.Controls.OfType<CategoryCollection>();
@@ -92,6 +100,11 @@ namespace SteelQuiz.Preferences
             currCollection.InvokeSelectedEvent();
         }
 
+
+        /// <summary>
+        /// Switches preferences category
+        /// </summary>
+        /// <param name="category">The category type to switch to</param>
         public void SwitchCategory(Type category)
         {
             /*

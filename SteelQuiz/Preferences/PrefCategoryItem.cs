@@ -83,12 +83,18 @@ namespace SteelQuiz
             }
         }
 
+        /// <summary>
+        /// A control used as a category in a category collection
+        /// </summary>
         public PrefCategoryItem()
         {
             InitializeComponent();
             SetTheme();
         }
 
+        /// <summary>
+        /// Selects the category without invoking its selection event
+        /// </summary>
         public void SelectWithoutInvokeEvent()
         {
             if (_selected)
@@ -115,6 +121,9 @@ namespace SteelQuiz
             }
         }
 
+        /// <summary>
+        /// Invokes the event which should be fired after selecting the category
+        /// </summary>
         public void InvokePrefSelected()
         {
             this.OnPrefSelected?.Invoke(this, null);
@@ -128,6 +137,9 @@ namespace SteelQuiz
             lbl_selectedIndicator.BackColor = PreferencesTheme.GetPrefBackColor();
         }
 
+        /// <summary>
+        /// Updates the colors for mouse hover
+        /// </summary>
         private void StartHover()
         {
             if (Selected)
@@ -141,6 +153,9 @@ namespace SteelQuiz
             }
         }
 
+        /// <summary>
+        /// Updates the colors for no mouse hover
+        /// </summary>
         private void StopHover()
         {
             if (Selected)

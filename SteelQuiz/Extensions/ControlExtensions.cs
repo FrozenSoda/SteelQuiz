@@ -27,6 +27,12 @@ namespace SteelQuiz.Extensions
 {
     public static class ControlExtensions
     {
+        /// <summary>
+        /// Gets all children controls of a control, of a specific type
+        /// </summary>
+        /// <param name="control">The control whose children to return</param>
+        /// <param name="type">The child type to search fore</param>
+        /// <returns>Returns all children controls of a control, of a specific type</returns>
         public static IEnumerable<Control> GetAllChildrenRecursive(this Control control, Type type)
         {
             var controls = control.Controls.Cast<Control>();
@@ -36,6 +42,11 @@ namespace SteelQuiz.Extensions
                                       .Where(c => c.GetType() == type);
         }
 
+        /// <summary>
+        /// Gets all children controls of a control
+        /// </summary>
+        /// <param name="control">The control whose children to return</param>
+        /// <returns>Returns all children controls of a control</returns>
         public static IEnumerable<Control> GetAllChildrenRecursive(this Control control)
         {
             var controls = control.Controls.Cast<Control>();

@@ -67,6 +67,9 @@ namespace SteelQuiz.Preferences
 
         private PreferencesTheme PreferencesTheme = new PreferencesTheme();
 
+        /// <summary>
+        /// A control used as a preference category collection in the category menu
+        /// </summary>
         public CategoryCollection() : base()
         {
             Location = new System.Drawing.Point(Width, Location.Y);
@@ -88,6 +91,9 @@ namespace SteelQuiz.Preferences
             }
         }
 
+        /// <summary>
+        /// Invokes the event to be fired when selecting the category collection
+        /// </summary>
         public void InvokeSelectedEvent()
         {
             foreach (var pcat in Controls.OfType<PrefCategoryItem>())
@@ -99,6 +105,9 @@ namespace SteelQuiz.Preferences
             }
         }
 
+        /// <summary>
+        /// Flips the page to the category collection (shows it), including the animation
+        /// </summary>
         public new void Show()
         {
             Location = new System.Drawing.Point(Width, Location.Y);
@@ -123,11 +132,18 @@ namespace SteelQuiz.Preferences
             tmr.Start();
         }
 
+        /// <summary>
+        /// Hides the category collection
+        /// </summary>
         public new void Hide()
         {
             Hide(false);
         }
 
+        /// <summary>
+        /// Flips to the previous category collection (hides the category collection), with an animation
+        /// </summary>
+        /// <param name="dispose">True if the category collection should be disposed after hiding it</param>
         public void Hide(bool dispose = false)
         {
             // animation

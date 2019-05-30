@@ -32,6 +32,13 @@ namespace SteelQuiz.Animations
         public static List<Label> LabelsFading = new List<Label>();
         public static List<Label> LabelFadeCancel = new List<Label>();
 
+        /// <summary>
+        /// Fades a color change of a label
+        /// </summary>
+        /// <param name="lbl">The label to fade a color change</param>
+        /// <param name="from">The starting color</param>
+        /// <param name="to">The target color</param>
+        /// <param name="time">The interval for the fade</param>
         public static void Fade(this Label lbl, Color from, Color to, int time)
         {
             lbl.ForeColor = from;

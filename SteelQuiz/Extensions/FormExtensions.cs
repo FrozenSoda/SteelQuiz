@@ -33,6 +33,11 @@ namespace SteelQuiz.Extensions
             Application.Run(state as Form);
         }
 
+        /// <summary>
+        /// Shows a form in a new thread
+        /// </summary>
+        /// <param name="form">The form to show</param>
+        /// <param name="isBackground">True if the thread should be a background thread, otherwise False</param>
         public static void RunInNewThread(this Form form, bool isBackground)
         {
             if (form == null)

@@ -26,6 +26,9 @@ namespace SteelQuiz.Preferences
 {
     public interface IPreferenceCategory
     {
+        /// <summary>
+        /// Updates the controls in the preference category to reflect the current configuration
+        /// </summary>
         void LoadPreferences();
     }
 }
