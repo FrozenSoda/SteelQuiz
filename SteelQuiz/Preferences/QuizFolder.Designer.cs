@@ -32,6 +32,11 @@
             this.btn_del = new System.Windows.Forms.Button();
             this.btn_browse = new System.Windows.Forms.Button();
             this.fbd_path = new System.Windows.Forms.FolderBrowserDialog();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.pnl_drag = new System.Windows.Forms.Panel();
+            this.pnl_drag.SuspendLayout();
             this.SuspendLayout();
             // 
             // txt_path
@@ -54,7 +59,7 @@
             this.btn_del.ForeColor = System.Drawing.Color.White;
             this.btn_del.Location = new System.Drawing.Point(323, 39);
             this.btn_del.Name = "btn_del";
-            this.btn_del.Size = new System.Drawing.Size(124, 23);
+            this.btn_del.Size = new System.Drawing.Size(124, 33);
             this.btn_del.TabIndex = 3;
             this.btn_del.Text = "Remove from list";
             this.btn_del.UseVisualStyleBackColor = false;
@@ -69,7 +74,7 @@
             this.btn_browse.ForeColor = System.Drawing.Color.White;
             this.btn_browse.Location = new System.Drawing.Point(453, 39);
             this.btn_browse.Name = "btn_browse";
-            this.btn_browse.Size = new System.Drawing.Size(124, 23);
+            this.btn_browse.Size = new System.Drawing.Size(124, 33);
             this.btn_browse.TabIndex = 4;
             this.btn_browse.Text = "Browse";
             this.btn_browse.UseVisualStyleBackColor = false;
@@ -79,11 +84,57 @@
             // 
             this.fbd_path.Description = "Select a folder to add as a quiz folder. The folder should ONLY contain quizzes";
             // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(42, 10);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "⎯⎯⎯⎯";
+            this.label1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseDown);
+            this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseMove);
+            // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(3, 9);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(42, 10);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "⎯⎯⎯⎯";
+            this.label2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseDown);
+            this.label2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseMove);
+            // 
+            // label3
+            // 
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(3, 18);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(42, 10);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "⎯⎯⎯⎯";
+            this.label3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseDown);
+            this.label3.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseMove);
+            // 
+            // pnl_drag
+            // 
+            this.pnl_drag.Controls.Add(this.label1);
+            this.pnl_drag.Controls.Add(this.label3);
+            this.pnl_drag.Controls.Add(this.label2);
+            this.pnl_drag.Location = new System.Drawing.Point(0, 40);
+            this.pnl_drag.Name = "pnl_drag";
+            this.pnl_drag.Size = new System.Drawing.Size(50, 35);
+            this.pnl_drag.TabIndex = 8;
+            this.pnl_drag.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseDown);
+            this.pnl_drag.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseMove);
+            // 
             // QuizFolder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.Controls.Add(this.pnl_drag);
             this.Controls.Add(this.btn_browse);
             this.Controls.Add(this.btn_del);
             this.Controls.Add(this.txt_path);
@@ -91,6 +142,7 @@
             this.ForeColor = System.Drawing.Color.White;
             this.Name = "QuizFolder";
             this.Size = new System.Drawing.Size(580, 75);
+            this.pnl_drag.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -102,5 +154,9 @@
         private System.Windows.Forms.Button btn_del;
         private System.Windows.Forms.Button btn_browse;
         private System.Windows.Forms.FolderBrowserDialog fbd_path;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Panel pnl_drag;
     }
 }

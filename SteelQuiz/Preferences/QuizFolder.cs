@@ -99,5 +99,24 @@ namespace SteelQuiz.Preferences
         {
             ParentUC.Save(true);
         }
+
+        private Point MouseDownLocation { get; set; }
+
+        private void Pnl_drag_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                MouseDownLocation = e.Location;
+            }
+        }
+
+        private void Pnl_drag_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                Left = e.X + Left - MouseDownLocation.X;
+                Top = e.Y + Top - MouseDownLocation.Y;
+            }
+        }
     }
 }
