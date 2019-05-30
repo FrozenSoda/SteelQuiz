@@ -117,7 +117,7 @@ namespace SteelQuiz.Controls
             List<Control> controlsAligned = Controls.Cast<Control>().OrderBy(x => x.Location.Y).ToList();
 
             // the dragged control should be put first if it has the same Y-position as another control
-
+#warning NOT IMPLEMENTED FEATURE
 
             controlsAligned[0].Location = new Point(Padding.Left, Padding.Top);
             for (int i = 1; i < controlsAligned.Count; ++i)
