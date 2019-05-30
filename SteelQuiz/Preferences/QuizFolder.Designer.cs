@@ -94,6 +94,7 @@
             this.label1.Text = "⎯⎯⎯⎯";
             this.label1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseDown);
             this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseMove);
+            this.label1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseUp);
             // 
             // label2
             // 
@@ -105,6 +106,7 @@
             this.label2.Text = "⎯⎯⎯⎯";
             this.label2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseDown);
             this.label2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseMove);
+            this.label2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseUp);
             // 
             // label3
             // 
@@ -116,6 +118,7 @@
             this.label3.Text = "⎯⎯⎯⎯";
             this.label3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseDown);
             this.label3.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseMove);
+            this.label3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseUp);
             // 
             // pnl_drag
             // 
@@ -128,6 +131,7 @@
             this.pnl_drag.TabIndex = 8;
             this.pnl_drag.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseDown);
             this.pnl_drag.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseMove);
+            this.pnl_drag.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseUp);
             // 
             // QuizFolder
             // 

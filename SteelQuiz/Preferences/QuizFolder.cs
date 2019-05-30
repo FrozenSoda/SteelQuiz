@@ -26,6 +26,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using SteelQuiz.Controls;
 
 namespace SteelQuiz.Preferences
 {
@@ -114,9 +115,23 @@ namespace SteelQuiz.Preferences
         {
             if (e.Button == MouseButtons.Left)
             {
-                Left = e.X + Left - MouseDownLocation.X;
-                Top = e.Y + Top - MouseDownLocation.Y;
+                int left = e.X + Left - MouseDownLocation.X;
+                int top = e.Y + Top - MouseDownLocation.Y;
+
+                if (left > 0 && left + Size.Width <= (Parent as DraggableFlowLayoutPanel).Size.Width)
+                {
+                    Left = left;
+                }
+                if (top > 0 && top + Size.Height <= (Parent as DraggableFlowLayoutPanel).Size.Height)
+                {
+                    Top = top;
+                }
             }
+        }
+
+        private void Pnl_drag_MouseUp(object sender, MouseEventArgs e)
+        {
+            (Parent as DraggableFlowLayoutPanel).Align(this);
         }
     }
 }

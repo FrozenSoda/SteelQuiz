@@ -48,16 +48,16 @@ namespace SteelQuiz.Preferences
         {
             this.pnl_quizFolders = new System.Windows.Forms.Panel();
             this.btn_add = new System.Windows.Forms.Button();
-            this.flp_folders = new System.Windows.Forms.FlowLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
+            this.dflp_quizFolders = new SteelQuiz.Controls.DraggableFlowLayoutPanel();
             this.pnl_quizFolders.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnl_quizFolders
             // 
             this.pnl_quizFolders.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.pnl_quizFolders.Controls.Add(this.dflp_quizFolders);
             this.pnl_quizFolders.Controls.Add(this.btn_add);
-            this.pnl_quizFolders.Controls.Add(this.flp_folders);
             this.pnl_quizFolders.Controls.Add(this.label4);
             this.pnl_quizFolders.Location = new System.Drawing.Point(14, 14);
             this.pnl_quizFolders.Name = "pnl_quizFolders";
@@ -79,14 +79,6 @@ namespace SteelQuiz.Preferences
             this.btn_add.UseVisualStyleBackColor = false;
             this.btn_add.Click += new System.EventHandler(this.Btn_add_Click);
             // 
-            // flp_folders
-            // 
-            this.flp_folders.AutoScroll = true;
-            this.flp_folders.Location = new System.Drawing.Point(15, 40);
-            this.flp_folders.Name = "flp_folders";
-            this.flp_folders.Size = new System.Drawing.Size(617, 390);
-            this.flp_folders.TabIndex = 1;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -97,6 +89,13 @@ namespace SteelQuiz.Preferences
             this.label4.Size = new System.Drawing.Size(118, 25);
             this.label4.TabIndex = 0;
             this.label4.Text = "Quiz Folders";
+            // 
+            // dflp_quizFolders
+            // 
+            this.dflp_quizFolders.Location = new System.Drawing.Point(15, 40);
+            this.dflp_quizFolders.Name = "dflp_quizFolders";
+            this.dflp_quizFolders.Size = new System.Drawing.Size(617, 393);
+            this.dflp_quizFolders.TabIndex = 3;
             // 
             // PrefsQuizFolders
             // 
@@ -115,7 +114,7 @@ namespace SteelQuiz.Preferences
         #endregion
         private System.Windows.Forms.Panel pnl_quizFolders;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.FlowLayoutPanel flp_folders;
         private System.Windows.Forms.Button btn_add;
+        private Controls.DraggableFlowLayoutPanel dflp_quizFolders;
     }
 }

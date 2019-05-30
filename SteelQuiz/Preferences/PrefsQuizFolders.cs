@@ -49,7 +49,7 @@ namespace SteelQuiz.Preferences
         {
             foreach (var quizFolder in ConfigManager.Config.SyncConfig.QuizFolders)
             {
-                flp_folders.Controls.Add(new QuizFolder(this, quizFolder));
+                dflp_quizFolders.Controls.Add(new QuizFolder(this, quizFolder));
             }
         }
 
@@ -58,7 +58,7 @@ namespace SteelQuiz.Preferences
             var quizFolders = new List<string>();
             var qfDispose = new List<QuizFolder>();
 
-            foreach (var qf in flp_folders.Controls.OfType<QuizFolder>())
+            foreach (var qf in dflp_quizFolders.Controls.OfType<QuizFolder>())
             {
                 if (Directory.Exists(qf.QuizFolderPath))
                 {
@@ -86,7 +86,7 @@ namespace SteelQuiz.Preferences
 
         private void Btn_add_Click(object sender, EventArgs e)
         {
-            flp_folders.Controls.Add(new QuizFolder(this));
+            dflp_quizFolders.Controls.Add(new QuizFolder(this));
         }
     }
 }

@@ -13,22 +13,66 @@ namespace SteelQuiz.Controls
         public DraggableFlowLayoutPanel() : base()
         {
             ControlAdded += DraggableFlowLayoutPanel_ControlAdded;
+            ControlRemoved += DraggableFlowLayoutPanel_ControlRemoved;
         }
 
         private void DraggableFlowLayoutPanel_ControlAdded(object sender, ControlEventArgs e)
         {
-            Point? bottomControlPoint = null;
-            foreach (var ctrl in Controls.OfType<Control>())
+            Control bottomControl = null;
+            foreach (var ctrl in Controls.OfType<Control>().Where(x => x != e.Control))
             {
-                if (bottomControlPoint == null || ctrl.Location.Y > bottomControlPoint.Value.Y)
+                if (bottomControl == null || ctrl.Bottom > bottomControl.Bottom)
                 {
-                    bottomControlPoint = ctrl.Location;
+                    bottomControl = ctrl;
                 }
             }
 
-            if (bottomControlPoint != null)
+            if (bottomControl != null)
             {
-                e.Control.Top = bottomControlPoint.Value.Y + Padding.Top;
+                e.Control.Top = bottomControl.Bottom + Padding.Top;
+            }
+        }
+
+        private void DraggableFlowLayoutPanel_ControlRemoved(object sender, ControlEventArgs e)
+        {
+            
+        }
+
+        private Control ClosestControl(Control control)
+        {
+            Control closestControl = null;
+            foreach (var ctrl in Controls.OfType<Control>().Where(x => x != control))
+            {
+                if (closestControl == null || Math.Abs(ctrl.Location.Y - control.Location.Y) < Math.Abs(closestControl.Location.Y - control.Location.Y))
+                {
+                    closestControl = ctrl;
+                }
+            }
+
+            return closestControl;
+        }
+
+        public void Align(Control control)
+        {
+            var closestControl = ClosestControl(control);
+
+            if (closestControl == null)
+            {
+                control.Location = new Point(Padding.Left, Padding.Top);
+            }
+            else
+            {
+                control.Left = Padding.Left;
+
+                int dY = control.Top - closestControl.Top;
+                if (dY > 0)
+                {
+                    control.Top = closestControl.Bottom + Padding.Top;
+                }
+                else
+                {
+                    control.Top = -control.Size.Height + closestControl.Top - Padding.Bottom;
+                }
             }
         }
     }
