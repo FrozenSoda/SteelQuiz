@@ -108,23 +108,25 @@ namespace SteelQuiz.Controls
             AlignAll();
         }
 
+        public IEnumerable<Control> ControlsOrdered()
+        {
+            return Controls.Cast<Control>().OrderBy(x => x.Location.Y).ToList();
+        }
+
         /// <summary>
         /// Aligns all the controls in the panel
         /// </summary>
         /// <param name="draggedControl">The control being dragged, if being dragged</param>
         public void AlignAll(Control draggedControl = null)
         {
-            List<Control> controlsAligned = Controls.Cast<Control>().OrderBy(x => x.Location.Y).ToList();
+            var controlsOrdered = ControlsOrdered().ToList();
 
-            // the dragged control should be put first if it has the same Y-position as another control
-#warning NOT IMPLEMENTED FEATURE
-
-            controlsAligned[0].Location = new Point(Padding.Left, Padding.Top);
-            for (int i = 1; i < controlsAligned.Count; ++i)
+            controlsOrdered[0].Location = new Point(Padding.Left, Padding.Top);
+            for (int i = 1; i < controlsOrdered.Count; ++i)
             {
-                if (controlsAligned[i] != draggedControl)
+                if (controlsOrdered[i] != draggedControl)
                 {
-                    controlsAligned[i].Top = controlsAligned[i - 1].Bottom + Padding.Top;
+                    controlsOrdered[i].Top = controlsOrdered[i - 1].Bottom + Padding.Top;
                 }
             }
         }

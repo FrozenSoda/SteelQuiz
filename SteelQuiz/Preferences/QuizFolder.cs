@@ -122,6 +122,7 @@ namespace SteelQuiz.Preferences
                 int left = e.X + Left - MouseDownLocation.X;
                 int top = e.Y + Top - MouseDownLocation.Y;
 
+                /*
                 if (left > 0 && left + Size.Width <= (Parent as DraggableFlowLayoutPanel).Size.Width)
                 {
                     Left = left;
@@ -130,6 +131,9 @@ namespace SteelQuiz.Preferences
                 {
                     Top = top;
                 }
+                */
+                Left = left;
+                Top = top;
 
                 if (hoverStopwatch.ElapsedMilliseconds > 100)
                 {

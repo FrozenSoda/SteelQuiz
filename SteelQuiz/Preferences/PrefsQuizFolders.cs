@@ -58,7 +58,7 @@ namespace SteelQuiz.Preferences
             var quizFolders = new List<string>();
             var qfDispose = new List<QuizFolder>();
 
-            foreach (var qf in dflp_quizFolders.Controls.OfType<QuizFolder>())
+            foreach (var qf in dflp_quizFolders.ControlsOrdered().OfType<QuizFolder>())
             {
                 if (Directory.Exists(qf.QuizFolderPath))
                 {
