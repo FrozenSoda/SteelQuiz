@@ -87,12 +87,10 @@ namespace SteelQuiz.Controls
         {
             var closestControl = ClosestControl(control);
 
-#warning problems with multiple smooth moves occuring at the same time
-
             if (closestControl == null)
             {
                 //control.Location = new Point(Padding.Left, Padding.Top);
-                control.SmoothMove(new Point(Padding.Left, Padding.Top), 500, () =>
+                control.SmoothMove(new Point(Padding.Left, Padding.Top), 100, () =>
                 {
                     AlignAll();
                 });
@@ -112,7 +110,7 @@ namespace SteelQuiz.Controls
                     y = -control.Size.Height + closestControl.Top - Padding.Bottom;
                 }
 
-                control.SmoothMove(new Point(x, y), 500, () =>
+                control.SmoothMove(new Point(x, y), 100, () =>
                 {
                     AlignAll();
                 });
@@ -135,14 +133,14 @@ namespace SteelQuiz.Controls
             var controlsOrdered = ControlsOrdered().ToList();
 
             //controlsOrdered[0].Location = new Point(Padding.Left, Padding.Top);
-            int lastBottom = controlsOrdered[0].Bottom;
+            int lastBottom = Padding.Top + controlsOrdered[0].Size.Height;
             controlsOrdered[0].SmoothMove(new Point(Padding.Left, Padding.Top), 500);
             for (int i = 1; i < controlsOrdered.Count; ++i)
             {
                 if (controlsOrdered[i] != draggedControl)
                 {
                     //controlsOrdered[i].Top = controlsOrdered[i - 1].Bottom + Padding.Top;
-                    controlsOrdered[i].SmoothMove(new Point(Padding.Left, lastBottom + Padding.Top), 500);
+                    controlsOrdered[i].SmoothMove(new Point(Padding.Left, lastBottom + Padding.Top), 100);
                 }
                 lastBottom += controlsOrdered[i].Size.Height + Padding.Top;
             }
