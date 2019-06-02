@@ -48,6 +48,11 @@ namespace SteelQuiz
         public static bool QuizRandomized { get; set; } = false;
         public static List<WordProgData> originalWordProgDataCollection = null;
 
+        /// <summary>
+        /// Loads a quiz and its progress data
+        /// </summary>
+        /// <param name="quizPath">The path to the quiz file</param>
+        /// <returns>True if the load was successful, otherwise false</returns>
         public static bool Load(string quizPath)
         {
             if (!File.Exists(quizPath))
@@ -111,6 +116,11 @@ namespace SteelQuiz
             return Load(quiz);
         }
 
+        /// <summary>
+        /// Loads a quiz and its progress data
+        /// </summary>
+        /// <param name="quizGuid">The quiz GUID</param>
+        /// <returns>True if the load was successful, otherwise false</returns>
         public static bool Load(Guid quizGuid)
         {
             Quiz quiz;
@@ -191,6 +201,12 @@ namespace SteelQuiz
             return true;
         }
 
+        /// <summary>
+        /// Loads a quiz and its progress data
+        /// </summary>
+        /// <param name="quiz">The quiz</param>
+        /// <param name="quizPath">The path to the quiz file</param>
+        /// <returns>True if the load was successful, otherwise false</returns>
         public static bool Load(Quiz quiz, string quizPath = null)
         {
             ResetTotalWordsThisRoundCountMemo();
