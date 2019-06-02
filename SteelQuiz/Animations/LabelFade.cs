@@ -111,10 +111,10 @@ namespace SteelQuiz.Animations
                 lbl.ForeColor = Color.FromArgb(A, R, G, B);
                 if (!LabelsFadeCancel.Contains(lbl))
                 {
-                    if ((dA >= 0 && lbl.ForeColor.A >= to.A || dA <= 0 && lbl.ForeColor.A <= to.A)
-                        && (dR >= 0 && lbl.ForeColor.R >= to.R || dR <= 0 && lbl.ForeColor.R <= to.R)
-                        && (dG >= 0 && lbl.ForeColor.G >= to.G || dG <= 0 && lbl.ForeColor.G <= to.G)
-                        && (dB >= 0 && lbl.ForeColor.B >= to.B || dB <= 0 && lbl.ForeColor.B <= to.B))
+                    if (((dA >= 0 && lbl.ForeColor.A >= to.A) || (dA <= 0 && lbl.ForeColor.A <= to.A))
+                        && ((dR >= 0 && lbl.ForeColor.R >= to.R) || (dR <= 0 && lbl.ForeColor.R <= to.R))
+                        && ((dG >= 0 && lbl.ForeColor.G >= to.G) || (dG <= 0 && lbl.ForeColor.G <= to.G))
+                        && ((dB >= 0 && lbl.ForeColor.B >= to.B) || (dB <= 0 && lbl.ForeColor.B <= to.B)))
                     {
                         lbl.ForeColor = to;
                         LabelsFading.Remove(lbl);

@@ -23,6 +23,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SteelQuiz.Animations;
 
 namespace SteelQuiz.Controls
 {
@@ -88,21 +89,25 @@ namespace SteelQuiz.Controls
 
             if (closestControl == null)
             {
-                control.Location = new Point(Padding.Left, Padding.Top);
+                //control.Location = new Point(Padding.Left, Padding.Top);
+                control.SmoothMove(new Point(Padding.Left, Padding.Top), 500);
             }
             else
             {
-                control.Left = Padding.Left;
+                int x = Padding.Left;
+                int y;
 
                 int dY = control.Top - closestControl.Top;
                 if (dY > 1)
                 {
-                    control.Top = closestControl.Bottom + Padding.Top;
+                    y = closestControl.Bottom + Padding.Top;
                 }
                 else
                 {
-                    control.Top = -control.Size.Height + closestControl.Top - Padding.Bottom;
+                    y = -control.Size.Height + closestControl.Top - Padding.Bottom;
                 }
+
+                control.SmoothMove(new Point(x, y), 500);
             }
 
             AlignAll();
@@ -121,12 +126,14 @@ namespace SteelQuiz.Controls
         {
             var controlsOrdered = ControlsOrdered().ToList();
 
-            controlsOrdered[0].Location = new Point(Padding.Left, Padding.Top);
+            //controlsOrdered[0].Location = new Point(Padding.Left, Padding.Top);
+            controlsOrdered[0].SmoothMove(new Point(Padding.Left, Padding.Top), 500);
             for (int i = 1; i < controlsOrdered.Count; ++i)
             {
                 if (controlsOrdered[i] != draggedControl)
                 {
-                    controlsOrdered[i].Top = controlsOrdered[i - 1].Bottom + Padding.Top;
+                    //controlsOrdered[i].Top = controlsOrdered[i - 1].Bottom + Padding.Top;
+                    controlsOrdered[i].SmoothMove(new Point(controlsOrdered[i].Location.X, controlsOrdered[i - 1].Bottom + Padding.Top), 500);
                 }
             }
         }

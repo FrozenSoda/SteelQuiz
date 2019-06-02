@@ -31,10 +31,10 @@ namespace SteelQuiz.Animations
         public static List<Control> ControlsMoving = new List<Control>();
         public static List<Control> ControlsStopMoving = new List<Control>();
 
-        public static void SmoothMove(this Control control, Point from, Point to, int time)
+        public static void SmoothMove(this Control control, Point to, int time)
         {
-            double dX_d = (to.X - from.X) / (time / 10D);
-            double dY_d = (to.Y - from.Y) / (time / 10D);
+            double dX_d = (to.X - control.Location.X) / (time / 10D);
+            double dY_d = (to.Y - control.Location.Y) / (time / 10D);
 
             int dX = 0;
             int dY = 0;
@@ -70,10 +70,15 @@ namespace SteelQuiz.Animations
                     ControlsMoving.Add(control);
                 }
 
+                int x = control.Location.X + dX;
+                int y = control.Location.Y + dY;
+
+                control.Location = new Point(x, y);
+
                 if (!ControlsStopMoving.Contains(control))
                 {
-                    if ((dX >= 0 && control.Location.X >= to.X) || (dX <= 0 && control.Location.X <= to.X)
-                        && (dY >= 0 && control.Location.Y >= to.Y) || (dY <= 0 && control.Location.Y <= to.Y))
+                    if (((dX >= 0 && control.Location.X >= to.X) || (dX <= 0 && control.Location.X <= to.X))
+                        && ((dY >= 0 && control.Location.Y >= to.Y) || (dY <= 0 && control.Location.Y <= to.Y)))
                     {
                         control.Location = to;
                         ControlsMoving.Remove(control);
