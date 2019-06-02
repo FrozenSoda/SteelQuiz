@@ -92,7 +92,10 @@ namespace SteelQuiz.Controls
             if (closestControl == null)
             {
                 //control.Location = new Point(Padding.Left, Padding.Top);
-                control.SmoothMove(new Point(Padding.Left, Padding.Top), 500);
+                control.SmoothMove(new Point(Padding.Left, Padding.Top), 500, () =>
+                {
+                    AlignAll();
+                });
             }
             else
             {
@@ -109,10 +112,13 @@ namespace SteelQuiz.Controls
                     y = -control.Size.Height + closestControl.Top - Padding.Bottom;
                 }
 
-                control.SmoothMove(new Point(x, y), 500);
+                control.SmoothMove(new Point(x, y), 500, () =>
+                {
+                    AlignAll();
+                });
             }
 
-            AlignAll();
+            //AlignAll();
         }
 
         public IEnumerable<Control> ControlsOrdered()
@@ -129,8 +135,8 @@ namespace SteelQuiz.Controls
             var controlsOrdered = ControlsOrdered().ToList();
 
             //controlsOrdered[0].Location = new Point(Padding.Left, Padding.Top);
-            controlsOrdered[0].SmoothMove(new Point(Padding.Left, Padding.Top), 500);
             int lastBottom = controlsOrdered[0].Bottom;
+            controlsOrdered[0].SmoothMove(new Point(Padding.Left, Padding.Top), 500);
             for (int i = 1; i < controlsOrdered.Count; ++i)
             {
                 if (controlsOrdered[i] != draggedControl)
@@ -138,7 +144,7 @@ namespace SteelQuiz.Controls
                     //controlsOrdered[i].Top = controlsOrdered[i - 1].Bottom + Padding.Top;
                     controlsOrdered[i].SmoothMove(new Point(Padding.Left, lastBottom + Padding.Top), 500);
                 }
-                lastBottom = controlsOrdered[i].Bottom;
+                lastBottom += controlsOrdered[i].Size.Height + Padding.Top;
             }
         }
     }

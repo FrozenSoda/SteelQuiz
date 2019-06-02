@@ -31,7 +31,9 @@ namespace SteelQuiz.Animations
         public static Dictionary<Control, System.Timers.Timer> ControlsMoving = new Dictionary<Control, System.Timers.Timer>();
         public static List<Control> ControlsStopMoving = new List<Control>();
 
-        public static void SmoothMove(this Control control, Point to, int time)
+        public delegate void OnSmoothMoveComplete();
+
+        public static void SmoothMove(this Control control, Point to, int time, OnSmoothMoveComplete onComplete = null)
         {
             double dX_d = (to.X - control.Location.X) / (time / 10D);
             double dY_d = (to.Y - control.Location.Y) / (time / 10D);
@@ -76,8 +78,11 @@ namespace SteelQuiz.Animations
                         && ((dY >= 0 && control.Location.Y >= to.Y) || (dY <= 0 && control.Location.Y <= to.Y)))
                     {
                         control.Location = to;
+
                         ControlsMoving.Remove(control);
                         ControlsStopMoving.Remove(control);
+
+                        onComplete?.Invoke();
                     }
                     else
                     {
