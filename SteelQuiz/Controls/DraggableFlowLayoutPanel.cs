@@ -87,6 +87,8 @@ namespace SteelQuiz.Controls
         {
             var closestControl = ClosestControl(control);
 
+#warning problems with multiple smooth moves occuring at the same time
+
             if (closestControl == null)
             {
                 //control.Location = new Point(Padding.Left, Padding.Top);
