@@ -28,7 +28,7 @@ namespace SteelQuiz.Animations
 {
     public static class ControlMove
     {
-        public static List<Control> ControlsMoving = new List<Control>();
+        public static Dictionary<Control, System.Timers.Timer> ControlsMoving = new Dictionary<Control, System.Timers.Timer>();
         public static List<Control> ControlsStopMoving = new List<Control>();
 
         public static void SmoothMove(this Control control, Point to, int time)
@@ -65,11 +65,6 @@ namespace SteelQuiz.Animations
             };
             tmr.Elapsed += delegate
             {
-                if (!ControlsMoving.Contains(control))
-                {
-                    ControlsMoving.Add(control);
-                }
-
                 int x = control.Location.X + dX;
                 int y = control.Location.Y + dY;
 
@@ -95,7 +90,13 @@ namespace SteelQuiz.Animations
                     ControlsStopMoving.Remove(control);
                 }
             };
+            if (ControlsMoving.Keys.Contains(control))
+            {
+                ControlsMoving[control].Stop();
+                ControlsMoving.Remove(control);
+            }
             tmr.Start();
+            ControlsMoving.Add(control, tmr);
         }
     }
 }

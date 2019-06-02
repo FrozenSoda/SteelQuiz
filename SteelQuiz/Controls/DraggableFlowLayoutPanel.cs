@@ -130,13 +130,15 @@ namespace SteelQuiz.Controls
 
             //controlsOrdered[0].Location = new Point(Padding.Left, Padding.Top);
             controlsOrdered[0].SmoothMove(new Point(Padding.Left, Padding.Top), 500);
+            int lastBottom = controlsOrdered[0].Bottom;
             for (int i = 1; i < controlsOrdered.Count; ++i)
             {
                 if (controlsOrdered[i] != draggedControl)
                 {
                     //controlsOrdered[i].Top = controlsOrdered[i - 1].Bottom + Padding.Top;
-                    controlsOrdered[i].SmoothMove(new Point(controlsOrdered[i].Location.X, controlsOrdered[i - 1].Bottom + Padding.Top), 500);
+                    controlsOrdered[i].SmoothMove(new Point(Padding.Left, lastBottom + Padding.Top), 500);
                 }
+                lastBottom = controlsOrdered[i].Bottom;
             }
         }
     }
