@@ -29,8 +29,6 @@ namespace SteelQuiz.Controls
 {
     public class DraggableFlowLayoutPanel : Panel
     {
-#warning saving should occur when leaving this category
-
         /// <summary>
         /// A panel that automatically orders the controls, which you can drag around to reorder. Only supports up-to-down ordering
         /// </summary>
