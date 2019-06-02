@@ -33,6 +33,13 @@ namespace SteelQuiz.Animations
 
         public delegate void OnSmoothMoveComplete();
 
+        /// <summary>
+        /// Moves a control smoothly from one point to another
+        /// </summary>
+        /// <param name="control">The control to move</param>
+        /// <param name="to">The target position</param>
+        /// <param name="time">How long the animation should take (ms)</param>
+        /// <param name="onComplete">Delegate to call after completing animation</param>
         public static void SmoothMove(this Control control, Point to, int time, OnSmoothMoveComplete onComplete = null)
         {
             double dX_d = (to.X - control.Location.X) / (time / 10D);

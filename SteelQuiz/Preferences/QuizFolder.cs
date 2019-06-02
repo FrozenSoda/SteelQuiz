@@ -123,6 +123,7 @@ namespace SteelQuiz.Preferences
                 int top = e.Y + Top - MouseDownLocation.Y;
 
                 /*
+                // LOCK CONTROL TO DFLP BOUNDS
                 if (left > 0 && left + Size.Width <= (Parent as DraggableFlowLayoutPanel).Size.Width)
                 {
                     Left = left;

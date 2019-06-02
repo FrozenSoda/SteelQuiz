@@ -29,6 +29,8 @@ namespace SteelQuiz.Controls
 {
     public class DraggableFlowLayoutPanel : Panel
     {
+#warning saving should occur when leaving this category
+
         /// <summary>
         /// A panel that automatically orders the controls, which you can drag around to reorder. Only supports up-to-down ordering
         /// </summary>
@@ -134,7 +136,7 @@ namespace SteelQuiz.Controls
 
             //controlsOrdered[0].Location = new Point(Padding.Left, Padding.Top);
             int lastBottom = Padding.Top + controlsOrdered[0].Size.Height;
-            controlsOrdered[0].SmoothMove(new Point(Padding.Left, Padding.Top), 500);
+            controlsOrdered[0].SmoothMove(new Point(Padding.Left, Padding.Top), 100);
             for (int i = 1; i < controlsOrdered.Count; ++i)
             {
                 if (controlsOrdered[i] != draggedControl)

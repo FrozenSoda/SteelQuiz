@@ -24,6 +24,9 @@ using System.Threading.Tasks;
 
 namespace SteelQuiz.Preferences
 {
+    /// <summary>
+    /// Implement this interface for preference categories that need to save the configuration in a function
+    /// </summary>
     public interface ICustomSaveCategory
     {
         /// <summary>
