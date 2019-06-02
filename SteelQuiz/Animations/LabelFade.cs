@@ -30,7 +30,7 @@ namespace SteelQuiz.Animations
     public static class LabelFade
     {
         public static List<Label> LabelsFading = new List<Label>();
-        public static List<Label> LabelFadeCancel = new List<Label>();
+        public static List<Label> LabelsFadeCancel = new List<Label>();
 
         /// <summary>
         /// Fades a color change of a label
@@ -109,7 +109,7 @@ namespace SteelQuiz.Animations
                 int B = (lbl.ForeColor.B + dB).FixBounds(0, 255);
 
                 lbl.ForeColor = Color.FromArgb(A, R, G, B);
-                if (!LabelFadeCancel.Contains(lbl))
+                if (!LabelsFadeCancel.Contains(lbl))
                 {
                     if ((dA >= 0 && lbl.ForeColor.A >= to.A || dA <= 0 && lbl.ForeColor.A <= to.A)
                         && (dR >= 0 && lbl.ForeColor.R >= to.R || dR <= 0 && lbl.ForeColor.R <= to.R)
@@ -118,6 +118,7 @@ namespace SteelQuiz.Animations
                     {
                         lbl.ForeColor = to;
                         LabelsFading.Remove(lbl);
+                        LabelsFadeCancel.Remove(lbl);
                     }
                     else
                     {
@@ -127,7 +128,7 @@ namespace SteelQuiz.Animations
                 else
                 {
                     LabelsFading.Remove(lbl);
-                    LabelFadeCancel.Remove(lbl);
+                    LabelsFadeCancel.Remove(lbl);
                 }
             };
             tmr.Start();

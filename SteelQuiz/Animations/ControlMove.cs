@@ -18,13 +18,79 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SteelQuiz.Animations
 {
-    class ControlMove
+    public static class ControlMove
     {
+        public static List<Control> ControlsMoving = new List<Control>();
+        public static List<Control> ControlsStopMoving = new List<Control>();
+
+        public static void SmoothMove(this Control control, Point from, Point to, int time)
+        {
+            double dX_d = (to.X - from.X) / (time / 10D);
+            double dY_d = (to.Y - from.Y) / (time / 10D);
+
+            int dX = 0;
+            int dY = 0;
+
+            if (dX_d > 0D)
+            {
+                dX = (int)Math.Ceiling(dX_d);
+            }
+            else if (dX_d < 0D)
+            {
+                dX = (int)Math.Floor(dX_d);
+            }
+
+            if (dY_d > 0D)
+            {
+                dY = (int)Math.Ceiling(dY_d);
+            }
+            else if (dY_d < 0D)
+            {
+                dY = (int)Math.Floor(dY_d);
+            }
+
+            var tmr = new System.Timers.Timer()
+            {
+                Interval = 10,
+                SynchronizingObject = control,
+                AutoReset = false
+            };
+            tmr.Elapsed += delegate
+            {
+                if (!ControlsMoving.Contains(control))
+                {
+                    ControlsMoving.Add(control);
+                }
+
+                if (!ControlsStopMoving.Contains(control))
+                {
+                    if ((dX >= 0 && control.Location.X >= to.X) || (dX <= 0 && control.Location.X <= to.X)
+                        && (dY >= 0 && control.Location.Y >= to.Y) || (dY <= 0 && control.Location.Y <= to.Y))
+                    {
+                        control.Location = to;
+                        ControlsMoving.Remove(control);
+                        ControlsStopMoving.Remove(control);
+                    }
+                    else
+                    {
+                        tmr.Enabled = true;
+                    }
+                }
+                else
+                {
+                    ControlsMoving.Remove(control);
+                    ControlsStopMoving.Remove(control);
+                }
+            };
+            tmr.Start();
+        }
     }
 }

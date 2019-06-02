@@ -68,7 +68,7 @@ namespace SteelQuiz
             {
                 // Stop notice fade
                 tmr_notice.Stop();
-                LabelFade.LabelFadeCancel.Add(lbl_notice);
+                LabelFade.LabelsFadeCancel.Add(lbl_notice);
                 while (LabelFade.LabelsFading.Contains(lbl_notice))
                 {
                     Thread.Sleep(10);
