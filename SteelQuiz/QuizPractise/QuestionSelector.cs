@@ -30,8 +30,15 @@ namespace SteelQuiz.QuizPractise
 {
     public static class QuestionSelector
     {
+        /// <summary>
+        /// Skips the next "Congratulations - you have learned all the words" notification during this practise session
+        /// </summary>
         public static bool SkipNextMasterNotice { get; set; } = false;
 
+        /// <summary>
+        /// Generates a question/word to be asked, while taking current word and Intelligent Learning settings into account
+        /// </summary>
+        /// <returns>Returns a question/word to be asked</returns>
         public static WordPair GenerateWordPair()
         {
             QuizCore.ResetWordsAskedThisRoundMemo();
@@ -51,6 +58,10 @@ namespace SteelQuiz.QuizPractise
             }
         }
 
+        /// <summary>
+        /// Generates a question/word to be asked, without taking Intelligent Learning progress into account, that is, pure random (excluding already asked words)
+        /// </summary>
+        /// <returns></returns>
         private static WordPair GenerateWordPair_NoIntelligentLearning()
         {
             var wordsNotToAsk = QuizCore.QuizProgress.WordsNotToAsk();
@@ -81,6 +92,10 @@ namespace SteelQuiz.QuizPractise
             return wordPair;
         }
 
+        /// <summary>
+        /// Generates a question/word to be asked, while taking Intelligent Learning progress into account
+        /// </summary>
+        /// <returns></returns>
         private static WordPair GenerateWordPair_IntelligentLearning()
         {
             var alreadyAsked = QuizCore.QuizProgress.WordsNotToAsk();
@@ -115,9 +130,6 @@ namespace SteelQuiz.QuizPractise
                 sum += askPrb;
                 if (r <= sum)
                 {
-                    // Select which synonym of the word to ask for
-
-
                     QuizCore.QuizProgress.SetCurrentWordPair(wordPairData.WordPair);
                     QuizCore.SaveQuizProgress();
                     return wordPairData.WordPair;
@@ -128,6 +140,9 @@ namespace SteelQuiz.QuizPractise
             throw new Exception("Probability error at QuizAI.GenerateWordPair()");
         }
 
+        /// <summary>
+        /// Starts a new round, for instance by re-evaluating words to be asked
+        /// </summary>
         public static void NewRound()
         {
             const int MINIMUM_TRIES_COUNT_TO_CONSIDER_SKIPPING = 2;

@@ -27,6 +27,10 @@ namespace SteelQuiz
     public class WelcomeMessage
     {
         private string _message;
+
+        /// <summary>
+        /// The message to be displayed
+        /// </summary>
         public string Message
         {
             get
@@ -47,14 +51,14 @@ namespace SteelQuiz
             }
         }
 
-        /*
-         * Evaluated at: Selection, Re-evaluation (timer)
-         */ 
+        /// <summary>
+        /// A function which evaluates conditions that needs to be fulfilled to select the welcome message. The conditions NEED to be fulfilled during re-checking
+        /// </summary>
         public Func<bool> Conditions { get; set; }
 
-        /*
-         * Evaluated at: Selection
-         */ 
+        /// <summary>
+        /// A function which evaluates conditions that needs to be fulfilled to select the welcome message. The conditions do NOT need to be fulfilled during re-checking
+        /// </summary>
         public Func<bool> ConditionsSelection { get; set; }
 
         public WelcomeMessage(string msg, Func<bool> conditions, Func<bool> conditionsSelection = null)

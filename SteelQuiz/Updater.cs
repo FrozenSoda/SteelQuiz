@@ -30,10 +30,19 @@ namespace SteelQuiz
 {
     public static class Updater
     {
-        public static bool UpdateInProgress { get; private set; } = false;
+        /// <summary>
+        /// True if an application exit triggered by an update is pending
+        /// </summary>
+        public static bool UpdateExitInProgress { get; private set; } = false;
 
+        /// <summary>
+        /// The update mode that the updater is currently using
+        /// </summary>
         private static UpdateMode CurrentUpdateMode { get; set; }
 
+        /// <summary>
+        /// The object used as a lock, to prevent multiple simultaneous updates
+        /// </summary>
         private static readonly object updateLock = new object();
 
         static Updater()
@@ -43,11 +52,30 @@ namespace SteelQuiz
 
         public enum UpdateMode
         {
-            Normal,         // update automatically (if mandatory option), or show update dialog if an update is available (or update if autoupdate), otherwise do nothing
-            Verbose,        // show update dialog if an update is available, otherwise show a message stating no updates are available
-            Notification,   // show a notification if an update is available, otherwise do nothing
-            Force,          // update even if no update is available (force update)
-            Manual          // do nothing (used when a custom eventhandler for update checking is used)
+            /// <summary>
+            /// Update automatically (if mandatory option), or show update dialog if an update is available (or update if autoupdate), otherwise do nothing
+            /// </summary>
+            Normal,
+
+            /// <summary>
+            /// Show update dialog if an update is available, otherwise show a message stating no updates are available
+            /// </summary>
+            Verbose,
+
+            /// <summary>
+            /// Show a notification if an update is available, otherwise do nothing
+            /// </summary>
+            Notification,
+
+            /// <summary>
+            /// Update even if no update is available (force update)
+            /// </summary>
+            Force,
+
+            /// <summary>
+            /// Do nothing (used when a custom eventhandler for update checking is used)
+            /// </summary>
+            Manual
         }
 
         private static void AutoUpdater_CheckForUpdateEvent(UpdateInfoEventArgs uargs)
@@ -62,33 +90,33 @@ namespace SteelQuiz
                             "update, or Cancel to exit", "SteelQuiz", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
                         if (msg == DialogResult.OK)
                         {
-                            UpdateInProgress = true;
+                            UpdateExitInProgress = true;
                             if (Program.CloseQuizEditors())
                             {
                                 AutoUpdater.DownloadUpdate();
                                 Application.Exit();
                             }
-                            UpdateInProgress = false;
+                            UpdateExitInProgress = false;
                         }
                         else
                         {
-                            UpdateInProgress = true;
+                            UpdateExitInProgress = true;
                             if (Program.CloseQuizEditors())
                             {
                                 Application.Exit();
                             }
-                            UpdateInProgress = false;
+                            UpdateExitInProgress = false;
                         }
                     }
                     else if (uargs.Mandatory && uargs.UpdateMode == Mode.ForcedDownload)
                     {
-                        UpdateInProgress = true;
+                        UpdateExitInProgress = true;
                         if (Program.CloseQuizEditors())
                         {
                             AutoUpdater.DownloadUpdate();
                             Application.Exit();
                         }
-                        UpdateInProgress = false;
+                        UpdateExitInProgress = false;
                     }
                     else
                     {
@@ -102,13 +130,13 @@ namespace SteelQuiz
                             }
                         }
 
-                        UpdateInProgress = true;
+                        UpdateExitInProgress = true;
                         if (Program.CloseQuizEditors())
                         {
                             AutoUpdater.DownloadUpdate();
                             Application.Exit();
                         }
-                        UpdateInProgress = false;
+                        UpdateExitInProgress = false;
                     }
                 }
             }
@@ -181,6 +209,10 @@ namespace SteelQuiz
             }
         }
 
+        /// <summary>
+        /// Checks for updates, and eventually downloads/installs them/doing other stuff, depending on the update mode
+        /// </summary>
+        /// <param name="updateMode">The update mode to be used for the update</param>
         public static void Update(UpdateMode updateMode)
         {
             lock (updateLock)

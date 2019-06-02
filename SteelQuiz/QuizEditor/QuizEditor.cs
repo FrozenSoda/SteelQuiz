@@ -323,7 +323,7 @@ namespace SteelQuiz.QuizEditor
 
             if (--Program.QuizEditorsOpen == 0)
             {
-                if (Updater.UpdateInProgress)
+                if (Updater.UpdateExitInProgress)
                 {
                     // do nothing
                 }

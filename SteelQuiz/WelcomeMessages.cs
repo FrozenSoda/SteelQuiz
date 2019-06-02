@@ -26,6 +26,11 @@ namespace SteelQuiz
 {
     public static class WelcomeMessages
     {
+        /// <summary>
+        /// Selects a welcome message to show, by evaluating all the conditions and selecting a random one
+        /// </summary>
+        /// <param name="welcomeMessages">Collection of welcome messages to choose from</param>
+        /// <returns>Returns a welcome message to show</returns>
         public static WelcomeMessage SelectWelcomeMessage(this WelcomeMessage[] welcomeMessages)
         {
             var possible = new List<WelcomeMessage>();
