@@ -20,9 +20,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 using AutoUpdaterDotNET;
 using SteelQuiz.Util;
 
@@ -209,6 +211,45 @@ namespace SteelQuiz
             }
         }
 
+        private class ChannelVersion
+        {
+            public string MetaURL { get; set; }
+            public Version Version { get; set; }
+
+            public ChannelVersion(string metaURL, Version version)
+            {
+                MetaURL = metaURL;
+                Version = version;
+            }
+        }
+
+        private static ChannelVersion NewestUpdateChannel(params string[] metaUrls)
+        {
+            var newestChannel = new ChannelVersion(null, new Version(0, 0, 0));
+
+            foreach (var metaURL in metaUrls)
+            {
+                using (var client = new WebClient())
+                {
+                    string xml = client.DownloadString(metaURL);
+                    var doc = new XmlDocument();
+                    doc.LoadXml(xml);
+
+                    XmlNode versionNode = doc.SelectSingleNode("/item/version");
+                    string strVersion = versionNode.InnerText;
+
+                    Version version = new Version(strVersion);
+
+                    if (version.CompareTo(newestChannel.Version) > 0)
+                    {
+                        newestChannel = new ChannelVersion(metaURL, version);
+                    }
+                }
+            }
+
+            return newestChannel;
+        }
+
         /// <summary>
         /// Checks for updates, and eventually downloads/installs them/doing other stuff, depending on the update mode
         /// </summary>
@@ -235,7 +276,9 @@ namespace SteelQuiz
                         }
                         else if (ConfigManager.Config.UpdateConfig.UpdateChannel == ConfigData.UpdateChannel.Development)
                         {
-                            AutoUpdater.Start("https://raw.githubusercontent.com/steel9/SteelQuiz/update_channel_dev/Updater/update_meta.xml");
+                            var newestChannel = NewestUpdateChannel("https://raw.githubusercontent.com/steel9/SteelQuiz/master/Updater/update_meta.xml",
+                                "https://raw.githubusercontent.com/steel9/SteelQuiz/update_channel_dev/Updater/update_meta.xml");
+                            AutoUpdater.Start(newestChannel.MetaURL);
                         }
 
                         //AutoUpdater.Start("http://localhost:8000/update_meta.xml");
