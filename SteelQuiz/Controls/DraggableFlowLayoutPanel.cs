@@ -145,11 +145,18 @@ namespace SteelQuiz.Controls
             {
                 if (controlsOrdered[i] != draggedControl)
                 {
-                    controlsOrdered[i].SmoothMove(new Point(Padding.Left, y), 100, () =>
+                    if (onAlignCompleted == null)
                     {
-                        multiAsyncWait.CompletedActions++;
-                    });
-                    //when all these smooth moves are complete, onAlignCompleted should be invoked
+                        controlsOrdered[i].SmoothMove(new Point(Padding.Left, y), 100);
+                    }
+                    else
+                    {
+                        controlsOrdered[i].SmoothMove(new Point(Padding.Left, y), 100, () =>
+                        {
+                            //when all these smooth moves are complete, onAlignCompleted should be invoked
+                            multiAsyncWait.CompletedActions++;
+                        });
+                    }
                 }
                 y += controlsOrdered[i].Size.Height + Padding.Top;
             }
