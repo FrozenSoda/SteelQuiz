@@ -90,8 +90,8 @@ namespace SteelQuiz.Preferences
 
             if (rdo_chDev.Checked)
             {
-                var msg = MessageBox.Show("By changing update channel to development, you might receive new features and updates faster, but the stability of the " +
-                    "application might be worse. Expect bugs, issues, data loss, and other bad things. Do not use this channel for production usage." +
+                var msg = MessageBox.Show("By changing the update channel to development, you might receive new features and updates faster, but the stability of the " +
+                    "application might be worsened. Expect bugs, issues, data loss, and other bad things. Do not use this channel for production usage." +
                     "\r\n\r\nIf you change your mind later on, or when receiving new updates, you might need to reset all settings and progress data.\r\n\r\nContinue?",
                     "Switch to dev update channel - SteelQuiz",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);

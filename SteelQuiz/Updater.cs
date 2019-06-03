@@ -251,7 +251,7 @@ namespace SteelQuiz
         }
 
         /// <summary>
-        /// Checks for updates, and eventually downloads/installs them/doing other stuff, depending on the update mode
+        /// Checks for updates, and eventually downloads/installs them/does other stuff, depending on the update mode
         /// </summary>
         /// <param name="updateMode">The update mode to be used for the update</param>
         public static void Update(UpdateMode updateMode)
