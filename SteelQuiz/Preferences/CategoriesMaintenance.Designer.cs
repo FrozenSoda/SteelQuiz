@@ -47,30 +47,18 @@ namespace SteelQuiz.Preferences
         private void InitializeComponent()
         {
             this.prefs_troubleshooting = new SteelQuiz.PrefCategoryItem();
-            this.prefs_cleanUp = new SteelQuiz.PrefCategoryItem();
             this.SuspendLayout();
             // 
             // prefs_troubleshooting
             // 
-            this.prefs_troubleshooting.Location = new System.Drawing.Point(0, 83);
+            this.prefs_troubleshooting.Location = new System.Drawing.Point(0, 48);
             this.prefs_troubleshooting.Name = "prefs_troubleshooting";
             this.prefs_troubleshooting.PrefText = "Troubleshooting";
             this.prefs_troubleshooting.Selectable = true;
-            this.prefs_troubleshooting.Selected = false;
+            this.prefs_troubleshooting.Selected = true;
             this.prefs_troubleshooting.Size = new System.Drawing.Size(130, 29);
             this.prefs_troubleshooting.TabIndex = 13;
             this.prefs_troubleshooting.OnPrefSelected += new System.EventHandler(this.Prefs_troubleshooting_OnPrefSelected);
-            // 
-            // prefs_cleanUp
-            // 
-            this.prefs_cleanUp.Location = new System.Drawing.Point(0, 48);
-            this.prefs_cleanUp.Name = "prefs_cleanUp";
-            this.prefs_cleanUp.PrefText = "Clean Up";
-            this.prefs_cleanUp.Selectable = true;
-            this.prefs_cleanUp.Selected = true;
-            this.prefs_cleanUp.Size = new System.Drawing.Size(130, 29);
-            this.prefs_cleanUp.TabIndex = 12;
-            this.prefs_cleanUp.OnPrefSelected += new System.EventHandler(this.Prefs_cleanUp_OnPrefSelected);
             // 
             // CategoriesMaintenance
             // 
@@ -78,7 +66,6 @@ namespace SteelQuiz.Preferences
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
             this.Controls.Add(this.prefs_troubleshooting);
-            this.Controls.Add(this.prefs_cleanUp);
             this.IsSubCategory = true;
             this.Location = new System.Drawing.Point(0, 0);
             this.Name = "CategoriesMaintenance";
@@ -90,6 +77,5 @@ namespace SteelQuiz.Preferences
         #endregion
 
         private PrefCategoryItem prefs_troubleshooting;
-        private PrefCategoryItem prefs_cleanUp;
     }
 }

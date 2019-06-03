@@ -79,6 +79,12 @@ namespace SteelQuiz.QuizEditor
             }
 
             SetTheme();
+
+            this.Text += $" | v{Application.ProductVersion}";
+            if (MetaData.PRE_RELEASE)
+            {
+                this.Text += " PRE-RELEASE";
+            }
         }
 
         public void ChkRecovery()

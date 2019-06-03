@@ -63,6 +63,10 @@ namespace SteelQuiz.QuizPractise
             lbl_lang1.Text = QuizCore.Quiz.Language1;
             lbl_lang2.Text = QuizCore.Quiz.Language2;
             this.Text += $" | v{Application.ProductVersion}";
+            if (MetaData.PRE_RELEASE)
+            {
+                this.Text += " PRE-RELEASE";
+            }
             NewWord();
             if (QuizCore.QuizProgress.FullTestInProgress)
             {
