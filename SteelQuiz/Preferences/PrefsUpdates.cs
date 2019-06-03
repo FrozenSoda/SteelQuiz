@@ -120,9 +120,12 @@ namespace SteelQuiz.Preferences
 
             ConfigManager.SaveConfig();
 
-            MessageBox.Show("SteelQuiz will now update to the latest release in the selected update channel", "SteelQuiz", MessageBoxButtons.OK,
+            var msg2 = MessageBox.Show("An update must be performed to switch update channels. Update now (highly recommended)?", "SteelQuiz", MessageBoxButtons.YesNo,
                 MessageBoxIcon.Information);
-            Updater.Update(Updater.UpdateMode.Force);
+            if (msg2 == DialogResult.Yes)
+            {
+                Updater.Update(Updater.UpdateMode.Force);
+            }
         }
     }
 }
