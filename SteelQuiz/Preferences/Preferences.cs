@@ -145,7 +145,7 @@ namespace SteelQuiz.Preferences
             }
         }
 
-        private void Save()
+        public void Save()
         {
             foreach (var prefs in pnl_prefs.Controls.OfType<ICustomSaveCategory>())
             {

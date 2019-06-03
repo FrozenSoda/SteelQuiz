@@ -67,6 +67,11 @@ namespace SteelQuiz
                     this.lbl_text.BackColor = PreferencesTheme.GetPrefBackColor();
                     this.lbl_selectedIndicator.BackColor = PreferencesTheme.GetPrefBackColor();
                 }
+
+                if (ParentForm is Preferences.Preferences)
+                {
+                    (ParentForm as Preferences.Preferences).Save();
+                }
             }
         }
 

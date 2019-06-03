@@ -38,6 +38,11 @@ namespace SteelQuiz.Controls
             ControlRemoved += DraggableFlowLayoutPanel_ControlRemoved;
         }
 
+        /// <summary>
+        /// Moves newly added controls to the bottom
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DraggableFlowLayoutPanel_ControlAdded(object sender, ControlEventArgs e)
         {
             Control bottomControl = null;
@@ -89,7 +94,6 @@ namespace SteelQuiz.Controls
 
             if (closestControl == null)
             {
-                //control.Location = new Point(Padding.Left, Padding.Top);
                 control.SmoothMove(new Point(Padding.Left, Padding.Top), 100, () =>
                 {
                     AlignAll();
@@ -115,31 +119,31 @@ namespace SteelQuiz.Controls
                     AlignAll();
                 });
             }
-
-            //AlignAll();
         }
 
+        /// <summary>
+        /// Returns a collection of all children controls, ordered by their vertical (Y) position, where the uppermost control will be the first control in the collection
+        /// </summary>
+        /// <returns>Returns an ordered collection of all children controls</returns>
         public IEnumerable<Control> ControlsOrdered()
         {
             return Controls.Cast<Control>().OrderBy(x => x.Location.Y).ToList();
         }
 
         /// <summary>
-        /// Aligns all the controls in the panel
+        /// Aligns all the controls in the panel, except for the dragged control
         /// </summary>
-        /// <param name="draggedControl">The control being dragged, if being dragged</param>
+        /// <param name="draggedControl">The control being dragged (to not align), if being dragged</param>
         public void AlignAll(Control draggedControl = null)
         {
             var controlsOrdered = ControlsOrdered().ToList();
 
-            //controlsOrdered[0].Location = new Point(Padding.Left, Padding.Top);
             int lastBottom = Padding.Top + controlsOrdered[0].Size.Height;
             controlsOrdered[0].SmoothMove(new Point(Padding.Left, Padding.Top), 100);
             for (int i = 1; i < controlsOrdered.Count; ++i)
             {
                 if (controlsOrdered[i] != draggedControl)
                 {
-                    //controlsOrdered[i].Top = controlsOrdered[i - 1].Bottom + Padding.Top;
                     controlsOrdered[i].SmoothMove(new Point(Padding.Left, lastBottom + Padding.Top), 100);
                 }
                 lastBottom += controlsOrdered[i].Size.Height + Padding.Top;
