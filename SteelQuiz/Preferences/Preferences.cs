@@ -32,8 +32,6 @@ namespace SteelQuiz.Preferences
 {
     public partial class Preferences : AutoThemeableForm
     {
-        public PrefCategoryItem lastSelectedCategory = null;
-
         private PreferencesTheme PreferencesTheme = new PreferencesTheme();
 
         public Preferences(Type selectedCategory = null, Type selectedCategoryCollection = null)
@@ -75,6 +73,7 @@ namespace SteelQuiz.Preferences
                     pcatc.BringToFront();
                     pcatc.InvokeSelectedEvent();
                     found = true;
+                    break;
                 }
             }
 
@@ -94,6 +93,7 @@ namespace SteelQuiz.Preferences
         /// <param name="categoryCollection">The category collection to return from</param>
         public void PopCategoryCollection(CategoryCollection categoryCollection)
         {
+            categoryCollection.InvokeDeselectedEvent();
             var collections = pnl_prefCategories.Controls.OfType<CategoryCollection>();
             var currCollection = collections.ElementAt(collections.Count() - 1);
             categoryCollection.Hide(true);
@@ -107,24 +107,6 @@ namespace SteelQuiz.Preferences
         /// <param name="category">The category type to switch to</param>
         public void SwitchCategory(Type category)
         {
-            /*
-            if (category == typeof(PrefsTroubleshooting))
-            {
-                // select pref category item for this category, as it is required when the preferences window was reshown
-                foreach (var _prefCategoryItem in this.GetAllChildrenRecursive())
-                {
-                    var prefCategoryItem = _prefCategoryItem as PrefCategoryItem;
-                    if (prefCategoryItem != null)
-                    {
-                        if (prefCategoryItem.Name == "prefs_troubleshooting")
-                        {
-                            prefCategoryItem.SelectWithoutInvokeEvent();
-                            break;
-                        }
-                    }
-                }
-            }
-            */
             var found = false;
             foreach (var prefs in pnl_prefs.Controls.OfType<UserControl>())
             {
@@ -145,12 +127,33 @@ namespace SteelQuiz.Preferences
             }
         }
 
-        public void Save()
+        /// <summary>
+        /// Saves the configuration for categories requiring custom save procedures
+        /// </summary>
+        /// <param name="category">The category whose configuration to save. The category MUST implement ICustomSaveCategory! If null, configuration for all 
+        /// ICustomSaveCategory categories will be saved</param>
+        public void Save(Type category = null)
         {
+            if (category != null && !typeof(ICustomSaveCategory).IsAssignableFrom(category))
+            {
+                throw new ArgumentException("Save category must implement ICustomSaveCategory");
+            }
+
+            bool found = false;
             foreach (var prefs in pnl_prefs.Controls.OfType<ICustomSaveCategory>())
             {
-                prefs.Save(false);
+                if (category == null || category == prefs.GetType())
+                {
+                    prefs.Save(false);
+                    found = true;
+                }
             }
+
+            if (category != null && !found)
+            {
+                throw new Exception("Save category could not be found");
+            }
+
             ConfigManager.SaveConfig();
         }
 

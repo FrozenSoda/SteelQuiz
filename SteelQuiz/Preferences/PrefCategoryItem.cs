@@ -34,6 +34,7 @@ namespace SteelQuiz
         private PreferencesTheme PreferencesTheme = new PreferencesTheme();
 
         public event EventHandler OnPrefSelected;
+        public event EventHandler OnPrefDeselected;
 
         public bool Selectable { get; set; } = true;
 
@@ -66,11 +67,8 @@ namespace SteelQuiz
                     _selected = value;
                     this.lbl_text.BackColor = PreferencesTheme.GetPrefBackColor();
                     this.lbl_selectedIndicator.BackColor = PreferencesTheme.GetPrefBackColor();
-                }
 
-                if (ParentForm is Preferences.Preferences)
-                {
-                    (ParentForm as Preferences.Preferences).Save();
+                    InvokePrefDeselected();
                 }
             }
         }
@@ -119,7 +117,7 @@ namespace SteelQuiz
                 {
                     if (pcat != this && pcat.Selected)
                     {
-                        (this.ParentForm as Preferences.Preferences).lastSelectedCategory = pcat;
+                        //(this.ParentForm as Preferences.Preferences).lastSelectedCategory = pcat;
                         pcat.Selected = false;
                     }
                 }
@@ -132,6 +130,14 @@ namespace SteelQuiz
         public void InvokePrefSelected()
         {
             this.OnPrefSelected?.Invoke(this, null);
+        }
+
+        /// <summary>
+        /// Invokes the event which should be fired after deselecting the category
+        /// </summary>
+        public void InvokePrefDeselected()
+        {
+            this.OnPrefDeselected?.Invoke(this, null);
         }
 
         public void SetTheme()

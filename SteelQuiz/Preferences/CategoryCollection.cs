@@ -28,6 +28,8 @@ namespace SteelQuiz.Preferences
 {
     public class CategoryCollection : AutoThemeableUserControl
     {
+        //public event EventHandler OnCollectionDeselected;
+
         private Button backButton;
 
         private bool _isSubCategory = false;
@@ -101,6 +103,20 @@ namespace SteelQuiz.Preferences
                 if (pcat.Selected)
                 {
                     pcat.InvokePrefSelected();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Invokes the event to be fired when deselecting the category collection
+        /// </summary>
+        public void InvokeDeselectedEvent()
+        {
+            foreach (var pcat in Controls.OfType<PrefCategoryItem>())
+            {
+                if (pcat.Selected)
+                {
+                    pcat.InvokePrefDeselected();
                 }
             }
         }

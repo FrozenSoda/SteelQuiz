@@ -41,5 +41,10 @@ namespace SteelQuiz.Preferences
         {
             (ParentForm as Preferences).SwitchCategory(typeof(PrefsQuizFolders));
         }
+
+        private void Pcat_quizFolders_OnPrefDeselected(object sender, EventArgs e)
+        {
+            (ParentForm as Preferences).Save(typeof(PrefsQuizFolders));
+        }
     }
 }

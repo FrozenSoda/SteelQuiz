@@ -52,6 +52,7 @@
             this.pcat_quizFolders.Size = new System.Drawing.Size(130, 29);
             this.pcat_quizFolders.TabIndex = 0;
             this.pcat_quizFolders.OnPrefSelected += new System.EventHandler(this.Pcat_quizFolders_OnPrefSelected);
+            this.pcat_quizFolders.OnPrefDeselected += new System.EventHandler(this.Pcat_quizFolders_OnPrefDeselected);
             // 
             // CategoriesSync
             // 

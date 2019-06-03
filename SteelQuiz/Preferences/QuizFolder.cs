@@ -80,6 +80,7 @@ namespace SteelQuiz.Preferences
             if (msg == DialogResult.Yes)
             {
                 Dispose();
+                ParentUC.Save(true);
             }
         }
 
