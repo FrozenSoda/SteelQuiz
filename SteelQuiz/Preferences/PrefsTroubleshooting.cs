@@ -87,6 +87,13 @@ namespace SteelQuiz.Preferences
 
         private void Btn_resetAppConfig_Click(object sender, EventArgs e)
         {
+            if (ConfigManager.Config.SyncConfig.QuizProgressPath != QuizCore.PROGRESS_FILE_PATH_DEFAULT)
+            {
+                MessageBox.Show("The Quiz Progress path must be set to defaults before you can restore everything to defaults. You can find the settings under " +
+                    "Sync > Progress Sync (from the root of preferences)", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             var msg = MessageBox.Show("Are you sure you want to reset the application config? This will undo ALL changes you have made to the settings",
                 "Reset Application Config - SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
             if (msg == DialogResult.Yes)
