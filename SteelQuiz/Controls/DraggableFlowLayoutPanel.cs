@@ -138,15 +138,15 @@ namespace SteelQuiz.Controls
         {
             var controlsOrdered = ControlsOrdered().ToList();
 
-            int lastBottom = Padding.Top + controlsOrdered[0].Size.Height;
-            controlsOrdered[0].SmoothMove(new Point(Padding.Left, Padding.Top), 100);
-            for (int i = 1; i < controlsOrdered.Count; ++i)
+            int y = Padding.Top;
+
+            for (int i = 0; i < controlsOrdered.Count; ++i)
             {
                 if (controlsOrdered[i] != draggedControl)
                 {
-                    controlsOrdered[i].SmoothMove(new Point(Padding.Left, lastBottom + Padding.Top), 100);
+                    controlsOrdered[i].SmoothMove(new Point(Padding.Left, y), 100);
                 }
-                lastBottom += controlsOrdered[i].Size.Height + Padding.Top;
+                y += controlsOrdered[i].Size.Height + Padding.Top;
             }
         }
     }
