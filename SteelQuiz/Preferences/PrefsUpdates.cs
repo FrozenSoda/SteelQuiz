@@ -48,6 +48,8 @@ namespace SteelQuiz.Preferences
             rdo_autoUpdate.Checked = ConfigManager.Config.UpdateConfig.AutoUpdate;
             rdo_notifyUpdate.Checked = !rdo_autoUpdate.Checked;
             nud_buttonEnableDelay.Value = ConfigManager.Config.UpdateConfig.UpdateAvailableButtonEnableDelay_s;
+            rdo_chStable.Checked = ConfigManager.Config.UpdateConfig.UpdateChannel == ConfigData.UpdateChannel.Stable;
+            rdo_chDev.Checked = ConfigManager.Config.UpdateConfig.UpdateChannel == ConfigData.UpdateChannel.Development;
         }
 
         private void Rdo_autoUpdate_CheckedChanged(object sender, EventArgs e)
@@ -70,6 +72,57 @@ namespace SteelQuiz.Preferences
 
             ConfigManager.Config.UpdateConfig.UpdateAvailableButtonEnableDelay_s = (int)nud_buttonEnableDelay.Value;
             ConfigManager.SaveConfig();
+        }
+
+        private bool updateModeChkChangedEvent = true;
+        private void Rdo_chDev_CheckedChanged(object sender, EventArgs e)
+        {
+            if (skipConfigApply)
+            {
+                return;
+            }
+
+            if (!updateModeChkChangedEvent)
+            {
+                updateModeChkChangedEvent = true;
+                return;
+            }
+
+            if (rdo_chDev.Checked)
+            {
+                var msg = MessageBox.Show("By changing update channel to development, you might receive new features and updates faster, but the stability of the " +
+                    "application might be worse. Expect bugs, issues, data loss, and other bad things. Do not use this channel for production usage." +
+                    "\r\n\r\nIf you change your mind later on, or when receiving new updates, you might need to reset all settings and progress data.\r\n\r\nContinue?",
+                    "Switch to dev update channel - SteelQuiz",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+                if (msg != DialogResult.Yes)
+                {
+                    updateModeChkChangedEvent = false;
+                    rdo_chStable.Checked = true;
+                    return;
+                }
+                ConfigManager.Config.UpdateConfig.UpdateChannel = ConfigData.UpdateChannel.Development;
+            }
+            else
+            {
+                var msg = MessageBox.Show("Changing update channel to one with an older update might cause issues. If you do experience problems, reset the config and" +
+                    " the quiz progress data.\r\n\r\nSwitch update channel to the stable channel?",
+                    "Switch to stable update channel - SteelQuiz",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+                if (msg != DialogResult.Yes)
+                {
+                    updateModeChkChangedEvent = false;
+                    rdo_chDev.Checked = true;
+                    return;
+                }
+                ConfigManager.Config.UpdateConfig.UpdateChannel = ConfigData.UpdateChannel.Stable;
+            }
+
+            ConfigManager.SaveConfig();
+
+            MessageBox.Show("SteelQuiz will now update to the latest release in the selected update channel", "SteelQuiz", MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+            Updater.Update(Updater.UpdateMode.Force);
         }
     }
 }

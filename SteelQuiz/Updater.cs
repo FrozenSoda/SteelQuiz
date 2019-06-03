@@ -228,7 +228,16 @@ namespace SteelQuiz
                             // if application has write permissions to application folder, admin is not required
                             AutoUpdater.RunUpdateAsAdmin = false;
                         }
-                        AutoUpdater.Start("https://raw.githubusercontent.com/steel9/SteelQuiz/master/Updater/update_meta.xml");
+
+                        if (ConfigManager.Config.UpdateConfig.UpdateChannel == ConfigData.UpdateChannel.Stable)
+                        {
+                            AutoUpdater.Start("https://raw.githubusercontent.com/steel9/SteelQuiz/master/Updater/update_meta.xml");
+                        }
+                        else if (ConfigManager.Config.UpdateConfig.UpdateChannel == ConfigData.UpdateChannel.Development)
+                        {
+                            AutoUpdater.Start("https://raw.githubusercontent.com/steel9/SteelQuiz/update_channel_dev/Updater/update_meta.xml");
+                        }
+
                         //AutoUpdater.Start("http://localhost:8000/update_meta.xml");
                     }
                     catch (Exception ex)

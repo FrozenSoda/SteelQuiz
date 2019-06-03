@@ -24,9 +24,16 @@ using System.Threading.Tasks;
 
 namespace SteelQuiz.ConfigData
 {
+    public enum UpdateChannel
+    {
+        Stable,
+        Development
+    }
+
     public class UpdateConfig
     {
         public bool AutoUpdate { get; set; } = false;
         public int UpdateAvailableButtonEnableDelay_s { get; set; } = 3;
+        public UpdateChannel UpdateChannel { get; set; } = UpdateChannel.Stable;
     }
 }
