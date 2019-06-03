@@ -31,16 +31,14 @@ namespace SteelQuiz.Animations
         public static Dictionary<Control, System.Timers.Timer> ControlsMoving = new Dictionary<Control, System.Timers.Timer>();
         public static List<Control> ControlsStopMoving = new List<Control>();
 
-        public delegate void OnSmoothMoveComplete();
-
         /// <summary>
         /// Moves a control smoothly from one point to another
         /// </summary>
         /// <param name="control">The control to move</param>
         /// <param name="to">The target position</param>
         /// <param name="time">How long the animation should take (ms)</param>
-        /// <param name="onComplete">Delegate to call after completing animation</param>
-        public static void SmoothMove(this Control control, Point to, int time, OnSmoothMoveComplete onComplete = null)
+        /// <param name="onComplete">Delegate to call after completing animation. Will NOT be invoked if animation is canceled</param>
+        public static void SmoothMove(this Control control, Point to, int time, Action onComplete = null)
         {
             double dX_d = (to.X - control.Location.X) / (time / 10D);
             double dY_d = (to.Y - control.Location.Y) / (time / 10D);

@@ -88,7 +88,7 @@ namespace SteelQuiz.Controls
         /// Alligns a dragged control in the panel
         /// </summary>
         /// <param name="control">The control being dragged</param>
-        public void Align(Control control)
+        public void Align(Control control, Action onAlignCompleted = null)
         {
             var closestControl = ClosestControl(control);
 
@@ -96,7 +96,7 @@ namespace SteelQuiz.Controls
             {
                 control.SmoothMove(new Point(Padding.Left, Padding.Top), 100, () =>
                 {
-                    AlignAll();
+                    AlignAll(null, onAlignCompleted);
                 });
             }
             else
@@ -116,7 +116,7 @@ namespace SteelQuiz.Controls
 
                 control.SmoothMove(new Point(x, y), 100, () =>
                 {
-                    AlignAll();
+                    AlignAll(null, onAlignCompleted);
                 });
             }
         }
@@ -134,19 +134,69 @@ namespace SteelQuiz.Controls
         /// Aligns all the controls in the panel, except for the dragged control
         /// </summary>
         /// <param name="draggedControl">The control being dragged (to not align), if being dragged</param>
-        public void AlignAll(Control draggedControl = null)
+        public void AlignAll(Control draggedControl = null, Action onAlignCompleted = null)
         {
             var controlsOrdered = ControlsOrdered().ToList();
 
             int y = Padding.Top;
 
+            var multiAsyncWait = new MultiAsyncWait(controlsOrdered.Count, onAlignCompleted);
             for (int i = 0; i < controlsOrdered.Count; ++i)
             {
                 if (controlsOrdered[i] != draggedControl)
                 {
-                    controlsOrdered[i].SmoothMove(new Point(Padding.Left, y), 100);
+                    controlsOrdered[i].SmoothMove(new Point(Padding.Left, y), 100, () =>
+                    {
+                        multiAsyncWait.CompletedActions++;
+                    });
+                    //when all these smooth moves are complete, onAlignCompleted should be invoked
                 }
                 y += controlsOrdered[i].Size.Height + Padding.Top;
+            }
+        }
+
+        public class MultiAsyncWait
+        {
+            private int _completedActions = 0;
+
+            /// <summary>
+            /// Number of actions that has been completed
+            /// </summary>
+            public int CompletedActions
+            {
+                get
+                {
+                    return _completedActions;
+                }
+
+                set
+                {
+                    _completedActions = value;
+                    if (_completedActions >= CompletedActionsInvokeLimit)
+                    {
+                        OnActionsCompleted.Invoke();
+                    }
+                }
+            }
+
+            /// <summary>
+            /// The action which should be invoked after the actions are completed
+            /// </summary>
+            private Action OnActionsCompleted { get; set; }
+
+            /// <summary>
+            /// How big CompletedActions should get before invoking the on completed delegate
+            /// </summary>
+            private int CompletedActionsInvokeLimit { get; set; }
+
+            /// <summary>
+            /// A class that invokes an action after a specified number of events are completed
+            /// </summary>
+            /// <param name="completedActionsInvokeLimit">How big CompletedActions should get before invoking the on completed delegate</param>
+            public MultiAsyncWait(int completedActionsInvokeLimit, Action onActionsCompleted)
+            {
+                CompletedActionsInvokeLimit = completedActionsInvokeLimit;
+                OnActionsCompleted = onActionsCompleted;
             }
         }
     }

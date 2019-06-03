@@ -46,6 +46,9 @@ namespace SteelQuiz.Preferences
             }
         }
 
+        /// <summary>
+        /// The user control that owns this control
+        /// </summary>
         private PrefsQuizFolders ParentUC { get; set; }
 
         public QuizFolder(PrefsQuizFolders parentUC, string path = null)
@@ -147,7 +150,10 @@ namespace SteelQuiz.Preferences
         private void Pnl_drag_MouseUp(object sender, MouseEventArgs e)
         {
             hoverStopwatch.Reset();
-            (Parent as DraggableFlowLayoutPanel).Align(this);
+            (Parent as DraggableFlowLayoutPanel).Align(this, () =>
+            {
+                ParentUC.Save(true);
+            });
         }
     }
 }
