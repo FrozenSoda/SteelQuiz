@@ -52,6 +52,11 @@ namespace SteelQuiz
 
                 tmr_btnEnable.Stop();
             }
+            else
+            {
+                btn_update.Text = $"({ConfigManager.Config.UpdateConfig.UpdateAvailableButtonEnableDelay_s - secondsSinceStart}s) Update now (recommended)";
+                btn_notNow.Text = $"({ConfigManager.Config.UpdateConfig.UpdateAvailableButtonEnableDelay_s - secondsSinceStart}s) Not now";
+            }
 
             lbl_top.Text = $"A new version of SteelQuiz is available (v{newVersion.ToString()})";
             lbl_installedVer.Text = $"Installed version: v{installedVersion.ToString()}";
