@@ -82,22 +82,46 @@ namespace SteelQuiz.Preferences
             bool bkp = QuizCore.BackupProgress(new Version(MetaData.QUIZ_FILE_FORMAT_VERSION));
             if (!bkp)
             {
+                txt_quizProgPath.Text = Path.GetDirectoryName(oldPath);
                 return false;
             }
 
             if (File.Exists(newPath))
             {
-                var msg = MessageBox.Show("A quiz progress data file already exists in the selected folder. Overwrite?\r\n\r\nWarning: Overwriting may cause data loss." +
-                    " If you are unsure, select a different folder, or move the quiz progress data file currently existing in the folder", "SteelQuiz",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (msg == DialogResult.No)
+                var conflictSolution = new QuizProgressConflict();
+                if (conflictSolution.ShowDialog() != DialogResult.OK)
                 {
+                    txt_quizProgPath.Text = Path.GetDirectoryName(oldPath);
                     return false;
                 }
-                File.Delete(newPath);
+
+                if (conflictSolution.ConflictResult == ConflictResult.KeepTarget)
+                {
+                    bkp = QuizCore.BackupFile(oldPath);
+                    if (!bkp)
+                    {
+                        txt_quizProgPath.Text = Path.GetDirectoryName(oldPath);
+                        return false;
+                    }
+                    File.Delete(oldPath);
+                }
+                else if (conflictSolution.ConflictResult == ConflictResult.OverwriteTarget)
+                {
+                    bkp = QuizCore.BackupFile(newPath);
+                    if (!bkp)
+                    {
+                        txt_quizProgPath.Text = Path.GetDirectoryName(oldPath);
+                        return false;
+                    }
+                    File.Delete(newPath);
+                    File.Move(oldPath, newPath);
+                }
+            }
+            else
+            {
+                File.Move(oldPath, newPath);
             }
 
-            File.Move(oldPath, newPath);
             ConfigManager.Config.SyncConfig.QuizProgressPath = newPath;
 
             if (saveConfig)

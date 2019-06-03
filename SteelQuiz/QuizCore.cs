@@ -502,6 +502,34 @@ namespace SteelQuiz
             return true;
         }
 
+        public static bool BackupFile(string file)
+        {
+            var bkpProgressPath = Path.Combine(
+                QuizCore.BACKUP_FOLDER,
+                file);
+            var exCount = 1;
+            while (File.Exists(bkpProgressPath))
+            {
+                ++exCount;
+                bkpProgressPath = Path.Combine(
+                    QuizCore.BACKUP_FOLDER,
+                    Path.GetFileNameWithoutExtension(file) + "_" + exCount + Path.GetExtension(file));
+            }
+
+            try
+            {
+                File.Copy(file, bkpProgressPath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred while backing up the file:\r\n\r\n" + ex.ToString(),
+                    "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            return true;
+        }
+
         public static bool BackupProgress(Version progressVer)
         {
             var extStartIndex = ConfigManager.Config.SyncConfig.QuizProgressPath.Length - ".json".Length;
