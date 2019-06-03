@@ -277,7 +277,7 @@ namespace SteelQuiz
                         else if (ConfigManager.Config.UpdateConfig.UpdateChannel == ConfigData.UpdateChannel.Development)
                         {
                             var newestChannel = NewestUpdateChannel("https://raw.githubusercontent.com/steel9/SteelQuiz/master/Updater/update_meta.xml",
-                                "https://raw.githubusercontent.com/steel9/SteelQuiz/update_channel_dev/Updater/update_meta.xml");
+                                "https://raw.githubusercontent.com/steel9/SteelQuiz/master/Updater/channel_dev/update_meta.xml");
                             AutoUpdater.Start(newestChannel.MetaURL);
                         }
 
