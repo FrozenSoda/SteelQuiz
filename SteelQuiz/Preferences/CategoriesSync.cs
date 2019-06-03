@@ -46,5 +46,16 @@ namespace SteelQuiz.Preferences
         {
             (ParentForm as Preferences).Save(typeof(PrefsQuizFolders));
         }
+
+        private void Pcat_progSync_OnPrefSelected(object sender, EventArgs e)
+        {
+            (ParentForm as Preferences).SwitchCategory(typeof(PrefsProgressSync));
+        }
+
+        private void Pcat_progSync_OnPrefDeselected(object sender, Util.ReturnArgs e)
+        {
+            bool result = (ParentForm as Preferences).Save(typeof(PrefsProgressSync));
+            e.ReturnValue = result;
+        }
     }
 }

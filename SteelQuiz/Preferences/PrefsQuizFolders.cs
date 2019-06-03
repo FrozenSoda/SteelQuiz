@@ -59,9 +59,9 @@ namespace SteelQuiz.Preferences
         /// Saves the configuration for this category
         /// </summary>
         /// <param name="saveConfig">True if the changes should be written to disk now, otherwise False</param>
-        public void Save(bool saveConfig)
+        public bool Save(bool saveConfig)
         {
-            Save(saveConfig, null);
+            return Save(saveConfig, null);
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace SteelQuiz.Preferences
         /// </summary>
         /// <param name="saveConfig">True if the changes should be written to disk now, otherwise False</param>
         /// <param name="extraQuizPath">An extra quiz path that will be added with lowest order. Useful when calling from an initializing QuizFolder for instance</param>
-        public void Save(bool saveConfig, string extraQuizPath = null)
+        public bool Save(bool saveConfig, string extraQuizPath = null)
         {
             var quizFolders = new List<string>();
             var qfDispose = new List<QuizFolder>();
@@ -110,6 +110,8 @@ namespace SteelQuiz.Preferences
             {
                 qf.Dispose();
             }
+
+            return true;
         }
 
         private void Btn_add_Click(object sender, EventArgs e)

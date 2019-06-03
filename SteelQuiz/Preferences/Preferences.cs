@@ -34,6 +34,8 @@ namespace SteelQuiz.Preferences
     {
         private PreferencesTheme PreferencesTheme = new PreferencesTheme();
 
+        public bool SaveConfig { get; set; } = true;
+
         public Preferences(Type selectedCategory = null, Type selectedCategoryCollection = null)
         {
             InitializeComponent();
@@ -93,7 +95,11 @@ namespace SteelQuiz.Preferences
         /// <param name="categoryCollection">The category collection to return from</param>
         public void PopCategoryCollection(CategoryCollection categoryCollection)
         {
-            categoryCollection.InvokeDeselectedEvent();
+            var deselect = categoryCollection.InvokeDeselectedEvent();
+            if (!deselect)
+            {
+                return;
+            }
             var collections = pnl_prefCategories.Controls.OfType<CategoryCollection>();
             var currCollection = collections.ElementAt(collections.Count() - 1);
             categoryCollection.Hide(true);
@@ -132,8 +138,15 @@ namespace SteelQuiz.Preferences
         /// </summary>
         /// <param name="category">The category whose configuration to save. The category MUST implement ICustomSaveCategory! If null, configuration for all 
         /// ICustomSaveCategory categories will be saved</param>
-        public void Save(Type category = null)
+        public bool Save(Type category = null)
         {
+            if (!SaveConfig)
+            {
+                return true;
+            }
+
+            bool result = true;
+
             if (category != null && !typeof(ICustomSaveCategory).IsAssignableFrom(category))
             {
                 throw new ArgumentException("Save category must implement ICustomSaveCategory");
@@ -144,7 +157,11 @@ namespace SteelQuiz.Preferences
             {
                 if (category == null || category == prefs.GetType())
                 {
-                    prefs.Save(false);
+                    bool s = prefs.Save(false);
+                    if (result)
+                    {
+                        result = s;
+                    }
                     found = true;
                 }
             }
@@ -154,7 +171,13 @@ namespace SteelQuiz.Preferences
                 throw new Exception("Save category could not be found");
             }
 
-            ConfigManager.SaveConfig();
+            bool save = ConfigManager.SaveConfig();
+            if (result)
+            {
+                result = save;
+            }
+
+            return result;
         }
 
         private void Preferences_FormClosing(object sender, FormClosingEventArgs e)

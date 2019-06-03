@@ -106,6 +106,8 @@ namespace SteelQuiz.Preferences
                     statistics = ConfigManager.Config.Statistics;
                 }
 
+                (ParentForm as Preferences).SaveConfig = false;
+
                 ConfigManager.Config = new ConfigData.Config();
 
                 if (statistics != null)

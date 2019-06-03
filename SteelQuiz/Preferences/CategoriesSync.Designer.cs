@@ -41,6 +41,8 @@
             this.pcat_progSync.Selected = false;
             this.pcat_progSync.Size = new System.Drawing.Size(130, 29);
             this.pcat_progSync.TabIndex = 1;
+            this.pcat_progSync.OnPrefSelected += new System.EventHandler(this.Pcat_progSync_OnPrefSelected);
+            this.pcat_progSync.OnPrefDeselected += new System.EventHandler<Util.ReturnArgs>(this.Pcat_progSync_OnPrefDeselected);
             // 
             // pcat_quizFolders
             // 
@@ -52,7 +54,7 @@
             this.pcat_quizFolders.Size = new System.Drawing.Size(130, 29);
             this.pcat_quizFolders.TabIndex = 0;
             this.pcat_quizFolders.OnPrefSelected += new System.EventHandler(this.Pcat_quizFolders_OnPrefSelected);
-            this.pcat_quizFolders.OnPrefDeselected += new System.EventHandler(this.Pcat_quizFolders_OnPrefDeselected);
+            this.pcat_quizFolders.OnPrefDeselected += new System.EventHandler<Util.ReturnArgs>(this.Pcat_quizFolders_OnPrefDeselected);
             // 
             // CategoriesSync
             // 

@@ -90,12 +90,12 @@ namespace SteelQuiz
             }
         }
 
-        public static void SaveConfig()
+        public static bool SaveConfig()
         {
             var dirInit = QuizCore.CheckInitDirectories();
             if (!dirInit)
             {
-                return;
+                return false;
             }
 
             try
@@ -109,7 +109,10 @@ namespace SteelQuiz
             {
                 MessageBox.Show("An error occurred while saving the config:\r\n\r\n" + ex.ToString(), "SteelQuiz", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
+                return false;
             }
+
+            return true;
         }
 
         public static void ChkSetupForFirstUse()

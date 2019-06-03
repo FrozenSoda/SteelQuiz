@@ -33,8 +33,8 @@ namespace SteelQuiz
     {
         private PreferencesTheme PreferencesTheme = new PreferencesTheme();
 
-        public event EventHandler OnPrefSelected;
-        public event EventHandler OnPrefDeselected;
+        public event EventHandler OnPrefSelected = null;
+        public event EventHandler<Util.ReturnArgs> OnPrefDeselected = null;
 
         public bool Selectable { get; set; } = true;
 
@@ -135,9 +135,11 @@ namespace SteelQuiz
         /// <summary>
         /// Invokes the event which should be fired after deselecting the category
         /// </summary>
-        public void InvokePrefDeselected()
+        public bool InvokePrefDeselected()
         {
-            this.OnPrefDeselected?.Invoke(this, null);
+            var args = new Util.ReturnArgs();
+            this.OnPrefDeselected?.Invoke(this, args);
+            return args.ReturnValue is bool ? (bool)args.ReturnValue : true;
         }
 
         public void SetTheme()

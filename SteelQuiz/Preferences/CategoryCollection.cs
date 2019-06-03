@@ -110,15 +110,17 @@ namespace SteelQuiz.Preferences
         /// <summary>
         /// Invokes the event to be fired when deselecting the category collection
         /// </summary>
-        public void InvokeDeselectedEvent()
+        public bool InvokeDeselectedEvent()
         {
             foreach (var pcat in Controls.OfType<PrefCategoryItem>())
             {
                 if (pcat.Selected)
                 {
-                    pcat.InvokePrefDeselected();
+                    return pcat.InvokePrefDeselected();
                 }
             }
+
+            return false;
         }
 
         /// <summary>

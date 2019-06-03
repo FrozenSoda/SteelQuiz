@@ -22,18 +22,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SteelQuiz.Preferences
+namespace SteelQuiz.Util
 {
-    /// <summary>
-    /// Implement this interface for preference categories that need to save the configuration in a function
-    /// </summary>
-    public interface ICustomSaveCategory
+    public class ReturnArgs : EventArgs
     {
-        /// <summary>
-        /// Saves the data entered to the config
-        /// </summary>
-        /// <param name="saveConfig">True to save the config to the disk, otherwise false</param>
-        /// <returns>Returns True if the save was successful, otherwise False</returns>
-        bool Save(bool saveConfig);
+        public object ReturnValue { get; set; }
     }
 }
