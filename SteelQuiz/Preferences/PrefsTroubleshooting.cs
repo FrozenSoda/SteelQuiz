@@ -135,7 +135,7 @@ namespace SteelQuiz.Preferences
 
                 try
                 {
-                    System.IO.File.Delete(QuizCore.PROGRESS_FILE_PATH);
+                    System.IO.File.Delete(ConfigManager.Config.SyncConfig.QuizProgressPath);
                 }
                 catch (Exception ex)
                 {

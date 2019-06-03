@@ -43,20 +43,30 @@ namespace SteelQuiz.Preferences
             fbd_quizProgFolder.SelectedPath = Path.GetDirectoryName(ConfigManager.Config.SyncConfig.QuizProgressPath);
             if (fbd_quizProgFolder.ShowDialog() == DialogResult.OK)
             {
-                txt_quizProgPath.Text = Path.Combine(fbd_quizProgFolder.SelectedPath, "SteelQuizProgress.json");
+                txt_quizProgPath.Text = fbd_quizProgFolder.SelectedPath;
                 Save(true);
             }
         }
 
         public void LoadPreferences()
         {
-            txt_quizProgPath.Text = ConfigManager.Config.SyncConfig.QuizProgressPath;
+            txt_quizProgPath.Text = Path.GetDirectoryName(ConfigManager.Config.SyncConfig.QuizProgressPath);
         }
 
         public bool Save(bool saveConfig)
         {
             var oldPath = ConfigManager.Config.SyncConfig.QuizProgressPath;
-            var newPath = txt_quizProgPath.Text;
+
+            string newPath;
+            if (txt_quizProgPath.Text == Path.GetDirectoryName(QuizCore.PROGRESS_FILE_PATH_DEFAULT))
+            {
+                // quiz progress file should have the filename "QuizProgress.json" in the default folder, for compatibility reasons
+                newPath = QuizCore.PROGRESS_FILE_PATH_DEFAULT;
+            }
+            else
+            {
+                newPath = Path.Combine(txt_quizProgPath.Text, "SteelQuizProgress.json");
+            }
 
             if (newPath == oldPath)
             {
@@ -90,7 +100,31 @@ namespace SteelQuiz.Preferences
             File.Move(oldPath, newPath);
             ConfigManager.Config.SyncConfig.QuizProgressPath = newPath;
 
+            if (saveConfig)
+            {
+                ConfigManager.SaveConfig();
+            }
+
             return true;
+        }
+
+        private void Btn_resetToDefaults_Click(object sender, EventArgs e)
+        {
+            var msg = MessageBox.Show("Reset quiz progress folder path to the default? Your current progress data will be moved to the new path", "SteelQuiz",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (msg == DialogResult.No)
+            {
+                return;
+            }
+
+            txt_quizProgPath.Text = Path.GetDirectoryName(QuizCore.PROGRESS_FILE_PATH_DEFAULT);
+            Save(true);
+        }
+
+        private void Txt_quizProgPath_Leave(object sender, EventArgs e)
+        {
+            Save(true);
         }
     }
 }

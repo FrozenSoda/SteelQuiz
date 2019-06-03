@@ -158,7 +158,7 @@ namespace SteelQuiz.Preferences
         {
             IEnumerable<Guid> guidsToRemove = QuizProgDatasToRemove();
             QuizProgDataRoot progDataRoot;
-            using (var reader = new StreamReader(QuizCore.PROGRESS_FILE_PATH))
+            using (var reader = new StreamReader(ConfigManager.Config.SyncConfig.QuizProgressPath))
             {
                 progDataRoot = JsonConvert.DeserializeObject<QuizProgDataRoot>(reader.ReadToEnd());
             }
@@ -181,7 +181,7 @@ namespace SteelQuiz.Preferences
                 progDataRoot.QuizProgDatas.Remove(quizProg);
             }
 
-            using (var writer = new StreamWriter(QuizCore.PROGRESS_FILE_PATH, false))
+            using (var writer = new StreamWriter(ConfigManager.Config.SyncConfig.QuizProgressPath, false))
             {
                 writer.Write(JsonConvert.SerializeObject(progDataRoot, Formatting.Indented));
             }
@@ -194,7 +194,7 @@ namespace SteelQuiz.Preferences
             List<Guid> toRemove = new List<Guid>();
 
             QuizProgDataRoot progDataRoot;
-            using (var reader = new StreamReader(QuizCore.PROGRESS_FILE_PATH))
+            using (var reader = new StreamReader(ConfigManager.Config.SyncConfig.QuizProgressPath))
             {
                 progDataRoot = JsonConvert.DeserializeObject<QuizProgDataRoot>(reader.ReadToEnd());
             }

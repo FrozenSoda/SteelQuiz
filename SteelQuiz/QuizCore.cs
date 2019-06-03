@@ -39,7 +39,7 @@ namespace SteelQuiz
         public static readonly string QUIZ_FOLDER_DEFAULT = Path.Combine(APP_CFG_FOLDER, "Quizzes");
         public static readonly string QUIZ_RECOVERY_FOLDER = Path.Combine(QUIZ_FOLDER_DEFAULT, "Recovery");
         public static readonly string QUIZ_BACKUP_FOLDER = Path.Combine(QUIZ_FOLDER_DEFAULT, "Backups");
-        public static readonly string PROGRESS_FILE_PATH = Path.Combine(APP_CFG_FOLDER, "QuizProgress.json");
+        public static readonly string PROGRESS_FILE_PATH_DEFAULT = Path.Combine(APP_CFG_FOLDER, "QuizProgress.json");
 
         public static Quiz Quiz { get; set; }
         public static QuizProgData QuizProgress { get; set; }
@@ -247,7 +247,7 @@ namespace SteelQuiz
         public static ChkUpgradeProgressDataResult ChkUpgradeProgressData()
         {
             dynamic cfgDz;
-            using (var reader = new StreamReader(PROGRESS_FILE_PATH))
+            using (var reader = new StreamReader(ConfigManager.Config.SyncConfig.QuizProgressPath))
             {
                 cfgDz = JsonConvert.DeserializeObject(reader.ReadToEnd());
             }
@@ -273,7 +273,7 @@ namespace SteelQuiz
                     return ChkUpgradeProgressDataResult.Fail;
                 }
 
-                File.Delete(PROGRESS_FILE_PATH);
+                File.Delete(ConfigManager.Config.SyncConfig.QuizProgressPath);
 
                 return ChkUpgradeProgressDataResult.UpgradedDowngraded;
             }
@@ -319,8 +319,8 @@ namespace SteelQuiz
 
                 if (latestBackup != null)
                 {
-                    File.Delete(PROGRESS_FILE_PATH);
-                    File.Copy(latestBackup, PROGRESS_FILE_PATH);
+                    File.Delete(ConfigManager.Config.SyncConfig.QuizProgressPath);
+                    File.Copy(latestBackup, ConfigManager.Config.SyncConfig.QuizProgressPath);
                 }
                 else
                 {
@@ -333,7 +333,7 @@ namespace SteelQuiz
                         return ChkUpgradeProgressDataResult.Fail;
                     }
 
-                    File.Delete(PROGRESS_FILE_PATH);
+                    File.Delete(ConfigManager.Config.SyncConfig.QuizProgressPath);
                 }
                 return ChkUpgradeProgressDataResult.UpgradedDowngraded;
             }
@@ -345,11 +345,11 @@ namespace SteelQuiz
 
         public static bool ChkCreateQuizProgress()
         {
-            if (!File.Exists(PROGRESS_FILE_PATH))
+            if (!File.Exists(ConfigManager.Config.SyncConfig.QuizProgressPath))
             {
                 var cfgDz = new QuizProgDataRoot(MetaData.QUIZ_FILE_FORMAT_VERSION);
                 var cfgSz = JsonConvert.SerializeObject(cfgDz, Formatting.Indented);
-                using (var writer = new StreamWriter(PROGRESS_FILE_PATH, false))
+                using (var writer = new StreamWriter(ConfigManager.Config.SyncConfig.QuizProgressPath, false))
                 {
                     writer.Write(cfgSz);
                 }
@@ -359,7 +359,7 @@ namespace SteelQuiz
 
         private static bool LoadProgressData()
         {
-            if (File.Exists(PROGRESS_FILE_PATH))
+            if (File.Exists(ConfigManager.Config.SyncConfig.QuizProgressPath))
             {
                 var upg = ChkUpgradeProgressData();
                 if (upg == ChkUpgradeProgressDataResult.UpgradedDowngraded)
@@ -371,7 +371,7 @@ namespace SteelQuiz
                     return false;
                 }
                 QuizProgDataRoot quizProgDataRoot;
-                using (var reader = new StreamReader(PROGRESS_FILE_PATH))
+                using (var reader = new StreamReader(ConfigManager.Config.SyncConfig.QuizProgressPath))
                 {
                     quizProgDataRoot = JsonConvert.DeserializeObject<QuizProgDataRoot>(reader.ReadToEnd());
                 }
@@ -504,22 +504,22 @@ namespace SteelQuiz
 
         public static bool BackupProgress(Version progressVer)
         {
-            var extStartIndex = QuizCore.PROGRESS_FILE_PATH.Length - ".json".Length;
+            var extStartIndex = ConfigManager.Config.SyncConfig.QuizProgressPath.Length - ".json".Length;
             var bkpProgressPath = Path.Combine(
                 QuizCore.BACKUP_FOLDER,
-                Path.GetFileNameWithoutExtension(QuizCore.PROGRESS_FILE_PATH) + "_" + progressVer.ToString() + ".json");
+                Path.GetFileNameWithoutExtension(ConfigManager.Config.SyncConfig.QuizProgressPath) + "_" + progressVer.ToString() + ".json");
             var exCount = 1;
             while (File.Exists(bkpProgressPath))
             {
                 ++exCount;
                 bkpProgressPath = Path.Combine(
                     QuizCore.BACKUP_FOLDER,
-                    Path.GetFileNameWithoutExtension(QuizCore.PROGRESS_FILE_PATH) + "_" + progressVer.ToString() + "_" + exCount + ".json");
+                    Path.GetFileNameWithoutExtension(ConfigManager.Config.SyncConfig.QuizProgressPath) + "_" + progressVer.ToString() + "_" + exCount + ".json");
             }
 
             try
             {
-                File.Copy(QuizCore.PROGRESS_FILE_PATH, bkpProgressPath);
+                File.Copy(ConfigManager.Config.SyncConfig.QuizProgressPath, bkpProgressPath);
             }
             catch (Exception ex)
             {
@@ -572,9 +572,9 @@ namespace SteelQuiz
 
             // DESERIALIZE AND PROCESS
             QuizProgDataRoot cfgDz;
-            if (File.Exists(PROGRESS_FILE_PATH))
+            if (File.Exists(ConfigManager.Config.SyncConfig.QuizProgressPath))
             {
-                using (var reader = new StreamReader(PROGRESS_FILE_PATH))
+                using (var reader = new StreamReader(ConfigManager.Config.SyncConfig.QuizProgressPath))
                 {
                     cfgDz = JsonConvert.DeserializeObject<QuizProgDataRoot>(reader.ReadToEnd());
                 }
@@ -607,7 +607,7 @@ namespace SteelQuiz
 
             // SERIALIZE AND SAVE
             var cfgSz = JsonConvert.SerializeObject(cfgDz, Formatting.Indented);
-            using (var writer = new StreamWriter(PROGRESS_FILE_PATH, false))
+            using (var writer = new StreamWriter(ConfigManager.Config.SyncConfig.QuizProgressPath, false))
             {
                 writer.Write(cfgSz);
             }

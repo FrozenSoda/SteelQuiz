@@ -33,8 +33,6 @@ namespace SteelQuiz.Preferences
 {
     public partial class PrefsQuizFolders : AutoThemeableUserControl, IPreferenceCategory, ICustomSaveCategory
     {
-#warning saving should occur when leaving this category
-
         private PreferencesTheme PreferencesTheme = new PreferencesTheme();
         private bool skipConfigApply = true;
 

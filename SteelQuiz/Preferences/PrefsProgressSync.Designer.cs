@@ -48,6 +48,7 @@ namespace SteelQuiz.Preferences
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PrefsProgressSync));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btn_resetToDefaults = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btn_browseQuizProgPath = new System.Windows.Forms.Button();
             this.txt_quizProgPath = new System.Windows.Forms.TextBox();
@@ -59,14 +60,28 @@ namespace SteelQuiz.Preferences
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.panel1.Controls.Add(this.btn_resetToDefaults);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.btn_browseQuizProgPath);
             this.panel1.Controls.Add(this.txt_quizProgPath);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Location = new System.Drawing.Point(14, 14);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(635, 140);
+            this.panel1.Size = new System.Drawing.Size(635, 158);
             this.panel1.TabIndex = 4;
+            // 
+            // btn_resetToDefaults
+            // 
+            this.btn_resetToDefaults.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.btn_resetToDefaults.FlatAppearance.BorderSize = 0;
+            this.btn_resetToDefaults.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_resetToDefaults.Location = new System.Drawing.Point(505, 132);
+            this.btn_resetToDefaults.Name = "btn_resetToDefaults";
+            this.btn_resetToDefaults.Size = new System.Drawing.Size(127, 23);
+            this.btn_resetToDefaults.TabIndex = 5;
+            this.btn_resetToDefaults.Text = "Reset to defaults";
+            this.btn_resetToDefaults.UseVisualStyleBackColor = false;
+            this.btn_resetToDefaults.Click += new System.EventHandler(this.Btn_resetToDefaults_Click);
             // 
             // label1
             // 
@@ -98,6 +113,7 @@ namespace SteelQuiz.Preferences
             this.txt_quizProgPath.Name = "txt_quizProgPath";
             this.txt_quizProgPath.Size = new System.Drawing.Size(536, 23);
             this.txt_quizProgPath.TabIndex = 2;
+            this.txt_quizProgPath.Leave += new System.EventHandler(this.Txt_quizProgPath_Leave);
             // 
             // label4
             // 
@@ -138,5 +154,6 @@ namespace SteelQuiz.Preferences
         private System.Windows.Forms.Button btn_browseQuizProgPath;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.FolderBrowserDialog fbd_quizProgFolder;
+        private System.Windows.Forms.Button btn_resetToDefaults;
     }
 }

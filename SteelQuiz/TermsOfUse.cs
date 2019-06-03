@@ -32,7 +32,7 @@ namespace SteelQuiz
 {
     public partial class TermsOfUse : AutoThemeableForm
     {
-        private const int AGREE_UNLOCK_DELAY_S = 20;
+        private const int AGREE_UNLOCK_DELAY_S = 5;
         private int unlockTimerCount = 0;
         private bool showForm = true;
 
