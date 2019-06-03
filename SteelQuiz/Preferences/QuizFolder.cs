@@ -62,6 +62,7 @@ namespace SteelQuiz.Preferences
                 if (fbd_path.ShowDialog() == DialogResult.OK)
                 {
                     txt_path.Text = fbd_path.SelectedPath;
+                    ParentUC.Save(true, txt_path.Text);
                 }
             }
             else

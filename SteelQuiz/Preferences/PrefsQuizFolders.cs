@@ -55,7 +55,21 @@ namespace SteelQuiz.Preferences
             }
         }
 
+        /// <summary>
+        /// Saves the configuration for this category
+        /// </summary>
+        /// <param name="saveConfig">True if the changes should be written to disk now, otherwise False</param>
         public void Save(bool saveConfig)
+        {
+            Save(saveConfig, null);
+        }
+
+        /// <summary>
+        /// Saves the configuration for this category
+        /// </summary>
+        /// <param name="saveConfig">True if the changes should be written to disk now, otherwise False</param>
+        /// <param name="extraQuizPath">An extra quiz path that will be added with lowest order. Useful when calling from an initializing QuizFolder for instance</param>
+        public void Save(bool saveConfig, string extraQuizPath = null)
         {
             var quizFolders = new List<string>();
             var qfDispose = new List<QuizFolder>();
@@ -71,6 +85,18 @@ namespace SteelQuiz.Preferences
                     MessageBox.Show($"Folder '{qf.QuizFolderPath}' does not exist; it will be removed from the list", "SteelQuiz", MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                     qfDispose.Add(qf);
+                }
+            }
+
+            if (extraQuizPath != null)
+            {
+                if (Directory.Exists(extraQuizPath))
+                {
+                    quizFolders.Add(extraQuizPath);
+                }
+                else
+                {
+                    throw new DirectoryNotFoundException("Extra quiz path '" + extraQuizPath + "' does not exist");
                 }
             }
 
