@@ -92,7 +92,7 @@ namespace SteelQuiz
             var duplicatePairs = unfixedQuizProgDataList.GroupBy(x => x.QuizGUID);
             foreach (var duplicatePair in duplicatePairs)
             {
-                var best = duplicatePair.OrderByDescending(x => x.GetSuccessRate()).ElementAt(0);
+                var best = duplicatePair.OrderByDescending(x => x.GetSuccessRateStrict()).ElementAt(0);
                 result.QuizProgDatas.Add(best);
             }
 
