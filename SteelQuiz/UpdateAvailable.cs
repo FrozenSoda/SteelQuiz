@@ -40,7 +40,6 @@ namespace SteelQuiz
             SetTheme();
 
             LoadPreferences();
-            skipConfigApply = true;
 
             if (ConfigManager.Config.UpdateConfig.UpdateAvailableButtonEnableDelay_s == 0)
             {
@@ -78,6 +77,8 @@ namespace SteelQuiz
         private void LoadPreferences()
         {
             chk_autoUpdateInFuture.Checked = ConfigManager.Config.UpdateConfig.AutoUpdate;
+
+            skipConfigApply = false;
         }
 
         private void Btn_notNow_Click(object sender, EventArgs e)
