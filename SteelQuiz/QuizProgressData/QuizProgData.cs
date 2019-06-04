@@ -78,6 +78,11 @@ namespace SteelQuiz.QuizProgressData
             QuizGUID = quiz.GUID;
         }
 
+        public double SuccessRate()
+        {
+            return WordProgDatas.Sum(x => x.GetSuccessRate()) / WordProgDatas.Count();
+        }
+
         // due to CurrentWordPair not preserving references due to serialization, implement setter through method instead, to avoid confusion regarding references
         public void SetCurrentWordPair(WordPair wordPair)
         {

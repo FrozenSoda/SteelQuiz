@@ -82,7 +82,7 @@
             // 
             // fbd_path
             // 
-            this.fbd_path.Description = "Select a folder to add as a quiz folder. The folder should ONLY contain quizzes";
+            this.fbd_path.Description = "Select a folder to add as a quiz folder";
             // 
             // label1
             // 

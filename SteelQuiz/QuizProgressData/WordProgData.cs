@@ -58,7 +58,7 @@ namespace SteelQuiz.QuizProgressData
             return WordTries.Count;
         }
 
-        public int GetSuccessRate()
+        public double GetSuccessRate()
         {
             var tries = GetWordTriesCount();
             if (tries == 0)
