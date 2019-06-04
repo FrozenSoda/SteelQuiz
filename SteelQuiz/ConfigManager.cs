@@ -115,6 +115,16 @@ namespace SteelQuiz
             return true;
         }
 
+        public static void Configure()
+        {
+            if (MetaData.PRE_RELEASE)
+            {
+                Config.UpdateConfig.UpdateChannel = UpdateChannel.Development;
+            }
+
+            SaveConfig();
+        }
+
         public static void ChkSetupForFirstUse()
         {
             if (Config.FullName != null)

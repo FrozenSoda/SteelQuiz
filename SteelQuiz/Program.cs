@@ -63,6 +63,7 @@ namespace SteelQuiz
 
             ++ConfigManager.Config.Statistics.LaunchCount.Data;
             ConfigManager.SaveConfig();
+            ConfigManager.Configure();
 
             Application.Run(new TermsOfUse());
         }
