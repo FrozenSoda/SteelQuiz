@@ -28,9 +28,9 @@ using System.Windows.Forms;
 
 namespace SteelQuiz.Preferences
 {
-    public partial class QuizProgressConflictAdvanced : AutoThemeableUserControl
+    public partial class QuizProgressConflictRecommended : AutoThemeableUserControl
     {
-        public QuizProgressConflictAdvanced()
+        public QuizProgressConflictRecommended()
         {
             InitializeComponent();
             SetTheme();

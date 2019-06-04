@@ -57,35 +57,57 @@ namespace SteelQuiz.Preferences
     {
         public ConflictResult ConflictResult { get; set; }
 
+        private bool AdvancedSettings { get; set; } = false;
+
         public QuizProgressConflict()
         {
             InitializeComponent();
+            pnl_step.Controls.Add(new QuizProgressConflictRecommended());
             SetTheme();
         }
 
         private void Btn_continue_Click(object sender, EventArgs e)
         {
-            var msg = MessageBox.Show("Confirm selection", "SteelQuiz", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-            if (msg != DialogResult.OK)
+            if (AdvancedSettings)
             {
-                return;
-            }
+                var msg = MessageBox.Show("Confirm selection", "SteelQuiz", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                if (msg != DialogResult.OK)
+                {
+                    return;
+                }
 
-            if (rdo_mergePrioTarget.Checked)
-            {
-                ConflictResult = ConflictResult.MergePrioTarget;
-            }
-            else if (rdo_mergePrioCurrent.Checked)
-            {
-                ConflictResult = ConflictResult.MergePrioCurrent;
-            }
-            else if (rdo_keepTarget.Checked)
-            {
-                ConflictResult = ConflictResult.KeepTarget;
+                QuizProgressConflictAdvanced adv = null;
+                foreach (var ctrl in pnl_step.Controls.OfType<QuizProgressConflictAdvanced>())
+                {
+                    adv = ctrl;
+                }
+
+                if (adv == null)
+                {
+                    throw new Exception("Cannot find QuizProgressConflictAdvanced");
+                }
+
+                if (adv.rdo_mergePrioTarget.Checked)
+                {
+                    ConflictResult = ConflictResult.MergePrioTarget;
+                }
+                else if (adv.rdo_mergePrioCurrent.Checked)
+                {
+                    ConflictResult = ConflictResult.MergePrioCurrent;
+                }
+                else if (adv.rdo_keepTarget.Checked)
+                {
+                    ConflictResult = ConflictResult.KeepTarget;
+                }
+                else
+                {
+                    ConflictResult = ConflictResult.OverwriteTarget;
+                }
             }
             else
             {
-                ConflictResult = ConflictResult.OverwriteTarget;
+                // use recommended option
+                ConflictResult = ConflictResult.MergePrioTarget;
             }
 
             DialogResult = DialogResult.OK;
@@ -94,6 +116,45 @@ namespace SteelQuiz.Preferences
         private void Btn_cancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
+        }
+
+        private void Btn_advancedSimple_Click(object sender, EventArgs e)
+        {
+            AdvancedSettings = !AdvancedSettings;
+
+            if (AdvancedSettings)
+            {
+                btn_advancedSimple.Text = "Recommended";
+
+                bool found = false;
+                foreach (var ctrl in pnl_step.Controls.OfType<UserControl>())
+                {
+                    if (ctrl.GetType() == typeof(QuizProgressConflictAdvanced))
+                    {
+                        ctrl.Show();
+                        ctrl.BringToFront();
+                        found = true;
+                    }
+                }
+
+                if (!found)
+                {
+                    var ctrl = new QuizProgressConflictAdvanced();
+                    pnl_step.Controls.Add(ctrl);
+                    ctrl.BringToFront();
+                }
+            }
+            else
+            {
+                btn_advancedSimple.Text = "Advanced";
+                foreach (var ctrl in pnl_step.Controls.OfType<UserControl>())
+                {
+                    if (ctrl.GetType() == typeof(QuizProgressConflictAdvanced))
+                    {
+                        ctrl.Hide();
+                    }
+                }
+            }
         }
     }
 }

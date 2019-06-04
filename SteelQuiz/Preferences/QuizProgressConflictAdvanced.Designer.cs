@@ -1,4 +1,22 @@
-﻿namespace SteelQuiz.Preferences
+﻿/*
+    SteelQuiz - A quiz program designed to make learning words easier
+    Copyright (C) 2019  Steel9Apps
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
+namespace SteelQuiz.Preferences
 {
     partial class QuizProgressConflictAdvanced
     {
@@ -92,7 +110,7 @@
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.White;
             this.Name = "QuizProgressConflictAdvanced";
-            this.Size = new System.Drawing.Size(663, 153);
+            this.Size = new System.Drawing.Size(657, 208);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -100,9 +118,9 @@
 
         #endregion
 
-        private System.Windows.Forms.RadioButton rdo_mergePrioCurrent;
-        private System.Windows.Forms.RadioButton rdo_mergePrioTarget;
-        private System.Windows.Forms.RadioButton rdo_overwriteTarget;
-        private System.Windows.Forms.RadioButton rdo_keepTarget;
+        internal System.Windows.Forms.RadioButton rdo_mergePrioCurrent;
+        internal System.Windows.Forms.RadioButton rdo_mergePrioTarget;
+        internal System.Windows.Forms.RadioButton rdo_overwriteTarget;
+        internal System.Windows.Forms.RadioButton rdo_keepTarget;
     }
 }
