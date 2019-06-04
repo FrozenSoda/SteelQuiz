@@ -92,8 +92,29 @@ namespace SteelQuiz
             var duplicatePairs = unfixedQuizProgDataList.GroupBy(x => x.QuizGUID);
             foreach (var duplicatePair in duplicatePairs)
             {
-                var best = duplicatePair.OrderByDescending(x => x.GetSuccessRateStrict()).ElementAt(0);
-                result.QuizProgDatas.Add(best);
+                var best = duplicatePair.OrderByDescending(x => x.GetSuccessRateStrict()).Take(2);
+
+                if (best.ElementAt(0).GetSuccessRateStrict() == best.ElementAt(1).GetSuccessRateStrict())
+                {
+                    // prioritize prog1
+
+                    if (prog1.QuizProgDatas.Contains(best.ElementAt(0)))
+                    {
+                        result.QuizProgDatas.Add(best.ElementAt(0));
+                    }
+                    else if (prog1.QuizProgDatas.Contains(best.ElementAt(1)))
+                    {
+                        result.QuizProgDatas.Add(best.ElementAt(1));
+                    }
+                    else
+                    {
+                        throw new Exception("Cannot find duplicate quiz progress data in prog1");
+                    }
+                }
+                else
+                {
+                    result.QuizProgDatas.Add(best.ElementAt(0));
+                }
             }
 
             return result;
