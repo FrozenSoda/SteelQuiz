@@ -2,6 +2,7 @@ v3.2.0-pre3 (v3.2.0.4):
 - Much more user friendly (quiz) progress path change
 - When changing progress path, you can now merge the files if a progress file already exists at the destination
 - Fixed issues with Intelligent Learning calculations
+- The development update channel is now used as default, for pre-releases
 - Bug fixes and improvements
 
 v3.2.0-pre2 (v3.2.0.2):
