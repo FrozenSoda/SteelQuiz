@@ -78,7 +78,7 @@ namespace SteelQuiz.QuizProgressData
             QuizGUID = quiz.GUID;
         }
 
-        public double SuccessRate()
+        public double GetSuccessRate()
         {
             return WordProgDatas.Sum(x => x.GetSuccessRate()) / WordProgDatas.Count();
         }

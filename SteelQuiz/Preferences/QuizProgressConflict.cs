@@ -31,6 +31,18 @@ namespace SteelQuiz.Preferences
     public enum ConflictResult
     {
         /// <summary>
+        /// Tries to merge both progress data files, but prioritizes progress data from the file in the selected folder, if it can't decide which 
+        /// progress data to keep for a specific quiz
+        /// </summary>
+        MergePrioTarget,
+
+        /// <summary>
+        /// Tries to merge both progress data files, but prioritizes progress data from the file in the current folder, if it can't decide which 
+        /// progress data to keep for a specific quiz
+        /// </summary>
+        MergePrioCurrent,
+
+        /// <summary>
         /// Remove the currently used progress data file, and use the one in the selected folder
         /// </summary>
         KeepTarget,
@@ -53,13 +65,21 @@ namespace SteelQuiz.Preferences
 
         private void Btn_continue_Click(object sender, EventArgs e)
         {
-            var msg = MessageBox.Show("Confirm action", "SteelQuiz", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+            var msg = MessageBox.Show("Confirm selection", "SteelQuiz", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
             if (msg != DialogResult.OK)
             {
                 return;
             }
 
-            if (rdo_keepTarget.Checked)
+            if (rdo_mergePrioTarget.Checked)
+            {
+                ConflictResult = ConflictResult.MergePrioTarget;
+            }
+            else if (rdo_mergePrioCurrent.Checked)
+            {
+                ConflictResult = ConflictResult.MergePrioCurrent;
+            }
+            else if (rdo_keepTarget.Checked)
             {
                 ConflictResult = ConflictResult.KeepTarget;
             }
@@ -67,6 +87,7 @@ namespace SteelQuiz.Preferences
             {
                 ConflictResult = ConflictResult.OverwriteTarget;
             }
+
             DialogResult = DialogResult.OK;
         }
 

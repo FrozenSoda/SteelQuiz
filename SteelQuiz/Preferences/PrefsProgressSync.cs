@@ -95,7 +95,25 @@ namespace SteelQuiz.Preferences
                     return false;
                 }
 
-                if (conflictSolution.ConflictResult == ConflictResult.KeepTarget)
+                if (conflictSolution.ConflictResult == ConflictResult.MergePrioTarget)
+                {
+                    var merge = QuizProgressMerger.Merge(newPath, oldPath, newPath);
+                    if (!merge)
+                    {
+                        return false;
+                    }
+                    File.Delete(oldPath);
+                }
+                else if (conflictSolution.ConflictResult == ConflictResult.MergePrioCurrent)
+                {
+                    var merge = QuizProgressMerger.Merge(oldPath, newPath, newPath);
+                    if (!merge)
+                    {
+                        return false;
+                    }
+                    File.Delete(oldPath);
+                }
+                else if (conflictSolution.ConflictResult == ConflictResult.KeepTarget)
                 {
                     bkp = QuizCore.BackupFile(oldPath);
                     if (!bkp)

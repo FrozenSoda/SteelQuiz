@@ -52,8 +52,8 @@ namespace SteelQuiz.Preferences
             this.rdo_overwriteTarget = new System.Windows.Forms.RadioButton();
             this.btn_continue = new System.Windows.Forms.Button();
             this.btn_cancel = new System.Windows.Forms.Button();
-            this.rdo_mergePrioDataSelectedFolder = new System.Windows.Forms.RadioButton();
-            this.rdo_mergePrioDataCurrentFolder = new System.Windows.Forms.RadioButton();
+            this.rdo_mergePrioTarget = new System.Windows.Forms.RadioButton();
+            this.rdo_mergePrioCurrent = new System.Windows.Forms.RadioButton();
             this.btn_help = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -118,28 +118,27 @@ namespace SteelQuiz.Preferences
             this.btn_cancel.UseVisualStyleBackColor = false;
             this.btn_cancel.Click += new System.EventHandler(this.Btn_cancel_Click);
             // 
-            // rdo_mergePrioDataSelectedFolder
+            // rdo_mergePrioTarget
             // 
-            this.rdo_mergePrioDataSelectedFolder.Checked = true;
-            this.rdo_mergePrioDataSelectedFolder.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdo_mergePrioDataSelectedFolder.Location = new System.Drawing.Point(12, 81);
-            this.rdo_mergePrioDataSelectedFolder.Name = "rdo_mergePrioDataSelectedFolder";
-            this.rdo_mergePrioDataSelectedFolder.Size = new System.Drawing.Size(327, 68);
-            this.rdo_mergePrioDataSelectedFolder.TabIndex = 6;
-            this.rdo_mergePrioDataSelectedFolder.Text = "Attempt to merge the files.\r\nPrioritize data from the file in the selected folder" +
-    ".";
-            this.rdo_mergePrioDataSelectedFolder.UseVisualStyleBackColor = true;
+            this.rdo_mergePrioTarget.Checked = true;
+            this.rdo_mergePrioTarget.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdo_mergePrioTarget.Location = new System.Drawing.Point(12, 81);
+            this.rdo_mergePrioTarget.Name = "rdo_mergePrioTarget";
+            this.rdo_mergePrioTarget.Size = new System.Drawing.Size(327, 68);
+            this.rdo_mergePrioTarget.TabIndex = 6;
+            this.rdo_mergePrioTarget.Text = "Merge the files.\r\nPrioritize data from the file in the selected folder (recommend" +
+    "ed)";
+            this.rdo_mergePrioTarget.UseVisualStyleBackColor = true;
             // 
-            // rdo_mergePrioDataCurrentFolder
+            // rdo_mergePrioCurrent
             // 
-            this.rdo_mergePrioDataCurrentFolder.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdo_mergePrioDataCurrentFolder.Location = new System.Drawing.Point(12, 155);
-            this.rdo_mergePrioDataCurrentFolder.Name = "rdo_mergePrioDataCurrentFolder";
-            this.rdo_mergePrioDataCurrentFolder.Size = new System.Drawing.Size(327, 67);
-            this.rdo_mergePrioDataCurrentFolder.TabIndex = 7;
-            this.rdo_mergePrioDataCurrentFolder.Text = "Attempt to merge the files.\r\nPrioritize data from the file in the current folder." +
-    "";
-            this.rdo_mergePrioDataCurrentFolder.UseVisualStyleBackColor = true;
+            this.rdo_mergePrioCurrent.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdo_mergePrioCurrent.Location = new System.Drawing.Point(12, 155);
+            this.rdo_mergePrioCurrent.Name = "rdo_mergePrioCurrent";
+            this.rdo_mergePrioCurrent.Size = new System.Drawing.Size(327, 67);
+            this.rdo_mergePrioCurrent.TabIndex = 7;
+            this.rdo_mergePrioCurrent.Text = "Merge the files.\r\nPrioritize data from the file in the current folder.";
+            this.rdo_mergePrioCurrent.UseVisualStyleBackColor = true;
             // 
             // btn_help
             // 
@@ -149,9 +148,9 @@ namespace SteelQuiz.Preferences
             this.btn_help.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_help.Location = new System.Drawing.Point(137, 249);
             this.btn_help.Name = "btn_help";
-            this.btn_help.Size = new System.Drawing.Size(110, 38);
+            this.btn_help.Size = new System.Drawing.Size(136, 38);
             this.btn_help.TabIndex = 8;
-            this.btn_help.Text = "Help";
+            this.btn_help.Text = "Help, I don\'t know";
             this.btn_help.UseVisualStyleBackColor = false;
             // 
             // QuizProgressConflict
@@ -161,8 +160,8 @@ namespace SteelQuiz.Preferences
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.ClientSize = new System.Drawing.Size(681, 299);
             this.Controls.Add(this.btn_help);
-            this.Controls.Add(this.rdo_mergePrioDataCurrentFolder);
-            this.Controls.Add(this.rdo_mergePrioDataSelectedFolder);
+            this.Controls.Add(this.rdo_mergePrioCurrent);
+            this.Controls.Add(this.rdo_mergePrioTarget);
             this.Controls.Add(this.btn_cancel);
             this.Controls.Add(this.btn_continue);
             this.Controls.Add(this.rdo_overwriteTarget);
@@ -188,8 +187,8 @@ namespace SteelQuiz.Preferences
         private System.Windows.Forms.RadioButton rdo_overwriteTarget;
         private System.Windows.Forms.Button btn_continue;
         private System.Windows.Forms.Button btn_cancel;
-        private System.Windows.Forms.RadioButton rdo_mergePrioDataSelectedFolder;
-        private System.Windows.Forms.RadioButton rdo_mergePrioDataCurrentFolder;
+        private System.Windows.Forms.RadioButton rdo_mergePrioTarget;
+        private System.Windows.Forms.RadioButton rdo_mergePrioCurrent;
         private System.Windows.Forms.Button btn_help;
     }
 }

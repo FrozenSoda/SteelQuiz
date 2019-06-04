@@ -29,6 +29,7 @@ namespace SteelQuiz.QuizProgressData
     public class WordProgData : ICloneable
     {
         public WordPair WordPair { get; set; }
+
         [JsonProperty]
         internal List<WordTry> WordTries { get; set; }
 
