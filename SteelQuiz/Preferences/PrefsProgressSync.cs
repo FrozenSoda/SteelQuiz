@@ -152,7 +152,7 @@ namespace SteelQuiz.Preferences
 
         private void Btn_resetToDefaults_Click(object sender, EventArgs e)
         {
-            var msg = MessageBox.Show("Reset quiz progress folder path to the default? Your current progress data will be moved to the new path", "SteelQuiz",
+            var msg = MessageBox.Show("Reset quiz progress folder path to the default? Your current progress data will be moved to the new (default) path", "SteelQuiz",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (msg == DialogResult.No)
