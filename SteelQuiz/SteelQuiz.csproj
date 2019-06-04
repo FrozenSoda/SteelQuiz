@@ -108,6 +108,12 @@
     <Compile Include="Preferences\QuizProgressConflict.Designer.cs">
       <DependentUpon>QuizProgressConflict.cs</DependentUpon>
     </Compile>
+    <Compile Include="Preferences\QuizProgressConflictAdvanced.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Preferences\QuizProgressConflictAdvanced.Designer.cs">
+      <DependentUpon>QuizProgressConflictAdvanced.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuizImport\Guide\QuizFolder.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -370,6 +376,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Preferences\QuizProgressConflict.resx">
       <DependentUpon>QuizProgressConflict.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Preferences\QuizProgressConflictAdvanced.resx">
+      <DependentUpon>QuizProgressConflictAdvanced.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuizImport\Guide\QuizFolder.resx">
       <DependentUpon>QuizFolder.cs</DependentUpon>
