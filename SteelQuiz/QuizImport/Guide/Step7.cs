@@ -29,16 +29,16 @@ using SteelQuiz.QuizData;
 
 namespace SteelQuiz.QuizImport.Guide
 {
-    public partial class Step6 : AutoThemeableUserControl
+    public partial class Step7 : AutoThemeableUserControl
     {
-        public string Language1 => txt_lang.Text;
+        public string Language2 => txt_lang.Text;
 
-        public Step6(IEnumerable<WordPair> wordPairs)
+        public Step7(IEnumerable<WordPair> wordPairs)
         {
             InitializeComponent();
             foreach (var wordPair in wordPairs)
             {
-                lst_words.Items.Add(wordPair.Word1);
+                lst_words.Items.Add(wordPair.Word2);
             }
 
             SetTheme();

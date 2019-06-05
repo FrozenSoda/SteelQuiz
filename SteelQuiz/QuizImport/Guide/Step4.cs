@@ -30,10 +30,44 @@ namespace SteelQuiz.QuizImport.Guide
 {
     public partial class Step4 : AutoThemeableUserControl
     {
+        public string QuizFolder
+        {
+            get
+            {
+                foreach (var rdo in flp_quizFolders.Controls.OfType<RadioButton>())
+                {
+                    if (rdo.Checked)
+                    {
+                        return rdo.Text;
+                    }
+                }
+
+                return null;
+            }
+        }
+
         public Step4()
         {
             InitializeComponent();
+            for (int i = 0; i < ConfigManager.Config.SyncConfig.QuizFolders.Count; ++i)
+            {
+                var folder = ConfigManager.Config.SyncConfig.QuizFolders[i];
 
+                var rdo = new RadioButton();
+                rdo.AutoSize = true;
+                rdo.MaximumSize = new Size(flp_quizFolders.Size.Width - 20, 0);
+                rdo.Text = folder;
+                rdo.Font = new Font("Segoe UI", 12);
+                if (i == 0)
+                {
+                    rdo.Checked = true;
+                }
+                else
+                {
+                    rdo.Checked = false;
+                }
+                flp_quizFolders.Controls.Add(rdo);
+            }
             SetTheme();
         }
     }

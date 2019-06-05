@@ -50,6 +50,7 @@ namespace SteelQuiz.QuizImport.Guide
         private QuizImporter.ImportSource ImportSource { get; set; }
         private bool MultipleTranslationsAsDifferentWordPairs { get; set; }
         private IEnumerable<WordPair> WordPairs { get; set; } = null;
+        private string QuizFolder { get; set; }
         private string QuizPath { get; set; }
         private string Language1 { get; set; }
         private string Language2 { get; set; }
@@ -112,6 +113,11 @@ namespace SteelQuiz.QuizImport.Guide
             else if (Step == 4)
             {
                 var uc = pnl_steps.Controls[Step] as Step4;
+                QuizFolder = uc.QuizFolder;
+            }
+            else if (Step == 5)
+            {
+                var uc = pnl_steps.Controls[Step] as Step5;
                 var quizFilename = uc.txt_quizName.Text;
                 if (quizFilename == "")
                 {
@@ -129,7 +135,7 @@ namespace SteelQuiz.QuizImport.Guide
                 }
 
 #warning add folder select
-                var quizPath = Path.Combine(QuizCore.QUIZ_FOLDER_DEFAULT, quizFilename) + QuizCore.QUIZ_EXTENSION;
+                var quizPath = Path.Combine(QuizFolder, quizFilename) + QuizCore.QUIZ_EXTENSION;
 
                 if (File.Exists(quizPath))
                 {
@@ -143,9 +149,9 @@ namespace SteelQuiz.QuizImport.Guide
 
                 QuizPath = quizPath;
             }
-            else if (Step == 5)
+            else if (Step == 6)
             {
-                var uc = pnl_steps.Controls[Step] as Step5;
+                var uc = pnl_steps.Controls[Step] as Step6;
                 if (uc.Language1 == "")
                 {
                     MessageBox.Show("Language cannot be empty", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -153,9 +159,9 @@ namespace SteelQuiz.QuizImport.Guide
                 }
                 Language1 = uc.Language1;
             }
-            else if (Step == 6)
+            else if (Step == 7)
             {
-                var uc = pnl_steps.Controls[Step] as Step6;
+                var uc = pnl_steps.Controls[Step] as Step7;
                 if (uc.Language2 == "")
                 {
                     MessageBox.Show("Language cannot be empty", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -250,15 +256,19 @@ namespace SteelQuiz.QuizImport.Guide
             }
             else if (Step == 4)
             {
-                (pnl_steps.Controls[Step] as Step4).txt_quizName.Focus();
+                (pnl_steps.Controls[Step] as Step4).Focus();
             }
             else if (Step == 5)
             {
-                (pnl_steps.Controls[Step] as Step5).txt_lang.Focus();
+                (pnl_steps.Controls[Step] as Step5).txt_quizName.Focus();
             }
             else if (Step == 6)
             {
                 (pnl_steps.Controls[Step] as Step6).txt_lang.Focus();
+            }
+            else if (Step == 7)
+            {
+                (pnl_steps.Controls[Step] as Step7).txt_lang.Focus();
             }
         }
 
@@ -303,13 +313,18 @@ namespace SteelQuiz.QuizImport.Guide
             }
             else if (step == 5)
             {
-                var step5 = new Step5(WordPairs);
+                var step5 = new Step5();
                 pnl_steps.Controls.Add(step5);
             }
             else if (step == 6)
             {
                 var step6 = new Step6(WordPairs);
                 pnl_steps.Controls.Add(step6);
+            }
+            else if (step == 7)
+            {
+                var step7 = new Step7(WordPairs);
+                pnl_steps.Controls.Add(step7);
             }
         }
 
