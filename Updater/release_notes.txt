@@ -3,6 +3,7 @@ v3.2.0-pre4 (v3.2.0.6):
 - Added buttons in the quiz folder settings, to easily move quizzes to a folder
 - Button usability improvements in quiz folder settings
 - The 'load quiz' dialog now opens in the top quiz folder as default
+- Fixed bug causing Update automatically checkbox in the update dialog not to work
 - Updated libraries
 - Bug fixes and improvements
 
