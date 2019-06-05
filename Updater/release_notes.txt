@@ -1,3 +1,11 @@
+v3.2.0-pre4 (v3.2.0.6):
+- You can now select folder destination when importing quizzes from external sources
+- Added buttons in the quiz folder settings, to easily move quizzes to a folder
+- Button usability improvements in quiz folder settings
+- The 'load quiz' dialog now opens in the top quiz folder as default
+- Updated libraries
+- Bug fixes and improvements
+
 v3.2.0-pre3 (v3.2.0.4):
 - Much more user friendly (quiz) progress path change
 - When changing progress path, you can now merge the files if a progress file already exists at the destination
