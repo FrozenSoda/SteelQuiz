@@ -28,6 +28,7 @@ using System.Windows.Forms;
 using System.IO;
 using SteelQuiz.Controls;
 using System.Diagnostics;
+using System.Threading;
 
 namespace SteelQuiz.Preferences
 {
@@ -156,6 +157,71 @@ namespace SteelQuiz.Preferences
             {
                 ParentUC.Save(true);
             });
+        }
+
+        private void Btn_moveAllQuizzesHere_Click(object sender, EventArgs e)
+        {
+            var msg = MessageBox.Show($"Move all quizzes to quiz folder '{QuizFolderPath}'?", "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (msg == DialogResult.Yes)
+            {
+                if (!Directory.Exists(QuizFolderPath))
+                {
+                    MessageBox.Show("Folder does not exist", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                ParentForm.Enabled = false;
+                var t = new Thread(() =>
+                {
+                    var success = MoveAllQuizzesToThisFolder();
+                    Invoke(new Action(() =>
+                    {
+                        ParentForm.Enabled = true;
+                        if (success)
+                        {
+                            MessageBox.Show("Move finished successfully!", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Move finished with errors", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }));
+                });
+                t.Start();
+            }
+        }
+
+        private bool MoveAllQuizzesToThisFolder()
+        {
+            bool error = false;
+
+            foreach (var quizFolder in ConfigManager.Config.SyncConfig.QuizFolders.Where(x => x != QuizFolderPath))
+            {
+                foreach (var quiz in Directory.EnumerateFiles(quizFolder, "*.steelquiz"))
+                {
+                    var dest = Path.Combine(QuizFolderPath, Path.GetFileName(quiz));
+
+                    // find appropriate file name if destination file already exists
+                    int dupCount = 0;
+                    while (File.Exists(dest))
+                    {
+                        ++dupCount;
+                        dest = Path.Combine(QuizFolderPath, Path.GetFileNameWithoutExtension(quiz) + $"_{dupCount}{Path.GetExtension(quiz)}");
+                    }
+
+                    try
+                    {
+                        File.Move(quiz, dest);
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.Print("Exception in MoveAllQuizzesToThisFolder() File.Move():\r\n\r\n" + ex.ToString());
+                        error = true;
+                    }
+                }
+            }
+
+            return !error;
         }
     }
 }

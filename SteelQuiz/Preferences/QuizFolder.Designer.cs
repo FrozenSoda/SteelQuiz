@@ -147,6 +147,7 @@
             this.btn_moveAllQuizzesHere.TabIndex = 9;
             this.btn_moveAllQuizzesHere.Text = "Move all quizzes here";
             this.btn_moveAllQuizzesHere.UseVisualStyleBackColor = false;
+            this.btn_moveAllQuizzesHere.Click += new System.EventHandler(this.Btn_moveAllQuizzesHere_Click);
             // 
             // QuizFolder
             // 
