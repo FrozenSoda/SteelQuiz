@@ -88,19 +88,13 @@ namespace SteelQuiz.Preferences
 
         private void Btn_browse_Click(object sender, EventArgs e)
         {
-            if (txt_path.Text != "" && Directory.Exists(txt_path.Text))
+            if (!Directory.Exists(QuizFolderPath))
             {
-                fbd_path.SelectedPath = txt_path.Text;
+                MessageBox.Show("Folder does not exist", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            else
-            {
-                fbd_path.SelectedPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            }
-            
-            if (fbd_path.ShowDialog() == DialogResult.OK)
-            {
-                txt_path.Text = fbd_path.SelectedPath;
-            }
+
+            Process.Start("explorer.exe", QuizFolderPath);
         }
 
         private void Txt_path_Leave(object sender, EventArgs e)
@@ -215,6 +209,7 @@ namespace SteelQuiz.Preferences
                     }
                     catch (Exception ex)
                     {
+#warning log error perhaps
                         Debug.Print("Exception in MoveAllQuizzesToThisFolder() File.Move():\r\n\r\n" + ex.ToString());
                         error = true;
                     }
@@ -222,6 +217,23 @@ namespace SteelQuiz.Preferences
             }
 
             return !error;
+        }
+
+        private void Btn_browsePath_Click(object sender, EventArgs e)
+        {
+            if (txt_path.Text != "" && Directory.Exists(txt_path.Text))
+            {
+                fbd_path.SelectedPath = txt_path.Text;
+            }
+            else
+            {
+                fbd_path.SelectedPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            }
+
+            if (fbd_path.ShowDialog() == DialogResult.OK)
+            {
+                txt_path.Text = fbd_path.SelectedPath;
+            }
         }
     }
 }

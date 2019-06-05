@@ -37,6 +37,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.pnl_drag = new System.Windows.Forms.Panel();
             this.btn_moveAllQuizzesHere = new System.Windows.Forms.Button();
+            this.btn_browsePath = new System.Windows.Forms.Button();
             this.pnl_drag.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,7 +48,7 @@
             this.txt_path.ForeColor = System.Drawing.Color.White;
             this.txt_path.Location = new System.Drawing.Point(3, 12);
             this.txt_path.Name = "txt_path";
-            this.txt_path.Size = new System.Drawing.Size(574, 22);
+            this.txt_path.Size = new System.Drawing.Size(503, 22);
             this.txt_path.TabIndex = 0;
             this.txt_path.Leave += new System.EventHandler(this.Txt_path_Leave);
             // 
@@ -149,11 +150,27 @@
             this.btn_moveAllQuizzesHere.UseVisualStyleBackColor = false;
             this.btn_moveAllQuizzesHere.Click += new System.EventHandler(this.Btn_moveAllQuizzesHere_Click);
             // 
+            // btn_browsePath
+            // 
+            this.btn_browsePath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.btn_browsePath.FlatAppearance.BorderSize = 0;
+            this.btn_browsePath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_browsePath.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_browsePath.ForeColor = System.Drawing.Color.White;
+            this.btn_browsePath.Location = new System.Drawing.Point(512, 12);
+            this.btn_browsePath.Name = "btn_browsePath";
+            this.btn_browsePath.Size = new System.Drawing.Size(65, 22);
+            this.btn_browsePath.TabIndex = 10;
+            this.btn_browsePath.Text = "...";
+            this.btn_browsePath.UseVisualStyleBackColor = false;
+            this.btn_browsePath.Click += new System.EventHandler(this.Btn_browsePath_Click);
+            // 
             // QuizFolder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.Controls.Add(this.btn_browsePath);
             this.Controls.Add(this.btn_moveAllQuizzesHere);
             this.Controls.Add(this.pnl_drag);
             this.Controls.Add(this.btn_browse);
@@ -180,5 +197,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel pnl_drag;
         private System.Windows.Forms.Button btn_moveAllQuizzesHere;
+        private System.Windows.Forms.Button btn_browsePath;
     }
 }
