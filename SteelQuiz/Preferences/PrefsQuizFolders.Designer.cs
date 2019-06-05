@@ -47,9 +47,9 @@ namespace SteelQuiz.Preferences
         private void InitializeComponent()
         {
             this.pnl_quizFolders = new System.Windows.Forms.Panel();
+            this.dflp_quizFolders = new SteelQuiz.Controls.DraggableFlowLayoutPanel();
             this.btn_add = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.dflp_quizFolders = new SteelQuiz.Controls.DraggableFlowLayoutPanel();
             this.pnl_quizFolders.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,6 +64,13 @@ namespace SteelQuiz.Preferences
             this.pnl_quizFolders.Size = new System.Drawing.Size(635, 433);
             this.pnl_quizFolders.TabIndex = 3;
             // 
+            // dflp_quizFolders
+            // 
+            this.dflp_quizFolders.Location = new System.Drawing.Point(15, 40);
+            this.dflp_quizFolders.Name = "dflp_quizFolders";
+            this.dflp_quizFolders.Size = new System.Drawing.Size(617, 393);
+            this.dflp_quizFolders.TabIndex = 3;
+            // 
             // btn_add
             // 
             this.btn_add.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
@@ -71,9 +78,9 @@ namespace SteelQuiz.Preferences
             this.btn_add.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_add.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_add.ForeColor = System.Drawing.Color.White;
-            this.btn_add.Location = new System.Drawing.Point(470, 11);
+            this.btn_add.Location = new System.Drawing.Point(468, 3);
             this.btn_add.Name = "btn_add";
-            this.btn_add.Size = new System.Drawing.Size(124, 23);
+            this.btn_add.Size = new System.Drawing.Size(124, 31);
             this.btn_add.TabIndex = 2;
             this.btn_add.Text = "Add";
             this.btn_add.UseVisualStyleBackColor = false;
@@ -89,13 +96,6 @@ namespace SteelQuiz.Preferences
             this.label4.Size = new System.Drawing.Size(118, 25);
             this.label4.TabIndex = 0;
             this.label4.Text = "Quiz Folders";
-            // 
-            // dflp_quizFolders
-            // 
-            this.dflp_quizFolders.Location = new System.Drawing.Point(15, 40);
-            this.dflp_quizFolders.Name = "dflp_quizFolders";
-            this.dflp_quizFolders.Size = new System.Drawing.Size(617, 393);
-            this.dflp_quizFolders.TabIndex = 3;
             // 
             // PrefsQuizFolders
             // 

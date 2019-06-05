@@ -77,7 +77,7 @@ namespace SteelQuiz.Preferences
         private void Btn_del_Click(object sender, EventArgs e)
         {
             var msg = MessageBox.Show("Remove quiz folder from list?\r\n\r\nWarning: Progress data for the quizzes in this folder might be lost in the future as the " +
-                "quizzes will not be tracked by SteelQuiz anymore. This might happen during clean ups and upgrades for instance.\r\n\r\nContinue?", "Remove Quiz Folder - SteelQuiz",
+                "quizzes will not be tracked by SteelQuiz anymore. This might happen during upgrades for instance.\r\n\r\nContinue?", "Remove Quiz Folder - SteelQuiz",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
             if (msg == DialogResult.Yes)
             {
