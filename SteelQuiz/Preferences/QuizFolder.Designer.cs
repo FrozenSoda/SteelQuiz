@@ -36,6 +36,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.pnl_drag = new System.Windows.Forms.Panel();
+            this.btn_moveAllQuizzesHere = new System.Windows.Forms.Button();
             this.pnl_drag.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -133,11 +134,26 @@
             this.pnl_drag.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseMove);
             this.pnl_drag.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseUp);
             // 
+            // btn_moveAllQuizzesHere
+            // 
+            this.btn_moveAllQuizzesHere.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.btn_moveAllQuizzesHere.FlatAppearance.BorderSize = 0;
+            this.btn_moveAllQuizzesHere.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_moveAllQuizzesHere.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_moveAllQuizzesHere.ForeColor = System.Drawing.Color.White;
+            this.btn_moveAllQuizzesHere.Location = new System.Drawing.Point(180, 39);
+            this.btn_moveAllQuizzesHere.Name = "btn_moveAllQuizzesHere";
+            this.btn_moveAllQuizzesHere.Size = new System.Drawing.Size(137, 33);
+            this.btn_moveAllQuizzesHere.TabIndex = 9;
+            this.btn_moveAllQuizzesHere.Text = "Move all quizzes here";
+            this.btn_moveAllQuizzesHere.UseVisualStyleBackColor = false;
+            // 
             // QuizFolder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.Controls.Add(this.btn_moveAllQuizzesHere);
             this.Controls.Add(this.pnl_drag);
             this.Controls.Add(this.btn_browse);
             this.Controls.Add(this.btn_del);
@@ -162,5 +178,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel pnl_drag;
+        private System.Windows.Forms.Button btn_moveAllQuizzesHere;
     }
 }
