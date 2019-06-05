@@ -134,7 +134,6 @@ namespace SteelQuiz.QuizImport.Guide
                     return;
                 }
 
-#warning add folder select
                 var quizPath = Path.Combine(QuizFolder, quizFilename) + QuizCore.QUIZ_EXTENSION;
 
                 if (File.Exists(quizPath))
@@ -218,7 +217,7 @@ namespace SteelQuiz.QuizImport.Guide
                 btn_prevCancel.Text = "Cancel";
             }
 
-            if (Step == 6)
+            if (Step == 7)
             {
                 btn_next.Text = "Finish";
             }

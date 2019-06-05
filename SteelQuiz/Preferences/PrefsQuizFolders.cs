@@ -42,7 +42,6 @@ namespace SteelQuiz.Preferences
 
             LoadPreferences();
             SetTheme();
-            skipConfigApply = false;
         }
 
         public void LoadPreferences()
@@ -51,6 +50,7 @@ namespace SteelQuiz.Preferences
             {
                 dflp_quizFolders.Controls.Add(new QuizFolder(this, quizFolder));
             }
+            skipConfigApply = false;
         }
 
         /// <summary>

@@ -37,7 +37,6 @@ namespace SteelQuiz.Preferences
             InitializeComponent();
 
             LoadPreferences();
-            skipConfigApply = false;
             SetTheme();
         }
 
@@ -51,10 +50,16 @@ namespace SteelQuiz.Preferences
             {
                 rdo_returnToWelcome.Checked = true;
             }
+            skipConfigApply = false;
         }
 
         private void Rdo_closeApp_CheckedChanged(object sender, EventArgs e)
         {
+            if (skipConfigApply)
+            {
+                return;
+            }
+
             ConfigManager.Config.QuizEditorConfig.CloseApplicationOnEditorClose = rdo_closeApp.Checked;
             ConfigManager.SaveConfig();
         }
