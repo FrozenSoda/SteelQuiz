@@ -36,7 +36,7 @@ namespace SteelQuiz.Tests
         {
             var progRoot1 = new QuizProgDataRoot(MetaData.QUIZ_FILE_FORMAT_VERSION);
 
-            var quizProg1 = new QuizProgData(new QuizData.Quiz("lang1", "lang2", MetaData.QUIZ_FILE_FORMAT_VERSION));
+            var quizProg1 = new QuizProgData(new QuizData.Quiz("lang1", "lang2", MetaData.QUIZ_FILE_FORMAT_VERSION, Guid.Empty));
             var wp1 = new WordPair("What's 1 + 1?", "2", StringComp.Rules.None, null, new List<string>() { "two" });
             var wpProg1 = new WordProgData(wp1);
             wpProg1.AddWordTry(new WordTry(true));
@@ -50,14 +50,14 @@ namespace SteelQuiz.Tests
 
             var progRoot2 = new QuizProgDataRoot(MetaData.QUIZ_FILE_FORMAT_VERSION);
 
-            var quizProg2 = new QuizProgData(new QuizData.Quiz("lang1", "lang2", MetaData.QUIZ_FILE_FORMAT_VERSION));
+            var quizProg2 = new QuizProgData(new QuizData.Quiz("lang1", "lang2", MetaData.QUIZ_FILE_FORMAT_VERSION, Guid.Empty));
             var wp2 = new WordPair("What's 1 + 1?", "2", StringComp.Rules.None, null, new List<string>() { "two" });
             var wpProg2 = new WordProgData(wp2);
             wpProg2.AddWordTry(new WordTry(true));
             wpProg2.AddWordTry(new WordTry(false));
             wpProg2.AddWordTry(new WordTry(true));
-            wpProg1.AddWordTry(new WordTry(true));
-            wpProg1.AddWordTry(new WordTry(true));
+            wpProg2.AddWordTry(new WordTry(true));
+            wpProg2.AddWordTry(new WordTry(true));
 
             quizProg2.WordProgDatas.Add(wpProg2);
             progRoot2.QuizProgDatas.Add(quizProg2);
@@ -65,9 +65,58 @@ namespace SteelQuiz.Tests
             var merged = QuizProgressMerger.Merge(progRoot1, progRoot2);
 
             /*
+             * Only one quiz progress data should be selected
+             */ 
+            Assert.IsTrue(merged.QuizProgDatas.Count == 1, "More than one quiz progress data was selected");
+
+            /*
              * The quiz progress data with the best success rate should be selected
              */ 
-            Assert.IsTrue(merged.QuizProgDatas[0].WordProgDatas[0].GetSuccessRateStrict() == 1);
+            Assert.IsTrue(merged.QuizProgDatas[0].WordProgDatas[0].GetSuccessRateStrict() == 1, "The best quiz progress data was not selected");
+        }
+
+        [TestMethod()]
+        public void MergeTest2()
+        {
+            var progRoot1 = new QuizProgDataRoot(MetaData.QUIZ_FILE_FORMAT_VERSION);
+
+            var quizProg1 = new QuizProgData(new QuizData.Quiz("lang1", "lang2", MetaData.QUIZ_FILE_FORMAT_VERSION, Guid.Empty));
+            var wp1 = new WordPair("What's 2 + 2?", "4", StringComp.Rules.None, null, new List<string>() { "two" });
+            var wpProg1 = new WordProgData(wp1);
+            wpProg1.AddWordTry(new WordTry(true));
+            wpProg1.AddWordTry(new WordTry(true));
+            wpProg1.AddWordTry(new WordTry(true));
+            wpProg1.AddWordTry(new WordTry(true));
+            wpProg1.AddWordTry(new WordTry(true));
+
+            quizProg1.WordProgDatas.Add(wpProg1);
+            progRoot1.QuizProgDatas.Add(quizProg1);
+
+            var progRoot2 = new QuizProgDataRoot(MetaData.QUIZ_FILE_FORMAT_VERSION);
+
+            var quizProg2 = new QuizProgData(new QuizData.Quiz("lang1", "lang2", MetaData.QUIZ_FILE_FORMAT_VERSION, Guid.Empty));
+            var wp2 = new WordPair("What's 1 + 1?", "2", StringComp.Rules.None, null, new List<string>() { "two" });
+            var wpProg2 = new WordProgData(wp2);
+            wpProg2.AddWordTry(new WordTry(true));
+            wpProg2.AddWordTry(new WordTry(true));
+            wpProg2.AddWordTry(new WordTry(true));
+            wpProg2.AddWordTry(new WordTry(true));
+            wpProg2.AddWordTry(new WordTry(true));
+
+            quizProg2.WordProgDatas.Add(wpProg2);
+            progRoot2.QuizProgDatas.Add(quizProg2);
+
+            var merged = QuizProgressMerger.Merge(progRoot1, progRoot2);
+
+            /*
+             * Only one quiz progress data should be selected
+             */
+            Assert.IsTrue(merged.QuizProgDatas.Count == 1, "More than one quiz progress data was selected");
+
+            /*
+             * The first quiz progress data should be selected, as it has priority
+             */
+            Assert.IsTrue(merged.QuizProgDatas[0].WordProgDatas[0].WordPair.Word1 == "What's 2 + 2?", "The first quiz progress data did not have priority");
         }
     }
 }
