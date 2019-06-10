@@ -114,7 +114,7 @@ namespace SteelQuiz.Tests
             Assert.IsTrue(merged.QuizProgDatas.Count == 1, "More than one quiz progress data was selected");
 
             /*
-             * The first quiz progress data should be selected, as it has priority
+             * The first quiz progress data should be selected when the progress is equal, as it has priority
              */
             Assert.IsTrue(merged.QuizProgDatas[0].WordProgDatas[0].WordPair.Word1 == "What's 2 + 2?", "The first quiz progress data did not have priority");
         }
