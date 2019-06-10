@@ -32,7 +32,7 @@ namespace SteelQuiz.Tests
     public class QuizProgressMergerTests
     {
         [TestMethod()]
-        public void MergeTest1()
+        public void Merge_BestProgressSelectionTest()
         {
             var progRoot1 = new QuizProgDataRoot(MetaData.QUIZ_FILE_FORMAT_VERSION);
 
@@ -76,7 +76,7 @@ namespace SteelQuiz.Tests
         }
 
         [TestMethod()]
-        public void MergeTest2()
+        public void Merge_EqualProgressPriorityTest()
         {
             var progRoot1 = new QuizProgDataRoot(MetaData.QUIZ_FILE_FORMAT_VERSION);
 
