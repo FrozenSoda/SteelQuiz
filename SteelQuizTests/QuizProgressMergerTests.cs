@@ -1,0 +1,73 @@
+﻿/*
+    SteelQuiz - A quiz program designed to make learning words easier
+    Copyright (C) 2019  Steel9Apps
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SteelQuiz;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using SteelQuiz.QuizProgressData;
+using SteelQuiz.QuizData;
+
+namespace SteelQuiz.Tests
+{
+    [TestClass()]
+    public class QuizProgressMergerTests
+    {
+        [TestMethod()]
+        public void MergeTest1()
+        {
+            var progRoot1 = new QuizProgDataRoot(MetaData.QUIZ_FILE_FORMAT_VERSION);
+
+            var quizProg1 = new QuizProgData(new QuizData.Quiz("lang1", "lang2", MetaData.QUIZ_FILE_FORMAT_VERSION));
+            var wp1 = new WordPair("What's 1 + 1?", "2", StringComp.Rules.None, null, new List<string>() { "two" });
+            var wpProg1 = new WordProgData(wp1);
+            wpProg1.AddWordTry(new WordTry(true));
+            wpProg1.AddWordTry(new WordTry(true));
+            wpProg1.AddWordTry(new WordTry(true));
+            wpProg1.AddWordTry(new WordTry(true));
+            wpProg1.AddWordTry(new WordTry(true));
+
+            quizProg1.WordProgDatas.Add(wpProg1);
+            progRoot1.QuizProgDatas.Add(quizProg1);
+
+            var progRoot2 = new QuizProgDataRoot(MetaData.QUIZ_FILE_FORMAT_VERSION);
+
+            var quizProg2 = new QuizProgData(new QuizData.Quiz("lang1", "lang2", MetaData.QUIZ_FILE_FORMAT_VERSION));
+            var wp2 = new WordPair("What's 1 + 1?", "2", StringComp.Rules.None, null, new List<string>() { "two" });
+            var wpProg2 = new WordProgData(wp2);
+            wpProg2.AddWordTry(new WordTry(true));
+            wpProg2.AddWordTry(new WordTry(false));
+            wpProg2.AddWordTry(new WordTry(true));
+            wpProg1.AddWordTry(new WordTry(true));
+            wpProg1.AddWordTry(new WordTry(true));
+
+            quizProg2.WordProgDatas.Add(wpProg2);
+            progRoot2.QuizProgDatas.Add(quizProg2);
+
+            var merged = QuizProgressMerger.Merge(progRoot1, progRoot2);
+
+            /*
+             * The quiz progress data with the best success rate should be selected
+             */ 
+            Assert.IsTrue(merged.QuizProgDatas[0].WordProgDatas[0].GetSuccessRateStrict() == 1);
+        }
+    }
+}

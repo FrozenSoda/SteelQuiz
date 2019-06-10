@@ -73,7 +73,7 @@ namespace SteelQuiz
         /// <param name="prog1">The first QuizProgDataRoot to merge. This one has priority over prog2</param>
         /// <param name="prog2">The second QuizProgDataRoot to merge</param>
         /// <returns></returns>
-        private static QuizProgDataRoot Merge(QuizProgDataRoot prog1, QuizProgDataRoot prog2)
+        public static QuizProgDataRoot Merge(QuizProgDataRoot prog1, QuizProgDataRoot prog2)
         {
             var result = new QuizProgDataRoot(MetaData.QUIZ_FILE_FORMAT_VERSION);
             var unfixedQuizProgDataList = new List<QuizProgData>();
