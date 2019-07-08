@@ -78,7 +78,7 @@ namespace SteelQuiz
 
             SetControlStates();
 
-            if (ConfigManager.Config.SyncWin10Theme)
+            if (ConfigManager.Config.SyncWin10Theme && Program.Win10AppThemeSupported())
             {
                 PullWin10Theme();
 
@@ -130,12 +130,20 @@ namespace SteelQuiz
         {
             foreach (var frm in Application.OpenForms.OfType<AutoThemeableForm>())
             {
-                frm.SetTheme();
+                // Call the potentially overriden SetTheme() method
+                dynamic frmT = Convert.ChangeType(frm, frm.GetType());
+                frmT.SetTheme();
+
+                //frm.SetTheme();
             }
 
             foreach (var uc in Application.OpenForms.OfType<AutoThemeableUserControl>())
             {
-                uc.SetTheme();
+                // Call the potentially overriden SetTheme() method
+                dynamic ucT = Convert.ChangeType(uc, uc.GetType());
+                ucT.SetTheme();
+
+                //uc.SetTheme();
             }
 
             this.SetTheme();
