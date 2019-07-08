@@ -282,6 +282,7 @@ namespace SteelQuiz
 
         public void OpenQuizEditor(Quiz quiz = null, string quizPath = null)
         {
+#warning theme monitor stops running
             Hide();
             Program.OpenQuizEditor(quiz, quizPath);
         }
