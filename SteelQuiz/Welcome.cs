@@ -78,9 +78,12 @@ namespace SteelQuiz
 
             SetControlStates();
 
-            if (ConfigManager.Config.SyncWin10Theme && Program.Win10AppThemeSupported())
+            if (Program.Win10AppThemeSupported())
             {
-                PullWin10Theme();
+                if (ConfigManager.Config.SyncWin10Theme)
+                {
+                    PullWin10Theme();
+                }
 
                 themeMonitor = new RegistryMonitor(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize");
                 themeMonitor.RegChanged += ThemeMonitor_RegChanged;
