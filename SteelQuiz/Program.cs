@@ -23,6 +23,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AutoUpdaterDotNET;
+using Microsoft.Win32;
 using SteelQuiz.QuizData;
 using SteelQuiz.QuizEditor;
 using SteelQuiz.QuizPractise;
@@ -66,6 +67,66 @@ namespace SteelQuiz
             ConfigManager.Configure();
 
             Application.Run(new TermsOfUse());
+        }
+
+        /// <summary>
+        /// Checks if the OS supports global app themes (as in newer versions of Windows 10)
+        /// </summary>
+        /// <returns>True if the OS supports global app themes, otherwise false </returns>
+        public static bool Win10AppThemeSupported()
+        {
+            using (var key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize"))
+            {
+                if (key == null)
+                {
+                    return false;
+                }
+
+                object lightObj = key.GetValue("AppsUseLightTheme");
+
+                if (lightObj == null)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Gets the Windows 10 app theme currently being used
+        /// </summary>
+        /// <returns>If Windows version supports app themes, returns the set theme. Otherwise, returns null</returns>
+        public static ThemeManager.ThemeCore.Theme? GetWin10Theme()
+        {
+            ThemeManager.ThemeCore.Theme theme;
+            using (var key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize"))
+            {
+                if (key == null)
+                {
+                    return null;
+                }
+
+                object lightObj = key.GetValue("AppsUseLightTheme");
+
+                if (lightObj == null)
+                {
+                    // User don't have Windows 10, or the Windows 10 build is too old for app theme
+                    return null;
+                }
+
+                bool light = Convert.ToBoolean((int)lightObj);
+                if (light)
+                {
+                    theme = ThemeManager.ThemeCore.Theme.Light;
+                }
+                else
+                {
+                    theme = ThemeManager.ThemeCore.Theme.Dark;
+                }
+            }
+
+            return theme;
         }
 
         public static bool CloseQuizEditors()

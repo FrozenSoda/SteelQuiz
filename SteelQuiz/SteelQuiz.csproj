@@ -326,6 +326,7 @@
     <Compile Include="QuizCore.cs" />
     <Compile Include="ConfigData\Config.cs" />
     <Compile Include="QuizPractise\StringComp.cs" />
+    <Compile Include="ThirdParty\RegistryMonitor.cs" />
     <Compile Include="Util\Args.cs" />
     <Compile Include="Util\SUtil.cs" />
     <Compile Include="TermsOfUse.cs">

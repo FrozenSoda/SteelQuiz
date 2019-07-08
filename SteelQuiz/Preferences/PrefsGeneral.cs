@@ -27,6 +27,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SteelQuiz.ThemeManager.Colors;
 using SteelQuiz.Extensions;
+using Microsoft.Win32;
 
 namespace SteelQuiz.Preferences
 {
@@ -40,6 +41,11 @@ namespace SteelQuiz.Preferences
             InitializeComponent();
 
             LoadPreferences();
+            chk_win10themeSync.Enabled = Program.Win10AppThemeSupported();
+            if (!chk_win10themeSync.Enabled)
+            {
+                chk_win10themeSync.Checked = false;
+            }
             SetTheme();
             skipConfigApply = false;
         }
@@ -60,6 +66,7 @@ namespace SteelQuiz.Preferences
             rdo_showNameOnWelcome.Checked = ConfigManager.Config.ShowNameOnWelcomeScreen;
             rdo_dontShowNameOnWelcome.Checked = !rdo_showNameOnWelcome.Checked;
             txt_name.Text = ConfigManager.Config.FullName;
+            chk_win10themeSync.Checked = ConfigManager.Config.SyncWin10Theme;
         }
 
         private void Rdo_themeLight_CheckedChanged(object sender, EventArgs e)
@@ -79,6 +86,11 @@ namespace SteelQuiz.Preferences
             }
 
             ConfigManager.SaveConfig();
+
+            if (ConfigManager.Config.SyncWin10Theme)
+            {
+                SetWin10Theme();
+            }
 
             Program.frmWelcome.SetTheme();
             //reshow preferences window, to use new theme
@@ -137,6 +149,57 @@ namespace SteelQuiz.Preferences
                 e.Handled = true;
                 ConfigManager.SaveConfig();
                 Program.frmWelcome.UpdateCfg();
+            }
+        }
+
+        /// <summary>
+        /// Sets the Windows 10 app theme
+        /// </summary>
+        public void SetWin10Theme()
+        {
+            using (var key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize", true))
+            {
+                if (key == null)
+                {
+                    return;
+                }
+
+                object lightStr = key.GetValue("AppsUseLightTheme");
+
+                if (lightStr == null)
+                {
+                    // User don't have Windows 10, or the Windows 10 build is too old for app theme
+                    return;
+                }
+
+                int light = Convert.ToInt32(ConfigManager.Config.Theme == ThemeManager.ThemeCore.Theme.Light);
+                key.SetValue("AppsUseLightTheme", light, RegistryValueKind.DWord);
+            }
+        }
+
+        private void Chk_win10themeSync_CheckedChanged(object sender, EventArgs e)
+        {
+            if (skipConfigApply)
+            {
+                return;
+            }
+
+            ConfigManager.Config.SyncWin10Theme = chk_win10themeSync.Checked;
+            ConfigManager.SaveConfig();
+
+            if (ConfigManager.Config.SyncWin10Theme)
+            {
+                // Set app theme to Win10 theme
+
+                var theme = Program.GetWin10Theme();
+                if (theme == ThemeManager.ThemeCore.Theme.Light)
+                {
+                    rdo_themeLight.Checked = true;
+                }
+                else if (theme == ThemeManager.ThemeCore.Theme.Dark)
+                {
+                    rdo_themeDark.Checked = true;
+                }
             }
         }
     }

@@ -28,6 +28,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AutoUpdaterDotNET;
+using Microsoft.Win32;
+using RegistryUtils;
 using SteelQuiz.Extensions;
 using SteelQuiz.QuizData;
 using SteelQuiz.QuizImport;
@@ -63,6 +65,8 @@ namespace SteelQuiz
         private WelcomeMessage CurrentWelcomeMessage { get; set; }
         public bool firstWelcomeMsgEvalCompleted = false;
 
+        private RegistryMonitor themeMonitor;
+
         public Welcome()
         {
             InitializeComponent();
@@ -73,13 +77,69 @@ namespace SteelQuiz
             }
 
             SetControlStates();
-            SetTheme();
+
+            if (ConfigManager.Config.SyncWin10Theme)
+            {
+                PullWin10Theme();
+
+                themeMonitor = new RegistryMonitor(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize");
+                themeMonitor.RegChanged += ThemeMonitor_RegChanged;
+                themeMonitor.Start();
+            }
 
             Updater.Update(Updater.UpdateMode.Normal);
 
             ConfigManager.ChkSetupForFirstUse();
 
             UpdateCfg();
+        }
+
+        private void ThemeMonitor_RegChanged(object sender, EventArgs e)
+        {
+            if (!ConfigManager.Config.SyncWin10Theme)
+            {
+                themeMonitor.Stop();
+                return;
+            }
+
+            PullWin10Theme();
+        }
+
+        /// <summary>
+        /// Sets and applies the app theme according to Windows 10 theme
+        /// </summary>
+        public void PullWin10Theme()
+        {
+            ThemeManager.ThemeCore.Theme? theme = Program.GetWin10Theme();
+
+            if (theme == null)
+            {
+                // User don't have Windows 10, or the Windows 10 build is too old for app theme
+                return;
+            }
+
+            ConfigManager.Config.Theme = (ThemeManager.ThemeCore.Theme)theme;
+            ConfigManager.SaveConfig();
+
+            SetThemeAll();
+        }
+
+        /// <summary>
+        /// Updates ALL forms and user controls with the colors for the set theme
+        /// </summary>
+        public void SetThemeAll()
+        {
+            foreach (var frm in Application.OpenForms.OfType<AutoThemeableForm>())
+            {
+                frm.SetTheme();
+            }
+
+            foreach (var uc in Application.OpenForms.OfType<AutoThemeableUserControl>())
+            {
+                uc.SetTheme();
+            }
+
+            this.SetTheme();
         }
 
         public void UpdateCfg()
@@ -94,6 +154,9 @@ namespace SteelQuiz
             firstWelcomeMsgEvalCompleted = true;
         }
 
+        /// <summary>
+        /// Updates this form with the colors for the set theme
+        /// </summary>
         public void SetTheme()
         {
             this.BackColor = WelcomeTheme.GetBackColor();
@@ -184,6 +247,7 @@ namespace SteelQuiz
 
         private void Welcome_FormClosing(object sender, FormClosingEventArgs e)
         {
+            themeMonitor?.Stop();
             ConfigManager.SaveConfig();
             Application.Exit();
         }

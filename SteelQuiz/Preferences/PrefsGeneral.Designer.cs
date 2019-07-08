@@ -53,6 +53,7 @@ namespace SteelQuiz.Preferences
             this.txt_name = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.chk_win10themeSync = new System.Windows.Forms.CheckBox();
             this.rdo_themeDark = new System.Windows.Forms.RadioButton();
             this.label4 = new System.Windows.Forms.Label();
             this.rdo_themeLight = new System.Windows.Forms.RadioButton();
@@ -136,6 +137,7 @@ namespace SteelQuiz.Preferences
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.panel1.Controls.Add(this.chk_win10themeSync);
             this.panel1.Controls.Add(this.rdo_themeDark);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.rdo_themeLight);
@@ -143,6 +145,21 @@ namespace SteelQuiz.Preferences
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(635, 130);
             this.panel1.TabIndex = 3;
+            // 
+            // chk_win10themeSync
+            // 
+            this.chk_win10themeSync.AutoSize = true;
+            this.chk_win10themeSync.Checked = true;
+            this.chk_win10themeSync.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk_win10themeSync.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chk_win10themeSync.ForeColor = System.Drawing.Color.White;
+            this.chk_win10themeSync.Location = new System.Drawing.Point(129, 41);
+            this.chk_win10themeSync.Name = "chk_win10themeSync";
+            this.chk_win10themeSync.Size = new System.Drawing.Size(221, 24);
+            this.chk_win10themeSync.TabIndex = 2;
+            this.chk_win10themeSync.Text = "Sync with Windows 10 theme";
+            this.chk_win10themeSync.UseVisualStyleBackColor = true;
+            this.chk_win10themeSync.CheckedChanged += new System.EventHandler(this.Chk_win10themeSync_CheckedChanged);
             // 
             // rdo_themeDark
             // 
@@ -211,5 +228,6 @@ namespace SteelQuiz.Preferences
         internal System.Windows.Forms.RadioButton rdo_themeDark;
         private System.Windows.Forms.Label label4;
         internal System.Windows.Forms.RadioButton rdo_themeLight;
+        private System.Windows.Forms.CheckBox chk_win10themeSync;
     }
 }
