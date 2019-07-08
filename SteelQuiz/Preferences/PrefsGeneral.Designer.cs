@@ -69,7 +69,7 @@ namespace SteelQuiz.Preferences
             this.pnl_name.Controls.Add(this.rdo_showNameOnWelcome);
             this.pnl_name.Controls.Add(this.txt_name);
             this.pnl_name.Controls.Add(this.label2);
-            this.pnl_name.Location = new System.Drawing.Point(14, 150);
+            this.pnl_name.Location = new System.Drawing.Point(14, 172);
             this.pnl_name.Name = "pnl_name";
             this.pnl_name.Size = new System.Drawing.Size(635, 130);
             this.pnl_name.TabIndex = 4;
@@ -143,7 +143,7 @@ namespace SteelQuiz.Preferences
             this.panel1.Controls.Add(this.rdo_themeLight);
             this.panel1.Location = new System.Drawing.Point(14, 14);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(635, 130);
+            this.panel1.Size = new System.Drawing.Size(635, 138);
             this.panel1.TabIndex = 3;
             // 
             // chk_win10themeSync
@@ -153,7 +153,7 @@ namespace SteelQuiz.Preferences
             this.chk_win10themeSync.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chk_win10themeSync.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chk_win10themeSync.ForeColor = System.Drawing.Color.White;
-            this.chk_win10themeSync.Location = new System.Drawing.Point(129, 41);
+            this.chk_win10themeSync.Location = new System.Drawing.Point(15, 111);
             this.chk_win10themeSync.Name = "chk_win10themeSync";
             this.chk_win10themeSync.Size = new System.Drawing.Size(221, 24);
             this.chk_win10themeSync.TabIndex = 2;

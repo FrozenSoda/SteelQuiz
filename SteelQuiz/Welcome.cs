@@ -98,7 +98,6 @@ namespace SteelQuiz
         {
             if (!ConfigManager.Config.SyncWin10Theme)
             {
-                themeMonitor.Stop();
                 return;
             }
 
