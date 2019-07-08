@@ -87,6 +87,7 @@ namespace SteelQuiz
 
                 themeMonitor = new RegistryMonitor(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize");
                 themeMonitor.RegChanged += ThemeMonitor_RegChanged;
+                themeMonitor.Error += ThemeMonitor_Error;
                 themeMonitor.Start();
             }
 
@@ -97,6 +98,11 @@ namespace SteelQuiz
             UpdateCfg();
         }
 
+        private void ThemeMonitor_Error(object sender, ErrorEventArgs e)
+        {
+            throw e.GetException();
+        }
+
         private void ThemeMonitor_RegChanged(object sender, EventArgs e)
         {
             if (!ConfigManager.Config.SyncWin10Theme)
@@ -104,7 +110,10 @@ namespace SteelQuiz
                 return;
             }
 
-            PullWin10Theme();
+            Invoke(new Action(() =>
+            {
+                PullWin10Theme();
+            }));
         }
 
         /// <summary>
@@ -135,18 +144,24 @@ namespace SteelQuiz
             {
                 // Call the potentially overriden SetTheme() method
                 dynamic frmT = Convert.ChangeType(frm, frm.GetType());
-                frmT.SetTheme();
+                frmT.Invoke(new Action(() =>
+                {
+                    frmT.SetTheme();
+                }));
+
+                foreach (var uc in frm.GetAllChildrenRecursive().OfType<AutoThemeableUserControl>())
+                {
+                    // Call the potentially overriden SetTheme() method
+                    dynamic ucT = Convert.ChangeType(uc, uc.GetType());
+                    ucT.Invoke(new Action(() =>
+                    {
+                        ucT.SetTheme();
+                    }));
+
+                    //uc.SetTheme();
+                }
 
                 //frm.SetTheme();
-            }
-
-            foreach (var uc in Application.OpenForms.OfType<AutoThemeableUserControl>())
-            {
-                // Call the potentially overriden SetTheme() method
-                dynamic ucT = Convert.ChangeType(uc, uc.GetType());
-                ucT.SetTheme();
-
-                //uc.SetTheme();
             }
 
             this.SetTheme();
@@ -285,7 +300,6 @@ namespace SteelQuiz
 
         public void OpenQuizEditor(Quiz quiz = null, string quizPath = null)
         {
-#warning theme monitor stops running
             Hide();
             Program.OpenQuizEditor(quiz, quizPath);
         }
