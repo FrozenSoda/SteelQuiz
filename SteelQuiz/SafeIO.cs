@@ -25,7 +25,7 @@ using System.Threading.Tasks;
 
 namespace SteelQuiz
 {
-    public static class SafeIO
+    public static class AtomicIO
     {
         /// <summary>
         /// Writes to a file, by first writing to a temp file then renaming it, to prevent corruption during a computer crash for instance.
@@ -44,7 +44,7 @@ namespace SteelQuiz
         /// <param name="data">The data to write to the file</param>
         public static void AtomicWrite(string path, byte[] data)
         {
-            string tempPath = path + ".safe.tmp";
+            string tempPath = path + ".atomic_copy";
 
             File.WriteAllBytes(tempPath, data);
 
@@ -63,7 +63,7 @@ namespace SteelQuiz
         /// <returns>Returns the data from the text file specified</returns>
         public static string AtomicRead(string path)
         {
-            string tempPath = path + ".safe.tmp";
+            string tempPath = path + ".atomic_copy";
 
             if (File.Exists(tempPath))
             {
