@@ -30,9 +30,27 @@ namespace SteelQuiz.ConfigData
         Development
     }
 
+    public enum AutomaticUpdateMode
+    {
+        /// <summary>
+        /// Checks for, downloads, and installs updates, automatically
+        /// </summary>
+        CheckDownloadInstall,
+
+        /// <summary>
+        /// Checks for updates and notifies the user, but does not download or install the updates automatically
+        /// </summary>
+        CheckOnly,
+
+        /// <summary>
+        /// Does not check for updates
+        /// </summary>
+        Disabled
+    }
+
     public class UpdateConfig
     {
-        public bool AutoUpdate { get; set; } = false;
+        public AutomaticUpdateMode AutoUpdateMode { get; set; } = AutomaticUpdateMode.CheckDownloadInstall;
         public int UpdateAvailableButtonEnableDelay_s { get; set; } = 3;
         public UpdateChannel UpdateChannel { get; set; } = UpdateChannel.Stable;
     }

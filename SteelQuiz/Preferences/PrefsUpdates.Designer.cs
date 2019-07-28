@@ -55,9 +55,10 @@ namespace SteelQuiz.Preferences
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.pnl_updateChannel = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
             this.rdo_chDev = new System.Windows.Forms.RadioButton();
             this.rdo_chStable = new System.Windows.Forms.RadioButton();
+            this.label5 = new System.Windows.Forms.Label();
+            this.rdo_doNotUpdate = new System.Windows.Forms.RadioButton();
             this.pnl_autoUpdate.SuspendLayout();
             this.pnl_updateDialog.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_buttonEnableDelay)).BeginInit();
@@ -67,12 +68,13 @@ namespace SteelQuiz.Preferences
             // pnl_autoUpdate
             // 
             this.pnl_autoUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.pnl_autoUpdate.Controls.Add(this.rdo_doNotUpdate);
             this.pnl_autoUpdate.Controls.Add(this.rdo_notifyUpdate);
             this.pnl_autoUpdate.Controls.Add(this.label1);
             this.pnl_autoUpdate.Controls.Add(this.rdo_autoUpdate);
             this.pnl_autoUpdate.Location = new System.Drawing.Point(14, 14);
             this.pnl_autoUpdate.Name = "pnl_autoUpdate";
-            this.pnl_autoUpdate.Size = new System.Drawing.Size(635, 130);
+            this.pnl_autoUpdate.Size = new System.Drawing.Size(635, 155);
             this.pnl_autoUpdate.TabIndex = 2;
             // 
             // rdo_notifyUpdate
@@ -119,7 +121,7 @@ namespace SteelQuiz.Preferences
             this.pnl_updateDialog.Controls.Add(this.nud_buttonEnableDelay);
             this.pnl_updateDialog.Controls.Add(this.label3);
             this.pnl_updateDialog.Controls.Add(this.label2);
-            this.pnl_updateDialog.Location = new System.Drawing.Point(14, 150);
+            this.pnl_updateDialog.Location = new System.Drawing.Point(14, 175);
             this.pnl_updateDialog.Name = "pnl_updateDialog";
             this.pnl_updateDialog.Size = new System.Drawing.Size(635, 94);
             this.pnl_updateDialog.TabIndex = 3;
@@ -172,21 +174,10 @@ namespace SteelQuiz.Preferences
             this.pnl_updateChannel.Controls.Add(this.rdo_chDev);
             this.pnl_updateChannel.Controls.Add(this.rdo_chStable);
             this.pnl_updateChannel.Controls.Add(this.label5);
-            this.pnl_updateChannel.Location = new System.Drawing.Point(14, 250);
+            this.pnl_updateChannel.Location = new System.Drawing.Point(14, 275);
             this.pnl_updateChannel.Name = "pnl_updateChannel";
             this.pnl_updateChannel.Size = new System.Drawing.Size(635, 130);
             this.pnl_updateChannel.TabIndex = 4;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(0, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(149, 25);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Update Channel";
             // 
             // rdo_chDev
             // 
@@ -214,6 +205,29 @@ namespace SteelQuiz.Preferences
             this.rdo_chStable.TabStop = true;
             this.rdo_chStable.Text = "Stable (recommended)";
             this.rdo_chStable.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.Location = new System.Drawing.Point(0, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(149, 25);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Update Channel";
+            // 
+            // rdo_doNotUpdate
+            // 
+            this.rdo_doNotUpdate.AutoSize = true;
+            this.rdo_doNotUpdate.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdo_doNotUpdate.ForeColor = System.Drawing.Color.White;
+            this.rdo_doNotUpdate.Location = new System.Drawing.Point(15, 100);
+            this.rdo_doNotUpdate.Name = "rdo_doNotUpdate";
+            this.rdo_doNotUpdate.Size = new System.Drawing.Size(432, 24);
+            this.rdo_doNotUpdate.TabIndex = 2;
+            this.rdo_doNotUpdate.Text = "Do not check for updates automatically (NOT recommended)";
+            this.rdo_doNotUpdate.UseVisualStyleBackColor = true;
             // 
             // PrefsUpdates
             // 
@@ -250,5 +264,6 @@ namespace SteelQuiz.Preferences
         internal System.Windows.Forms.RadioButton rdo_chDev;
         internal System.Windows.Forms.RadioButton rdo_chStable;
         private System.Windows.Forms.Label label5;
+        internal System.Windows.Forms.RadioButton rdo_doNotUpdate;
     }
 }

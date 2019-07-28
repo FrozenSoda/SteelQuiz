@@ -45,7 +45,21 @@ namespace SteelQuiz.Preferences
 
         public void LoadPreferences()
         {
-            rdo_autoUpdate.Checked = ConfigManager.Config.UpdateConfig.AutoUpdate;
+            switch (ConfigManager.Config.UpdateConfig.AutoUpdateMode)
+            {
+                case ConfigData.AutomaticUpdateMode.CheckDownloadInstall:
+                    rdo_autoUpdate.Checked = true;
+                    break;
+
+                case ConfigData.AutomaticUpdateMode.CheckOnly:
+                    rdo_notifyUpdate.Checked = true;
+                    break;
+
+                case ConfigData.AutomaticUpdateMode.Disabled:
+                    rdo_doNotUpdate.Checked = true;
+                    break;
+            }
+
             rdo_notifyUpdate.Checked = !rdo_autoUpdate.Checked;
             nud_buttonEnableDelay.Value = ConfigManager.Config.UpdateConfig.UpdateAvailableButtonEnableDelay_s;
             rdo_chStable.Checked = ConfigManager.Config.UpdateConfig.UpdateChannel == ConfigData.UpdateChannel.Stable;
@@ -59,7 +73,19 @@ namespace SteelQuiz.Preferences
                 return;
             }
 
-            ConfigManager.Config.UpdateConfig.AutoUpdate = rdo_autoUpdate.Checked;
+            if (rdo_autoUpdate.Checked)
+            {
+                ConfigManager.Config.UpdateConfig.AutoUpdateMode = ConfigData.AutomaticUpdateMode.CheckDownloadInstall;
+            }
+            else if (rdo_notifyUpdate.Checked)
+            {
+                ConfigManager.Config.UpdateConfig.AutoUpdateMode = ConfigData.AutomaticUpdateMode.CheckOnly;
+            }
+            else if (rdo_doNotUpdate.Checked)
+            {
+                ConfigManager.Config.UpdateConfig.AutoUpdateMode = ConfigData.AutomaticUpdateMode.Disabled;
+            }
+
             ConfigManager.SaveConfig();
         }
 
