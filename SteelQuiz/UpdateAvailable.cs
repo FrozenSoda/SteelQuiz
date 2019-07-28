@@ -76,7 +76,7 @@ namespace SteelQuiz
 
         private void LoadPreferences()
         {
-            chk_autoUpdateInFuture.Checked = ConfigManager.Config.UpdateConfig.AutoUpdate;
+            chk_autoUpdateInFuture.Checked = ConfigManager.Config.UpdateConfig.AutoUpdateMode == ConfigData.AutomaticUpdateMode.CheckDownloadInstall;
 
             skipConfigApply = false;
         }
@@ -134,7 +134,10 @@ namespace SteelQuiz
                 return;
             }
 
-            ConfigManager.Config.UpdateConfig.AutoUpdate = chk_autoUpdateInFuture.Checked;
+            if (chk_autoUpdateInFuture.Checked)
+            {
+                ConfigManager.Config.UpdateConfig.AutoUpdateMode = ConfigData.AutomaticUpdateMode.CheckDownloadInstall;
+            }
             ConfigManager.SaveConfig();
         }
     }

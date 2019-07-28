@@ -122,7 +122,7 @@ namespace SteelQuiz
                     }
                     else
                     {
-                        if (!ConfigManager.Config.UpdateConfig.AutoUpdate)
+                        if (ConfigManager.Config.UpdateConfig.AutoUpdateMode == ConfigData.AutomaticUpdateMode.CheckOnly)
                         {
                             var frmUpdate = new UpdateAvailable(uargs.InstalledVersion, uargs.CurrentVersion);
                             var result = frmUpdate.ShowDialog();
@@ -168,7 +168,7 @@ namespace SteelQuiz
                     }
                     else
                     {
-                        if (ConfigManager.Config.UpdateConfig.AutoUpdate)
+                        if (ConfigManager.Config.UpdateConfig.AutoUpdateMode == ConfigData.AutomaticUpdateMode.CheckDownloadInstall)
                         {
                             notifyIcon.BalloonTipText = "A software update is available. Click here to update now";
                         }

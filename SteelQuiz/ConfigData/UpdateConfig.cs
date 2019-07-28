@@ -35,17 +35,17 @@ namespace SteelQuiz.ConfigData
         /// <summary>
         /// Checks for, downloads, and installs updates, automatically
         /// </summary>
-        CheckDownloadInstall,
+        CheckDownloadInstall = 2,
 
         /// <summary>
         /// Checks for updates and notifies the user, but does not download or install the updates automatically
         /// </summary>
-        CheckOnly,
+        CheckOnly = 1,
 
         /// <summary>
         /// Does not check for updates
         /// </summary>
-        Disabled
+        Disabled = 0
     }
 
     public class UpdateConfig

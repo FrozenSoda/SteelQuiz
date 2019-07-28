@@ -66,13 +66,8 @@ namespace SteelQuiz.Preferences
             rdo_chDev.Checked = ConfigManager.Config.UpdateConfig.UpdateChannel == ConfigData.UpdateChannel.Development;
         }
 
-        private void Rdo_autoUpdate_CheckedChanged(object sender, EventArgs e)
+        private void ApplyAutomaticUpdatesMode()
         {
-            if (skipConfigApply)
-            {
-                return;
-            }
-
             if (rdo_autoUpdate.Checked)
             {
                 ConfigManager.Config.UpdateConfig.AutoUpdateMode = ConfigData.AutomaticUpdateMode.CheckDownloadInstall;
@@ -101,6 +96,7 @@ namespace SteelQuiz.Preferences
         }
 
         private bool updateModeChkChangedEvent = true;
+
         private void Rdo_chDev_CheckedChanged(object sender, EventArgs e)
         {
             if (skipConfigApply)
@@ -153,6 +149,81 @@ namespace SteelQuiz.Preferences
             if (msg2 == DialogResult.Yes)
             {
                 Updater.Update(Updater.UpdateMode.Force);
+            }
+        }
+
+        private RadioButton lastAutoUpdateModeSelected;
+
+        private void Rdo_autoUpdate_CheckedChanged(object sender, EventArgs e)
+        {
+            if (skipConfigApply)
+            {
+                if (rdo_autoUpdate.Checked)
+                {
+                    lastAutoUpdateModeSelected = rdo_autoUpdate;
+                }
+                return;
+            }
+
+            if (rdo_autoUpdate.Checked)
+            {
+                ApplyAutomaticUpdatesMode();
+                lastAutoUpdateModeSelected = rdo_autoUpdate;
+            }
+        }
+
+        private void Rdo_notifyUpdate_CheckedChanged(object sender, EventArgs e)
+        {
+            if (skipConfigApply)
+            {
+                if (rdo_notifyUpdate.Checked)
+                {
+                    lastAutoUpdateModeSelected = rdo_notifyUpdate;
+                }
+                return;
+            }
+
+            if (rdo_notifyUpdate.Checked)
+            {
+                ApplyAutomaticUpdatesMode();
+                lastAutoUpdateModeSelected = rdo_notifyUpdate;
+            }
+        }
+
+        private void Rdo_doNotUpdate_CheckedChanged(object sender, EventArgs e)
+        {
+            if (skipConfigApply)
+            {
+                if (rdo_doNotUpdate.Checked)
+                {
+                    lastAutoUpdateModeSelected = rdo_doNotUpdate;
+                }
+                return;
+            }
+
+            if (rdo_doNotUpdate.Checked)
+            {
+                var msg = MessageBox.Show("Disabling automatic update checking is NOT recommended. " +
+                    "Doing so prevents you from receiving updates including but not limited to:" +
+                    "\r\n  - Security fixes" +
+                    "\r\n  - Bug fixes" +
+                    "\r\n  - Improvements" +
+                    "\r\n  - New features" +
+                    "\r\n\r\nRunning old versions may also prevent you from loading quizzes made for a newer version of SteelQuiz, and may cause issues with the quiz " +
+                    "importer." +
+                    "\r\n\r\nOne of the few valid reasons to run old versions is if you experience problems with newer versions." +
+                    "\r\n\r\nAre you sure you want to disable automatic checking for updates?", "Disable Automatic Updates - SteelQuiz", MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+                if (msg == DialogResult.No)
+                {
+                    lastAutoUpdateModeSelected.Checked = true;
+                }
+            }
+
+            if (rdo_doNotUpdate.Checked)
+            {
+                ApplyAutomaticUpdatesMode();
+                lastAutoUpdateModeSelected = rdo_doNotUpdate;
             }
         }
     }

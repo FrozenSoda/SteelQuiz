@@ -87,9 +87,9 @@ namespace SteelQuiz.Preferences
             this.rdo_notifyUpdate.Name = "rdo_notifyUpdate";
             this.rdo_notifyUpdate.Size = new System.Drawing.Size(528, 24);
             this.rdo_notifyUpdate.TabIndex = 1;
-            this.rdo_notifyUpdate.TabStop = true;
             this.rdo_notifyUpdate.Text = "Check for updates, but let me choose whether to download and install them";
             this.rdo_notifyUpdate.UseVisualStyleBackColor = true;
+            this.rdo_notifyUpdate.CheckedChanged += new System.EventHandler(this.Rdo_notifyUpdate_CheckedChanged);
             // 
             // label1
             // 
@@ -228,6 +228,7 @@ namespace SteelQuiz.Preferences
             this.rdo_doNotUpdate.TabIndex = 2;
             this.rdo_doNotUpdate.Text = "Do not check for updates automatically (NOT recommended)";
             this.rdo_doNotUpdate.UseVisualStyleBackColor = true;
+            this.rdo_doNotUpdate.CheckedChanged += new System.EventHandler(this.Rdo_doNotUpdate_CheckedChanged);
             // 
             // PrefsUpdates
             // 
