@@ -55,7 +55,8 @@ namespace SteelQuiz
         public enum UpdateMode
         {
             /// <summary>
-            /// Update automatically (if mandatory option), or show update dialog if an update is available (or update if autoupdate), otherwise do nothing
+            /// Update automatically (if mandatory or auto update mode is set to full auto), show update dialog if an update is available (if auto update mode is set to notify), 
+            /// otherwise do nothing
             /// </summary>
             Normal,
 
@@ -65,7 +66,7 @@ namespace SteelQuiz
             Verbose,
 
             /// <summary>
-            /// Show a notification if an update is available, otherwise do nothing
+            /// Show a notification if an update is available and auto update mode is not set to disabled, otherwise do nothing
             /// </summary>
             Notification,
 
@@ -84,6 +85,11 @@ namespace SteelQuiz
         {
             if (CurrentUpdateMode == UpdateMode.Normal)
             {
+                if (ConfigManager.Config.UpdateConfig.AutoUpdateMode == ConfigData.AutomaticUpdateMode.Disabled)
+                {
+                    return;
+                }
+
                 if (uargs != null && uargs.IsUpdateAvailable)
                 {
                     if (uargs.Mandatory && uargs.UpdateMode == Mode.Forced)
@@ -144,6 +150,11 @@ namespace SteelQuiz
             }
             else if (CurrentUpdateMode == UpdateMode.Notification)
             {
+                if (ConfigManager.Config.UpdateConfig.AutoUpdateMode == ConfigData.AutomaticUpdateMode.Disabled)
+                {
+                    return;
+                }
+
                 if (uargs != null && uargs.IsUpdateAvailable)
                 {
                     Program.frmWelcome.tmr_chkUpdate.Interval = 2 * 60 * 60 * 1000; // dont check for updates again for 2h
