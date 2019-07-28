@@ -74,8 +74,14 @@ namespace SteelQuiz
 
                 string data = File.ReadAllText(tempPath);
 
-                // Delete corrupted file
-                File.Delete(path);
+                if (File.Exists(path))
+                {
+                    // Delete corrupted file
+                    File.Delete(path);
+                }
+
+                // Restore atomic_copy to normal path
+                File.Move(tempPath, path);
 
                 return data;
             }
