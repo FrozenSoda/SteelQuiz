@@ -44,35 +44,16 @@ namespace SteelQuiz
         /// <param name="data">The data to write to the file</param>
         public static void SafeWrite(string path, byte[] data)
         {
-            int tmpCount = 0;
-            string tempPath;
-            do
-            {
-                tempPath = path + $".{tmpCount}.tmp";
-                ++tmpCount;
-            } while (File.Exists(tempPath));
+            string tempPath = path + ".safe.tmp";
 
             File.WriteAllBytes(tempPath, data);
 
-            int tmpCount2 = 0;
-            string tempPath2 = null;
             if (File.Exists(path))
             {
-                do
-                {
-                    tempPath2 = path + $".{tmpCount2}.tmp";
-                    ++tmpCount2;
-                } while (File.Exists(tempPath2));
-
-                File.Move(path, tempPath2);
+                File.Delete(path);
             }
 
             File.Move(tempPath, path);
-
-            if (tempPath2 != null)
-            {
-                File.Delete(tempPath2);
-            }
         }
     }
 }
