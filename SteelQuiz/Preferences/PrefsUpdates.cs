@@ -38,6 +38,8 @@ namespace SteelQuiz.Preferences
         {
             InitializeComponent();
 
+            lastAutoUpdateModeSelected = rdo_notifyUpdate;
+
             LoadPreferences();
             SetTheme();
             skipConfigApply = false;
