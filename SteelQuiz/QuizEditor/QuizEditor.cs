@@ -483,10 +483,7 @@ namespace SteelQuiz.QuizEditor
             UseWaitCursor = true;
 
             var quiz = ConstructQuiz();
-            using (var writer = new StreamWriter(path, false))
-            {
-                writer.Write(JsonConvert.SerializeObject(quiz, Formatting.Indented));
-            }
+            AtomicIO.AtomicWrite(path, JsonConvert.SerializeObject(quiz, Formatting.Indented));
 
             if (customPath == null)
             {

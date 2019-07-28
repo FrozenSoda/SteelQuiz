@@ -49,10 +49,8 @@ namespace SteelQuiz
             {
                 try
                 {
-                    using (var reader = new StreamReader(CONFIG_PATH))
-                    {
-                        Config = JsonConvert.DeserializeObject<Config>(reader.ReadToEnd());
-                    }
+                    Config = JsonConvert.DeserializeObject<Config>(AtomicIO.AtomicRead(CONFIG_PATH));
+
                     if (Config == null)
                     {
                         var msg = MessageBox.Show("The configuration file for SteelQuiz is corrupted, and must be reset. Reset configuration?", "SteelQuiz", MessageBoxButtons.YesNo,
@@ -100,10 +98,7 @@ namespace SteelQuiz
 
             try
             {
-                using (var writer = new StreamWriter(CONFIG_PATH, false))
-                {
-                    writer.Write(JsonConvert.SerializeObject(Config, Formatting.Indented));
-                }
+                AtomicIO.AtomicWrite(CONFIG_PATH, JsonConvert.SerializeObject(Config, Formatting.Indented));
             }
             catch (Exception ex)
             {

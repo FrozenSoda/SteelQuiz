@@ -25,6 +25,9 @@ using System.Threading.Tasks;
 
 namespace SteelQuiz
 {
+    /// <summary>
+    /// This class provides functions for atomic write/read, to prevent file corruption/data loss during crashes
+    /// </summary>
     public static class AtomicIO
     {
         /// <summary>
@@ -67,9 +70,9 @@ namespace SteelQuiz
 
             if (File.Exists(tempPath))
             {
-                // AtomicWrite operation was interrupted
+                // AtomicWrite operation was interrupted, return atomic_copy
 
-                string data = File.ReadAllText(tempPath);
+                string data = AtomicIO.AtomicRead(tempPath);
 
                 // Delete corrupted file
                 File.Delete(path);
@@ -78,7 +81,7 @@ namespace SteelQuiz
             }
             else
             {
-                string data = File.ReadAllText(path);
+                string data = AtomicIO.AtomicRead(path);
 
                 return data;
             }

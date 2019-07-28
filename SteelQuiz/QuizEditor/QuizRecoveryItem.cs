@@ -49,7 +49,7 @@ namespace SteelQuiz.QuizEditor
 
         private void LoadProperties()
         {
-            var recoveryFile = File.ReadAllText(RecoveryPath);
+            var recoveryFile = AtomicIO.AtomicRead(RecoveryPath);
             var recovery = JsonConvert.DeserializeObject<QuizRecoveryData>(recoveryFile);
 
             QuizPath = recovery.QuizPath;
@@ -91,7 +91,7 @@ namespace SteelQuiz.QuizEditor
 
         private void btn_load_Click(object sender, EventArgs e)
         {
-            var recoveryFile = File.ReadAllText(RecoveryPath);
+            var recoveryFile = AtomicIO.AtomicRead(RecoveryPath);
             var recovery = JsonConvert.DeserializeObject<QuizRecoveryData>(recoveryFile);
 
             ((QuizRecovery)Parent.Parent).QuizRecoveryData = recovery;

@@ -181,10 +181,7 @@ namespace SteelQuiz.Preferences
                 progDataRoot.QuizProgDatas.Remove(quizProg);
             }
 
-            using (var writer = new StreamWriter(ConfigManager.Config.SyncConfig.QuizProgressPath, false))
-            {
-                writer.Write(JsonConvert.SerializeObject(progDataRoot, Formatting.Indented));
-            }
+            AtomicIO.AtomicWrite(ConfigManager.Config.SyncConfig.QuizProgressPath, JsonConvert.SerializeObject(progDataRoot, Formatting.Indented));
 
             return removalCount;
         }

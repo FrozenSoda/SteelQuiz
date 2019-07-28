@@ -349,10 +349,8 @@ namespace SteelQuiz
             {
                 var cfgDz = new QuizProgDataRoot(MetaData.QUIZ_FILE_FORMAT_VERSION);
                 var cfgSz = JsonConvert.SerializeObject(cfgDz, Formatting.Indented);
-                using (var writer = new StreamWriter(ConfigManager.Config.SyncConfig.QuizProgressPath, false))
-                {
-                    writer.Write(cfgSz);
-                }
+
+                AtomicIO.AtomicWrite(ConfigManager.Config.SyncConfig.QuizProgressPath, cfgSz);
             }
             return true;
         }
@@ -635,10 +633,8 @@ namespace SteelQuiz
 
             // SERIALIZE AND SAVE
             var cfgSz = JsonConvert.SerializeObject(cfgDz, Formatting.Indented);
-            using (var writer = new StreamWriter(ConfigManager.Config.SyncConfig.QuizProgressPath, false))
-            {
-                writer.Write(cfgSz);
-            }
+
+            AtomicIO.AtomicWrite(ConfigManager.Config.SyncConfig.QuizProgressPath, cfgSz);
 
             /*
             if (QuizRandomized)
@@ -655,11 +651,8 @@ namespace SteelQuiz
 
         public static void SaveQuiz(Quiz quiz, string path)
         {
-            using (var writer = new StreamWriter(path, false))
-            {
-                var quizDz = JsonConvert.SerializeObject(quiz, Formatting.Indented);
-                writer.Write(quizDz);
-            }
+            var quizDz = JsonConvert.SerializeObject(quiz, Formatting.Indented);
+            AtomicIO.AtomicWrite(path, quizDz);
         }
 
         public static void QuizRandomize(this IList<WordProgData> list)
