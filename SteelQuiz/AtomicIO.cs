@@ -72,7 +72,7 @@ namespace SteelQuiz
             {
                 // AtomicWrite operation was interrupted, return atomic_copy
 
-                string data = AtomicIO.AtomicRead(tempPath);
+                string data = File.ReadAllText(tempPath);
 
                 // Delete corrupted file
                 File.Delete(path);
@@ -81,7 +81,7 @@ namespace SteelQuiz
             }
             else
             {
-                string data = AtomicIO.AtomicRead(path);
+                string data = File.ReadAllText(path);
 
                 return data;
             }
