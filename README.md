@@ -46,7 +46,7 @@ Causes problems with installation, updates, and uninstallation of SteelQuiz. The
 **Solution:** Uninstall the f.lux Microsoft Store version, and install the non-Store version of f.lux instead (the one you download from their website).
 
 ## Contributing
-Thank you for your interest in contributing to SteelQuiz! If you do so, please follow the [coding conventions](https://github.com/steel9/SteelQuiz/releases/latest/download/SteelQuizSetup.exe).   
+Thank you for your interest in contributing to SteelQuiz! If you do so, please follow the [coding conventions](CODING_CONVENTIONS.md).   
 
 ### Development tools
 - Microsoft Visual Studio Community 2019
