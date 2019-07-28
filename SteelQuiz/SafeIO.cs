@@ -32,9 +32,9 @@ namespace SteelQuiz
         /// </summary>
         /// <param name="path">The path to save the file to. If it already exists, it will be overwritten</param>
         /// <param name="data">The string data to write to the file</param>
-        public static void SafeWrite(string path, string data)
+        public static void AtomicWrite(string path, string data)
         {
-            SafeWrite(path, Encoding.Default.GetBytes(data));
+            AtomicWrite(path, Encoding.Default.GetBytes(data));
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace SteelQuiz
         /// </summary>
         /// <param name="path">The path to save the file to. If it already exists, it will be overwritten</param>
         /// <param name="data">The data to write to the file</param>
-        public static void SafeWrite(string path, byte[] data)
+        public static void AtomicWrite(string path, byte[] data)
         {
             string tempPath = path + ".safe.tmp";
 
@@ -54,6 +54,34 @@ namespace SteelQuiz
             }
 
             File.Move(tempPath, path);
+        }
+
+        /// <summary>
+        /// Reads data from a text file. If the AtomicWrite operation to the file was interrupted, the intact copy will be read instead of the exact path
+        /// </summary>
+        /// <param name="path">The path to the text file</param>
+        /// <returns>Returns the data from the text file specified</returns>
+        public static string AtomicRead(string path)
+        {
+            string tempPath = path + ".safe.tmp";
+
+            if (File.Exists(tempPath))
+            {
+                // AtomicWrite operation was interrupted
+
+                string data = File.ReadAllText(tempPath);
+
+                // Delete corrupted file
+                File.Delete(path);
+
+                return data;
+            }
+            else
+            {
+                string data = File.ReadAllText(path);
+
+                return data;
+            }
         }
     }
 }
