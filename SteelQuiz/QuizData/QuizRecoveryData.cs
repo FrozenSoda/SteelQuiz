@@ -88,10 +88,7 @@ namespace SteelQuiz.QuizData
         {
             Quiz = quiz;
             LastUpdated = DateTime.Now;
-            using (var writer = new StreamWriter(RecoveryFilePath, false))
-            {
-                writer.Write(JsonConvert.SerializeObject(this, Formatting.Indented));
-            }
+            AtomicIO.AtomicWrite(RecoveryFilePath, JsonConvert.SerializeObject(this, Formatting.Indented));
         }
     }
 }

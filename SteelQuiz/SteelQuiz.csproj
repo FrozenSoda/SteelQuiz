@@ -146,6 +146,7 @@
       <DependentUpon>QuizFolderSelect.cs</DependentUpon>
     </Compile>
     <Compile Include="QuizProgressMerger.cs" />
+    <Compile Include="AtomicIO.cs" />
     <Compile Include="StartupLoading.cs">
       <SubType>Form</SubType>
     </Compile>

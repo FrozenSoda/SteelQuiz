@@ -59,10 +59,7 @@ namespace SteelQuiz
 
             QuizProgDataRoot merged = Merge(prog1, prog2);
 
-            using (var writer = new StreamWriter(savePath, false))
-            {
-                writer.Write(JsonConvert.SerializeObject(merged, Formatting.Indented));
-            }
+            AtomicIO.AtomicWrite(savePath, JsonConvert.SerializeObject(merged, Formatting.Indented));
 
             return true;
         }
