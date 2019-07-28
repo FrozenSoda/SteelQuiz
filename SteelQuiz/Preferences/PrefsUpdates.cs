@@ -60,7 +60,6 @@ namespace SteelQuiz.Preferences
                     break;
             }
 
-            rdo_notifyUpdate.Checked = !rdo_autoUpdate.Checked;
             nud_buttonEnableDelay.Value = ConfigManager.Config.UpdateConfig.UpdateAvailableButtonEnableDelay_s;
             rdo_chStable.Checked = ConfigManager.Config.UpdateConfig.UpdateChannel == ConfigData.UpdateChannel.Stable;
             rdo_chDev.Checked = ConfigManager.Config.UpdateConfig.UpdateChannel == ConfigData.UpdateChannel.Development;
