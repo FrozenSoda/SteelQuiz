@@ -45,10 +45,13 @@ SteelQuiz has been tested in CrossOver on Ubuntu 18.04.2 LTS, and worked accepta
 Causes problems with installation, updates, and uninstallation of SteelQuiz. The specific cause of the problem is currently unknown. For some reason, it causes System PID 4 to lock SteelQuiz.exe.   
 **Solution:** Uninstall the f.lux Microsoft Store version, and install the non-Store version of f.lux instead (the one you download from their website).
 
+## Contributing
+Thank you for your interest in contributing to SteelQuiz! If you do so, please follow the [coding conventions](https://github.com/steel9/SteelQuiz/releases/latest/download/SteelQuizSetup.exe).   
+
 ### Development tools
 - Microsoft Visual Studio Community 2019
 - Nullsoft Scriptable Install System v3
 - Git v2
 
-### Contact
+## Contact
 **E-mail:** steel9apps [at] gmail.com
