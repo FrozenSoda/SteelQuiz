@@ -223,7 +223,15 @@ namespace SteelQuiz.QuizEditor
                     return;
                 }
 
-                quiz = JsonConvert.DeserializeObject<Quiz>(AtomicIO.AtomicRead(QuizPath));
+                try
+                {
+                    quiz = JsonConvert.DeserializeObject<Quiz>(AtomicIO.AtomicRead(QuizPath));
+                }
+                catch (AtomicException ex)
+                {
+                    // Should never be reached as path exists
+                    throw ex;
+                }
             }
 
             if (quizPath != null)

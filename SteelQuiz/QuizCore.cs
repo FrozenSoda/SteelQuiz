@@ -256,7 +256,16 @@ namespace SteelQuiz
 
         public static ChkUpgradeProgressDataResult ChkUpgradeProgressData()
         {
-            dynamic cfgDz = JsonConvert.DeserializeObject(AtomicIO.AtomicRead(ConfigManager.Config.SyncConfig.QuizProgressPath));
+            dynamic cfgDz;
+            try
+            {
+                cfgDz = JsonConvert.DeserializeObject(AtomicIO.AtomicRead(ConfigManager.Config.SyncConfig.QuizProgressPath));
+            }
+            catch (AtomicException)
+            {
+                return ChkUpgradeProgressDataResult.NotRequired;
+            }
+
             var progressVer = SUtil.PropertyDefined(cfgDz.FileFormatVersion) && cfgDz.FileFormatVersion != null
                 ? new Version((string)cfgDz.FileFormatVersion) : new Version(1, 0, 0);
             var currVer = new Version(MetaData.QUIZ_FILE_FORMAT_VERSION);
@@ -374,7 +383,16 @@ namespace SteelQuiz
                 {
                     return false;
                 }
-                QuizProgDataRoot quizProgDataRoot = JsonConvert.DeserializeObject<QuizProgDataRoot>(AtomicIO.AtomicRead(ConfigManager.Config.SyncConfig.QuizProgressPath));
+                QuizProgDataRoot quizProgDataRoot;
+                try
+                {
+                    quizProgDataRoot = JsonConvert.DeserializeObject<QuizProgDataRoot>(AtomicIO.AtomicRead(ConfigManager.Config.SyncConfig.QuizProgressPath));
+                }
+                catch (AtomicException)
+                {
+                    System.Diagnostics.Debug.WriteLine("AtomicException when loading QuizProgressData");
+                    return false;
+                }
 
                 //find progress for current quiz
                 bool found = false;
@@ -602,7 +620,15 @@ namespace SteelQuiz
             QuizProgDataRoot cfgDz;
             if (File.Exists(ConfigManager.Config.SyncConfig.QuizProgressPath))
             {
-                cfgDz = JsonConvert.DeserializeObject<QuizProgDataRoot>(AtomicIO.AtomicRead(ConfigManager.Config.SyncConfig.QuizProgressPath));
+                try
+                {
+                    cfgDz = JsonConvert.DeserializeObject<QuizProgDataRoot>(AtomicIO.AtomicRead(ConfigManager.Config.SyncConfig.QuizProgressPath));
+                }
+                catch (AtomicException ex)
+                {
+                    // Should never be reached as path exists
+                    throw ex;
+                }
 
                 //find progress for current quiz
                 bool found = false;

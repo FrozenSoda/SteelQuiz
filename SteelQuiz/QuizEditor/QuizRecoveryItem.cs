@@ -49,7 +49,19 @@ namespace SteelQuiz.QuizEditor
 
         private void LoadProperties()
         {
-            var recoveryFile = AtomicIO.AtomicRead(RecoveryPath);
+            string recoveryFile;
+            try
+            {
+                recoveryFile = AtomicIO.AtomicRead(RecoveryPath);
+            }
+            catch (AtomicException)
+            {
+                System.Diagnostics.Debug.WriteLine("AtomicException when loading QuizRecoveryItem at LoadProperties()");
+#warning test if this dispose works as intended (the QuizRecoveryItem should be removed)
+                Dispose();
+                return;
+            }
+
             var recovery = JsonConvert.DeserializeObject<QuizRecoveryData>(recoveryFile);
 
             QuizPath = recovery.QuizPath;
@@ -91,7 +103,16 @@ namespace SteelQuiz.QuizEditor
 
         private void btn_load_Click(object sender, EventArgs e)
         {
-            var recoveryFile = AtomicIO.AtomicRead(RecoveryPath);
+            string recoveryFile;
+            try
+            {
+                recoveryFile = AtomicIO.AtomicRead(RecoveryPath);
+            }
+            catch (AtomicException ex)
+            {
+                MessageBox.Show("Could not load recovery file:\r\n\r\n" + ex.ToString(), "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             var recovery = JsonConvert.DeserializeObject<QuizRecoveryData>(recoveryFile);
 
             ((QuizRecovery)Parent.Parent).QuizRecoveryData = recovery;

@@ -219,7 +219,15 @@ namespace SteelQuiz.Preferences
 
                     foreach (var quizFile in Directory.GetFiles(quizFolder, $"*{QuizCore.QUIZ_EXTENSION}", SearchOption.TopDirectoryOnly))
                     {
-                        Quiz quiz = JsonConvert.DeserializeObject<Quiz>(AtomicIO.AtomicRead(quizFile));
+                        Quiz quiz;
+                        try
+                        {
+                            quiz = JsonConvert.DeserializeObject<Quiz>(AtomicIO.AtomicRead(quizFile));
+                        }
+                        catch (AtomicException)
+                        {
+                            continue;
+                        }
 
                         if (quiz.GUID.Equals(guid))
                         {

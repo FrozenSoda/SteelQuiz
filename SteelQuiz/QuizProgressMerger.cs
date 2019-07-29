@@ -22,6 +22,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Newtonsoft.Json;
 using SteelQuiz.QuizProgressData;
 
@@ -45,9 +46,20 @@ namespace SteelQuiz
                 return false;
             }
 
-            QuizProgDataRoot prog1 = JsonConvert.DeserializeObject<QuizProgDataRoot>(AtomicIO.AtomicRead(progressFile1));
+            QuizProgDataRoot prog1;
+            QuizProgDataRoot prog2;
 
-            QuizProgDataRoot prog2 = JsonConvert.DeserializeObject<QuizProgDataRoot>(AtomicIO.AtomicRead(progressFile2));
+            try
+            {
+                prog1 = JsonConvert.DeserializeObject<QuizProgDataRoot>(AtomicIO.AtomicRead(progressFile1));
+
+                prog2 = JsonConvert.DeserializeObject<QuizProgDataRoot>(AtomicIO.AtomicRead(progressFile2));
+            }
+            catch (AtomicException ex)
+            {
+                MessageBox.Show("Could not load progress data files:\r\n\r\n" + ex.ToString(), "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
 
             QuizProgDataRoot merged = Merge(prog1, prog2);
 
