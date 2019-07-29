@@ -80,7 +80,7 @@ namespace SteelQuiz
                 {
                     // AtomicWrite operation was interrupted when replacing original file with atomic copy (but atomic copy is finished), 
                     //  move atomic copy to original path
-
+#warning if path never existed, then this might potentially return a corrupt atomic copy
                     File.Move(atomicPath, path);
                 }
             }
