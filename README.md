@@ -21,8 +21,7 @@ You can create and edit quizzes, with the built in quiz editor. It has full supp
 Is there a spelling error in the quiz? Or do you want to add a synonym to a word? No problem - just click "Fix quiz errors" while practising, and change the quiz as you like. It only takes a few seconds.
 
 ### Automatic updates
-SteelQuiz automatically searches for, and offers to download and install updates. You only need to click one button to update. It is recommended to always install all available updates, as they often contain important bug fixes and improvements.
-**Note:** SteelQuiz might automatically download and install updates without asking, if it is considered necessary.  
+SteelQuiz automatically downloads and installs updates, or offers to download them, depending on your preferences. It is recommended to always install all available updates, as they often contain important bug fixes and improvements.    
 &NewLine;   
 &NewLine;   
 &NewLine;   
