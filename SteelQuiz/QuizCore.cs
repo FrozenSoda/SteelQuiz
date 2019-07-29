@@ -73,11 +73,7 @@ namespace SteelQuiz
                 }
             }
 
-            dynamic quiz;
-            using (var reader = new StreamReader(quizPath))
-            {
-                quiz = JsonConvert.DeserializeObject<Quiz>(reader.ReadToEnd());
-            }
+            dynamic quiz = JsonConvert.DeserializeObject<Quiz>(AtomicIO.AtomicRead(quizPath));
 
             QuizPath = quizPath;
 
@@ -129,10 +125,7 @@ namespace SteelQuiz
             {
                 foreach (var file in Directory.GetFiles(quizFolder).Where(x => x.EndsWith(QUIZ_EXTENSION)))
                 {
-                    using (var reader = new StreamReader(file))
-                    {
-                        quiz = JsonConvert.DeserializeObject<Quiz>(reader.ReadToEnd());
-                    }
+                    quiz = JsonConvert.DeserializeObject<Quiz>(AtomicIO.AtomicRead(file));
 
                     if (quiz != null && quiz.GUID == quizGuid)
                     {
@@ -246,11 +239,7 @@ namespace SteelQuiz
 
         public static ChkUpgradeProgressDataResult ChkUpgradeProgressData()
         {
-            dynamic cfgDz;
-            using (var reader = new StreamReader(ConfigManager.Config.SyncConfig.QuizProgressPath))
-            {
-                cfgDz = JsonConvert.DeserializeObject(reader.ReadToEnd());
-            }
+            dynamic cfgDz = JsonConvert.DeserializeObject(AtomicIO.AtomicRead(ConfigManager.Config.SyncConfig.QuizProgressPath));
             var progressVer = SUtil.PropertyDefined(cfgDz.FileFormatVersion) && cfgDz.FileFormatVersion != null
                 ? new Version((string)cfgDz.FileFormatVersion) : new Version(1, 0, 0);
             var currVer = new Version(MetaData.QUIZ_FILE_FORMAT_VERSION);
@@ -368,11 +357,7 @@ namespace SteelQuiz
                 {
                     return false;
                 }
-                QuizProgDataRoot quizProgDataRoot;
-                using (var reader = new StreamReader(ConfigManager.Config.SyncConfig.QuizProgressPath))
-                {
-                    quizProgDataRoot = JsonConvert.DeserializeObject<QuizProgDataRoot>(reader.ReadToEnd());
-                }
+                QuizProgDataRoot quizProgDataRoot = JsonConvert.DeserializeObject<QuizProgDataRoot>(AtomicIO.AtomicRead(ConfigManager.Config.SyncConfig.QuizProgressPath));
 
                 //find progress for current quiz
                 bool found = false;
@@ -600,10 +585,7 @@ namespace SteelQuiz
             QuizProgDataRoot cfgDz;
             if (File.Exists(ConfigManager.Config.SyncConfig.QuizProgressPath))
             {
-                using (var reader = new StreamReader(ConfigManager.Config.SyncConfig.QuizProgressPath))
-                {
-                    cfgDz = JsonConvert.DeserializeObject<QuizProgDataRoot>(reader.ReadToEnd());
-                }
+                cfgDz = JsonConvert.DeserializeObject<QuizProgDataRoot>(AtomicIO.AtomicRead(ConfigManager.Config.SyncConfig.QuizProgressPath));
 
                 //find progress for current quiz
                 bool found = false;

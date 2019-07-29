@@ -223,10 +223,7 @@ namespace SteelQuiz.QuizEditor
                     return;
                 }
 
-                using (var reader = new StreamReader(QuizPath))
-                {
-                    quiz = JsonConvert.DeserializeObject<Quiz>(reader.ReadToEnd());
-                }
+                quiz = JsonConvert.DeserializeObject<Quiz>(AtomicIO.AtomicRead(QuizPath));
             }
 
             if (quizPath != null)

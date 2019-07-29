@@ -45,17 +45,9 @@ namespace SteelQuiz
                 return false;
             }
 
-            QuizProgDataRoot prog1;
-            using (var reader = new StreamReader(progressFile1))
-            {
-                prog1 = JsonConvert.DeserializeObject<QuizProgDataRoot>(reader.ReadToEnd());
-            }
+            QuizProgDataRoot prog1 = JsonConvert.DeserializeObject<QuizProgDataRoot>(AtomicIO.AtomicRead(progressFile1));
 
-            QuizProgDataRoot prog2;
-            using (var reader = new StreamReader(progressFile2))
-            {
-                prog2 = JsonConvert.DeserializeObject<QuizProgDataRoot>(reader.ReadToEnd());
-            }
+            QuizProgDataRoot prog2 = JsonConvert.DeserializeObject<QuizProgDataRoot>(AtomicIO.AtomicRead(progressFile2));
 
             QuizProgDataRoot merged = Merge(prog1, prog2);
 

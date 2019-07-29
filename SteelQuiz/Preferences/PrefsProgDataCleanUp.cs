@@ -157,11 +157,7 @@ namespace SteelQuiz.Preferences
         private int CleanUp()
         {
             IEnumerable<Guid> guidsToRemove = QuizProgDatasToRemove();
-            QuizProgDataRoot progDataRoot;
-            using (var reader = new StreamReader(ConfigManager.Config.SyncConfig.QuizProgressPath))
-            {
-                progDataRoot = JsonConvert.DeserializeObject<QuizProgDataRoot>(reader.ReadToEnd());
-            }
+            QuizProgDataRoot progDataRoot = JsonConvert.DeserializeObject<QuizProgDataRoot>(AtomicIO.AtomicRead(ConfigManager.Config.SyncConfig.QuizProgressPath));
 
             var progDatasToRemove = new List<QuizProgData>();
 
@@ -190,11 +186,7 @@ namespace SteelQuiz.Preferences
         {
             List<Guid> toRemove = new List<Guid>();
 
-            QuizProgDataRoot progDataRoot;
-            using (var reader = new StreamReader(ConfigManager.Config.SyncConfig.QuizProgressPath))
-            {
-                progDataRoot = JsonConvert.DeserializeObject<QuizProgDataRoot>(reader.ReadToEnd());
-            }
+            QuizProgDataRoot progDataRoot = JsonConvert.DeserializeObject<QuizProgDataRoot>(AtomicIO.AtomicRead(ConfigManager.Config.SyncConfig.QuizProgressPath));
 
             foreach (var quizProg in progDataRoot.QuizProgDatas)
             {
@@ -211,11 +203,7 @@ namespace SteelQuiz.Preferences
 
                     foreach (var quizFile in Directory.GetFiles(quizFolder, $"*{QuizCore.QUIZ_EXTENSION}", SearchOption.TopDirectoryOnly))
                     {
-                        Quiz quiz;
-                        using (var reader = new StreamReader(quizFile))
-                        {
-                            quiz = JsonConvert.DeserializeObject<Quiz>(reader.ReadToEnd());
-                        }
+                        Quiz quiz = JsonConvert.DeserializeObject<Quiz>(AtomicIO.AtomicRead(quizFile));
 
                         if (quiz.GUID.Equals(guid))
                         {
