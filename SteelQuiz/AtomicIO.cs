@@ -25,6 +25,24 @@ using System.Threading.Tasks;
 
 namespace SteelQuiz
 {
+    public class AtomicException : Exception
+    {
+        public AtomicException() : base()
+        {
+
+        }
+
+        public AtomicException(string message) : base(message)
+        {
+
+        }
+
+        public AtomicException(string message, Exception inner) : base(message, inner)
+        {
+
+        }
+    }
+
     /// <summary>
     /// This class provides functions for atomic write/read, to prevent file corruption/data loss during crashes
     /// </summary>
@@ -51,12 +69,19 @@ namespace SteelQuiz
 
             File.WriteAllBytes(atomicPath, data);
 
+            string pathOrig = path + ".atomic_orig";
+
             if (File.Exists(path))
             {
-                File.Delete(path);
+                File.Move(path, pathOrig);
             }
 
             File.Move(atomicPath, path);
+
+            if (File.Exists(pathOrig))
+            {
+                File.Delete(pathOrig);
+            }
         }
 
         /// <summary>
@@ -64,24 +89,49 @@ namespace SteelQuiz
         /// </summary>
         /// <param name="path">The path to the text file</param>
         /// <returns>Returns the data from the text file specified</returns>
+        /// <exception cref="AtomicException">Thrown if no intact file could be found, or if path doesn't exist</exception>
         public static string AtomicRead(string path)
         {
             string atomicPath = path + ".atomic_copy";
+            string pathOrig = path + ".atomic_orig";
 
             if (File.Exists(atomicPath))
             {
+                // AtomicWrite operation was interrupted
+
                 if (File.Exists(path))
                 {
-                    // AtomicWrite operation was interrupted when writing to atomic copy, remove atomic copy
+                    // Operation was interrupted while writing to atomic copy, so remove it
 
                     File.Delete(atomicPath);
                 }
                 else
                 {
-                    // AtomicWrite operation was interrupted when replacing original file with atomic copy (but atomic copy is finished), 
-                    //  move atomic copy to original path
-#warning if path never existed, then this might potentially return a corrupt atomic copy
-                    File.Move(atomicPath, path);
+                    if (File.Exists(pathOrig))
+                    {
+                        // Operation was interrupted while swapping atomic copy and original, but atomic copy is finished, so use atomic copy
+
+                        File.Delete(pathOrig);
+                        File.Move(atomicPath, path);
+                    }
+                    else
+                    {
+                        // Operation was interrupted while writing to atomic copy, and no original file exists, so there's no file to read
+
+                        throw new AtomicException(
+                            "Last atomic write operation to this file was interrupted while writing to atomic copy, " +
+                            "and no original file exists, so there's no file to read");
+                    }
+                }
+            }
+            else
+            {
+                if (!File.Exists(path))
+                {
+                    // Write operation didn't even finish, or file doesn't exist
+
+                    throw new AtomicException(
+                        "Last atomic write operation to this file didn't finish, or file doesn't exist");
                 }
             }
 
