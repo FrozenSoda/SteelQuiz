@@ -47,16 +47,16 @@ namespace SteelQuiz
         /// <param name="data">The data to write to the file</param>
         public static void AtomicWrite(string path, byte[] data)
         {
-            string tempPath = path + ".atomic_copy";
+            string atomicPath = path + ".atomic_copy";
 
-            File.WriteAllBytes(tempPath, data);
+            File.WriteAllBytes(atomicPath, data);
 
             if (File.Exists(path))
             {
                 File.Delete(path);
             }
 
-            File.Move(tempPath, path);
+            File.Move(atomicPath, path);
         }
 
         /// <summary>
@@ -66,31 +66,28 @@ namespace SteelQuiz
         /// <returns>Returns the data from the text file specified</returns>
         public static string AtomicRead(string path)
         {
-            string tempPath = path + ".atomic_copy";
+            string atomicPath = path + ".atomic_copy";
 
-            if (File.Exists(tempPath))
+            if (File.Exists(atomicPath))
             {
-                // AtomicWrite operation was interrupted, return atomic_copy
-
-                string text = File.ReadAllText(tempPath);
-
                 if (File.Exists(path))
                 {
-                    // Delete corrupted file
-                    File.Delete(path);
+                    // AtomicWrite operation was interrupted when writing to atomic copy, remove atomic copy
+
+                    File.Delete(atomicPath);
                 }
+                else
+                {
+                    // AtomicWrite operation was interrupted when replacing original file with atomic copy (but atomic copy is finished), 
+                    //  move atomic copy to original path
 
-                // Restore atomic_copy to normal path
-                File.Move(tempPath, path);
-
-                return text;
+                    File.Move(atomicPath, path);
+                }
             }
-            else
-            {
-                string text = File.ReadAllText(path);
 
-                return text;
-            }
+            string text = File.ReadAllText(path);
+
+            return text;
         }
     }
 }
