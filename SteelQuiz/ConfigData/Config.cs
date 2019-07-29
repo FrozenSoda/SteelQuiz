@@ -79,12 +79,6 @@ namespace SteelQuiz.ConfigData
         /// </summary>
         public Statistics Statistics { get; set; } = new Statistics();
 
-        /// <summary>
-        /// The latest version of SteelQuiz that has been used with automatic updates enabled. Used to make sure the user gets asked to enable/disable automatic updates
-        ///  when downgrading SteelQuiz or starting it for the first time
-        /// </summary>
-        public string LatestVersionAcceptedFullAutoUpdate { get; set; }
-
         public Config()
         {
             FileFormatVersion = MetaData.QUIZ_FILE_FORMAT_VERSION;

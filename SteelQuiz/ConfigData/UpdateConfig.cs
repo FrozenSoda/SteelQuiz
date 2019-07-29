@@ -50,8 +50,30 @@ namespace SteelQuiz.ConfigData
 
     public class UpdateConfig
     {
+        /// <summary>
+        /// The mode for automatic updates
+        /// </summary>
         public AutomaticUpdateMode AutoUpdateMode { get; set; } = AutomaticUpdateMode.CheckDownloadInstall;
+
+        /// <summary>
+        /// The delay until the Update, Not now and Close button becomes enabled on the update dialog. Used to prevent misclicks.
+        /// </summary>
         public int UpdateAvailableButtonEnableDelay_s { get; set; } = 3;
+
+        /// <summary>
+        /// The update channel to be used when updating
+        /// </summary>
         public UpdateChannel UpdateChannel { get; set; } = UpdateChannel.Stable;
+
+        /// <summary>
+        /// The latest version of SteelQuiz that has been used with automatic updates enabled. Used to make sure the user gets asked to enable/disable automatic updates
+        ///  when downgrading SteelQuiz
+        /// </summary>
+        public string LatestVersionAcceptedFullAutoUpdate { get; set; }
+
+        /// <summary>
+        /// The version of the update to skip. If no update is skipped, it is null
+        /// </summary>
+        public string VersionSkip { get; set; }
     }
 }

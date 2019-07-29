@@ -92,6 +92,17 @@ namespace SteelQuiz
 
                 if (uargs != null && uargs.IsUpdateAvailable)
                 {
+#warning unfinished
+                    if (ConfigManager.Config.UpdateConfig.LatestVersionAcceptedFullAutoUpdate != null)
+                    {
+                        var acceptVer = new Version(ConfigManager.Config.UpdateConfig.LatestVersionAcceptedFullAutoUpdate);
+                        if (acceptVer.CompareTo(new Version(Application.ProductVersion)) > 0)
+                        {
+
+                        }
+                    }
+#warning end of unfinished warning
+
                     if (uargs.Mandatory && uargs.UpdateMode == Mode.Forced)
                     {
                         var msg = MessageBox.Show("A mandatory software update is available. You can not continue using SteelQuiz without updating. Press OK to " +
