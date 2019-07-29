@@ -73,7 +73,16 @@ namespace SteelQuiz
                 }
             }
 
-            dynamic quiz = JsonConvert.DeserializeObject<Quiz>(AtomicIO.AtomicRead(quizPath));
+            dynamic quiz;
+            try
+            {
+                quiz = JsonConvert.DeserializeObject<Quiz>(AtomicIO.AtomicRead(quizPath));
+            }
+            catch (AtomicException ex)
+            {
+                // This should never be reached as quizPath exists
+                throw ex;
+            }
 
             QuizPath = quizPath;
 
@@ -125,8 +134,15 @@ namespace SteelQuiz
             {
                 foreach (var file in Directory.GetFiles(quizFolder).Where(x => x.EndsWith(QUIZ_EXTENSION)))
                 {
-                    string quizRaw = AtomicIO.AtomicRead(file);
-                    quiz = JsonConvert.DeserializeObject<Quiz>(quizRaw);
+                    try
+                    {
+                        string quizRaw = AtomicIO.AtomicRead(file);
+                        quiz = JsonConvert.DeserializeObject<Quiz>(quizRaw);
+                    }
+                    catch (AtomicException)
+                    {
+                        continue;
+                    }
 
                     if (quiz != null && quiz.GUID == quizGuid)
                     {

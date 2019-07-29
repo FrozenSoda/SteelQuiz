@@ -49,8 +49,16 @@ namespace SteelQuiz
             {
                 try
                 {
-                    Config = JsonConvert.DeserializeObject<Config>(AtomicIO.AtomicRead(CONFIG_PATH));
+                    try
+                    {
+                        Config = JsonConvert.DeserializeObject<Config>(AtomicIO.AtomicRead(CONFIG_PATH));
+                    }
+                    catch (AtomicException)
+                    {
+                        Config = new Config();
+                    }
 
+                    /*
                     if (Config == null)
                     {
                         var msg = MessageBox.Show("The configuration file for SteelQuiz is corrupted, and must be reset. Reset configuration?", "SteelQuiz", MessageBoxButtons.YesNo,
@@ -70,6 +78,7 @@ namespace SteelQuiz
                             return false;
                         }
                     }
+                    */
                     return true;
                 }
                 catch (Exception ex)

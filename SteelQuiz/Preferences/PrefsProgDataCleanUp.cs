@@ -157,7 +157,15 @@ namespace SteelQuiz.Preferences
         private int CleanUp()
         {
             IEnumerable<Guid> guidsToRemove = QuizProgDatasToRemove();
-            QuizProgDataRoot progDataRoot = JsonConvert.DeserializeObject<QuizProgDataRoot>(AtomicIO.AtomicRead(ConfigManager.Config.SyncConfig.QuizProgressPath));
+            QuizProgDataRoot progDataRoot;
+            try
+            {
+                progDataRoot = JsonConvert.DeserializeObject<QuizProgDataRoot>(AtomicIO.AtomicRead(ConfigManager.Config.SyncConfig.QuizProgressPath));
+            }
+            catch (AtomicException)
+            {
+                return 0;
+            }
 
             var progDatasToRemove = new List<QuizProgData>();
 
@@ -186,7 +194,15 @@ namespace SteelQuiz.Preferences
         {
             List<Guid> toRemove = new List<Guid>();
 
-            QuizProgDataRoot progDataRoot = JsonConvert.DeserializeObject<QuizProgDataRoot>(AtomicIO.AtomicRead(ConfigManager.Config.SyncConfig.QuizProgressPath));
+            QuizProgDataRoot progDataRoot;
+            try
+            {
+                progDataRoot = JsonConvert.DeserializeObject<QuizProgDataRoot>(AtomicIO.AtomicRead(ConfigManager.Config.SyncConfig.QuizProgressPath));
+            }
+            catch (AtomicException)
+            {
+                return new List<Guid>();
+            }
 
             foreach (var quizProg in progDataRoot.QuizProgDatas)
             {

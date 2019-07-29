@@ -25,6 +25,10 @@ using System.Threading.Tasks;
 
 namespace SteelQuiz
 {
+    /// <summary>
+    /// Thrown when AtomicRead cannot retrieve the file specified, which is caused either by (I) no write operation to the file has ever finished or (II)
+    ///  the file doesn't exist
+    /// </summary>
     public class AtomicException : Exception
     {
         public AtomicException() : base()
