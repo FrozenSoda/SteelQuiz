@@ -74,10 +74,14 @@ namespace SteelQuiz
                 }
                 catch (Exception ex)
                 {
+#if DEBUG
+                    throw ex;
+#else
                     MessageBox.Show("An error occurred while loading the config:\r\n\r\n" + ex.ToString(), "SteelQuiz", MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                     Application.Exit();
                     return false;
+#endif
                 }
             }
             else

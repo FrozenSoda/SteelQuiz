@@ -72,7 +72,8 @@ namespace SteelQuiz
             {
                 // AtomicWrite operation was interrupted, return atomic_copy
 
-                string data = File.ReadAllText(tempPath);
+                byte[] data = File.ReadAllBytes(tempPath);
+                string text = Encoding.Unicode.GetString(data);
 
                 if (File.Exists(path))
                 {
@@ -83,13 +84,14 @@ namespace SteelQuiz
                 // Restore atomic_copy to normal path
                 File.Move(tempPath, path);
 
-                return data;
+                return text;
             }
             else
             {
-                string data = File.ReadAllText(path);
+                byte[] data = File.ReadAllBytes(path);
+                string text = Encoding.Unicode.GetString(data);
 
-                return data;
+                return text;
             }
         }
     }
