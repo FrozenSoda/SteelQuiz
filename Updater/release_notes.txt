@@ -3,6 +3,7 @@ v3.2.0-pre5 (v3.2.0.13):
 - SteelQuiz now uses atomic file write/read to prevent data loss and file corruption.
 - When downgrading SteelQuiz, it will not auto-update until a new version has been released (it will not update to the latest version at the time of downgrading).
 - An option has been added to disable automatic updates, if someone wants that for some reason.
+- .NET Framework 4.7.2 is now required to use SteelQuiz.
 - Bug fixes and improvements.
 
 v3.2.0-pre4 (v3.2.0.6):
