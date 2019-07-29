@@ -37,7 +37,7 @@ namespace SteelQuiz
         /// <param name="data">The string data to write to the file</param>
         public static void AtomicWrite(string path, string data)
         {
-            AtomicWrite(path, Encoding.Default.GetBytes(data));
+            AtomicWrite(path, Encoding.Unicode.GetBytes(data));
         }
 
         /// <summary>
