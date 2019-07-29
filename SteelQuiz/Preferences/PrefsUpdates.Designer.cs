@@ -47,6 +47,7 @@ namespace SteelQuiz.Preferences
         private void InitializeComponent()
         {
             this.pnl_autoUpdate = new System.Windows.Forms.Panel();
+            this.rdo_doNotUpdate = new System.Windows.Forms.RadioButton();
             this.rdo_notifyUpdate = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
             this.rdo_autoUpdate = new System.Windows.Forms.RadioButton();
@@ -58,7 +59,6 @@ namespace SteelQuiz.Preferences
             this.rdo_chDev = new System.Windows.Forms.RadioButton();
             this.rdo_chStable = new System.Windows.Forms.RadioButton();
             this.label5 = new System.Windows.Forms.Label();
-            this.rdo_doNotUpdate = new System.Windows.Forms.RadioButton();
             this.pnl_autoUpdate.SuspendLayout();
             this.pnl_updateDialog.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_buttonEnableDelay)).BeginInit();
@@ -77,6 +77,19 @@ namespace SteelQuiz.Preferences
             this.pnl_autoUpdate.Size = new System.Drawing.Size(635, 155);
             this.pnl_autoUpdate.TabIndex = 2;
             // 
+            // rdo_doNotUpdate
+            // 
+            this.rdo_doNotUpdate.AutoSize = true;
+            this.rdo_doNotUpdate.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdo_doNotUpdate.ForeColor = System.Drawing.Color.White;
+            this.rdo_doNotUpdate.Location = new System.Drawing.Point(15, 100);
+            this.rdo_doNotUpdate.Name = "rdo_doNotUpdate";
+            this.rdo_doNotUpdate.Size = new System.Drawing.Size(425, 24);
+            this.rdo_doNotUpdate.TabIndex = 2;
+            this.rdo_doNotUpdate.Text = "Do not check for updates automatically (not recommended)";
+            this.rdo_doNotUpdate.UseVisualStyleBackColor = true;
+            this.rdo_doNotUpdate.CheckedChanged += new System.EventHandler(this.Rdo_doNotUpdate_CheckedChanged);
+            // 
             // rdo_notifyUpdate
             // 
             this.rdo_notifyUpdate.AutoSize = true;
@@ -87,6 +100,7 @@ namespace SteelQuiz.Preferences
             this.rdo_notifyUpdate.Name = "rdo_notifyUpdate";
             this.rdo_notifyUpdate.Size = new System.Drawing.Size(528, 24);
             this.rdo_notifyUpdate.TabIndex = 1;
+            this.rdo_notifyUpdate.TabStop = true;
             this.rdo_notifyUpdate.Text = "Check for updates, but let me choose whether to download and install them";
             this.rdo_notifyUpdate.UseVisualStyleBackColor = true;
             this.rdo_notifyUpdate.CheckedChanged += new System.EventHandler(this.Rdo_notifyUpdate_CheckedChanged);
@@ -109,9 +123,9 @@ namespace SteelQuiz.Preferences
             this.rdo_autoUpdate.ForeColor = System.Drawing.Color.White;
             this.rdo_autoUpdate.Location = new System.Drawing.Point(15, 40);
             this.rdo_autoUpdate.Name = "rdo_autoUpdate";
-            this.rdo_autoUpdate.Size = new System.Drawing.Size(319, 24);
+            this.rdo_autoUpdate.Size = new System.Drawing.Size(430, 24);
             this.rdo_autoUpdate.TabIndex = 0;
-            this.rdo_autoUpdate.Text = "Automatically download and install updates";
+            this.rdo_autoUpdate.Text = "Automatically download and install updates (recommended)";
             this.rdo_autoUpdate.UseVisualStyleBackColor = true;
             this.rdo_autoUpdate.CheckedChanged += new System.EventHandler(this.Rdo_autoUpdate_CheckedChanged);
             // 
@@ -216,19 +230,6 @@ namespace SteelQuiz.Preferences
             this.label5.Size = new System.Drawing.Size(149, 25);
             this.label5.TabIndex = 0;
             this.label5.Text = "Update Channel";
-            // 
-            // rdo_doNotUpdate
-            // 
-            this.rdo_doNotUpdate.AutoSize = true;
-            this.rdo_doNotUpdate.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdo_doNotUpdate.ForeColor = System.Drawing.Color.White;
-            this.rdo_doNotUpdate.Location = new System.Drawing.Point(15, 100);
-            this.rdo_doNotUpdate.Name = "rdo_doNotUpdate";
-            this.rdo_doNotUpdate.Size = new System.Drawing.Size(432, 24);
-            this.rdo_doNotUpdate.TabIndex = 2;
-            this.rdo_doNotUpdate.Text = "Do not check for updates automatically (NOT recommended)";
-            this.rdo_doNotUpdate.UseVisualStyleBackColor = true;
-            this.rdo_doNotUpdate.CheckedChanged += new System.EventHandler(this.Rdo_doNotUpdate_CheckedChanged);
             // 
             // PrefsUpdates
             // 

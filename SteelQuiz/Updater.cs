@@ -97,7 +97,7 @@ namespace SteelQuiz
                         ConfigManager.SaveConfig();
 
                         MessageBox.Show("It seems that you have downgraded SteelQuiz, so SteelQuiz will not automatically update to the latest version " +
-                            "available now. As soon as a newer update is released than the latest one available now, the automatic updates will resume though. " +
+                            "available now.\r\n\r\nAs soon as a newer update is released than the latest one available now, the automatic updates will resume.\r\n\r\n" +
                             "This can be changed at any time in Preferences > Updates.", "Skipping available update - SteelQuiz",
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
