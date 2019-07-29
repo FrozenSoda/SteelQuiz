@@ -28,16 +28,62 @@ namespace SteelQuiz.ConfigData
     public class Config
     {
         public string FileFormatVersion { get; set; }
+
+        /// <summary>
+        /// True if the user has accepted the terms of use when starting the application for the first time, otherwise false.
+        /// </summary>
         public bool AcceptedTermsOfUse { get; set; } = false;
+
+        /// <summary>
+        /// The GUID of the last quiz practised
+        /// </summary>
         public Guid LastQuiz { get; set; } = Guid.Empty;
+
+        /// <summary>
+        /// The set application theme
+        /// </summary>
         public ThemeCore.Theme Theme { get; set; } = ThemeCore.Theme.Light;
+
+        /// <summary>
+        /// True if the application should use the same theme as Windows 10 apps
+        /// </summary>
         public bool SyncWin10Theme { get; set; } = true;
+
+        /// <summary>
+        /// The full name of the user
+        /// </summary>
         public string FullName { get; set; }
+
+        /// <summary>
+        /// True if name is allowed to be displayed on welcome messages on the welcome screen, otherwise false
+        /// </summary>
         public bool ShowNameOnWelcomeScreen { get; set; } = true;
+
+        /// <summary>
+        /// The config for the quiz editor
+        /// </summary>
         public QuizEditorConfig QuizEditorConfig { get; set; } = new QuizEditorConfig();
+
+        /// <summary>
+        /// The config for updates
+        /// </summary>
         public UpdateConfig UpdateConfig { get; set; } = new UpdateConfig();
+
+        /// <summary>
+        /// The config for synchronization
+        /// </summary>
         public SyncConfig SyncConfig { get; set; } = new SyncConfig();
+
+        /// <summary>
+        /// Statistics that have been collected
+        /// </summary>
         public Statistics Statistics { get; set; } = new Statistics();
+
+        /// <summary>
+        /// The latest version of SteelQuiz that has been used with automatic updates enabled. Used to make sure the user gets asked to enable/disable automatic updates
+        ///  when downgrading SteelQuiz or starting it for the first time
+        /// </summary>
+        public string LatestVersionAcceptedFullAutoUpdate { get; set; }
 
         public Config()
         {
