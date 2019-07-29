@@ -125,7 +125,8 @@ namespace SteelQuiz
             {
                 foreach (var file in Directory.GetFiles(quizFolder).Where(x => x.EndsWith(QUIZ_EXTENSION)))
                 {
-                    quiz = JsonConvert.DeserializeObject<Quiz>(AtomicIO.AtomicRead(file));
+                    string quizRaw = AtomicIO.AtomicRead(file);
+                    quiz = JsonConvert.DeserializeObject<Quiz>(quizRaw);
 
                     if (quiz != null && quiz.GUID == quizGuid)
                     {

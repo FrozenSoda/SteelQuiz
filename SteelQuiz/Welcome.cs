@@ -279,19 +279,23 @@ namespace SteelQuiz
 
         private void btn_continueLast_Click(object sender, EventArgs e)
         {
+#if !DEBUG
             try
             {
+#endif
                 var load = QuizCore.Load(ConfigManager.Config.LastQuiz);
                 if (!load)
                 {
                     return;
                 }
+#if !DEBUG
             }
             catch (Exception ex)
             {
                 MessageBox.Show("The quiz file could not be loaded:\r\n\r\n" + ex.ToString(), "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+#endif
 
             Hide();
             Program.frmInQuiz = new InQuiz();

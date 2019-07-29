@@ -37,7 +37,7 @@ namespace SteelQuiz
         /// <param name="data">The string data to write to the file</param>
         public static void AtomicWrite(string path, string data)
         {
-            AtomicWrite(path, Encoding.Unicode.GetBytes(data));
+            AtomicWrite(path, Encoding.UTF8.GetBytes(data));
         }
 
         /// <summary>
@@ -72,8 +72,7 @@ namespace SteelQuiz
             {
                 // AtomicWrite operation was interrupted, return atomic_copy
 
-                byte[] data = File.ReadAllBytes(tempPath);
-                string text = Encoding.Unicode.GetString(data);
+                string text = File.ReadAllText(tempPath);
 
                 if (File.Exists(path))
                 {
@@ -88,8 +87,7 @@ namespace SteelQuiz
             }
             else
             {
-                byte[] data = File.ReadAllBytes(path);
-                string text = Encoding.Unicode.GetString(data);
+                string text = File.ReadAllText(path);
 
                 return text;
             }
