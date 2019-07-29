@@ -83,6 +83,27 @@ namespace SteelQuiz
 
         private static void AutoUpdater_CheckForUpdateEvent(UpdateInfoEventArgs uargs)
         {
+            if ((CurrentUpdateMode == UpdateMode.Normal || CurrentUpdateMode == UpdateMode.Notification) && uargs != null && uargs.IsUpdateAvailable)
+            {
+                if (ConfigManager.Config.UpdateConfig.LatestVersionRun != null
+                    && ConfigManager.Config.UpdateConfig.VersionSkip != uargs.CurrentVersion.ToString())
+                {
+                    var acceptVer = new Version(ConfigManager.Config.UpdateConfig.LatestVersionRun);
+                    if (acceptVer.CompareTo(new Version(Application.ProductVersion)) > 0)
+                    {
+                        // user has downgraded, skip available update
+
+                        ConfigManager.Config.UpdateConfig.VersionSkip = uargs.CurrentVersion.ToString();
+                        ConfigManager.SaveConfig();
+
+                        MessageBox.Show("It seems that you have downgraded SteelQuiz, so SteelQuiz will not automatically update to the latest version " +
+                            "available now. As soon as a newer update is released than the latest one available now, the automatic updates will resume though. " +
+                            "This can be changed at any time in Preferences > Updates.", "Skipping available update - SteelQuiz",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+
             if (CurrentUpdateMode == UpdateMode.Normal)
             {
                 if (ConfigManager.Config.UpdateConfig.AutoUpdateMode == ConfigData.AutomaticUpdateMode.Disabled)
@@ -92,16 +113,19 @@ namespace SteelQuiz
 
                 if (uargs != null && uargs.IsUpdateAvailable)
                 {
-#warning unfinished
-                    if (ConfigManager.Config.UpdateConfig.LatestVersionAcceptedFullAutoUpdate != null)
+                    if (ConfigManager.Config.UpdateConfig.VersionSkip == uargs.CurrentVersion.ToString())
                     {
-                        var acceptVer = new Version(ConfigManager.Config.UpdateConfig.LatestVersionAcceptedFullAutoUpdate);
-                        if (acceptVer.CompareTo(new Version(Application.ProductVersion)) > 0)
-                        {
-
-                        }
+                        return;
                     }
-#warning end of unfinished warning
+                    else
+                    {
+                        if (ConfigManager.Config.UpdateConfig.VersionSkip != null)
+                        {
+                            ConfigManager.Config.UpdateConfig.VersionSkip = null;
+                        }
+                        ConfigManager.Config.UpdateConfig.LatestVersionRun = uargs.InstalledVersion.ToString();
+                        ConfigManager.SaveConfig();
+                    }
 
                     if (uargs.Mandatory && uargs.UpdateMode == Mode.Forced)
                     {
@@ -168,6 +192,20 @@ namespace SteelQuiz
 
                 if (uargs != null && uargs.IsUpdateAvailable)
                 {
+                    if (ConfigManager.Config.UpdateConfig.VersionSkip == uargs.CurrentVersion.ToString())
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        if (ConfigManager.Config.UpdateConfig.VersionSkip != null)
+                        {
+                            ConfigManager.Config.UpdateConfig.VersionSkip = null;
+                        }
+                        ConfigManager.Config.UpdateConfig.LatestVersionRun = uargs.InstalledVersion.ToString();
+                        ConfigManager.SaveConfig();
+                    }
+
                     Program.frmWelcome.tmr_chkUpdate.Interval = 2 * 60 * 60 * 1000; // dont check for updates again for 2h
 
                     var notifyIcon = new NotifyIcon
@@ -272,6 +310,12 @@ namespace SteelQuiz
             return newestChannel;
         }
 
+        private static ChannelVersion NewestUpdateChannel()
+        {
+            return NewestUpdateChannel("https://raw.githubusercontent.com/steel9/SteelQuiz/master/Updater/update_meta.xml",
+                "https://raw.githubusercontent.com/steel9/SteelQuiz/master/Updater/channel_dev/update_meta.xml");
+        }
+
         /// <summary>
         /// Checks for updates, and eventually downloads/installs them/does other stuff, depending on the update mode
         /// </summary>
@@ -298,8 +342,7 @@ namespace SteelQuiz
                         }
                         else if (ConfigManager.Config.UpdateConfig.UpdateChannel == ConfigData.UpdateChannel.Development)
                         {
-                            var newestChannel = NewestUpdateChannel("https://raw.githubusercontent.com/steel9/SteelQuiz/master/Updater/update_meta.xml",
-                                "https://raw.githubusercontent.com/steel9/SteelQuiz/master/Updater/channel_dev/update_meta.xml");
+                            var newestChannel = NewestUpdateChannel();
                             AutoUpdater.Start(newestChannel.MetaURL);
                         }
 

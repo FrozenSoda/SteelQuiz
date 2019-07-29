@@ -66,10 +66,9 @@ namespace SteelQuiz.ConfigData
         public UpdateChannel UpdateChannel { get; set; } = UpdateChannel.Stable;
 
         /// <summary>
-        /// The latest version of SteelQuiz that has been used with automatic updates enabled. Used to make sure the user gets asked to enable/disable automatic updates
-        ///  when downgrading SteelQuiz
+        /// The latest version of SteelQuiz that has been used. Used to make sure the application doesn't automatically get updated when the user downgrades
         /// </summary>
-        public string LatestVersionAcceptedFullAutoUpdate { get; set; }
+        public string LatestVersionRun { get; set; }
 
         /// <summary>
         /// The version of the update to skip. If no update is skipped, it is null
