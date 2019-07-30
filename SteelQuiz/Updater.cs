@@ -104,30 +104,26 @@ namespace SteelQuiz
                 }
             }
 
+            if (ConfigManager.Config.UpdateConfig.VersionSkip != uargs.CurrentVersion.ToString())
+            {
+                if (ConfigManager.Config.UpdateConfig.VersionSkip != null)
+                {
+                    ConfigManager.Config.UpdateConfig.VersionSkip = null;
+                }
+                ConfigManager.Config.UpdateConfig.LatestVersionRun = uargs.InstalledVersion.ToString();
+                ConfigManager.SaveConfig();
+            }
+
             if (CurrentUpdateMode == UpdateMode.Normal)
             {
-                if (ConfigManager.Config.UpdateConfig.AutoUpdateMode == ConfigData.AutomaticUpdateMode.Disabled)
+                if (ConfigManager.Config.UpdateConfig.AutoUpdateMode == ConfigData.AutomaticUpdateMode.Disabled
+                    || ConfigManager.Config.UpdateConfig.VersionSkip == uargs.CurrentVersion.ToString())
                 {
                     return;
                 }
 
                 if (uargs != null && uargs.IsUpdateAvailable)
                 {
-#warning LatestVersionRun only updated if an update is available!
-                    if (ConfigManager.Config.UpdateConfig.VersionSkip == uargs.CurrentVersion.ToString())
-                    {
-                        return;
-                    }
-                    else
-                    {
-                        if (ConfigManager.Config.UpdateConfig.VersionSkip != null)
-                        {
-                            ConfigManager.Config.UpdateConfig.VersionSkip = null;
-                        }
-                        ConfigManager.Config.UpdateConfig.LatestVersionRun = uargs.InstalledVersion.ToString();
-                        ConfigManager.SaveConfig();
-                    }
-
                     if (uargs.Mandatory && uargs.UpdateMode == Mode.Forced)
                     {
                         var msg = MessageBox.Show("A mandatory software update is available. You can not continue using SteelQuiz without updating. Press OK to " +
@@ -186,27 +182,14 @@ namespace SteelQuiz
             }
             else if (CurrentUpdateMode == UpdateMode.Notification)
             {
-                if (ConfigManager.Config.UpdateConfig.AutoUpdateMode == ConfigData.AutomaticUpdateMode.Disabled)
+                if (ConfigManager.Config.UpdateConfig.AutoUpdateMode == ConfigData.AutomaticUpdateMode.Disabled
+                    || ConfigManager.Config.UpdateConfig.VersionSkip == uargs.CurrentVersion.ToString())
                 {
                     return;
                 }
 
                 if (uargs != null && uargs.IsUpdateAvailable)
                 {
-                    if (ConfigManager.Config.UpdateConfig.VersionSkip == uargs.CurrentVersion.ToString())
-                    {
-                        return;
-                    }
-                    else
-                    {
-                        if (ConfigManager.Config.UpdateConfig.VersionSkip != null)
-                        {
-                            ConfigManager.Config.UpdateConfig.VersionSkip = null;
-                        }
-                        ConfigManager.Config.UpdateConfig.LatestVersionRun = uargs.InstalledVersion.ToString();
-                        ConfigManager.SaveConfig();
-                    }
-
                     Program.frmWelcome.tmr_chkUpdate.Interval = 2 * 60 * 60 * 1000; // dont check for updates again for 2h
 
                     var notifyIcon = new NotifyIcon
