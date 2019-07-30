@@ -113,6 +113,7 @@ namespace SteelQuiz
 
                 if (uargs != null && uargs.IsUpdateAvailable)
                 {
+#warning LatestVersionRun only updated if an update is available!
                     if (ConfigManager.Config.UpdateConfig.VersionSkip == uargs.CurrentVersion.ToString())
                     {
                         return;
