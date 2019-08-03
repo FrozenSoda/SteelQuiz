@@ -46,6 +46,7 @@ namespace SteelQuiz.QuizEditor
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SaveDontSave));
             this.lbl_msg = new System.Windows.Forms.Label();
             this.btn_save = new System.Windows.Forms.Button();
             this.pic_icon = new System.Windows.Forms.PictureBox();
@@ -138,7 +139,7 @@ namespace SteelQuiz.QuizEditor
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.ClientSize = new System.Drawing.Size(391, 118);
+            this.ClientSize = new System.Drawing.Size(387, 114);
             this.ControlBox = false;
             this.Controls.Add(this.chk_doNotSave);
             this.Controls.Add(this.btn_cancel);
@@ -147,6 +148,7 @@ namespace SteelQuiz.QuizEditor
             this.Controls.Add(this.btn_save);
             this.Controls.Add(this.lbl_msg);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SaveDontSave";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
