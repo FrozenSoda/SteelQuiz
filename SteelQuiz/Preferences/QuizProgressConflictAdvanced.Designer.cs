@@ -71,8 +71,8 @@ namespace SteelQuiz.Preferences
             this.rdo_mergePrioTarget.Size = new System.Drawing.Size(327, 68);
             this.rdo_mergePrioTarget.TabIndex = 10;
             this.rdo_mergePrioTarget.TabStop = true;
-            this.rdo_mergePrioTarget.Text = "Merge the files.\r\nPrioritize data from the file in the selected folder (recommend" +
-    "ed)";
+            this.rdo_mergePrioTarget.Text = "Merge the files.\r\nPrioritize data from the file in the selected folder. (Recommen" +
+    "ded)";
             this.rdo_mergePrioTarget.UseVisualStyleBackColor = true;
             // 
             // rdo_overwriteTarget
