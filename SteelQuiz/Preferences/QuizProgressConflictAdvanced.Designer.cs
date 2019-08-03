@@ -70,32 +70,31 @@ namespace SteelQuiz.Preferences
             this.rdo_mergePrioTarget.Name = "rdo_mergePrioTarget";
             this.rdo_mergePrioTarget.Size = new System.Drawing.Size(327, 68);
             this.rdo_mergePrioTarget.TabIndex = 10;
+            this.rdo_mergePrioTarget.TabStop = true;
             this.rdo_mergePrioTarget.Text = "Merge the files.\r\nPrioritize data from the file in the selected folder (recommend" +
     "ed)";
             this.rdo_mergePrioTarget.UseVisualStyleBackColor = true;
             // 
             // rdo_overwriteTarget
             // 
-            this.rdo_overwriteTarget.AutoSize = true;
             this.rdo_overwriteTarget.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdo_overwriteTarget.Location = new System.Drawing.Point(333, 55);
+            this.rdo_overwriteTarget.Location = new System.Drawing.Point(333, 77);
             this.rdo_overwriteTarget.Name = "rdo_overwriteTarget";
-            this.rdo_overwriteTarget.Size = new System.Drawing.Size(325, 46);
+            this.rdo_overwriteTarget.Size = new System.Drawing.Size(321, 67);
             this.rdo_overwriteTarget.TabIndex = 9;
-            this.rdo_overwriteTarget.Text = "The quiz progress file currently being used.\r\nOverwrite the file in the selected " +
-    "folder.";
+            this.rdo_overwriteTarget.Text = "Keep && use the quiz progress file currently being used.\r\nOverwrite the file in t" +
+    "he selected folder.";
             this.rdo_overwriteTarget.UseVisualStyleBackColor = true;
             // 
             // rdo_keepTarget
             // 
-            this.rdo_keepTarget.AutoSize = true;
             this.rdo_keepTarget.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdo_keepTarget.Location = new System.Drawing.Point(333, 3);
             this.rdo_keepTarget.Name = "rdo_keepTarget";
-            this.rdo_keepTarget.Size = new System.Drawing.Size(327, 46);
+            this.rdo_keepTarget.Size = new System.Drawing.Size(321, 68);
             this.rdo_keepTarget.TabIndex = 8;
-            this.rdo_keepTarget.Text = "The quiz progress file in the selected folder.\r\nRemove the currently used progres" +
-    "s file.";
+            this.rdo_keepTarget.Text = "Keep && use the quiz progress file in the selected folder.\r\nRemove the currently " +
+    "used progress file.";
             this.rdo_keepTarget.UseVisualStyleBackColor = true;
             // 
             // QuizProgressConflictAdvanced
@@ -112,7 +111,6 @@ namespace SteelQuiz.Preferences
             this.Name = "QuizProgressConflictAdvanced";
             this.Size = new System.Drawing.Size(657, 208);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
