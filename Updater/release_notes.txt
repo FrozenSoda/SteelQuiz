@@ -6,6 +6,7 @@ New features:
 - Theme in SteelQuiz is now synced with Windows 10 app theme (can be disabled in settings).
 
 Improvements:
+- New logo.
 - SteelQuiz now uses atomic file write/read to prevent data loss and file corruption.
 - More update-related preferences added.
 - Added new update channel - development.
