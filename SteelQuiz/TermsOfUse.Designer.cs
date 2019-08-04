@@ -77,7 +77,7 @@ namespace SteelQuiz
             this.rtb_license.ReadOnly = true;
             this.rtb_license.Size = new System.Drawing.Size(772, 312);
             this.rtb_license.TabIndex = 1;
-            this.rtb_license.Text = resources.GetString("rtb_license.Text");
+            this.rtb_license.Text = "";
             // 
             // btn_agree
             // 
