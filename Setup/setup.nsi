@@ -70,6 +70,9 @@ Section "SteelQuiz" SecSteelQuiz
   File "..\SteelQuiz\bin\Release\Newtonsoft.Json.dll"
   File "..\SteelQuiz\bin\Release\AutoUpdater.NET.dll"
   
+  ; Prevent SteelQuiz from asking user to accept license again
+  File "..\SteelQuiz\ACCEPTED_LICENSE"
+  
   ;Store installation folder
   WriteRegStr HKCU "Software\SteelQuiz" "" $INSTDIR
   
@@ -124,6 +127,7 @@ Section "Uninstall"
   Delete "$INSTDIR\SteelQuiz.exe"
   Delete "$INSTDIR\Newtonsoft.Json.dll"
   Delete "$INSTDIR\AutoUpdater.NET.dll"
+  Delete "$INSTDIR\ACCEPTED_LICENSE"
   Delete "$INSTDIR\uninstall.exe"
 
   ;Delete remaining shortcuts

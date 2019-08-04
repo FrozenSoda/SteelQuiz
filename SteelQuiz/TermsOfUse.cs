@@ -74,6 +74,8 @@ namespace SteelQuiz
 
         public TermsOfUse()
         {
+            SetTermsOfUseAccepted();
+
             if (ConfigManager.Config.AcceptedTermsOfUse)
             {
                 showForm = false;
@@ -86,6 +88,27 @@ namespace SteelQuiz
                 Stage = 0;
 
                 SetTheme();
+            }
+        }
+
+        private void SetTermsOfUseAccepted()
+        {
+            // Check if TOS was accepted from setup, and if that's true, set the config variable
+
+            string licenseAcceptedPath = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "ACCEPTED_LICENSE");
+
+            if (!File.Exists(licenseAcceptedPath))
+            {
+                return;
+            }
+
+            using (var reader = new StreamReader(licenseAcceptedPath))
+            {
+                if (reader.ReadToEnd() == "ACCEPTED_LICENSE=true")
+                {
+                    ConfigManager.Config.AcceptedTermsOfUse = true;
+                    ConfigManager.SaveConfig();
+                }
             }
         }
 
