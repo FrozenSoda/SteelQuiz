@@ -28,6 +28,7 @@ using System.Security.AccessControl;
 using System.Security.Principal;
 using System.IO;
 using System.Net;
+using System.Reflection;
 
 namespace SteelQuiz.Util
 {
@@ -119,6 +120,26 @@ namespace SteelQuiz.Util
         public static bool IsNullOrEmpty<T>(this List<T> list)
         {
             return list == null || !list.Any();
+        }
+
+        /// <summary>
+        /// Reads an embedded resource text file
+        /// </summary>
+        /// <param name="relativePath">The relative path to the embedded text file. For instance 'flowers.txt'.</param>
+        /// <returns>Returns the text content of the text file</returns>
+        public static string ReadEmbeddedResource(string relativePath)
+        {
+            var asm = Assembly.GetExecutingAssembly();
+            string txt;
+            using (Stream rsrcStream = asm.GetManifestResourceStream(asm.GetName().Name + "." + relativePath))
+            {
+                using (StreamReader sRdr = new StreamReader(rsrcStream))
+                {
+                    txt = sRdr.ReadToEnd();
+                }
+            }
+
+            return txt;
         }
     }
 }

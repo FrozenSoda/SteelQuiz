@@ -49,7 +49,7 @@ namespace SteelQuiz
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TermsOfUse));
             this.lbl_notice = new System.Windows.Forms.Label();
-            this.rtb_license = new System.Windows.Forms.RichTextBox();
+            this.rtf_license = new System.Windows.Forms.RichTextBox();
             this.btn_agree = new System.Windows.Forms.Button();
             this.btn_cancel = new System.Windows.Forms.Button();
             this.timer_agree_unlock = new System.Windows.Forms.Timer(this.components);
@@ -66,18 +66,18 @@ namespace SteelQuiz
             this.lbl_notice.Text = "Welcome! To use this software, you must agree to the terms of use";
             this.lbl_notice.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // rtb_license
+            // rtf_license
             // 
-            this.rtb_license.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.rtb_license.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.rtb_license.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtb_license.ForeColor = System.Drawing.Color.White;
-            this.rtb_license.Location = new System.Drawing.Point(16, 69);
-            this.rtb_license.Name = "rtb_license";
-            this.rtb_license.ReadOnly = true;
-            this.rtb_license.Size = new System.Drawing.Size(772, 312);
-            this.rtb_license.TabIndex = 1;
-            this.rtb_license.Text = "";
+            this.rtf_license.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.rtf_license.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.rtf_license.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtf_license.ForeColor = System.Drawing.Color.White;
+            this.rtf_license.Location = new System.Drawing.Point(16, 69);
+            this.rtf_license.Name = "rtf_license";
+            this.rtf_license.ReadOnly = true;
+            this.rtf_license.Size = new System.Drawing.Size(772, 312);
+            this.rtf_license.TabIndex = 1;
+            this.rtf_license.Text = "";
             // 
             // btn_agree
             // 
@@ -124,7 +124,7 @@ namespace SteelQuiz
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.btn_cancel);
             this.Controls.Add(this.btn_agree);
-            this.Controls.Add(this.rtb_license);
+            this.Controls.Add(this.rtf_license);
             this.Controls.Add(this.lbl_notice);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -140,7 +140,7 @@ namespace SteelQuiz
         #endregion
 
         private System.Windows.Forms.Label lbl_notice;
-        private System.Windows.Forms.RichTextBox rtb_license;
+        private System.Windows.Forms.RichTextBox rtf_license;
         private System.Windows.Forms.Button btn_agree;
         private System.Windows.Forms.Button btn_cancel;
         private System.Windows.Forms.Timer timer_agree_unlock;

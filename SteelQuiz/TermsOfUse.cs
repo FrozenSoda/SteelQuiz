@@ -17,6 +17,7 @@
 */
 
 using SteelQuiz.QuizPractise;
+using SteelQuiz.Util;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -36,6 +37,41 @@ namespace SteelQuiz
         private int unlockTimerCount = 0;
         private bool showForm = true;
 
+        private int __stage;
+        private int Stage
+        {
+            get
+            {
+                return __stage;
+            }
+
+            set
+            {
+                __stage = value;
+                if (Stage == -1)
+                {
+                    Application.Exit();
+                }
+                else if (Stage == 0)
+                {
+                    btn_cancel.Text = "Cancel";
+                    rtf_license.Text = SUtil.ReadEmbeddedResource("LICENSE");
+                }
+                else if (Stage == 1)
+                {
+                    btn_cancel.Text = "Back";
+                    rtf_license.Text = SUtil.ReadEmbeddedResource("LICENSE_3RD_PARTY");
+                }
+                else if (Stage == 2)
+                {
+                    ConfigManager.Config.AcceptedTermsOfUse = true;
+                    ConfigManager.SaveConfig();
+
+                    OpenApplication();
+                }
+            }
+        }
+
         public TermsOfUse()
         {
             if (ConfigManager.Config.AcceptedTermsOfUse)
@@ -47,6 +83,8 @@ namespace SteelQuiz
             {
                 InitializeComponent();
                 this.Text += $" | v{Application.ProductVersion}";
+                Stage = 0;
+
                 SetTheme();
             }
         }
@@ -126,15 +164,12 @@ namespace SteelQuiz
 
         private void btn_cancel_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            --Stage;
         }
 
         private void btn_agree_Click(object sender, EventArgs e)
         {
-            ConfigManager.Config.AcceptedTermsOfUse = true;
-            ConfigManager.SaveConfig();
-
-            OpenApplication();
+            ++Stage;
         }
     }
 }
