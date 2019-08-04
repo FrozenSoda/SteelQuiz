@@ -3,8 +3,6 @@
  * This source code file is licensed under The Code Project Open License (CPOL) 1.02 (https://www.codeproject.com/info/cpol10.aspx)
  */
 
-#warning !!! include license with application !!!
-
 using System;
 using System.ComponentModel;
 using System.IO;

@@ -1,3 +1,21 @@
+v3.2.0 (v3.2.0.19):
+New features:
+- You can now add custom folder paths to store quizzes in (for instance to store them in the cloud).
+- You can now change the path of the quiz progress data file (for instance to sync it with multiple computers).
+- Added automatic updates (can be disabled), plus additional update-related settings.
+- Theme in SteelQuiz is now synced with Windows 10 app theme (can be disabled in settings).
+
+Improvements:
+- SteelQuiz now uses atomic file write/read to prevent data loss and file corruption.
+- More update-related preferences added.
+- Added new update channel - development.
+
+Other:
+- .NET Framework 4.7.2 is now required to use SteelQuiz.
+- Fixed issues with Intelligent Learning calculations.
+- Updated libraries.
+- Bug fixes and improvements.
+
 v3.2.0-pre5 (v3.2.0.13):
 - Theme in SteelQuiz is now synced with Windows 10 app theme (can be disabled in settings).
 - SteelQuiz now uses atomic file write/read to prevent data loss and file corruption.
