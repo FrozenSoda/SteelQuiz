@@ -116,7 +116,7 @@ namespace SteelQuiz.Preferences
                 var msg = MessageBox.Show("By changing the update channel to development, you might receive new features and updates faster, but the stability of the " +
                     "application might be worsened. Expect bugs, issues, data loss, and other bad things. Do not use this channel for production usage." +
                     "\r\n\r\nIf you change your mind later on, or when receiving new updates, you might need to reset all settings and progress data.\r\n\r\n" +
-                    "SteelQuiz will be downgraded/upgraded to the latest release for the selected channel when switching.\r\n\r\nContinue?",
+                    "SteelQuiz will be upgraded/downgraded to the latest release available in the selected channel/stable channel when switching.\r\n\r\nContinue?",
                     "Switch to dev update channel - SteelQuiz",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
                 if (msg != DialogResult.Yes)
@@ -129,7 +129,7 @@ namespace SteelQuiz.Preferences
             }
             else
             {
-                var msg = MessageBox.Show("SteelQuiz will be downgraded/upgraded to the latest release for the selected channel when switching." +
+                var msg = MessageBox.Show("SteelQuiz will be downgraded/upgraded to the latest release available in the selected channel when switching." +
                     "\r\n\r\nChanging update channel to one with an older update might cause issues. If you do experience problems, reset the config and" +
                     " the quiz progress data.\r\n\r\nSwitch update channel to the stable channel?",
                     "Switch to stable update channel - SteelQuiz",
