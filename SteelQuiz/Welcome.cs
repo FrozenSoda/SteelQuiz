@@ -84,11 +84,19 @@ namespace SteelQuiz
                 {
                     PullWin10Theme();
                 }
+                else
+                {
+                    SetTheme();
+                }
 
                 themeMonitor = new RegistryMonitor(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize");
                 themeMonitor.RegChanged += ThemeMonitor_RegChanged;
                 themeMonitor.Error += ThemeMonitor_Error;
                 themeMonitor.Start();
+            }
+            else
+            {
+                SetTheme();
             }
 
             Updater.Update(Updater.UpdateMode.Normal);
