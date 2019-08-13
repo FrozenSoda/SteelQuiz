@@ -1,3 +1,10 @@
+v3.2.1 (v3.2.1.5):
+- You can now load quizzes from subfolders within quiz folders.
+- Fixed an issue causing the theme to look strange when Win10 theme sync was enabled and it had never been changed.
+- Fixed an issue causing Win10 theme sync to be unavailable in some conditions, even when running Windows 10.
+- Fixed an issue preventing ampersand (&) from being properly written in quiz practise.
+- Fixed confusing statements in messages when switching update channel.
+
 v3.2.0 (v3.2.0.19):
 New features:
 - You can now add custom folder paths to store quizzes in (for instance to store them in the cloud).
