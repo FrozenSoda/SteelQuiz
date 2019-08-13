@@ -132,7 +132,7 @@ namespace SteelQuiz
 
             foreach (var quizFolder in ConfigManager.Config.SyncConfig.QuizFolders)
             {
-                foreach (var file in Directory.GetFiles(quizFolder).Where(x => x.EndsWith(QUIZ_EXTENSION)))
+                foreach (var file in Directory.GetFiles(quizFolder, $"*.{QUIZ_EXTENSION}", SearchOption.AllDirectories))
                 {
                     try
                     {
