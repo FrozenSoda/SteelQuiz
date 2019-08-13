@@ -78,6 +78,8 @@ namespace SteelQuiz
 
             SetControlStates();
 
+            ofd_loadQuiz.InitialDirectory = ConfigManager.Config.SyncConfig.QuizFolders[0];
+
             if (Program.Win10AppThemeSupported())
             {
                 if (ConfigManager.Config.SyncWin10Theme)
@@ -242,7 +244,6 @@ namespace SteelQuiz
         private void btn_loadQuiz_Click(object sender, EventArgs e)
         {
             //ofd_loadQuiz.InitialDirectory = QuizCore.QUIZ_FOLDER_DEFAULT;
-            ofd_loadQuiz.InitialDirectory = ConfigManager.Config.SyncConfig.QuizFolders[0];
             if (ofd_loadQuiz.ShowDialog() == DialogResult.OK)
             {
                 /*

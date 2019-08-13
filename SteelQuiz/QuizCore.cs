@@ -33,7 +33,7 @@ namespace SteelQuiz
 {
     public static class QuizCore
     {
-        public const string QUIZ_EXTENSION = ".steelquiz";
+        public const string QUIZ_EXTENSION = "steelquiz";
         public static readonly string APP_CFG_FOLDER = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SteelQuiz");
         public static readonly string BACKUP_FOLDER = Path.Combine(APP_CFG_FOLDER, "Backups");
         public static readonly string QUIZ_FOLDER_DEFAULT = Path.Combine(APP_CFG_FOLDER, "Quizzes");
@@ -60,7 +60,8 @@ namespace SteelQuiz
                 throw new FileNotFoundException("The quiz file cannot be found");
             }
 
-            if (!ConfigManager.Config.SyncConfig.QuizFolders.Contains(Path.GetDirectoryName(quizPath)))
+            //if (!ConfigManager.Config.SyncConfig.QuizFolders.Contains(Path.GetDirectoryName(quizPath)))
+            if (!ConfigManager.Config.SyncConfig.QuizFolders.Any(x => quizPath.StartsWith(x)))
             {
                 var msg = MessageBox.Show($"Import quiz '{quizPath}'?", "SteelQuiz", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                 if (msg == DialogResult.OK)
@@ -490,12 +491,13 @@ namespace SteelQuiz
             return false;
         }
 
+        [Obsolete("Proper handling for backing up quizzes in subfolders within quiz folders has not been implemented. Do not use this function until that is implemented.")]
         public static bool BackupQuiz(string quizPath, Version quizVer)
         {
-            var extStartIndex = quizPath.Length - QuizCore.QUIZ_EXTENSION.Length;
+            var extStartIndex = quizPath.Length - QuizCore.QUIZ_EXTENSION.Length - 1; // - 1 to account for dot
             var bkpQuizPath = Path.Combine(
                 QuizCore.QUIZ_BACKUP_FOLDER,
-                Path.GetFileNameWithoutExtension(quizPath) + "_" + quizVer.ToString() + QuizCore.QUIZ_EXTENSION);
+                Path.GetFileNameWithoutExtension(quizPath) + "_" + quizVer.ToString() + "." + QuizCore.QUIZ_EXTENSION);
             var exCount = 1;
             while (File.Exists(bkpQuizPath))
             {
@@ -503,7 +505,7 @@ namespace SteelQuiz
                 //newQuizPath = QuizPath.Insert(extStartIndex, "_" + quizVer.ToString() + "_" + exCount);
                 bkpQuizPath = Path.Combine(
                     QuizCore.QUIZ_BACKUP_FOLDER,
-                    Path.GetFileNameWithoutExtension(quizPath) + "_" + quizVer.ToString() + "_" + exCount + QuizCore.QUIZ_EXTENSION);
+                    Path.GetFileNameWithoutExtension(quizPath) + "_" + quizVer.ToString() + "_" + exCount + "." + QuizCore.QUIZ_EXTENSION);
             }
 
             try

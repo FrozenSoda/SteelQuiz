@@ -213,6 +213,7 @@ namespace SteelQuiz.QuizEditor
 
             if (quiz == null)
             {
+                //ofd_quiz.InitialDirectory = ConfigManager.Config.SyncConfig.QuizFolders[0];
                 var ofd = ofd_quiz.ShowDialog();
                 if (ofd == DialogResult.OK)
                 {
@@ -454,7 +455,7 @@ namespace SteelQuiz.QuizEditor
             {
                 if (QuizPath == null || saveAs)
                 {
-                    sfd_quiz.InitialDirectory = QuizCore.QUIZ_FOLDER_DEFAULT;
+                    sfd_quiz.InitialDirectory = ConfigManager.Config.SyncConfig.QuizFolders[0];
                     int untitledCounter = 1;
                     path = $"Untitled{ untitledCounter }.steelquiz";
                     while (File.Exists(Path.Combine(QuizCore.QUIZ_FOLDER_DEFAULT, path)))

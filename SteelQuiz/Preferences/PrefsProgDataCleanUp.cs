@@ -217,7 +217,7 @@ namespace SteelQuiz.Preferences
                         break;
                     }
 
-                    foreach (var quizFile in Directory.GetFiles(quizFolder, $"*{QuizCore.QUIZ_EXTENSION}", SearchOption.AllDirectories))
+                    foreach (var quizFile in Directory.GetFiles(quizFolder, $"*.{QuizCore.QUIZ_EXTENSION}", SearchOption.AllDirectories))
                     {
                         Quiz quiz;
                         try
