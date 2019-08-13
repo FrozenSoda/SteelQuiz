@@ -91,6 +91,7 @@ namespace SteelQuiz.QuizPractise
             this.lbl_word2.TabIndex = 1;
             this.lbl_word2.Text = "Enter your answer...";
             this.lbl_word2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_word2.UseMnemonic = false;
             this.lbl_word2.Click += new System.EventHandler(this.lbl_word2_Click);
             // 
             // lbl_progress
