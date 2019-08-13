@@ -80,7 +80,7 @@ namespace SteelQuiz
 
             ofd_loadQuiz.InitialDirectory = ConfigManager.Config.SyncConfig.QuizFolders[0];
 
-            if (Program.Win10AppThemeSupported())
+            if (Util.WinVer.WindowsVersion().Major >= 10) // if user runs Windows 10
             {
                 if (ConfigManager.Config.SyncWin10Theme)
                 {

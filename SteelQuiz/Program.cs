@@ -73,6 +73,8 @@ namespace SteelQuiz
         /// Checks if the OS supports global app themes (as in newer versions of Windows 10)
         /// </summary>
         /// <returns>True if the OS supports global app themes, otherwise false </returns>
+        [Obsolete("This method is not reliable. If the user runs a compatible version of Windows 10, but has never changed their theme, this method will return " +
+            "false. Do not rely on this method.", true)]
         public static bool Win10AppThemeSupported()
         {
             using (var key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize"))

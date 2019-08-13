@@ -41,7 +41,8 @@ namespace SteelQuiz.Preferences
             InitializeComponent();
 
             LoadPreferences();
-            chk_win10themeSync.Enabled = Program.Win10AppThemeSupported();
+            //chk_win10themeSync.Enabled = Program.Win10AppThemeSupported();
+            chk_win10themeSync.Enabled = Util.WinVer.WindowsVersion().Major >= 10;
             if (!chk_win10themeSync.Enabled)
             {
                 chk_win10themeSync.Checked = false;
