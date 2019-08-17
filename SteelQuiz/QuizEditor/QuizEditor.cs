@@ -682,5 +682,15 @@ namespace SteelQuiz.QuizEditor
             pnl_msg.Location = new Point(locXanchor + (277 - pnl_msg.Size.Width), locYanchor + (100 - pnl_msg.Size.Height));
             */
         }
+
+        private void Cmb_lang1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ChangedSinceLastSave = true;
+        }
+
+        private void Cmb_lang2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ChangedSinceLastSave = true;
+        }
     }
 }
