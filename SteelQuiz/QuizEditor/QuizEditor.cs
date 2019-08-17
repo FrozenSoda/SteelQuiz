@@ -683,12 +683,12 @@ namespace SteelQuiz.QuizEditor
             */
         }
 
-        private void Cmb_lang1_SelectedIndexChanged(object sender, EventArgs e)
+        private void Cmb_lang1_TextUpdate(object sender, EventArgs e)
         {
             ChangedSinceLastSave = true;
         }
 
-        private void Cmb_lang2_SelectedIndexChanged(object sender, EventArgs e)
+        private void Cmb_lang2_TextUpdate(object sender, EventArgs e)
         {
             ChangedSinceLastSave = true;
         }
