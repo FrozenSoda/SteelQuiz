@@ -71,6 +71,12 @@
     <Compile Include="Controls\DraggableFlowLayoutPanel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="DashboardQuiz.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DashboardQuiz.Designer.cs">
+      <DependentUpon>DashboardQuiz.cs</DependentUpon>
+    </Compile>
     <Compile Include="Extensions\FormExtensions.cs" />
     <Compile Include="Extensions\IntegerExtensions.cs" />
     <Compile Include="Preferences\CategoriesSync.cs">
@@ -382,6 +388,9 @@
     <Compile Include="QuizProgressData\WordTry.cs" />
     <Compile Include="WelcomeMessage.cs" />
     <Compile Include="WelcomeMessages.cs" />
+    <EmbeddedResource Include="DashboardQuiz.resx">
+      <DependentUpon>DashboardQuiz.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Preferences\CategoriesSync.resx">
       <DependentUpon>CategoriesSync.cs</DependentUpon>
     </EmbeddedResource>
