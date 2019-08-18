@@ -134,6 +134,7 @@
     <Compile Include="Preferences\QuizProgressConflictRecommended.Designer.cs">
       <DependentUpon>QuizProgressConflictRecommended.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuizData\QuizIdentity.cs" />
     <Compile Include="QuizImport\Guide\QuizFolder.cs">
       <SubType>UserControl</SubType>
     </Compile>

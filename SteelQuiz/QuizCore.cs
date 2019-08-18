@@ -129,6 +129,23 @@ namespace SteelQuiz
         /// <returns>True if the load was successful, otherwise false</returns>
         public static bool Load(Guid quizGuid)
         {
+            string quizPath = FindQuizPath(quizGuid);
+            if (quizPath != null)
+            {
+                return Load(quizPath);
+            }
+
+            MessageBox.Show("The quiz file could not be found", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false;
+        }
+
+        /// <summary>
+        /// Finds the quiz path for the quiz with the specified Guid.
+        /// </summary>
+        /// <param name="quizGuid">The quiz Guid.</param>
+        /// <returns>Returns the path to the quiz if it can be found, otherwise returns null.</returns>
+        public static string FindQuizPath(Guid quizGuid)
+        {
             Quiz quiz;
 
             foreach (var quizFolder in ConfigManager.Config.SyncConfig.QuizFolders)
@@ -147,13 +164,12 @@ namespace SteelQuiz
 
                     if (quiz != null && quiz.GUID == quizGuid)
                     {
-                        return Load(file);
+                        return file;
                     }
                 }
             }
 
-            MessageBox.Show("The quiz file could not be found", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return false;
+            return null;
         }
 
         public static bool ImportLocalQuiz(string quizPath)
