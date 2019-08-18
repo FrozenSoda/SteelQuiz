@@ -12,6 +12,8 @@ namespace SteelQuiz
 {
     public partial class DashboardQuiz : UserControl
     {
+        public Guid QuizGuid { get; private set; }
+
         public DashboardQuiz()
         {
             InitializeComponent();

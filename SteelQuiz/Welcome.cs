@@ -106,6 +106,13 @@ namespace SteelQuiz
             ConfigManager.ChkSetupForFirstUse();
 
             UpdateCfg();
+
+            PopulateQuizList();
+        }
+
+        private void PopulateQuizList()
+        {
+
         }
 
         private void ThemeMonitor_Error(object sender, ErrorEventArgs e)

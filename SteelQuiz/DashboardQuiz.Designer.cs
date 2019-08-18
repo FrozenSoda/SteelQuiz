@@ -28,18 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.lbl_name = new System.Windows.Forms.Label();
             this.SuspendLayout();
+            // 
+            // lbl_name
+            // 
+            this.lbl_name.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_name.Location = new System.Drawing.Point(0, 0);
+            this.lbl_name.Name = "lbl_name";
+            this.lbl_name.Size = new System.Drawing.Size(178, 59);
+            this.lbl_name.TabIndex = 0;
+            this.lbl_name.Text = "p308";
+            this.lbl_name.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // DashboardQuiz
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.Controls.Add(this.lbl_name);
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ForeColor = System.Drawing.Color.White;
             this.Name = "DashboardQuiz";
-            this.Size = new System.Drawing.Size(178, 78);
+            this.Size = new System.Drawing.Size(178, 59);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Label lbl_name;
     }
 }
