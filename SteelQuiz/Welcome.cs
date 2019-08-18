@@ -200,8 +200,8 @@ namespace SteelQuiz
 
             btn_createQuiz.BackColor = WelcomeTheme.GetMainButtonBackColor();
             btn_loadQuiz.BackColor = WelcomeTheme.GetMainButtonBackColor();
-            btn_importQuizFromSite.BackColor = WelcomeTheme.GetMainButtonBackColor();
-            btn_continueLast.BackColor = WelcomeTheme.GetMainButtonBackColor();
+            //btn_importQuizFromSite.BackColor = WelcomeTheme.GetMainButtonBackColor();
+            //btn_continueLast.BackColor = WelcomeTheme.GetMainButtonBackColor();
 
             //btn_createQuiz.ForeColor = WelcomeTheme.GetMainButtonForeColor();
             //btn_loadQuiz.ForeColor = WelcomeTheme.GetMainButtonForeColor();
@@ -210,8 +210,8 @@ namespace SteelQuiz
 
             btn_createQuiz.ForeColor = WelcomeTheme.GetButtonForeColor();
             btn_loadQuiz.ForeColor = WelcomeTheme.GetButtonForeColor();
-            btn_importQuizFromSite.ForeColor = WelcomeTheme.GetButtonForeColor();
-            btn_continueLast.ForeColor = WelcomeTheme.GetButtonForeColor();
+            //btn_importQuizFromSite.ForeColor = WelcomeTheme.GetButtonForeColor();
+            //btn_continueLast.ForeColor = WelcomeTheme.GetButtonForeColor();
 
             lbl_copyright.ForeColor = WelcomeTheme.GetBackgroundLabelForeColor();
 
@@ -226,7 +226,7 @@ namespace SteelQuiz
         {
             if (ConfigManager.Config.LastQuiz != Guid.Empty)
             {
-                btn_continueLast.Enabled = true;
+                //btn_continueLast.Enabled = true;
             }
         }
 
