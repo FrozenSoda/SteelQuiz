@@ -69,6 +69,17 @@ namespace SteelQuiz
         /// <param name="data">The data to write to the file</param>
         public static void AtomicWrite(string path, byte[] data)
         {
+            if (!ConfigManager.Config.AdvancedConfig.AtomicIOEnabled)
+            {
+                if (File.Exists(path))
+                {
+                    File.Delete(path);
+                }
+                File.WriteAllBytes(path, data);
+
+                return;
+            }
+
             string atomicPath = path + ".atomic_copy";
 
             File.WriteAllBytes(atomicPath, data);
@@ -96,6 +107,11 @@ namespace SteelQuiz
         /// <exception cref="AtomicException">Thrown if no intact file could be found, or if path doesn't exist</exception>
         public static string AtomicRead(string path)
         {
+            if (!ConfigManager.Config.AdvancedConfig.AtomicIOEnabled)
+            {
+                return File.ReadAllText(path);
+            }
+
             string atomicPath = path + ".atomic_copy";
             string pathOrig = path + ".atomic_orig";
 

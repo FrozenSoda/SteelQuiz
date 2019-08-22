@@ -62,6 +62,7 @@
     <Compile Include="AutoThemeableUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ConfigData\AdvancedConfig.cs" />
     <Compile Include="ConfigData\QuizEditorConfig.cs" />
     <Compile Include="ConfigData\Statistic.cs" />
     <Compile Include="ConfigData\Statistics.cs" />
@@ -79,6 +80,12 @@
       <DependentUpon>CategoriesSync.cs</DependentUpon>
     </Compile>
     <Compile Include="Preferences\ICustomSaveCategory.cs" />
+    <Compile Include="Preferences\PrefsAdvanced.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Preferences\PrefsAdvanced.Designer.cs">
+      <DependentUpon>PrefsAdvanced.cs</DependentUpon>
+    </Compile>
     <Compile Include="Preferences\PrefsProgressSync.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -377,6 +384,9 @@
     <Compile Include="WelcomeMessages.cs" />
     <EmbeddedResource Include="Preferences\CategoriesSync.resx">
       <DependentUpon>CategoriesSync.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Preferences\PrefsAdvanced.resx">
+      <DependentUpon>PrefsAdvanced.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Preferences\PrefsProgressSync.resx">
       <DependentUpon>PrefsProgressSync.cs</DependentUpon>

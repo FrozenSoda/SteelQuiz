@@ -79,6 +79,11 @@ namespace SteelQuiz.ConfigData
         /// </summary>
         public Statistics Statistics { get; set; } = new Statistics();
 
+        /// <summary>
+        /// Advanced config.
+        /// </summary>
+        public AdvancedConfig AdvancedConfig { get; set; } = new AdvancedConfig();
+
         public Config()
         {
             FileFormatVersion = MetaData.QUIZ_FILE_FORMAT_VERSION;
