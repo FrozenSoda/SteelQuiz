@@ -125,7 +125,7 @@ namespace SteelQuiz.QuizData
             }
             else
             {
-                throw new NotImplementedException("Error in WordPair.CharacterMismatches: All translation modes hasn't been implemented!");
+                throw new NotImplementedException("Error in WordPair.CharacterMismatches: All translation modes haven't been implemented!");
             }
 
             // find CharacterMismatch with the least mismatch
