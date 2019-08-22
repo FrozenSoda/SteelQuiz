@@ -1,3 +1,8 @@
+v3.2.2 (v3.2.2.1):
+- Fixed an issue causing do not save dialog not to appear when you only have changed the word language in quiz editor.
+- Added an option to disable Atomic IO as it might cause issues with some antivirus software.
+- Other bug fixes and improvements.
+
 v3.2.1 (v3.2.1.5):
 - You can now load quizzes from subfolders within quiz folders.
 - Fixed an issue causing the theme to look strange when Win10 theme sync was enabled and it had never been changed.
