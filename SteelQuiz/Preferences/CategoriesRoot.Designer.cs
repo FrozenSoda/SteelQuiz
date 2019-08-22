@@ -118,6 +118,7 @@ namespace SteelQuiz.Preferences
             this.pcat_advanced.Selected = false;
             this.pcat_advanced.Size = new System.Drawing.Size(130, 29);
             this.pcat_advanced.TabIndex = 17;
+            this.pcat_advanced.OnPrefSelected += new System.EventHandler(this.Pcat_advanced_OnPrefSelected);
             // 
             // CategoriesRoot
             // 
