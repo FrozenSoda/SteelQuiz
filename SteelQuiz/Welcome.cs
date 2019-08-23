@@ -112,7 +112,7 @@ namespace SteelQuiz
 
         private void PopulateQuizList()
         {
-
+            
         }
 
         private void ThemeMonitor_Error(object sender, ErrorEventArgs e)
@@ -205,9 +205,10 @@ namespace SteelQuiz
 
             lbl_welcome.ForeColor = WelcomeTheme.GetMainLabelForeColor();
 
+            btn_addQuiz.BackColor = WelcomeTheme.GetMainButtonBackColor();
             btn_createQuiz.BackColor = WelcomeTheme.GetMainButtonBackColor();
-            btn_loadQuiz.BackColor = WelcomeTheme.GetMainButtonBackColor();
-            //btn_importQuizFromSite.BackColor = WelcomeTheme.GetMainButtonBackColor();
+            btn_addQuizFromFile.BackColor = WelcomeTheme.GetMainButtonBackColor();
+            btn_importQuiz.BackColor = WelcomeTheme.GetMainButtonBackColor();
             //btn_continueLast.BackColor = WelcomeTheme.GetMainButtonBackColor();
 
             //btn_createQuiz.ForeColor = WelcomeTheme.GetMainButtonForeColor();
@@ -215,9 +216,10 @@ namespace SteelQuiz
             //btn_importQuizFromSite.ForeColor = WelcomeTheme.GetMainButtonForeColor();
             //btn_continueLast.ForeColor = WelcomeTheme.GetMainButtonForeColor();
 
+            btn_addQuiz.ForeColor = WelcomeTheme.GetButtonForeColor();
             btn_createQuiz.ForeColor = WelcomeTheme.GetButtonForeColor();
-            btn_loadQuiz.ForeColor = WelcomeTheme.GetButtonForeColor();
-            //btn_importQuizFromSite.ForeColor = WelcomeTheme.GetButtonForeColor();
+            btn_addQuizFromFile.ForeColor = WelcomeTheme.GetButtonForeColor();
+            btn_importQuiz.ForeColor = WelcomeTheme.GetButtonForeColor();
             //btn_continueLast.ForeColor = WelcomeTheme.GetButtonForeColor();
 
             lbl_copyright.ForeColor = WelcomeTheme.GetBackgroundLabelForeColor();
@@ -246,6 +248,8 @@ namespace SteelQuiz
                 Program.frmInQuiz.Show();
                 Hide();
             }
+
+            AddQuizButtonsExpanded = false;
         }
 
         private void btn_loadQuiz_Click(object sender, EventArgs e)
@@ -263,6 +267,8 @@ namespace SteelQuiz
 
                 LoadQuiz(ofd_loadQuiz.FileName);
             }
+
+            AddQuizButtonsExpanded = false;
         }
 
         private void LoadQuiz(string quizPath)
@@ -327,6 +333,8 @@ namespace SteelQuiz
         private void btn_createQuiz_Click(object sender, EventArgs e)
         {
             OpenQuizEditor();
+
+            AddQuizButtonsExpanded = false;
         }
 
         private void Tmr_chkUpdate_Tick(object sender, EventArgs e)
@@ -364,6 +372,38 @@ namespace SteelQuiz
             {
                 GenerateWelcomeMsg();
             }
+        }
+
+        private bool __addQuizButtonsExpanded = false;
+        private bool AddQuizButtonsExpanded
+        {
+            get
+            {
+                return __addQuizButtonsExpanded;
+            }
+
+            set
+            {
+                __addQuizButtonsExpanded = value;
+
+                btn_createQuiz.Visible = AddQuizButtonsExpanded;
+                btn_addQuizFromFile.Visible = AddQuizButtonsExpanded;
+                btn_importQuiz.Visible = AddQuizButtonsExpanded;
+
+                if (AddQuizButtonsExpanded)
+                {
+                    btn_addQuiz.Text = "←";
+                }
+                else
+                {
+                    btn_addQuiz.Text = "+";
+                }
+            }
+        }
+
+        private void Btn_addQuiz_Click(object sender, EventArgs e)
+        {
+            AddQuizButtonsExpanded = !AddQuizButtonsExpanded;
         }
     }
 }

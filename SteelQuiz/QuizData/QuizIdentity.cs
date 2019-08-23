@@ -23,6 +23,12 @@ namespace SteelQuiz.QuizData
         /// </summary>
         private string QuizPath { get; set; }
 
+        public QuizIdentity(Guid quizGuid, string quizPath)
+        {
+            QuizGuid = quizGuid;
+            QuizPath = quizPath;
+        }
+
         /// <summary>
         /// Finds the quiz path, even when the quiz has been moved to a different location in a quiz folder.
         /// </summary>
