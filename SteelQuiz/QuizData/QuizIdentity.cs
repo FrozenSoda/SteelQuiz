@@ -13,11 +13,13 @@ namespace SteelQuiz.QuizData
     /// </summary>
     public class QuizIdentity
     {
+        [JsonProperty]
         /// <summary>
         /// The GUID of the quiz. This will not change if the quiz is moved.
         /// </summary>
         private Guid QuizGuid { get; set; }
 
+        [JsonProperty]
         /// <summary>
         /// The last known path to the quiz. If the quiz at this path doesn't match QuizGuid, this property will be ignored.
         /// </summary>

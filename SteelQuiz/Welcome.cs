@@ -107,15 +107,15 @@ namespace SteelQuiz
 
             UpdateCfg();
 
-            QuizCore.LoadProgressData();
+            QuizCore.LoadQuizAccessData();
             PopulateQuizList();
         }
 
         private void PopulateQuizList()
         {
-            foreach (var quizAccessTimePair in QuizCore.QuizProgressRoot.QuizAccessTimes.OrderByDescending(x => x.Value.Ticks))
+            foreach (var quizAccessTimePair in QuizCore.QuizAccessTimes.OrderByDescending(x => x.Value.Ticks))
             {
-                var quizIdentity = QuizCore.QuizProgressRoot.QuizIdentities[quizAccessTimePair.Key];
+                var quizIdentity = QuizCore.QuizIdentities[quizAccessTimePair.Key];
 
                 var dashboardQuiz = new DashboardQuiz(quizIdentity);
                 flp_lastQuizzes.Controls.Add(dashboardQuiz);
