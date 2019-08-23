@@ -1,5 +1,9 @@
+v3.2.3 (v3.2.3.0):
+- Fixed an issue causing full test results to be incorrect in some conditions.
+- Fixed an issue causing full test results not to be preserved across practise sessions.
+
 v3.2.2 (v3.2.2.1):
-- Fixed an issue causing do not save dialog not to appear when you only have changed the word language in quiz editor.
+- Fixed an issue, causing the do not save dialog not to appear, when you only have changed word languages in the quiz editor.
 - Added an option to disable Atomic IO as it might cause issues with some antivirus software.
 - Other bug fixes and improvements.
 
