@@ -42,7 +42,8 @@ namespace SteelQuiz
         public static readonly string PROGRESS_FILE_PATH_DEFAULT = Path.Combine(APP_CFG_FOLDER, "QuizProgress.json");
 
         public static Quiz Quiz { get; set; }
-        public static QuizProgDataRoot QuizProgressRoot { get; set; }
+        public static Dictionary<Guid, QuizIdentity> QuizIdentities { get; set; } = new Dictionary<Guid, QuizIdentity>();
+        public static Dictionary<Guid, DateTime> QuizAccessTimes { get; set; } = new Dictionary<Guid, DateTime>();
         public static QuizProgData QuizProgress { get; set; }
         public static string QuizPath { get; set; }
 
@@ -237,8 +238,8 @@ namespace SteelQuiz
         /// <returns>True if the load was successful, otherwise false</returns>
         public static bool Load(Quiz quiz, string quizPath)
         {
-            QuizProgressRoot.QuizIdentities[quiz.GUID] = new QuizIdentity(quiz.GUID, quizPath);
-            QuizProgressRoot.QuizAccessTimes[quiz.GUID] = DateTime.Now;
+            QuizIdentities[quiz.GUID] = new QuizIdentity(quiz.GUID, quizPath);
+            QuizAccessTimes[quiz.GUID] = DateTime.Now;
 
             ResetTotalWordsThisRoundCountMemo();
             ResetWordsAskedThisRoundMemo();
@@ -391,7 +392,11 @@ namespace SteelQuiz
             return true;
         }
 
-        public static bool LoadProgressDataRoot()
+        /// <summary>
+        /// Loads quiz access times and quiz identities
+        /// </summary>
+        /// <returns>Returns true if successful</returns>
+        public static bool LoadQuizAccessData()
         {
             if (File.Exists(ConfigManager.Config.SyncConfig.QuizProgressPath))
             {
@@ -415,11 +420,8 @@ namespace SteelQuiz
                     return false;
                 }
 
-                QuizProgressRoot = quizProgDataRoot;
-            }
-            else
-            {
-                QuizProgressRoot = new QuizProgDataRoot(MetaData.QUIZ_FILE_FORMAT_VERSION);
+                QuizAccessTimes = quizProgDataRoot.QuizAccessTimes;
+                QuizIdentities = quizProgDataRoot.QuizIdentities;
             }
 
             return true;
@@ -449,7 +451,8 @@ namespace SteelQuiz
                     return false;
                 }
 
-                QuizProgressRoot = quizProgDataRoot;
+                //QuizAccessTimes = quizProgDataRoot.QuizAccessTimes;
+                //QuizIdentities = quizProgDataRoot.QuizIdentities;
 
                 //find progress for current quiz
                 bool found = false;
@@ -687,6 +690,9 @@ namespace SteelQuiz
                     // Should never be reached as path exists
                     throw ex;
                 }
+
+                cfgDz.QuizAccessTimes = QuizAccessTimes;
+                cfgDz.QuizIdentities = QuizIdentities;
 
                 //find progress for current quiz
                 bool found = false;

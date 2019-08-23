@@ -28,7 +28,7 @@ namespace SteelQuiz.QuizProgressData
     public class QuizProgDataRoot
     {
         public string FileFormatVersion { get; set; }
-        public Dictionary<Guid, QuizIdentity> QuizIdentities = new Dictionary<Guid, QuizIdentity>();
+        public Dictionary<Guid, QuizIdentity> QuizIdentities { get; set; } = new Dictionary<Guid, QuizIdentity>();
         public Dictionary<Guid, DateTime> QuizAccessTimes { get; set; } = new Dictionary<Guid, DateTime>();
         public List<QuizProgData> QuizProgDatas { get; set; } = new List<QuizProgData>();
 
