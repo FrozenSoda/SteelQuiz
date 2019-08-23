@@ -43,6 +43,11 @@ namespace SteelQuiz.QuizProgressData
 
         public bool FullTestInProgress { get; set; } = false;
 
+        /// <summary>
+        /// Contains the number of correct answers during a full test
+        /// </summary>
+        public int CorrectAnswersThisRound { get; set; } = 0;
+
         public QuizProgData(Quiz quiz, bool initWordProgDatas = true)
         {
             if (quiz == null)

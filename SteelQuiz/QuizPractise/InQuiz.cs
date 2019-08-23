@@ -45,7 +45,7 @@ namespace SteelQuiz.QuizPractise
         private bool UserCopyingWord { get; set; } = false;
         private bool CountThisTranslationToProgress { get; set; } = true; // false if the user clicked Fix Quiz Errors, as the answer is displayed there. Will become true as a new word is selected
         private bool ShowingW1synonyms { get; set; } = false;
-        private int CorrectAnswersThisRound { get; set; } = 0;
+        //private int CorrectAnswersThisRound { get; set; } = 0;
 
         public InQuiz(bool welcomeLocationInitialized = true)
         {
@@ -136,7 +136,7 @@ namespace SteelQuiz.QuizPractise
                 newRoundMsg = false;
             }
 
-            CorrectAnswersThisRound = 0;
+            QuizCore.QuizProgress.CorrectAnswersThisRound = 0;
             QuestionSelector.NewRound();
 
             if (newRoundMsg && !skipNewRoundMsg)
@@ -164,7 +164,7 @@ namespace SteelQuiz.QuizPractise
                 {
                     if (!UserCopyingWord)
                     {
-                        ++CorrectAnswersThisRound;
+                        ++QuizCore.QuizProgress.CorrectAnswersThisRound;
                     }
                     lbl_word1.Text = "Correct! Press ENTER to continue";
                     QuizCore.ResetWordsAskedThisRoundMemo();
@@ -172,14 +172,14 @@ namespace SteelQuiz.QuizPractise
 
                     if (QuizCore.QuizProgress.FullTestInProgress && QuizCore.GetWordsAskedThisRound() == QuizCore.GetTotalWordsThisRound())
                     {
-                        if (CorrectAnswersThisRound == QuizCore.GetTotalWordsThisRound())
+                        if (QuizCore.QuizProgress.CorrectAnswersThisRound == QuizCore.GetTotalWordsThisRound())
                         {
-                            MessageBox.Show($"Full test results:\r\nCorrect: {CorrectAnswersThisRound} / {QuizCore.GetTotalWordsThisRound()}, congratulations!",
+                            MessageBox.Show($"Full test results:\r\nCorrect: {QuizCore.QuizProgress.CorrectAnswersThisRound} / {QuizCore.GetTotalWordsThisRound()}, congratulations!",
                                 "Full test finished - SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         else
                         {
-                            var msg = MessageBox.Show($"Full test results:\r\nCorrect: {CorrectAnswersThisRound} / {QuizCore.GetTotalWordsThisRound()}\r\n\r\n" +
+                            var msg = MessageBox.Show($"Full test results:\r\nCorrect: {QuizCore.QuizProgress.CorrectAnswersThisRound} / {QuizCore.GetTotalWordsThisRound()}\r\n\r\n" +
                                 $"Would you like to re-enable Intelligent Learning, to learn the missed words?",
                                 "Full test finished - SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                             if (msg == DialogResult.Yes)
@@ -187,6 +187,7 @@ namespace SteelQuiz.QuizPractise
                                 SwitchAIMode(false);
                             }
                         }
+                        QuizCore.QuizProgress.CorrectAnswersThisRound = 0;
                     }
                     WaitingForEnter = true;
                 }
