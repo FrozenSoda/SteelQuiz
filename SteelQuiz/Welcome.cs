@@ -255,7 +255,7 @@ namespace SteelQuiz
             btn_importQuiz.ForeColor = WelcomeTheme.GetButtonForeColor();
             //btn_continueLast.ForeColor = WelcomeTheme.GetButtonForeColor();
 
-            lbl_copyright.ForeColor = WelcomeTheme.GetBackgroundLabelForeColor();
+            //lbl_copyright.ForeColor = WelcomeTheme.GetBackgroundLabelForeColor();
 
             btn_chkUpdates.BackColor = WelcomeTheme.GetButtonBackColor();
             btn_preferences.BackColor = WelcomeTheme.GetButtonBackColor();
@@ -399,11 +399,15 @@ namespace SteelQuiz
         private void Btn_preferences_Click(object sender, EventArgs e)
         {
             ShowPreferences();
+
+            AddQuizButtonsExpanded = false;
         }
 
         private void Btn_chkUpdates_Click(object sender, EventArgs e)
         {
             Updater.Update(Updater.UpdateMode.Verbose);
+
+            AddQuizButtonsExpanded = false;
         }
 
         private void Welcome_Shown(object sender, EventArgs e)
@@ -434,6 +438,8 @@ namespace SteelQuiz
                 btn_createQuiz.Visible = AddQuizButtonsExpanded;
                 btn_loadQuizFromFile.Visible = AddQuizButtonsExpanded;
                 btn_importQuiz.Visible = AddQuizButtonsExpanded;
+                btn_preferences.Visible = AddQuizButtonsExpanded;
+                btn_chkUpdates.Visible = AddQuizButtonsExpanded;
 
                 if (AddQuizButtonsExpanded)
                 {
