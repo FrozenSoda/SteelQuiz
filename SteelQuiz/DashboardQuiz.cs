@@ -75,7 +75,7 @@ namespace SteelQuiz
 
         private void Lbl_name_Click(object sender, EventArgs e)
         {
-
+            (ParentForm as Welcome).SwitchQuizProgressInfo(QuizIdentity);
         }
     }
 }

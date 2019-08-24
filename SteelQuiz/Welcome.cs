@@ -128,6 +128,25 @@ namespace SteelQuiz
             }
         }
 
+        public void SwitchQuizProgressInfo(QuizIdentity quizIdentity)
+        {
+            foreach (var q in pnl_quizInfo.Controls.OfType<QuizProgressInfo>())
+            {
+                if (q.QuizIdentity.QuizGuid == quizIdentity.QuizGuid)
+                {
+                    q.Show();
+                    q.BringToFront();
+
+                    return;
+                }
+            }
+
+            var quizProgressInfo = new QuizProgressInfo(quizIdentity);
+            pnl_quizInfo.Controls.Add(quizProgressInfo);
+            quizProgressInfo.Show();
+            quizProgressInfo.BringToFront();
+        }
+
         private void ThemeMonitor_Error(object sender, ErrorEventArgs e)
         {
             throw e.GetException();
@@ -176,7 +195,7 @@ namespace SteelQuiz
                 dynamic frmT = Convert.ChangeType(frm, frm.GetType());
                 frmT.Invoke(new Action(() =>
                 {
-                    frmT.SetTheme();
+                    frmT.SetTheme(null);
                 }));
 
                 foreach (var uc in frm.GetAllChildrenRecursive().OfType<AutoThemeableUserControl>())
@@ -185,7 +204,7 @@ namespace SteelQuiz
                     dynamic ucT = Convert.ChangeType(uc, uc.GetType());
                     ucT.Invoke(new Action(() =>
                     {
-                        ucT.SetTheme();
+                        ucT.SetTheme(null);
                     }));
 
                     //uc.SetTheme();
@@ -250,7 +269,7 @@ namespace SteelQuiz
                 dynamic ucT = Convert.ChangeType(uc, uc.GetType());
                 ucT.Invoke(new Action(() =>
                 {
-                    ucT.SetTheme();
+                    ucT.SetTheme(null);
                 }));
 
                 //uc.SetTheme();
