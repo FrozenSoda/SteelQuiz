@@ -54,7 +54,7 @@ namespace SteelQuiz
             this.lbl_name.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_name.Location = new System.Drawing.Point(0, 0);
             this.lbl_name.Name = "lbl_name";
-            this.lbl_name.Size = new System.Drawing.Size(178, 59);
+            this.lbl_name.Size = new System.Drawing.Size(170, 59);
             this.lbl_name.TabIndex = 0;
             this.lbl_name.Text = "p308";
             this.lbl_name.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -71,7 +71,7 @@ namespace SteelQuiz
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.White;
             this.Name = "DashboardQuiz";
-            this.Size = new System.Drawing.Size(178, 59);
+            this.Size = new System.Drawing.Size(170, 59);
             this.MouseEnter += new System.EventHandler(this.DashboardQuiz_MouseEnter);
             this.MouseLeave += new System.EventHandler(this.DashboardQuiz_MouseLeave);
             this.ResumeLayout(false);

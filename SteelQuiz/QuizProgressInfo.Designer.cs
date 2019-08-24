@@ -50,6 +50,8 @@ namespace SteelQuiz
             this.btn_editQuiz = new System.Windows.Forms.Button();
             this.btn_deleteQuiz = new System.Windows.Forms.Button();
             this.lbl_quizNameHere = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btn_practiseQuiz
@@ -58,12 +60,13 @@ namespace SteelQuiz
             this.btn_practiseQuiz.FlatAppearance.BorderSize = 0;
             this.btn_practiseQuiz.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_practiseQuiz.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_practiseQuiz.Location = new System.Drawing.Point(428, 338);
+            this.btn_practiseQuiz.Location = new System.Drawing.Point(428, 381);
             this.btn_practiseQuiz.Name = "btn_practiseQuiz";
             this.btn_practiseQuiz.Size = new System.Drawing.Size(158, 45);
             this.btn_practiseQuiz.TabIndex = 0;
             this.btn_practiseQuiz.Text = "Practise Quiz";
             this.btn_practiseQuiz.UseVisualStyleBackColor = false;
+            this.btn_practiseQuiz.Click += new System.EventHandler(this.Btn_practiseQuiz_Click);
             // 
             // btn_editQuiz
             // 
@@ -71,7 +74,7 @@ namespace SteelQuiz
             this.btn_editQuiz.FlatAppearance.BorderSize = 0;
             this.btn_editQuiz.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_editQuiz.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_editQuiz.Location = new System.Drawing.Point(264, 338);
+            this.btn_editQuiz.Location = new System.Drawing.Point(264, 381);
             this.btn_editQuiz.Name = "btn_editQuiz";
             this.btn_editQuiz.Size = new System.Drawing.Size(158, 45);
             this.btn_editQuiz.TabIndex = 1;
@@ -85,7 +88,7 @@ namespace SteelQuiz
             this.btn_deleteQuiz.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_deleteQuiz.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_deleteQuiz.ForeColor = System.Drawing.Color.LightCoral;
-            this.btn_deleteQuiz.Location = new System.Drawing.Point(42, 338);
+            this.btn_deleteQuiz.Location = new System.Drawing.Point(42, 381);
             this.btn_deleteQuiz.Name = "btn_deleteQuiz";
             this.btn_deleteQuiz.Size = new System.Drawing.Size(158, 45);
             this.btn_deleteQuiz.TabIndex = 2;
@@ -94,19 +97,40 @@ namespace SteelQuiz
             // 
             // lbl_quizNameHere
             // 
-            this.lbl_quizNameHere.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_quizNameHere.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_quizNameHere.Location = new System.Drawing.Point(3, 0);
             this.lbl_quizNameHere.Name = "lbl_quizNameHere";
-            this.lbl_quizNameHere.Size = new System.Drawing.Size(580, 49);
+            this.lbl_quizNameHere.Size = new System.Drawing.Size(580, 68);
             this.lbl_quizNameHere.TabIndex = 3;
             this.lbl_quizNameHere.Text = "Quiz Name Here";
-            this.lbl_quizNameHere.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(3, 68);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(197, 68);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Learning Progress:";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(206, 68);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(197, 68);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "0 %";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // QuizProgressInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.lbl_quizNameHere);
             this.Controls.Add(this.btn_deleteQuiz);
             this.Controls.Add(this.btn_editQuiz);
@@ -114,7 +138,7 @@ namespace SteelQuiz
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.White;
             this.Name = "QuizProgressInfo";
-            this.Size = new System.Drawing.Size(586, 383);
+            this.Size = new System.Drawing.Size(586, 426);
             this.ResumeLayout(false);
 
         }
@@ -125,5 +149,7 @@ namespace SteelQuiz
         private System.Windows.Forms.Button btn_editQuiz;
         private System.Windows.Forms.Button btn_deleteQuiz;
         private System.Windows.Forms.Label lbl_quizNameHere;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }
