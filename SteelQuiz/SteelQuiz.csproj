@@ -159,6 +159,12 @@
     <Compile Include="QuizImport\Internal\QuizFolderSelect.Designer.cs">
       <DependentUpon>QuizFolderSelect.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuizProgressInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuizProgressInfo.Designer.cs">
+      <DependentUpon>QuizProgressInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuizProgressMerger.cs" />
     <Compile Include="AtomicIO.cs" />
     <Compile Include="StartupLoading.cs">
@@ -430,6 +436,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="QuizImport\Internal\QuizFolderSelect.resx">
       <DependentUpon>QuizFolderSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuizProgressInfo.resx">
+      <DependentUpon>QuizProgressInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StartupLoading.resx">
       <DependentUpon>StartupLoading.cs</DependentUpon>
