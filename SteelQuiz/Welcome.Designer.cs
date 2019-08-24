@@ -168,7 +168,7 @@ namespace SteelQuiz
             this.btn_loadQuizFromFile.Name = "btn_loadQuizFromFile";
             this.btn_loadQuizFromFile.Size = new System.Drawing.Size(184, 31);
             this.btn_loadQuizFromFile.TabIndex = 10;
-            this.btn_loadQuizFromFile.Text = "Load Quiz from File";
+            this.btn_loadQuizFromFile.Text = "Load Quiz";
             this.btn_loadQuizFromFile.UseVisualStyleBackColor = false;
             this.btn_loadQuizFromFile.Visible = false;
             this.btn_loadQuizFromFile.Click += new System.EventHandler(this.btn_loadQuiz_Click);
@@ -200,7 +200,7 @@ namespace SteelQuiz
             this.btn_importQuiz.Name = "btn_importQuiz";
             this.btn_importQuiz.Size = new System.Drawing.Size(184, 31);
             this.btn_importQuiz.TabIndex = 12;
-            this.btn_importQuiz.Text = "Import Quiz from Internet";
+            this.btn_importQuiz.Text = "Import Quiz";
             this.btn_importQuiz.UseVisualStyleBackColor = false;
             this.btn_importQuiz.Visible = false;
             this.btn_importQuiz.Click += new System.EventHandler(this.btn_importQuizFromSite_Click);
