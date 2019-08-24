@@ -111,8 +111,14 @@ namespace SteelQuiz
             PopulateQuizList();
         }
 
-        private void PopulateQuizList()
+        public void PopulateQuizList()
         {
+            foreach (var c in flp_lastQuizzes.Controls.OfType<Control>())
+            {
+                c.Dispose();
+            }
+            flp_lastQuizzes.Controls.Clear();
+
             foreach (var quizAccessTimePair in QuizCore.QuizAccessTimes.OrderByDescending(x => x.Value.Ticks))
             {
                 var quizIdentity = QuizCore.QuizIdentities[quizAccessTimePair.Key];
@@ -211,6 +217,7 @@ namespace SteelQuiz
             this.BackColor = WelcomeTheme.GetBackColor();
 
             lbl_welcome.ForeColor = WelcomeTheme.GetMainLabelForeColor();
+            lbl_recentQuizzes.ForeColor = WelcomeTheme.GetMainLabelForeColor();
 
             btn_addQuiz.BackColor = WelcomeTheme.GetMainButtonBackColor();
             btn_createQuiz.BackColor = WelcomeTheme.GetMainButtonBackColor();
