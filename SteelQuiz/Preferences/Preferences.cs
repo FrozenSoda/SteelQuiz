@@ -44,7 +44,7 @@ namespace SteelQuiz.Preferences
             pnl_prefCategories.Controls.Add(catRoot);
             catRoot.Show();
 
-            SetTheme();
+            SetTheme(null);
 
             this.Text += $" | v{Application.ProductVersion}";
             if (MetaData.PRE_RELEASE)
@@ -59,7 +59,7 @@ namespace SteelQuiz.Preferences
             }
         }
 
-        public override void SetTheme()
+        public override void SetTheme(GeneralTheme theme)
         {
             base.SetTheme();
 

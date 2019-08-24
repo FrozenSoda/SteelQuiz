@@ -40,6 +40,7 @@
             this.lbl_name.TabIndex = 0;
             this.lbl_name.Text = "p308";
             this.lbl_name.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_name.Click += new System.EventHandler(this.Lbl_name_Click);
             this.lbl_name.MouseEnter += new System.EventHandler(this.Lbl_name_MouseEnter);
             this.lbl_name.MouseLeave += new System.EventHandler(this.Lbl_name_MouseLeave);
             // 
