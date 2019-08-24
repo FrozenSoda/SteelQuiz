@@ -86,12 +86,12 @@ namespace SteelQuiz.QuizPractise
                 btn_w1_synonyms.Enabled = true;
             }
 
-            SetTheme();
+            SetTheme(GeneralTheme);
         }
 
-        public override void SetTheme()
+        public override void SetTheme(GeneralTheme theme)
         {
-            base.SetTheme();
+            base.SetTheme(theme);
 
             lbl_intelligentLearning.ForeColor = GeneralTheme.GetBackgroundLabelForeColor();
             lbl_progress.ForeColor = GeneralTheme.GetBackgroundLabelForeColor();

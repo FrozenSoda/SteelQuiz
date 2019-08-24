@@ -23,16 +23,16 @@ namespace SteelQuiz
         {
             InitializeComponent();
 
-            SetTheme();
+            SetTheme(WelcomeTheme);
 
             QuizIdentity = quizIdentity;
 
             lbl_name.Text = Path.GetFileNameWithoutExtension(QuizIdentity.FindQuizPath());
         }
 
-        public override void SetTheme()
+        public override void SetTheme(GeneralTheme theme)
         {
-            base.SetTheme();
+            base.SetTheme(theme);
 
             BackColor = WelcomeTheme.GetBackColor();
             lbl_name.BackColor = BackColor;
@@ -71,6 +71,11 @@ namespace SteelQuiz
         private void Lbl_name_MouseLeave(object sender, EventArgs e)
         {
             SetHoverColors(false);
+        }
+
+        private void Lbl_name_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

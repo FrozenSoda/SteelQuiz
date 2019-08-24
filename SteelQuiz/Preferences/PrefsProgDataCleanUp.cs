@@ -42,12 +42,12 @@ namespace SteelQuiz.Preferences
         {
             InitializeComponent();
 
-            SetTheme();
+            SetTheme(null);
 
 //#warning do not clean up cloud stored progress data for local quizzes on another computer
         }
 
-        public override void SetTheme()
+        public override void SetTheme(GeneralTheme theme)
         {
             base.SetTheme();
 
