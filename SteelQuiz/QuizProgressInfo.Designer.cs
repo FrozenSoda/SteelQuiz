@@ -76,13 +76,13 @@
             // 
             // lbl_quizNameHere
             // 
-            this.lbl_quizNameHere.AutoSize = true;
             this.lbl_quizNameHere.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_quizNameHere.Location = new System.Drawing.Point(3, 19);
+            this.lbl_quizNameHere.Location = new System.Drawing.Point(3, 0);
             this.lbl_quizNameHere.Name = "lbl_quizNameHere";
-            this.lbl_quizNameHere.Size = new System.Drawing.Size(154, 25);
+            this.lbl_quizNameHere.Size = new System.Drawing.Size(580, 49);
             this.lbl_quizNameHere.TabIndex = 3;
             this.lbl_quizNameHere.Text = "Quiz Name Here";
+            this.lbl_quizNameHere.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // QuizProgressInfo
             // 
@@ -98,7 +98,6 @@
             this.Name = "QuizProgressInfo";
             this.Size = new System.Drawing.Size(586, 354);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

@@ -17,7 +17,7 @@ namespace SteelQuiz.QuizData
         /// <summary>
         /// The GUID of the quiz. This will not change if the quiz is moved.
         /// </summary>
-        private Guid QuizGuid { get; set; }
+        public Guid QuizGuid { get; private set; }
 
         [JsonProperty]
         /// <summary>

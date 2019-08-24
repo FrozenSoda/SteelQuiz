@@ -26,5 +26,17 @@ namespace SteelQuiz
 
             SetTheme(new WelcomeTheme());
         }
+
+        public override void SetTheme(GeneralTheme theme = null)
+        {
+            if (theme == null || theme.GetType() != typeof(WelcomeTheme))
+            {
+                theme = new WelcomeTheme();
+            }
+
+            base.SetTheme(theme);
+
+            btn_deleteQuiz.ForeColor = Color.LightCoral;
+        }
     }
 }

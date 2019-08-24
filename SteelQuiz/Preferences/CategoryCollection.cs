@@ -82,7 +82,7 @@ namespace SteelQuiz.Preferences
             (ParentForm as Preferences).PopCategoryCollection(this);
         }
 
-        public override void SetTheme(GeneralTheme theme)
+        public override void SetTheme(GeneralTheme theme = null)
         {
             base.SetTheme();
 
