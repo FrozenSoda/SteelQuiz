@@ -316,7 +316,7 @@ namespace SteelQuiz
             AddQuizButtonsExpanded = false;
         }
 
-        private void LoadQuiz(string quizPath)
+        public void LoadQuiz(string quizPath)
         {
             try
             {

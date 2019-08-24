@@ -56,5 +56,10 @@ namespace SteelQuiz
 
             btn_deleteQuiz.ForeColor = Color.LightCoral;
         }
+
+        private void Btn_practiseQuiz_Click(object sender, EventArgs e)
+        {
+            (ParentForm as Welcome).LoadQuiz(QuizIdentity.FindQuizPath());
+        }
     }
 }
