@@ -15,7 +15,7 @@ namespace SteelQuiz
 {
     public partial class DashboardQuiz : AutoThemeableUserControl
     {
-        private GeneralTheme GeneralTheme = new GeneralTheme();
+        private WelcomeTheme WelcomeTheme = new WelcomeTheme();
 
         public QuizIdentity QuizIdentity { get; private set; }
 
@@ -34,8 +34,43 @@ namespace SteelQuiz
         {
             base.SetTheme();
 
-            BackColor = GeneralTheme.GetButtonBackColor();
-            ForeColor = GeneralTheme.GetButtonForeColor();
+            BackColor = WelcomeTheme.GetBackColor();
+            lbl_name.BackColor = BackColor;
+            ForeColor = WelcomeTheme.GetBackColor();
+        }
+
+        private void SetHoverColors(bool hover)
+        {
+            if (hover)
+            {
+                BackColor = Color.FromArgb
+                    (WelcomeTheme.GetBackColor().A, WelcomeTheme.GetBackColor().R - 20, WelcomeTheme.GetBackColor().G - 20, WelcomeTheme.GetBackColor().B - 20);
+            }
+            else
+            {
+                BackColor = WelcomeTheme.GetBackColor();
+            }
+            lbl_name.BackColor = BackColor;
+        }
+
+        private void DashboardQuiz_MouseEnter(object sender, EventArgs e)
+        {
+            SetHoverColors(true);
+        }
+
+        private void DashboardQuiz_MouseLeave(object sender, EventArgs e)
+        {
+            SetHoverColors(false);
+        }
+
+        private void Lbl_name_MouseEnter(object sender, EventArgs e)
+        {
+            SetHoverColors(true);
+        }
+
+        private void Lbl_name_MouseLeave(object sender, EventArgs e)
+        {
+            SetHoverColors(false);
         }
     }
 }

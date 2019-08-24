@@ -214,7 +214,7 @@ namespace SteelQuiz
 
             btn_addQuiz.BackColor = WelcomeTheme.GetMainButtonBackColor();
             btn_createQuiz.BackColor = WelcomeTheme.GetMainButtonBackColor();
-            btn_addQuizFromFile.BackColor = WelcomeTheme.GetMainButtonBackColor();
+            btn_loadQuizFromFile.BackColor = WelcomeTheme.GetMainButtonBackColor();
             btn_importQuiz.BackColor = WelcomeTheme.GetMainButtonBackColor();
             //btn_continueLast.BackColor = WelcomeTheme.GetMainButtonBackColor();
 
@@ -225,7 +225,7 @@ namespace SteelQuiz
 
             btn_addQuiz.ForeColor = WelcomeTheme.GetButtonForeColor();
             btn_createQuiz.ForeColor = WelcomeTheme.GetButtonForeColor();
-            btn_addQuizFromFile.ForeColor = WelcomeTheme.GetButtonForeColor();
+            btn_loadQuizFromFile.ForeColor = WelcomeTheme.GetButtonForeColor();
             btn_importQuiz.ForeColor = WelcomeTheme.GetButtonForeColor();
             //btn_continueLast.ForeColor = WelcomeTheme.GetButtonForeColor();
 
@@ -236,6 +236,18 @@ namespace SteelQuiz
 
             btn_chkUpdates.ForeColor = WelcomeTheme.GetButtonForeColor();
             btn_preferences.ForeColor = WelcomeTheme.GetButtonForeColor();
+
+            foreach (var uc in this.GetAllChildrenRecursive().OfType<AutoThemeableUserControl>())
+            {
+                // Call the potentially overriden SetTheme() method
+                dynamic ucT = Convert.ChangeType(uc, uc.GetType());
+                ucT.Invoke(new Action(() =>
+                {
+                    ucT.SetTheme();
+                }));
+
+                //uc.SetTheme();
+            }
         }
 
         public void SetControlStates()
@@ -394,7 +406,7 @@ namespace SteelQuiz
                 __addQuizButtonsExpanded = value;
 
                 btn_createQuiz.Visible = AddQuizButtonsExpanded;
-                btn_addQuizFromFile.Visible = AddQuizButtonsExpanded;
+                btn_loadQuizFromFile.Visible = AddQuizButtonsExpanded;
                 btn_importQuiz.Visible = AddQuizButtonsExpanded;
 
                 if (AddQuizButtonsExpanded)

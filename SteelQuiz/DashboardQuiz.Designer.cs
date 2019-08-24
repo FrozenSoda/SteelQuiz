@@ -40,6 +40,8 @@
             this.lbl_name.TabIndex = 0;
             this.lbl_name.Text = "p308";
             this.lbl_name.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_name.MouseEnter += new System.EventHandler(this.Lbl_name_MouseEnter);
+            this.lbl_name.MouseLeave += new System.EventHandler(this.Lbl_name_MouseLeave);
             // 
             // DashboardQuiz
             // 
@@ -51,6 +53,8 @@
             this.ForeColor = System.Drawing.Color.White;
             this.Name = "DashboardQuiz";
             this.Size = new System.Drawing.Size(178, 59);
+            this.MouseEnter += new System.EventHandler(this.DashboardQuiz_MouseEnter);
+            this.MouseLeave += new System.EventHandler(this.DashboardQuiz_MouseLeave);
             this.ResumeLayout(false);
 
         }

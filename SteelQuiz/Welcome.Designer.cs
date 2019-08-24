@@ -58,7 +58,7 @@ namespace SteelQuiz
             this.tmr_welcomeMsg = new System.Windows.Forms.Timer(this.components);
             this.flp_lastQuizzes = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btn_addQuizFromFile = new System.Windows.Forms.Button();
+            this.btn_loadQuizFromFile = new System.Windows.Forms.Button();
             this.btn_createQuiz = new System.Windows.Forms.Button();
             this.btn_importQuiz = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -165,21 +165,21 @@ namespace SteelQuiz
             this.panel1.Size = new System.Drawing.Size(586, 354);
             this.panel1.TabIndex = 9;
             // 
-            // btn_addQuizFromFile
+            // btn_loadQuizFromFile
             // 
-            this.btn_addQuizFromFile.BackColor = System.Drawing.Color.SlateBlue;
-            this.btn_addQuizFromFile.FlatAppearance.BorderSize = 0;
-            this.btn_addQuizFromFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_addQuizFromFile.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_addQuizFromFile.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btn_addQuizFromFile.Location = new System.Drawing.Point(12, 333);
-            this.btn_addQuizFromFile.Name = "btn_addQuizFromFile";
-            this.btn_addQuizFromFile.Size = new System.Drawing.Size(184, 31);
-            this.btn_addQuizFromFile.TabIndex = 10;
-            this.btn_addQuizFromFile.Text = "Add Quiz from File";
-            this.btn_addQuizFromFile.UseVisualStyleBackColor = false;
-            this.btn_addQuizFromFile.Visible = false;
-            this.btn_addQuizFromFile.Click += new System.EventHandler(this.btn_loadQuiz_Click);
+            this.btn_loadQuizFromFile.BackColor = System.Drawing.Color.SlateBlue;
+            this.btn_loadQuizFromFile.FlatAppearance.BorderSize = 0;
+            this.btn_loadQuizFromFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_loadQuizFromFile.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_loadQuizFromFile.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btn_loadQuizFromFile.Location = new System.Drawing.Point(12, 333);
+            this.btn_loadQuizFromFile.Name = "btn_loadQuizFromFile";
+            this.btn_loadQuizFromFile.Size = new System.Drawing.Size(184, 31);
+            this.btn_loadQuizFromFile.TabIndex = 10;
+            this.btn_loadQuizFromFile.Text = "Load Quiz from File";
+            this.btn_loadQuizFromFile.UseVisualStyleBackColor = false;
+            this.btn_loadQuizFromFile.Visible = false;
+            this.btn_loadQuizFromFile.Click += new System.EventHandler(this.btn_loadQuiz_Click);
             // 
             // btn_createQuiz
             // 
@@ -221,7 +221,7 @@ namespace SteelQuiz
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.btn_importQuiz);
             this.Controls.Add(this.btn_createQuiz);
-            this.Controls.Add(this.btn_addQuizFromFile);
+            this.Controls.Add(this.btn_loadQuizFromFile);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.flp_lastQuizzes);
             this.Controls.Add(this.btn_preferences);
@@ -253,7 +253,7 @@ namespace SteelQuiz
         internal System.Windows.Forms.Timer tmr_chkUpdate;
         private System.Windows.Forms.Timer tmr_welcomeMsg;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button btn_addQuizFromFile;
+        private System.Windows.Forms.Button btn_loadQuizFromFile;
         private System.Windows.Forms.Button btn_createQuiz;
         private System.Windows.Forms.Button btn_importQuiz;
         private System.Windows.Forms.FlowLayoutPanel flp_lastQuizzes;
