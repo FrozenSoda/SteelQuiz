@@ -210,7 +210,7 @@ namespace SteelQuiz
             this.lbl_recentQuizzes.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_recentQuizzes.Location = new System.Drawing.Point(8, 9);
             this.lbl_recentQuizzes.Name = "lbl_recentQuizzes";
-            this.lbl_recentQuizzes.Size = new System.Drawing.Size(188, 43);
+            this.lbl_recentQuizzes.Size = new System.Drawing.Size(170, 43);
             this.lbl_recentQuizzes.TabIndex = 13;
             this.lbl_recentQuizzes.Text = "Recent quizzes";
             this.lbl_recentQuizzes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

@@ -51,7 +51,7 @@ namespace SteelQuiz
             this.btn_deleteQuiz = new System.Windows.Forms.Button();
             this.lbl_quizNameHere = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lbl_learningProgressPercentage = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btn_practiseQuiz
@@ -114,22 +114,22 @@ namespace SteelQuiz
             this.label1.Text = "Learning Progress:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label2
+            // lbl_learningProgressPercentage
             // 
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(206, 68);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(197, 68);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "0 %";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lbl_learningProgressPercentage.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_learningProgressPercentage.Location = new System.Drawing.Point(206, 68);
+            this.lbl_learningProgressPercentage.Name = "lbl_learningProgressPercentage";
+            this.lbl_learningProgressPercentage.Size = new System.Drawing.Size(197, 68);
+            this.lbl_learningProgressPercentage.TabIndex = 5;
+            this.lbl_learningProgressPercentage.Text = "0 %";
+            this.lbl_learningProgressPercentage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // QuizProgressInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lbl_learningProgressPercentage);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lbl_quizNameHere);
             this.Controls.Add(this.btn_deleteQuiz);
@@ -150,6 +150,6 @@ namespace SteelQuiz
         private System.Windows.Forms.Button btn_deleteQuiz;
         private System.Windows.Forms.Label lbl_quizNameHere;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lbl_learningProgressPercentage;
     }
 }

@@ -28,6 +28,7 @@ using System.Windows.Forms;
 using SteelQuiz.ThemeManager.Colors;
 using SteelQuiz.QuizData;
 using System.IO;
+using SteelQuiz.QuizProgressData;
 
 namespace SteelQuiz
 {
@@ -43,6 +44,17 @@ namespace SteelQuiz
             lbl_quizNameHere.Text = Path.GetFileNameWithoutExtension(QuizIdentity.FindQuizPath());
 
             SetTheme(new WelcomeTheme());
+            LoadLearningProgressPercentage();
+        }
+
+        private void LoadLearningProgressPercentage()
+        {
+            if (!QuizCore.Load(QuizIdentity.QuizGuid))
+            {
+                return;
+            }
+
+            lbl_learningProgressPercentage.Text = Math.Round(QuizCore.QuizProgress.GetSuccessRate() * 100D, 1).ToString() + " %";
         }
 
         public override void SetTheme(GeneralTheme theme = null)
