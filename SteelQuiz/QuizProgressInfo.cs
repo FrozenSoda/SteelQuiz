@@ -54,7 +54,9 @@ namespace SteelQuiz
                 return;
             }
 
-            lbl_learningProgressPercentage.Text = Math.Round(QuizCore.QuizProgress.GetSuccessRate() * 100D, 1).ToString() + " %";
+            //lbl_learningProgressPercentage.Text = Math.Round(QuizCore.QuizProgress.GetSuccessRate() * 100D, 1).ToString() + " %";
+            cpb_learningProgress.Value = (int)Math.Round(QuizCore.QuizProgress.GetSuccessRate() * 100D, 0);
+            cpb_learningProgress.Text = cpb_learningProgress.Value.ToString() + " %";
         }
 
         public override void SetTheme(GeneralTheme theme = null)

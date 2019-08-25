@@ -46,12 +46,13 @@ namespace SteelQuiz
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btn_practiseQuiz = new System.Windows.Forms.Button();
             this.btn_editQuiz = new System.Windows.Forms.Button();
             this.btn_deleteQuiz = new System.Windows.Forms.Button();
             this.lbl_quizNameHere = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lbl_learningProgressPercentage = new System.Windows.Forms.Label();
+            this.cpb_learningProgress = new CircularProgressBar.CircularProgressBar();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // btn_practiseQuiz
@@ -104,33 +105,45 @@ namespace SteelQuiz
             this.lbl_quizNameHere.TabIndex = 3;
             this.lbl_quizNameHere.Text = "Quiz Name Here";
             // 
-            // label1
+            // cpb_learningProgress
             // 
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(3, 68);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(197, 68);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Learning Progress:";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lbl_learningProgressPercentage
-            // 
-            this.lbl_learningProgressPercentage.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_learningProgressPercentage.Location = new System.Drawing.Point(206, 68);
-            this.lbl_learningProgressPercentage.Name = "lbl_learningProgressPercentage";
-            this.lbl_learningProgressPercentage.Size = new System.Drawing.Size(197, 68);
-            this.lbl_learningProgressPercentage.TabIndex = 5;
-            this.lbl_learningProgressPercentage.Text = "0 %";
-            this.lbl_learningProgressPercentage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cpb_learningProgress.AnimationFunction = WinFormAnimation.KnownAnimationFunctions.Liner;
+            this.cpb_learningProgress.AnimationSpeed = 500;
+            this.cpb_learningProgress.BackColor = System.Drawing.Color.Transparent;
+            this.cpb_learningProgress.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cpb_learningProgress.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.cpb_learningProgress.InnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.cpb_learningProgress.InnerMargin = 2;
+            this.cpb_learningProgress.InnerWidth = -1;
+            this.cpb_learningProgress.Location = new System.Drawing.Point(486, 0);
+            this.cpb_learningProgress.MarqueeAnimationSpeed = 2000;
+            this.cpb_learningProgress.Name = "cpb_learningProgress";
+            this.cpb_learningProgress.OuterColor = System.Drawing.Color.Gray;
+            this.cpb_learningProgress.OuterMargin = -25;
+            this.cpb_learningProgress.OuterWidth = 26;
+            this.cpb_learningProgress.ProgressColor = System.Drawing.Color.MediumSlateBlue;
+            this.cpb_learningProgress.ProgressWidth = 5;
+            this.cpb_learningProgress.SecondaryFont = new System.Drawing.Font("Microsoft Sans Serif", 36F);
+            this.cpb_learningProgress.Size = new System.Drawing.Size(100, 100);
+            this.cpb_learningProgress.StartAngle = 270;
+            this.cpb_learningProgress.SubscriptColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(166)))), ((int)(((byte)(166)))));
+            this.cpb_learningProgress.SubscriptMargin = new System.Windows.Forms.Padding(10, -35, 0, 0);
+            this.cpb_learningProgress.SubscriptText = "";
+            this.cpb_learningProgress.SuperscriptColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(166)))), ((int)(((byte)(166)))));
+            this.cpb_learningProgress.SuperscriptMargin = new System.Windows.Forms.Padding(10, 35, 0, 0);
+            this.cpb_learningProgress.SuperscriptText = "";
+            this.cpb_learningProgress.TabIndex = 6;
+            this.cpb_learningProgress.Text = "0 %";
+            this.cpb_learningProgress.TextMargin = new System.Windows.Forms.Padding(0);
+            this.toolTip1.SetToolTip(this.cpb_learningProgress, "Learning Progress");
+            this.cpb_learningProgress.Value = 68;
             // 
             // QuizProgressInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.Controls.Add(this.lbl_learningProgressPercentage);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.cpb_learningProgress);
             this.Controls.Add(this.lbl_quizNameHere);
             this.Controls.Add(this.btn_deleteQuiz);
             this.Controls.Add(this.btn_editQuiz);
@@ -149,7 +162,7 @@ namespace SteelQuiz
         private System.Windows.Forms.Button btn_editQuiz;
         private System.Windows.Forms.Button btn_deleteQuiz;
         private System.Windows.Forms.Label lbl_quizNameHere;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label lbl_learningProgressPercentage;
+        private CircularProgressBar.CircularProgressBar cpb_learningProgress;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
