@@ -119,6 +119,12 @@ namespace SteelQuiz
             }
             flp_lastQuizzes.Controls.Clear();
 
+            foreach (var q in pnl_quizInfo.Controls.OfType<QuizProgressInfo>())
+            {
+                q.Dispose();
+            }
+            pnl_quizInfo.Controls.Clear();
+
             foreach (var quizAccessTimePair in QuizCore.QuizAccessTimes.OrderByDescending(x => x.Value.Ticks))
             {
                 var quizIdentity = QuizCore.QuizIdentities[quizAccessTimePair.Key];
@@ -238,10 +244,10 @@ namespace SteelQuiz
             lbl_welcome.ForeColor = WelcomeTheme.GetMainLabelForeColor();
             lbl_recentQuizzes.ForeColor = WelcomeTheme.GetMainLabelForeColor();
 
-            btn_addQuiz.BackColor = WelcomeTheme.GetMainButtonBackColor();
-            btn_createQuiz.BackColor = WelcomeTheme.GetMainButtonBackColor();
-            btn_loadQuizFromFile.BackColor = WelcomeTheme.GetMainButtonBackColor();
-            btn_importQuiz.BackColor = WelcomeTheme.GetMainButtonBackColor();
+            btn_addQuiz.BackColor = WelcomeTheme.GetButtonBackColor();
+            btn_createQuiz.BackColor = WelcomeTheme.GetButtonBackColor();
+            btn_loadQuizFromFile.BackColor = WelcomeTheme.GetButtonBackColor();
+            btn_importQuiz.BackColor = WelcomeTheme.GetButtonBackColor();
             //btn_continueLast.BackColor = WelcomeTheme.GetMainButtonBackColor();
 
             //btn_createQuiz.ForeColor = WelcomeTheme.GetMainButtonForeColor();

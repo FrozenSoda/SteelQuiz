@@ -77,7 +77,7 @@ namespace SteelQuiz
             // 
             // btn_addQuiz
             // 
-            this.btn_addQuiz.BackColor = System.Drawing.Color.SlateBlue;
+            this.btn_addQuiz.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.btn_addQuiz.FlatAppearance.BorderSize = 0;
             this.btn_addQuiz.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_addQuiz.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -103,12 +103,12 @@ namespace SteelQuiz
             // 
             // btn_chkUpdates
             // 
-            this.btn_chkUpdates.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.btn_chkUpdates.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
             this.btn_chkUpdates.FlatAppearance.BorderSize = 0;
             this.btn_chkUpdates.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_chkUpdates.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_chkUpdates.ForeColor = System.Drawing.Color.White;
-            this.btn_chkUpdates.Location = new System.Drawing.Point(12, 259);
+            this.btn_chkUpdates.Location = new System.Drawing.Point(12, 244);
             this.btn_chkUpdates.Name = "btn_chkUpdates";
             this.btn_chkUpdates.Size = new System.Drawing.Size(184, 31);
             this.btn_chkUpdates.TabIndex = 6;
@@ -119,12 +119,12 @@ namespace SteelQuiz
             // 
             // btn_preferences
             // 
-            this.btn_preferences.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.btn_preferences.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
             this.btn_preferences.FlatAppearance.BorderSize = 0;
             this.btn_preferences.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_preferences.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_preferences.ForeColor = System.Drawing.Color.White;
-            this.btn_preferences.Location = new System.Drawing.Point(12, 222);
+            this.btn_preferences.Location = new System.Drawing.Point(12, 207);
             this.btn_preferences.Name = "btn_preferences";
             this.btn_preferences.Size = new System.Drawing.Size(184, 31);
             this.btn_preferences.TabIndex = 7;
@@ -159,7 +159,7 @@ namespace SteelQuiz
             // 
             // btn_loadQuizFromFile
             // 
-            this.btn_loadQuizFromFile.BackColor = System.Drawing.Color.SlateBlue;
+            this.btn_loadQuizFromFile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.btn_loadQuizFromFile.FlatAppearance.BorderSize = 0;
             this.btn_loadQuizFromFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_loadQuizFromFile.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -175,7 +175,7 @@ namespace SteelQuiz
             // 
             // btn_createQuiz
             // 
-            this.btn_createQuiz.BackColor = System.Drawing.Color.SlateBlue;
+            this.btn_createQuiz.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.btn_createQuiz.FlatAppearance.BorderSize = 0;
             this.btn_createQuiz.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_createQuiz.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -191,7 +191,7 @@ namespace SteelQuiz
             // 
             // btn_importQuiz
             // 
-            this.btn_importQuiz.BackColor = System.Drawing.Color.SlateBlue;
+            this.btn_importQuiz.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.btn_importQuiz.FlatAppearance.BorderSize = 0;
             this.btn_importQuiz.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_importQuiz.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
