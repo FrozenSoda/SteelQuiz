@@ -53,6 +53,7 @@ namespace SteelQuiz
             this.lbl_quizNameHere = new System.Windows.Forms.Label();
             this.cpb_learningProgress = new CircularProgressBar.CircularProgressBar();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.flp_words = new System.Windows.Forms.FlowLayoutPanel();
             this.SuspendLayout();
             // 
             // btn_practiseQuiz
@@ -138,11 +139,19 @@ namespace SteelQuiz
             this.toolTip1.SetToolTip(this.cpb_learningProgress, "Learning Progress");
             this.cpb_learningProgress.Value = 68;
             // 
+            // flp_words
+            // 
+            this.flp_words.Location = new System.Drawing.Point(9, 106);
+            this.flp_words.Name = "flp_words";
+            this.flp_words.Size = new System.Drawing.Size(574, 269);
+            this.flp_words.TabIndex = 7;
+            // 
             // QuizProgressInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.Controls.Add(this.flp_words);
             this.Controls.Add(this.cpb_learningProgress);
             this.Controls.Add(this.lbl_quizNameHere);
             this.Controls.Add(this.btn_deleteQuiz);
@@ -164,5 +173,6 @@ namespace SteelQuiz
         private System.Windows.Forms.Label lbl_quizNameHere;
         private CircularProgressBar.CircularProgressBar cpb_learningProgress;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.FlowLayoutPanel flp_words;
     }
 }
