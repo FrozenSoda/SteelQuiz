@@ -411,5 +411,19 @@ namespace SteelQuiz.QuizPractise
             }
             lbl_word2.Focus();
         }
+
+        private void InQuiz_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData.HasFlag(Keys.Oemplus) && e.Shift && e.Alt && e.Control)
+            {
+                CurrentInput += "¿";
+                lbl_word2.Text = CurrentInput;
+            }
+            else if (e.KeyData.HasFlag(Keys.D1) && e.Shift && e.Alt && e.Control)
+            {
+                CurrentInput += "¡";
+                lbl_word2.Text = CurrentInput;
+            }
+        }
     }
 }

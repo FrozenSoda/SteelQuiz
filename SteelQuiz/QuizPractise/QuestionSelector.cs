@@ -166,6 +166,7 @@ namespace SteelQuiz.QuizPractise
 
             QuizCore.ResetTotalWordsThisRoundCountMemo();
             QuizCore.ResetWordsAskedThisRoundMemo();
+            QuizCore.QuizProgress.CorrectAnswersThisRound = 0;
 
             var rnd = new Random();
             var skipCount = 0;

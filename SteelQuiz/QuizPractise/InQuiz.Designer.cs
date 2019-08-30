@@ -242,6 +242,7 @@ namespace SteelQuiz.QuizPractise
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "SteelQuiz";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.InQuiz_FormClosing);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InQuiz_KeyDown);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.InQuiz_KeyPress);
             this.pnl_word1.ResumeLayout(false);
             this.pnl_word1.PerformLayout();

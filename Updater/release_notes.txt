@@ -1,3 +1,8 @@
+v3.2.4 (v3.2.4.0):
+- Fixed an issue causing full test results to be incorrect in some conditions.
+- Implemented typing of upside down question/exclamation mark without needing to use Alt-codes.
+- Updated 3rd party libraries.
+
 v3.2.3 (v3.2.3.0):
 - Fixed an issue causing full test results to be incorrect in some conditions.
 - Fixed an issue causing full test results not to be preserved across practise sessions.
