@@ -77,6 +77,7 @@ namespace SteelQuiz
             // 
             // btn_addQuiz
             // 
+            this.btn_addQuiz.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btn_addQuiz.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.btn_addQuiz.FlatAppearance.BorderSize = 0;
             this.btn_addQuiz.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -103,6 +104,7 @@ namespace SteelQuiz
             // 
             // btn_chkUpdates
             // 
+            this.btn_chkUpdates.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btn_chkUpdates.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
             this.btn_chkUpdates.FlatAppearance.BorderSize = 0;
             this.btn_chkUpdates.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -119,6 +121,7 @@ namespace SteelQuiz
             // 
             // btn_preferences
             // 
+            this.btn_preferences.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btn_preferences.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
             this.btn_preferences.FlatAppearance.BorderSize = 0;
             this.btn_preferences.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -159,6 +162,7 @@ namespace SteelQuiz
             // 
             // btn_loadQuizFromFile
             // 
+            this.btn_loadQuizFromFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btn_loadQuizFromFile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.btn_loadQuizFromFile.FlatAppearance.BorderSize = 0;
             this.btn_loadQuizFromFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -175,6 +179,7 @@ namespace SteelQuiz
             // 
             // btn_createQuiz
             // 
+            this.btn_createQuiz.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btn_createQuiz.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.btn_createQuiz.FlatAppearance.BorderSize = 0;
             this.btn_createQuiz.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -191,6 +196,7 @@ namespace SteelQuiz
             // 
             // btn_importQuiz
             // 
+            this.btn_importQuiz.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btn_importQuiz.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.btn_importQuiz.FlatAppearance.BorderSize = 0;
             this.btn_importQuiz.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -232,14 +238,13 @@ namespace SteelQuiz
             this.Controls.Add(this.btn_addQuiz);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.White;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
             this.Name = "Welcome";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SteelQuiz";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Welcome_FormClosing);
             this.Shown += new System.EventHandler(this.Welcome_Shown);
+            this.SizeChanged += new System.EventHandler(this.Welcome_SizeChanged);
             this.pnl_quizInfo.ResumeLayout(false);
             this.ResumeLayout(false);
 

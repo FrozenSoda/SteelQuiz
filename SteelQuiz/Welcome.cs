@@ -142,6 +142,7 @@ namespace SteelQuiz
             {
                 if (q.QuizIdentity.QuizGuid == quizIdentity.QuizGuid)
                 {
+                    q.Size = pnl_quizInfo.Size;
                     q.Show();
                     q.BringToFront();
 
@@ -151,6 +152,7 @@ namespace SteelQuiz
 
             var quizProgressInfo = new QuizProgressInfo(quizIdentity);
             pnl_quizInfo.Controls.Add(quizProgressInfo);
+            quizProgressInfo.Size = pnl_quizInfo.Size;
             quizProgressInfo.Show();
             quizProgressInfo.BringToFront();
         }
@@ -463,6 +465,17 @@ namespace SteelQuiz
         private void Btn_addQuiz_Click(object sender, EventArgs e)
         {
             AddQuizButtonsExpanded = !AddQuizButtonsExpanded;
+        }
+
+        private void Welcome_SizeChanged(object sender, EventArgs e)
+        {
+            lbl_welcome.Size = new Size(Size.Width - 230, Size.Height - 63);
+            pnl_quizInfo.Size = lbl_welcome.Size;
+            foreach (var c in pnl_quizInfo.Controls.OfType<Control>())
+            {
+                c.Size = pnl_quizInfo.Size;
+            }
+            flp_lastQuizzes.Size = new Size(flp_lastQuizzes.Size.Width, Size.Height - 143);
         }
     }
 }

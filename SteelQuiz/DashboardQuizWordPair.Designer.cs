@@ -63,6 +63,7 @@ namespace SteelQuiz
             // 
             // lbl_word2
             // 
+            this.lbl_word2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_word2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_word2.Location = new System.Drawing.Point(286, 9);
             this.lbl_word2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -74,18 +75,19 @@ namespace SteelQuiz
             // 
             // cpb_learningProgress
             // 
+            this.cpb_learningProgress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cpb_learningProgress.AnimationFunction = WinFormAnimation.KnownAnimationFunctions.Liner;
             this.cpb_learningProgress.AnimationSpeed = 500;
             this.cpb_learningProgress.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.cpb_learningProgress.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cpb_learningProgress.ForeColor = System.Drawing.Color.White;
             this.cpb_learningProgress.InnerColor = System.Drawing.Color.Transparent;
-            this.cpb_learningProgress.InnerMargin = 2;
+            this.cpb_learningProgress.InnerMargin = -1;
             this.cpb_learningProgress.InnerWidth = -1;
             this.cpb_learningProgress.Location = new System.Drawing.Point(487, 47);
             this.cpb_learningProgress.MarqueeAnimationSpeed = 2000;
             this.cpb_learningProgress.Name = "cpb_learningProgress";
-            this.cpb_learningProgress.OuterColor = System.Drawing.Color.White;
+            this.cpb_learningProgress.OuterColor = System.Drawing.Color.DimGray;
             this.cpb_learningProgress.OuterMargin = -25;
             this.cpb_learningProgress.OuterWidth = 24;
             this.cpb_learningProgress.ProgressColor = System.Drawing.Color.Magenta;

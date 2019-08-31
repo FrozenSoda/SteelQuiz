@@ -58,6 +58,7 @@ namespace SteelQuiz
             // 
             // btn_practiseQuiz
             // 
+            this.btn_practiseQuiz.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_practiseQuiz.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.btn_practiseQuiz.FlatAppearance.BorderSize = 0;
             this.btn_practiseQuiz.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -72,6 +73,7 @@ namespace SteelQuiz
             // 
             // btn_editQuiz
             // 
+            this.btn_editQuiz.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_editQuiz.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.btn_editQuiz.FlatAppearance.BorderSize = 0;
             this.btn_editQuiz.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -85,6 +87,7 @@ namespace SteelQuiz
             // 
             // btn_deleteQuiz
             // 
+            this.btn_deleteQuiz.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btn_deleteQuiz.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.btn_deleteQuiz.FlatAppearance.BorderSize = 0;
             this.btn_deleteQuiz.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -99,15 +102,17 @@ namespace SteelQuiz
             // 
             // lbl_quizNameHere
             // 
+            this.lbl_quizNameHere.Dock = System.Windows.Forms.DockStyle.Top;
             this.lbl_quizNameHere.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_quizNameHere.Location = new System.Drawing.Point(3, 0);
+            this.lbl_quizNameHere.Location = new System.Drawing.Point(0, 0);
             this.lbl_quizNameHere.Name = "lbl_quizNameHere";
-            this.lbl_quizNameHere.Size = new System.Drawing.Size(580, 68);
+            this.lbl_quizNameHere.Size = new System.Drawing.Size(586, 68);
             this.lbl_quizNameHere.TabIndex = 3;
             this.lbl_quizNameHere.Text = "Quiz Name Here";
             // 
             // cpb_learningProgress
             // 
+            this.cpb_learningProgress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cpb_learningProgress.AnimationFunction = WinFormAnimation.KnownAnimationFunctions.Liner;
             this.cpb_learningProgress.AnimationSpeed = 500;
             this.cpb_learningProgress.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
@@ -142,10 +147,13 @@ namespace SteelQuiz
             // flp_words
             // 
             this.flp_words.AutoScroll = true;
+            this.flp_words.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flp_words.Location = new System.Drawing.Point(9, 106);
+            this.flp_words.MinimumSize = new System.Drawing.Size(574, 269);
             this.flp_words.Name = "flp_words";
             this.flp_words.Size = new System.Drawing.Size(574, 269);
             this.flp_words.TabIndex = 7;
+            this.flp_words.WrapContents = false;
             // 
             // QuizProgressInfo
             // 
@@ -162,6 +170,7 @@ namespace SteelQuiz
             this.ForeColor = System.Drawing.Color.White;
             this.Name = "QuizProgressInfo";
             this.Size = new System.Drawing.Size(586, 426);
+            this.SizeChanged += new System.EventHandler(this.QuizProgressInfo_SizeChanged);
             this.ResumeLayout(false);
 
         }

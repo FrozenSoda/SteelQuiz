@@ -68,14 +68,25 @@ namespace SteelQuiz
             var controls = new List<DashboardQuizWordPair>();
             foreach (var wordPair in QuizCore.Quiz.WordPairs)
             {
-                controls.Add(new DashboardQuizWordPair(wordPair));
+                var c = new DashboardQuizWordPair(wordPair);
+                c.Size = new Size(flp_words.Size.Width - 34, c.Size.Height);
+                controls.Add(c);
             }
 
             controls = controls.OrderBy(x => x.LearningProgress).ToList();
 
+            int count = 1;
             foreach (var c in controls)
             {
+                // Every other wordpair should have a slighly different color to make reading them easier
+                if (count % 2 == 0)
+                {
+                    c.BackColor = Color.FromArgb(c.BackColor.A, c.BackColor.R - 5, c.BackColor.G - 5, c.BackColor.B - 5);
+                }
                 flp_words.Controls.Add(c);
+                flp_words.SetFlowBreak(c, true);
+
+                ++count;
             }
         }
 
@@ -98,6 +109,15 @@ namespace SteelQuiz
         private void Btn_practiseQuiz_Click(object sender, EventArgs e)
         {
             (ParentForm as Welcome).LoadQuiz(QuizIdentity.FindQuizPath());
+        }
+
+        private void QuizProgressInfo_SizeChanged(object sender, EventArgs e)
+        {
+            flp_words.Size = new Size(Size.Width - 12, Size.Height - 157);
+            foreach (var c in flp_words.Controls.OfType<Control>())
+            {
+                c.Size = new Size(flp_words.Size.Width - 34, c.Size.Height);
+            }
         }
     }
 }
