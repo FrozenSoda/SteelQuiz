@@ -1,3 +1,7 @@
+v4.0.0-pre1 (v4.0.0.1):
+- Re-designed dashboard to give a better overview of quizzes, word pairs, and learning progress.
+- Fixed issues with Intelligent Learning calculations.
+
 v3.2.4 (v3.2.4.0):
 - Fixed an issue causing full test results to be incorrect in some conditions.
 - Implemented typing of upside down question/exclamation mark without needing to use Alt-codes.
