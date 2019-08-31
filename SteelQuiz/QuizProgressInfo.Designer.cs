@@ -112,20 +112,20 @@ namespace SteelQuiz
             this.cpb_learningProgress.AnimationSpeed = 500;
             this.cpb_learningProgress.BackColor = System.Drawing.Color.Transparent;
             this.cpb_learningProgress.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cpb_learningProgress.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.cpb_learningProgress.InnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.cpb_learningProgress.ForeColor = System.Drawing.Color.White;
+            this.cpb_learningProgress.InnerColor = System.Drawing.Color.Transparent;
             this.cpb_learningProgress.InnerMargin = 2;
-            this.cpb_learningProgress.InnerWidth = -1;
-            this.cpb_learningProgress.Location = new System.Drawing.Point(486, 0);
+            this.cpb_learningProgress.InnerWidth = 0;
+            this.cpb_learningProgress.Location = new System.Drawing.Point(486, 3);
             this.cpb_learningProgress.MarqueeAnimationSpeed = 2000;
             this.cpb_learningProgress.Name = "cpb_learningProgress";
-            this.cpb_learningProgress.OuterColor = System.Drawing.Color.Gray;
+            this.cpb_learningProgress.OuterColor = System.Drawing.Color.White;
             this.cpb_learningProgress.OuterMargin = -25;
-            this.cpb_learningProgress.OuterWidth = 26;
-            this.cpb_learningProgress.ProgressColor = System.Drawing.Color.MediumSlateBlue;
+            this.cpb_learningProgress.OuterWidth = 24;
+            this.cpb_learningProgress.ProgressColor = System.Drawing.Color.Magenta;
             this.cpb_learningProgress.ProgressWidth = 5;
             this.cpb_learningProgress.SecondaryFont = new System.Drawing.Font("Microsoft Sans Serif", 36F);
-            this.cpb_learningProgress.Size = new System.Drawing.Size(100, 100);
+            this.cpb_learningProgress.Size = new System.Drawing.Size(97, 97);
             this.cpb_learningProgress.StartAngle = 270;
             this.cpb_learningProgress.SubscriptColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(166)))), ((int)(((byte)(166)))));
             this.cpb_learningProgress.SubscriptMargin = new System.Windows.Forms.Padding(10, -35, 0, 0);
@@ -141,6 +141,7 @@ namespace SteelQuiz
             // 
             // flp_words
             // 
+            this.flp_words.AutoScroll = true;
             this.flp_words.Location = new System.Drawing.Point(9, 106);
             this.flp_words.Name = "flp_words";
             this.flp_words.Size = new System.Drawing.Size(574, 269);

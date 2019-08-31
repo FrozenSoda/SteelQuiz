@@ -45,18 +45,37 @@ namespace SteelQuiz
 
             SetTheme(new WelcomeTheme());
             LoadLearningProgressPercentage();
+            LoadWordPairs();
         }
 
         private void LoadLearningProgressPercentage()
         {
+            /*
             if (!QuizCore.Load(QuizIdentity.QuizGuid))
             {
                 return;
             }
+            */
 
             //lbl_learningProgressPercentage.Text = Math.Round(QuizCore.QuizProgress.GetSuccessRate() * 100D, 1).ToString() + " %";
-            cpb_learningProgress.Value = (int)Math.Round(QuizCore.QuizProgress.GetSuccessRate() * 100D, 0);
+            cpb_learningProgress.Value = (int)Math.Floor(QuizCore.QuizProgress.GetSuccessRateStrict() * 100D);
             cpb_learningProgress.Text = cpb_learningProgress.Value.ToString() + " %";
+        }
+
+        private void LoadWordPairs()
+        {
+            var controls = new List<DashboardQuizWordPair>();
+            foreach (var wordPair in QuizCore.Quiz.WordPairs)
+            {
+                controls.Add(new DashboardQuizWordPair(wordPair));
+            }
+
+            controls = controls.OrderBy(x => x.LearningProgress).ToList();
+
+            foreach (var c in controls)
+            {
+                flp_words.Controls.Add(c);
+            }
         }
 
         public override void SetTheme(GeneralTheme theme = null)

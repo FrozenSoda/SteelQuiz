@@ -136,6 +136,8 @@ namespace SteelQuiz
 
         public void SwitchQuizProgressInfo(QuizIdentity quizIdentity)
         {
+            QuizCore.Load(quizIdentity.FindQuizPath());
+
             foreach (var q in pnl_quizInfo.Controls.OfType<QuizProgressInfo>())
             {
                 if (q.QuizIdentity.QuizGuid == quizIdentity.QuizGuid)
