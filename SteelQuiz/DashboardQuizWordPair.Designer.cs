@@ -46,9 +46,11 @@ namespace SteelQuiz
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lbl_word1 = new System.Windows.Forms.Label();
             this.lbl_word2 = new System.Windows.Forms.Label();
             this.cpb_learningProgress = new CircularProgressBar.CircularProgressBar();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // lbl_word1
@@ -104,6 +106,7 @@ namespace SteelQuiz
             this.cpb_learningProgress.TabIndex = 7;
             this.cpb_learningProgress.Text = "0 %";
             this.cpb_learningProgress.TextMargin = new System.Windows.Forms.Padding(0);
+            this.toolTip1.SetToolTip(this.cpb_learningProgress, "Learning Progress");
             this.cpb_learningProgress.Value = 68;
             // 
             // DashboardQuizWordPair
@@ -128,5 +131,6 @@ namespace SteelQuiz
         private System.Windows.Forms.Label lbl_word1;
         private System.Windows.Forms.Label lbl_word2;
         private CircularProgressBar.CircularProgressBar cpb_learningProgress;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

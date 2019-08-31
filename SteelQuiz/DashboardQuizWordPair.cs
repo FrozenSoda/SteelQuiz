@@ -54,6 +54,11 @@ namespace SteelQuiz
 
         public override void SetTheme(GeneralTheme theme = null)
         {
+            if (theme == null || theme.GetType() != typeof(WelcomeTheme))
+            {
+                theme = new WelcomeTheme();
+            }
+
             base.SetTheme(theme);
 
             cpb_learningProgress.BackColor = theme.GetBackColor();

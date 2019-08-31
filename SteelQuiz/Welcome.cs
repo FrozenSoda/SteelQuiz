@@ -136,6 +136,33 @@ namespace SteelQuiz
             }
         }
 
+        /// <summary>
+        /// Removes a quiz from the list
+        /// </summary>
+        public void RemoveQuiz(Guid quizGuid)
+        {
+            QuizCore.QuizAccessTimes.Remove(quizGuid);
+            QuizCore.SaveQuizProgress();
+            
+            foreach (var c in flp_lastQuizzes.Controls.OfType<DashboardQuiz>())
+            {
+                if (c.QuizIdentity.QuizGuid == quizGuid)
+                {
+                    flp_lastQuizzes.Controls.Remove(c);
+                    c.Dispose();
+                }
+            }
+
+            foreach (var c in pnl_quizInfo.Controls.OfType<QuizProgressInfo>())
+            {
+                if (c.QuizIdentity.QuizGuid == quizGuid)
+                {
+                    pnl_quizInfo.Controls.Remove(c);
+                    c.Dispose();
+                }
+            }
+        }
+
         public void SwitchQuizProgressInfo(QuizIdentity quizIdentity)
         {
             QuizCore.Load(quizIdentity.FindQuizPath());
@@ -270,8 +297,9 @@ namespace SteelQuiz
 
             //lbl_copyright.ForeColor = WelcomeTheme.GetBackgroundLabelForeColor();
 
-            btn_chkUpdates.BackColor = WelcomeTheme.GetButtonBackColor();
-            btn_preferences.BackColor = WelcomeTheme.GetButtonBackColor();
+            var btnbc = WelcomeTheme.GetButtonBackColor();
+            btn_chkUpdates.BackColor = Color.FromArgb(btnbc.A, btnbc.R - 10, btnbc.G - 10, btnbc.B - 10);
+            btn_preferences.BackColor = Color.FromArgb(btnbc.A, btnbc.R - 10, btnbc.G - 10, btnbc.B - 10);
 
             btn_chkUpdates.ForeColor = WelcomeTheme.GetButtonForeColor();
             btn_preferences.ForeColor = WelcomeTheme.GetButtonForeColor();

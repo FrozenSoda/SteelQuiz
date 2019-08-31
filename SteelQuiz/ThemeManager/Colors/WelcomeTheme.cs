@@ -89,5 +89,17 @@ namespace SteelQuiz.ThemeManager.Colors
                 return Color.FromArgb(192, 192, 192);
             }
         }
+
+        public Color GetButtonRedForeColor()
+        {
+            if (ConfigManager.Config == null || ConfigManager.Config.Theme == Theme.Dark)
+            {
+                return Color.LightCoral;
+            }
+            else
+            {
+                return Color.Red;
+            }
+        }
     }
 }

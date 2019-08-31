@@ -63,6 +63,24 @@ namespace SteelQuiz
             cpb_learningProgress.Text = cpb_learningProgress.Value.ToString() + " %";
         }
 
+        /// <summary>
+        /// Re-colors the word pairs in the list, to have every other wordpair in a different color, to make reading easier
+        /// </summary>
+        public void RecolorWordPairs()
+        {
+            int count = 0;
+            foreach (var c in flp_words.Controls.OfType<Control>())
+            {
+                // Every other wordpair should have a slighly different color to make reading them easier
+                if (count % 2 == 0)
+                {
+                    c.BackColor = Color.FromArgb(c.BackColor.A, c.BackColor.R - 5, c.BackColor.G - 5, c.BackColor.B - 5);
+                }
+
+                ++count;
+            }
+        }
+
         private void LoadWordPairs()
         {
             var controls = new List<DashboardQuizWordPair>();
@@ -75,7 +93,7 @@ namespace SteelQuiz
 
             controls = controls.OrderBy(x => x.LearningProgress).ToList();
 
-            int count = 1;
+            int count = 0;
             foreach (var c in controls)
             {
                 // Every other wordpair should have a slighly different color to make reading them easier
@@ -99,11 +117,13 @@ namespace SteelQuiz
 
             base.SetTheme(theme);
 
-            btn_deleteQuiz.ForeColor = Color.LightCoral;
+            btn_deleteQuiz.ForeColor = ((WelcomeTheme)theme).GetButtonRedForeColor();
 
             cpb_learningProgress.BackColor = theme.GetBackColor();
             cpb_learningProgress.InnerColor = theme.GetBackColor();
             cpb_learningProgress.ForeColor = theme.GetMainLabelForeColor();
+
+            RecolorWordPairs();
         }
 
         private void Btn_practiseQuiz_Click(object sender, EventArgs e)
@@ -117,6 +137,21 @@ namespace SteelQuiz
             foreach (var c in flp_words.Controls.OfType<Control>())
             {
                 c.Size = new Size(flp_words.Size.Width - 34, c.Size.Height);
+            }
+        }
+
+        private void Btn_editQuiz_Click(object sender, EventArgs e)
+        {
+            Program.frmWelcome.OpenQuizEditor(QuizCore.Quiz, QuizCore.QuizPath);
+        }
+
+        private void Btn_deleteQuiz_Click(object sender, EventArgs e)
+        {
+            var msg = MessageBox.Show("Are you sure you want to remove this quiz from the 'Recent Quizzes' list? The quiz file will not be removed.",
+                "Remove Quiz - SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (msg == DialogResult.Yes)
+            {
+                Program.frmWelcome.RemoveQuiz(QuizIdentity.QuizGuid);
             }
         }
     }

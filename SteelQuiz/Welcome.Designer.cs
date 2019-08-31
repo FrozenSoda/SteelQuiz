@@ -86,7 +86,7 @@ namespace SteelQuiz
             this.btn_addQuiz.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.btn_addQuiz.FlatAppearance.BorderSize = 0;
             this.btn_addQuiz.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_addQuiz.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_addQuiz.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_addQuiz.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.btn_addQuiz.Location = new System.Drawing.Point(12, 407);
             this.btn_addQuiz.Name = "btn_addQuiz";

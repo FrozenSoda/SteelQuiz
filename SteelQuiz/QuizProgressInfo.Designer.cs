@@ -84,6 +84,7 @@ namespace SteelQuiz
             this.btn_editQuiz.TabIndex = 1;
             this.btn_editQuiz.Text = "Edit Quiz";
             this.btn_editQuiz.UseVisualStyleBackColor = false;
+            this.btn_editQuiz.Click += new System.EventHandler(this.Btn_editQuiz_Click);
             // 
             // btn_deleteQuiz
             // 
@@ -99,6 +100,7 @@ namespace SteelQuiz
             this.btn_deleteQuiz.TabIndex = 2;
             this.btn_deleteQuiz.Text = "Delete Quiz";
             this.btn_deleteQuiz.UseVisualStyleBackColor = false;
+            this.btn_deleteQuiz.Click += new System.EventHandler(this.Btn_deleteQuiz_Click);
             // 
             // lbl_quizNameHere
             // 
