@@ -123,7 +123,9 @@ namespace SteelQuiz
             {
                 q.Dispose();
             }
+
             pnl_quizInfo.Controls.Clear();
+            pnl_quizInfo.Controls.Add(pnl_welcome);
 
             foreach (var quizAccessTimePair in QuizCore.QuizAccessTimes.OrderByDescending(x => x.Value.Ticks))
             {
@@ -247,6 +249,7 @@ namespace SteelQuiz
 
             lbl_welcome.ForeColor = WelcomeTheme.GetMainLabelForeColor();
             lbl_recentQuizzes.ForeColor = WelcomeTheme.GetMainLabelForeColor();
+            lbl_toBegin.ForeColor = WelcomeTheme.GetMainLabelForeColor();
 
             btn_addQuiz.BackColor = WelcomeTheme.GetButtonBackColor();
             btn_createQuiz.BackColor = WelcomeTheme.GetButtonBackColor();
@@ -469,8 +472,11 @@ namespace SteelQuiz
 
         private void Welcome_SizeChanged(object sender, EventArgs e)
         {
-            lbl_welcome.Size = new Size(Size.Width - 230, Size.Height - 63);
-            pnl_quizInfo.Size = lbl_welcome.Size;
+            //lbl_welcome.Size = new Size(Size.Width - 230, Size.Height - 63);
+            pnl_quizInfo.Size = new Size(Size.Width - 230, Size.Height - 63);
+            pnl_welcomeText.Location =
+                new Point(pnl_quizInfo.Width / 2 - pnl_welcomeText.Size.Width / 2,
+                pnl_quizInfo.Height / 2 - pnl_welcomeText.Size.Height / 2);
             foreach (var c in pnl_quizInfo.Controls.OfType<Control>())
             {
                 c.Size = pnl_quizInfo.Size;
