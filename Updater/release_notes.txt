@@ -1,6 +1,9 @@
+v3.2.5 (v3.2.5.0):
+- Fixed issues with Intelligent Learning calculations (same patch as in v4.0.0-pre1).
+
 v4.0.0-pre1 (v4.0.0.1):
 - Re-designed dashboard to give a better overview of quizzes, word pairs, and learning progress.
-- Fixed issues with Intelligent Learning calculations.
+- Fixed issues with Intelligent Learning calculations (same patch as in v3.2.5).
 
 v3.2.4 (v3.2.4.0):
 - Fixed an issue causing full test results to be incorrect in some conditions.

@@ -72,7 +72,7 @@ namespace SteelQuiz.QuizProgressData
             }
             var successCount = WordTries.Where(x => x.Success).Count();
 
-            return successCount / tries;
+            return successCount / (double)tries;
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace SteelQuiz.QuizProgressData
         public double GetSuccessRateStrict()
         {
             var successCount = WordTries.Where(x => x.Success).Count();
-            return successCount / WORD_TRIES_TO_KEEP;
+            return successCount / (double)WORD_TRIES_TO_KEEP;
         }
 
         public object Clone()
