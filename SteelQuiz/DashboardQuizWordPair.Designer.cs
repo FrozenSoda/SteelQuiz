@@ -76,7 +76,7 @@ namespace SteelQuiz
             // 
             this.cpb_learningProgress.AnimationFunction = WinFormAnimation.KnownAnimationFunctions.Liner;
             this.cpb_learningProgress.AnimationSpeed = 500;
-            this.cpb_learningProgress.BackColor = System.Drawing.Color.Transparent;
+            this.cpb_learningProgress.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.cpb_learningProgress.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cpb_learningProgress.ForeColor = System.Drawing.Color.White;
             this.cpb_learningProgress.InnerColor = System.Drawing.Color.Transparent;

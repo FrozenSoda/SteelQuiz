@@ -34,6 +34,7 @@ namespace SteelQuiz
 {
     public partial class QuizProgressInfo : AutoThemeableUserControl
     {
+        private WelcomeTheme WelcomeTheme { get; set; } = new WelcomeTheme();
         public QuizIdentity QuizIdentity { get; private set; }
 
         public QuizProgressInfo(QuizIdentity quizIdentity)
@@ -43,7 +44,7 @@ namespace SteelQuiz
             QuizIdentity = quizIdentity;
             lbl_quizNameHere.Text = Path.GetFileNameWithoutExtension(QuizIdentity.FindQuizPath());
 
-            SetTheme(new WelcomeTheme());
+            SetTheme(WelcomeTheme);
             LoadLearningProgressPercentage();
             LoadWordPairs();
         }
@@ -88,6 +89,10 @@ namespace SteelQuiz
             base.SetTheme(theme);
 
             btn_deleteQuiz.ForeColor = Color.LightCoral;
+
+            cpb_learningProgress.BackColor = theme.GetBackColor();
+            cpb_learningProgress.InnerColor = theme.GetBackColor();
+            cpb_learningProgress.ForeColor = theme.GetMainLabelForeColor();
         }
 
         private void Btn_practiseQuiz_Click(object sender, EventArgs e)
