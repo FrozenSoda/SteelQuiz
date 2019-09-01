@@ -85,7 +85,8 @@ namespace SteelQuiz
 
         private void Lbl_learningProgress_bar_SizeChanged(object sender, EventArgs e)
         {
-            double progress = lbl_learningProgress_bar.Size.Width / (double)Size.Width;
+            //double progress = lbl_learningProgress_bar.Size.Width / (double)Size.Width;
+            double progress = LearningProgress;
 
             lbl_learningProgress_bar.ForeColor = Color.FromArgb(
                 255,
