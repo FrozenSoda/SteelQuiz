@@ -46,11 +46,16 @@ namespace SteelQuiz
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lbl_name = new System.Windows.Forms.Label();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.removeFromListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl_name
             // 
+            this.lbl_name.ContextMenuStrip = this.contextMenuStrip1;
             this.lbl_name.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_name.Location = new System.Drawing.Point(0, 0);
             this.lbl_name.Name = "lbl_name";
@@ -62,11 +67,26 @@ namespace SteelQuiz
             this.lbl_name.MouseEnter += new System.EventHandler(this.Lbl_name_MouseEnter);
             this.lbl_name.MouseLeave += new System.EventHandler(this.Lbl_name_MouseLeave);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.removeFromListToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(165, 26);
+            // 
+            // removeFromListToolStripMenuItem
+            // 
+            this.removeFromListToolStripMenuItem.Name = "removeFromListToolStripMenuItem";
+            this.removeFromListToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.removeFromListToolStripMenuItem.Text = "Remove from list";
+            this.removeFromListToolStripMenuItem.Click += new System.EventHandler(this.RemoveFromListToolStripMenuItem_Click);
+            // 
             // DashboardQuiz
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add(this.lbl_name);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.White;
@@ -74,6 +94,7 @@ namespace SteelQuiz
             this.Size = new System.Drawing.Size(170, 59);
             this.MouseEnter += new System.EventHandler(this.DashboardQuiz_MouseEnter);
             this.MouseLeave += new System.EventHandler(this.DashboardQuiz_MouseLeave);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -81,5 +102,7 @@ namespace SteelQuiz
         #endregion
 
         private System.Windows.Forms.Label lbl_name;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem removeFromListToolStripMenuItem;
     }
 }

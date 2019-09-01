@@ -50,7 +50,7 @@ namespace SteelQuiz
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QuizProgressInfo));
             this.btn_practiseQuiz = new System.Windows.Forms.Button();
             this.btn_editQuiz = new System.Windows.Forms.Button();
-            this.btn_deleteQuiz = new System.Windows.Forms.Button();
+            this.btn_resetProgress = new System.Windows.Forms.Button();
             this.lbl_quizNameHere = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.flp_words = new System.Windows.Forms.FlowLayoutPanel();
@@ -89,21 +89,21 @@ namespace SteelQuiz
             this.btn_editQuiz.UseVisualStyleBackColor = false;
             this.btn_editQuiz.Click += new System.EventHandler(this.Btn_editQuiz_Click);
             // 
-            // btn_deleteQuiz
+            // btn_resetProgress
             // 
-            this.btn_deleteQuiz.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_deleteQuiz.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.btn_deleteQuiz.FlatAppearance.BorderSize = 0;
-            this.btn_deleteQuiz.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_deleteQuiz.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_deleteQuiz.ForeColor = System.Drawing.Color.LightCoral;
-            this.btn_deleteQuiz.Location = new System.Drawing.Point(42, 381);
-            this.btn_deleteQuiz.Name = "btn_deleteQuiz";
-            this.btn_deleteQuiz.Size = new System.Drawing.Size(158, 45);
-            this.btn_deleteQuiz.TabIndex = 2;
-            this.btn_deleteQuiz.Text = "Delete Quiz";
-            this.btn_deleteQuiz.UseVisualStyleBackColor = false;
-            this.btn_deleteQuiz.Click += new System.EventHandler(this.Btn_deleteQuiz_Click);
+            this.btn_resetProgress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btn_resetProgress.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.btn_resetProgress.FlatAppearance.BorderSize = 0;
+            this.btn_resetProgress.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_resetProgress.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_resetProgress.ForeColor = System.Drawing.Color.LightCoral;
+            this.btn_resetProgress.Location = new System.Drawing.Point(10, 378);
+            this.btn_resetProgress.Name = "btn_resetProgress";
+            this.btn_resetProgress.Size = new System.Drawing.Size(158, 45);
+            this.btn_resetProgress.TabIndex = 2;
+            this.btn_resetProgress.Text = "Reset Progress";
+            this.btn_resetProgress.UseVisualStyleBackColor = false;
+            this.btn_resetProgress.Click += new System.EventHandler(this.Btn_resetProgress_Click);
             // 
             // lbl_quizNameHere
             // 
@@ -166,7 +166,7 @@ namespace SteelQuiz
             this.Controls.Add(this.lbl_learningProgress_bar);
             this.Controls.Add(this.flp_words);
             this.Controls.Add(this.lbl_quizNameHere);
-            this.Controls.Add(this.btn_deleteQuiz);
+            this.Controls.Add(this.btn_resetProgress);
             this.Controls.Add(this.btn_editQuiz);
             this.Controls.Add(this.btn_practiseQuiz);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -182,7 +182,7 @@ namespace SteelQuiz
 
         private System.Windows.Forms.Button btn_practiseQuiz;
         private System.Windows.Forms.Button btn_editQuiz;
-        private System.Windows.Forms.Button btn_deleteQuiz;
+        private System.Windows.Forms.Button btn_resetProgress;
         private System.Windows.Forms.Label lbl_quizNameHere;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.FlowLayoutPanel flp_words;

@@ -52,5 +52,21 @@ namespace SteelQuiz.QuizData
             QuizPath = path;
             return path;
         }
+
+        /// <summary>
+        /// Finds the name of this quiz, even when the quiz has been moved to a different location in a quiz folder.
+        /// </summary>
+        /// <returns>Returns the name of the quiz. Returns null if it can't be found.</returns>
+        public string FindName()
+        {
+            var path = FindQuizPath();
+            if (path == null)
+            {
+                return null;
+            }
+
+            var name = Path.GetFileNameWithoutExtension(path);
+            return name;
+        }
     }
 }

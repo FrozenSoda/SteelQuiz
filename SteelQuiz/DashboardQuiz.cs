@@ -97,5 +97,15 @@ namespace SteelQuiz
         {
             (ParentForm as Welcome).SwitchQuizProgressInfo(QuizIdentity);
         }
+
+        private void RemoveFromListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var msg = MessageBox.Show($"Are you sure you want to remove the quiz '{QuizIdentity.FindName()}' from the 'Recent Quizzes' list? The quiz file will not be removed.",
+                "Remove Quiz - SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (msg == DialogResult.Yes)
+            {
+                Program.frmWelcome.RemoveQuiz(QuizIdentity.QuizGuid);
+            }
+        }
     }
 }

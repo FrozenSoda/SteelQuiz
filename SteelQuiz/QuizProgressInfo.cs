@@ -29,6 +29,7 @@ using SteelQuiz.ThemeManager.Colors;
 using SteelQuiz.QuizData;
 using System.IO;
 using SteelQuiz.QuizProgressData;
+using System.Diagnostics;
 
 namespace SteelQuiz
 {
@@ -90,6 +91,13 @@ namespace SteelQuiz
 
         private void LoadWordPairs()
         {
+            foreach (var c in flp_words.Controls.OfType<Control>())
+            {
+                c.Dispose();
+            }
+
+            flp_words.Controls.Clear();
+
             var controls = new List<DashboardQuizWordPair>();
             foreach (var wordPair in QuizCore.Quiz.WordPairs)
             {
@@ -133,7 +141,7 @@ namespace SteelQuiz
 
             lbl_learningProgress_bar.ForeColor = lbl_learningProgress_bar_color;
 
-            btn_deleteQuiz.ForeColor = ((WelcomeTheme)theme).GetButtonRedForeColor();
+            btn_resetProgress.ForeColor = ((WelcomeTheme)theme).GetButtonRedForeColor();
 
             //cpb_learningProgress.BackColor = theme.GetBackColor();
             //cpb_learningProgress.InnerColor = theme.GetBackColor();
@@ -172,14 +180,24 @@ namespace SteelQuiz
             Program.frmWelcome.OpenQuizEditor(QuizCore.Quiz, QuizCore.QuizPath);
         }
 
-        private void Btn_deleteQuiz_Click(object sender, EventArgs e)
+        private void Btn_resetProgress_Click(object sender, EventArgs e)
         {
-            var msg = MessageBox.Show("Are you sure you want to remove this quiz from the 'Recent Quizzes' list? The quiz file will not be removed.",
-                "Remove Quiz - SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (msg == DialogResult.Yes)
+            var msg = MessageBox.Show($"Are you sure you want to start over learning the quiz '{QuizIdentity.FindName()}'? This action cannot be undone.",
+                "Reset Quiz Progress data - SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+            if (msg != DialogResult.Yes)
             {
-                Program.frmWelcome.RemoveQuiz(QuizIdentity.QuizGuid);
+                return;
             }
+
+            // Ensure we are not resetting the wrong progress data
+            SAssert.Assert(QuizCore.QuizProgress.QuizGUID == QuizIdentity.QuizGuid);
+            SAssert.Assert(QuizCore.Quiz.GUID == QuizIdentity.QuizGuid);
+
+            QuizCore.QuizProgress = new QuizProgData(QuizCore.Quiz);
+            QuizCore.SaveQuizProgress();
+
+            LoadLearningProgressPercentage();
+            LoadWordPairs();
         }
 
         private void Lbl_learningProgress_bar_SizeChanged(object sender, EventArgs e)

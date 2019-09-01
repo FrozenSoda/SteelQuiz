@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="Animations\ControlMove.cs" />
     <Compile Include="Animations\LabelFade.cs" />
+    <Compile Include="SAssert.cs" />
     <Compile Include="AutoThemeableUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
