@@ -60,7 +60,7 @@ namespace SteelQuiz.QuizProgressData
         }
 
         /// <summary>
-        /// Returns the success rate between 0 and 1 for answering this word, for the amount of tries completed
+        /// Calculates the success rate between 0 and 1 for answering this word, for the amount of tries completed
         /// </summary>
         /// <returns>Returns the success rate between 0 and 1 for answering this word, for the amount of tries completed</returns>
         public double GetSuccessRate()
@@ -76,10 +76,11 @@ namespace SteelQuiz.QuizProgressData
         }
 
         /// <summary>
-        /// Returns the success rate between 0 and 1 for answering this word, for the total amount of tries to save (WORD_TRIES_TO_KEEP)
+        /// Calculates the learning progress for this quiz, 
+        /// that is, the average of the success rates for all wordpairs, that is between 0 and 1, divided by total amount of tries to save (WORD_TRIES_TO_KEEP)
         /// </summary>
-        /// <returns>Returns the success rate between 0 and 1 for answering this word, for the total amount of tries to save (WORD_TRIES_TO_KEEP)</returns>
-        public double GetSuccessRateStrict()
+        /// <returns>Returns the learning progress</returns>
+        public double GetLearningProgress()
         {
             var successCount = WordTries.Where(x => x.Success).Count();
             return successCount / (double)WORD_TRIES_TO_KEEP;

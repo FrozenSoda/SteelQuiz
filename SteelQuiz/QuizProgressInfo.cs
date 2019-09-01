@@ -61,8 +61,8 @@ namespace SteelQuiz
             //lbl_learningProgressPercentage.Text = Math.Round(QuizCore.QuizProgress.GetSuccessRate() * 100D, 1).ToString() + " %";
             //cpb_learningProgress.Value = (int)Math.Floor(QuizCore.QuizProgress.GetSuccessRateStrict() * 100D);
             //cpb_learningProgress.Text = cpb_learningProgress.Value.ToString() + " %";
-            lbl_learningProgress_bar.Size = new Size((int)Math.Floor(Size.Width * QuizCore.QuizProgress.GetSuccessRate()), lbl_learningProgress_bar.Size.Height);
-            lbl_learningProgress.Text = Math.Floor(QuizCore.QuizProgress.GetSuccessRate() * 100D).ToString() + " %";
+            lbl_learningProgress_bar.Size = new Size((int)Math.Floor(Size.Width * QuizCore.QuizProgress.GetLearningProgress()), lbl_learningProgress_bar.Size.Height);
+            lbl_learningProgress.Text = Math.Floor(QuizCore.QuizProgress.GetLearningProgress() * 100D).ToString() + " %";
         }
 
         /// <summary>
@@ -121,6 +121,7 @@ namespace SteelQuiz
 
             base.SetTheme(theme);
 
+#warning lbl_learningProgress_bar.ForeColor gets overwritten!
             lbl_learningProgress_bar.ForeColor = lbl_learningProgress_bar_color;
 
             btn_deleteQuiz.ForeColor = ((WelcomeTheme)theme).GetButtonRedForeColor();
@@ -139,7 +140,7 @@ namespace SteelQuiz
 
         public void UpdateLearningProgressBar()
         {
-            lbl_learningProgress_bar.Size = new Size((int)Math.Floor(Size.Width * QuizCore.QuizProgress.GetSuccessRate()), lbl_learningProgress_bar.Size.Height);
+            lbl_learningProgress_bar.Size = new Size((int)Math.Floor(Size.Width * QuizCore.QuizProgress.GetLearningProgress()), lbl_learningProgress_bar.Size.Height);
             foreach (var c in flp_words.Controls.OfType<DashboardQuizWordPair>())
             {
                 c.UpdateLearningProgressBar();

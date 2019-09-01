@@ -43,7 +43,7 @@ namespace SteelQuiz
 
             WordPair = wordPair;
             var wordProgData = WordPair.GetWordProgData();
-            LearningProgress = wordProgData.GetSuccessRateStrict();
+            LearningProgress = wordProgData.GetSuccessRate();
 
             //cpb_learningProgress.Value = (int)Math.Floor(LearningProgress * 100d);
             //cpb_learningProgress.Text = cpb_learningProgress.Value.ToString() + " %";

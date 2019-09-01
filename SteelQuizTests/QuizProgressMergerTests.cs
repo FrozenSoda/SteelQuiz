@@ -72,7 +72,7 @@ namespace SteelQuiz.Tests
             /*
              * The quiz progress data with the best success rate should be selected
              */ 
-            Assert.IsTrue(merged.QuizProgDatas[0].WordProgDatas[0].GetSuccessRateStrict() == 1, "The best quiz progress data was not selected");
+            Assert.IsTrue(merged.QuizProgDatas[0].WordProgDatas[0].GetLearningProgress() == 1, "The best quiz progress data was not selected");
         }
 
         [TestMethod()]

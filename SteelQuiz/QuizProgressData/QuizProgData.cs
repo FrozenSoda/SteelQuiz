@@ -84,21 +84,22 @@ namespace SteelQuiz.QuizProgressData
         }
 
         /// <summary>
-        /// Returns the average of GetSuccessRate() for all wordpairs
+        /// Calculates the success rate between 0 and 1 for answering this word, for the amount of tries completed
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Returns the success rate between 0 and 1 for answering this word, for the amount of tries completed</returns>
         public double GetSuccessRate()
         {
             return WordProgDatas.Sum(x => x.GetSuccessRate()) / WordProgDatas.Count();
         }
 
         /// <summary>
-        /// Returns the average of GetSuccessRateStrict() for all wordpairs
+        /// Returns the learning progress for this quiz, 
+        /// that is, the average of the success rates for all wordpairs, that is between 0 and 1, divided by total amount of tries to save (WORD_TRIES_TO_KEEP)
         /// </summary>
         /// <returns></returns>
-        public double GetSuccessRateStrict()
+        public double GetLearningProgress()
         {
-            return WordProgDatas.Sum(x => x.GetSuccessRateStrict()) / WordProgDatas.Count();
+            return WordProgDatas.Sum(x => x.GetLearningProgress()) / WordProgDatas.Count();
         }
 
         // due to CurrentWordPair not preserving references due to serialization, implement setter through method instead, to avoid confusion regarding references
