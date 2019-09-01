@@ -68,7 +68,6 @@ namespace SteelQuiz
             // 
             // lbl_word2
             // 
-            this.lbl_word2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_word2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_word2.Location = new System.Drawing.Point(286, 22);
             this.lbl_word2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);

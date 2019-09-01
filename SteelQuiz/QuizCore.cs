@@ -667,6 +667,41 @@ namespace SteelQuiz
             return true;
         }
 
+        /// <summary>
+        /// Saves QuizAccessTimes and QuizIdentities to the QuizProgress file
+        /// </summary>
+        public static void SaveQuizData()
+        {
+            // DESERIALIZE AND PROCESS
+            QuizProgDataRoot cfgDz;
+            if (File.Exists(ConfigManager.Config.SyncConfig.QuizProgressPath))
+            {
+                try
+                {
+                    cfgDz = JsonConvert.DeserializeObject<QuizProgDataRoot>(AtomicIO.AtomicRead(ConfigManager.Config.SyncConfig.QuizProgressPath));
+                }
+                catch (AtomicException ex)
+                {
+                    // Should never be reached as path exists
+                    throw ex;
+                }
+
+                cfgDz.QuizAccessTimes = QuizAccessTimes;
+                cfgDz.QuizIdentities = QuizIdentities;
+            }
+            else
+            {
+                cfgDz = new QuizProgDataRoot(MetaData.QUIZ_FILE_FORMAT_VERSION);
+                cfgDz.QuizAccessTimes = QuizAccessTimes;
+                cfgDz.QuizIdentities = QuizIdentities;
+            }
+
+            // SERIALIZE AND SAVE
+            var cfgSz = JsonConvert.SerializeObject(cfgDz, Formatting.Indented);
+
+            AtomicIO.AtomicWrite(ConfigManager.Config.SyncConfig.QuizProgressPath, cfgSz);
+        }
+
         public static void SaveQuizProgress()
         {
             /*
@@ -714,6 +749,8 @@ namespace SteelQuiz
             else
             {
                 cfgDz = new QuizProgDataRoot(MetaData.QUIZ_FILE_FORMAT_VERSION);
+                cfgDz.QuizAccessTimes = QuizAccessTimes;
+                cfgDz.QuizIdentities = QuizIdentities;
                 if (QuizProgress != null)
                 {
                     cfgDz.QuizProgDatas.Add(QuizProgress);

@@ -143,7 +143,7 @@ namespace SteelQuiz
         public void RemoveQuiz(Guid quizGuid)
         {
             QuizCore.QuizAccessTimes.Remove(quizGuid);
-            QuizCore.SaveQuizProgress();
+            QuizCore.SaveQuizData();
             
             foreach (var c in flp_lastQuizzes.Controls.OfType<DashboardQuiz>())
             {
