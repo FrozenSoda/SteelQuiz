@@ -274,6 +274,7 @@ namespace SteelQuiz
         public void SetTheme()
         {
             this.BackColor = WelcomeTheme.GetBackColor();
+            pnl_left.BackColor = Color.FromArgb(BackColor.A, BackColor.R - 10, BackColor.G - 10, BackColor.B - 10);
 
             lbl_welcome.ForeColor = WelcomeTheme.GetMainLabelForeColor();
             lbl_recentQuizzes.ForeColor = WelcomeTheme.GetMainLabelForeColor();

@@ -52,21 +52,23 @@ namespace SteelQuiz
         {
             base.SetTheme(theme);
 
-            BackColor = WelcomeTheme.GetBackColor();
+            var bc = WelcomeTheme.GetBackColor();
+            BackColor = Color.FromArgb(bc.A, bc.R - 10, bc.G - 10, bc.B - 10);
             lbl_name.BackColor = BackColor;
             ForeColor = WelcomeTheme.GetBackColor();
         }
 
         private void SetHoverColors(bool hover)
         {
+            var bc = WelcomeTheme.GetBackColor();
             if (hover)
             {
                 BackColor = Color.FromArgb
-                    (WelcomeTheme.GetBackColor().A, WelcomeTheme.GetBackColor().R - 20, WelcomeTheme.GetBackColor().G - 20, WelcomeTheme.GetBackColor().B - 20);
+                    (bc.A, bc.R - 30, bc.G - 30, bc.B - 30);
             }
             else
             {
-                BackColor = WelcomeTheme.GetBackColor();
+                BackColor = Color.FromArgb(bc.A, bc.R - 10, bc.G - 10, bc.B - 10);
             }
             lbl_name.BackColor = BackColor;
         }

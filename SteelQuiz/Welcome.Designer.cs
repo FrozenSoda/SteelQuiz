@@ -57,16 +57,18 @@ namespace SteelQuiz
             this.tmr_welcomeMsg = new System.Windows.Forms.Timer(this.components);
             this.flp_lastQuizzes = new System.Windows.Forms.FlowLayoutPanel();
             this.pnl_quizInfo = new System.Windows.Forms.Panel();
+            this.pnl_welcome = new System.Windows.Forms.Panel();
+            this.pnl_welcomeText = new System.Windows.Forms.Panel();
+            this.lbl_toBegin = new System.Windows.Forms.Label();
             this.btn_loadQuizFromFile = new System.Windows.Forms.Button();
             this.btn_createQuiz = new System.Windows.Forms.Button();
             this.btn_importQuiz = new System.Windows.Forms.Button();
             this.lbl_recentQuizzes = new System.Windows.Forms.Label();
-            this.pnl_welcome = new System.Windows.Forms.Panel();
-            this.lbl_toBegin = new System.Windows.Forms.Label();
-            this.pnl_welcomeText = new System.Windows.Forms.Panel();
+            this.pnl_left = new System.Windows.Forms.Panel();
             this.pnl_quizInfo.SuspendLayout();
             this.pnl_welcome.SuspendLayout();
             this.pnl_welcomeText.SuspendLayout();
+            this.pnl_left.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl_welcome
@@ -88,9 +90,9 @@ namespace SteelQuiz
             this.btn_addQuiz.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_addQuiz.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_addQuiz.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btn_addQuiz.Location = new System.Drawing.Point(12, 407);
+            this.btn_addQuiz.Location = new System.Drawing.Point(10, 406);
             this.btn_addQuiz.Name = "btn_addQuiz";
-            this.btn_addQuiz.Size = new System.Drawing.Size(184, 31);
+            this.btn_addQuiz.Size = new System.Drawing.Size(173, 31);
             this.btn_addQuiz.TabIndex = 1;
             this.btn_addQuiz.Text = "+";
             this.btn_addQuiz.UseVisualStyleBackColor = false;
@@ -115,9 +117,9 @@ namespace SteelQuiz
             this.btn_chkUpdates.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_chkUpdates.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_chkUpdates.ForeColor = System.Drawing.Color.White;
-            this.btn_chkUpdates.Location = new System.Drawing.Point(12, 244);
+            this.btn_chkUpdates.Location = new System.Drawing.Point(10, 243);
             this.btn_chkUpdates.Name = "btn_chkUpdates";
-            this.btn_chkUpdates.Size = new System.Drawing.Size(184, 31);
+            this.btn_chkUpdates.Size = new System.Drawing.Size(173, 31);
             this.btn_chkUpdates.TabIndex = 6;
             this.btn_chkUpdates.Text = "Check for Updates";
             this.btn_chkUpdates.UseVisualStyleBackColor = false;
@@ -132,9 +134,9 @@ namespace SteelQuiz
             this.btn_preferences.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_preferences.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_preferences.ForeColor = System.Drawing.Color.White;
-            this.btn_preferences.Location = new System.Drawing.Point(12, 207);
+            this.btn_preferences.Location = new System.Drawing.Point(10, 206);
             this.btn_preferences.Name = "btn_preferences";
-            this.btn_preferences.Size = new System.Drawing.Size(184, 31);
+            this.btn_preferences.Size = new System.Drawing.Size(173, 31);
             this.btn_preferences.TabIndex = 7;
             this.btn_preferences.Text = "Preferences";
             this.btn_preferences.UseVisualStyleBackColor = false;
@@ -165,6 +167,36 @@ namespace SteelQuiz
             this.pnl_quizInfo.Size = new System.Drawing.Size(586, 426);
             this.pnl_quizInfo.TabIndex = 9;
             // 
+            // pnl_welcome
+            // 
+            this.pnl_welcome.Controls.Add(this.pnl_welcomeText);
+            this.pnl_welcome.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnl_welcome.Location = new System.Drawing.Point(0, 0);
+            this.pnl_welcome.Name = "pnl_welcome";
+            this.pnl_welcome.Size = new System.Drawing.Size(586, 426);
+            this.pnl_welcome.TabIndex = 1;
+            // 
+            // pnl_welcomeText
+            // 
+            this.pnl_welcomeText.Controls.Add(this.lbl_welcome);
+            this.pnl_welcomeText.Controls.Add(this.lbl_toBegin);
+            this.pnl_welcomeText.Location = new System.Drawing.Point(107, 89);
+            this.pnl_welcomeText.Name = "pnl_welcomeText";
+            this.pnl_welcomeText.Size = new System.Drawing.Size(373, 249);
+            this.pnl_welcomeText.TabIndex = 2;
+            // 
+            // lbl_toBegin
+            // 
+            this.lbl_toBegin.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_toBegin.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lbl_toBegin.Location = new System.Drawing.Point(0, 116);
+            this.lbl_toBegin.Name = "lbl_toBegin";
+            this.lbl_toBegin.Size = new System.Drawing.Size(373, 133);
+            this.lbl_toBegin.TabIndex = 1;
+            this.lbl_toBegin.Text = "Select a quiz in the Recent Quizzes list, or add one by clicking the \'+\'-button i" +
+    "n the bottom left corner.";
+            this.lbl_toBegin.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // btn_loadQuizFromFile
             // 
             this.btn_loadQuizFromFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -173,9 +205,9 @@ namespace SteelQuiz
             this.btn_loadQuizFromFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_loadQuizFromFile.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_loadQuizFromFile.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btn_loadQuizFromFile.Location = new System.Drawing.Point(12, 333);
+            this.btn_loadQuizFromFile.Location = new System.Drawing.Point(10, 332);
             this.btn_loadQuizFromFile.Name = "btn_loadQuizFromFile";
-            this.btn_loadQuizFromFile.Size = new System.Drawing.Size(184, 31);
+            this.btn_loadQuizFromFile.Size = new System.Drawing.Size(173, 31);
             this.btn_loadQuizFromFile.TabIndex = 10;
             this.btn_loadQuizFromFile.Text = "Load Quiz";
             this.btn_loadQuizFromFile.UseVisualStyleBackColor = false;
@@ -190,9 +222,9 @@ namespace SteelQuiz
             this.btn_createQuiz.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_createQuiz.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_createQuiz.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btn_createQuiz.Location = new System.Drawing.Point(12, 370);
+            this.btn_createQuiz.Location = new System.Drawing.Point(10, 369);
             this.btn_createQuiz.Name = "btn_createQuiz";
-            this.btn_createQuiz.Size = new System.Drawing.Size(184, 31);
+            this.btn_createQuiz.Size = new System.Drawing.Size(173, 31);
             this.btn_createQuiz.TabIndex = 11;
             this.btn_createQuiz.Text = "Create Quiz";
             this.btn_createQuiz.UseVisualStyleBackColor = false;
@@ -207,9 +239,9 @@ namespace SteelQuiz
             this.btn_importQuiz.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_importQuiz.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_importQuiz.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btn_importQuiz.Location = new System.Drawing.Point(12, 296);
+            this.btn_importQuiz.Location = new System.Drawing.Point(10, 295);
             this.btn_importQuiz.Name = "btn_importQuiz";
-            this.btn_importQuiz.Size = new System.Drawing.Size(184, 31);
+            this.btn_importQuiz.Size = new System.Drawing.Size(173, 31);
             this.btn_importQuiz.TabIndex = 12;
             this.btn_importQuiz.Text = "Import Quiz";
             this.btn_importQuiz.UseVisualStyleBackColor = false;
@@ -219,42 +251,29 @@ namespace SteelQuiz
             // lbl_recentQuizzes
             // 
             this.lbl_recentQuizzes.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_recentQuizzes.Location = new System.Drawing.Point(8, 9);
+            this.lbl_recentQuizzes.Location = new System.Drawing.Point(13, 9);
             this.lbl_recentQuizzes.Name = "lbl_recentQuizzes";
             this.lbl_recentQuizzes.Size = new System.Drawing.Size(170, 43);
             this.lbl_recentQuizzes.TabIndex = 13;
             this.lbl_recentQuizzes.Text = "Recent Quizzes";
             this.lbl_recentQuizzes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // pnl_welcome
+            // pnl_left
             // 
-            this.pnl_welcome.Controls.Add(this.pnl_welcomeText);
-            this.pnl_welcome.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnl_welcome.Location = new System.Drawing.Point(0, 0);
-            this.pnl_welcome.Name = "pnl_welcome";
-            this.pnl_welcome.Size = new System.Drawing.Size(586, 426);
-            this.pnl_welcome.TabIndex = 1;
-            // 
-            // lbl_toBegin
-            // 
-            this.lbl_toBegin.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_toBegin.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lbl_toBegin.Location = new System.Drawing.Point(0, 116);
-            this.lbl_toBegin.Name = "lbl_toBegin";
-            this.lbl_toBegin.Size = new System.Drawing.Size(373, 133);
-            this.lbl_toBegin.TabIndex = 1;
-            this.lbl_toBegin.Text = "Select a quiz in the Recent Quizzes list, or add one by clicking the \'+\'-button i" +
-    "n the bottom left corner.";
-            this.lbl_toBegin.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // pnl_welcomeText
-            // 
-            this.pnl_welcomeText.Controls.Add(this.lbl_welcome);
-            this.pnl_welcomeText.Controls.Add(this.lbl_toBegin);
-            this.pnl_welcomeText.Location = new System.Drawing.Point(107, 89);
-            this.pnl_welcomeText.Name = "pnl_welcomeText";
-            this.pnl_welcomeText.Size = new System.Drawing.Size(373, 249);
-            this.pnl_welcomeText.TabIndex = 2;
+            this.pnl_left.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.pnl_left.Controls.Add(this.lbl_recentQuizzes);
+            this.pnl_left.Controls.Add(this.btn_chkUpdates);
+            this.pnl_left.Controls.Add(this.btn_importQuiz);
+            this.pnl_left.Controls.Add(this.btn_createQuiz);
+            this.pnl_left.Controls.Add(this.btn_loadQuizFromFile);
+            this.pnl_left.Controls.Add(this.btn_preferences);
+            this.pnl_left.Controls.Add(this.btn_addQuiz);
+            this.pnl_left.Controls.Add(this.flp_lastQuizzes);
+            this.pnl_left.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnl_left.Location = new System.Drawing.Point(0, 0);
+            this.pnl_left.Name = "pnl_left";
+            this.pnl_left.Size = new System.Drawing.Size(197, 450);
+            this.pnl_left.TabIndex = 14;
             // 
             // Welcome
             // 
@@ -262,15 +281,8 @@ namespace SteelQuiz
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.btn_chkUpdates);
-            this.Controls.Add(this.lbl_recentQuizzes);
-            this.Controls.Add(this.btn_importQuiz);
-            this.Controls.Add(this.btn_createQuiz);
-            this.Controls.Add(this.btn_loadQuizFromFile);
+            this.Controls.Add(this.pnl_left);
             this.Controls.Add(this.pnl_quizInfo);
-            this.Controls.Add(this.btn_preferences);
-            this.Controls.Add(this.flp_lastQuizzes);
-            this.Controls.Add(this.btn_addQuiz);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.White;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -283,6 +295,7 @@ namespace SteelQuiz
             this.pnl_quizInfo.ResumeLayout(false);
             this.pnl_welcome.ResumeLayout(false);
             this.pnl_welcomeText.ResumeLayout(false);
+            this.pnl_left.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -305,6 +318,7 @@ namespace SteelQuiz
         private System.Windows.Forms.Panel pnl_welcome;
         private System.Windows.Forms.Label lbl_toBegin;
         private System.Windows.Forms.Panel pnl_welcomeText;
+        private System.Windows.Forms.Panel pnl_left;
     }
 }
 
