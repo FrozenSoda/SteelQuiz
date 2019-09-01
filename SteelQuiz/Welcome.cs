@@ -30,6 +30,7 @@ using System.Windows.Forms;
 using AutoUpdaterDotNET;
 using Microsoft.Win32;
 using RegistryUtils;
+using SteelQuiz.Animations;
 using SteelQuiz.Extensions;
 using SteelQuiz.QuizData;
 using SteelQuiz.QuizImport;
@@ -476,11 +477,65 @@ namespace SteelQuiz
             {
                 __addQuizButtonsExpanded = value;
 
-                btn_createQuiz.Visible = AddQuizButtonsExpanded;
-                btn_loadQuizFromFile.Visible = AddQuizButtonsExpanded;
-                btn_importQuiz.Visible = AddQuizButtonsExpanded;
-                btn_preferences.Visible = AddQuizButtonsExpanded;
-                btn_chkUpdates.Visible = AddQuizButtonsExpanded;
+                var btn_createQuiz_loc = btn_createQuiz.Location;
+                var btn_loadQuizFromFile_loc = btn_loadQuizFromFile.Location;
+                var btn_importQuiz_loc = btn_importQuiz.Location;
+                var btn_preferences_loc = btn_preferences.Location;
+                var btn_chkUpdates_loc = btn_chkUpdates.Location;
+
+                if (AddQuizButtonsExpanded)
+                {
+                    btn_createQuiz.Visible = true;
+                    btn_loadQuizFromFile.Visible = true;
+                    btn_importQuiz.Visible = true;
+                    btn_preferences.Visible = true;
+                    btn_chkUpdates.Visible = true;
+
+                    btn_createQuiz.Location = btn_addQuiz.Location;
+                    btn_loadQuizFromFile.Location = btn_addQuiz.Location;
+                    btn_importQuiz.Location = btn_addQuiz.Location;
+                    btn_preferences.Location = btn_addQuiz.Location;
+                    btn_chkUpdates.Location = btn_addQuiz.Location;
+
+                    ControlMove.SmoothMove(btn_createQuiz, btn_createQuiz_loc, 80);
+                    ControlMove.SmoothMove(btn_loadQuizFromFile, btn_loadQuizFromFile_loc, 80);
+                    ControlMove.SmoothMove(btn_importQuiz, btn_importQuiz_loc, 80);
+                    ControlMove.SmoothMove(btn_preferences, btn_preferences_loc, 80);
+                    ControlMove.SmoothMove(btn_chkUpdates, btn_chkUpdates_loc, 80);
+                }
+                else
+                {
+                    ControlMove.SmoothMove(btn_createQuiz, btn_addQuiz.Location, 80, () =>
+                    {
+                        btn_createQuiz.Visible = false;
+
+                        btn_createQuiz.Location = btn_createQuiz_loc;
+                    });
+                    ControlMove.SmoothMove(btn_loadQuizFromFile, btn_addQuiz.Location, 80, () =>
+                    {
+                        btn_loadQuizFromFile.Visible = false;
+
+                        btn_loadQuizFromFile.Location = btn_loadQuizFromFile_loc;
+                    });
+                    ControlMove.SmoothMove(btn_importQuiz, btn_addQuiz.Location, 80, () =>
+                    {
+                        btn_importQuiz.Visible = false;
+
+                        btn_importQuiz.Location = btn_importQuiz_loc;
+                    });
+                    ControlMove.SmoothMove(btn_preferences, btn_addQuiz.Location, 80, () =>
+                    {
+                        btn_preferences.Visible = false;
+
+                        btn_preferences.Location = btn_preferences_loc;
+                    });
+                    ControlMove.SmoothMove(btn_chkUpdates, btn_addQuiz.Location, 80, () =>
+                    {
+                        btn_chkUpdates.Visible = false;
+
+                        btn_chkUpdates.Location = btn_chkUpdates_loc;
+                    });
+                }
 
                 if (AddQuizButtonsExpanded)
                 {
