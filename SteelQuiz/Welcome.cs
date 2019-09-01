@@ -307,7 +307,7 @@ namespace SteelQuiz
             btn_chkUpdates.ForeColor = WelcomeTheme.GetButtonForeColor();
             btn_preferences.ForeColor = WelcomeTheme.GetButtonForeColor();
 
-            foreach (var uc in this.GetAllChildrenRecursive().OfType<AutoThemeableUserControl>())
+            foreach (var uc in this.GetAllChildrenRecursiveDerives(typeof(AutoThemeableUserControl)))
             {
                 // Call the potentially overriden SetTheme() method
                 dynamic ucT = Convert.ChangeType(uc, uc.GetType());

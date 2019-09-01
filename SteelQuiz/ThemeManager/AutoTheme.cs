@@ -110,6 +110,11 @@ namespace SteelQuiz.ThemeManager
                     ((ToolStripMenuItem)tsmi).ForeColor = theme.GetMainLabelForeColor();
                 }
             }
+
+            foreach (var a in control.GetAllChildrenRecursiveDerives(typeof(AutoThemeableUserControl)).Cast<AutoThemeableUserControl>())
+            {
+                a.SetTheme();
+            }
         }
     }
 }

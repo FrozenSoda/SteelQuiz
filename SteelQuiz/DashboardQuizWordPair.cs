@@ -63,9 +63,14 @@ namespace SteelQuiz
             }
 
             var lbl_learningProgress_bar_color = lbl_learningProgress_bar.ForeColor;
+            var bc = BackColor;
 
             base.SetTheme(theme);
 
+            // Revert backcolor (it's handled in QuizProgressInfo)
+            BackColor = bc;
+
+            // Revert learning progress bar color (it should not be changed)
             lbl_learningProgress_bar.ForeColor = lbl_learningProgress_bar_color;
 
             //cpb_learningProgress.BackColor = theme.GetBackColor();

@@ -28,31 +28,78 @@ namespace SteelQuiz.Extensions
     public static class ControlExtensions
     {
         /// <summary>
-        /// Gets all children controls of a control, of a specific type
+        /// Gets all children controls of a control, of a specific type, except for controls within an AutoThemeableUserControl, if that is not the type
         /// </summary>
         /// <param name="control">The control whose children to return</param>
-        /// <param name="type">The child type to search fore</param>
+        /// <param name="type">The child type to search for</param>
         /// <returns>Returns all children controls of a control, of a specific type</returns>
         public static IEnumerable<Control> GetAllChildrenRecursive(this Control control, Type type)
         {
             var controls = control.Controls.Cast<Control>();
 
+            /*
             return controls.SelectMany(ctrl => GetAllChildrenRecursive(ctrl, type))
                                       .Concat(controls)
                                       .Where(c => c.GetType() == type);
+            */
+
+            var children = new List<Control>();
+
+            foreach (var c in controls.Where(x => !typeof(AutoThemeableUserControl).IsAssignableFrom(x.GetType()) || type == typeof(AutoThemeableUserControl)))
+            {
+                if (c.GetType() == type)
+                {
+                    children.Add(c);
+                }
+                children = children.Concat(GetAllChildrenRecursive(c, type)).ToList();
+            }
+
+            return children;
         }
 
         /// <summary>
-        /// Gets all children controls of a control
+        /// Gets all children controls of a control, which derives a specific type, except for controls within an AutoThemeableUserControl, if that is not the type
+        /// </summary>
+        /// <param name="control">The control whose children to return</param>
+        /// <param name="type">The child derive type to search for</param>
+        /// <returns>Returns all children controls of a control, of a specific type</returns>
+        public static IEnumerable<Control> GetAllChildrenRecursiveDerives(this Control control, Type type)
+        {
+            var controls = control.Controls.Cast<Control>();
+            var children = new List<Control>();
+
+            foreach (var c in controls.Where(x => !typeof(AutoThemeableUserControl).IsAssignableFrom(x.GetType()) || type == typeof(AutoThemeableUserControl)))
+            {
+                if (type.IsAssignableFrom(c.GetType()))
+                {
+                    children.Add(c);
+                }
+                children = children.Concat(GetAllChildrenRecursiveDerives(c, type)).ToList();
+            }
+
+            return children;
+        }
+
+        /// <summary>
+        /// Gets all children controls of a control, except for controls within an AutoThemeableUserControl
         /// </summary>
         /// <param name="control">The control whose children to return</param>
         /// <returns>Returns all children controls of a control</returns>
         public static IEnumerable<Control> GetAllChildrenRecursive(this Control control)
         {
-            var controls = control.Controls.Cast<Control>();
+            var controls = control.Controls.Cast<Control>().Where(x => !typeof(AutoThemeableUserControl).IsAssignableFrom(x.GetType()));
 
+            /*
             return controls.SelectMany(ctrl => GetAllChildrenRecursive(ctrl))
                                       .Concat(controls);
+            */
+
+            foreach (var c in controls)
+            {
+                controls = controls.Concat(GetAllChildrenRecursive(c)).ToList();
+            }
+
+            return controls;
         }
     }
 }

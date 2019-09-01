@@ -74,9 +74,14 @@ namespace SteelQuiz
             foreach (var c in flp_words.Controls.OfType<Control>())
             {
                 // Every other wordpair should have a slighly different color to make reading them easier
+                var bc = WelcomeTheme.GetBackColor();
                 if (count % 2 == 0)
                 {
-                    c.BackColor = Color.FromArgb(c.BackColor.A, c.BackColor.R - 5, c.BackColor.G - 5, c.BackColor.B - 5);
+                    c.BackColor = Color.FromArgb(bc.A, bc.R - 5, bc.G - 5, bc.B - 5);
+                }
+                else
+                {
+                    c.BackColor = bc;
                 }
 
                 ++count;
@@ -99,9 +104,14 @@ namespace SteelQuiz
             foreach (var c in controls)
             {
                 // Every other wordpair should have a slighly different color to make reading them easier
+                var bc = WelcomeTheme.GetBackColor();
                 if (count % 2 == 0)
                 {
-                    c.BackColor = Color.FromArgb(c.BackColor.A, c.BackColor.R - 5, c.BackColor.G - 5, c.BackColor.B - 5);
+                    c.BackColor = Color.FromArgb(bc.A, bc.R - 5, bc.G - 5, bc.B - 5);
+                }
+                else
+                {
+                    c.BackColor = bc;
                 }
                 flp_words.Controls.Add(c);
                 flp_words.SetFlowBreak(c, true);
@@ -121,7 +131,6 @@ namespace SteelQuiz
 
             base.SetTheme(theme);
 
-#warning lbl_learningProgress_bar.ForeColor gets overwritten!
             lbl_learningProgress_bar.ForeColor = lbl_learningProgress_bar_color;
 
             btn_deleteQuiz.ForeColor = ((WelcomeTheme)theme).GetButtonRedForeColor();
