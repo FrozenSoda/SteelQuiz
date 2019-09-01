@@ -173,6 +173,7 @@ namespace SteelQuiz
                 if (q.QuizIdentity.QuizGuid == quizIdentity.QuizGuid)
                 {
                     q.Size = pnl_quizInfo.Size;
+                    q.UpdateLearningProgressBar();
                     q.Show();
                     q.BringToFront();
 

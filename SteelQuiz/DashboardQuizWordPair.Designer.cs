@@ -47,16 +47,19 @@ namespace SteelQuiz
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DashboardQuizWordPair));
             this.lbl_word1 = new System.Windows.Forms.Label();
             this.lbl_word2 = new System.Windows.Forms.Label();
-            this.cpb_learningProgress = new CircularProgressBar.CircularProgressBar();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.lbl_learningProgress_bar = new System.Windows.Forms.Label();
+            this.lbl_learningProgress = new System.Windows.Forms.Label();
+            this.lbl_learningProgress_desc = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lbl_word1
             // 
             this.lbl_word1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_word1.Location = new System.Drawing.Point(4, 9);
+            this.lbl_word1.Location = new System.Drawing.Point(4, 22);
             this.lbl_word1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_word1.Name = "lbl_word1";
             this.lbl_word1.Size = new System.Drawing.Size(250, 38);
@@ -67,7 +70,7 @@ namespace SteelQuiz
             // 
             this.lbl_word2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_word2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_word2.Location = new System.Drawing.Point(286, 9);
+            this.lbl_word2.Location = new System.Drawing.Point(286, 22);
             this.lbl_word2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_word2.Name = "lbl_word2";
             this.lbl_word2.Size = new System.Drawing.Size(250, 38);
@@ -75,46 +78,47 @@ namespace SteelQuiz
             this.lbl_word2.Text = "What\'s your name?";
             this.lbl_word2.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // cpb_learningProgress
+            // lbl_learningProgress_bar
             // 
-            this.cpb_learningProgress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cpb_learningProgress.AnimationFunction = WinFormAnimation.KnownAnimationFunctions.Liner;
-            this.cpb_learningProgress.AnimationSpeed = 500;
-            this.cpb_learningProgress.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.cpb_learningProgress.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cpb_learningProgress.ForeColor = System.Drawing.Color.White;
-            this.cpb_learningProgress.InnerColor = System.Drawing.Color.Transparent;
-            this.cpb_learningProgress.InnerMargin = -1;
-            this.cpb_learningProgress.InnerWidth = -1;
-            this.cpb_learningProgress.Location = new System.Drawing.Point(487, 47);
-            this.cpb_learningProgress.MarqueeAnimationSpeed = 2000;
-            this.cpb_learningProgress.Name = "cpb_learningProgress";
-            this.cpb_learningProgress.OuterColor = System.Drawing.Color.DimGray;
-            this.cpb_learningProgress.OuterMargin = -25;
-            this.cpb_learningProgress.OuterWidth = 24;
-            this.cpb_learningProgress.ProgressColor = System.Drawing.Color.Magenta;
-            this.cpb_learningProgress.ProgressWidth = 5;
-            this.cpb_learningProgress.SecondaryFont = new System.Drawing.Font("Microsoft Sans Serif", 36F);
-            this.cpb_learningProgress.Size = new System.Drawing.Size(50, 50);
-            this.cpb_learningProgress.StartAngle = 270;
-            this.cpb_learningProgress.SubscriptColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(166)))), ((int)(((byte)(166)))));
-            this.cpb_learningProgress.SubscriptMargin = new System.Windows.Forms.Padding(10, -35, 0, 0);
-            this.cpb_learningProgress.SubscriptText = "";
-            this.cpb_learningProgress.SuperscriptColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(166)))), ((int)(((byte)(166)))));
-            this.cpb_learningProgress.SuperscriptMargin = new System.Windows.Forms.Padding(10, 35, 0, 0);
-            this.cpb_learningProgress.SuperscriptText = "";
-            this.cpb_learningProgress.TabIndex = 7;
-            this.cpb_learningProgress.Text = "0 %";
-            this.cpb_learningProgress.TextMargin = new System.Windows.Forms.Padding(0);
-            this.toolTip1.SetToolTip(this.cpb_learningProgress, "Learning Progress");
-            this.cpb_learningProgress.Value = 68;
+            this.lbl_learningProgress_bar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_learningProgress_bar.ForeColor = System.Drawing.Color.Lime;
+            this.lbl_learningProgress_bar.Location = new System.Drawing.Point(0, 0);
+            this.lbl_learningProgress_bar.Name = "lbl_learningProgress_bar";
+            this.lbl_learningProgress_bar.Size = new System.Drawing.Size(540, 13);
+            this.lbl_learningProgress_bar.TabIndex = 9;
+            this.lbl_learningProgress_bar.Text = resources.GetString("lbl_learningProgress_bar.Text");
+            this.lbl_learningProgress_bar.SizeChanged += new System.EventHandler(this.Lbl_learningProgress_bar_SizeChanged);
+            // 
+            // lbl_learningProgress
+            // 
+            this.lbl_learningProgress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbl_learningProgress.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_learningProgress.Location = new System.Drawing.Point(484, 62);
+            this.lbl_learningProgress.Name = "lbl_learningProgress";
+            this.lbl_learningProgress.Size = new System.Drawing.Size(53, 38);
+            this.lbl_learningProgress.TabIndex = 12;
+            this.lbl_learningProgress.Text = "100 %";
+            this.lbl_learningProgress.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lbl_learningProgress_desc
+            // 
+            this.lbl_learningProgress_desc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbl_learningProgress_desc.Font = new System.Drawing.Font("Segoe UI Semilight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_learningProgress_desc.Location = new System.Drawing.Point(360, 62);
+            this.lbl_learningProgress_desc.Name = "lbl_learningProgress_desc";
+            this.lbl_learningProgress_desc.Size = new System.Drawing.Size(118, 38);
+            this.lbl_learningProgress_desc.TabIndex = 11;
+            this.lbl_learningProgress_desc.Text = "Learning Progress:";
+            this.lbl_learningProgress_desc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // DashboardQuizWordPair
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.Controls.Add(this.cpb_learningProgress);
+            this.Controls.Add(this.lbl_learningProgress);
+            this.Controls.Add(this.lbl_learningProgress_desc);
+            this.Controls.Add(this.lbl_learningProgress_bar);
             this.Controls.Add(this.lbl_word2);
             this.Controls.Add(this.lbl_word1);
             this.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -122,6 +126,7 @@ namespace SteelQuiz
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "DashboardQuizWordPair";
             this.Size = new System.Drawing.Size(540, 100);
+            this.SizeChanged += new System.EventHandler(this.DashboardQuizWordPair_SizeChanged);
             this.ResumeLayout(false);
 
         }
@@ -130,7 +135,9 @@ namespace SteelQuiz
 
         private System.Windows.Forms.Label lbl_word1;
         private System.Windows.Forms.Label lbl_word2;
-        private CircularProgressBar.CircularProgressBar cpb_learningProgress;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Label lbl_learningProgress_bar;
+        private System.Windows.Forms.Label lbl_learningProgress;
+        private System.Windows.Forms.Label lbl_learningProgress_desc;
     }
 }

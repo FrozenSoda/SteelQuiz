@@ -59,8 +59,10 @@ namespace SteelQuiz
             */
 
             //lbl_learningProgressPercentage.Text = Math.Round(QuizCore.QuizProgress.GetSuccessRate() * 100D, 1).ToString() + " %";
-            cpb_learningProgress.Value = (int)Math.Floor(QuizCore.QuizProgress.GetSuccessRateStrict() * 100D);
-            cpb_learningProgress.Text = cpb_learningProgress.Value.ToString() + " %";
+            //cpb_learningProgress.Value = (int)Math.Floor(QuizCore.QuizProgress.GetSuccessRateStrict() * 100D);
+            //cpb_learningProgress.Text = cpb_learningProgress.Value.ToString() + " %";
+            lbl_learningProgress_bar.Size = new Size((int)Math.Floor(Size.Width * QuizCore.QuizProgress.GetSuccessRate()), lbl_learningProgress_bar.Size.Height);
+            lbl_learningProgress.Text = Math.Floor(QuizCore.QuizProgress.GetSuccessRate() * 100D).ToString() + " %";
         }
 
         /// <summary>
@@ -115,13 +117,17 @@ namespace SteelQuiz
                 theme = new WelcomeTheme();
             }
 
+            var lbl_learningProgress_bar_color = lbl_learningProgress_bar.ForeColor;
+
             base.SetTheme(theme);
+
+            lbl_learningProgress_bar.ForeColor = lbl_learningProgress_bar_color;
 
             btn_deleteQuiz.ForeColor = ((WelcomeTheme)theme).GetButtonRedForeColor();
 
-            cpb_learningProgress.BackColor = theme.GetBackColor();
-            cpb_learningProgress.InnerColor = theme.GetBackColor();
-            cpb_learningProgress.ForeColor = theme.GetMainLabelForeColor();
+            //cpb_learningProgress.BackColor = theme.GetBackColor();
+            //cpb_learningProgress.InnerColor = theme.GetBackColor();
+            //cpb_learningProgress.ForeColor = theme.GetMainLabelForeColor();
 
             RecolorWordPairs();
         }
@@ -131,6 +137,15 @@ namespace SteelQuiz
             (ParentForm as Welcome).LoadQuiz(QuizIdentity.FindQuizPath());
         }
 
+        public void UpdateLearningProgressBar()
+        {
+            lbl_learningProgress_bar.Size = new Size((int)Math.Floor(Size.Width * QuizCore.QuizProgress.GetSuccessRate()), lbl_learningProgress_bar.Size.Height);
+            foreach (var c in flp_words.Controls.OfType<DashboardQuizWordPair>())
+            {
+                c.UpdateLearningProgressBar();
+            }
+        }
+
         private void QuizProgressInfo_SizeChanged(object sender, EventArgs e)
         {
             flp_words.Size = new Size(Size.Width - 12, Size.Height - 157);
@@ -138,6 +153,8 @@ namespace SteelQuiz
             {
                 c.Size = new Size(flp_words.Size.Width - 34, c.Size.Height);
             }
+
+            UpdateLearningProgressBar();
         }
 
         private void Btn_editQuiz_Click(object sender, EventArgs e)
@@ -153,6 +170,17 @@ namespace SteelQuiz
             {
                 Program.frmWelcome.RemoveQuiz(QuizIdentity.QuizGuid);
             }
+        }
+
+        private void Lbl_learningProgress_bar_SizeChanged(object sender, EventArgs e)
+        {
+            double progress = lbl_learningProgress_bar.Size.Width / (double)Size.Width;
+
+            lbl_learningProgress_bar.ForeColor = Color.FromArgb(
+                255,
+                (int)Math.Floor(255 - progress * 255),
+                (int)Math.Floor(progress * 255),
+                0);
         }
     }
 }

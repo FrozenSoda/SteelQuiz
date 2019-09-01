@@ -45,8 +45,11 @@ namespace SteelQuiz
             var wordProgData = WordPair.GetWordProgData();
             LearningProgress = wordProgData.GetSuccessRateStrict();
 
-            cpb_learningProgress.Value = (int)Math.Floor(LearningProgress * 100d);
-            cpb_learningProgress.Text = cpb_learningProgress.Value.ToString() + " %";
+            //cpb_learningProgress.Value = (int)Math.Floor(LearningProgress * 100d);
+            //cpb_learningProgress.Text = cpb_learningProgress.Value.ToString() + " %";
+
+            lbl_learningProgress_bar.Size = new Size((int)Math.Floor(Size.Width * LearningProgress), lbl_learningProgress_bar.Size.Height);
+            lbl_learningProgress.Text = Math.Floor(LearningProgress * 100D).ToString() + " %";
 
             lbl_word1.Text = WordPair.Word1;
             lbl_word2.Text = WordPair.Word2;
@@ -59,11 +62,36 @@ namespace SteelQuiz
                 theme = new WelcomeTheme();
             }
 
+            var lbl_learningProgress_bar_color = lbl_learningProgress_bar.ForeColor;
+
             base.SetTheme(theme);
 
-            cpb_learningProgress.BackColor = theme.GetBackColor();
-            cpb_learningProgress.InnerColor = theme.GetBackColor();
-            cpb_learningProgress.ForeColor = theme.GetMainLabelForeColor();
+            lbl_learningProgress_bar.ForeColor = lbl_learningProgress_bar_color;
+
+            //cpb_learningProgress.BackColor = theme.GetBackColor();
+            //cpb_learningProgress.InnerColor = theme.GetBackColor();
+            //cpb_learningProgress.ForeColor = theme.GetMainLabelForeColor();
+        }
+
+        public void UpdateLearningProgressBar()
+        {
+            lbl_learningProgress_bar.Size = new Size((int)Math.Floor(Size.Width * LearningProgress), lbl_learningProgress_bar.Size.Height);
+        }
+
+        private void Lbl_learningProgress_bar_SizeChanged(object sender, EventArgs e)
+        {
+            double progress = lbl_learningProgress_bar.Size.Width / (double)Size.Width;
+
+            lbl_learningProgress_bar.ForeColor = Color.FromArgb(
+                255,
+                (int)Math.Floor(255 - progress * 255),
+                (int)Math.Floor(progress * 255),
+                0);
+        }
+
+        private void DashboardQuizWordPair_SizeChanged(object sender, EventArgs e)
+        {
+            UpdateLearningProgressBar();
         }
     }
 }
