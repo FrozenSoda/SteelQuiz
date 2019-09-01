@@ -58,24 +58,32 @@ namespace SteelQuiz
             // 
             // lbl_word1
             // 
+            this.lbl_word1.AutoSize = true;
             this.lbl_word1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_word1.Location = new System.Drawing.Point(4, 22);
             this.lbl_word1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_word1.MaximumSize = new System.Drawing.Size(250, 0);
+            this.lbl_word1.MinimumSize = new System.Drawing.Size(250, 38);
             this.lbl_word1.Name = "lbl_word1";
             this.lbl_word1.Size = new System.Drawing.Size(250, 38);
             this.lbl_word1.TabIndex = 0;
             this.lbl_word1.Text = "¿Cómo te llamas?";
+            this.lbl_word1.SizeChanged += new System.EventHandler(this.Lbl_word_SizeChanged);
             // 
             // lbl_word2
             // 
+            this.lbl_word2.AutoSize = true;
             this.lbl_word2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_word2.Location = new System.Drawing.Point(286, 22);
             this.lbl_word2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_word2.MaximumSize = new System.Drawing.Size(250, 0);
+            this.lbl_word2.MinimumSize = new System.Drawing.Size(250, 38);
             this.lbl_word2.Name = "lbl_word2";
             this.lbl_word2.Size = new System.Drawing.Size(250, 38);
             this.lbl_word2.TabIndex = 1;
             this.lbl_word2.Text = "What\'s your name?";
             this.lbl_word2.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.lbl_word2.SizeChanged += new System.EventHandler(this.Lbl_word_SizeChanged);
             // 
             // lbl_learningProgress_bar
             // 
@@ -127,6 +135,7 @@ namespace SteelQuiz
             this.Size = new System.Drawing.Size(540, 100);
             this.SizeChanged += new System.EventHandler(this.DashboardQuizWordPair_SizeChanged);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

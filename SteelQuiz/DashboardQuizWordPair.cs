@@ -99,9 +99,23 @@ namespace SteelQuiz
         {
             UpdateLearningProgressBar();
 
-            lbl_word1.Size = new Size(Size.Width / 2 - 20, lbl_word1.Size.Height);
-            lbl_word2.Size = new Size(Size.Width / 2 - 20, lbl_word2.Size.Height);
+            //lbl_word1.Size = new Size(Size.Width / 2 - 20, lbl_word1.Size.Height);
+            //lbl_word2.Size = new Size(Size.Width / 2 - 20, lbl_word2.Size.Height);
+            //lbl_word2.Location = new Point(lbl_word1.Right + 32, lbl_word2.Location.Y);
+
+            lbl_word1.MinimumSize = new Size(Size.Width / 2 - 20, lbl_word1.MinimumSize.Height);
+            lbl_word2.MinimumSize = new Size(Size.Width / 2 - 20, lbl_word2.MinimumSize.Height);
+
+            lbl_word1.MaximumSize = new Size(Size.Width / 2 - 20, 0);
+            lbl_word2.MaximumSize = new Size(Size.Width / 2 - 20, 0);
+
             lbl_word2.Location = new Point(lbl_word1.Right + 32, lbl_word2.Location.Y);
+        }
+
+        private void Lbl_word_SizeChanged(object sender, EventArgs e)
+        {
+            int maxBottom = Math.Max(lbl_word1.Bottom, lbl_word2.Bottom);
+            Size = new Size(Size.Width, maxBottom + 40);
         }
     }
 }
