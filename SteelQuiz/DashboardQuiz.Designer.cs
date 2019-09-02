@@ -50,6 +50,7 @@ namespace SteelQuiz
             this.lbl_name = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.removeFromListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetProgressDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -70,16 +71,24 @@ namespace SteelQuiz
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.removeFromListToolStripMenuItem});
+            this.removeFromListToolStripMenuItem,
+            this.resetProgressDataToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(165, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 70);
             // 
             // removeFromListToolStripMenuItem
             // 
             this.removeFromListToolStripMenuItem.Name = "removeFromListToolStripMenuItem";
-            this.removeFromListToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.removeFromListToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.removeFromListToolStripMenuItem.Text = "Remove from list";
             this.removeFromListToolStripMenuItem.Click += new System.EventHandler(this.RemoveFromListToolStripMenuItem_Click);
+            // 
+            // resetProgressDataToolStripMenuItem
+            // 
+            this.resetProgressDataToolStripMenuItem.Name = "resetProgressDataToolStripMenuItem";
+            this.resetProgressDataToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.resetProgressDataToolStripMenuItem.Text = "Reset progress data";
+            this.resetProgressDataToolStripMenuItem.Click += new System.EventHandler(this.ResetProgressDataToolStripMenuItem_Click);
             // 
             // DashboardQuiz
             // 
@@ -104,5 +113,6 @@ namespace SteelQuiz
         private System.Windows.Forms.Label lbl_name;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem removeFromListToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem resetProgressDataToolStripMenuItem;
     }
 }

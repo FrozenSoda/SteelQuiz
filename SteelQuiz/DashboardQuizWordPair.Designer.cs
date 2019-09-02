@@ -85,6 +85,10 @@ namespace SteelQuiz
             this.lbl_word2.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.lbl_word2.SizeChanged += new System.EventHandler(this.Lbl_word_SizeChanged);
             // 
+            // toolTip1
+            // 
+
+            // 
             // lbl_learningProgress_bar
             // 
             this.lbl_learningProgress_bar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

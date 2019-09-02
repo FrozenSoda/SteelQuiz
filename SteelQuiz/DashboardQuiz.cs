@@ -28,6 +28,7 @@ using System.Windows.Forms;
 using SteelQuiz.QuizData;
 using System.IO;
 using SteelQuiz.ThemeManager.Colors;
+using SteelQuiz.QuizProgressData;
 
 namespace SteelQuiz
 {
@@ -106,6 +107,29 @@ namespace SteelQuiz
             {
                 Program.frmWelcome.RemoveQuiz(QuizIdentity.QuizGuid);
             }
+        }
+
+        private void ResetProgressDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var msg = MessageBox.Show($"Are you sure you want to start over learning the quiz '{QuizIdentity.FindName()}'? This action cannot be undone.",
+                "Reset Quiz Progress data - SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+            if (msg != DialogResult.Yes)
+            {
+                return;
+            }
+
+            QuizCore.Load(QuizIdentity.FindQuizPath());
+
+            // Ensure we are not resetting the wrong progress data
+            SAssert.Assert(QuizCore.QuizProgress.QuizGUID == QuizIdentity.QuizGuid);
+            SAssert.Assert(QuizCore.Quiz.GUID == QuizIdentity.QuizGuid);
+
+            QuizCore.QuizProgress = new QuizProgData(QuizCore.Quiz);
+            QuizCore.SaveQuizProgress();
+
+            var quizProgressInfo = Program.frmWelcome.FindQuizProgressInfo(QuizIdentity.QuizGuid);
+            quizProgressInfo?.LoadLearningProgressPercentage();
+            quizProgressInfo?.LoadWordPairs();
         }
     }
 }

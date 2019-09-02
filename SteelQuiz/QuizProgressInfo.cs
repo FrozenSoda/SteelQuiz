@@ -50,7 +50,7 @@ namespace SteelQuiz
             LoadWordPairs();
         }
 
-        private void LoadLearningProgressPercentage()
+        public void LoadLearningProgressPercentage()
         {
             /*
             if (!QuizCore.Load(QuizIdentity.QuizGuid))
@@ -89,7 +89,7 @@ namespace SteelQuiz
             }
         }
 
-        private void LoadWordPairs()
+        public void LoadWordPairs()
         {
             foreach (var c in flp_words.Controls.OfType<Control>())
             {
@@ -141,7 +141,7 @@ namespace SteelQuiz
 
             lbl_learningProgress_bar.ForeColor = lbl_learningProgress_bar_color;
 
-            btn_resetProgress.ForeColor = ((WelcomeTheme)theme).GetButtonRedForeColor();
+            //btn_resetProgress.ForeColor = ((WelcomeTheme)theme).GetButtonRedForeColor();
 
             //cpb_learningProgress.BackColor = theme.GetBackColor();
             //cpb_learningProgress.InnerColor = theme.GetBackColor();

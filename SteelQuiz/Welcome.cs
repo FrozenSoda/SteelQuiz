@@ -188,6 +188,24 @@ namespace SteelQuiz
             quizProgressInfo.BringToFront();
         }
 
+        /// <summary>
+        /// Finds the QuizProgressInfo UserControl for a specified quiz
+        /// </summary>
+        /// <param name="quizGuid">The Guid of the quiz whose QuizProgressInfo to return</param>
+        /// <returns>Returns the QuizProgressInfo if found, otherwise null</returns>
+        public QuizProgressInfo FindQuizProgressInfo(Guid quizGuid)
+        {
+            foreach (var q in pnl_quizInfo.Controls.OfType<QuizProgressInfo>())
+            {
+                if (q.QuizIdentity.QuizGuid == quizGuid)
+                {
+                    return q;
+                }
+            }
+
+            return null;
+        }
+
         private void ThemeMonitor_Error(object sender, ErrorEventArgs e)
         {
             throw e.GetException();
@@ -488,6 +506,8 @@ namespace SteelQuiz
 
                 if (AddQuizButtonsExpanded)
                 {
+                    flp_lastQuizzes.Enabled = false;
+
                     btn_createQuiz.Visible = true;
                     btn_loadQuizFromFile.Visible = true;
                     btn_importQuiz.Visible = true;
@@ -508,6 +528,8 @@ namespace SteelQuiz
                 }
                 else
                 {
+                    flp_lastQuizzes.Enabled = true;
+
                     ControlMove.SmoothMove(btn_createQuiz, btn_addQuiz.Location, 80, () =>
                     {
                         btn_createQuiz.Visible = false;
