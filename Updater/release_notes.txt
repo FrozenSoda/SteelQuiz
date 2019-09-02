@@ -1,9 +1,18 @@
+v4.0.0-pre3 (v4.0.0.6):
+- Bigger default window size.
+- Moved 'Reset Quiz Progress' button to a right-click menu instead.
+- Fixed a bug causing Dashboard to minimize when switching theme.
+- Some other improvements.
+
 v4.0.0-pre2 (v4.0.0.4):
 - Better looking UI.
 - Added ability to reset quiz progress data.
 - More logical UI design.
 - Clarified progress calculations.
 - Bug fixes and improvements.
+
+v3.2.5:
+Fixed issues with Intelligent Learning calculations (same patch as in v4.0.0-pre1).
 
 v4.0.0-pre1 (v4.0.0.1):
 - Re-designed dashboard to give a better overview of quizzes, word pairs, and learning progress.
