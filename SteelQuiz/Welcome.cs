@@ -435,7 +435,8 @@ namespace SteelQuiz
         public void ShowPreferences(Type selectedCategory = null, Type selectedCategoryCollection = null)
         {
             Program.frmPreferences?.Dispose();
-            this.Focus();
+            this.Activate();
+            //this.Focus();
             Program.frmPreferences = new Preferences.Preferences(selectedCategory, selectedCategoryCollection);
             Program.frmPreferences.ShowDialog();
         }
