@@ -70,7 +70,7 @@ namespace SteelQuiz.QuizImport.Guide
         {
             if (Step == 1)
             {
-                var uc = pnl_steps.Controls[Step] as Step1;
+                var uc = GetStep(Step, ImportSource.NULL) as Step1;
                 if (uc.rdo_studentlitteratur.Checked)
                 {
                     ImportSource = QuizImporter.ImportSource.Studentlitteratur;
@@ -88,12 +88,12 @@ namespace SteelQuiz.QuizImport.Guide
             {
                 if (ImportSource == QuizImporter.ImportSource.TextImport)
                 {
-                    var uc = pnl_steps.Controls[Step] as TextImport.Step2;
+                    var uc = GetStep(Step, ImportSource) as TextImport.Step2;
                     MultipleTranslationsAsDifferentWordPairs = uc.rdo_multipleTranslationsAsDifferentWordPairs.Checked;
                 }
                 else if (ImportSource == QuizImporter.ImportSource.Studentlitteratur)
                 {
-                    var uc = pnl_steps.Controls[Step] as Studentlitteratur.Step2;
+                    var uc = GetStep(Step, ImportSource) as Studentlitteratur.Step2;
                     MultipleTranslationsAsDifferentWordPairs = uc.rdo_multipleTranslationsAsDifferentWordPairs.Checked;
                 }
             }
@@ -101,33 +101,42 @@ namespace SteelQuiz.QuizImport.Guide
             {
                 if (ImportSource == QuizImporter.ImportSource.TextImport)
                 {
-                    var uc = pnl_steps.Controls[Step] as TextImport.Step3;
+                    var uc = GetStep(Step, ImportSource) as TextImport.Step3;
 
                     string quizText = uc.rtf_text.Text;
                     string wordDelimeter = Regex.Unescape(uc.txt_chBetweenWords.Text);
                     string lineDelimeter = Regex.Unescape(uc.txt_chBetweenLines.Text);
 
                     var wordPairs = new List<WordPair>();
-                    foreach (string line in quizText.Split(new string[] { lineDelimeter }, StringSplitOptions.None))
+
+                    try
                     {
-                        string[] words = line.Split(new string[] { wordDelimeter }, StringSplitOptions.None);
+                        foreach (string line in quizText.Split(new string[] { lineDelimeter }, StringSplitOptions.None))
+                        {
+                            string[] words = line.Split(new string[] { wordDelimeter }, StringSplitOptions.None);
 
-                        var w1wordPair = wordPairs.Where(x => x.Word1 == words[0]).FirstOrDefault();
-                        var w2wordPair = wordPairs.Where(x => x.Word2 == words[1]).FirstOrDefault();
+                            var w1wordPair = wordPairs.Where(x => x.Word1 == words[0]).FirstOrDefault();
+                            var w2wordPair = wordPairs.Where(x => x.Word2 == words[1]).FirstOrDefault();
 
-                        if (!MultipleTranslationsAsDifferentWordPairs && w1wordPair != null)
-                        {
-                            w1wordPair.Word2Synonyms.Add(words[1]);
+                            if (!MultipleTranslationsAsDifferentWordPairs && w1wordPair != null)
+                            {
+                                w1wordPair.Word2Synonyms.Add(words[1]);
+                            }
+                            else if (!MultipleTranslationsAsDifferentWordPairs && w2wordPair != null)
+                            {
+                                w2wordPair.Word1Synonyms.Add(words[0]);
+                            }
+                            else
+                            {
+                                var wordPair = new WordPair(words[0], words[1], StringComp.Rules.None);
+                                wordPairs.Add(wordPair);
+                            }
                         }
-                        else if (!MultipleTranslationsAsDifferentWordPairs && w2wordPair != null)
-                        {
-                            w2wordPair.Word1Synonyms.Add(words[0]);
-                        }
-                        else
-                        {
-                            var wordPair = new WordPair(words[0], words[1], StringComp.Rules.None);
-                            wordPairs.Add(wordPair);
-                        }
+                    }
+                    catch (IndexOutOfRangeException)
+                    {
+                        MessageBox.Show("Pasted text does not match delimeter settings (word/line break)", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
                     }
 
                     if (WordPairs != null && !WordPairs.SequenceEqual(wordPairs))
@@ -140,7 +149,7 @@ namespace SteelQuiz.QuizImport.Guide
                 }
                 else if (ImportSource == QuizImporter.ImportSource.Studentlitteratur)
                 {
-                    var uc = pnl_steps.Controls[Step] as Studentlitteratur.Step3;
+                    var uc = GetStep(Step, ImportSource) as Studentlitteratur.Step3;
                     string url = uc.txt_url.Text;
                     IEnumerable<WordPair> wordPairs;
                     if (ImportSource == QuizImporter.ImportSource.Studentlitteratur)
@@ -170,12 +179,12 @@ namespace SteelQuiz.QuizImport.Guide
             {
                 if (ImportSource == QuizImporter.ImportSource.TextImport)
                 {
-                    var uc = pnl_steps.Controls[Step] as TextImport.Step4;
+                    var uc = GetStep(Step, ImportSource) as TextImport.Step4;
                     QuizFolder = uc.QuizFolder;
                 }
                 else if (ImportSource == QuizImporter.ImportSource.Studentlitteratur)
                 {
-                    var uc = pnl_steps.Controls[Step] as Studentlitteratur.Step4;
+                    var uc = GetStep(Step, ImportSource) as Studentlitteratur.Step4;
                     QuizFolder = uc.QuizFolder;
                 }
             }
@@ -183,7 +192,7 @@ namespace SteelQuiz.QuizImport.Guide
             {
                 if (ImportSource == QuizImporter.ImportSource.TextImport)
                 {
-                    var uc = pnl_steps.Controls[Step] as TextImport.Step5;
+                    var uc = GetStep(Step, ImportSource) as TextImport.Step5;
                     var quizFilename = uc.txt_quizName.Text;
                     if (quizFilename == "")
                     {
@@ -216,7 +225,7 @@ namespace SteelQuiz.QuizImport.Guide
                 }
                 else if (ImportSource == QuizImporter.ImportSource.Studentlitteratur)
                 {
-                    var uc = pnl_steps.Controls[Step] as Studentlitteratur.Step5;
+                    var uc = GetStep(Step, ImportSource) as Studentlitteratur.Step5;
                     var quizFilename = uc.txt_quizName.Text;
                     if (quizFilename == "")
                     {
@@ -252,7 +261,7 @@ namespace SteelQuiz.QuizImport.Guide
             {
                 if (ImportSource == QuizImporter.ImportSource.TextImport)
                 {
-                    var uc = pnl_steps.Controls[Step] as TextImport.Step6;
+                    var uc = GetStep(Step, ImportSource) as TextImport.Step6;
                     if (uc.Language1 == "")
                     {
                         MessageBox.Show("Language cannot be empty", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -262,7 +271,7 @@ namespace SteelQuiz.QuizImport.Guide
                 }
                 else if (ImportSource == QuizImporter.ImportSource.Studentlitteratur)
                 {
-                    var uc = pnl_steps.Controls[Step] as Studentlitteratur.Step6;
+                    var uc = GetStep(Step, ImportSource) as Studentlitteratur.Step6;
                     if (uc.Language1 == "")
                     {
                         MessageBox.Show("Language cannot be empty", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -275,7 +284,7 @@ namespace SteelQuiz.QuizImport.Guide
             {
                 if (ImportSource == QuizImporter.ImportSource.TextImport)
                 {
-                    var uc = pnl_steps.Controls[Step] as TextImport.Step7;
+                    var uc = GetStep(Step, ImportSource) as TextImport.Step7;
                     if (uc.Language2 == "")
                     {
                         MessageBox.Show("Language cannot be empty", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -288,7 +297,7 @@ namespace SteelQuiz.QuizImport.Guide
                 }
                 else if (ImportSource == QuizImporter.ImportSource.Studentlitteratur)
                 {
-                    var uc = pnl_steps.Controls[Step] as Studentlitteratur.Step7;
+                    var uc = GetStep(Step, ImportSource) as Studentlitteratur.Step7;
                     if (uc.Language2 == "")
                     {
                         MessageBox.Show("Language cannot be empty", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -356,6 +365,11 @@ namespace SteelQuiz.QuizImport.Guide
             }
         }
 
+        private IStep GetStep(int step, ImportSource importSource)
+        {
+            return pnl_steps.Controls.OfType<IStep>().Where(x => x.Step == step && x.ImportSource == importSource).FirstOrDefault();
+        }
+
         private void SwitchStep()
         {
             if (Step == -1)
@@ -372,72 +386,58 @@ namespace SteelQuiz.QuizImport.Guide
             pnl_steps.Focus();
             if (Step == 1)
             {
-                (pnl_steps.Controls[Step] as Step1).Focus();
+                (GetStep(Step, ImportSource.NULL) as Step1).Focus();
             }
             else if (Step == 2)
             {
-                if (ImportSource == QuizImporter.ImportSource.TextImport)
-                {
-                    (pnl_steps.Controls[Step] as TextImport.Step2).Focus();
-                }
-                else if (ImportSource == QuizImporter.ImportSource.Studentlitteratur)
-                {
-                    (pnl_steps.Controls[Step] as Studentlitteratur.Step2).Focus();
-                }
+                (GetStep(Step, ImportSource) as Control).Focus();
             }
             else if (Step == 3)
             {
                 if (ImportSource == QuizImporter.ImportSource.TextImport)
                 {
-                    (pnl_steps.Controls[Step] as TextImport.Step3).rtf_text.Focus();
+                    (GetStep(Step, ImportSource) as TextImport.Step3).rtf_text.Focus();
                 }
                 else if (ImportSource == QuizImporter.ImportSource.Studentlitteratur)
                 {
-                    (pnl_steps.Controls[Step] as Studentlitteratur.Step3).txt_url.Focus();
+                    (GetStep(Step, ImportSource) as Control as Studentlitteratur.Step3).txt_url.Focus();
                 }
             }
             else if (Step == 4)
             {
-                if (ImportSource == QuizImporter.ImportSource.TextImport)
-                {
-                    (pnl_steps.Controls[Step] as TextImport.Step4).Focus();
-                }
-                else if (ImportSource == QuizImporter.ImportSource.Studentlitteratur)
-                {
-                    (pnl_steps.Controls[Step] as Studentlitteratur.Step4).Focus();
-                }
+                (GetStep(Step, ImportSource) as Control).Focus();
             }
             else if (Step == 5)
             {
                 if (ImportSource == QuizImporter.ImportSource.TextImport)
                 {
-                    (pnl_steps.Controls[Step] as TextImport.Step5).txt_quizName.Focus();
+                    (GetStep(Step, ImportSource) as TextImport.Step5).txt_quizName.Focus();
                 }
                 else if (ImportSource == QuizImporter.ImportSource.Studentlitteratur)
                 {
-                    (pnl_steps.Controls[Step] as Studentlitteratur.Step5).txt_quizName.Focus();
+                    (GetStep(Step, ImportSource) as Studentlitteratur.Step5).txt_quizName.Focus();
                 }
             }
             else if (Step == 6)
             {
                 if (ImportSource == QuizImporter.ImportSource.TextImport)
                 {
-                    (pnl_steps.Controls[Step] as TextImport.Step6).txt_lang.Focus();
+                    (GetStep(Step, ImportSource) as TextImport.Step6).txt_lang.Focus();
                 }
                 else if (ImportSource == QuizImporter.ImportSource.Studentlitteratur)
                 {
-                    (pnl_steps.Controls[Step] as Studentlitteratur.Step6).txt_lang.Focus();
+                    (GetStep(Step, ImportSource) as Studentlitteratur.Step6).txt_lang.Focus();
                 }
             }
             else if (Step == 7)
             {
                 if (ImportSource == QuizImporter.ImportSource.TextImport)
                 {
-                    (pnl_steps.Controls[Step] as TextImport.Step7).txt_lang.Focus();
+                    (GetStep(Step, ImportSource) as TextImport.Step7).txt_lang.Focus();
                 }
                 else if (ImportSource == QuizImporter.ImportSource.Studentlitteratur)
                 {
-                    (pnl_steps.Controls[Step] as Studentlitteratur.Step7).txt_lang.Focus();
+                    (GetStep(Step, ImportSource) as Studentlitteratur.Step7).txt_lang.Focus();
                 }
             }
         }
@@ -453,17 +453,14 @@ namespace SteelQuiz.QuizImport.Guide
             if (step < pnl_steps.Controls.Count)
             {
                 // the step usercontrol already exists, so show it instead of creating a new
-                (pnl_steps.Controls[step] as UserControl).Show();
+                (GetStep(Step, ImportSource) as UserControl).Show();
                 return;
             }
             */
 
-            foreach (dynamic s in pnl_steps.Controls.OfType<Control>())
+            foreach (IStep s in pnl_steps.Controls.OfType<IStep>())
             {
-                var importSource = (ImportSource)s.IMPORT_SOURCE;
-                var s_step = (int)s.STEP;
-
-                if ((ImportSource == ImportSource || importSource == ImportSource.NULL) && (int)s.STEP == step)
+                if ((s.ImportSource == ImportSource || s.ImportSource == ImportSource.NULL) && s.Step == step)
                 {
                     ((Control)s).Show();
                     return;

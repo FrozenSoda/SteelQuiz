@@ -30,10 +30,10 @@ using static SteelQuiz.QuizImport.QuizImporter;
 
 namespace SteelQuiz.QuizImport.Guide.TextImport
 {
-    public partial class Step7 : AutoThemeableUserControl
+    public partial class Step7 : AutoThemeableUserControl, IStep
     {
-        public const ImportSource IMPORT_SOURCE = ImportSource.TextImport;
-        public const int STEP = 7;
+        public ImportSource ImportSource { get; set; } = ImportSource.TextImport;
+        public int Step { get; set; } = 7;
 
         public string Language2 => txt_lang.Text;
 

@@ -29,10 +29,10 @@ using static SteelQuiz.QuizImport.QuizImporter;
 
 namespace SteelQuiz.QuizImport.Guide.Studentlitteratur
 {
-    public partial class Step4 : AutoThemeableUserControl
+    public partial class Step4 : AutoThemeableUserControl, IStep
     {
-        public const ImportSource IMPORT_SOURCE = ImportSource.Studentlitteratur;
-        public const int STEP = 4;
+        public ImportSource ImportSource { get; set; } = ImportSource.Studentlitteratur;
+        public int Step { get; set; } = 4;
 
         public string QuizFolder
         {
