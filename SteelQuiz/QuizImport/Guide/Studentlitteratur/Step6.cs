@@ -26,19 +26,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SteelQuiz.QuizData;
+using static SteelQuiz.QuizImport.QuizImporter;
 
-namespace SteelQuiz.QuizImport.Guide
+namespace SteelQuiz.QuizImport.Guide.Studentlitteratur
 {
-    public partial class Step7 : AutoThemeableUserControl
+    public partial class Step6 : AutoThemeableUserControl
     {
-        public string Language2 => txt_lang.Text;
+        public const ImportSource IMPORT_SOURCE = ImportSource.Studentlitteratur;
+        public const int STEP = 6;
 
-        public Step7(IEnumerable<WordPair> wordPairs)
+        public string Language1 => txt_lang.Text;
+
+        public Step6(IEnumerable<WordPair> wordPairs)
         {
             InitializeComponent();
             foreach (var wordPair in wordPairs)
             {
-                lst_words.Items.Add(wordPair.Word2);
+                lst_words.Items.Add(wordPair.Word1);
             }
 
             SetTheme();

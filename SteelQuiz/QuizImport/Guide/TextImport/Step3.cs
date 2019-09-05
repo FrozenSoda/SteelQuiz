@@ -27,17 +27,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static SteelQuiz.QuizImport.QuizImporter;
 
-namespace SteelQuiz.QuizImport.Guide
+namespace SteelQuiz.QuizImport.Guide.TextImport
 {
-    public partial class Step0 : AutoThemeableUserControl, IStep
+    public partial class Step3 : AutoThemeableUserControl
     {
-        public ImportSource ImportSource { get; set; } = ImportSource.NULL;
-        public int Step { get; set; } = 0;
+        public const ImportSource IMPORT_SOURCE = ImportSource.TextImport;
+        public const int STEP = 3;
 
-        public Step0()
+        public Step3(QuizImporter.ImportSource importSource)
         {
             InitializeComponent();
-
             SetTheme();
         }
     }

@@ -25,20 +25,45 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SteelQuiz.QuizData;
 using static SteelQuiz.QuizImport.QuizImporter;
 
-namespace SteelQuiz.QuizImport.Guide
+namespace SteelQuiz.QuizImport.Guide.Studentlitteratur
 {
-    public partial class Step0 : AutoThemeableUserControl, IStep
+    public partial class Step7 : AutoThemeableUserControl
     {
-        public ImportSource ImportSource { get; set; } = ImportSource.NULL;
-        public int Step { get; set; } = 0;
+        public const ImportSource IMPORT_SOURCE = ImportSource.Studentlitteratur;
+        public const int STEP = 7;
 
-        public Step0()
+        public string Language2 => txt_lang.Text;
+
+        public Step7(IEnumerable<WordPair> wordPairs)
         {
             InitializeComponent();
+            foreach (var wordPair in wordPairs)
+            {
+                lst_words.Items.Add(wordPair.Word2);
+            }
 
             SetTheme();
+        }
+
+        private void Txt_lang_TextChanged(object sender, EventArgs e)
+        {
+            if (txt_lang.Text.Length < 1)
+            {
+                return;
+            }
+
+            // force first character to be uppercase
+            if (char.IsLower(txt_lang.Text.First()))
+            {
+                var initialSelection = txt_lang.SelectionStart;
+
+                //make it uppercase
+                txt_lang.Text = txt_lang.Text.First().ToString().ToUpper() + txt_lang.Text.Substring(1);
+                txt_lang.SelectionStart = initialSelection;
+            }
         }
     }
 }

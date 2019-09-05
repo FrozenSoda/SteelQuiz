@@ -16,9 +16,9 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-namespace SteelQuiz.QuizImport.Guide
+namespace SteelQuiz.QuizImport.Guide.Studentlitteratur
 {
-    partial class Step6
+    partial class Step7
     {
         /// <summary> 
         /// Required designer variable.
@@ -48,8 +48,8 @@ namespace SteelQuiz.QuizImport.Guide
         {
             this.txt_lang = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.lbl_question = new System.Windows.Forms.Label();
             this.lst_words = new System.Windows.Forms.ListBox();
+            this.lbl_question = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txt_lang
@@ -73,16 +73,6 @@ namespace SteelQuiz.QuizImport.Guide
             this.label1.TabIndex = 8;
             this.label1.Text = "Language (in English):";
             // 
-            // lbl_question
-            // 
-            this.lbl_question.Font = new System.Drawing.Font("Segoe UI Semilight", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_question.ForeColor = System.Drawing.Color.White;
-            this.lbl_question.Location = new System.Drawing.Point(3, 13);
-            this.lbl_question.Name = "lbl_question";
-            this.lbl_question.Size = new System.Drawing.Size(760, 43);
-            this.lbl_question.TabIndex = 4;
-            this.lbl_question.Text = "Which language are the following words written in?";
-            // 
             // lst_words
             // 
             this.lst_words.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
@@ -95,7 +85,17 @@ namespace SteelQuiz.QuizImport.Guide
             this.lst_words.TabIndex = 6;
             this.lst_words.TabStop = false;
             // 
-            // Step5
+            // lbl_question
+            // 
+            this.lbl_question.Font = new System.Drawing.Font("Segoe UI Semilight", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_question.ForeColor = System.Drawing.Color.White;
+            this.lbl_question.Location = new System.Drawing.Point(3, 13);
+            this.lbl_question.Name = "lbl_question";
+            this.lbl_question.Size = new System.Drawing.Size(760, 43);
+            this.lbl_question.TabIndex = 4;
+            this.lbl_question.Text = "Which language are the following words written in?";
+            // 
+            // Step6
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -104,7 +104,7 @@ namespace SteelQuiz.QuizImport.Guide
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lst_words);
             this.Controls.Add(this.lbl_question);
-            this.Name = "Step5";
+            this.Name = "Step6";
             this.Size = new System.Drawing.Size(766, 364);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -114,7 +114,7 @@ namespace SteelQuiz.QuizImport.Guide
         #endregion
         internal System.Windows.Forms.TextBox txt_lang;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label lbl_question;
         private System.Windows.Forms.ListBox lst_words;
+        private System.Windows.Forms.Label lbl_question;
     }
 }

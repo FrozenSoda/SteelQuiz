@@ -27,18 +27,33 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static SteelQuiz.QuizImport.QuizImporter;
 
-namespace SteelQuiz.QuizImport.Guide
+namespace SteelQuiz.QuizImport.Guide.Studentlitteratur
 {
-    public partial class Step0 : AutoThemeableUserControl, IStep
+    public partial class Step2 : AutoThemeableUserControl, IStep
     {
-        public ImportSource ImportSource { get; set; } = ImportSource.NULL;
-        public int Step { get; set; } = 0;
+        public ImportSource ImportSource { get; set; } = ImportSource.Studentlitteratur;
+        public int Step { get; set; } = 2;
 
-        public Step0()
+        public Step2()
         {
             InitializeComponent();
 
             SetTheme();
+        }
+
+        private void Rdo_addMultipleTranslationsAsSynonyms_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdo_addMultipleTranslationsAsSynonyms.Checked)
+            {
+                var msg = MessageBox.Show("Warning! If this option is selected, you will not necessarily learn all the synonyms of the words (which are added" +
+                    " to the quiz). Continue?",
+                    "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+                if (msg == DialogResult.No)
+                {
+                    rdo_addMultipleTranslationsAsSynonyms.Checked = false;
+                    rdo_multipleTranslationsAsDifferentWordPairs.Checked = true;
+                }
+            }
         }
     }
 }

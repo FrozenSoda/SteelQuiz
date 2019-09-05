@@ -25,30 +25,44 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SteelQuiz.QuizData;
+using static SteelQuiz.QuizImport.QuizImporter;
 
-namespace SteelQuiz.QuizImport.Guide
+namespace SteelQuiz.QuizImport.Guide.TextImport
 {
-    public partial class Step2 : AutoThemeableUserControl
+    public partial class Step7 : AutoThemeableUserControl
     {
-        public Step2()
+        public const ImportSource IMPORT_SOURCE = ImportSource.TextImport;
+        public const int STEP = 7;
+
+        public string Language2 => txt_lang.Text;
+
+        public Step7(IEnumerable<WordPair> wordPairs)
         {
             InitializeComponent();
+            foreach (var wordPair in wordPairs)
+            {
+                lst_words.Items.Add(wordPair.Word2);
+            }
 
             SetTheme();
         }
 
-        private void Rdo_addMultipleTranslationsAsSynonyms_CheckedChanged(object sender, EventArgs e)
+        private void Txt_lang_TextChanged(object sender, EventArgs e)
         {
-            if (rdo_addMultipleTranslationsAsSynonyms.Checked)
+            if (txt_lang.Text.Length < 1)
             {
-                var msg = MessageBox.Show("Warning! If this option is selected, you will not necessarily learn all the synonyms of the words (which are added" +
-                    " to the quiz). Continue?",
-                    "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
-                if (msg == DialogResult.No)
-                {
-                    rdo_addMultipleTranslationsAsSynonyms.Checked = false;
-                    rdo_multipleTranslationsAsDifferentWordPairs.Checked = true;
-                }
+                return;
+            }
+
+            // force first character to be uppercase
+            if (char.IsLower(txt_lang.Text.First()))
+            {
+                var initialSelection = txt_lang.SelectionStart;
+
+                //make it uppercase
+                txt_lang.Text = txt_lang.Text.First().ToString().ToUpper() + txt_lang.Text.Substring(1);
+                txt_lang.SelectionStart = initialSelection;
             }
         }
     }
