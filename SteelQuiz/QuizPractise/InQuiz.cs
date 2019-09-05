@@ -227,6 +227,11 @@ namespace SteelQuiz.QuizPractise
                     answerWord = CurrentWordPair.Word1;
                 }
 
+                foreach (var c in lbl_word1.Controls.OfType<WrongAnswer>())
+                {
+                    c.Dispose();
+                }
+
                 var wrongAnswer = new WrongAnswer(questionWord, QuizCore.QuizProgress.QuestionLanguage, answerWord, QuizCore.QuizProgress.AnswerLanguage);
                 lbl_word1.Controls.Add(wrongAnswer);
                 wrongAnswer.Location = new Point(0, 0);
