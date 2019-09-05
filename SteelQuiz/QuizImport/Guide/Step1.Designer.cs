@@ -79,7 +79,7 @@ namespace SteelQuiz.QuizImport.Guide
             this.rdo_studentlitteratur.ForeColor = System.Drawing.Color.White;
             this.rdo_studentlitteratur.Location = new System.Drawing.Point(3, 3);
             this.rdo_studentlitteratur.Name = "rdo_studentlitteratur";
-            this.rdo_studentlitteratur.Size = new System.Drawing.Size(142, 24);
+            this.rdo_studentlitteratur.Size = new System.Drawing.Size(141, 25);
             this.rdo_studentlitteratur.TabIndex = 0;
             this.rdo_studentlitteratur.TabStop = true;
             this.rdo_studentlitteratur.Text = "Studentlitteratur";
@@ -92,6 +92,8 @@ namespace SteelQuiz.QuizImport.Guide
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.Controls.Add(this.flp_siteRdo);
             this.Controls.Add(this.lbl_question);
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ForeColor = System.Drawing.Color.White;
             this.Name = "Step1";
             this.Size = new System.Drawing.Size(766, 364);
             this.flp_siteRdo.ResumeLayout(false);
