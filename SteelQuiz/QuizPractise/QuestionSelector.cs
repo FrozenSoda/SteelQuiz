@@ -213,7 +213,7 @@ namespace SteelQuiz.QuizPractise
 
                             if (msg == DialogResult.Yes)
                             {
-                                Program.frmInQuiz.SwitchAIMode();
+                                Program.frmInQuiz.SwitchIntelligentLearningMode();
                                 return;
                             }
                             else

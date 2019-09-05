@@ -70,13 +70,11 @@ namespace SteelQuiz.QuizPractise
             NewWord();
             if (QuizCore.QuizProgress.FullTestInProgress)
             {
-                btn_switchTestMode.Text = "Enable Intelligent Learning";
                 lbl_intelligentLearning.Text = "Intelligent learning: Disabled";
                 //lbl_AI.ForeColor = Color.Gray;
             }
             else
             {
-                btn_switchTestMode.Text = "Disable Intelligent Learning (do full test)";
                 lbl_intelligentLearning.Text = "Intelligent learning: Enabled";
                 //lbl_AI.ForeColor = Color.DarkGreen;
             }
@@ -184,7 +182,7 @@ namespace SteelQuiz.QuizPractise
                                 "Full test finished - SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                             if (msg == DialogResult.Yes)
                             {
-                                SwitchAIMode(false);
+                                SwitchIntelligentLearningMode(false);
                             }
                         }
                         QuizCore.QuizProgress.CorrectAnswersThisRound = 0;
@@ -280,18 +278,7 @@ namespace SteelQuiz.QuizPractise
             }
         }
 
-        private void btn_switchTestMode_Click(object sender, EventArgs e)
-        {
-            var msg = MessageBox.Show("Warning: The state of the current round will be lost (current word, word count etc).\r\n\r\nProceed?",
-                "Switch mode - SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
-            if (msg == DialogResult.Yes)
-            {
-                SwitchAIMode();
-            }
-            lbl_word2.Focus();
-        }
-
-        public void SwitchAIMode(bool callGenerationFunctions = true)
+        public void SwitchIntelligentLearningMode(bool callGenerationFunctions = true)
         {
             skipNewRoundMsg = true;
             QuizCore.QuizProgress.MasterNoticeShowed = false;
@@ -306,13 +293,11 @@ namespace SteelQuiz.QuizPractise
 
             if (QuizCore.QuizProgress.FullTestInProgress)
             {
-                btn_switchTestMode.Text = "Enable Intelligent Learning";
                 lbl_intelligentLearning.Text = "Intelligent learning: Disabled";
                 //lbl_AI.ForeColor = Color.Gray;
             }
             else
             {
-                btn_switchTestMode.Text = "Disable Intelligent Learning (do full test)";
                 lbl_intelligentLearning.Text = "Intelligent learning: Enabled";
                 //lbl_AI.ForeColor = Color.DarkGreen;
             }
@@ -376,7 +361,7 @@ namespace SteelQuiz.QuizPractise
             Program.frmInQuiz = null;
         }
 
-        private void btn_dontAgree_Click(object sender, EventArgs e)
+        public void FixQuizErrors()
         {
             var msg = MessageBox.Show("If you continue, the translation of this word won't be counted this round to the score, to prevent cheating. Continue?",
                 "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -425,6 +410,14 @@ namespace SteelQuiz.QuizPractise
                 CurrentInput += "¡";
                 lbl_word2.Text = CurrentInput;
             }
+        }
+
+        private void Btn_cfg_Click(object sender, EventArgs e)
+        {
+            var cfg = new QuizPractiseConfig();
+            cfg.ShowDialog();
+
+            lbl_word2.Focus();
         }
     }
 }

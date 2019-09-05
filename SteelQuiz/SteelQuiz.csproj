@@ -96,6 +96,12 @@
     <Compile Include="QuizImport\Guide\TextImport\Step7.Designer.cs">
       <DependentUpon>Step7.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuizPractise\QuizPractiseConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuizPractise\QuizPractiseConfig.Designer.cs">
+      <DependentUpon>QuizPractiseConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="SAssert.cs" />
     <Compile Include="AutoThemeableUserControl.cs">
       <SubType>UserControl</SubType>
@@ -502,6 +508,9 @@
     <EmbeddedResource Include="QuizImport\Internal\QuizFolderSelect.resx">
       <DependentUpon>QuizFolderSelect.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="QuizPractise\QuizPractiseConfig.resx">
+      <DependentUpon>QuizPractiseConfig.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="QuizProgressInfo.resx">
       <DependentUpon>QuizProgressInfo.cs</DependentUpon>
     </EmbeddedResource>
@@ -630,6 +639,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Logo.ico" />
+    <None Include="Resources\gear-1077563-with-border1.png" />
+    <None Include="Resources\gear-1077563-with-border.png" />
+    <None Include="Resources\gear-1077563.png" />
     <None Include="Resources\Logo.ico" />
     <None Include="Resources\Dual Ring-1s-80px_white.gif" />
     <None Include="Resources\Dual Ring-1s-80px_black.gif" />
