@@ -33,7 +33,9 @@ namespace SteelQuiz.QuizImport
     {
         public enum ImportSource
         {
-            Studentlitteratur
+            Studentlitteratur,
+            TextImport,
+            NULL
         }
 
         public static IEnumerable<WordPair> FromStudentlitteratur(string url, bool multipleTranslationsAsDifferentWordPairs)

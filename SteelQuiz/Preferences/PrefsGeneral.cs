@@ -93,7 +93,7 @@ namespace SteelQuiz.Preferences
                 SetWin10Theme();
             }
 
-            Program.frmWelcome.SetTheme();
+            Program.frmWelcome.SetThemeAll();
             //reshow preferences window, to use new theme
             Program.frmPreferences.DialogResult = DialogResult.OK;
             Program.frmWelcome.ShowPreferences();

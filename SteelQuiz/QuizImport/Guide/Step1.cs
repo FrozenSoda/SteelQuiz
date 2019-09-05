@@ -25,11 +25,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static SteelQuiz.QuizImport.QuizImporter;
 
 namespace SteelQuiz.QuizImport.Guide
 {
-    public partial class Step1 : AutoThemeableUserControl
+    public partial class Step1 : AutoThemeableUserControl, IStep
     {
+        public ImportSource ImportSource { get; set; } = ImportSource.NULL;
+        public int Step { get; set; } = 1;
+
         public Step1()
         {
             InitializeComponent();

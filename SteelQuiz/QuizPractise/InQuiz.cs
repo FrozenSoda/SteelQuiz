@@ -39,7 +39,7 @@ namespace SteelQuiz.QuizPractise
 
         private WordPair CurrentWordPair { get; set; } = null;
         private string CurrentInput { get; set; } = "";
-        private WordPair.TranslationMode TranslationMode { get; set; } = WordPair.TranslationMode.L1_to_L2;
+        //private WordPair.TranslationMode TranslationMode { get; set; } = WordPair.TranslationMode.L1_to_L2;
 
         private bool WaitingForEnter { get; set; } = false;
         private bool UserCopyingWord { get; set; } = false;
@@ -70,13 +70,11 @@ namespace SteelQuiz.QuizPractise
             NewWord();
             if (QuizCore.QuizProgress.FullTestInProgress)
             {
-                btn_switchTestMode.Text = "Enable Intelligent Learning";
                 lbl_intelligentLearning.Text = "Intelligent learning: Disabled";
                 //lbl_AI.ForeColor = Color.Gray;
             }
             else
             {
-                btn_switchTestMode.Text = "Disable Intelligent Learning (do full test)";
                 lbl_intelligentLearning.Text = "Intelligent learning: Enabled";
                 //lbl_AI.ForeColor = Color.DarkGreen;
             }
@@ -86,12 +84,12 @@ namespace SteelQuiz.QuizPractise
                 btn_w1_synonyms.Enabled = true;
             }
 
-            SetTheme();
+            SetTheme(GeneralTheme);
         }
 
-        public override void SetTheme()
+        public override void SetTheme(GeneralTheme theme)
         {
-            base.SetTheme();
+            base.SetTheme(theme);
 
             lbl_intelligentLearning.ForeColor = GeneralTheme.GetBackgroundLabelForeColor();
             lbl_progress.ForeColor = GeneralTheme.GetBackgroundLabelForeColor();
@@ -99,12 +97,17 @@ namespace SteelQuiz.QuizPractise
             lbl_lang2.ForeColor = GeneralTheme.GetBackgroundLabelForeColor();
         }
 
-        private void NewWord()
+        public void NewWord()
         {
             WaitingForEnter = false;
             CountThisTranslationToProgress = true;
             lbl_lang1.Text = QuizCore.Quiz.Language1;
             CurrentWordPair = QuestionSelector.GenerateWordPair();
+
+            foreach (var c in lbl_word1.Controls.OfType<WrongAnswer>())
+            {
+                c.Dispose();
+            }
 
             if (CurrentWordPair == null)
             {
@@ -112,11 +115,11 @@ namespace SteelQuiz.QuizPractise
                 return;
             }
 
-            if (TranslationMode == WordPair.TranslationMode.L1_to_L2)
+            if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language2)
             {
                 lbl_word1.Text = CurrentWordPair.Word1;
             }
-            else if (TranslationMode == WordPair.TranslationMode.L2_to_L1)
+            else if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language1)
             {
                 lbl_word1.Text = CurrentWordPair.Word2;
             }
@@ -130,6 +133,11 @@ namespace SteelQuiz.QuizPractise
         {
             CountThisTranslationToProgress = true;
             lbl_progress.Text = $"Progress this round: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
+
+            foreach (var c in lbl_word1.Controls.OfType<WrongAnswer>())
+            {
+                c.Dispose();
+            }
 
             if (QuizCore.QuizProgress.FullTestInProgress)
             {
@@ -157,9 +165,14 @@ namespace SteelQuiz.QuizPractise
         private void CheckWord()
         {
             lbl_lang1.Text = "Info";
-            var mismatch = CurrentWordPair.CharacterMismatches(CurrentInput, TranslationMode, !UserCopyingWord && CountThisTranslationToProgress);
+            var mismatch = CurrentWordPair.CharacterMismatches(CurrentInput, !UserCopyingWord && CountThisTranslationToProgress);
             if (mismatch.Correct())
             {
+                foreach (var c in lbl_word1.Controls.OfType<WrongAnswer>())
+                {
+                    c.Dispose();
+                }
+
                 if (!mismatch.AskingForSynonym)
                 {
                     if (!UserCopyingWord)
@@ -184,7 +197,7 @@ namespace SteelQuiz.QuizPractise
                                 "Full test finished - SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                             if (msg == DialogResult.Yes)
                             {
-                                SwitchAIMode(false);
+                                SwitchIntelligentLearningMode(false);
                             }
                         }
                         QuizCore.QuizProgress.CorrectAnswersThisRound = 0;
@@ -200,18 +213,30 @@ namespace SteelQuiz.QuizPractise
             }
             else
             {
-                if (TranslationMode == WordPair.TranslationMode.L1_to_L2)
+                string questionWord = null;
+                string answerWord = null;
+
+                if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language2)
                 {
-                    lbl_word1.Text = $"Wrong\r\n\r\n{QuizCore.Quiz.Language1} word:\r\n"
-                        + $"{CurrentWordPair.Word1}\r\n\r\nCorrect {QuizCore.Quiz.Language2} word is:\r\n{CurrentWordPair.Word2}"
-                        + $"\r\n\r\nType the {QuizCore.Quiz.Language2} word";
+                    questionWord = CurrentWordPair.Word1;
+                    answerWord = CurrentWordPair.Word2;
                 }
-                else if (TranslationMode == WordPair.TranslationMode.L2_to_L1)
+                else if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language1)
                 {
-                    lbl_word1.Text = $"Wrong\r\n\r\n{QuizCore.Quiz.Language2} word:\r\n"
-                        + $"{CurrentWordPair.Word2}\r\n\r\nCorrect {QuizCore.Quiz.Language1} word is:\r\n{CurrentWordPair.Word1}"
-                        + $"\r\n\r\nType the {QuizCore.Quiz.Language1} word";
+                    questionWord = CurrentWordPair.Word2;
+                    answerWord = CurrentWordPair.Word1;
                 }
+
+                foreach (var c in lbl_word1.Controls.OfType<WrongAnswer>())
+                {
+                    c.Dispose();
+                }
+
+                var wrongAnswer = new WrongAnswer(questionWord, QuizCore.QuizProgress.QuestionLanguage, answerWord, QuizCore.QuizProgress.AnswerLanguage);
+                lbl_word1.Controls.Add(wrongAnswer);
+                wrongAnswer.Location = new Point(0, 0);
+                wrongAnswer.Show();
+
                 UserCopyingWord = true;
                 CurrentInput = "";
                 lbl_word2.Text = "Enter your answer...";
@@ -280,18 +305,7 @@ namespace SteelQuiz.QuizPractise
             }
         }
 
-        private void btn_switchTestMode_Click(object sender, EventArgs e)
-        {
-            var msg = MessageBox.Show("Warning: The state of the current round will be lost (current word, word count etc).\r\n\r\nProceed?",
-                "Switch mode - SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
-            if (msg == DialogResult.Yes)
-            {
-                SwitchAIMode();
-            }
-            lbl_word2.Focus();
-        }
-
-        public void SwitchAIMode(bool callGenerationFunctions = true)
+        public void SwitchIntelligentLearningMode(bool callGenerationFunctions = true)
         {
             skipNewRoundMsg = true;
             QuizCore.QuizProgress.MasterNoticeShowed = false;
@@ -306,13 +320,11 @@ namespace SteelQuiz.QuizPractise
 
             if (QuizCore.QuizProgress.FullTestInProgress)
             {
-                btn_switchTestMode.Text = "Enable Intelligent Learning";
                 lbl_intelligentLearning.Text = "Intelligent learning: Disabled";
                 //lbl_AI.ForeColor = Color.Gray;
             }
             else
             {
-                btn_switchTestMode.Text = "Disable Intelligent Learning (do full test)";
                 lbl_intelligentLearning.Text = "Intelligent learning: Enabled";
                 //lbl_AI.ForeColor = Color.DarkGreen;
             }
@@ -365,6 +377,7 @@ namespace SteelQuiz.QuizPractise
             Program.frmWelcome.Location = new Point(Location.X + (Size.Width / 2) - (Program.frmWelcome.Size.Width / 2),
                               Location.Y + (Size.Height / 2) - (Program.frmWelcome.Size.Height / 2)
                             );
+            Program.frmWelcome.PopulateQuizList();
             Program.frmWelcome.SetControlStates();
             Program.frmWelcome.GenerateWelcomeMsg();
             Program.frmWelcome.Show();
@@ -375,7 +388,7 @@ namespace SteelQuiz.QuizPractise
             Program.frmInQuiz = null;
         }
 
-        private void btn_dontAgree_Click(object sender, EventArgs e)
+        public void FixQuizErrors()
         {
             var msg = MessageBox.Show("If you continue, the translation of this word won't be counted this round to the score, to prevent cheating. Continue?",
                 "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -392,11 +405,11 @@ namespace SteelQuiz.QuizPractise
             {
                 QuizCore.SaveQuiz();
 
-                if (TranslationMode == WordPair.TranslationMode.L1_to_L2)
+                if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language2)
                 {
                     lbl_word1.Text = CurrentWordPair.Word1;
                 }
-                else if (TranslationMode == WordPair.TranslationMode.L2_to_L1)
+                else if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language1)
                 {
                     lbl_word1.Text = CurrentWordPair.Word2;
                 }
@@ -424,6 +437,14 @@ namespace SteelQuiz.QuizPractise
                 CurrentInput += "¡";
                 lbl_word2.Text = CurrentInput;
             }
+        }
+
+        private void Btn_cfg_Click(object sender, EventArgs e)
+        {
+            var cfg = new QuizPractiseConfig();
+            cfg.ShowDialog();
+
+            lbl_word2.Focus();
         }
     }
 }

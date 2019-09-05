@@ -16,6 +16,7 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using SteelQuiz.QuizData;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,12 +28,14 @@ namespace SteelQuiz.QuizProgressData
     public class QuizProgDataRoot
     {
         public string FileFormatVersion { get; set; }
-        public List<QuizProgData> QuizProgDatas { get; set; }
+        public Dictionary<Guid, QuizIdentity> QuizIdentities { get; set; } = new Dictionary<Guid, QuizIdentity>();
+        public Dictionary<Guid, DateTime> QuizAccessTimes { get; set; } = new Dictionary<Guid, DateTime>();
+        public List<QuizProgData> QuizProgDatas { get; set; } = new List<QuizProgData>();
 
         public QuizProgDataRoot(string fileFormatVersion)
         {
             FileFormatVersion = fileFormatVersion;
-            QuizProgDatas = new List<QuizProgData>();
+            //QuizProgDatas = new List<QuizProgData>();
         }
     }
 }

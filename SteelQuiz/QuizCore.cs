@@ -42,6 +42,8 @@ namespace SteelQuiz
         public static readonly string PROGRESS_FILE_PATH_DEFAULT = Path.Combine(APP_CFG_FOLDER, "QuizProgress.json");
 
         public static Quiz Quiz { get; set; }
+        public static Dictionary<Guid, QuizIdentity> QuizIdentities { get; set; } = new Dictionary<Guid, QuizIdentity>();
+        public static Dictionary<Guid, DateTime> QuizAccessTimes { get; set; } = new Dictionary<Guid, DateTime>();
         public static QuizProgData QuizProgress { get; set; }
         public static string QuizPath { get; set; }
 
@@ -119,7 +121,7 @@ namespace SteelQuiz
                 return false;
             }
 
-            return Load(quiz);
+            return Load(quiz, quizPath);
         }
 
         /// <summary>
@@ -128,6 +130,23 @@ namespace SteelQuiz
         /// <param name="quizGuid">The quiz GUID</param>
         /// <returns>True if the load was successful, otherwise false</returns>
         public static bool Load(Guid quizGuid)
+        {
+            string quizPath = FindQuizPath(quizGuid);
+            if (quizPath != null)
+            {
+                return Load(quizPath);
+            }
+
+            MessageBox.Show("The quiz file could not be found", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false;
+        }
+
+        /// <summary>
+        /// Finds the quiz path for the quiz with the specified Guid.
+        /// </summary>
+        /// <param name="quizGuid">The quiz Guid.</param>
+        /// <returns>Returns the path to the quiz if it can be found, otherwise returns null.</returns>
+        public static string FindQuizPath(Guid quizGuid)
         {
             Quiz quiz;
 
@@ -147,13 +166,12 @@ namespace SteelQuiz
 
                     if (quiz != null && quiz.GUID == quizGuid)
                     {
-                        return Load(file);
+                        return file;
                     }
                 }
             }
 
-            MessageBox.Show("The quiz file could not be found", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return false;
+            return null;
         }
 
         public static bool ImportLocalQuiz(string quizPath)
@@ -218,8 +236,11 @@ namespace SteelQuiz
         /// <param name="quiz">The quiz</param>
         /// <param name="quizPath">The path to the quiz file</param>
         /// <returns>True if the load was successful, otherwise false</returns>
-        public static bool Load(Quiz quiz, string quizPath = null)
+        public static bool Load(Quiz quiz, string quizPath)
         {
+            QuizIdentities[quiz.GUID] = new QuizIdentity(quiz.GUID, quizPath);
+            QuizAccessTimes[quiz.GUID] = DateTime.Now;
+
             ResetTotalWordsThisRoundCountMemo();
             ResetWordsAskedThisRoundMemo();
 
@@ -371,6 +392,41 @@ namespace SteelQuiz
             return true;
         }
 
+        /// <summary>
+        /// Loads quiz access times and quiz identities
+        /// </summary>
+        /// <returns>Returns true if successful</returns>
+        public static bool LoadQuizAccessData()
+        {
+            if (File.Exists(ConfigManager.Config.SyncConfig.QuizProgressPath))
+            {
+                var upg = ChkUpgradeProgressData();
+                if (upg == ChkUpgradeProgressDataResult.UpgradedDowngraded)
+                {
+                    return LoadProgressData();
+                }
+                else if (upg == ChkUpgradeProgressDataResult.Fail)
+                {
+                    return false;
+                }
+                QuizProgDataRoot quizProgDataRoot;
+                try
+                {
+                    quizProgDataRoot = JsonConvert.DeserializeObject<QuizProgDataRoot>(AtomicIO.AtomicRead(ConfigManager.Config.SyncConfig.QuizProgressPath));
+                }
+                catch (AtomicException)
+                {
+                    System.Diagnostics.Debug.WriteLine("AtomicException when loading QuizProgressData");
+                    return false;
+                }
+
+                QuizAccessTimes = quizProgDataRoot.QuizAccessTimes;
+                QuizIdentities = quizProgDataRoot.QuizIdentities;
+            }
+
+            return true;
+        }
+
         private static bool LoadProgressData()
         {
             if (File.Exists(ConfigManager.Config.SyncConfig.QuizProgressPath))
@@ -394,6 +450,9 @@ namespace SteelQuiz
                     System.Diagnostics.Debug.WriteLine("AtomicException when loading QuizProgressData");
                     return false;
                 }
+
+                //QuizAccessTimes = quizProgDataRoot.QuizAccessTimes;
+                //QuizIdentities = quizProgDataRoot.QuizIdentities;
 
                 //find progress for current quiz
                 bool found = false;
@@ -608,6 +667,41 @@ namespace SteelQuiz
             return true;
         }
 
+        /// <summary>
+        /// Saves QuizAccessTimes and QuizIdentities to the QuizProgress file
+        /// </summary>
+        public static void SaveQuizData()
+        {
+            // DESERIALIZE AND PROCESS
+            QuizProgDataRoot cfgDz;
+            if (File.Exists(ConfigManager.Config.SyncConfig.QuizProgressPath))
+            {
+                try
+                {
+                    cfgDz = JsonConvert.DeserializeObject<QuizProgDataRoot>(AtomicIO.AtomicRead(ConfigManager.Config.SyncConfig.QuizProgressPath));
+                }
+                catch (AtomicException ex)
+                {
+                    // Should never be reached as path exists
+                    throw ex;
+                }
+
+                cfgDz.QuizAccessTimes = QuizAccessTimes;
+                cfgDz.QuizIdentities = QuizIdentities;
+            }
+            else
+            {
+                cfgDz = new QuizProgDataRoot(MetaData.QUIZ_FILE_FORMAT_VERSION);
+                cfgDz.QuizAccessTimes = QuizAccessTimes;
+                cfgDz.QuizIdentities = QuizIdentities;
+            }
+
+            // SERIALIZE AND SAVE
+            var cfgSz = JsonConvert.SerializeObject(cfgDz, Formatting.Indented);
+
+            AtomicIO.AtomicWrite(ConfigManager.Config.SyncConfig.QuizProgressPath, cfgSz);
+        }
+
         public static void SaveQuizProgress()
         {
             /*
@@ -632,6 +726,9 @@ namespace SteelQuiz
                     throw ex;
                 }
 
+                cfgDz.QuizAccessTimes = QuizAccessTimes;
+                cfgDz.QuizIdentities = QuizIdentities;
+
                 //find progress for current quiz
                 bool found = false;
                 for (int i = 0; i < cfgDz.QuizProgDatas.Count; ++i)
@@ -652,6 +749,8 @@ namespace SteelQuiz
             else
             {
                 cfgDz = new QuizProgDataRoot(MetaData.QUIZ_FILE_FORMAT_VERSION);
+                cfgDz.QuizAccessTimes = QuizAccessTimes;
+                cfgDz.QuizIdentities = QuizIdentities;
                 if (QuizProgress != null)
                 {
                     cfgDz.QuizProgDatas.Add(QuizProgress);

@@ -31,6 +31,54 @@ namespace SteelQuiz.QuizProgressData
         public Guid QuizGUID { get; set; }
         public List<WordProgData> WordProgDatas { get; set; } = null;
 
+        /// <summary>
+        /// 1 if the answer language is Language1, otherwise 2
+        /// </summary>
+        public int AnswerLanguageNum { get; set; } = 2;
+
+        private string __answerLanguage = null;
+
+        /// <summary>
+        /// The language to answer in when practising the quiz
+        /// </summary>
+        public string AnswerLanguage
+        {
+            get
+            {
+                return AnswerLanguageNum == 2 ? QuizCore.Quiz.Language2 : QuizCore.Quiz.Language1;
+
+                /*
+                if (__answerLanguage != null)
+                {
+                    return __answerLanguage;
+                }
+                else if (QuizCore.Quiz.GUID == QuizGUID)
+                {
+                    __answerLanguage = QuizCore.Quiz.Language2;
+                    return __answerLanguage;
+                }
+                else
+                {
+                    return __answerLanguage;
+                }
+                */
+            }
+        }
+
+        [JsonIgnore]
+        public string QuestionLanguage
+        {
+            get
+            {
+                if (QuizCore.Quiz.GUID != QuizGUID)
+                {
+                    return null;
+                }
+
+                return QuizCore.Quiz.Language2 == AnswerLanguage ? QuizCore.Quiz.Language1 : QuizCore.Quiz.Language2;
+            }
+        }
+
         [JsonProperty] // required for deserialization of property with private setter
         internal WordPair CurrentWordPair { get; set; } = null;
 
@@ -54,6 +102,8 @@ namespace SteelQuiz.QuizProgressData
             {
                 return;
             }
+
+            //AnswerLanguage = quiz.Language2;
 
             if (WordProgDatas == null)
             {
@@ -84,21 +134,22 @@ namespace SteelQuiz.QuizProgressData
         }
 
         /// <summary>
-        /// Returns the average of GetSuccessRate() for all wordpairs
+        /// Calculates the success rate between 0 and 1 for answering this word, for the amount of tries completed
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Returns the success rate between 0 and 1 for answering this word, for the amount of tries completed</returns>
         public double GetSuccessRate()
         {
             return WordProgDatas.Sum(x => x.GetSuccessRate()) / WordProgDatas.Count();
         }
 
         /// <summary>
-        /// Returns the average of GetSuccessRateStrict() for all wordpairs
+        /// Returns the learning progress for this quiz, 
+        /// that is, the average of the success rates for all wordpairs, that is between 0 and 1, divided by total amount of tries to save (WORD_TRIES_TO_KEEP)
         /// </summary>
         /// <returns></returns>
-        public double GetSuccessRateStrict()
+        public double GetLearningProgress()
         {
-            return WordProgDatas.Sum(x => x.GetSuccessRateStrict()) / WordProgDatas.Count();
+            return WordProgDatas.Sum(x => x.GetLearningProgress()) / WordProgDatas.Count();
         }
 
         // due to CurrentWordPair not preserving references due to serialization, implement setter through method instead, to avoid confusion regarding references

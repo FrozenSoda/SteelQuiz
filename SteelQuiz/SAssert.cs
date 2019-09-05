@@ -1,15 +1,4 @@
-#warning, not working
-
-import os
-
-def file_list_rec(dir):
-	file_list = list()
-	for (dir_path, dir_names, file_names) in os.walk(dir):
-		file_list += [os.path.join(dir_path, file) for file in file_names]
-	return file_list
-		
-LICENSE_HEADER = """
-/*
+﻿/*
     SteelQuiz - A quiz program designed to make learning words easier
     Copyright (C) 2019  Steel9Apps
 
@@ -26,19 +15,40 @@ LICENSE_HEADER = """
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
-"""
-		
-working_dir = os.path.dirname(os.path.realpath(__file__))
-files = file_list_rec(working_dir)
-files_no_header = list()
 
-for file in files:
-	try:
-		if not LICENSE_HEADER in open(file, 'r'):
-			files_no_header.append(file)
-	except UnicodeDecodeError:
-		#found non-text data
-		print("Did not check file ''".format(file))
-		
-print('\n\nFiles with missing license header:\n\n')
-print('\n'.join(files_no_header))
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SteelQuiz
+{
+    public class SAssertException : Exception
+    {
+        public SAssertException() : base()
+        {
+        }
+
+        public SAssertException(string message)
+            : base(message)
+        {
+        }
+
+        public SAssertException(string message, Exception inner)
+            : base(message, inner)
+        {
+        }
+    }
+
+    public static class SAssert
+    {
+        public static void Assert(bool condition)
+        {
+            if (!condition)
+            {
+                throw new SAssertException("Assertion error");
+            }
+        }
+    }
+}

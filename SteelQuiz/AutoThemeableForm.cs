@@ -17,6 +17,7 @@
 */
 
 using SteelQuiz.ThemeManager;
+using SteelQuiz.ThemeManager.Colors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,9 +29,9 @@ namespace SteelQuiz
 {
     public class AutoThemeableForm : Form
     {
-        public virtual void SetTheme()
+        public virtual void SetTheme(GeneralTheme theme = null)
         {
-            AutoTheme.AutoSetTheme(this);
+            AutoTheme.AutoSetTheme(this, theme);
         }
     }
 }

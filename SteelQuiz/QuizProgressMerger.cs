@@ -93,9 +93,9 @@ namespace SteelQuiz
             var duplicatePairs = unfixedQuizProgDataList.GroupBy(x => x.QuizGUID);
             foreach (var duplicatePair in duplicatePairs)
             {
-                var best = duplicatePair.OrderByDescending(x => x.GetSuccessRateStrict()).Take(2);
+                var best = duplicatePair.OrderByDescending(x => x.GetLearningProgress()).Take(2);
 
-                if (best.Count() >= 2 && best.ElementAt(0).GetSuccessRateStrict() == best.ElementAt(1).GetSuccessRateStrict())
+                if (best.Count() >= 2 && best.ElementAt(0).GetLearningProgress() == best.ElementAt(1).GetLearningProgress())
                 {
                     // prioritize prog1
 

@@ -1,4 +1,12 @@
-﻿/*
+import os
+
+def file_list_rec(dir):
+	file_list = list()
+	for (dir_path, dir_names, file_names) in os.walk(dir):
+		file_list += [os.path.join(dir_path, f) for f in file_names]
+	return file_list
+		
+LICENSE_HEADER = """/*
     SteelQuiz - A quiz program designed to make learning words easier
     Copyright (C) 2019  Steel9Apps
 
@@ -14,27 +22,21 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
-*/
+*/"""
+		
+working_dir = os.path.dirname(os.path.realpath(__file__))
+files = file_list_rec(working_dir)
+files_no_header = list()
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+for f in (x for x in files if x.endswith('.cs')):
+	try:
+		if not LICENSE_HEADER in open(f, 'r', encoding='utf-8-sig').read():
+			files_no_header.append(f)
+	except UnicodeDecodeError:
+		#found non-text data
+		print("Did not check file ''".format(f))
+		
+print('\n\nFiles with missing license header:\n\n')
+print('\n'.join(files_no_header))
 
-namespace SteelQuiz.QuizImport.Guide
-{
-    public partial class Step5 : AutoThemeableUserControl
-    {
-        public Step5()
-        {
-            InitializeComponent();
-
-            SetTheme();
-        }
-    }
-}
+input()

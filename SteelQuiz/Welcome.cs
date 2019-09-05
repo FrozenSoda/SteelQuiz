@@ -30,6 +30,7 @@ using System.Windows.Forms;
 using AutoUpdaterDotNET;
 using Microsoft.Win32;
 using RegistryUtils;
+using SteelQuiz.Animations;
 using SteelQuiz.Extensions;
 using SteelQuiz.QuizData;
 using SteelQuiz.QuizImport;
@@ -106,6 +107,103 @@ namespace SteelQuiz
             ConfigManager.ChkSetupForFirstUse();
 
             UpdateCfg();
+
+            QuizCore.LoadQuizAccessData();
+            PopulateQuizList();
+        }
+
+        public void PopulateQuizList()
+        {
+            foreach (var c in flp_lastQuizzes.Controls.OfType<Control>())
+            {
+                c.Dispose();
+            }
+            flp_lastQuizzes.Controls.Clear();
+
+            foreach (var q in pnl_quizInfo.Controls.OfType<QuizProgressInfo>())
+            {
+                q.Dispose();
+            }
+
+            pnl_quizInfo.Controls.Clear();
+            pnl_quizInfo.Controls.Add(pnl_welcome);
+
+            foreach (var quizAccessTimePair in QuizCore.QuizAccessTimes.OrderByDescending(x => x.Value.Ticks))
+            {
+                var quizIdentity = QuizCore.QuizIdentities[quizAccessTimePair.Key];
+
+                var dashboardQuiz = new DashboardQuiz(quizIdentity);
+                flp_lastQuizzes.Controls.Add(dashboardQuiz);
+            }
+        }
+
+        /// <summary>
+        /// Removes a quiz from the list
+        /// </summary>
+        public void RemoveQuiz(Guid quizGuid)
+        {
+            QuizCore.QuizAccessTimes.Remove(quizGuid);
+            QuizCore.SaveQuizData();
+            
+            foreach (var c in flp_lastQuizzes.Controls.OfType<DashboardQuiz>())
+            {
+                if (c.QuizIdentity.QuizGuid == quizGuid)
+                {
+                    flp_lastQuizzes.Controls.Remove(c);
+                    c.Dispose();
+                }
+            }
+
+            foreach (var c in pnl_quizInfo.Controls.OfType<QuizProgressInfo>())
+            {
+                if (c.QuizIdentity.QuizGuid == quizGuid)
+                {
+                    pnl_quizInfo.Controls.Remove(c);
+                    c.Dispose();
+                }
+            }
+        }
+
+        public void SwitchQuizProgressInfo(QuizIdentity quizIdentity)
+        {
+            QuizCore.Load(quizIdentity.FindQuizPath());
+
+            foreach (var q in pnl_quizInfo.Controls.OfType<QuizProgressInfo>())
+            {
+                if (q.QuizIdentity.QuizGuid == quizIdentity.QuizGuid)
+                {
+                    q.Size = pnl_quizInfo.Size;
+                    q.UpdateLearningProgressBar();
+                    q.Show();
+                    q.BringToFront();
+
+                    return;
+                }
+            }
+
+            var quizProgressInfo = new QuizProgressInfo(quizIdentity);
+            pnl_quizInfo.Controls.Add(quizProgressInfo);
+            quizProgressInfo.Size = pnl_quizInfo.Size;
+            quizProgressInfo.Show();
+            quizProgressInfo.BringToFront();
+        }
+
+        /// <summary>
+        /// Finds the QuizProgressInfo UserControl for a specified quiz
+        /// </summary>
+        /// <param name="quizGuid">The Guid of the quiz whose QuizProgressInfo to return</param>
+        /// <returns>Returns the QuizProgressInfo if found, otherwise null</returns>
+        public QuizProgressInfo FindQuizProgressInfo(Guid quizGuid)
+        {
+            foreach (var q in pnl_quizInfo.Controls.OfType<QuizProgressInfo>())
+            {
+                if (q.QuizIdentity.QuizGuid == quizGuid)
+                {
+                    return q;
+                }
+            }
+
+            return null;
         }
 
         private void ThemeMonitor_Error(object sender, ErrorEventArgs e)
@@ -156,7 +254,7 @@ namespace SteelQuiz
                 dynamic frmT = Convert.ChangeType(frm, frm.GetType());
                 frmT.Invoke(new Action(() =>
                 {
-                    frmT.SetTheme();
+                    frmT.SetTheme(null);
                 }));
 
                 foreach (var uc in frm.GetAllChildrenRecursive().OfType<AutoThemeableUserControl>())
@@ -165,7 +263,7 @@ namespace SteelQuiz
                     dynamic ucT = Convert.ChangeType(uc, uc.GetType());
                     ucT.Invoke(new Action(() =>
                     {
-                        ucT.SetTheme();
+                        ucT.SetTheme(null);
                     }));
 
                     //uc.SetTheme();
@@ -195,38 +293,56 @@ namespace SteelQuiz
         public void SetTheme()
         {
             this.BackColor = WelcomeTheme.GetBackColor();
+            pnl_left.BackColor = Color.FromArgb(BackColor.A, BackColor.R - 10, BackColor.G - 10, BackColor.B - 10);
 
             lbl_welcome.ForeColor = WelcomeTheme.GetMainLabelForeColor();
+            lbl_recentQuizzes.ForeColor = WelcomeTheme.GetMainLabelForeColor();
+            lbl_toBegin.ForeColor = WelcomeTheme.GetMainLabelForeColor();
 
-            btn_createQuiz.BackColor = WelcomeTheme.GetMainButtonBackColor();
-            btn_loadQuiz.BackColor = WelcomeTheme.GetMainButtonBackColor();
-            btn_importQuizFromSite.BackColor = WelcomeTheme.GetMainButtonBackColor();
-            btn_continueLast.BackColor = WelcomeTheme.GetMainButtonBackColor();
+            btn_addQuiz.BackColor = WelcomeTheme.GetButtonBackColor();
+            btn_createQuiz.BackColor = WelcomeTheme.GetButtonBackColor();
+            btn_loadQuizFromFile.BackColor = WelcomeTheme.GetButtonBackColor();
+            btn_importQuiz.BackColor = WelcomeTheme.GetButtonBackColor();
+            //btn_continueLast.BackColor = WelcomeTheme.GetMainButtonBackColor();
 
             //btn_createQuiz.ForeColor = WelcomeTheme.GetMainButtonForeColor();
             //btn_loadQuiz.ForeColor = WelcomeTheme.GetMainButtonForeColor();
             //btn_importQuizFromSite.ForeColor = WelcomeTheme.GetMainButtonForeColor();
             //btn_continueLast.ForeColor = WelcomeTheme.GetMainButtonForeColor();
 
+            btn_addQuiz.ForeColor = WelcomeTheme.GetButtonForeColor();
             btn_createQuiz.ForeColor = WelcomeTheme.GetButtonForeColor();
-            btn_loadQuiz.ForeColor = WelcomeTheme.GetButtonForeColor();
-            btn_importQuizFromSite.ForeColor = WelcomeTheme.GetButtonForeColor();
-            btn_continueLast.ForeColor = WelcomeTheme.GetButtonForeColor();
+            btn_loadQuizFromFile.ForeColor = WelcomeTheme.GetButtonForeColor();
+            btn_importQuiz.ForeColor = WelcomeTheme.GetButtonForeColor();
+            //btn_continueLast.ForeColor = WelcomeTheme.GetButtonForeColor();
 
-            lbl_copyright.ForeColor = WelcomeTheme.GetBackgroundLabelForeColor();
+            //lbl_copyright.ForeColor = WelcomeTheme.GetBackgroundLabelForeColor();
 
-            btn_chkUpdates.BackColor = WelcomeTheme.GetButtonBackColor();
-            btn_preferences.BackColor = WelcomeTheme.GetButtonBackColor();
+            var btnbc = WelcomeTheme.GetButtonBackColor();
+            btn_chkUpdates.BackColor = Color.FromArgb(btnbc.A, btnbc.R - 10, btnbc.G - 10, btnbc.B - 10);
+            btn_preferences.BackColor = Color.FromArgb(btnbc.A, btnbc.R - 10, btnbc.G - 10, btnbc.B - 10);
 
             btn_chkUpdates.ForeColor = WelcomeTheme.GetButtonForeColor();
             btn_preferences.ForeColor = WelcomeTheme.GetButtonForeColor();
+
+            foreach (var uc in this.GetAllChildrenRecursiveDerives(typeof(AutoThemeableUserControl)))
+            {
+                // Call the potentially overriden SetTheme() method
+                dynamic ucT = Convert.ChangeType(uc, uc.GetType());
+                ucT.Invoke(new Action(() =>
+                {
+                    ucT.SetTheme(null);
+                }));
+
+                //uc.SetTheme();
+            }
         }
 
         public void SetControlStates()
         {
             if (ConfigManager.Config.LastQuiz != Guid.Empty)
             {
-                btn_continueLast.Enabled = true;
+                //btn_continueLast.Enabled = true;
             }
         }
 
@@ -239,6 +355,8 @@ namespace SteelQuiz
                 Program.frmInQuiz.Show();
                 Hide();
             }
+
+            AddQuizButtonsExpanded = false;
         }
 
         private void btn_loadQuiz_Click(object sender, EventArgs e)
@@ -256,9 +374,11 @@ namespace SteelQuiz
 
                 LoadQuiz(ofd_loadQuiz.FileName);
             }
+
+            AddQuizButtonsExpanded = false;
         }
 
-        private void LoadQuiz(string quizPath)
+        public void LoadQuiz(string quizPath)
         {
             try
             {
@@ -320,6 +440,8 @@ namespace SteelQuiz
         private void btn_createQuiz_Click(object sender, EventArgs e)
         {
             OpenQuizEditor();
+
+            AddQuizButtonsExpanded = false;
         }
 
         private void Tmr_chkUpdate_Tick(object sender, EventArgs e)
@@ -331,7 +453,8 @@ namespace SteelQuiz
         public void ShowPreferences(Type selectedCategory = null, Type selectedCategoryCollection = null)
         {
             Program.frmPreferences?.Dispose();
-            this.Focus();
+            this.Activate();
+            //this.Focus();
             Program.frmPreferences = new Preferences.Preferences(selectedCategory, selectedCategoryCollection);
             Program.frmPreferences.ShowDialog();
         }
@@ -339,11 +462,15 @@ namespace SteelQuiz
         private void Btn_preferences_Click(object sender, EventArgs e)
         {
             ShowPreferences();
+
+            AddQuizButtonsExpanded = false;
         }
 
         private void Btn_chkUpdates_Click(object sender, EventArgs e)
         {
             Updater.Update(Updater.UpdateMode.Verbose);
+
+            AddQuizButtonsExpanded = false;
         }
 
         private void Welcome_Shown(object sender, EventArgs e)
@@ -357,6 +484,112 @@ namespace SteelQuiz
             {
                 GenerateWelcomeMsg();
             }
+        }
+
+        private bool __addQuizButtonsExpanded = false;
+        private bool AddQuizButtonsExpanded
+        {
+            get
+            {
+                return __addQuizButtonsExpanded;
+            }
+
+            set
+            {
+                __addQuizButtonsExpanded = value;
+
+                var btn_createQuiz_loc = btn_createQuiz.Location;
+                var btn_loadQuizFromFile_loc = btn_loadQuizFromFile.Location;
+                var btn_importQuiz_loc = btn_importQuiz.Location;
+                var btn_preferences_loc = btn_preferences.Location;
+                var btn_chkUpdates_loc = btn_chkUpdates.Location;
+
+                if (AddQuizButtonsExpanded)
+                {
+                    flp_lastQuizzes.Enabled = false;
+
+                    btn_createQuiz.Visible = true;
+                    btn_loadQuizFromFile.Visible = true;
+                    btn_importQuiz.Visible = true;
+                    btn_preferences.Visible = true;
+                    btn_chkUpdates.Visible = true;
+
+                    btn_createQuiz.Location = btn_addQuiz.Location;
+                    btn_loadQuizFromFile.Location = btn_addQuiz.Location;
+                    btn_importQuiz.Location = btn_addQuiz.Location;
+                    btn_preferences.Location = btn_addQuiz.Location;
+                    btn_chkUpdates.Location = btn_addQuiz.Location;
+
+                    ControlMove.SmoothMove(btn_createQuiz, btn_createQuiz_loc, 80);
+                    ControlMove.SmoothMove(btn_loadQuizFromFile, btn_loadQuizFromFile_loc, 80);
+                    ControlMove.SmoothMove(btn_importQuiz, btn_importQuiz_loc, 80);
+                    ControlMove.SmoothMove(btn_preferences, btn_preferences_loc, 80);
+                    ControlMove.SmoothMove(btn_chkUpdates, btn_chkUpdates_loc, 80);
+                }
+                else
+                {
+                    flp_lastQuizzes.Enabled = true;
+
+                    ControlMove.SmoothMove(btn_createQuiz, btn_addQuiz.Location, 80, () =>
+                    {
+                        btn_createQuiz.Visible = false;
+
+                        btn_createQuiz.Location = btn_createQuiz_loc;
+                    });
+                    ControlMove.SmoothMove(btn_loadQuizFromFile, btn_addQuiz.Location, 80, () =>
+                    {
+                        btn_loadQuizFromFile.Visible = false;
+
+                        btn_loadQuizFromFile.Location = btn_loadQuizFromFile_loc;
+                    });
+                    ControlMove.SmoothMove(btn_importQuiz, btn_addQuiz.Location, 80, () =>
+                    {
+                        btn_importQuiz.Visible = false;
+
+                        btn_importQuiz.Location = btn_importQuiz_loc;
+                    });
+                    ControlMove.SmoothMove(btn_preferences, btn_addQuiz.Location, 80, () =>
+                    {
+                        btn_preferences.Visible = false;
+
+                        btn_preferences.Location = btn_preferences_loc;
+                    });
+                    ControlMove.SmoothMove(btn_chkUpdates, btn_addQuiz.Location, 80, () =>
+                    {
+                        btn_chkUpdates.Visible = false;
+
+                        btn_chkUpdates.Location = btn_chkUpdates_loc;
+                    });
+                }
+
+                if (AddQuizButtonsExpanded)
+                {
+                    btn_addQuiz.Text = "←";
+                }
+                else
+                {
+                    btn_addQuiz.Text = "+";
+                }
+            }
+        }
+
+        private void Btn_addQuiz_Click(object sender, EventArgs e)
+        {
+            AddQuizButtonsExpanded = !AddQuizButtonsExpanded;
+        }
+
+        private void Welcome_SizeChanged(object sender, EventArgs e)
+        {
+            //lbl_welcome.Size = new Size(Size.Width - 230, Size.Height - 63);
+            pnl_quizInfo.Size = new Size(Size.Width - 230, Size.Height - 63);
+            pnl_welcomeText.Location =
+                new Point(pnl_quizInfo.Width / 2 - pnl_welcomeText.Size.Width / 2,
+                pnl_quizInfo.Height / 2 - pnl_welcomeText.Size.Height / 2);
+            foreach (var c in pnl_quizInfo.Controls.OfType<Control>())
+            {
+                c.Size = pnl_quizInfo.Size;
+            }
+            flp_lastQuizzes.Size = new Size(flp_lastQuizzes.Size.Width, Size.Height - 143);
         }
     }
 }

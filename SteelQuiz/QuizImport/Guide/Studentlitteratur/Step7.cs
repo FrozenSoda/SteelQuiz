@@ -26,11 +26,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SteelQuiz.QuizData;
+using static SteelQuiz.QuizImport.QuizImporter;
 
-namespace SteelQuiz.QuizImport.Guide
+namespace SteelQuiz.QuizImport.Guide.Studentlitteratur
 {
-    public partial class Step7 : AutoThemeableUserControl
+    public partial class Step7 : AutoThemeableUserControl, IStep
     {
+        public ImportSource ImportSource { get; set; } = ImportSource.Studentlitteratur;
+        public int Step { get; set; } = 7;
+
         public string Language2 => txt_lang.Text;
 
         public Step7(IEnumerable<WordPair> wordPairs)

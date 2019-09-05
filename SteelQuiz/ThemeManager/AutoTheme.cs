@@ -31,79 +31,89 @@ namespace SteelQuiz.ThemeManager
     {
         private static GeneralTheme GeneralTheme = new GeneralTheme();
 
-        public static void AutoSetTheme(Control control)
+        public static void AutoSetTheme(Control control, GeneralTheme theme = null)
         {
-            control.BackColor = GeneralTheme.GetBackColor();
+            if (theme == null)
+            {
+                theme = new GeneralTheme();
+            }
+
+            control.BackColor = theme.GetBackColor();
 
             foreach (var btn in control.GetAllChildrenRecursive(typeof(Button)))
             {
-                btn.BackColor = GeneralTheme.GetButtonBackColor();
-                btn.ForeColor = GeneralTheme.GetButtonForeColor();
+                btn.BackColor = theme.GetButtonBackColor();
+                btn.ForeColor = theme.GetButtonForeColor();
             }
 
             foreach (var lbl in control.GetAllChildrenRecursive(typeof(Label)))
             {
-                lbl.ForeColor = GeneralTheme.GetMainLabelForeColor();
+                lbl.ForeColor = theme.GetMainLabelForeColor();
             }
 
             foreach (var chk in control.GetAllChildrenRecursive(typeof(CheckBox)))
             {
-                chk.ForeColor = GeneralTheme.GetMainLabelForeColor();
+                chk.ForeColor = theme.GetMainLabelForeColor();
             }
 
             foreach (var rdo in control.GetAllChildrenRecursive(typeof(RadioButton)))
             {
-                rdo.ForeColor = GeneralTheme.GetMainLabelForeColor();
+                rdo.ForeColor = theme.GetMainLabelForeColor();
             }
 
             foreach (var pnl in control.GetAllChildrenRecursive(typeof(Panel)))
             {
-                pnl.BackColor = GeneralTheme.GetBackColor();
+                pnl.BackColor = theme.GetBackColor();
             }
 
             foreach (var flp in control.GetAllChildrenRecursive(typeof(FlowLayoutPanel)))
             {
-                flp.BackColor = GeneralTheme.GetBackColor();
+                flp.BackColor = theme.GetBackColor();
             }
 
             foreach (var lst in control.GetAllChildrenRecursive(typeof(ListBox)))
             {
-                lst.BackColor = GeneralTheme.GetBackColor();
-                lst.ForeColor = GeneralTheme.GetMainLabelForeColor();
+                lst.BackColor = theme.GetBackColor();
+                lst.ForeColor = theme.GetMainLabelForeColor();
             }
 
             foreach (var txt in control.GetAllChildrenRecursive(typeof(TextBox)))
             {
-                txt.BackColor = GeneralTheme.GetTextBoxBackColor();
-                txt.ForeColor = GeneralTheme.GetTextBoxForeColor();
+                txt.BackColor = theme.GetTextBoxBackColor();
+                txt.ForeColor = theme.GetTextBoxForeColor();
             }
 
             foreach (var nud in control.GetAllChildrenRecursive(typeof(NumericUpDown)))
             {
-                nud.BackColor = GeneralTheme.GetTextBoxBackColor();
-                nud.ForeColor = GeneralTheme.GetTextBoxForeColor();
+                nud.BackColor = theme.GetTextBoxBackColor();
+                nud.ForeColor = theme.GetTextBoxForeColor();
             }
 
             foreach (var rtf in control.GetAllChildrenRecursive(typeof(RichTextBox)))
             {
-                rtf.BackColor = GeneralTheme.GetTextBoxBackColor();
-                rtf.ForeColor = GeneralTheme.GetTextBoxForeColor();
+                rtf.BackColor = theme.GetTextBoxBackColor();
+                rtf.ForeColor = theme.GetTextBoxForeColor();
             }
 
             foreach (var cmb in control.GetAllChildrenRecursive(typeof(ComboBox)))
             {
-                cmb.BackColor = GeneralTheme.GetTextBoxBackColor();
-                cmb.ForeColor = GeneralTheme.GetTextBoxForeColor();
+                cmb.BackColor = theme.GetTextBoxBackColor();
+                cmb.ForeColor = theme.GetTextBoxForeColor();
             }
 
             foreach (var mns in control.GetAllChildrenRecursive(typeof(MenuStrip)))
             {
-                mns.ForeColor = GeneralTheme.GetMainLabelForeColor();
-                mns.BackColor = GeneralTheme.GetBackColor();
+                mns.ForeColor = theme.GetMainLabelForeColor();
+                mns.BackColor = theme.GetBackColor();
                 foreach (var tsmi in ((MenuStrip)mns).Items)
                 {
-                    ((ToolStripMenuItem)tsmi).ForeColor = GeneralTheme.GetMainLabelForeColor();
+                    ((ToolStripMenuItem)tsmi).ForeColor = theme.GetMainLabelForeColor();
                 }
+            }
+
+            foreach (var a in control.GetAllChildrenRecursiveDerives(typeof(AutoThemeableUserControl)).Cast<AutoThemeableUserControl>())
+            {
+                a.SetTheme();
             }
         }
     }
