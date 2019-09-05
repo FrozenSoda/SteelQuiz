@@ -1,5 +1,3 @@
-#warning, not working
-
 import os
 
 def file_list_rec(dir):
