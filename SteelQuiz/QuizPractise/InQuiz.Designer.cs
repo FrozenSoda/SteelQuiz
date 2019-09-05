@@ -196,6 +196,7 @@ namespace SteelQuiz.QuizPractise
             this.btn_cfg.Name = "btn_cfg";
             this.btn_cfg.Size = new System.Drawing.Size(30, 30);
             this.btn_cfg.TabIndex = 12;
+            this.btn_cfg.TabStop = false;
             this.btn_cfg.UseVisualStyleBackColor = false;
             this.btn_cfg.Click += new System.EventHandler(this.Btn_cfg_Click);
             // 

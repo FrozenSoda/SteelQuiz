@@ -155,7 +155,7 @@ namespace SteelQuiz.QuizPractise
         private void CheckWord()
         {
             lbl_lang1.Text = "Info";
-            var mismatch = CurrentWordPair.CharacterMismatches(CurrentInput, TranslationMode, !UserCopyingWord && CountThisTranslationToProgress);
+            var mismatch = CurrentWordPair.CharacterMismatches(CurrentInput, !UserCopyingWord && CountThisTranslationToProgress);
             if (mismatch.Correct())
             {
                 if (!mismatch.AskingForSynonym)

@@ -44,11 +44,13 @@ namespace SteelQuiz.QuizProgressData
                 {
                     return __answerLanguage;
                 }
+                else if (QuizCore.Quiz.GUID == QuizGUID)
+                {
+                    __answerLanguage = QuizCore.Quiz.Language2;
+                    return __answerLanguage;
+                }
                 else
                 {
-                    SAssert.Assert(QuizCore.Quiz.GUID == QuizGUID);
-
-                    __answerLanguage = QuizCore.Quiz.Language2;
                     return __answerLanguage;
                 }
             }

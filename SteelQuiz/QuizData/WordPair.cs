@@ -104,10 +104,10 @@ namespace SteelQuiz.QuizData
             throw new Exception("No word progress data could be found for this word pair");
         }
 
-        public StringComp.CharacterMismatch CharacterMismatches(string input, TranslationMode translationMode, bool updateProgress = true, bool recurse = false)
+        public StringComp.CharacterMismatch CharacterMismatches(string input, bool updateProgress = true, bool recurse = false)
         {
             var mismatches = new List<StringComp.CharacterMismatch>();
-            if (translationMode == TranslationMode.L1_to_L2)
+            if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language2)
             {
                 mismatches.Add(StringComp.CharacterMismatches(Word2, input, TranslationRules));
                 foreach (var synonym in Word2Synonyms)
@@ -115,7 +115,7 @@ namespace SteelQuiz.QuizData
                     mismatches.Add(StringComp.CharacterMismatches(synonym, input, TranslationRules));
                 }
             }
-            else if (translationMode == TranslationMode.L2_to_L1)
+            else if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language1)
             {
                 mismatches.Add(StringComp.CharacterMismatches(Word1, input, TranslationRules));
                 foreach (var synonym in Word1Synonyms)
@@ -163,12 +163,12 @@ namespace SteelQuiz.QuizData
                 // check if a synonym for the was being asked as a separate word
                 foreach (var wordPair in QuizCore.Quiz.WordPairs)
                 {
-                    if (translationMode == TranslationMode.L1_to_L2)
+                    if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language2)
                     {
                         if (wordPair.Word1 == Word1 && wordPair.Word2 != Word2)
                         {
                             // check if the answer to this wordpair was correct
-                            var mismatch2 = wordPair.CharacterMismatches(input, translationMode, false, true);
+                            var mismatch2 = wordPair.CharacterMismatches(input, false, true);
                             if (mismatch2.Correct())
                             {
                                 // a synonym for this word was being asked, the user could not know this, so don't count it as a miss in the progress
@@ -176,12 +176,12 @@ namespace SteelQuiz.QuizData
                             }
                         }
                     }
-                    else if (translationMode == TranslationMode.L2_to_L1)
+                    else if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language1)
                     {
                         if (wordPair.Word2 == Word2 && wordPair.Word1 != Word1)
                         {
                             // check if the answer to this wordpair was correct
-                            var mismatch2 = wordPair.CharacterMismatches(input, translationMode, false, true);
+                            var mismatch2 = wordPair.CharacterMismatches(input, false, true);
                             if (mismatch2.Correct())
                             {
                                 // a synonym for this word was being asked, the user could not know this, so don't count it as a miss in the progress
