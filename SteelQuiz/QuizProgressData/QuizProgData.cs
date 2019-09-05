@@ -48,7 +48,7 @@ namespace SteelQuiz.QuizProgressData
                 {
                     SAssert.Assert(QuizCore.Quiz.GUID == QuizGUID);
 
-                    __answerLanguage = QuizCore.Quiz.Language1;
+                    __answerLanguage = QuizCore.Quiz.Language2;
                     return __answerLanguage;
                 }
             }
@@ -83,7 +83,7 @@ namespace SteelQuiz.QuizProgressData
                 return;
             }
 
-            AnswerLanguage = quiz.Language1;
+            AnswerLanguage = quiz.Language2;
 
             if (WordProgDatas == null)
             {

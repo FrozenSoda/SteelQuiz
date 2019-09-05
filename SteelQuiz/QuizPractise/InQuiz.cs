@@ -39,7 +39,7 @@ namespace SteelQuiz.QuizPractise
 
         private WordPair CurrentWordPair { get; set; } = null;
         private string CurrentInput { get; set; } = "";
-        private WordPair.TranslationMode TranslationMode { get; set; } = WordPair.TranslationMode.L1_to_L2;
+        //private WordPair.TranslationMode TranslationMode { get; set; } = WordPair.TranslationMode.L1_to_L2;
 
         private bool WaitingForEnter { get; set; } = false;
         private bool UserCopyingWord { get; set; } = false;
@@ -110,11 +110,11 @@ namespace SteelQuiz.QuizPractise
                 return;
             }
 
-            if (TranslationMode == WordPair.TranslationMode.L1_to_L2)
+            if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language2)
             {
                 lbl_word1.Text = CurrentWordPair.Word1;
             }
-            else if (TranslationMode == WordPair.TranslationMode.L2_to_L1)
+            else if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language1)
             {
                 lbl_word1.Text = CurrentWordPair.Word2;
             }
@@ -198,13 +198,13 @@ namespace SteelQuiz.QuizPractise
             }
             else
             {
-                if (TranslationMode == WordPair.TranslationMode.L1_to_L2)
+                if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language2)
                 {
                     lbl_word1.Text = $"Wrong\r\n\r\n{QuizCore.Quiz.Language1} word:\r\n"
                         + $"{CurrentWordPair.Word1}\r\n\r\nCorrect {QuizCore.Quiz.Language2} word is:\r\n{CurrentWordPair.Word2}"
                         + $"\r\n\r\nType the {QuizCore.Quiz.Language2} word";
                 }
-                else if (TranslationMode == WordPair.TranslationMode.L2_to_L1)
+                else if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language1)
                 {
                     lbl_word1.Text = $"Wrong\r\n\r\n{QuizCore.Quiz.Language2} word:\r\n"
                         + $"{CurrentWordPair.Word2}\r\n\r\nCorrect {QuizCore.Quiz.Language1} word is:\r\n{CurrentWordPair.Word1}"
@@ -378,11 +378,11 @@ namespace SteelQuiz.QuizPractise
             {
                 QuizCore.SaveQuiz();
 
-                if (TranslationMode == WordPair.TranslationMode.L1_to_L2)
+                if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language2)
                 {
                     lbl_word1.Text = CurrentWordPair.Word1;
                 }
-                else if (TranslationMode == WordPair.TranslationMode.L2_to_L1)
+                else if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language1)
                 {
                     lbl_word1.Text = CurrentWordPair.Word2;
                 }
