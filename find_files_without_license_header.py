@@ -38,3 +38,5 @@ for f in (x for x in files if x.endswith('.cs')):
 		
 print('\n\nFiles with missing license header:\n\n')
 print('\n'.join(files_no_header))
+
+input()

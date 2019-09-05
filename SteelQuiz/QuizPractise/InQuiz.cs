@@ -104,6 +104,11 @@ namespace SteelQuiz.QuizPractise
             lbl_lang1.Text = QuizCore.Quiz.Language1;
             CurrentWordPair = QuestionSelector.GenerateWordPair();
 
+            foreach (var c in lbl_word1.Controls.OfType<WrongAnswer>())
+            {
+                c.Dispose();
+            }
+
             if (CurrentWordPair == null)
             {
                 NewRound();
@@ -128,6 +133,11 @@ namespace SteelQuiz.QuizPractise
         {
             CountThisTranslationToProgress = true;
             lbl_progress.Text = $"Progress this round: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
+
+            foreach (var c in lbl_word1.Controls.OfType<WrongAnswer>())
+            {
+                c.Dispose();
+            }
 
             if (QuizCore.QuizProgress.FullTestInProgress)
             {

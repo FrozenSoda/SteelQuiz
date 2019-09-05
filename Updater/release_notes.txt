@@ -1,3 +1,7 @@
+v4.0.0-pre5 (v4.0.0.9):
+- Improved UI in quiz practise.
+- Fixed some bugs.
+
 v4.0.0-pre4 (v4.0.0.7):
 - Added feature to switch answer language during quiz practise.
 - Added feature to import quizzes from text.

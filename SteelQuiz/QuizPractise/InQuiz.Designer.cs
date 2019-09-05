@@ -192,7 +192,7 @@ namespace SteelQuiz.QuizPractise
             this.btn_cfg.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btn_cfg.FlatAppearance.BorderSize = 0;
             this.btn_cfg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_cfg.Location = new System.Drawing.Point(758, 12);
+            this.btn_cfg.Location = new System.Drawing.Point(758, 14);
             this.btn_cfg.Name = "btn_cfg";
             this.btn_cfg.Size = new System.Drawing.Size(30, 30);
             this.btn_cfg.TabIndex = 12;
