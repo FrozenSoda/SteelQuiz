@@ -42,7 +42,7 @@ namespace SteelQuiz
 {
     public partial class Welcome : Form, ThemeManager.IThemeable
     {
-        private WelcomeTheme WelcomeTheme = new WelcomeTheme();
+        private WelcomeTheme WelcomeTheme;
         private WelcomeMessage[] welcomeMessages = new WelcomeMessage[]
         {
             new WelcomeMessage(@"Hi \firstname!",
@@ -292,6 +292,11 @@ namespace SteelQuiz
         /// </summary>
         public void SetTheme()
         {
+            if (WelcomeTheme == null)
+            {
+                WelcomeTheme = new WelcomeTheme();
+            }
+
             this.BackColor = WelcomeTheme.GetBackColor();
             pnl_left.BackColor = Color.FromArgb(BackColor.A, BackColor.R - 10, BackColor.G - 10, BackColor.B - 10);
 

@@ -102,6 +102,12 @@
     <Compile Include="QuizPractise\QuizPractiseConfig.Designer.cs">
       <DependentUpon>QuizPractiseConfig.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuizPractise\ProbablyCorrectAnswer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuizPractise\ProbablyCorrectAnswer.Designer.cs">
+      <DependentUpon>ProbablyCorrectAnswer.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuizPractise\WrongAnswer.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -516,6 +522,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="QuizPractise\QuizPractiseConfig.resx">
       <DependentUpon>QuizPractiseConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuizPractise\ProbablyCorrectAnswer.resx">
+      <DependentUpon>ProbablyCorrectAnswer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuizPractise\WrongAnswer.resx">
       <DependentUpon>WrongAnswer.cs</DependentUpon>
