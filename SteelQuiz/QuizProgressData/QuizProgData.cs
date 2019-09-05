@@ -34,7 +34,7 @@ namespace SteelQuiz.QuizProgressData
         /// <summary>
         /// 1 if the answer language is Language1, otherwise 2
         /// </summary>
-        public int AnswerLanguageNum { get; set; }
+        public int AnswerLanguageNum { get; set; } = 2;
 
         private string __answerLanguage = null;
 
@@ -62,11 +62,6 @@ namespace SteelQuiz.QuizProgressData
                     return __answerLanguage;
                 }
                 */
-            }
-
-            set
-            {
-                __answerLanguage = value;
             }
         }
 
@@ -108,7 +103,7 @@ namespace SteelQuiz.QuizProgressData
                 return;
             }
 
-            AnswerLanguage = quiz.Language2;
+            //AnswerLanguage = quiz.Language2;
 
             if (WordProgDatas == null)
             {

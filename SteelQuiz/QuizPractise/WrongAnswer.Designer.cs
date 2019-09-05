@@ -1,4 +1,22 @@
-﻿namespace SteelQuiz.QuizPractise
+﻿/*
+    SteelQuiz - A quiz program designed to make learning words easier
+    Copyright (C) 2019  Steel9Apps
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
+namespace SteelQuiz.QuizPractise
 {
     partial class WrongAnswer
     {
@@ -66,7 +84,7 @@
             this.lbl_questionWord.Location = new System.Drawing.Point(4, 106);
             this.lbl_questionWord.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_questionWord.Name = "lbl_questionWord";
-            this.lbl_questionWord.Size = new System.Drawing.Size(317, 57);
+            this.lbl_questionWord.Size = new System.Drawing.Size(317, 76);
             this.lbl_questionWord.TabIndex = 2;
             this.lbl_questionWord.Text = "To eat";
             this.lbl_questionWord.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -74,10 +92,10 @@
             // lbl_correctAnswer
             // 
             this.lbl_correctAnswer.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_correctAnswer.Location = new System.Drawing.Point(4, 195);
+            this.lbl_correctAnswer.Location = new System.Drawing.Point(4, 214);
             this.lbl_correctAnswer.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_correctAnswer.Name = "lbl_correctAnswer";
-            this.lbl_correctAnswer.Size = new System.Drawing.Size(317, 57);
+            this.lbl_correctAnswer.Size = new System.Drawing.Size(317, 76);
             this.lbl_correctAnswer.TabIndex = 4;
             this.lbl_correctAnswer.Text = "Comer";
             this.lbl_correctAnswer.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -85,7 +103,7 @@
             // lbl_answerLang
             // 
             this.lbl_answerLang.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_answerLang.Location = new System.Drawing.Point(4, 163);
+            this.lbl_answerLang.Location = new System.Drawing.Point(4, 182);
             this.lbl_answerLang.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_answerLang.Name = "lbl_answerLang";
             this.lbl_answerLang.Size = new System.Drawing.Size(317, 32);
@@ -96,7 +114,7 @@
             // lbl_instruction
             // 
             this.lbl_instruction.Font = new System.Drawing.Font("Segoe UI Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_instruction.Location = new System.Drawing.Point(4, 280);
+            this.lbl_instruction.Location = new System.Drawing.Point(4, 290);
             this.lbl_instruction.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_instruction.Name = "lbl_instruction";
             this.lbl_instruction.Size = new System.Drawing.Size(317, 32);

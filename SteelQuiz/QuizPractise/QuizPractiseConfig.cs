@@ -61,7 +61,16 @@ namespace SteelQuiz.QuizPractise
 
         private void Cmb_langAns_SelectedIndexChanged(object sender, EventArgs e)
         {
-            QuizCore.QuizProgress.AnswerLanguage = cmb_langAns.SelectedItem.ToString();
+            //QuizCore.QuizProgress.AnswerLanguage = cmb_langAns.SelectedItem.ToString();
+            if (cmb_langAns.SelectedItem.ToString() == QuizCore.Quiz.Language1)
+            {
+                QuizCore.QuizProgress.AnswerLanguageNum = 1;
+            }
+            else if (cmb_langAns.SelectedItem.ToString() == QuizCore.Quiz.Language2)
+            {
+                QuizCore.QuizProgress.AnswerLanguageNum = 2;
+            }
+
             QuizCore.SaveQuizProgress();
 
             QuestionSelector.NewRound();
