@@ -31,6 +31,34 @@ namespace SteelQuiz.QuizProgressData
         public Guid QuizGUID { get; set; }
         public List<WordProgData> WordProgDatas { get; set; } = null;
 
+
+        private string __answerLanguage = null;
+        /// <summary>
+        /// The language to answer in when practising the quiz
+        /// </summary>
+        public string AnswerLanguage
+        {
+            get
+            {
+                if (__answerLanguage != null)
+                {
+                    return __answerLanguage;
+                }
+                else
+                {
+                    SAssert.Assert(QuizCore.Quiz.GUID == QuizGUID);
+
+                    __answerLanguage = QuizCore.Quiz.Language1;
+                    return __answerLanguage;
+                }
+            }
+
+            set
+            {
+                __answerLanguage = value;
+            }
+        }
+
         [JsonProperty] // required for deserialization of property with private setter
         internal WordPair CurrentWordPair { get; set; } = null;
 
@@ -54,6 +82,8 @@ namespace SteelQuiz.QuizProgressData
             {
                 return;
             }
+
+            AnswerLanguage = quiz.Language1;
 
             if (WordProgDatas == null)
             {

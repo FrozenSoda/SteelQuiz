@@ -97,7 +97,7 @@ namespace SteelQuiz.QuizPractise
             lbl_lang2.ForeColor = GeneralTheme.GetBackgroundLabelForeColor();
         }
 
-        private void NewWord()
+        public void NewWord()
         {
             WaitingForEnter = false;
             CountThisTranslationToProgress = true;

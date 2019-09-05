@@ -20,6 +20,8 @@ namespace SteelQuiz.QuizPractise
             cmb_langAns.Items.Add(QuizCore.Quiz.Language1);
             cmb_langAns.Items.Add(QuizCore.Quiz.Language2);
 
+            cmb_langAns.SelectedItem = QuizCore.QuizProgress.AnswerLanguage;
+
             if (QuizCore.QuizProgress.FullTestInProgress)
             {
                 btn_switchTestMode.Text = "Enable Intelligent Learning";
@@ -52,6 +54,15 @@ namespace SteelQuiz.QuizPractise
                     btn_switchTestMode.Text = "Disable Intelligent Learning (do full test)";
                 }
             }
+        }
+
+        private void Cmb_langAns_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            QuizCore.QuizProgress.AnswerLanguage = cmb_langAns.SelectedItem.ToString();
+            QuizCore.SaveQuizProgress();
+
+            QuestionSelector.NewRound();
+            Program.frmInQuiz.NewWord();
         }
     }
 }
