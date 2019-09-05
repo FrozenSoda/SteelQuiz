@@ -1,3 +1,8 @@
+v4.0.0-pre4 (v4.0.0.7):
+- Added feature to switch answer language during quiz practise.
+- Added feature to import quizzes from text.
+- Some other improvements.
+
 v4.0.0-pre3 (v4.0.0.6):
 - Bigger default window size.
 - Moved 'Reset Quiz Progress' button to a right-click menu instead.
