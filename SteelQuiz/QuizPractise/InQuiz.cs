@@ -158,6 +158,11 @@ namespace SteelQuiz.QuizPractise
             var mismatch = CurrentWordPair.CharacterMismatches(CurrentInput, !UserCopyingWord && CountThisTranslationToProgress);
             if (mismatch.Correct())
             {
+                foreach (var c in lbl_word1.Controls.OfType<WrongAnswer>())
+                {
+                    c.Dispose();
+                }
+
                 if (!mismatch.AskingForSynonym)
                 {
                     if (!UserCopyingWord)
@@ -198,18 +203,25 @@ namespace SteelQuiz.QuizPractise
             }
             else
             {
+                string questionWord = null;
+                string answerWord = null;
+
                 if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language2)
                 {
-                    lbl_word1.Text = $"Wrong\r\n\r\n{QuizCore.Quiz.Language1} word:\r\n"
-                        + $"{CurrentWordPair.Word1}\r\n\r\nCorrect {QuizCore.Quiz.Language2} word is:\r\n{CurrentWordPair.Word2}"
-                        + $"\r\n\r\nType the {QuizCore.Quiz.Language2} word";
+                    questionWord = CurrentWordPair.Word1;
+                    answerWord = CurrentWordPair.Word2;
                 }
                 else if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language1)
                 {
-                    lbl_word1.Text = $"Wrong\r\n\r\n{QuizCore.Quiz.Language2} word:\r\n"
-                        + $"{CurrentWordPair.Word2}\r\n\r\nCorrect {QuizCore.Quiz.Language1} word is:\r\n{CurrentWordPair.Word1}"
-                        + $"\r\n\r\nType the {QuizCore.Quiz.Language1} word";
+                    questionWord = CurrentWordPair.Word2;
+                    answerWord = CurrentWordPair.Word1;
                 }
+
+                var wrongAnswer = new WrongAnswer(questionWord, QuizCore.QuizProgress.QuestionLanguage, answerWord, QuizCore.QuizProgress.AnswerLanguage);
+                lbl_word1.Controls.Add(wrongAnswer);
+                wrongAnswer.Location = new Point(0, 0);
+                wrongAnswer.Show();
+
                 UserCopyingWord = true;
                 CurrentInput = "";
                 lbl_word2.Text = "Enter your answer...";

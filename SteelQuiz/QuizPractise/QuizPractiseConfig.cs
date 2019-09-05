@@ -30,6 +30,9 @@ namespace SteelQuiz.QuizPractise
             {
                 btn_switchTestMode.Text = "Disable Intelligent Learning (do full test)";
             }
+
+
+            cmb_langAns.SelectedIndexChanged += new EventHandler(Cmb_langAns_SelectedIndexChanged);
         }
 
         private void Btn_dontAgree_Click(object sender, EventArgs e)

@@ -31,8 +31,13 @@ namespace SteelQuiz.QuizProgressData
         public Guid QuizGUID { get; set; }
         public List<WordProgData> WordProgDatas { get; set; } = null;
 
+        /// <summary>
+        /// 1 if the answer language is Language1, otherwise 2
+        /// </summary>
+        public int AnswerLanguageNum { get; set; }
 
         private string __answerLanguage = null;
+
         /// <summary>
         /// The language to answer in when practising the quiz
         /// </summary>
@@ -40,6 +45,9 @@ namespace SteelQuiz.QuizProgressData
         {
             get
             {
+                return AnswerLanguageNum == 2 ? QuizCore.Quiz.Language2 : QuizCore.Quiz.Language1;
+
+                /*
                 if (__answerLanguage != null)
                 {
                     return __answerLanguage;
@@ -53,11 +61,26 @@ namespace SteelQuiz.QuizProgressData
                 {
                     return __answerLanguage;
                 }
+                */
             }
 
             set
             {
                 __answerLanguage = value;
+            }
+        }
+
+        [JsonIgnore]
+        public string QuestionLanguage
+        {
+            get
+            {
+                if (QuizCore.Quiz.GUID != QuizGUID)
+                {
+                    return null;
+                }
+
+                return QuizCore.Quiz.Language2 == AnswerLanguage ? QuizCore.Quiz.Language1 : QuizCore.Quiz.Language2;
             }
         }
 

@@ -102,6 +102,12 @@
     <Compile Include="QuizPractise\QuizPractiseConfig.Designer.cs">
       <DependentUpon>QuizPractiseConfig.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuizPractise\WrongAnswer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuizPractise\WrongAnswer.Designer.cs">
+      <DependentUpon>WrongAnswer.cs</DependentUpon>
+    </Compile>
     <Compile Include="SAssert.cs" />
     <Compile Include="AutoThemeableUserControl.cs">
       <SubType>UserControl</SubType>
@@ -510,6 +516,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="QuizPractise\QuizPractiseConfig.resx">
       <DependentUpon>QuizPractiseConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuizPractise\WrongAnswer.resx">
+      <DependentUpon>WrongAnswer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuizProgressInfo.resx">
       <DependentUpon>QuizProgressInfo.cs</DependentUpon>

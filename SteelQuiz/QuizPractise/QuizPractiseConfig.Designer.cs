@@ -67,7 +67,6 @@
             this.cmb_langAns.Name = "cmb_langAns";
             this.cmb_langAns.Size = new System.Drawing.Size(372, 21);
             this.cmb_langAns.TabIndex = 14;
-            this.cmb_langAns.SelectedIndexChanged += new System.EventHandler(this.Cmb_langAns_SelectedIndexChanged);
             // 
             // btn_switchTestMode
             // 

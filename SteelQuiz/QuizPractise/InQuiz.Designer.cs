@@ -107,7 +107,7 @@ namespace SteelQuiz.QuizPractise
             // 
             this.lbl_intelligentLearning.AutoSize = true;
             this.lbl_intelligentLearning.ForeColor = System.Drawing.Color.LightGray;
-            this.lbl_intelligentLearning.Location = new System.Drawing.Point(276, 428);
+            this.lbl_intelligentLearning.Location = new System.Drawing.Point(576, 428);
             this.lbl_intelligentLearning.Name = "lbl_intelligentLearning";
             this.lbl_intelligentLearning.Size = new System.Drawing.Size(212, 13);
             this.lbl_intelligentLearning.TabIndex = 4;
