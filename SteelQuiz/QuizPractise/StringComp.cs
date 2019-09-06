@@ -132,7 +132,6 @@ namespace SteelQuiz.QuizPractise
                     string w2 = correctAnswer.Split('(')[1].Split(')')[0].TrimStart(' ').TrimEnd(' '); // tarp (tarpaulin) => tarpaulin
                     string w3 = correctAnswer.Replace("(", "").Replace(")", ""); // (eye)lash => eyelash
                     string w4 = correctAnswer.Split(')')[1].TrimStart(' '); // (eye)lash => lash
-                    //string w2 = spl[1].Split(')')[0];
 
                     similarityDatas.Add(Similarity(userAnswer, w1, rules, (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
                     similarityDatas.Add(Similarity(userAnswer, w2, rules, (CorrectCertainty)Math.Max((int)CorrectCertainty.MaybeCorrect, (int)certainty)));

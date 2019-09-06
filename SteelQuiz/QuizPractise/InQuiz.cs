@@ -104,6 +104,8 @@ namespace SteelQuiz.QuizPractise
             lbl_lang1.Text = QuizCore.Quiz.Language1;
             CurrentWordPair = QuestionSelector.GenerateWordPair();
 
+            RevertSuccessBackColor();
+
             foreach (var c in lbl_word1.Controls.OfType<WrongAnswer>())
             {
                 c.Dispose();
@@ -137,6 +139,8 @@ namespace SteelQuiz.QuizPractise
         {
             CountThisTranslationToProgress = true;
             lbl_progress.Text = $"Progress this round: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
+
+            RevertSuccessBackColor();
 
             foreach (var c in lbl_word1.Controls.OfType<WrongAnswer>())
             {
@@ -209,6 +213,8 @@ namespace SteelQuiz.QuizPractise
                 if (ansDiff.Certainty == StringComp.CorrectCertainty.CompletelyCorrect)
                 {
                     lbl_word1.Text = "Correct! Press ENTER to continue";
+
+                    SetSuccessBackColor(Color.FromArgb(255, 60, 179, 113));
                 }
                 else if (ansDiff.Certainty == StringComp.CorrectCertainty.ProbablyCorrect)
                 {
@@ -217,6 +223,8 @@ namespace SteelQuiz.QuizPractise
                     lbl_word1.Controls.Add(probablyCorrectAns);
                     probablyCorrectAns.Location = new Point(0, 0);
                     probablyCorrectAns.Show();
+
+                    SetSuccessBackColor(Color.FromArgb(255, 60, 179, 113));
                 }
                 else if (ansDiff.Certainty == StringComp.CorrectCertainty.MaybeCorrect)
                 {
@@ -225,8 +233,9 @@ namespace SteelQuiz.QuizPractise
                     lbl_word1.Controls.Add(probablyCorrectAns);
                     probablyCorrectAns.Location = new Point(0, 0);
                     probablyCorrectAns.Show();
-                }
 
+                    SetSuccessBackColor(Color.FromArgb(255, 60, 179, 113));
+                }
 
                 QuizCore.ResetWordsAskedThisRoundMemo();
                 lbl_progress.Text = $"Progress this round: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
@@ -269,10 +278,43 @@ namespace SteelQuiz.QuizPractise
                 wrongAnswer.Location = new Point(0, 0);
                 wrongAnswer.Show();
 
+                SetSuccessBackColor(Color.FromArgb(255, 220, 20, 60));
+
                 UserCopyingWord = true;
                 CurrentInput = "";
                 lbl_word2.Text = "Enter your answer...";
             }
+        }
+
+        private void SetSuccessBackColor(Color color)
+        {
+            BackColor = color;
+            foreach (var c in lbl_word1.Controls.OfType<WrongAnswer>())
+            {
+                c.BackColor = color;
+            }
+            foreach (var c in lbl_word1.Controls.OfType<ProbablyCorrectAnswer>())
+            {
+                c.BackColor = color;
+            }
+            lbl_word1.BackColor = color;
+            lbl_word2.BackColor = color;
+        }
+
+        private void RevertSuccessBackColor()
+        {
+            SetTheme(GeneralTheme);
+
+            foreach (var c in lbl_word1.Controls.OfType<WrongAnswer>())
+            {
+                c.BackColor = BackColor;
+            }
+            foreach (var c in lbl_word1.Controls.OfType<ProbablyCorrectAnswer>())
+            {
+                c.BackColor = BackColor;
+            }
+            lbl_word1.BackColor = BackColor;
+            lbl_word2.BackColor = BackColor;
         }
 
         private void InQuiz_KeyPress(object sender, KeyPressEventArgs e)
