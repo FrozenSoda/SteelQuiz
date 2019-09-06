@@ -181,16 +181,16 @@ namespace SteelQuiz.QuizData
 
             if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language2)
             {
-                similarityData.Add(StringComp.Similarity(input, Word2, wordPair, TranslationRules));
-                foreach (var synonym in Word2Synonyms)
+                similarityData.Add(StringComp.Similarity(input, wordPair.Word2, wordPair, TranslationRules));
+                foreach (var synonym in wordPair.Word2Synonyms)
                 {
                     similarityData.Add(StringComp.Similarity(input, synonym, wordPair, TranslationRules));
                 }
             }
             else if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language1)
             {
-                similarityData.Add(StringComp.Similarity(input, Word1, wordPair, TranslationRules));
-                foreach (var synonym in Word1Synonyms)
+                similarityData.Add(StringComp.Similarity(input, wordPair.Word1, wordPair, TranslationRules));
+                foreach (var synonym in wordPair.Word1Synonyms)
                 {
                     similarityData.Add(StringComp.Similarity(input, synonym, wordPair, TranslationRules));
                 }

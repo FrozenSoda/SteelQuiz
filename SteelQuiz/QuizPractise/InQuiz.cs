@@ -117,16 +117,17 @@ namespace SteelQuiz.QuizPractise
             if (MultiAns == null || MultiAns.AnswersProvided == CurrentWordPair.GetRequiredSynonyms().Count())
             {
                 CountThisTranslationToProgress = true;
-                CurrentWordPair = QuestionSelector.GenerateWordPair();
                 MultiAns?.Dispose();
+                MultiAns = null;
 
-                lbl_word1.ForeColor = GeneralTheme.GetMainLabelForeColor();
-
+                CurrentWordPair = QuestionSelector.GenerateWordPair();
                 if (CurrentWordPair == null)
                 {
                     NewRound();
                     return;
                 }
+
+                lbl_word1.ForeColor = GeneralTheme.GetMainLabelForeColor();
 
                 if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language2)
                 {
@@ -186,6 +187,9 @@ namespace SteelQuiz.QuizPractise
             {
                 c.Dispose();
             }
+
+            MultiAns?.Dispose();
+            MultiAns = null;
 
             lbl_word1.ForeColor = GeneralTheme.GetMainLabelForeColor();
 
@@ -408,6 +412,18 @@ namespace SteelQuiz.QuizPractise
             QuizCore.QuizProgress.MasterNoticeShowed = false;
             QuizCore.QuizProgress.FullTestInProgress = !QuizCore.QuizProgress.FullTestInProgress;
             QuestionSelector.SkipNextMasterNotice = !QuizCore.QuizProgress.FullTestInProgress;
+
+            foreach (var c in lbl_word1.Controls.OfType<WrongAnswer>())
+            {
+                c.Dispose();
+            }
+            foreach (var c in lbl_word1.Controls.OfType<ProbablyCorrectAnswer>())
+            {
+                c.Dispose();
+            }
+
+            MultiAns?.Dispose();
+            MultiAns = null;
 
             if (callGenerationFunctions)
             {
