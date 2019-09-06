@@ -44,23 +44,14 @@ namespace SteelQuiz.QuizProgressData
         {
             get
             {
-                return AnswerLanguageNum == 2 ? QuizCore.Quiz.Language2 : QuizCore.Quiz.Language1;
-
-                /*
-                if (__answerLanguage != null)
+                if (QuizCore.Quiz.GUID == QuizGUID)
                 {
-                    return __answerLanguage;
-                }
-                else if (QuizCore.Quiz.GUID == QuizGUID)
-                {
-                    __answerLanguage = QuizCore.Quiz.Language2;
-                    return __answerLanguage;
+                    return AnswerLanguageNum == 2 ? QuizCore.Quiz.Language2 : QuizCore.Quiz.Language1;
                 }
                 else
                 {
-                    return __answerLanguage;
+                    return null;
                 }
-                */
             }
         }
 
