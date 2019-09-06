@@ -812,17 +812,22 @@ namespace SteelQuiz
                 return totalWordsThisRoundMemo;
             }
 
-            var counter = 0;
+            var wordsThisRound = new List<WordPair>();
             foreach (var word in QuizProgress.WordProgDatas)
             {
                 if (!word.SkipThisRound)
                 {
-                    ++counter;
+                    foreach (var syn in word.WordPair.GetRequiredSynonyms().Where(x => !wordsThisRound.Contains(x)))
+                    {
+                        wordsThisRound.Add(syn);
+                    }
                 }
             }
 
-            totalWordsThisRoundMemo = counter;
-            return counter;
+            int count = wordsThisRound.Count();
+
+            totalWordsThisRoundMemo = count;
+            return count;
         }
 
         private static int wordsAskedThisRoundMemo = -1;
@@ -833,6 +838,7 @@ namespace SteelQuiz
                 return wordsAskedThisRoundMemo;
             }
 
+            /*
             var counter = 0;
             foreach (var word in QuizProgress.WordProgDatas)
             {
@@ -841,6 +847,8 @@ namespace SteelQuiz
                     ++counter;
                 }
             }
+            */
+            int counter = QuizProgress.WordProgDatas.Where(x => x.AskedThisRound).Count();
 
             wordsAskedThisRoundMemo = counter;
             return counter;
