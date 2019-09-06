@@ -100,7 +100,7 @@ namespace SteelQuiz.QuizPractise
             lbl_lang2.ForeColor = GeneralTheme.GetBackgroundLabelForeColor();
         }
 
-        public void NewWord()
+        public void NewWord(bool newRoundMsg = true)
         {
             WaitingForEnter = false;
             lbl_lang1.Text = QuizCore.Quiz.Language1;
@@ -123,7 +123,7 @@ namespace SteelQuiz.QuizPractise
                 CurrentWordPair = QuestionSelector.GenerateWordPair();
                 if (CurrentWordPair == null)
                 {
-                    NewRound();
+                    NewRound(newRoundMsg);
                     return;
                 }
 
@@ -175,7 +175,7 @@ namespace SteelQuiz.QuizPractise
             }
         }
 
-        private bool skipNewRoundMsg = false;
+        private bool skipNewRoundMessage = false;
         private void NewRound(bool newRoundMsg = true)
         {
             CountThisTranslationToProgress = true;
@@ -203,7 +203,9 @@ namespace SteelQuiz.QuizPractise
             QuizCore.QuizProgress.CorrectAnswersThisRound = 0;
             QuestionSelector.NewRound();
 
-            if (newRoundMsg && !skipNewRoundMsg)
+            // problem: the stuff the NewRound() called in QuestionSelector.NewRound() does gets replaced by the stuff below in this function call
+
+            if (newRoundMsg && !skipNewRoundMessage)
             {
                 lbl_lang1.Text = "Info";
                 lbl_word1.Text = "Round completed! Press ENTER to continue";
@@ -211,9 +213,10 @@ namespace SteelQuiz.QuizPractise
             }
             else
             {
-                skipNewRoundMsg = false;
-                NewWord();
-#warning NewWord shouldnt be called again
+                skipNewRoundMessage = false;
+                WaitingForEnter = false;
+
+                NewWord(newRoundMsg);
             }
 
             lbl_progress.Text = $"Progress this round: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
@@ -229,28 +232,9 @@ namespace SteelQuiz.QuizPractise
             }
             else
             {
-                //var labels = MultiAns.flp_answers.Controls.OfType<Label>();
-                //var answersAlreadyEntered = labels.Take(labels.Count() - 1).Select(x => x.Text);
-
                 ansDiff = CurrentWordPair.AnswerCheck(CurrentInput, AnswersAlreadyEntered,
                     !UserCopyingWord && CountThisTranslationToProgress);
             }
-
-            /*
-            string questionWord = null;
-            string answerWord = null;
-
-            if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language2)
-            {
-                questionWord = CurrentWordPair.Word1;
-                answerWord = CurrentWordPair.Word2;
-            }
-            else if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language1)
-            {
-                questionWord = CurrentWordPair.Word2;
-                answerWord = CurrentWordPair.Word1;
-            }
-            */
 
             if (ansDiff.Correct())
             {
@@ -399,7 +383,7 @@ namespace SteelQuiz.QuizPractise
                 CurrentInput += e.KeyChar.ToString();
             }
 
-            if (updateInputLbl)
+            if (updateInputLbl && !WaitingForEnter)
             {
                 if (MultiAns == null)
                 {
@@ -430,7 +414,7 @@ namespace SteelQuiz.QuizPractise
 
         public void SwitchIntelligentLearningMode(bool callGenerationFunctions = true)
         {
-            skipNewRoundMsg = true;
+            //skipNewRoundMsg = true;
             QuizCore.QuizProgress.MasterNoticeShowed = false;
             QuizCore.QuizProgress.FullTestInProgress = !QuizCore.QuizProgress.FullTestInProgress;
             QuestionSelector.SkipNextMasterNotice = !QuizCore.QuizProgress.FullTestInProgress;
@@ -449,8 +433,9 @@ namespace SteelQuiz.QuizPractise
 
             if (callGenerationFunctions)
             {
-                QuestionSelector.NewRound();
-                NewWord();
+                //QuestionSelector.NewRound();
+                skipNewRoundMessage = true;
+                NewWord(false);
             }
 
             if (QuizCore.QuizProgress.FullTestInProgress)
