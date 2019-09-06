@@ -16,6 +16,7 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using SteelQuiz.QuizData;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,11 +51,17 @@ namespace SteelQuiz.QuizPractise
             /// </summary>
             public string CorrectAnswer { get; set; }
 
-            public SimilarityData(int difference, CorrectCertainty certainty, string correctAnswer)
+            /// <summary>
+            /// The wordpair belonging to this class instance
+            /// </summary>
+            public WordPair WordPair { get; set; }
+
+            public SimilarityData(int difference, CorrectCertainty certainty, string correctAnswer, WordPair wordPair)
             {
                 Difference = difference;
                 Certainty = certainty;
                 CorrectAnswer = correctAnswer;
+                WordPair = wordPair;
             }
         }
 
@@ -76,12 +83,12 @@ namespace SteelQuiz.QuizPractise
             | Rules.IgnoreOpeningWhitespace
             | Rules.IgnoreEndingWhitespace;
 
-        public static SimilarityData Similarity(string userAnswer, string correctAnswer, Rules rules)
+        public static SimilarityData Similarity(string userAnswer, string correctAnswer, WordPair wordPair, Rules rules)
         {
-            return Similarity(userAnswer, correctAnswer, rules, CorrectCertainty.CompletelyCorrect);
+            return Similarity(userAnswer, correctAnswer, wordPair, rules, CorrectCertainty.CompletelyCorrect);
         }
 
-        private static SimilarityData Similarity(string userAnswer, string correctAnswer, Rules rules, CorrectCertainty certainty)
+        private static SimilarityData Similarity(string userAnswer, string correctAnswer, WordPair wordPair, Rules rules, CorrectCertainty certainty)
         {
             var similarityDatas = new List<SimilarityData>();
 
@@ -94,20 +101,20 @@ namespace SteelQuiz.QuizPractise
 
             if (rules.HasFlag(Rules.IgnoreOpeningWhitespace))
             {
-                similarityDatas.Add(Similarity(userAnswer.TrimStart(' '), correctAnswer.TrimStart(' '), rules & ~Rules.IgnoreOpeningWhitespace,
+                similarityDatas.Add(Similarity(userAnswer.TrimStart(' '), correctAnswer.TrimStart(' '), wordPair, rules & ~Rules.IgnoreOpeningWhitespace,
                     (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
                 // Math.Max to use worst certainty (if the certainty when calling this method was 'maybe correct', new certainty can't be 'probably correct' for instance)
             }
 
             if (rules.HasFlag(Rules.IgnoreEndingWhitespace))
             {
-                similarityDatas.Add(Similarity(userAnswer.TrimEnd(' '), correctAnswer.TrimEnd(' '), rules & ~Rules.IgnoreEndingWhitespace,
+                similarityDatas.Add(Similarity(userAnswer.TrimEnd(' '), correctAnswer.TrimEnd(' '), wordPair, rules & ~Rules.IgnoreEndingWhitespace,
                     (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
             }
 
             if (rules.HasFlag(Rules.IgnoreFirstCapitalization))
             {
-                similarityDatas.Add(Similarity(CapitalizeFirstChar(userAnswer), CapitalizeFirstChar(correctAnswer), rules & ~Rules.IgnoreFirstCapitalization,
+                similarityDatas.Add(Similarity(CapitalizeFirstChar(userAnswer), CapitalizeFirstChar(correctAnswer), wordPair, rules & ~Rules.IgnoreFirstCapitalization,
                     (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
             }
 
@@ -118,7 +125,7 @@ namespace SteelQuiz.QuizPractise
                     string[] correctAnswers = correctAnswer.Split('/');
                     foreach (var ans in correctAnswers)
                     {
-                        similarityDatas.Add(Similarity(userAnswer, ans.TrimStart(' '), rules,
+                        similarityDatas.Add(Similarity(userAnswer, ans.TrimStart(' '), wordPair, rules,
                             (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
                     }
                 }
@@ -133,15 +140,15 @@ namespace SteelQuiz.QuizPractise
                     string w3 = correctAnswer.Replace("(", "").Replace(")", ""); // (eye)lash => eyelash
                     string w4 = correctAnswer.Split(')')[1].TrimStart(' '); // (eye)lash => lash
 
-                    similarityDatas.Add(Similarity(userAnswer, w1, rules, (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
-                    similarityDatas.Add(Similarity(userAnswer, w2, rules, (CorrectCertainty)Math.Max((int)CorrectCertainty.MaybeCorrect, (int)certainty)));
-                    similarityDatas.Add(Similarity(userAnswer, w3, rules, (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
-                    similarityDatas.Add(Similarity(userAnswer, w4, rules, (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
+                    similarityDatas.Add(Similarity(userAnswer, w1, wordPair, rules, (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
+                    similarityDatas.Add(Similarity(userAnswer, w2, wordPair, rules, (CorrectCertainty)Math.Max((int)CorrectCertainty.MaybeCorrect, (int)certainty)));
+                    similarityDatas.Add(Similarity(userAnswer, w3, wordPair, rules, (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
+                    similarityDatas.Add(Similarity(userAnswer, w4, wordPair, rules, (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
                 }
             }
 
             int difference = Fastenshtein.Levenshtein.Distance(userAnswer, correctAnswer);
-            similarityDatas.Add(new SimilarityData(difference, certainty, correctAnswer));
+            similarityDatas.Add(new SimilarityData(difference, certainty, correctAnswer, wordPair));
             KeepBestSimilarityData();
             SimilarityData best = similarityDatas.First();
 

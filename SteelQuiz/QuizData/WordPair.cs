@@ -134,12 +134,14 @@ namespace SteelQuiz.QuizData
             public string MostSimilarAnswer { get; set; }
             public int Difference { get; set; }
             public StringComp.CorrectCertainty Certainty { get; set; }
+            public WordPair WordPair { get; set; }
 
-            public AnswerDiff(int difference, string mostSimilarAnswer, StringComp.CorrectCertainty certainty)
+            public AnswerDiff(int difference, string mostSimilarAnswer, StringComp.CorrectCertainty certainty, WordPair wordPair)
             {
                 Difference = difference;
                 MostSimilarAnswer = mostSimilarAnswer;
                 Certainty = certainty;
+                WordPair = wordPair;
             }
 
             public bool Correct()
@@ -150,22 +152,47 @@ namespace SteelQuiz.QuizData
 
         public AnswerDiff AnswerCheck(string input, bool updateProgress = true)
         {
-            var similarityDatas = new List<StringComp.SimilarityData>();
+            var similarityData = new List<StringComp.SimilarityData>();
+
+            foreach (var wp in GetRequiredSynonyms())
+            {
+                similarityData = similarityData.Concat(SimilarityData(wp, input, updateProgress)).ToList();
+            }
+
+            StringComp.SimilarityData bestSimilarityData = similarityData.OrderBy(x => x.Difference).ThenBy(x => (int)x.Certainty).First();
+
+            var ansDiff = new AnswerDiff(bestSimilarityData.Difference, bestSimilarityData.CorrectAnswer, bestSimilarityData.Certainty, bestSimilarityData.WordPair);
+
+            if (updateProgress)
+            {
+                ansDiff.WordPair.GetWordProgData().AddWordTry(new WordTry(ansDiff.Correct()));
+                QuizCore.SaveQuizProgress();
+
+                ansDiff.WordPair.GetWordProgData().AskedThisRound = true;
+                QuizCore.QuizProgress.SetCurrentWordPair(null);
+            }
+
+            return ansDiff;
+        }
+
+        private IEnumerable<StringComp.SimilarityData> SimilarityData(WordPair wordPair, string input, bool updateProgress = true)
+        {
+            var similarityData = new List<StringComp.SimilarityData>();
 
             if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language2)
             {
-                similarityDatas.Add(StringComp.Similarity(input, Word2, TranslationRules));
+                similarityData.Add(StringComp.Similarity(input, Word2, wordPair, TranslationRules));
                 foreach (var synonym in Word2Synonyms)
                 {
-                    similarityDatas.Add(StringComp.Similarity(input, synonym, TranslationRules));
+                    similarityData.Add(StringComp.Similarity(input, synonym, wordPair, TranslationRules));
                 }
             }
             else if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language1)
             {
-                similarityDatas.Add(StringComp.Similarity(input, Word1, TranslationRules));
+                similarityData.Add(StringComp.Similarity(input, Word1, wordPair, TranslationRules));
                 foreach (var synonym in Word1Synonyms)
                 {
-                    similarityDatas.Add(StringComp.Similarity(input, synonym, TranslationRules));
+                    similarityData.Add(StringComp.Similarity(input, synonym, wordPair, TranslationRules));
                 }
             }
             else
@@ -173,20 +200,7 @@ namespace SteelQuiz.QuizData
                 throw new NotImplementedException("Error in WordPair.CharacterMismatches: All translation modes haven't been implemented!");
             }
 
-            StringComp.SimilarityData bestSimilarityData = similarityDatas.OrderBy(x => x.Difference).ThenBy(x => (int)x.Certainty).First();
-
-            var ansDiff = new AnswerDiff(bestSimilarityData.Difference, bestSimilarityData.CorrectAnswer, bestSimilarityData.Certainty);
-
-            if (updateProgress)
-            {
-                GetWordProgData().AddWordTry(new WordTry(ansDiff.Correct()));
-                QuizCore.SaveQuizProgress();
-
-                GetWordProgData().AskedThisRound = true;
-                QuizCore.QuizProgress.SetCurrentWordPair(null);
-            }
-
-            return ansDiff;
+            return similarityData;
         }
 
         /*
