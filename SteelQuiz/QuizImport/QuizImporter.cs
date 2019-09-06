@@ -26,6 +26,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SteelQuiz.QuizData;
+using SteelQuiz.QuizPractise;
 
 namespace SteelQuiz.QuizImport
 {

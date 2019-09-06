@@ -16,6 +16,7 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using SteelQuiz.QuizPractise;
 using SteelQuiz.QuizProgressData;
 using System;
 using System.Collections.Generic;
@@ -104,7 +105,10 @@ namespace SteelQuiz.QuizData
             throw new Exception("No word progress data could be found for this word pair");
         }
 
-        public StringComp.CharacterMismatch CharacterMismatches(string input, bool updateProgress = true, bool recurse = false)
+
+
+        /*
+        public StringComp.CharacterMismatch CharacterMismatches_old(string input, bool updateProgress = true, bool recurse = false)
         {
             var mismatches = new List<StringComp.CharacterMismatch>();
             if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language2)
@@ -200,5 +204,6 @@ namespace SteelQuiz.QuizData
 
             return bestCharacterMismatch;
         }
+        */
     }
 }

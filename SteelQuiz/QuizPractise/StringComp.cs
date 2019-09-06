@@ -22,134 +22,116 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SteelQuiz
+namespace SteelQuiz.QuizPractise
 {
     public static class StringComp
     {
+        public class SimilarityData
+        {
+            /// <summary>
+            /// How different the words were. A value where 0 equals total similarity. The higher Difference, the less similar.
+            /// </summary>
+            public int Difference { get; set; }
+
+            /// <summary>
+            /// True if they were deemed similar due to Rules, but it *might* be wrong, so show the user the correct answer.
+            /// </summary>
+            public bool ProbablyCorrect { get; set; }
+
+            public SimilarityData(int difference, bool probablyCorrect)
+            {
+                Difference = difference;
+                ProbablyCorrect = probablyCorrect;
+            }
+        }
+
         [Flags]
         public enum Rules
         {
-            IgnoreCapitalization        = 1 << 2,
-            IgnoreExclamation           = 1 << 1,
-            None                        = 1 << 0
+            IgnoreFirstCapitalization = 1 << 5,
+            TreatWordInParenthesisAsSynonym = 1 << 4,
+            TreatWordsBetweenSlashAsSynonyms = 1 << 3,
+            IgnoreOpeningWhitespace = 1 << 2,
+            IgnoreEndingWhitespace = 1 << 1,
+            None = 1 << 0,
         }
 
-        public class CharacterMismatch
+        public const Rules SMART_RULES =
+            Rules.IgnoreFirstCapitalization
+            | Rules.TreatWordInParenthesisAsSynonym
+            | Rules.TreatWordsBetweenSlashAsSynonyms
+            | Rules.IgnoreOpeningWhitespace
+            | Rules.IgnoreEndingWhitespace;
+
+        public static SimilarityData Similarity(string userAnswer, string correctAnswer, Rules rules)
         {
-            public bool AskingForSynonym { get; set; } // true if a synonym for the word was being asked
-            public int[] Cmp { get; set; }
-            public int[] Input { get; set; }
-
-            public CharacterMismatch(List<int> cmp, List<int> input, bool askingForSynonym = false)
-            {
-                Cmp = cmp.ToArray();
-                Input = input.ToArray();
-                AskingForSynonym = askingForSynonym;
-            }
-
-            public bool Correct()
-            {
-                return AskingForSynonym || (Cmp.Length == 0 && Input.Length == 0);
-            }
+            return Similarity(userAnswer, correctAnswer, rules, false);
         }
 
-        public static CharacterMismatch CharacterMismatches(string cmp, string input, Rules rules)
+        private static SimilarityData Similarity(string userAnswer, string correctAnswer, Rules rules, bool probablyCorrect)
         {
-            var jCurrent = 0;
-            var mismatchCmp = new List<int>(); // missing cmp indexes
-            var mismatchInput = new List<int>(); // missing input indexes
+            var similarityDatas = new List<SimilarityData>();
 
-            for (int i = 0; i < cmp.Length; ++i)
+            void KeepBestSimilarityData()
             {
-                var found = false;
-                for (int j = jCurrent; j < input.Length; ++j)
-                {
-                    if (cmp[i] == input[j])
-                    {
-                        ++jCurrent;
-                        found = true;
-                        break;
-                    }
-                    else
-                    {
-                        if (rules.HasFlag(Rules.IgnoreCapitalization))
-                        {
-                            if (char.ToUpper(cmp[i]) == char.ToUpper(input[j]))
-                            {
-                                ++jCurrent;
-                                found = true;
-                                break;
-                            }
-                        }
-
-                        if (rules.HasFlag(Rules.IgnoreExclamation))
-                        {
-                            if (cmp[i] == '!')
-                            {
-                                ++jCurrent;
-                                found = true;
-                                break;
-                            }
-                        }
-
-                        mismatchInput.Add(j);
-                    }
-                }
-
-                if (!found)
-                {
-                    mismatchCmp.Add(i);
-                }
+                // Keep best similarity data
+                similarityDatas = similarityDatas.OrderBy(x => x.Difference).ThenBy(x => x.ProbablyCorrect).ToList();
+                similarityDatas = similarityDatas.Take(1).ToList();
             }
 
-            jCurrent = 0;
-            for (int i = 0; i < input.Length; ++i)
+            if (rules.HasFlag(Rules.IgnoreOpeningWhitespace))
             {
-                var found = false;
-                for (int j = jCurrent; j < cmp.Length; ++j)
+                similarityDatas.Add(Similarity(userAnswer.TrimStart(' '), correctAnswer.TrimStart(' '), rules & ~Rules.IgnoreOpeningWhitespace, true));
+            }
+
+            if (rules.HasFlag(Rules.IgnoreEndingWhitespace))
+            {
+                similarityDatas.Add(Similarity(userAnswer.TrimEnd(' '), correctAnswer.TrimEnd(' '), rules & ~Rules.IgnoreEndingWhitespace, true));
+            }
+
+            if (rules.HasFlag(Rules.IgnoreFirstCapitalization))
+            {
+                similarityDatas.Add(Similarity(CapitalizeFirstChar(userAnswer), CapitalizeFirstChar(correctAnswer), rules & ~Rules.IgnoreFirstCapitalization, true));
+            }
+
+            if (rules.HasFlag(Rules.TreatWordsBetweenSlashAsSynonyms))
+            {
+                if (correctAnswer.Contains("/"))
                 {
-                    if (input[i] == cmp[j])
+                    string[] correctAnswers = correctAnswer.Split('/');
+                    foreach (var ans in correctAnswers)
                     {
-                        ++jCurrent;
-                        found = true;
-                        break;
-                    }
-                    else
-                    {
-                        if (rules.HasFlag(Rules.IgnoreCapitalization))
-                        {
-                            if (char.ToUpper(input[i]) == char.ToUpper(cmp[j]))
-                            {
-                                ++jCurrent;
-                                found = true;
-                                break;
-                            }
-                        }
-
-                        if (rules.HasFlag(Rules.IgnoreExclamation))
-                        {
-                            if (input[i] == '!')
-                            {
-                                ++jCurrent;
-                                found = true;
-                                break;
-                            }
-                        }
-
-                        mismatchCmp.Add(j);
-                    }
-                }
-
-                if (!found)
-                {
-                    if (!rules.HasFlag(Rules.IgnoreExclamation) || input[i] != '!')
-                    {
-                        mismatchInput.Add(i);
+                        similarityDatas.Add(Similarity(userAnswer, ans.TrimStart(' '), rules, true));
                     }
                 }
             }
 
-            return new CharacterMismatch(mismatchCmp, mismatchInput);
+            if (rules.HasFlag(Rules.TreatWordInParenthesisAsSynonym))
+            {
+                if (correctAnswer.Contains("(") && correctAnswer.Contains(")"))
+                {
+                    string[] spl = correctAnswer.Split('(');
+
+                    string w1 = spl[0].TrimEnd(' ');
+                    string w2 = spl[1].Split(')')[0];
+
+                    similarityDatas.Add(Similarity(userAnswer, w1, rules, true));
+                    similarityDatas.Add(Similarity(userAnswer, w2, rules, true));
+                }
+            }
+
+            int difference = Fastenshtein.Levenshtein.Distance(userAnswer, correctAnswer);
+            similarityDatas.Add(new SimilarityData(difference, probablyCorrect));
+            KeepBestSimilarityData();
+            SimilarityData best = similarityDatas.First();
+
+            return best;
+        }
+
+        private static string CapitalizeFirstChar(string s)
+        {
+            s = char.ToUpper(s.First()) + string.Concat(s.Skip(1));
+            return s;
         }
     }
 }
