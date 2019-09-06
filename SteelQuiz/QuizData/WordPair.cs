@@ -100,6 +100,27 @@ namespace SteelQuiz.QuizData
             throw new Exception("No word progress data could be found for this word pair");
         }
 
+        /// <summary>
+        /// Finds all synonyms to this wordpair that are required to be provided. Only valid for the selected language.
+        /// </summary>
+        /// <returns>Returns the wordpairs that are synonyms to this wordpair and are required to be provided</returns>
+        public IEnumerable<WordPair> RequiredSynonyms()
+        {
+            if (QuizCore.QuizProgress.AnswerLanguageNum == 2)
+            {
+                return QuizCore.Quiz.WordPairs.Where(x => x.Word1 == Word1);
+            }
+            else if (QuizCore.QuizProgress.AnswerLanguageNum == 1)
+            {
+                return QuizCore.Quiz.WordPairs.Where(x => x.Word2 == Word2);
+            }
+            else
+            {
+                // should never be reached
+                throw new Exception("RequiredSynonyms() reached end");
+            }
+        }
+
         public class AnswerDiff
         {
             public string MostSimilarAnswer { get; set; }
