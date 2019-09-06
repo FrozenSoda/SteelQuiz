@@ -25,6 +25,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SteelQuiz.Extensions;
 using SteelQuiz.QuizData;
 using SteelQuiz.ThemeManager.Colors;
 
@@ -46,6 +47,8 @@ namespace SteelQuiz.QuizPractise
         private bool CountThisTranslationToProgress { get; set; } = true; // false if the user clicked Fix Quiz Errors, as the answer is displayed there. Will become true as a new word is selected
         private bool ShowingW1synonyms { get; set; } = false;
         //private int CorrectAnswersThisRound { get; set; } = 0;
+
+        private MultiAnswer MultiAns { get; set; } = null;
 
         public InQuiz(bool welcomeLocationInitialized = true)
         {
@@ -100,38 +103,73 @@ namespace SteelQuiz.QuizPractise
         public void NewWord()
         {
             WaitingForEnter = false;
-            CountThisTranslationToProgress = true;
             lbl_lang1.Text = QuizCore.Quiz.Language1;
-            CurrentWordPair = QuestionSelector.GenerateWordPair();
 
-            foreach (var c in lbl_word1.Controls.OfType<WrongAnswer>())
+            if (MultiAns == null || MultiAns.AnswersProvided == CurrentWordPair.GetRequiredSynonyms().Count())
             {
-                c.Dispose();
-            }
-            foreach (var c in lbl_word1.Controls.OfType<ProbablyCorrectAnswer>())
-            {
-                c.Dispose();
-            }
+                CountThisTranslationToProgress = true;
+                CurrentWordPair = QuestionSelector.GenerateWordPair();
+                MultiAns?.Dispose();
 
-            lbl_word1.ForeColor = GeneralTheme.GetMainLabelForeColor();
+                foreach (var c in lbl_word1.Controls.OfType<WrongAnswer>())
+                {
+                    c.Dispose();
+                }
+                foreach (var c in lbl_word1.Controls.OfType<ProbablyCorrectAnswer>())
+                {
+                    c.Dispose();
+                }
 
-            if (CurrentWordPair == null)
-            {
-                NewRound();
-                return;
-            }
+                lbl_word1.ForeColor = GeneralTheme.GetMainLabelForeColor();
 
-            if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language2)
-            {
-                lbl_word1.Text = CurrentWordPair.Word1;
+                if (CurrentWordPair == null)
+                {
+                    NewRound();
+                    return;
+                }
+
+                if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language2)
+                {
+                    lbl_word1.Text = CurrentWordPair.Word1;
+                }
+                else if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language1)
+                {
+                    lbl_word1.Text = CurrentWordPair.Word2;
+                }
+                CurrentInput = "";
+                lbl_progress.Text = $"Progress this round: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
+
+                if (CurrentWordPair.GetRequiredSynonyms().Count() > 1)
+                {
+                    MultiAns?.Dispose();
+                    MultiAns = new MultiAnswer();
+                    lbl_word2.Controls.Add(MultiAns);
+                    MultiAns.Location = new Point(0, 0);
+                    MultiAns.Show();
+                }
+                else
+                {
+                    lbl_word2.Text = "Enter your answer...";
+                }
             }
-            else if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language1)
+            else
             {
-                lbl_word1.Text = CurrentWordPair.Word2;
+                lbl_word1.ForeColor = GeneralTheme.GetMainLabelForeColor();
+                if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language2)
+                {
+                    lbl_word1.Text = CurrentWordPair.Word1;
+                }
+                else if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language1)
+                {
+                    lbl_word1.Text = CurrentWordPair.Word2;
+                }
+
+                CurrentInput = "";
+                lbl_progress.Text = $"Progress this round: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
+
+                var lbl = MultiAns.flp_answers.Controls.OfType<Label>().Last().Clone();
+                lbl.Text = "Enter your answer...";
             }
-            CurrentInput = "";
-            lbl_progress.Text = $"Progress this round: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
-            lbl_word2.Text = "Enter your answer...";
         }
 
         private bool skipNewRoundMsg = false;
@@ -282,7 +320,15 @@ namespace SteelQuiz.QuizPractise
 
                 UserCopyingWord = true;
                 CurrentInput = "";
-                lbl_word2.Text = "Enter your answer...";
+
+                if (MultiAns == null)
+                {
+                    lbl_word2.Text = "Enter your answer...";
+                }
+                else
+                {
+                    MultiAns.CurrentLabel.Text = "Enter your answer...";
+                }
             }
         }
 
@@ -309,6 +355,7 @@ namespace SteelQuiz.QuizPractise
                 e.Handled = true;
 
                 // ENTER
+
                 if (WaitingForEnter)
                 {
                     WaitingForEnter = false;
@@ -328,7 +375,14 @@ namespace SteelQuiz.QuizPractise
 
             if (updateInputLbl)
             {
-                lbl_word2.Text = CurrentInput;
+                if (MultiAns == null)
+                {
+                    lbl_word2.Text = CurrentInput;
+                }
+                else
+                {
+                    MultiAns.flp_answers.Controls.OfType<Label>().Last().Text = CurrentInput;
+                }
             }
         }
 

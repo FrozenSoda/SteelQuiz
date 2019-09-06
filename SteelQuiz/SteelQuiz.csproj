@@ -105,6 +105,12 @@
     <Compile Include="QuizImport\Guide\TextImport\Step7.Designer.cs">
       <DependentUpon>Step7.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuizPractise\MultiAnswer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuizPractise\MultiAnswer.Designer.cs">
+      <DependentUpon>MultiAnswer.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuizPractise\QuizPractiseConfig.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -528,6 +534,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="QuizImport\Internal\QuizFolderSelect.resx">
       <DependentUpon>QuizFolderSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuizPractise\MultiAnswer.resx">
+      <DependentUpon>MultiAnswer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuizPractise\QuizPractiseConfig.resx">
       <DependentUpon>QuizPractiseConfig.cs</DependentUpon>

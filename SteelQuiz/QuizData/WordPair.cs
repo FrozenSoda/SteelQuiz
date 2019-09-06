@@ -100,25 +100,33 @@ namespace SteelQuiz.QuizData
             throw new Exception("No word progress data could be found for this word pair");
         }
 
+        private IEnumerable<WordPair> __requiredSynonyms = null;
+
         /// <summary>
-        /// Finds all synonyms to this wordpair that are required to be provided. Only valid for the selected language.
+        /// Finds all synonyms to this wordpair that are required to be provided, including this wordpair. Only valid for the selected language.
         /// </summary>
-        /// <returns>Returns the wordpairs that are synonyms to this wordpair and are required to be provided</returns>
-        public IEnumerable<WordPair> RequiredSynonyms()
+        /// <returns>Returns the wordpairs that are synonyms to this wordpair (including this wordpair) and are required to be provided</returns>
+        public IEnumerable<WordPair> GetRequiredSynonyms()
         {
-            if (QuizCore.QuizProgress.AnswerLanguageNum == 2)
+            if (__requiredSynonyms != null)
             {
-                return QuizCore.Quiz.WordPairs.Where(x => x.Word1 == Word1);
+                ;
+            }
+            else if (QuizCore.QuizProgress.AnswerLanguageNum == 2)
+            {
+                __requiredSynonyms = QuizCore.Quiz.WordPairs.Where(x => x.Word1 == Word1);
             }
             else if (QuizCore.QuizProgress.AnswerLanguageNum == 1)
             {
-                return QuizCore.Quiz.WordPairs.Where(x => x.Word2 == Word2);
+                __requiredSynonyms = QuizCore.Quiz.WordPairs.Where(x => x.Word2 == Word2);
             }
             else
             {
                 // should never be reached
                 throw new Exception("RequiredSynonyms() reached end");
             }
+
+            return __requiredSynonyms;
         }
 
         public class AnswerDiff
