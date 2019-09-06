@@ -31,7 +31,6 @@ namespace SteelQuiz.QuizPractise
             CompletelyCorrect = 0,
             ProbablyCorrect = 1,
             MaybeCorrect = 2,
-            NotCorrect = 3
         }
 
         public class SimilarityData
@@ -95,17 +94,21 @@ namespace SteelQuiz.QuizPractise
 
             if (rules.HasFlag(Rules.IgnoreOpeningWhitespace))
             {
-                similarityDatas.Add(Similarity(userAnswer.TrimStart(' '), correctAnswer.TrimStart(' '), rules & ~Rules.IgnoreOpeningWhitespace, CorrectCertainty.ProbablyCorrect));
+                similarityDatas.Add(Similarity(userAnswer.TrimStart(' '), correctAnswer.TrimStart(' '), rules & ~Rules.IgnoreOpeningWhitespace,
+                    (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
+                // Math.Max to use worst certainty (if the certainty when calling this method was 'maybe correct', new certainty can't be 'probably correct' for instance)
             }
 
             if (rules.HasFlag(Rules.IgnoreEndingWhitespace))
             {
-                similarityDatas.Add(Similarity(userAnswer.TrimEnd(' '), correctAnswer.TrimEnd(' '), rules & ~Rules.IgnoreEndingWhitespace, CorrectCertainty.ProbablyCorrect));
+                similarityDatas.Add(Similarity(userAnswer.TrimEnd(' '), correctAnswer.TrimEnd(' '), rules & ~Rules.IgnoreEndingWhitespace,
+                    (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
             }
 
             if (rules.HasFlag(Rules.IgnoreFirstCapitalization))
             {
-                similarityDatas.Add(Similarity(CapitalizeFirstChar(userAnswer), CapitalizeFirstChar(correctAnswer), rules & ~Rules.IgnoreFirstCapitalization, CorrectCertainty.ProbablyCorrect));
+                similarityDatas.Add(Similarity(CapitalizeFirstChar(userAnswer), CapitalizeFirstChar(correctAnswer), rules & ~Rules.IgnoreFirstCapitalization,
+                    (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
             }
 
             if (rules.HasFlag(Rules.TreatWordsBetweenSlashAsSynonyms))
@@ -115,7 +118,8 @@ namespace SteelQuiz.QuizPractise
                     string[] correctAnswers = correctAnswer.Split('/');
                     foreach (var ans in correctAnswers)
                     {
-                        similarityDatas.Add(Similarity(userAnswer, ans.TrimStart(' '), rules, CorrectCertainty.ProbablyCorrect));
+                        similarityDatas.Add(Similarity(userAnswer, ans.TrimStart(' '), rules,
+                            (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
                     }
                 }
             }
@@ -130,10 +134,10 @@ namespace SteelQuiz.QuizPractise
                     string w4 = correctAnswer.Split(')')[1].TrimStart(' '); // (eye)lash => lash
                     //string w2 = spl[1].Split(')')[0];
 
-                    similarityDatas.Add(Similarity(userAnswer, w1, rules, CorrectCertainty.ProbablyCorrect));
-                    similarityDatas.Add(Similarity(userAnswer, w2, rules, CorrectCertainty.MaybeCorrect));
-                    similarityDatas.Add(Similarity(userAnswer, w3, rules, CorrectCertainty.ProbablyCorrect));
-                    similarityDatas.Add(Similarity(userAnswer, w4, rules, CorrectCertainty.ProbablyCorrect));
+                    similarityDatas.Add(Similarity(userAnswer, w1, rules, (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
+                    similarityDatas.Add(Similarity(userAnswer, w2, rules, (CorrectCertainty)Math.Max((int)CorrectCertainty.MaybeCorrect, (int)certainty)));
+                    similarityDatas.Add(Similarity(userAnswer, w3, rules, (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
+                    similarityDatas.Add(Similarity(userAnswer, w4, rules, (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
                 }
             }
 
