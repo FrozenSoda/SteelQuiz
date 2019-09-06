@@ -6,6 +6,8 @@ The MIT License (MIT)
 applies to:
 - Newtonsoft Json.NET, Copyright (c) 2007 James Newton-King
 - AutoUpdater.NET, Copyright (c) 2012-2019 RBSoft
+- Fastenshtein, Copyright (c) 2017 DanHartley
+- MSTest Framework, Copyright (c) Microsoft Corporation. All rights reserved.
 ------------------------------------------
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -34,3 +36,15 @@ applies to:
 - RegistryMonitor (RegistryUtils.RegistryMonitor)
 ------------------------------------------
 https://www.codeproject.com/info/cpol10.aspx
+
+
+------------------------------------------
+MICROSOFT SOFTWARE LICENSE TERMS
+
+MICROSOFT .NET LIBRARY
+
+applies to:
+- MICROSOFT .NET LIBRARY
+- System.Runtime (included in MICROSOFT .NET LIBRARY)
+------------------------------------------
+https://dotnet.microsoft.com/en/dotnet_library_license.htm
