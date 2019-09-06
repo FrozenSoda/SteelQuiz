@@ -51,6 +51,24 @@ namespace SteelQuiz.QuizPractise
         {
             InitializeComponent();
             SetTheme();
+            AlignFlpAnswers();
+        }
+
+        private void AlignFlpAnswers()
+        {
+            int x = 3;
+
+            int yMin = 34;
+            int y = Size.Height / 2 - flp_answers.Controls.OfType<Label>().Sum(n => (n.Size.Height + flp_answers.Padding.Top) / 2);
+
+            y = Math.Max(yMin, y);
+
+            flp_answers.Location = new Point(x, y);
+        }
+
+        private void Flp_answers_ControlAdded(object sender, ControlEventArgs e)
+        {
+            AlignFlpAnswers();
         }
     }
 }

@@ -79,6 +79,7 @@ namespace SteelQuiz.QuizPractise
             this.flp_answers.Name = "flp_answers";
             this.flp_answers.Size = new System.Drawing.Size(381, 308);
             this.flp_answers.TabIndex = 2;
+            this.flp_answers.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.Flp_answers_ControlAdded);
             // 
             // MultiAnswer
             // 
