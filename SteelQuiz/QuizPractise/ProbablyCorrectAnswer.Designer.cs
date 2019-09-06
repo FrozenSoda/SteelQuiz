@@ -59,6 +59,7 @@ namespace SteelQuiz.QuizPractise
             // lbl_certainty
             // 
             this.lbl_certainty.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_certainty.ForeColor = System.Drawing.Color.MediumSpringGreen;
             this.lbl_certainty.Location = new System.Drawing.Point(4, 18);
             this.lbl_certainty.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_certainty.Name = "lbl_certainty";

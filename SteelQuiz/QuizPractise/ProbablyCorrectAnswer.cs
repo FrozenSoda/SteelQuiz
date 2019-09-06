@@ -25,6 +25,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SteelQuiz.ThemeManager.Colors;
 
 namespace SteelQuiz.QuizPractise
 {
@@ -41,13 +42,27 @@ namespace SteelQuiz.QuizPractise
 
             AutoShrinkFont(lbl_questionWord, 8);
 
-            lbl_answerLang.Text = $"Correct {answerLang} word:";
+            lbl_answerLang.Text = $"{answerLang} word:";
             lbl_correctAnswer.Text = correctAnswer;
             toolTip1.SetToolTip(lbl_correctAnswer, correctAnswer);
 
             AutoShrinkFont(lbl_correctAnswer, 8);
 
             lbl_certainty.Text = certaintyText;
+        }
+
+        public override void SetTheme(GeneralTheme theme = null)
+        {
+            base.SetTheme(theme);
+
+            if (ConfigManager.Config.Theme == ThemeManager.ThemeCore.Theme.Dark)
+            {
+                lbl_certainty.ForeColor = Color.MediumSpringGreen;
+            }
+            else
+            {
+                lbl_certainty.ForeColor = Color.DarkGreen;
+            }
         }
 
         private void AutoShrinkFont(Label lbl, int minimumSize)

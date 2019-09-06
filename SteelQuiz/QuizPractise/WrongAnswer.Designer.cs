@@ -47,7 +47,7 @@ namespace SteelQuiz.QuizPractise
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lbl_wrong = new System.Windows.Forms.Label();
             this.lbl_questionLang = new System.Windows.Forms.Label();
             this.lbl_questionWord = new System.Windows.Forms.Label();
             this.lbl_correctAnswer = new System.Windows.Forms.Label();
@@ -56,16 +56,17 @@ namespace SteelQuiz.QuizPractise
             this.lbl_instruction = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // label1
+            // lbl_wrong
             // 
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(4, 18);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(317, 32);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Wrong!";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_wrong.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_wrong.ForeColor = System.Drawing.Color.Red;
+            this.lbl_wrong.Location = new System.Drawing.Point(4, 18);
+            this.lbl_wrong.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_wrong.Name = "lbl_wrong";
+            this.lbl_wrong.Size = new System.Drawing.Size(317, 32);
+            this.lbl_wrong.TabIndex = 0;
+            this.lbl_wrong.Text = "Wrong!";
+            this.lbl_wrong.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbl_questionLang
             // 
@@ -132,7 +133,7 @@ namespace SteelQuiz.QuizPractise
             this.Controls.Add(this.lbl_answerLang);
             this.Controls.Add(this.lbl_questionWord);
             this.Controls.Add(this.lbl_questionLang);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lbl_wrong);
             this.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.White;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -144,7 +145,7 @@ namespace SteelQuiz.QuizPractise
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbl_wrong;
         private System.Windows.Forms.Label lbl_questionLang;
         private System.Windows.Forms.Label lbl_questionWord;
         private System.Windows.Forms.Label lbl_correctAnswer;

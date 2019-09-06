@@ -105,9 +105,10 @@ namespace SteelQuiz.QuizPractise
             // 
             // lbl_intelligentLearning
             // 
+            this.lbl_intelligentLearning.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_intelligentLearning.AutoSize = true;
             this.lbl_intelligentLearning.ForeColor = System.Drawing.Color.LightGray;
-            this.lbl_intelligentLearning.Location = new System.Drawing.Point(576, 428);
+            this.lbl_intelligentLearning.Location = new System.Drawing.Point(552, 428);
             this.lbl_intelligentLearning.Name = "lbl_intelligentLearning";
             this.lbl_intelligentLearning.Size = new System.Drawing.Size(212, 13);
             this.lbl_intelligentLearning.TabIndex = 4;
@@ -128,7 +129,7 @@ namespace SteelQuiz.QuizPractise
             // 
             this.lbl_lang2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_lang2.ForeColor = System.Drawing.Color.LightGray;
-            this.lbl_lang2.Location = new System.Drawing.Point(398, 12);
+            this.lbl_lang2.Location = new System.Drawing.Point(398, 9);
             this.lbl_lang2.Name = "lbl_lang2";
             this.lbl_lang2.Size = new System.Drawing.Size(390, 23);
             this.lbl_lang2.TabIndex = 6;
@@ -187,12 +188,13 @@ namespace SteelQuiz.QuizPractise
             // 
             // btn_cfg
             // 
+            this.btn_cfg.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_cfg.BackColor = System.Drawing.Color.Gray;
             this.btn_cfg.BackgroundImage = global::SteelQuiz.Properties.Resources.gear_1077563_with_border1;
             this.btn_cfg.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btn_cfg.FlatAppearance.BorderSize = 0;
             this.btn_cfg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_cfg.Location = new System.Drawing.Point(758, 14);
+            this.btn_cfg.Location = new System.Drawing.Point(770, 419);
             this.btn_cfg.Name = "btn_cfg";
             this.btn_cfg.Size = new System.Drawing.Size(30, 30);
             this.btn_cfg.TabIndex = 12;
@@ -206,13 +208,13 @@ namespace SteelQuiz.QuizPractise
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lbl_lang2);
+            this.Controls.Add(this.lbl_lang1);
             this.Controls.Add(this.btn_cfg);
             this.Controls.Add(this.btn_home);
             this.Controls.Add(this.pnl_word2);
             this.Controls.Add(this.pnl_word1);
             this.Controls.Add(this.btn_w1_synonyms);
-            this.Controls.Add(this.lbl_lang2);
-            this.Controls.Add(this.lbl_lang1);
             this.Controls.Add(this.lbl_intelligentLearning);
             this.Controls.Add(this.lbl_progress);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
