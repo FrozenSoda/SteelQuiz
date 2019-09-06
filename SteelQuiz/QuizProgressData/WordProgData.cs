@@ -33,7 +33,7 @@ namespace SteelQuiz.QuizProgressData
         [JsonProperty]
         internal List<WordTry> WordTries { get; set; }
 
-        private const int WORD_TRIES_FOR_LEARNING_PROGRESS = 3;
+        public const int WORD_TRIES_FOR_LEARNING_PROGRESS = 3;
 
         public bool AskedThisRound { get; set; } = false;
         public bool SkipThisRound { get; set; } = false;

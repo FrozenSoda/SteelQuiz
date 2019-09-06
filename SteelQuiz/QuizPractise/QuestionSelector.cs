@@ -192,16 +192,16 @@ namespace SteelQuiz.QuizPractise
             {
                 if (!QuizCore.QuizProgress.MasterNoticeShowed)
                 {
-                    var allSuccess100 = true;
+                    var allLearned100 = true;
                     foreach (var word in QuizCore.QuizProgress.WordProgDatas)
                     {
-                        if (word.GetSuccessRate() < 1)
+                        if (word.GetLearningProgress() < 1 && word.GetWordTriesCount() >= WordProgData.WORD_TRIES_FOR_LEARNING_PROGRESS)
                         {
-                            allSuccess100 = false;
+                            allLearned100 = false;
                         }
                     }
 
-                    if (allSuccess100)
+                    if (allLearned100)
                     {
                         if (!SkipNextMasterNotice)
                         {
