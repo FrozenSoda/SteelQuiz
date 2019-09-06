@@ -168,7 +168,7 @@ namespace SteelQuiz.QuizPractise
                 CurrentInput = "";
                 lbl_progress.Text = $"Progress this round: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
 
-                var lbl = MultiAns.flp_answers.Controls.OfType<Label>().Last().Clone();
+                var lbl = MultiAns.CurrentLabel.Clone();
                 lbl.Text = "Enter your answer...";
             }
         }
@@ -211,6 +211,7 @@ namespace SteelQuiz.QuizPractise
             {
                 skipNewRoundMsg = false;
                 NewWord();
+#warning NewWord shouldnt be called again
             }
 
             lbl_progress.Text = $"Progress this round: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
@@ -385,7 +386,7 @@ namespace SteelQuiz.QuizPractise
                 }
                 else
                 {
-                    MultiAns.flp_answers.Controls.OfType<Label>().Last().Text = CurrentInput;
+                    MultiAns.CurrentLabel.Text = CurrentInput;
                 }
             }
         }
