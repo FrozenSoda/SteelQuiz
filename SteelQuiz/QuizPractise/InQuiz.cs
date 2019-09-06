@@ -266,7 +266,7 @@ namespace SteelQuiz.QuizPractise
                 }
                 else if (ansDiff.Certainty == StringComp.CorrectCertainty.ProbablyCorrect)
                 {
-                    var probablyCorrectAns = new ProbablyCorrectAnswer(questionWord, QuizCore.QuizProgress.QuestionLanguage, answerWord, QuizCore.QuizProgress.AnswerLanguage,
+                    var probablyCorrectAns = new ProbablyCorrectAnswer(questionWord, QuizCore.QuizProgress.QuestionLanguage, ansDiff.MostSimilarAnswer, QuizCore.QuizProgress.AnswerLanguage,
                         "Probably correct!");
                     lbl_word1.Controls.Add(probablyCorrectAns);
                     probablyCorrectAns.Location = new Point(0, 0);
@@ -274,7 +274,7 @@ namespace SteelQuiz.QuizPractise
                 }
                 else if (ansDiff.Certainty == StringComp.CorrectCertainty.MaybeCorrect)
                 {
-                    var probablyCorrectAns = new ProbablyCorrectAnswer(questionWord, QuizCore.QuizProgress.QuestionLanguage, answerWord, QuizCore.QuizProgress.AnswerLanguage,
+                    var probablyCorrectAns = new ProbablyCorrectAnswer(questionWord, QuizCore.QuizProgress.QuestionLanguage, ansDiff.MostSimilarAnswer, QuizCore.QuizProgress.AnswerLanguage,
                         "Might be correct!");
                     lbl_word1.Controls.Add(probablyCorrectAns);
                     probablyCorrectAns.Location = new Point(0, 0);
