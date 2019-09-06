@@ -129,6 +129,11 @@ namespace SteelQuiz.QuizData
             return __requiredSynonyms;
         }
 
+        public void ResetRequiredSynonymsMemo()
+        {
+            __requiredSynonyms = null;
+        }
+
         public class AnswerDiff
         {
             public string MostSimilarAnswer { get; set; }

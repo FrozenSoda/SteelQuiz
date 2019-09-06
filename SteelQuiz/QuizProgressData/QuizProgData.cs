@@ -31,10 +31,30 @@ namespace SteelQuiz.QuizProgressData
         public Guid QuizGUID { get; set; }
         public List<WordProgData> WordProgDatas { get; set; } = null;
 
+        private int __answerLanguageNum = 2;
         /// <summary>
         /// 1 if the answer language is Language1, otherwise 2
         /// </summary>
-        public int AnswerLanguageNum { get; set; } = 2;
+        public int AnswerLanguageNum
+        {
+            get
+            {
+                return __answerLanguageNum;
+            }
+
+            set
+            {
+                __answerLanguageNum = value;
+
+                if (QuizCore.Quiz != null && QuizCore.Quiz.GUID == QuizGUID)
+                {
+                    foreach (var wordPair in QuizCore.Quiz.WordPairs)
+                    {
+                        wordPair.ResetRequiredSynonymsMemo();
+                    }
+                }
+            }
+        }
 
         [JsonIgnore]
         /// <summary>
@@ -44,7 +64,7 @@ namespace SteelQuiz.QuizProgressData
         {
             get
             {
-                if (QuizCore.Quiz.GUID == QuizGUID)
+                if (QuizCore.Quiz != null && QuizCore.Quiz.GUID == QuizGUID)
                 {
                     return AnswerLanguageNum == 2 ? QuizCore.Quiz.Language2 : QuizCore.Quiz.Language1;
                 }
