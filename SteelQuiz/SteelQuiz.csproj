@@ -418,7 +418,6 @@
     <Compile Include="QuizProgressData\WordProgData.cs" />
     <Compile Include="QuizCore.cs" />
     <Compile Include="ConfigData\Config.cs" />
-    <Compile Include="QuizPractise\StringComp_old.cs" />
     <Compile Include="QuizPractise\StringComp.cs" />
     <Compile Include="ThirdParty\RegistryMonitor.cs" />
     <Compile Include="Util\Args.cs" />
