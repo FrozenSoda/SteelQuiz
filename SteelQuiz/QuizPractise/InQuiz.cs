@@ -105,20 +105,20 @@ namespace SteelQuiz.QuizPractise
             WaitingForEnter = false;
             lbl_lang1.Text = QuizCore.Quiz.Language1;
 
+            foreach (var c in lbl_word1.Controls.OfType<WrongAnswer>())
+            {
+                c.Dispose();
+            }
+            foreach (var c in lbl_word1.Controls.OfType<ProbablyCorrectAnswer>())
+            {
+                c.Dispose();
+            }
+
             if (MultiAns == null || MultiAns.AnswersProvided == CurrentWordPair.GetRequiredSynonyms().Count())
             {
                 CountThisTranslationToProgress = true;
                 CurrentWordPair = QuestionSelector.GenerateWordPair();
                 MultiAns?.Dispose();
-
-                foreach (var c in lbl_word1.Controls.OfType<WrongAnswer>())
-                {
-                    c.Dispose();
-                }
-                foreach (var c in lbl_word1.Controls.OfType<ProbablyCorrectAnswer>())
-                {
-                    c.Dispose();
-                }
 
                 lbl_word1.ForeColor = GeneralTheme.GetMainLabelForeColor();
 
