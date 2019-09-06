@@ -29,6 +29,7 @@ using System.Windows.Forms;
 using SteelQuiz.QuizData;
 using System.Text.RegularExpressions;
 using static SteelQuiz.QuizImport.QuizImporter;
+using SteelQuiz.QuizPractise;
 
 namespace SteelQuiz.QuizImport.Guide
 {
@@ -128,7 +129,7 @@ namespace SteelQuiz.QuizImport.Guide
                             }
                             else
                             {
-                                var wordPair = new WordPair(words[0], words[1], StringComp.Rules.None);
+                                var wordPair = new WordPair(words[0], words[1], StringComp.SMART_RULES);
                                 wordPairs.Add(wordPair);
                             }
                         }

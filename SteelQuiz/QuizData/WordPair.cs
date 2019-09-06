@@ -105,7 +105,63 @@ namespace SteelQuiz.QuizData
             throw new Exception("No word progress data could be found for this word pair");
         }
 
+        public class AnswerDiff
+        {
+            public string MostSimilarAnswer { get; set; }
+            public int Difference { get; set; }
 
+            public AnswerDiff(int difference, string mostSimilarAnswer)
+            {
+                Difference = difference;
+                MostSimilarAnswer = mostSimilarAnswer;
+            }
+
+            public bool Correct()
+            {
+                return Difference == 0;
+            }
+        }
+
+        public AnswerDiff AnswerCheck(string input, bool updateProgress = true)
+        {
+            var similarityDatas = new List<StringComp.SimilarityData>();
+
+            if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language2)
+            {
+                similarityDatas.Add(StringComp.Similarity(input, Word2, TranslationRules));
+                foreach (var synonym in Word2Synonyms)
+                {
+                    similarityDatas.Add(StringComp.Similarity(input, synonym, TranslationRules));
+                }
+            }
+            else if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language1)
+            {
+                similarityDatas.Add(StringComp.Similarity(input, Word1, TranslationRules));
+                foreach (var synonym in Word1Synonyms)
+                {
+                    similarityDatas.Add(StringComp.Similarity(input, synonym, TranslationRules));
+                }
+            }
+            else
+            {
+                throw new NotImplementedException("Error in WordPair.CharacterMismatches: All translation modes haven't been implemented!");
+            }
+
+            StringComp.SimilarityData bestSimilarityData = similarityDatas.OrderBy(x => x.Difference).ThenBy(x => x.ProbablyCorrect).First();
+
+            var ansDiff = new AnswerDiff(bestSimilarityData.Difference, bestSimilarityData.CorrectAnswer);
+
+            if (updateProgress)
+            {
+                GetWordProgData().AddWordTry(new WordTry(ansDiff.Correct()));
+                QuizCore.SaveQuizProgress();
+
+                GetWordProgData().AskedThisRound = true;
+                QuizCore.QuizProgress.SetCurrentWordPair(null);
+            }
+
+            return ansDiff;
+        }
 
         /*
         public StringComp.CharacterMismatch CharacterMismatches_old(string input, bool updateProgress = true, bool recurse = false)

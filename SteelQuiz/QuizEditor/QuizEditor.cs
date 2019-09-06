@@ -29,6 +29,7 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using SteelQuiz.QuizData;
 using SteelQuiz.QuizEditor.UndoRedo;
+using SteelQuiz.QuizPractise;
 using SteelQuiz.Util;
 
 namespace SteelQuiz.QuizEditor
@@ -168,13 +169,9 @@ namespace SteelQuiz.QuizEditor
                 wordPair.RemoveSynonymsEqualToWords();
 
                 StringComp.Rules translationRules = StringComp.Rules.None;
-                if (wordPair.chk_ignoreCapitalization.Checked)
+                if (wordPair.chk_smartComp.Checked)
                 {
-                    translationRules |= StringComp.Rules.IgnoreCapitalization;
-                }
-                if (wordPair.chk_ignoreExcl.Checked)
-                {
-                    translationRules |= StringComp.Rules.IgnoreExclamation;
+                    translationRules |= StringComp.SMART_RULES;
                 }
 
                 var wp = new WordPair(wordPair.txt_word1.Text, wordPair.txt_word2.Text, translationRules, wordPair.Synonyms1, wordPair.Synonyms2);
@@ -257,8 +254,7 @@ namespace SteelQuiz.QuizEditor
                 ctrl.Synonyms1 = wp.Word1Synonyms;
                 ctrl.txt_word2.Text = wp.Word2;
                 ctrl.Synonyms2 = wp.Word2Synonyms;
-                ctrl.chk_ignoreCapitalization.Checked = wp.TranslationRules.HasFlag(StringComp.Rules.IgnoreCapitalization);
-                ctrl.chk_ignoreExcl.Checked = wp.TranslationRules.HasFlag(StringComp.Rules.IgnoreExclamation);
+                ctrl.chk_smartComp.Checked = wp.TranslationRules.HasFlag(StringComp.SMART_RULES);
             }
 
             if (!fromRecovery)

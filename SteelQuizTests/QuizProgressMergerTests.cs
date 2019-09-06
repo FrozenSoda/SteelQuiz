@@ -25,6 +25,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SteelQuiz.QuizProgressData;
 using SteelQuiz.QuizData;
+using SteelQuiz.QuizPractise;
 
 namespace SteelQuiz.Tests
 {

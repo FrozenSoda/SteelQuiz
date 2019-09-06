@@ -165,15 +165,16 @@ namespace SteelQuiz.QuizPractise
         private void CheckWord()
         {
             lbl_lang1.Text = "Info";
-            var mismatch = CurrentWordPair.CharacterMismatches(CurrentInput, !UserCopyingWord && CountThisTranslationToProgress);
-            if (mismatch.Correct())
+            var ansDiff = CurrentWordPair.AnswerCheck(CurrentInput, !UserCopyingWord && CountThisTranslationToProgress);
+            if (ansDiff.Correct())
             {
                 foreach (var c in lbl_word1.Controls.OfType<WrongAnswer>())
                 {
                     c.Dispose();
                 }
 
-                if (!mismatch.AskingForSynonym)
+                //if (!mismatch.AskingForSynonym)
+                if (true)
                 {
                     if (!UserCopyingWord)
                     {

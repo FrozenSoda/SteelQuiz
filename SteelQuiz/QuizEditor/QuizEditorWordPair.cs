@@ -43,7 +43,7 @@ namespace SteelQuiz.QuizEditor
 
         public bool ignore_txt_word_change = false;
         public bool ignore_chk_ignoreCapitalization_change = false;
-        public bool ignore_chk_ignoreExcl_change = false;
+        public bool ignore_chk_smartComp_change = false;
 
         public QuizEditorWordPair(QuizEditor owner, int number)
         {
@@ -160,8 +160,8 @@ namespace SteelQuiz.QuizEditor
             if (QEOwner.UpdateUndoRedoStacks)
             {
                 QEOwner.UndoStack.Push(new UndoRedoFuncPair(
-                new Func<object>[] { chk_ignoreCapitalization.SetChecked(!chk_ignoreCapitalization.Checked, () => { ignore_chk_ignoreCapitalization_change = true; }) },
-                new Func<object>[] { chk_ignoreCapitalization.SetChecked(chk_ignoreCapitalization.Checked, () => { ignore_chk_ignoreCapitalization_change = true; }) },
+                new Func<object>[] { chk_smartComp.SetChecked(!chk_smartComp.Checked, () => { ignore_chk_ignoreCapitalization_change = true; }) },
+                new Func<object>[] { chk_smartComp.SetChecked(chk_smartComp.Checked, () => { ignore_chk_ignoreCapitalization_change = true; }) },
                 "Checkbox switch",
                 new OwnerControlData(this, this.Parent)
                 ));
@@ -172,17 +172,17 @@ namespace SteelQuiz.QuizEditor
 
         private void chk_ignoreExcl_CheckedChanged(object sender, EventArgs e)
         {
-            if (ignore_chk_ignoreExcl_change)
+            if (ignore_chk_smartComp_change)
             {
-                ignore_chk_ignoreExcl_change = false;
+                ignore_chk_smartComp_change = false;
                 return;
             }
 
             if (QEOwner.UpdateUndoRedoStacks)
             {
                 QEOwner.UndoStack.Push(new UndoRedoFuncPair(
-                    new Func<object>[] { chk_ignoreExcl.SetChecked(!chk_ignoreExcl.Checked, () => { ignore_chk_ignoreExcl_change = true; }) },
-                    new Func<object>[] { chk_ignoreExcl.SetChecked(chk_ignoreExcl.Checked, () => { ignore_chk_ignoreExcl_change = true; }) },
+                    new Func<object>[] { chk_smartComp.SetChecked(!chk_smartComp.Checked, () => { ignore_chk_smartComp_change = true; }) },
+                    new Func<object>[] { chk_smartComp.SetChecked(chk_smartComp.Checked, () => { ignore_chk_smartComp_change = true; }) },
                     "Checkbox switch",
                     new OwnerControlData(this, this.Parent)
                     ));

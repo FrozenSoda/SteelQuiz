@@ -47,9 +47,8 @@ namespace SteelQuiz.QuizEditor
         private void InitializeComponent()
         {
             this.pnl_translationRules = new System.Windows.Forms.Panel();
-            this.chk_ignoreExcl = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.chk_ignoreCapitalization = new System.Windows.Forms.CheckBox();
+            this.chk_smartComp = new System.Windows.Forms.CheckBox();
             this.txt_word1 = new System.Windows.Forms.TextBox();
             this.btn_editSynonyms_w1 = new System.Windows.Forms.Button();
             this.txt_word2 = new System.Windows.Forms.TextBox();
@@ -62,52 +61,39 @@ namespace SteelQuiz.QuizEditor
             // 
             // pnl_translationRules
             // 
-            this.pnl_translationRules.Controls.Add(this.chk_ignoreExcl);
             this.pnl_translationRules.Controls.Add(this.label4);
-            this.pnl_translationRules.Controls.Add(this.chk_ignoreCapitalization);
+            this.pnl_translationRules.Controls.Add(this.chk_smartComp);
             this.pnl_translationRules.Location = new System.Drawing.Point(217, 29);
             this.pnl_translationRules.Name = "pnl_translationRules";
             this.pnl_translationRules.Size = new System.Drawing.Size(299, 65);
             this.pnl_translationRules.TabIndex = 2;
             // 
-            // chk_ignoreExcl
-            // 
-            this.chk_ignoreExcl.AutoSize = true;
-            this.chk_ignoreExcl.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chk_ignoreExcl.ForeColor = System.Drawing.Color.LightGray;
-            this.chk_ignoreExcl.Location = new System.Drawing.Point(141, 22);
-            this.chk_ignoreExcl.Name = "chk_ignoreExcl";
-            this.chk_ignoreExcl.Size = new System.Drawing.Size(157, 17);
-            this.chk_ignoreExcl.TabIndex = 2;
-            this.chk_ignoreExcl.TabStop = false;
-            this.chk_ignoreExcl.Text = "Ignore exclamation marks";
-            this.chk_ignoreExcl.UseVisualStyleBackColor = true;
-            this.chk_ignoreExcl.CheckedChanged += new System.EventHandler(this.chk_ignoreExcl_CheckedChanged);
-            // 
             // label4
             // 
             this.label4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.LightGray;
-            this.label4.Location = new System.Drawing.Point(-3, 1);
+            this.label4.Location = new System.Drawing.Point(3, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(282, 13);
             this.label4.TabIndex = 1;
             this.label4.Text = "Translation rules";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // chk_ignoreCapitalization
+            // chk_smartComp
             // 
-            this.chk_ignoreCapitalization.AutoSize = true;
-            this.chk_ignoreCapitalization.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chk_ignoreCapitalization.ForeColor = System.Drawing.Color.LightGray;
-            this.chk_ignoreCapitalization.Location = new System.Drawing.Point(3, 22);
-            this.chk_ignoreCapitalization.Name = "chk_ignoreCapitalization";
-            this.chk_ignoreCapitalization.Size = new System.Drawing.Size(132, 17);
-            this.chk_ignoreCapitalization.TabIndex = 0;
-            this.chk_ignoreCapitalization.TabStop = false;
-            this.chk_ignoreCapitalization.Text = "Ignore capitalization";
-            this.chk_ignoreCapitalization.UseVisualStyleBackColor = true;
-            this.chk_ignoreCapitalization.CheckedChanged += new System.EventHandler(this.chk_ignoreCapitalization_CheckedChanged);
+            this.chk_smartComp.AutoSize = true;
+            this.chk_smartComp.Checked = true;
+            this.chk_smartComp.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk_smartComp.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chk_smartComp.ForeColor = System.Drawing.Color.LightGray;
+            this.chk_smartComp.Location = new System.Drawing.Point(88, 22);
+            this.chk_smartComp.Name = "chk_smartComp";
+            this.chk_smartComp.Size = new System.Drawing.Size(120, 17);
+            this.chk_smartComp.TabIndex = 0;
+            this.chk_smartComp.TabStop = false;
+            this.chk_smartComp.Text = "Smart Comparison";
+            this.chk_smartComp.UseVisualStyleBackColor = true;
+            this.chk_smartComp.CheckedChanged += new System.EventHandler(this.chk_ignoreCapitalization_CheckedChanged);
             // 
             // txt_word1
             // 
@@ -235,9 +221,8 @@ namespace SteelQuiz.QuizEditor
         #endregion
 
         private System.Windows.Forms.Panel pnl_translationRules;
-        internal System.Windows.Forms.CheckBox chk_ignoreExcl;
         private System.Windows.Forms.Label label4;
-        internal System.Windows.Forms.CheckBox chk_ignoreCapitalization;
+        internal System.Windows.Forms.CheckBox chk_smartComp;
         internal System.Windows.Forms.TextBox txt_word1;
         private System.Windows.Forms.Button btn_editSynonyms_w1;
         internal System.Windows.Forms.TextBox txt_word2;

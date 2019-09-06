@@ -28,6 +28,14 @@ namespace SteelQuiz.QuizPractise
     {
         public class SimilarityData
         {
+            public enum CorrectCertainty
+            {
+                CompletelyCorrect,
+                ProbablyCorrect,
+                MaybeCorrect,
+                NotCorrect
+            }
+
             /// <summary>
             /// How different the words were. A value where 0 equals total similarity. The higher Difference, the less similar.
             /// </summary>
@@ -38,10 +46,16 @@ namespace SteelQuiz.QuizPractise
             /// </summary>
             public bool ProbablyCorrect { get; set; }
 
-            public SimilarityData(int difference, bool probablyCorrect)
+            /// <summary>
+            /// The correct answer the user answer was compared to
+            /// </summary>
+            public string CorrectAnswer { get; set; }
+
+            public SimilarityData(int difference, bool probablyCorrect, string correctAnswer)
             {
                 Difference = difference;
                 ProbablyCorrect = probablyCorrect;
+                CorrectAnswer = correctAnswer;
             }
         }
 
@@ -49,7 +63,7 @@ namespace SteelQuiz.QuizPractise
         public enum Rules
         {
             IgnoreFirstCapitalization = 1 << 5,
-            TreatWordInParenthesisAsSynonym = 1 << 4,
+            TreatWordInParenthesisAsOptional = 1 << 4,
             TreatWordsBetweenSlashAsSynonyms = 1 << 3,
             IgnoreOpeningWhitespace = 1 << 2,
             IgnoreEndingWhitespace = 1 << 1,
@@ -58,7 +72,7 @@ namespace SteelQuiz.QuizPractise
 
         public const Rules SMART_RULES =
             Rules.IgnoreFirstCapitalization
-            | Rules.TreatWordInParenthesisAsSynonym
+            | Rules.TreatWordInParenthesisAsOptional
             | Rules.TreatWordsBetweenSlashAsSynonyms
             | Rules.IgnoreOpeningWhitespace
             | Rules.IgnoreEndingWhitespace;
@@ -106,22 +120,25 @@ namespace SteelQuiz.QuizPractise
                 }
             }
 
-            if (rules.HasFlag(Rules.TreatWordInParenthesisAsSynonym))
+            if (rules.HasFlag(Rules.TreatWordInParenthesisAsOptional))
             {
                 if (correctAnswer.Contains("(") && correctAnswer.Contains(")"))
                 {
-                    string[] spl = correctAnswer.Split('(');
-
-                    string w1 = spl[0].TrimEnd(' ');
-                    string w2 = spl[1].Split(')')[0];
+                    string w1 = correctAnswer.Split('(')[0].TrimEnd(' '); // tarp (tarpaulin) => tarp
+                    string w2 = correctAnswer.Split('(')[1].Split(')').TrimEnd(' '); // tarp (tarpaulin) => tarpaulin
+                    string w3 = correctAnswer.Replace("(", "").Replace(")", ""); // (eye)lash => eyelash
+                    string w4 = correctAnswer.Split(')')[1].TrimStart(' '); // (eye)lash => lash
+                    //string w2 = spl[1].Split(')')[0];
 
                     similarityDatas.Add(Similarity(userAnswer, w1, rules, true));
                     similarityDatas.Add(Similarity(userAnswer, w2, rules, true));
+                    similarityDatas.Add(Similarity(userAnswer, w3, rules, true));
+                    similarityDatas.Add(Similarity(userAnswer, w4, rules, true));
                 }
             }
 
             int difference = Fastenshtein.Levenshtein.Distance(userAnswer, correctAnswer);
-            similarityDatas.Add(new SimilarityData(difference, probablyCorrect));
+            similarityDatas.Add(new SimilarityData(difference, probablyCorrect, correctAnswer));
             KeepBestSimilarityData();
             SimilarityData best = similarityDatas.First();
 
@@ -130,6 +147,11 @@ namespace SteelQuiz.QuizPractise
 
         private static string CapitalizeFirstChar(string s)
         {
+            if (s == "")
+            {
+                return s;
+            }
+
             s = char.ToUpper(s.First()) + string.Concat(s.Skip(1));
             return s;
         }
