@@ -33,7 +33,7 @@ namespace SteelQuiz.QuizProgressData
         [JsonProperty]
         internal List<WordTry> WordTries { get; set; }
 
-        private const int WORD_TRIES_TO_KEEP = 5;
+        private const int WORD_TRIES_FOR_LEARNING_PROGRESS = 3;
 
         public bool AskedThisRound { get; set; } = false;
         public bool SkipThisRound { get; set; } = false;
@@ -46,10 +46,12 @@ namespace SteelQuiz.QuizProgressData
 
         public void AddWordTry(WordTry wordTry)
         {
-            while (WordTries.Count >= WORD_TRIES_TO_KEEP)
+            /*
+            while (WordTries.Count >= WORD_TRIES_FOR_LEARNING_PROGRESS)
             {
                 WordTries.RemoveAt(0);
             }
+            */
 
             WordTries.Add(wordTry);
         }
@@ -77,13 +79,22 @@ namespace SteelQuiz.QuizProgressData
 
         /// <summary>
         /// Calculates the learning progress for this quiz, 
-        /// that is, the average of the success rates for all wordpairs, that is between 0 and 1, divided by total amount of tries to save (WORD_TRIES_TO_KEEP)
+        /// that is, the average of the success rates for all wordpairs, that is between 0 and 1, divided by total amount of tries to save (WORD_TRIES_FOR_LEARNING_PROGRESS)
         /// </summary>
         /// <returns>Returns the learning progress</returns>
         public double GetLearningProgress()
         {
-            var successCount = WordTries.Where(x => x.Success).Count();
-            return successCount / (double)WORD_TRIES_TO_KEEP;
+            var latestTries = WordTries.Skip(Math.Max(0, WordTries.Count() - WORD_TRIES_FOR_LEARNING_PROGRESS));
+            var successCount = latestTries.Where(x => x.Success).Count();
+
+            if (successCount == 0)
+            {
+                return 0d;
+            }
+            else
+            {
+                return successCount / (double)latestTries.Count();
+            }
         }
 
         public object Clone()
