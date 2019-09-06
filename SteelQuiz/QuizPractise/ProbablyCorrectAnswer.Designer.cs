@@ -47,24 +47,25 @@ namespace SteelQuiz.QuizPractise
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lbl_certainty = new System.Windows.Forms.Label();
             this.lbl_questionLang = new System.Windows.Forms.Label();
             this.lbl_questionWord = new System.Windows.Forms.Label();
             this.lbl_correctAnswer = new System.Windows.Forms.Label();
             this.lbl_answerLang = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.lbl_instruction = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // label1
+            // lbl_certainty
             // 
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(4, 18);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(317, 32);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Probably correct!";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_certainty.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_certainty.Location = new System.Drawing.Point(4, 18);
+            this.lbl_certainty.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_certainty.Name = "lbl_certainty";
+            this.lbl_certainty.Size = new System.Drawing.Size(317, 32);
+            this.lbl_certainty.TabIndex = 0;
+            this.lbl_certainty.Text = "Probably correct!";
+            this.lbl_certainty.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbl_questionLang
             // 
@@ -110,16 +111,28 @@ namespace SteelQuiz.QuizPractise
             this.lbl_answerLang.Text = "Spanish word:";
             this.lbl_answerLang.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // lbl_instruction
+            // 
+            this.lbl_instruction.Font = new System.Drawing.Font("Segoe UI Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_instruction.Location = new System.Drawing.Point(4, 290);
+            this.lbl_instruction.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_instruction.Name = "lbl_instruction";
+            this.lbl_instruction.Size = new System.Drawing.Size(317, 32);
+            this.lbl_instruction.TabIndex = 6;
+            this.lbl_instruction.Text = "Press ENTER to continue";
+            this.lbl_instruction.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // ProbablyCorrectAnswer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.Controls.Add(this.lbl_instruction);
             this.Controls.Add(this.lbl_correctAnswer);
             this.Controls.Add(this.lbl_answerLang);
             this.Controls.Add(this.lbl_questionWord);
             this.Controls.Add(this.lbl_questionLang);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lbl_certainty);
             this.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.White;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -131,11 +144,12 @@ namespace SteelQuiz.QuizPractise
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbl_certainty;
         private System.Windows.Forms.Label lbl_questionLang;
         private System.Windows.Forms.Label lbl_questionWord;
         private System.Windows.Forms.Label lbl_correctAnswer;
         private System.Windows.Forms.Label lbl_answerLang;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Label lbl_instruction;
     }
 }

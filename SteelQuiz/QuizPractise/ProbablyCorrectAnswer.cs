@@ -30,7 +30,7 @@ namespace SteelQuiz.QuizPractise
 {
     public partial class ProbablyCorrectAnswer : AutoThemeableUserControl
     {
-        public ProbablyCorrectAnswer(string questionWord, string questionLang, string correctAnswer, string answerLang)
+        public ProbablyCorrectAnswer(string questionWord, string questionLang, string correctAnswer, string answerLang, string certaintyText)
         {
             InitializeComponent();
             SetTheme();
@@ -46,6 +46,8 @@ namespace SteelQuiz.QuizPractise
             toolTip1.SetToolTip(lbl_correctAnswer, correctAnswer);
 
             AutoShrinkFont(lbl_correctAnswer, 8);
+
+            lbl_certainty.Text = certaintyText;
         }
 
         private void AutoShrinkFont(Label lbl, int minimumSize)

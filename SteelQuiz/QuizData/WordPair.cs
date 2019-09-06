@@ -55,11 +55,6 @@ namespace SteelQuiz.QuizData
             }
         }
 
-        public enum TranslationMode
-        {
-            L1_to_L2,
-            L2_to_L1
-        }
         public override bool Equals(object obj)
         {
             return Equals(obj as WordPair, true, true);
@@ -109,11 +104,13 @@ namespace SteelQuiz.QuizData
         {
             public string MostSimilarAnswer { get; set; }
             public int Difference { get; set; }
+            public StringComp.CorrectCertainty Certainty { get; set; }
 
-            public AnswerDiff(int difference, string mostSimilarAnswer)
+            public AnswerDiff(int difference, string mostSimilarAnswer, StringComp.CorrectCertainty certainty)
             {
                 Difference = difference;
                 MostSimilarAnswer = mostSimilarAnswer;
+                Certainty = certainty;
             }
 
             public bool Correct()
@@ -147,9 +144,9 @@ namespace SteelQuiz.QuizData
                 throw new NotImplementedException("Error in WordPair.CharacterMismatches: All translation modes haven't been implemented!");
             }
 
-            StringComp.SimilarityData bestSimilarityData = similarityDatas.OrderBy(x => x.Difference).ThenBy(x => x.ProbablyCorrect).First();
+            StringComp.SimilarityData bestSimilarityData = similarityDatas.OrderBy(x => x.Difference).ThenBy(x => (int)x.Certainty).First();
 
-            var ansDiff = new AnswerDiff(bestSimilarityData.Difference, bestSimilarityData.CorrectAnswer);
+            var ansDiff = new AnswerDiff(bestSimilarityData.Difference, bestSimilarityData.CorrectAnswer, bestSimilarityData.Certainty);
 
             if (updateProgress)
             {

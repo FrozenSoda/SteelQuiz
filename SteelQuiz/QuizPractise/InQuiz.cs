@@ -108,6 +108,10 @@ namespace SteelQuiz.QuizPractise
             {
                 c.Dispose();
             }
+            foreach (var c in lbl_word1.Controls.OfType<ProbablyCorrectAnswer>())
+            {
+                c.Dispose();
+            }
 
             if (CurrentWordPair == null)
             {
@@ -135,6 +139,10 @@ namespace SteelQuiz.QuizPractise
             lbl_progress.Text = $"Progress this round: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
 
             foreach (var c in lbl_word1.Controls.OfType<WrongAnswer>())
+            {
+                c.Dispose();
+            }
+            foreach (var c in lbl_word1.Controls.OfType<ProbablyCorrectAnswer>())
             {
                 c.Dispose();
             }
@@ -166,69 +174,92 @@ namespace SteelQuiz.QuizPractise
         {
             lbl_lang1.Text = "Info";
             var ansDiff = CurrentWordPair.AnswerCheck(CurrentInput, !UserCopyingWord && CountThisTranslationToProgress);
+
+            string questionWord = null;
+            string answerWord = null;
+
+            if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language2)
+            {
+                questionWord = CurrentWordPair.Word1;
+                answerWord = CurrentWordPair.Word2;
+            }
+            else if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language1)
+            {
+                questionWord = CurrentWordPair.Word2;
+                answerWord = CurrentWordPair.Word1;
+            }
+
             if (ansDiff.Correct())
             {
                 foreach (var c in lbl_word1.Controls.OfType<WrongAnswer>())
                 {
                     c.Dispose();
                 }
+                foreach (var c in lbl_word1.Controls.OfType<ProbablyCorrectAnswer>())
+                {
+                    c.Dispose();
+                }
 
                 //if (!mismatch.AskingForSynonym)
-                if (true)
+                if (!UserCopyingWord)
                 {
-                    if (!UserCopyingWord)
-                    {
-                        ++QuizCore.QuizProgress.CorrectAnswersThisRound;
-                    }
-                    lbl_word1.Text = "Correct! Press ENTER to continue";
-                    QuizCore.ResetWordsAskedThisRoundMemo();
-                    lbl_progress.Text = $"Progress this round: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
+                    ++QuizCore.QuizProgress.CorrectAnswersThisRound;
+                }
 
-                    if (QuizCore.QuizProgress.FullTestInProgress && QuizCore.GetWordsAskedThisRound() == QuizCore.GetTotalWordsThisRound())
-                    {
-                        if (QuizCore.QuizProgress.CorrectAnswersThisRound == QuizCore.GetTotalWordsThisRound())
-                        {
-                            MessageBox.Show($"Full test results:\r\nCorrect: {QuizCore.QuizProgress.CorrectAnswersThisRound} / {QuizCore.GetTotalWordsThisRound()}, congratulations!",
-                                "Full test finished - SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        else
-                        {
-                            var msg = MessageBox.Show($"Full test results:\r\nCorrect: {QuizCore.QuizProgress.CorrectAnswersThisRound} / {QuizCore.GetTotalWordsThisRound()}\r\n\r\n" +
-                                $"Would you like to re-enable Intelligent Learning, to learn the missed words?",
-                                "Full test finished - SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                            if (msg == DialogResult.Yes)
-                            {
-                                SwitchIntelligentLearningMode(false);
-                            }
-                        }
-                        QuizCore.QuizProgress.CorrectAnswersThisRound = 0;
-                    }
-                    WaitingForEnter = true;
-                }
-                else
+                if (ansDiff.Certainty == StringComp.CorrectCertainty.CompletelyCorrect)
                 {
-                    lbl_word1.Text = "Correct, but a synonym to this word is being asked for.\r\n\r\nPress ENTER to try again.\r\n\r\n(press ENTER then write the answer)";
-                    WaitingForEnter = true;
+                    lbl_word1.Text = "Correct! Press ENTER to continue";
                 }
+                else if (ansDiff.Certainty == StringComp.CorrectCertainty.ProbablyCorrect)
+                {
+                    var probablyCorrectAns = new ProbablyCorrectAnswer(questionWord, QuizCore.QuizProgress.QuestionLanguage, answerWord, QuizCore.QuizProgress.AnswerLanguage,
+                        "Probably correct!");
+                    lbl_word1.Controls.Add(probablyCorrectAns);
+                    probablyCorrectAns.Location = new Point(0, 0);
+                    probablyCorrectAns.Show();
+                }
+                else if (ansDiff.Certainty == StringComp.CorrectCertainty.MaybeCorrect)
+                {
+                    var probablyCorrectAns = new ProbablyCorrectAnswer(questionWord, QuizCore.QuizProgress.QuestionLanguage, answerWord, QuizCore.QuizProgress.AnswerLanguage,
+                        "Might be correct!");
+                    lbl_word1.Controls.Add(probablyCorrectAns);
+                    probablyCorrectAns.Location = new Point(0, 0);
+                    probablyCorrectAns.Show();
+                }
+
+
+                QuizCore.ResetWordsAskedThisRoundMemo();
+                lbl_progress.Text = $"Progress this round: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
+
+                if (QuizCore.QuizProgress.FullTestInProgress && QuizCore.GetWordsAskedThisRound() == QuizCore.GetTotalWordsThisRound())
+                {
+                    if (QuizCore.QuizProgress.CorrectAnswersThisRound == QuizCore.GetTotalWordsThisRound())
+                    {
+                        MessageBox.Show($"Full test results:\r\nCorrect: {QuizCore.QuizProgress.CorrectAnswersThisRound} / {QuizCore.GetTotalWordsThisRound()}, congratulations!",
+                            "Full test finished - SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        var msg = MessageBox.Show($"Full test results:\r\nCorrect: {QuizCore.QuizProgress.CorrectAnswersThisRound} / {QuizCore.GetTotalWordsThisRound()}\r\n\r\n" +
+                            $"Would you like to re-enable Intelligent Learning, to learn the missed words?",
+                            "Full test finished - SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (msg == DialogResult.Yes)
+                        {
+                            SwitchIntelligentLearningMode(false);
+                        }
+                    }
+                    QuizCore.QuizProgress.CorrectAnswersThisRound = 0;
+                }
+                WaitingForEnter = true;
                 UserCopyingWord = false;
             }
             else
             {
-                string questionWord = null;
-                string answerWord = null;
-
-                if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language2)
-                {
-                    questionWord = CurrentWordPair.Word1;
-                    answerWord = CurrentWordPair.Word2;
-                }
-                else if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language1)
-                {
-                    questionWord = CurrentWordPair.Word2;
-                    answerWord = CurrentWordPair.Word1;
-                }
-
                 foreach (var c in lbl_word1.Controls.OfType<WrongAnswer>())
+                {
+                    c.Dispose();
+                }
+                foreach (var c in lbl_word1.Controls.OfType<ProbablyCorrectAnswer>())
                 {
                     c.Dispose();
                 }
