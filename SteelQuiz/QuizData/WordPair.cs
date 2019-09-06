@@ -16,6 +16,7 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using Newtonsoft.Json;
 using SteelQuiz.QuizPractise;
 using SteelQuiz.QuizProgressData;
 using System;
@@ -35,6 +36,34 @@ namespace SteelQuiz.QuizData
         public List<string> Word2Synonyms { get; set; }
 
         public StringComp.Rules TranslationRules { get; set; }
+
+        [JsonIgnore]
+        public string Question
+        {
+            get
+            {
+                if (QuizCore.Quiz == null || QuizCore.QuizProgress == null || QuizCore.Quiz.GUID != QuizCore.QuizProgress.QuizGUID)
+                {
+                    return null;
+                }
+
+                return QuizCore.QuizProgress.AnswerLanguageNum == 2 ? Word1 : Word2;
+            }
+        }
+
+        [JsonIgnore]
+        public string Answer
+        {
+            get
+            {
+                if (QuizCore.Quiz == null || QuizCore.QuizProgress == null || QuizCore.Quiz.GUID != QuizCore.QuizProgress.QuizGUID)
+                {
+                    return null;
+                }
+
+                return QuizCore.QuizProgress.AnswerLanguageNum == 2 ? Word2 : Word1;
+            }
+        }
 
         public WordPair(string word1, string word2, StringComp.Rules translationRules, List<string> word1Synonyms = null, List<string> word2Synonyms = null)
         {
@@ -155,11 +184,18 @@ namespace SteelQuiz.QuizData
             }
         }
 
-        public AnswerDiff AnswerCheck(string input, bool updateProgress = true)
+        /// <summary>
+        /// Checks the answer to see if it is correct, and returns data about the closest match
+        /// </summary>
+        /// <param name="input">The user answer</param>
+        /// <param name="answerIgnores">In case of a question with multiple answers, contains the answers already provided</param>
+        /// <param name="updateProgress">True if progress should be updated, otherwise false</param>
+        /// <returns></returns>
+        public AnswerDiff AnswerCheck(string input, IEnumerable<string> answerIgnores = null, bool updateProgress = true)
         {
             var similarityData = new List<StringComp.SimilarityData>();
 
-            foreach (var wp in GetRequiredSynonyms())
+            foreach (var wp in GetRequiredSynonyms().Where(x => answerIgnores == null || !answerIgnores.Contains(x.Answer)))
             {
                 similarityData = similarityData.Concat(SimilarityData(wp, input, updateProgress)).ToList();
             }

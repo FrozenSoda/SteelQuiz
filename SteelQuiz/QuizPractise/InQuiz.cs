@@ -40,15 +40,15 @@ namespace SteelQuiz.QuizPractise
 
         private WordPair CurrentWordPair { get; set; } = null;
         private string CurrentInput { get; set; } = "";
-        //private WordPair.TranslationMode TranslationMode { get; set; } = WordPair.TranslationMode.L1_to_L2;
 
         private bool WaitingForEnter { get; set; } = false;
         private bool UserCopyingWord { get; set; } = false;
         private bool CountThisTranslationToProgress { get; set; } = true; // false if the user clicked Fix Quiz Errors, as the answer is displayed there. Will become true as a new word is selected
         private bool ShowingW1synonyms { get; set; } = false;
-        //private int CorrectAnswersThisRound { get; set; } = 0;
 
         private MultiAnswer MultiAns { get; set; } = null;
+
+        private List<string> AnswersAlreadyEntered { get; set; } = null;
 
         public InQuiz(bool welcomeLocationInitialized = true)
         {
@@ -142,6 +142,8 @@ namespace SteelQuiz.QuizPractise
 
                 if (CurrentWordPair.GetRequiredSynonyms().Count() > 1)
                 {
+                    AnswersAlreadyEntered?.Clear();
+                    AnswersAlreadyEntered = new List<string>();
                     MultiAns?.Dispose();
                     MultiAns = new MultiAnswer();
                     lbl_word2.Controls.Add(MultiAns);
@@ -220,8 +222,21 @@ namespace SteelQuiz.QuizPractise
         private void CheckWord()
         {
             lbl_lang1.Text = "Info";
-            var ansDiff = CurrentWordPair.AnswerCheck(CurrentInput, !UserCopyingWord && CountThisTranslationToProgress);
+            WordPair.AnswerDiff ansDiff;
+            if (MultiAns == null)
+            {
+                ansDiff = CurrentWordPair.AnswerCheck(CurrentInput, null, !UserCopyingWord && CountThisTranslationToProgress);
+            }
+            else
+            {
+                //var labels = MultiAns.flp_answers.Controls.OfType<Label>();
+                //var answersAlreadyEntered = labels.Take(labels.Count() - 1).Select(x => x.Text);
 
+                ansDiff = CurrentWordPair.AnswerCheck(CurrentInput, AnswersAlreadyEntered,
+                    !UserCopyingWord && CountThisTranslationToProgress);
+            }
+
+            /*
             string questionWord = null;
             string answerWord = null;
 
@@ -235,6 +250,7 @@ namespace SteelQuiz.QuizPractise
                 questionWord = CurrentWordPair.Word2;
                 answerWord = CurrentWordPair.Word1;
             }
+            */
 
             if (ansDiff.Correct())
             {
@@ -245,6 +261,11 @@ namespace SteelQuiz.QuizPractise
                 foreach (var c in lbl_word1.Controls.OfType<ProbablyCorrectAnswer>())
                 {
                     c.Dispose();
+                }
+
+                if (MultiAns != null)
+                {
+                    AnswersAlreadyEntered.Add(ansDiff.MostSimilarAnswer);
                 }
 
                 //if (!mismatch.AskingForSynonym)
@@ -267,7 +288,7 @@ namespace SteelQuiz.QuizPractise
                 }
                 else if (ansDiff.Certainty == StringComp.CorrectCertainty.ProbablyCorrect)
                 {
-                    var probablyCorrectAns = new ProbablyCorrectAnswer(questionWord, QuizCore.QuizProgress.QuestionLanguage, ansDiff.MostSimilarAnswer, QuizCore.QuizProgress.AnswerLanguage,
+                    var probablyCorrectAns = new ProbablyCorrectAnswer(CurrentWordPair.Question, QuizCore.QuizProgress.QuestionLanguage, ansDiff.MostSimilarAnswer, QuizCore.QuizProgress.AnswerLanguage,
                         "Probably correct!");
                     lbl_word1.Controls.Add(probablyCorrectAns);
                     probablyCorrectAns.Location = new Point(0, 0);
@@ -275,7 +296,7 @@ namespace SteelQuiz.QuizPractise
                 }
                 else if (ansDiff.Certainty == StringComp.CorrectCertainty.MaybeCorrect)
                 {
-                    var probablyCorrectAns = new ProbablyCorrectAnswer(questionWord, QuizCore.QuizProgress.QuestionLanguage, ansDiff.MostSimilarAnswer, QuizCore.QuizProgress.AnswerLanguage,
+                    var probablyCorrectAns = new ProbablyCorrectAnswer(CurrentWordPair.Question, QuizCore.QuizProgress.QuestionLanguage, ansDiff.MostSimilarAnswer, QuizCore.QuizProgress.AnswerLanguage,
                         "Might be correct!");
                     lbl_word1.Controls.Add(probablyCorrectAns);
                     probablyCorrectAns.Location = new Point(0, 0);
@@ -318,7 +339,7 @@ namespace SteelQuiz.QuizPractise
                     c.Dispose();
                 }
 
-                var wrongAnswer = new WrongAnswer(questionWord, QuizCore.QuizProgress.QuestionLanguage, answerWord, QuizCore.QuizProgress.AnswerLanguage);
+                var wrongAnswer = new WrongAnswer(CurrentWordPair.Question, QuizCore.QuizProgress.QuestionLanguage, ansDiff.MostSimilarAnswer, QuizCore.QuizProgress.AnswerLanguage);
                 lbl_word1.Controls.Add(wrongAnswer);
                 wrongAnswer.Location = new Point(0, 0);
                 wrongAnswer.Show();
