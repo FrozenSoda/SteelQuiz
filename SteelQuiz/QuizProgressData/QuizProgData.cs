@@ -36,8 +36,7 @@ namespace SteelQuiz.QuizProgressData
         /// </summary>
         public int AnswerLanguageNum { get; set; } = 2;
 
-        private string __answerLanguage = null;
-
+        [JsonIgnore]
         /// <summary>
         /// The language to answer in when practising the quiz
         /// </summary>
