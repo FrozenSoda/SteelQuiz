@@ -338,6 +338,8 @@ namespace SteelQuiz.QuizEditor
                 else if (returningToMainMenu || !ConfigManager.Config.QuizEditorConfig.CloseApplicationOnEditorClose)
                 {
                     Hide();
+                    Program.frmWelcome.PopulateQuizList();
+                    Program.frmWelcome.SetControlStates();
                     Program.frmWelcome.GenerateWelcomeMsg();
                     Program.frmWelcome.Show();
                     Program.openQuizEditors.Remove(this);
