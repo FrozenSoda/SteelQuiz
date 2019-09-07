@@ -108,6 +108,7 @@ namespace SteelQuiz.QuizPractise
 
             WaitingForEnter = false;
             lbl_lang1.Text = QuizCore.Quiz.Language1;
+            lbl_word2.Text = "";
 
             foreach (var c in lbl_word1.Controls.OfType<WrongAnswer>())
             {
