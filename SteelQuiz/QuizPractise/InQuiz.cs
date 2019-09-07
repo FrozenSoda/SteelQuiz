@@ -311,7 +311,7 @@ namespace SteelQuiz.QuizPractise
                     }
                     QuizCore.QuizProgress.CorrectAnswersThisRound = 0;
                 }
-                else if (!QuizCore.QuizProgress.FullTestInProgress)
+                else if (!QuizCore.QuizProgress.FullTestInProgress && QuizCore.GetTotalWordsThisRound() == QuizCore.QuizProgress.CorrectAnswersThisRound)
                 {
                     bool allLearned100 = true;
                     foreach (var word in QuizCore.QuizProgress.WordProgDatas)
