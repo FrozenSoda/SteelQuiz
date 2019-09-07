@@ -175,5 +175,14 @@ namespace SteelQuiz.QuizEditor.UndoRedo
                 return item;
             };
         }
+
+        public static Func<T> Set<T>(this T variable, T val)
+        {
+            return () =>
+            {
+                variable = val;
+                return variable;
+            };
+        }
     }
 }

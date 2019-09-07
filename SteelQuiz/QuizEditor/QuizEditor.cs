@@ -690,5 +690,29 @@ namespace SteelQuiz.QuizEditor
         {
             ChangedSinceLastSave = true;
         }
+
+        private void EnableSmartComparisonToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+#warning implement undo/redo
+
+            var undoActions = new List<Func<object>>();
+            var redoActions = new List<Func<object>>();
+
+            if (enableSmartComparisonToolStripMenuItem.Checked)
+            {
+                foreach (var wp in flp_words.Controls.OfType<QuizEditorWordPair>())
+                {
+                    undoActions.Add(new Func<StringComp.Rules>(wp.ComparisonRules.Set(wp.ComparisonRules)));
+                    wp.ComparisonRules = StringComp.SMART_RULES;
+                }
+            }
+            else
+            {
+                foreach (var wp in flp_words.Controls.OfType<QuizEditorWordPair>())
+                {
+                    wp.ComparisonRules = StringComp.Rules.None;
+                }
+            }
+        }
     }
 }

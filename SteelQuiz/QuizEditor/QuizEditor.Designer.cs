@@ -69,6 +69,9 @@ namespace SteelQuiz.QuizEditor
             this.ofd_quiz = new System.Windows.Forms.OpenFileDialog();
             this.tmr_autoRecoverySave = new System.Windows.Forms.Timer(this.components);
             this.pnl_msg = new System.Windows.Forms.Panel();
+            this.globalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.enableSmartComparisonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.modifySmartComparisonSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mns_top.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -136,6 +139,7 @@ namespace SteelQuiz.QuizEditor
             this.mns_top.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
+            this.globalToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.mns_top.Location = new System.Drawing.Point(0, 0);
             this.mns_top.Name = "mns_top";
@@ -208,7 +212,7 @@ namespace SteelQuiz.QuizEditor
             // 
             this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
             this.undoToolStripMenuItem.ShortcutKeyDisplayString = "CTRL+Z";
-            this.undoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.undoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.undoToolStripMenuItem.Text = "Undo";
             this.undoToolStripMenuItem.Click += new System.EventHandler(this.undoToolStripMenuItem_Click);
             // 
@@ -216,7 +220,7 @@ namespace SteelQuiz.QuizEditor
             // 
             this.redoToolStripMenuItem.Name = "redoToolStripMenuItem";
             this.redoToolStripMenuItem.ShortcutKeyDisplayString = "CTRL+Y";
-            this.redoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.redoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.redoToolStripMenuItem.Text = "Redo";
             this.redoToolStripMenuItem.Click += new System.EventHandler(this.redoToolStripMenuItem_Click);
             // 
@@ -261,6 +265,31 @@ namespace SteelQuiz.QuizEditor
             this.pnl_msg.TabIndex = 0;
             this.pnl_msg.Visible = false;
             this.pnl_msg.SizeChanged += new System.EventHandler(this.Pnl_msg_SizeChanged);
+            // 
+            // globalToolStripMenuItem
+            // 
+            this.globalToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.enableSmartComparisonToolStripMenuItem,
+            this.modifySmartComparisonSettingsToolStripMenuItem});
+            this.globalToolStripMenuItem.Name = "globalToolStripMenuItem";
+            this.globalToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
+            this.globalToolStripMenuItem.Text = "Global";
+            // 
+            // enableSmartComparisonToolStripMenuItem
+            // 
+            this.enableSmartComparisonToolStripMenuItem.Checked = true;
+            this.enableSmartComparisonToolStripMenuItem.CheckOnClick = true;
+            this.enableSmartComparisonToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.enableSmartComparisonToolStripMenuItem.Name = "enableSmartComparisonToolStripMenuItem";
+            this.enableSmartComparisonToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
+            this.enableSmartComparisonToolStripMenuItem.Text = "Enable Smart Comparison";
+            this.enableSmartComparisonToolStripMenuItem.Click += new System.EventHandler(this.EnableSmartComparisonToolStripMenuItem_Click);
+            // 
+            // modifySmartComparisonSettingsToolStripMenuItem
+            // 
+            this.modifySmartComparisonSettingsToolStripMenuItem.Name = "modifySmartComparisonSettingsToolStripMenuItem";
+            this.modifySmartComparisonSettingsToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
+            this.modifySmartComparisonSettingsToolStripMenuItem.Text = "Modify Smart Comparison Settings";
             // 
             // QuizEditor
             // 
@@ -313,5 +342,8 @@ namespace SteelQuiz.QuizEditor
         private System.Windows.Forms.Timer tmr_autoRecoverySave;
         private System.Windows.Forms.ToolStripMenuItem sorryThereIsNoneYetToolStripMenuItem;
         private System.Windows.Forms.Panel pnl_msg;
+        private System.Windows.Forms.ToolStripMenuItem globalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem enableSmartComparisonToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem modifySmartComparisonSettingsToolStripMenuItem;
     }
 }
