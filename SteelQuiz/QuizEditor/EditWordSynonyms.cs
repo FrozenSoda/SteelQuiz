@@ -208,8 +208,8 @@ namespace SteelQuiz.QuizEditor
             lst_synonyms.Items.Add(txt_wordAdd.Text);
 
             QEOwner.UndoStack.Push(new UndoRedoFuncPair(
-                new Func<object>[] { lst_synonyms.RemoveItem(() => { return this.Parent.EditWordSynonyms; }, lst_synonyms.Name, txt_wordAdd.Text) },
-                new Func<object>[] { lst_synonyms.AddItem(() => { return this.Parent.EditWordSynonyms; }, lst_synonyms.Name, txt_wordAdd.Text) },
+                new Action[] { lst_synonyms.RemoveItem(() => { return this.Parent.EditWordSynonyms; }, lst_synonyms.Name, txt_wordAdd.Text) },
+                new Action[] { lst_synonyms.AddItem(() => { return this.Parent.EditWordSynonyms; }, lst_synonyms.Name, txt_wordAdd.Text) },
                 "Add synonym(s)",
                 new OwnerControlData(this, this.Parent, Language)));
             UpdateUndoRedoTooltips();
@@ -278,8 +278,8 @@ namespace SteelQuiz.QuizEditor
                 toUpdate.Add(lst_synonyms.SelectedItems[i]);
             }
 
-            var undoes = new List<Func<object>>();
-            var redoes = new List<Func<object>>();
+            var undoes = new List<Action>();
+            var redoes = new List<Action>();
 
             foreach (var item in toUpdate)
             {
@@ -309,8 +309,8 @@ namespace SteelQuiz.QuizEditor
                 toRemove.Add(lst_synonyms.SelectedItems[i]);
             }
 
-            var undoes = new List<Func<object>>();
-            var redoes = new List<Func<object>>();
+            var undoes = new List<Action>();
+            var redoes = new List<Action>();
 
             foreach (var item in toRemove)
             {

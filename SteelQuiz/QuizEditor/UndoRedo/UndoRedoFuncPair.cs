@@ -27,12 +27,12 @@ namespace SteelQuiz.QuizEditor.UndoRedo
 {
     public class UndoRedoFuncPair
     {
-        public Func<object>[] UndoActions { get; set; }
-        public Func<object>[] RedoActions { get; set; }
+        public Action[] UndoActions { get; set; }
+        public Action[] RedoActions { get; set; }
         public string Description { get; set; }
         public OwnerControlData OwnerControlData { get; set; }
 
-        public UndoRedoFuncPair(Func<object>[] undoActions, Func<object>[] redoActions, string description, OwnerControlData ownerControlData)
+        public UndoRedoFuncPair(Action[] undoActions, Action[] redoActions, string description, OwnerControlData ownerControlData)
         {
             UndoActions = undoActions;
             RedoActions = redoActions;

@@ -162,8 +162,8 @@ namespace SteelQuiz.QuizPractise
             lst_synonyms.Items.Add(txt_wordAdd.Text);
 
             UndoStack.Push(new UndoRedoFuncPair(
-                new Func<object>[] { lst_synonyms.RemoveItem(txt_wordAdd.Text) },
-                new Func<object>[] { lst_synonyms.AddItem(txt_wordAdd.Text) },
+                new Action[] { lst_synonyms.RemoveItem(txt_wordAdd.Text) },
+                new Action[] { lst_synonyms.AddItem(txt_wordAdd.Text) },
                 "Add synonym(s)",
                 new OwnerControlData(this, this.Parent, Language)));
             UpdateUndoRedoTooltips();
@@ -230,8 +230,8 @@ namespace SteelQuiz.QuizPractise
                 toUpdate.Add(lst_synonyms.SelectedItems[i]);
             }
 
-            var undoes = new List<Func<object>>();
-            var redoes = new List<Func<object>>();
+            var undoes = new List<Action>();
+            var redoes = new List<Action>();
 
             foreach (var item in toUpdate)
             {
@@ -260,8 +260,8 @@ namespace SteelQuiz.QuizPractise
                 toRemove.Add(lst_synonyms.SelectedItems[i]);
             }
 
-            var undoes = new List<Func<object>>();
-            var redoes = new List<Func<object>>();
+            var undoes = new List<Action>();
+            var redoes = new List<Action>();
 
             foreach (var item in toRemove)
             {

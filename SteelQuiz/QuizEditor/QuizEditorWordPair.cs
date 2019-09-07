@@ -157,8 +157,8 @@ namespace SteelQuiz.QuizEditor
             if (QEOwner.UpdateUndoRedoStacks)
             {
                 QEOwner.UndoStack.Push(new UndoRedoFuncPair(
-                    new Func<object>[] { txt_word1.ChangeText(txt_word1_text_old, () => { ignore_txt_word_change = true; }) },
-                    new Func<object>[] { txt_word1.ChangeText(txt_word1.Text, () => { ignore_txt_word_change = true; }) },
+                    new Action[] { txt_word1.ChangeText(txt_word1_text_old, () => { ignore_txt_word_change = true; }) },
+                    new Action[] { txt_word1.ChangeText(txt_word1.Text, () => { ignore_txt_word_change = true; }) },
                     "Change word",
                     new OwnerControlData(this, this.Parent)));
                 QEOwner.UpdateUndoRedoTooltips();
@@ -184,8 +184,8 @@ namespace SteelQuiz.QuizEditor
             if (QEOwner.UpdateUndoRedoStacks)
             {
                 QEOwner.UndoStack.Push(new UndoRedoFuncPair(
-                new Func<object>[] { txt_word2.ChangeText(txt_word2_text_old, () => { ignore_txt_word_change = true; }) },
-                new Func<object>[] { txt_word2.ChangeText(txt_word2.Text, () => { ignore_txt_word_change = true; }) },
+                new Action[] { txt_word2.ChangeText(txt_word2_text_old, () => { ignore_txt_word_change = true; }) },
+                new Action[] { txt_word2.ChangeText(txt_word2.Text, () => { ignore_txt_word_change = true; }) },
                 "Change word",
                 new OwnerControlData(this, this.Parent)));
                 QEOwner.UpdateUndoRedoTooltips();
@@ -206,8 +206,8 @@ namespace SteelQuiz.QuizEditor
             if (QEOwner.UpdateUndoRedoStacks)
             {
                 QEOwner.UndoStack.Push(new UndoRedoFuncPair(
-                    new Func<object>[] { chk_smartComp.SetChecked(!chk_smartComp.Checked, () => { ignore_chk_smartComp_change = true; }) },
-                    new Func<object>[] { chk_smartComp.SetChecked(chk_smartComp.Checked, () => { ignore_chk_smartComp_change = true; }) },
+                    new Action[] { chk_smartComp.SetChecked(!chk_smartComp.Checked, () => { ignore_chk_smartComp_change = true; }) },
+                    new Action[] { chk_smartComp.SetChecked(chk_smartComp.Checked, () => { ignore_chk_smartComp_change = true; }) },
                     "Checkbox switch",
                     new OwnerControlData(this, this.Parent)
                     ));
@@ -231,8 +231,8 @@ namespace SteelQuiz.QuizEditor
             if (QEOwner.UpdateUndoRedoStacks)
             {
                 QEOwner.UndoStack.Push(new UndoRedoFuncPair(
-                    new Func<object>[] { QEOwner.AddWordPair(this, QEOwner.flp_words.Controls.GetChildIndex(this)) },
-                    new Func<object>[] { QEOwner.RemoveWordPair(this) },
+                    new Action[] { QEOwner.AddWordPair(this, QEOwner.flp_words.Controls.GetChildIndex(this)) },
+                    new Action[] { QEOwner.RemoveWordPair(this) },
                     "Remove word pair",
                     new OwnerControlData(this, this.Parent)
                     ));
@@ -250,8 +250,8 @@ namespace SteelQuiz.QuizEditor
             if ((word == -1 || word == 1) && Synonyms1 != null && Synonyms1.Contains(Word1))
             {
                 QEOwner.UndoStack.Push(new UndoRedoFuncPair(
-                    new Func<object>[] { Synonyms1.AddItem(Word1) },
-                    new Func<object>[] { Synonyms1.RemoveItem(Word1) },
+                    new Action[] { Synonyms1.AddItem(Word1) },
+                    new Action[] { Synonyms1.RemoveItem(Word1) },
                     "Auto-remove synonym",
                     new OwnerControlData(this, this.Parent)
                     ));
@@ -268,8 +268,8 @@ namespace SteelQuiz.QuizEditor
             if ((word == -1 || word == 2) && Synonyms2 != null && Synonyms2.Contains(Word2))
             {
                 QEOwner.UndoStack.Push(new UndoRedoFuncPair(
-                    new Func<object>[] { Synonyms2.AddItem(Word2) },
-                    new Func<object>[] { Synonyms2.RemoveItem(Word2) },
+                    new Action[] { Synonyms2.AddItem(Word2) },
+                    new Action[] { Synonyms2.RemoveItem(Word2) },
                     "Auto-remove synonym",
                     new OwnerControlData(this, this.Parent)
                     ));

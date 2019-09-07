@@ -693,26 +693,45 @@ namespace SteelQuiz.QuizEditor
 
         private void EnableSmartComparisonToolStripMenuItem_Click(object sender, EventArgs e)
         {
-#warning implement undo/redo
-
-            var undoActions = new List<Func<object>>();
-            var redoActions = new List<Func<object>>();
+            var undoActions = new List<Action>();
+            var redoActions = new List<Action>();
 
             if (enableSmartComparisonToolStripMenuItem.Checked)
             {
                 foreach (var wp in flp_words.Controls.OfType<QuizEditorWordPair>())
                 {
-                    undoActions.Add(new Func<StringComp.Rules>(wp.ComparisonRules.Set(wp.ComparisonRules)));
+                    var compRules = wp.ComparisonRules;
+                    undoActions.Add(new Action(wp.ComparisonRules.Set(compRules)));
+                    redoActions.Add(new Action(wp.ComparisonRules.Set(StringComp.SMART_RULES)));
                     wp.ComparisonRules = StringComp.SMART_RULES;
                 }
+
+                UndoStack.Push(new UndoRedoFuncPair(
+                    undoActions.ToArray(),
+                    redoActions.ToArray(),
+                    "Global enable Smart Comparison",
+                    new OwnerControlData(this, this.Parent)
+                    ));
             }
             else
             {
                 foreach (var wp in flp_words.Controls.OfType<QuizEditorWordPair>())
                 {
+                    var compRules = wp.ComparisonRules;
+                    undoActions.Add(new Action(wp.ComparisonRules.Set(compRules)));
+                    redoActions.Add(new Action(wp.ComparisonRules.Set(StringComp.Rules.None)));
                     wp.ComparisonRules = StringComp.Rules.None;
                 }
+
+                UndoStack.Push(new UndoRedoFuncPair(
+                    undoActions.ToArray(),
+                    redoActions.ToArray(),
+                    "Global disable Smart Comparison",
+                    new OwnerControlData(this, this.Parent)
+                    ));
             }
+
+            UpdateUndoRedoTooltips();
         }
     }
 }

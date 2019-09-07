@@ -37,151 +37,137 @@ namespace SteelQuiz.QuizEditor.UndoRedo
          * formPtr is a Func which returns the appropriate form
          */ 
 
-        public static Func<TextBox> ChangeText(this TextBox textBox, string to, Action beforeRevertAction)
+        public static Action ChangeText(this TextBox textBox, string to, Action beforeRevertAction)
         {
             return () => {
                 beforeRevertAction?.Invoke();
                 textBox.Text = to;
                 textBox.SelectionStart = textBox.Text.Length;
                 textBox.SelectionLength = 0;
-                return textBox;
             };
         }
 
 
-        public static Func<TextBox> ChangeText(this TextBox textBox, Func<Form> formPtr, string textBoxName, string to)
+        public static Action ChangeText(this TextBox textBox, Func<Form> formPtr, string textBoxName, string to)
         {
             return () => {
                 var txt = formPtr().Controls[textBoxName] as TextBox;
                 if (txt == null)
                 {
-                    return null;
+                    return;
                 }
                 txt.Text = to;
                 textBox.SelectionStart = textBox.Text.Length;
                 textBox.SelectionLength = 0;
-                return txt;
             };
         }
 
-        public static Func<ListBox> RemoveItem(this ListBox listBox, object added)
+        public static Action RemoveItem(this ListBox listBox, object added)
         {
             return () => {
                 listBox.Items.Remove(added);
-                return listBox;
             };
         }
 
-        public static Func<ListBox> RemoveItem(this ListBox listBox, Func<Form> formPtr, string listBoxName, object added)
+        public static Action RemoveItem(this ListBox listBox, Func<Form> formPtr, string listBoxName, object added)
         {
             return () => {
                 var lst = formPtr().Controls[listBoxName] as ListBox;
                 if (lst == null)
                 {
-                    return null;
+                    return;
                 }
                 lst.Items.Remove(added);
-                return lst;
             };
         }
 
-        public static Func<ListBox> AddItem(this ListBox listBox, object removed)
+        public static Action AddItem(this ListBox listBox, object removed)
         {
             return () => {
                 listBox.Items.Add(removed);
-                return listBox;
             };
         }
 
-        public static Func<ListBox> AddItem(this ListBox listBox, Func<Form> formPtr, string listBoxName, object removed)
+        public static Action AddItem(this ListBox listBox, Func<Form> formPtr, string listBoxName, object removed)
         {
             return () => {
                 var lst = formPtr().Controls[listBoxName] as ListBox;
                 if (lst == null)
                 {
-                    return null;
+                    return;
                 }
                 lst.Items.Add(removed);
-                return lst;
             };
         }
 
-        public static Func<ListBox> ChangeItem(this ListBox listBox, object to, object from)
+        public static Action ChangeItem(this ListBox listBox, object to, object from)
         {
             return () => {
                 listBox.Items[listBox.Items.IndexOf(from)] = to;
-                return listBox;
             };
         }
 
-        public static Func<ListBox> ChangeItem(this ListBox listBox, Func<Form> formPtr, string listBoxName, object to, object from)
+        public static Action ChangeItem(this ListBox listBox, Func<Form> formPtr, string listBoxName, object to, object from)
         {
             return () => {
                 var lst = formPtr().Controls[listBoxName] as ListBox;
                 if (lst == null)
                 {
-                    return null;
+                    return;
                 }
                 lst.Items[lst.Items.IndexOf(from)] = to;
-                return lst;
             };
         }
 
-        public static Func<CheckBox> SetChecked(this CheckBox checkBox, bool state, Action beforeRevertAction)
+        public static Action SetChecked(this CheckBox checkBox, bool state, Action beforeRevertAction)
         {
             return () =>
             {
                 beforeRevertAction?.Invoke();
                 checkBox.Checked = state;
-                return checkBox;
             };
         }
 
-        public static Func<QuizEditorWordPair> RemoveWordPair(this QuizEditor quizEditor, QuizEditorWordPair wordPair)
+        public static Action RemoveWordPair(this QuizEditor quizEditor, QuizEditorWordPair wordPair)
         {
             return () =>
             {
                 quizEditor.flp_words.Controls.Remove(wordPair);
                 quizEditor.ChkFixWordsCount();
-                return wordPair;
             };
         }
 
-        public static Func<QuizEditorWordPair> AddWordPair(this QuizEditor quizEditor, QuizEditorWordPair wordPair, int index)
+        public static Action AddWordPair(this QuizEditor quizEditor, QuizEditorWordPair wordPair, int index)
         {
             return () =>
             {
                 quizEditor.flp_words.Controls.Add(wordPair);
                 quizEditor.flp_words.Controls.SetChildIndex(wordPair, index);
                 quizEditor.ChkFixWordsCount();
-                return wordPair;
             };
         }
 
-        public static Func<T> RemoveItem<T>(this IList<T> lst, T item)
+        public static Action RemoveItem<T>(this IList<T> lst, T item)
         {
             return () =>
             {
                 lst.Remove(item);
-                return item;
             };
         }
 
-        public static Func<T> AddItem<T>(this IList<T> lst, T item)
+        public static Action AddItem<T>(this IList<T> lst, T item)
         {
             return () =>
             {
                 lst.Add(item);
-                return item;
             };
         }
 
-        public static Func<T> Set<T>(this T variable, T val)
+        public static Action Set<T>(this T variable, T val)
         {
             return () =>
             {
                 variable = val;
-                return variable;
             };
         }
     }
