@@ -73,7 +73,6 @@ namespace SteelQuiz.QuizEditor
             // btn_smartCompSettings
             // 
             this.btn_smartCompSettings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
-            this.btn_smartCompSettings.BackgroundImage = global::SteelQuiz.Properties.Resources.gear_1077563_white_with_bigger_border;
             this.btn_smartCompSettings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btn_smartCompSettings.FlatAppearance.BorderSize = 0;
             this.btn_smartCompSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;

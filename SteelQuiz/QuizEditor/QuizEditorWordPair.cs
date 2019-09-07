@@ -93,11 +93,11 @@ namespace SteelQuiz.QuizEditor
 
             if (ConfigManager.Config.Theme == ThemeManager.ThemeCore.Theme.Dark)
             {
-                btn_smartCompSettings.BackgroundImage = Properties.Resources.gear_1077563_white_with_bigger_border;
+                btn_smartCompSettings.BackgroundImage = CachedResourceManager.LoadResource<Bitmap>("gear-1077563-white-with-bigger-border");
             }
             else
             {
-                btn_smartCompSettings.BackgroundImage = Properties.Resources.gear_1077563_black_with_bigger_border;
+                btn_smartCompSettings.BackgroundImage = CachedResourceManager.LoadResource<Bitmap>("gear-1077563-black-with-bigger-border");
             }
         }
 

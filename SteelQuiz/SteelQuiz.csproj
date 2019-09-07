@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="Animations\ControlMove.cs" />
     <Compile Include="Animations\LabelFade.cs" />
+    <Compile Include="CachedResourceManager.cs" />
     <Compile Include="QuizEditor\SmartComparisonSettings.cs">
       <SubType>Form</SubType>
     </Compile>
