@@ -212,7 +212,11 @@ namespace SteelQuiz.QuizData
             if (ansDiff.Correct())
             {
                 ansDiff.WordPair.GetWordProgData().AskedThisRound = true;
-                QuizCore.QuizProgress.SetCurrentWordPair(null);
+
+                if (ansDiff.WordPair.GetRequiredSynonyms().Select(x => x.GetWordProgData().AskedThisRound).All(x => x == true))
+                {
+                    QuizCore.QuizProgress.SetCurrentWordPair(null);
+                }
             }
 
             QuizCore.SaveQuizProgress();

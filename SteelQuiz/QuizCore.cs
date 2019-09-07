@@ -488,16 +488,24 @@ namespace SteelQuiz
         public static bool FixQuizProgressData()
         {
             // REMOVE WORD PAIRS FROM PROGRESS DATA THAT WERE REMOVED FROM THE QUIZ
-            var findCurrent = FindWordPairInQuiz(QuizProgress.CurrentWordPair);
-            QuizProgress.CurrentWordPair = findCurrent;
 
-            var toRemove = new List<WordProgData>();
+            //var findCurrent = FindWordPairInQuiz(QuizProgress.CurrentWordPairs);
+            //QuizProgress.CurrentWordPairs = findCurrent;
+
+            for (int i = 0; i < QuizProgress.CurrentWordPairs.Count; ++i)
+            {
+                QuizProgress.CurrentWordPairs[i] = FindWordPairInQuiz(QuizProgress.CurrentWordPairs[i]);
+            }
+
+            QuizProgress.CurrentWordPairs = QuizProgress.CurrentWordPairs.Where(x => x != null).ToList();
+
+            var toRemoveWprog = new List<WordProgData>();
             foreach (var wordProgData in QuizProgress.WordProgDatas)
             {
                 var find = FindWordPairInQuiz(wordProgData.WordPair);
                 if (find == null)
                 {
-                    toRemove.Add(wordProgData);
+                    toRemoveWprog.Add(wordProgData);
                 }
                 else
                 {
@@ -505,7 +513,7 @@ namespace SteelQuiz
                 }
             }
 
-            foreach (var rm in toRemove)
+            foreach (var rm in toRemoveWprog)
             {
                 QuizProgress.WordProgDatas.Remove(rm);
             }

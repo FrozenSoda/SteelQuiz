@@ -90,7 +90,7 @@ namespace SteelQuiz.QuizProgressData
         }
 
         [JsonProperty] // required for deserialization of property with private setter
-        internal WordPair CurrentWordPair { get; set; } = null;
+        internal List<WordPair> CurrentWordPairs { get; set; } = new List<WordPair>();
 
         [JsonIgnore]
         /// <summary>
@@ -164,7 +164,14 @@ namespace SteelQuiz.QuizProgressData
         // due to CurrentWordPair not preserving references due to serialization, implement setter through method instead, to avoid confusion regarding references
         public void SetCurrentWordPair(WordPair wordPair)
         {
-            CurrentWordPair = wordPair;
+            if (wordPair == null)
+            {
+                CurrentWordPairs.Clear();
+            }
+            else
+            {
+                CurrentWordPairs = wordPair.GetRequiredSynonyms().ToList();
+            }
         }
 
         public IEnumerable<WordPair> WordsNotToAsk()

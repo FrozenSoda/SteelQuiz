@@ -62,9 +62,9 @@ namespace SteelQuiz.QuizPractise
         {
             QuizCore.ResetWordsAskedThisRoundMemo();
 
-            if (QuizCore.QuizProgress.CurrentWordPair != null)
+            if (QuizCore.QuizProgress.CurrentWordPairs != null && QuizCore.QuizProgress.CurrentWordPairs.Count > 0)
             {
-                return QuizCore.QuizProgress.CurrentWordPair;
+                return QuizCore.QuizProgress.CurrentWordPairs[0];
             }
 
             if (QuizCore.QuizProgress.FullTestInProgress)
