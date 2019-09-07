@@ -50,7 +50,7 @@ namespace SteelQuiz.QuizPractise
 
         private MultiAnswer MultiAns { get; set; } = null;
 
-        private List<string> AnswersAlreadyEntered { get; set; } = null;
+        //private List<string> AnswersAlreadyEntered { get; set; } = null;
 
         public InQuiz(bool welcomeLocationInitialized = true)
         {
@@ -146,13 +146,41 @@ namespace SteelQuiz.QuizPractise
 
                 if (CurrentWordPair.GetRequiredSynonyms().Count() > 1)
                 {
-                    AnswersAlreadyEntered?.Clear();
-                    AnswersAlreadyEntered = new List<string>();
+                    //AnswersAlreadyEntered?.Clear();
+                    //AnswersAlreadyEntered = new List<string>();
                     MultiAns?.Dispose();
                     MultiAns = new MultiAnswer();
                     lbl_word2.Controls.Add(MultiAns);
                     MultiAns.Location = new Point(0, 0);
                     MultiAns.Show();
+
+                    bool first = true;
+                    bool found = false;
+                    foreach (var wp in CurrentWordPair.GetRequiredSynonyms().Where(x => x != CurrentWordPair && x.GetWordProgData().AskedThisRound))
+                    {
+                        found = true;
+
+                        if (first)
+                        {
+                            first = false;
+
+                            MultiAns.CurrentLabel.Text = wp.Answer;
+                            MultiAns.CurrentLabel.Show();
+                        }
+                        else
+                        {
+                            var lbl = MultiAns.CurrentLabel.Clone();
+                            lbl.Text = wp.Answer;
+                            lbl.Show();
+                        }
+                    }
+
+                    if (found)
+                    {
+                        var lbl = MultiAns.CurrentLabel.Clone();
+                        lbl.Text = "Enter your answers...";
+                        lbl.Show();
+                    }
                 }
                 else
                 {
@@ -175,7 +203,7 @@ namespace SteelQuiz.QuizPractise
                 lbl_progress.Text = $"Progress this round: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
 
                 var lbl = MultiAns.CurrentLabel.Clone();
-                lbl.Text = "Enter your answer...";
+                lbl.Text = "Enter your answers...";
             }
         }
 
@@ -224,6 +252,15 @@ namespace SteelQuiz.QuizPractise
             lbl_progress.Text = $"Progress this round: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
         }
 
+        /// <summary>
+        /// Retrieves a collection of answers already entered in a multi-answer question
+        /// </summary>
+        /// <returns>Returns the collection</returns>
+        private IEnumerable<WordPair> MultiAnswersAlreadyEntered()
+        {
+            return CurrentWordPair.GetRequiredSynonyms().Where(x => x.GetWordProgData().AskedThisRound);
+        }
+
         private void CheckWord()
         {
             lbl_lang1.Text = "Info";
@@ -234,7 +271,7 @@ namespace SteelQuiz.QuizPractise
             }
             else
             {
-                ansDiff = CurrentWordPair.AnswerCheck(CurrentInput, AnswersAlreadyEntered,
+                ansDiff = CurrentWordPair.AnswerCheck(CurrentInput, MultiAnswersAlreadyEntered().Select(x => x.Answer),
                     !UserCopyingWord && CountThisTranslationToProgress);
             }
 
@@ -249,10 +286,12 @@ namespace SteelQuiz.QuizPractise
                     c.Dispose();
                 }
 
+                /*
                 if (MultiAns != null)
                 {
                     AnswersAlreadyEntered.Add(ansDiff.MostSimilarAnswer);
                 }
+                */
 
                 //if (!mismatch.AskingForSynonym)
                 if (!UserCopyingWord)
