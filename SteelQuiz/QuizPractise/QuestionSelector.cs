@@ -190,12 +190,13 @@ namespace SteelQuiz.QuizPractise
 
             if (skipCount == QuizCore.QuizProgress.WordProgDatas.Count)
             {
+                /*
                 if (!QuizCore.QuizProgress.MasterNoticeShowed)
                 {
                     var allLearned100 = true;
                     foreach (var word in QuizCore.QuizProgress.WordProgDatas)
                     {
-                        if (word.GetLearningProgress() < 1 && word.GetWordTriesCount() >= WordProgData.WORD_TRIES_FOR_LEARNING_PROGRESS)
+                        if (word.GetLearningProgress() < 1 || word.GetWordTriesCount() < WordProgData.WORD_TRIES_FOR_LEARNING_PROGRESS)
                         {
                             allLearned100 = false;
                         }
@@ -227,6 +228,7 @@ namespace SteelQuiz.QuizPractise
                         }
                     }
                 }
+                */
 
                 // if all words are skipped, select five random words to ask (remove skip sign)
                 const int MAXIMUM_WORDS_TO_GENERATE = 5;

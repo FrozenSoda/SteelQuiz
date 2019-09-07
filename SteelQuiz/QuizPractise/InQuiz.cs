@@ -20,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -27,6 +28,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SteelQuiz.Extensions;
 using SteelQuiz.QuizData;
+using SteelQuiz.QuizProgressData;
 using SteelQuiz.ThemeManager.Colors;
 
 namespace SteelQuiz.QuizPractise
@@ -70,7 +72,7 @@ namespace SteelQuiz.QuizPractise
             {
                 this.Text += " PRE-RELEASE";
             }
-            NewWord();
+            NewWord(false);
             if (QuizCore.QuizProgress.FullTestInProgress)
             {
                 lbl_intelligentLearning.Text = "Intelligent learning: Disabled";
@@ -102,6 +104,8 @@ namespace SteelQuiz.QuizPractise
 
         public void NewWord(bool newRoundMsg = true)
         {
+            Debug.WriteLine("InQuiz.NewWord()");
+
             WaitingForEnter = false;
             lbl_lang1.Text = QuizCore.Quiz.Language1;
 
@@ -175,9 +179,10 @@ namespace SteelQuiz.QuizPractise
             }
         }
 
-        private bool skipNewRoundMessage = false;
         private void NewRound(bool newRoundMsg = true)
         {
+            Debug.WriteLine("InQuiz.NewRound()");
+
             CountThisTranslationToProgress = true;
             lbl_progress.Text = $"Progress this round: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
 
@@ -203,9 +208,7 @@ namespace SteelQuiz.QuizPractise
             QuizCore.QuizProgress.CorrectAnswersThisRound = 0;
             QuestionSelector.NewRound();
 
-            // problem: the stuff the NewRound() called in QuestionSelector.NewRound() does gets replaced by the stuff below in this function call
-
-            if (newRoundMsg && !skipNewRoundMessage)
+            if (newRoundMsg)
             {
                 lbl_lang1.Text = "Info";
                 lbl_word1.Text = "Round completed! Press ENTER to continue";
@@ -213,7 +216,6 @@ namespace SteelQuiz.QuizPractise
             }
             else
             {
-                skipNewRoundMessage = false;
                 WaitingForEnter = false;
 
                 NewWord(newRoundMsg);
@@ -308,6 +310,47 @@ namespace SteelQuiz.QuizPractise
                         }
                     }
                     QuizCore.QuizProgress.CorrectAnswersThisRound = 0;
+                }
+                else if (!QuizCore.QuizProgress.FullTestInProgress)
+                {
+                    bool allLearned100 = true;
+                    foreach (var word in QuizCore.QuizProgress.WordProgDatas)
+                    {
+                        if (word.GetLearningProgress() < 1 || word.GetWordTriesCount() < WordProgData.WORD_TRIES_FOR_LEARNING_PROGRESS)
+                        {
+                            allLearned100 = false;
+                        }
+                    }
+
+                    if (allLearned100)
+                    {
+                        if (!QuestionSelector.SkipNextMasterNotice)
+                        {
+                            QuizCore.QuizProgress.MasterNoticeShowed = true;
+                            var msg = MessageBox.Show("Congratulations! It seems that you have mastered this quiz. " +
+                                "Repeat it to make sure you don't forget it, and don't remember to do a full test of the words to make sure you still know them all."
+                                + "\r\n\r\nPerform a full test now?",
+                                "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+                            if (msg == DialogResult.Yes)
+                            {
+                                Program.frmInQuiz.SwitchIntelligentLearningMode();
+
+                                WaitingForEnter = false;
+                                UserCopyingWord = false;
+
+                                return;
+                            }
+                            else
+                            {
+                                QuestionSelector.SkipNextMasterNotice = true;
+                            }
+                        }
+                        else
+                        {
+                            QuestionSelector.SkipNextMasterNotice = false;
+                        }
+                    }
                 }
                 WaitingForEnter = true;
                 UserCopyingWord = false;
@@ -434,7 +477,6 @@ namespace SteelQuiz.QuizPractise
             if (callGenerationFunctions)
             {
                 //QuestionSelector.NewRound();
-                skipNewRoundMessage = true;
                 NewWord(false);
             }
 
