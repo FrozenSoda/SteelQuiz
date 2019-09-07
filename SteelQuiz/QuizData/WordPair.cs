@@ -191,7 +191,7 @@ namespace SteelQuiz.QuizData
         /// <param name="answerIgnores">In case of a question with multiple answers, contains the answers already provided</param>
         /// <param name="updateProgress">True if progress should be updated, otherwise false</param>
         /// <returns></returns>
-        public AnswerDiff AnswerCheck(string input, IEnumerable<string> answerIgnores = null, bool updateProgress = true, bool userCopyingWord = false)
+        public AnswerDiff AnswerCheck(string input, IEnumerable<string> answerIgnores = null, bool updateProgress = true)
         {
             var similarityData = new List<StringComp.SimilarityData>();
 
@@ -209,7 +209,7 @@ namespace SteelQuiz.QuizData
                 ansDiff.WordPair.GetWordProgData().AddWordTry(new WordTry(ansDiff.Correct()));
             }
 
-            if (!userCopyingWord)
+            if (ansDiff.Correct())
             {
                 ansDiff.WordPair.GetWordProgData().AskedThisRound = true;
                 QuizCore.QuizProgress.SetCurrentWordPair(null);

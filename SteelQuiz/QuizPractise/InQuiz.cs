@@ -268,12 +268,12 @@ namespace SteelQuiz.QuizPractise
             WordPair.AnswerDiff ansDiff;
             if (MultiAns == null)
             {
-                ansDiff = CurrentWordPair.AnswerCheck(CurrentInput, null, CountThisTranslationToProgress, UserCopyingWord);
+                ansDiff = CurrentWordPair.AnswerCheck(CurrentInput, null, CountThisTranslationToProgress && !UserCopyingWord);
             }
             else
             {
                 ansDiff = CurrentWordPair.AnswerCheck(CurrentInput, MultiAnswersAlreadyEntered().Select(x => x.Answer),
-                    CountThisTranslationToProgress, UserCopyingWord);
+                    CountThisTranslationToProgress && !UserCopyingWord);
             }
 
             if (ansDiff.Correct())
