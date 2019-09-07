@@ -68,16 +68,18 @@ namespace SteelQuiz.QuizPractise
         [Flags]
         public enum Rules
         {
-            IgnoreFirstCapitalization = 1 << 5,
-            TreatWordInParenthesisAsOptional = 1 << 4,
-            TreatWordsBetweenSlashAsSynonyms = 1 << 3,
-            IgnoreOpeningWhitespace = 1 << 2,
-            IgnoreEndingWhitespace = 1 << 1,
-            None = 1 << 0,
+            IgnoreDotsInEnd                     = 1 << 6,
+            IgnoreFirstCapitalization           = 1 << 5,
+            TreatWordInParenthesisAsOptional    = 1 << 4,
+            TreatWordsBetweenSlashAsSynonyms    = 1 << 3,
+            IgnoreOpeningWhitespace             = 1 << 2,
+            IgnoreEndingWhitespace              = 1 << 1,
+            None                                = 1 << 0,
         }
 
         public const Rules SMART_RULES =
-            Rules.IgnoreFirstCapitalization
+            Rules.IgnoreDotsInEnd
+            | Rules.IgnoreFirstCapitalization
             | Rules.TreatWordInParenthesisAsOptional
             | Rules.TreatWordsBetweenSlashAsSynonyms
             | Rules.IgnoreOpeningWhitespace
@@ -115,6 +117,12 @@ namespace SteelQuiz.QuizPractise
             if (rules.HasFlag(Rules.IgnoreFirstCapitalization))
             {
                 similarityDatas.Add(Similarity(CapitalizeFirstChar(userAnswer), CapitalizeFirstChar(correctAnswer), wordPair, rules & ~Rules.IgnoreFirstCapitalization,
+                    (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
+            }
+
+            if (rules.HasFlag(Rules.IgnoreDotsInEnd))
+            {
+                similarityDatas.Add(Similarity(userAnswer.TrimEnd('.'), correctAnswer.TrimEnd('.'), wordPair, rules & ~Rules.IgnoreDotsInEnd,
                     (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
             }
 
