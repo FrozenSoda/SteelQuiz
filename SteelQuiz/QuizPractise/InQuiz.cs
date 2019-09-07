@@ -324,7 +324,7 @@ namespace SteelQuiz.QuizPractise
 
                     if (allLearned100)
                     {
-                        if (!QuestionSelector.SkipNextMasterNotice)
+                        if (QuestionSelector.SkipNextMasterNotice == 0)
                         {
                             QuizCore.QuizProgress.MasterNoticeShowed = true;
                             var msg = MessageBox.Show("Congratulations! It seems that you have mastered this quiz. " +
@@ -343,12 +343,12 @@ namespace SteelQuiz.QuizPractise
                             }
                             else
                             {
-                                QuestionSelector.SkipNextMasterNotice = true;
+                                QuestionSelector.SkipNextMasterNotice += 2;
                             }
                         }
                         else
                         {
-                            QuestionSelector.SkipNextMasterNotice = false;
+                            QuestionSelector.SkipNextMasterNotice -= 1;
                         }
                     }
                 }
@@ -460,7 +460,11 @@ namespace SteelQuiz.QuizPractise
             //skipNewRoundMsg = true;
             QuizCore.QuizProgress.MasterNoticeShowed = false;
             QuizCore.QuizProgress.FullTestInProgress = !QuizCore.QuizProgress.FullTestInProgress;
-            QuestionSelector.SkipNextMasterNotice = !QuizCore.QuizProgress.FullTestInProgress;
+            //QuestionSelector.SkipNextMasterNotice = !QuizCore.QuizProgress.FullTestInProgress;
+            if (QuizCore.QuizProgress.FullTestInProgress)
+            {
+                QuestionSelector.SkipNextMasterNotice += 2;
+            }
 
             foreach (var c in lbl_word1.Controls.OfType<WrongAnswer>())
             {

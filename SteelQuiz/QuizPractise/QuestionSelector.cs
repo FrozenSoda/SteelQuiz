@@ -30,10 +30,29 @@ namespace SteelQuiz.QuizPractise
 {
     public static class QuestionSelector
     {
+        private static int __skipNextMasterNotice = 0;
         /// <summary>
-        /// Skips the next "Congratulations - you have learned all the words" notification during this practise session
+        /// How many times to skip the next "Congratulations - you have learned all the words" notification during this practise session. Can be decremented without checking, it won't allow values under 0
         /// </summary>
-        public static bool SkipNextMasterNotice { get; set; } = false;
+        public static int SkipNextMasterNotice
+        {
+            get
+            {
+                return __skipNextMasterNotice;
+            }
+
+            set
+            {
+                if (value >= 0)
+                {
+                    __skipNextMasterNotice = value;
+                }
+                else
+                {
+                    __skipNextMasterNotice = 0;
+                }
+            }
+        }
 
         /// <summary>
         /// Generates a question/word to be asked, while taking current word and Intelligent Learning settings into account
