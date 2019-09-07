@@ -480,7 +480,7 @@ namespace SteelQuiz.QuizPractise
 
             if (callGenerationFunctions)
             {
-                //QuestionSelector.NewRound();
+                QuestionSelector.NewRound();
                 NewWord(false);
             }
 
