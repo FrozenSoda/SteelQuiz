@@ -156,7 +156,8 @@ namespace SteelQuiz.QuizPractise
 
                     bool first = true;
                     bool found = false;
-                    foreach (var wp in CurrentWordPair.GetRequiredSynonyms().Where(x => x != CurrentWordPair && x.GetWordProgData().AskedThisRound))
+                    //foreach (var wp in CurrentWordPair.GetRequiredSynonyms().Where(x => x != CurrentWordPair && x.GetWordProgData().AskedThisRound))
+                    foreach (var wp in CurrentWordPair.GetRequiredSynonyms().Where(x => x.GetWordProgData().AskedThisRound))
                     {
                         found = true;
 
@@ -267,12 +268,12 @@ namespace SteelQuiz.QuizPractise
             WordPair.AnswerDiff ansDiff;
             if (MultiAns == null)
             {
-                ansDiff = CurrentWordPair.AnswerCheck(CurrentInput, null, !UserCopyingWord && CountThisTranslationToProgress);
+                ansDiff = CurrentWordPair.AnswerCheck(CurrentInput, null, CountThisTranslationToProgress, UserCopyingWord);
             }
             else
             {
                 ansDiff = CurrentWordPair.AnswerCheck(CurrentInput, MultiAnswersAlreadyEntered().Select(x => x.Answer),
-                    !UserCopyingWord && CountThisTranslationToProgress);
+                    CountThisTranslationToProgress, UserCopyingWord);
             }
 
             if (ansDiff.Correct())

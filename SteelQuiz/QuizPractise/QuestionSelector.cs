@@ -209,46 +209,6 @@ namespace SteelQuiz.QuizPractise
 
             if (skipCount == QuizCore.QuizProgress.WordProgDatas.Count)
             {
-                /*
-                if (!QuizCore.QuizProgress.MasterNoticeShowed)
-                {
-                    var allLearned100 = true;
-                    foreach (var word in QuizCore.QuizProgress.WordProgDatas)
-                    {
-                        if (word.GetLearningProgress() < 1 || word.GetWordTriesCount() < WordProgData.WORD_TRIES_FOR_LEARNING_PROGRESS)
-                        {
-                            allLearned100 = false;
-                        }
-                    }
-
-                    if (allLearned100)
-                    {
-                        if (!SkipNextMasterNotice)
-                        {
-                            QuizCore.QuizProgress.MasterNoticeShowed = true;
-                            var msg = MessageBox.Show("Congratulations! It seems that you have mastered this quiz. " +
-                                "Repeat it to make sure you don't forget it, and don't remember to do a full test of the words to make sure you still know them all."
-                                + "\r\n\r\nPerform a full test now?",
-                                "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-
-                            if (msg == DialogResult.Yes)
-                            {
-                                Program.frmInQuiz.SwitchIntelligentLearningMode();
-                                return;
-                            }
-                            else
-                            {
-                                SkipNextMasterNotice = true;
-                            }
-                        }
-                        else
-                        {
-                            SkipNextMasterNotice = false;
-                        }
-                    }
-                }
-                */
-
                 // if all words are skipped, select five random words to ask (remove skip sign)
                 const int MAXIMUM_WORDS_TO_GENERATE = 5;
                 var toAsk = new Random().RandomUnique(0, QuizCore.QuizProgress.WordProgDatas.Count,
