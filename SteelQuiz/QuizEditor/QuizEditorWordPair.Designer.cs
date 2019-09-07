@@ -47,6 +47,7 @@ namespace SteelQuiz.QuizEditor
         private void InitializeComponent()
         {
             this.pnl_translationRules = new System.Windows.Forms.Panel();
+            this.btn_smartCompSettings = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.chk_smartComp = new System.Windows.Forms.CheckBox();
             this.txt_word1 = new System.Windows.Forms.TextBox();
@@ -61,12 +62,30 @@ namespace SteelQuiz.QuizEditor
             // 
             // pnl_translationRules
             // 
+            this.pnl_translationRules.Controls.Add(this.btn_smartCompSettings);
             this.pnl_translationRules.Controls.Add(this.label4);
             this.pnl_translationRules.Controls.Add(this.chk_smartComp);
             this.pnl_translationRules.Location = new System.Drawing.Point(217, 29);
             this.pnl_translationRules.Name = "pnl_translationRules";
             this.pnl_translationRules.Size = new System.Drawing.Size(299, 65);
             this.pnl_translationRules.TabIndex = 2;
+            // 
+            // btn_smartCompSettings
+            // 
+            this.btn_smartCompSettings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.btn_smartCompSettings.BackgroundImage = global::SteelQuiz.Properties.Resources.gear_1077563_white_with_bigger_border;
+            this.btn_smartCompSettings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_smartCompSettings.FlatAppearance.BorderSize = 0;
+            this.btn_smartCompSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_smartCompSettings.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_smartCompSettings.ForeColor = System.Drawing.Color.White;
+            this.btn_smartCompSettings.Location = new System.Drawing.Point(214, 19);
+            this.btn_smartCompSettings.Name = "btn_smartCompSettings";
+            this.btn_smartCompSettings.Size = new System.Drawing.Size(20, 20);
+            this.btn_smartCompSettings.TabIndex = 8;
+            this.btn_smartCompSettings.TabStop = false;
+            this.btn_smartCompSettings.UseVisualStyleBackColor = false;
+            this.btn_smartCompSettings.Click += new System.EventHandler(this.Btn_smartCompSettings_Click);
             // 
             // label4
             // 
@@ -92,8 +111,8 @@ namespace SteelQuiz.QuizEditor
             this.chk_smartComp.TabIndex = 0;
             this.chk_smartComp.TabStop = false;
             this.chk_smartComp.Text = "Smart Comparison";
+            this.chk_smartComp.ThreeState = true;
             this.chk_smartComp.UseVisualStyleBackColor = true;
-            this.chk_smartComp.CheckedChanged += new System.EventHandler(this.chk_ignoreCapitalization_CheckedChanged);
             // 
             // txt_word1
             // 
@@ -200,7 +219,6 @@ namespace SteelQuiz.QuizEditor
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_delete);
@@ -210,7 +228,7 @@ namespace SteelQuiz.QuizEditor
             this.Controls.Add(this.txt_word1);
             this.Controls.Add(this.pnl_translationRules);
             this.Name = "QuizEditorWordPair";
-            this.Size = new System.Drawing.Size(728, 95);
+            this.Size = new System.Drawing.Size(730, 97);
             this.pnl_translationRules.ResumeLayout(false);
             this.pnl_translationRules.PerformLayout();
             this.ResumeLayout(false);
@@ -230,5 +248,6 @@ namespace SteelQuiz.QuizEditor
         private System.Windows.Forms.Button btn_delete;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btn_smartCompSettings;
     }
 }

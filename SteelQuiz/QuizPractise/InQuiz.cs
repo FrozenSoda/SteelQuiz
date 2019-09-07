@@ -100,6 +100,15 @@ namespace SteelQuiz.QuizPractise
             lbl_progress.ForeColor = GeneralTheme.GetBackgroundLabelForeColor();
             lbl_lang1.ForeColor = GeneralTheme.GetBackgroundLabelForeColor();
             lbl_lang2.ForeColor = GeneralTheme.GetBackgroundLabelForeColor();
+
+            if (ConfigManager.Config.Theme == ThemeManager.ThemeCore.Theme.Dark)
+            {
+                btn_cfg.BackgroundImage = Properties.Resources.gear_1077563_white_with_bigger_border;
+            }
+            else
+            {
+                btn_cfg.BackgroundImage = Properties.Resources.gear_1077563_black_with_bigger_border;
+            }
         }
 
         public void NewWord(bool newRoundMsg = true)

@@ -168,13 +168,13 @@ namespace SteelQuiz.QuizEditor
             {
                 wordPair.RemoveSynonymsEqualToWords();
 
-                StringComp.Rules translationRules = StringComp.Rules.None;
+                StringComp.Rules comparisonRules = StringComp.Rules.None;
                 if (wordPair.chk_smartComp.Checked)
                 {
-                    translationRules |= StringComp.SMART_RULES;
+                    comparisonRules = wordPair.ComparisonRules;
                 }
 
-                var wp = new WordPair(wordPair.txt_word1.Text, wordPair.txt_word2.Text, translationRules, wordPair.Synonyms1, wordPair.Synonyms2);
+                var wp = new WordPair(wordPair.txt_word1.Text, wordPair.txt_word2.Text, comparisonRules, wordPair.Synonyms1, wordPair.Synonyms2);
                 quiz.WordPairs.Add(wp);
                 ++i;
             }
@@ -254,7 +254,7 @@ namespace SteelQuiz.QuizEditor
                 ctrl.Synonyms1 = wp.Word1Synonyms;
                 ctrl.txt_word2.Text = wp.Word2;
                 ctrl.Synonyms2 = wp.Word2Synonyms;
-                ctrl.chk_smartComp.Checked = wp.TranslationRules.HasFlag(StringComp.SMART_RULES);
+                ctrl.ComparisonRules = wp.TranslationRules;
             }
 
             if (!fromRecovery)

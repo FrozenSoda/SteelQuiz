@@ -68,6 +68,12 @@
   <ItemGroup>
     <Compile Include="Animations\ControlMove.cs" />
     <Compile Include="Animations\LabelFade.cs" />
+    <Compile Include="QuizEditor\SmartComparisonSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuizEditor\SmartComparisonSettings.Designer.cs">
+      <DependentUpon>SmartComparisonSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuizImport\Guide\IStep.cs" />
     <Compile Include="QuizImport\Guide\TextImport\Step2.cs">
       <SubType>UserControl</SubType>
@@ -505,6 +511,9 @@
     <EmbeddedResource Include="Preferences\QuizProgressConflictRecommended.resx">
       <DependentUpon>QuizProgressConflictRecommended.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="QuizEditor\SmartComparisonSettings.resx">
+      <DependentUpon>SmartComparisonSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="QuizImport\Guide\QuizFolder.resx">
       <DependentUpon>QuizFolder.cs</DependentUpon>
     </EmbeddedResource>
@@ -675,6 +684,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Logo.ico" />
+    <None Include="Resources\gear-1077563-black-with-bigger-border.png" />
+    <None Include="Resources\gear-1077563-white-with-bigger-border.png" />
+    <None Include="Resources\gear-1077563-with-bigger-border.png" />
     <None Include="Resources\gear-1077563-with-border1.png" />
     <None Include="Resources\gear-1077563-with-border.png" />
     <None Include="Resources\gear-1077563.png" />

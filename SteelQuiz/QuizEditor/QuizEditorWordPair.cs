@@ -26,6 +26,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SteelQuiz.QuizEditor.UndoRedo;
+using SteelQuiz.ThemeManager.Colors;
+using SteelQuiz.QuizPractise;
 
 namespace SteelQuiz.QuizEditor
 {
@@ -37,12 +39,42 @@ namespace SteelQuiz.QuizEditor
 
         public List<string> Synonyms1 { get; set; } = null;
         public List<string> Synonyms2 { get; set; } = null;
+
+        private StringComp.Rules __comparisonRules = StringComp.SMART_RULES;
+        public StringComp.Rules ComparisonRules
+        {
+            get
+            {
+                return __comparisonRules;
+            }
+
+            set
+            {
+                __comparisonRules = value;
+
+                if (value.HasFlag(StringComp.SMART_RULES))
+                {
+                    chk_smartComp.CheckState = CheckState.Checked;
+                }
+                else if (value == StringComp.Rules.None)
+                {
+                    chk_smartComp.CheckState = CheckState.Unchecked;
+                }
+                else
+                {
+                    chk_smartComp.CheckState = CheckState.Indeterminate;
+                }
+
+#warning push to undo/redo stack
+                QEOwner.ChangedSinceLastSave = true;
+            }
+        }
+
         public EditWordSynonyms EditWordSynonyms { get; set; } = null;
 
         public QuizEditor QEOwner { get; set; }
 
         public bool ignore_txt_word_change = false;
-        public bool ignore_chk_ignoreCapitalization_change = false;
         public bool ignore_chk_smartComp_change = false;
 
         public QuizEditorWordPair(QuizEditor owner, int number)
@@ -53,6 +85,20 @@ namespace SteelQuiz.QuizEditor
             RemoveSynonymsEqualToWords();
 
             SetTheme();
+        }
+
+        public override void SetTheme(GeneralTheme theme = null)
+        {
+            base.SetTheme(theme);
+
+            if (ConfigManager.Config.Theme == ThemeManager.ThemeCore.Theme.Dark)
+            {
+                btn_smartCompSettings.BackgroundImage = Properties.Resources.gear_1077563_white_with_bigger_border;
+            }
+            else
+            {
+                btn_smartCompSettings.BackgroundImage = Properties.Resources.gear_1077563_black_with_bigger_border;
+            }
         }
 
         public void InitEditWordSynonyms(int language)
@@ -147,27 +193,6 @@ namespace SteelQuiz.QuizEditor
             QEOwner.ChangedSinceLastSave = true;
 
             txt_word2_text_old = txt_word2.Text;
-        }
-
-        private void chk_ignoreCapitalization_CheckedChanged(object sender, EventArgs e)
-        {
-            if (ignore_chk_ignoreCapitalization_change)
-            {
-                ignore_chk_ignoreCapitalization_change = false;
-                return;
-            }
-
-            if (QEOwner.UpdateUndoRedoStacks)
-            {
-                QEOwner.UndoStack.Push(new UndoRedoFuncPair(
-                new Func<object>[] { chk_smartComp.SetChecked(!chk_smartComp.Checked, () => { ignore_chk_ignoreCapitalization_change = true; }) },
-                new Func<object>[] { chk_smartComp.SetChecked(chk_smartComp.Checked, () => { ignore_chk_ignoreCapitalization_change = true; }) },
-                "Checkbox switch",
-                new OwnerControlData(this, this.Parent)
-                ));
-                QEOwner.UpdateUndoRedoTooltips();
-            }
-            QEOwner.ChangedSinceLastSave = true;
         }
 
         private void chk_ignoreExcl_CheckedChanged(object sender, EventArgs e)
@@ -266,6 +291,16 @@ namespace SteelQuiz.QuizEditor
         private void Txt_word2_Leave(object sender, EventArgs e)
         {
             RemoveSynonymsEqualToWords(2);
+        }
+
+        private void Btn_smartCompSettings_Click(object sender, EventArgs e)
+        {
+            var smartCompSettings = new SmartComparisonSettings(ComparisonRules);
+            var result = smartCompSettings.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                ComparisonRules = smartCompSettings.Rules;
+            }
         }
     }
 }

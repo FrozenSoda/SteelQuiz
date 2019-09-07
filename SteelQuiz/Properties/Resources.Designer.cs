@@ -93,6 +93,36 @@ namespace SteelQuiz.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap gear_1077563_black_with_bigger_border {
+            get {
+                object obj = ResourceManager.GetObject("gear-1077563-black-with-bigger-border", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap gear_1077563_white_with_bigger_border {
+            get {
+                object obj = ResourceManager.GetObject("gear-1077563-white-with-bigger-border", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap gear_1077563_with_bigger_border {
+            get {
+                object obj = ResourceManager.GetObject("gear-1077563-with-bigger-border", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap gear_1077563_with_border {
             get {
                 object obj = ResourceManager.GetObject("gear-1077563-with-border", resourceCulture);
