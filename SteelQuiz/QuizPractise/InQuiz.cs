@@ -103,11 +103,11 @@ namespace SteelQuiz.QuizPractise
 
             if (ConfigManager.Config.Theme == ThemeManager.ThemeCore.Theme.Dark)
             {
-                btn_cfg.BackgroundImage = Properties.Resources.gear_1077563_white_with_bigger_border;
+                btn_cfg.BackgroundImage = Properties.Resources.gear_1077563_white_with_bigger_border_512x512;
             }
             else
             {
-                btn_cfg.BackgroundImage = Properties.Resources.gear_1077563_black_with_bigger_border;
+                btn_cfg.BackgroundImage = Properties.Resources.gear_1077563_black_with_bigger_border_512x512;
             }
         }
 

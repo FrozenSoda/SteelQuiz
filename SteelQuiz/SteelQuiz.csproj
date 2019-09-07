@@ -685,6 +685,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Logo.ico" />
+    <None Include="Resources\gear-1077563-white-with-bigger-border-512x512.png" />
+    <None Include="Resources\gear-1077563-black-with-bigger-border-512x512.png" />
     <None Include="Resources\gear-1077563-black-with-bigger-border.png" />
     <None Include="Resources\gear-1077563-white-with-bigger-border.png" />
     <None Include="Resources\gear-1077563-with-bigger-border.png" />

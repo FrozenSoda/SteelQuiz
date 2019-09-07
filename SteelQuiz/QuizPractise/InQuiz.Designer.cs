@@ -190,7 +190,7 @@ namespace SteelQuiz.QuizPractise
             // 
             this.btn_cfg.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_cfg.BackColor = System.Drawing.Color.Gray;
-            this.btn_cfg.BackgroundImage = global::SteelQuiz.Properties.Resources.gear_1077563_white_with_bigger_border;
+            this.btn_cfg.BackgroundImage = global::SteelQuiz.Properties.Resources.gear_1077563_white_with_bigger_border_512x512;
             this.btn_cfg.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btn_cfg.FlatAppearance.BorderSize = 0;
             this.btn_cfg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
