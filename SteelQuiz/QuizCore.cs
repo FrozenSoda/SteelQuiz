@@ -838,16 +838,6 @@ namespace SteelQuiz
                 return wordsAskedThisRoundMemo;
             }
 
-            /*
-            var counter = 0;
-            foreach (var word in QuizProgress.WordProgDatas)
-            {
-                if (word.AskedThisRound)
-                {
-                    ++counter;
-                }
-            }
-            */
             int counter = QuizProgress.WordProgDatas.Where(x => x.AskedThisRound).Count();
 
             wordsAskedThisRoundMemo = counter;

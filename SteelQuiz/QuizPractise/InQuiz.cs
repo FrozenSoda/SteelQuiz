@@ -258,6 +258,8 @@ namespace SteelQuiz.QuizPractise
                 if (!UserCopyingWord)
                 {
                     ++QuizCore.QuizProgress.CorrectAnswersThisRound;
+
+                    QuizCore.SaveQuizProgress();
                 }
 
                 if (ansDiff.Certainty == StringComp.CorrectCertainty.CompletelyCorrect)
