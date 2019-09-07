@@ -163,11 +163,11 @@ namespace SteelQuiz.QuizEditor.UndoRedo
             };
         }
 
-        public static Action Set<T>(this T variable, T val)
+        public static Action Set<T>(this Pointer<T> ptr, T val)
         {
             return () =>
             {
-                variable = val;
+                ptr.Data = val;
             };
         }
     }

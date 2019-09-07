@@ -20,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -171,7 +172,7 @@ namespace SteelQuiz.QuizEditor
                 StringComp.Rules comparisonRules = StringComp.Rules.None;
                 if (wordPair.chk_smartComp.Checked)
                 {
-                    comparisonRules = wordPair.ComparisonRules;
+                    comparisonRules = wordPair.ComparisonRules.Data;
                 }
 
                 var wp = new WordPair(wordPair.txt_word1.Text, wordPair.txt_word2.Text, comparisonRules, wordPair.Synonyms1, wordPair.Synonyms2);
@@ -254,7 +255,7 @@ namespace SteelQuiz.QuizEditor
                 ctrl.Synonyms1 = wp.Word1Synonyms;
                 ctrl.txt_word2.Text = wp.Word2;
                 ctrl.Synonyms2 = wp.Word2Synonyms;
-                ctrl.ComparisonRules = wp.TranslationRules;
+                ctrl.ComparisonRules.Data = wp.TranslationRules;
             }
 
             if (!fromRecovery)
@@ -266,6 +267,8 @@ namespace SteelQuiz.QuizEditor
             UndoStack.Clear();
             RedoStack.Clear();
             UpdateUndoRedoStacks = true;
+
+            SetGlobalSmartComparisonState();
         }
 
         private void DeleteRecovery()
@@ -700,10 +703,10 @@ namespace SteelQuiz.QuizEditor
             {
                 foreach (var wp in flp_words.Controls.OfType<QuizEditorWordPair>())
                 {
-                    var compRules = wp.ComparisonRules;
+                    var compRules = wp.ComparisonRules.Data;
                     undoActions.Add(new Action(wp.ComparisonRules.Set(compRules)));
                     redoActions.Add(new Action(wp.ComparisonRules.Set(StringComp.SMART_RULES)));
-                    wp.ComparisonRules = StringComp.SMART_RULES;
+                    wp.ComparisonRules.Data = StringComp.SMART_RULES;
                 }
 
                 UndoStack.Push(new UndoRedoFuncPair(
@@ -717,10 +720,10 @@ namespace SteelQuiz.QuizEditor
             {
                 foreach (var wp in flp_words.Controls.OfType<QuizEditorWordPair>())
                 {
-                    var compRules = wp.ComparisonRules;
+                    var compRules = wp.ComparisonRules.Data;
                     undoActions.Add(new Action(wp.ComparisonRules.Set(compRules)));
                     redoActions.Add(new Action(wp.ComparisonRules.Set(StringComp.Rules.None)));
-                    wp.ComparisonRules = StringComp.Rules.None;
+                    wp.ComparisonRules.Data = StringComp.Rules.None;
                 }
 
                 UndoStack.Push(new UndoRedoFuncPair(
@@ -732,6 +735,37 @@ namespace SteelQuiz.QuizEditor
             }
 
             UpdateUndoRedoTooltips();
+        }
+
+        public void SetGlobalSmartComparisonState()
+        {
+            Debug.Assert(
+                !(StringComp.Rules.IgnoreFirstCapitalization
+                | StringComp.Rules.TreatWordInParenthesisAsOptional
+                | StringComp.Rules.TreatWordsBetweenSlashAsSynonyms
+                | StringComp.Rules.IgnoreOpeningWhitespace
+                | StringComp.Rules.IgnoreEndingWhitespace).HasFlag(StringComp.SMART_RULES));
+
+            int fullEnableCount = flp_words.Controls.OfType<QuizEditorWordPair>().Where(x => x.ComparisonRules.Data.HasFlag(StringComp.SMART_RULES)).Count();
+            int totalCount = flp_words.Controls.OfType<QuizEditorWordPair>().Count();
+
+            if (fullEnableCount == totalCount)
+            {
+                enableSmartComparisonToolStripMenuItem.CheckState = CheckState.Checked;
+            }
+            else if (fullEnableCount < totalCount && fullEnableCount > 0)
+            {
+                enableSmartComparisonToolStripMenuItem.CheckState = CheckState.Indeterminate;
+            }
+            else if (fullEnableCount == 0)
+            {
+                enableSmartComparisonToolStripMenuItem.CheckState = CheckState.Unchecked;
+            }
+            else
+            {
+                // should not happen
+                throw new Exception("SetGlobalSmartComparisonState() reached end");
+            }
         }
     }
 }

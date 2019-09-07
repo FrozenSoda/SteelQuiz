@@ -40,7 +40,10 @@ namespace SteelQuiz.QuizEditor
         public List<string> Synonyms1 { get; set; } = null;
         public List<string> Synonyms2 { get; set; } = null;
 
-        private StringComp.Rules __comparisonRules = StringComp.SMART_RULES;
+        public Pointer<StringComp.Rules> ComparisonRules { get; set; } = new Pointer<StringComp.Rules>(StringComp.SMART_RULES);
+
+        /*
+        private Pointer<StringComp.Rules> __comparisonRules = new Pointer<StringComp.Rules>(StringComp.SMART_RULES);
         public StringComp.Rules ComparisonRules
         {
             get
@@ -69,6 +72,7 @@ namespace SteelQuiz.QuizEditor
                 QEOwner.ChangedSinceLastSave = true;
             }
         }
+        */
 
         public EditWordSynonyms EditWordSynonyms { get; set; } = null;
 
@@ -83,6 +87,25 @@ namespace SteelQuiz.QuizEditor
             QEOwner = owner;
             Number = number;
             RemoveSynonymsEqualToWords();
+
+            ComparisonRules.AfterDataChanged += (sender, e) =>
+            {
+                if (e.HasFlag(StringComp.SMART_RULES))
+                {
+                    chk_smartComp.CheckState = CheckState.Checked;
+                }
+                else if (e == StringComp.Rules.None)
+                {
+                    chk_smartComp.CheckState = CheckState.Unchecked;
+                }
+                else
+                {
+                    chk_smartComp.CheckState = CheckState.Indeterminate;
+                }
+
+#warning push to undo/redo stack
+                QEOwner.ChangedSinceLastSave = true;
+            };
 
             SetTheme();
         }
@@ -295,12 +318,37 @@ namespace SteelQuiz.QuizEditor
 
         private void Btn_smartCompSettings_Click(object sender, EventArgs e)
         {
-            var smartCompSettings = new SmartComparisonSettings(ComparisonRules);
+            var smartCompSettings = new SmartComparisonSettings(ComparisonRules.Data);
             var result = smartCompSettings.ShowDialog();
             if (result == DialogResult.OK)
             {
-                ComparisonRules = smartCompSettings.Rules;
+                ComparisonRules.Data = smartCompSettings.Rules;
             }
+        }
+
+        private void Chk_smartComp_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ignore_chk_smartComp_change)
+            {
+                ignore_chk_smartComp_change = false;
+                return;
+            }
+
+            /*
+            if (QEOwner.UpdateUndoRedoStacks)
+            {
+                QEOwner.UndoStack.Push(new UndoRedoFuncPair(
+                    new Action[] { chk_smartComp.SetChecked(!chk_smartComp.Checked, () => { ignore_chk_smartComp_change = true; }) },
+                    new Action[] { chk_smartComp.SetChecked(chk_smartComp.Checked, () => { ignore_chk_smartComp_change = true; }) },
+                    "Checkbox switch",
+                    new OwnerControlData(this, this.Parent)
+                    ));
+                QEOwner.UpdateUndoRedoTooltips();
+            }
+            */
+
+#warning implement proper undo/redo
+            QEOwner.ChangedSinceLastSave = true;
         }
     }
 }

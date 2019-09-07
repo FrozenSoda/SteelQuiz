@@ -112,6 +112,7 @@ namespace SteelQuiz.QuizEditor
             this.chk_smartComp.Text = "Smart Comparison";
             this.chk_smartComp.ThreeState = true;
             this.chk_smartComp.UseVisualStyleBackColor = true;
+            this.chk_smartComp.CheckedChanged += new System.EventHandler(this.Chk_smartComp_CheckedChanged);
             // 
             // txt_word1
             // 

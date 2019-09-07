@@ -74,7 +74,7 @@ namespace SteelQuiz.QuizPractise
             TreatWordsBetweenSlashAsSynonyms    = 1 << 3,
             IgnoreOpeningWhitespace             = 1 << 2,
             IgnoreEndingWhitespace              = 1 << 1,
-            None                                = 1 << 0,
+            None                                = 0,
         }
 
         public const Rules SMART_RULES =
