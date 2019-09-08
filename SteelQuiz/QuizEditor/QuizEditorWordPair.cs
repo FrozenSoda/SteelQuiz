@@ -88,6 +88,7 @@ namespace SteelQuiz.QuizEditor
                     chk_smartComp.CheckState = CheckState.Indeterminate;
                 }
                 chk_smartComp.CheckStateChanged += Chk_smartComp_CheckStateChanged;
+                QEOwner.SetGlobalSmartComparisonState();
             };
 
             SetTheme();

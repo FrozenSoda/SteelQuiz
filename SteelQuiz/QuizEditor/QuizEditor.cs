@@ -915,6 +915,7 @@ namespace SteelQuiz.QuizEditor
             }
 
             UpdateUndoRedoTooltips();
+            SetGlobalSmartComparisonState();
         }
     }
 }
