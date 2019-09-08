@@ -186,13 +186,12 @@ namespace SteelQuiz.QuizEditor
         }
 
         #endregion
-
-        private System.Windows.Forms.CheckBox chk_ignoreCapitalizationFirstChar;
-        private System.Windows.Forms.CheckBox chk_ignoreOpeningWhitespace;
-        private System.Windows.Forms.CheckBox chk_ignoreEndingWhitespace;
-        private System.Windows.Forms.CheckBox chk_ignoreDotsInEnd;
-        private System.Windows.Forms.CheckBox chk_treatTextInParenthesisAsSynonym;
-        private System.Windows.Forms.CheckBox chk_treatWordsBetweenSlashAsSynonyms;
         private System.Windows.Forms.Button btn_apply;
+        internal System.Windows.Forms.CheckBox chk_ignoreCapitalizationFirstChar;
+        internal System.Windows.Forms.CheckBox chk_ignoreOpeningWhitespace;
+        internal System.Windows.Forms.CheckBox chk_ignoreEndingWhitespace;
+        internal System.Windows.Forms.CheckBox chk_ignoreDotsInEnd;
+        internal System.Windows.Forms.CheckBox chk_treatTextInParenthesisAsSynonym;
+        internal System.Windows.Forms.CheckBox chk_treatWordsBetweenSlashAsSynonyms;
     }
 }

@@ -756,6 +756,7 @@ namespace SteelQuiz.QuizEditor
             }
 
             UpdateUndoRedoTooltips();
+            ChangedSinceLastSave = true;
         }
 
         public void SetGlobalSmartComparisonState()
@@ -789,14 +790,125 @@ namespace SteelQuiz.QuizEditor
             }
         }
 
+        private UndoRedoFuncPair SetGlobalRuleState(StringComp.Rules rules, bool enabled)
+        {
+            var undoActions = new List<Action>();
+            var redoActions = new List<Action>();
+
+            foreach (var wprules in flp_words.Controls.OfType<QuizEditorWordPair>().Select(x => x.ComparisonRules))
+            {
+                StringComp.Rules newval;
+                StringComp.Rules oldval = wprules.Data;
+
+                if (enabled)
+                {
+                    newval = wprules.Data | rules;
+                }
+                else
+                {
+                    newval = wprules.Data & ~rules;
+                }
+
+                if (newval == oldval)
+                {
+                    continue;
+                }
+
+                undoActions.Add(wprules.SetSemiSilentUR(oldval));
+                redoActions.Add(wprules.SetSemiSilentUR(newval));
+
+                wprules.SetSemiSilent(newval);
+            }
+
+            return new UndoRedoFuncPair(
+                    undoActions.ToArray(),
+                    redoActions.ToArray(),
+                    "Global set comparison rules state",
+                    new OwnerControlData(this, this.Parent)
+                    );
+        }
+
         private void ModifySmartComparisonSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var smartCompSettings = new SmartComparisonSettings(flp_words.Controls.OfType<QuizEditorWordPair>().Select(x => x.ComparisonRules.Data));
             var result = smartCompSettings.ShowDialog();
-            if (result == DialogResult.OK)
-            {
+            var undoRedoes = new List<UndoRedoFuncPair>();
 
+            if (result != DialogResult.OK)
+            {
+                return;
             }
+
+            if (smartCompSettings.chk_ignoreCapitalizationFirstChar.CheckState == CheckState.Checked)
+            {
+                undoRedoes.Add(SetGlobalRuleState(StringComp.Rules.IgnoreFirstCapitalization, true));
+            }
+            else if (smartCompSettings.chk_ignoreCapitalizationFirstChar.CheckState == CheckState.Unchecked)
+            {
+                undoRedoes.Add(SetGlobalRuleState(StringComp.Rules.IgnoreFirstCapitalization, false));
+            }
+
+
+            if (smartCompSettings.chk_ignoreOpeningWhitespace.CheckState == CheckState.Checked)
+            {
+                undoRedoes.Add(SetGlobalRuleState(StringComp.Rules.IgnoreOpeningWhitespace, true));
+            }
+            else if (smartCompSettings.chk_ignoreOpeningWhitespace.CheckState == CheckState.Unchecked)
+            {
+                undoRedoes.Add(SetGlobalRuleState(StringComp.Rules.IgnoreOpeningWhitespace, false));
+            }
+
+
+            if (smartCompSettings.chk_ignoreEndingWhitespace.CheckState == CheckState.Checked)
+            {
+                undoRedoes.Add(SetGlobalRuleState(StringComp.Rules.IgnoreEndingWhitespace, true));
+            }
+            else if (smartCompSettings.chk_ignoreEndingWhitespace.CheckState == CheckState.Unchecked)
+            {
+                undoRedoes.Add(SetGlobalRuleState(StringComp.Rules.IgnoreEndingWhitespace, false));
+            }
+
+
+            if (smartCompSettings.chk_ignoreDotsInEnd.CheckState == CheckState.Checked)
+            {
+                undoRedoes.Add(SetGlobalRuleState(StringComp.Rules.IgnoreDotsInEnd, true));
+            }
+            else if (smartCompSettings.chk_ignoreDotsInEnd.CheckState == CheckState.Unchecked)
+            {
+                undoRedoes.Add(SetGlobalRuleState(StringComp.Rules.IgnoreDotsInEnd, false));
+            }
+
+
+            if (smartCompSettings.chk_treatTextInParenthesisAsSynonym.CheckState == CheckState.Checked)
+            {
+                undoRedoes.Add(SetGlobalRuleState(StringComp.Rules.TreatWordInParenthesisAsOptional, true));
+            }
+            else if (smartCompSettings.chk_treatTextInParenthesisAsSynonym.CheckState == CheckState.Unchecked)
+            {
+                undoRedoes.Add(SetGlobalRuleState(StringComp.Rules.TreatWordInParenthesisAsOptional, false));
+            }
+
+
+            if (smartCompSettings.chk_treatWordsBetweenSlashAsSynonyms.CheckState == CheckState.Checked)
+            {
+                undoRedoes.Add(SetGlobalRuleState(StringComp.Rules.TreatWordsBetweenSlashAsSynonyms, true));
+            }
+            else if (smartCompSettings.chk_treatWordsBetweenSlashAsSynonyms.CheckState == CheckState.Unchecked)
+            {
+                undoRedoes.Add(SetGlobalRuleState(StringComp.Rules.TreatWordsBetweenSlashAsSynonyms, false));
+            }
+
+            UndoRedoFuncPair undoRedo = new UndoRedoFuncPair(undoRedoes.SelectMany(x => x.UndoActions).ToArray(), undoRedoes.SelectMany(x => x.RedoActions).ToArray(),
+                "Global set comparison rules state", new OwnerControlData(this, this.Parent));
+
+            if (undoRedo.UndoActions.Length > 0)
+            {
+                UndoStack.Push(undoRedo);
+
+                ChangedSinceLastSave = true;
+            }
+
+            UpdateUndoRedoTooltips();
         }
     }
 }
