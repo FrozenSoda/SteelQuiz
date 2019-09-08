@@ -42,38 +42,6 @@ namespace SteelQuiz.QuizEditor
 
         public Pointer<StringComp.Rules> ComparisonRules { get; set; } = new Pointer<StringComp.Rules>(StringComp.SMART_RULES);
 
-        /*
-        private Pointer<StringComp.Rules> __comparisonRules = new Pointer<StringComp.Rules>(StringComp.SMART_RULES);
-        public StringComp.Rules ComparisonRules
-        {
-            get
-            {
-                return __comparisonRules;
-            }
-
-            set
-            {
-                __comparisonRules = value;
-
-                if (value.HasFlag(StringComp.SMART_RULES))
-                {
-                    chk_smartComp.CheckState = CheckState.Checked;
-                }
-                else if (value == StringComp.Rules.None)
-                {
-                    chk_smartComp.CheckState = CheckState.Unchecked;
-                }
-                else
-                {
-                    chk_smartComp.CheckState = CheckState.Indeterminate;
-                }
-
-#warning push to undo/redo stack
-                QEOwner.ChangedSinceLastSave = true;
-            }
-        }
-        */
-
         public EditWordSynonyms EditWordSynonyms { get; set; } = null;
 
         public QuizEditor QEOwner { get; set; }

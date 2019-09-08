@@ -24,9 +24,17 @@ using System.Threading.Tasks;
 
 namespace SteelQuiz
 {
+    /// <summary>
+    /// Represents a reference type that can be used to store value types, to access them via reference.
+    /// </summary>
+    /// <typeparam name="T">The type of data to store in the pointer.</typeparam>
     public class Pointer<T>
     {
         private T __data;
+
+        /// <summary>
+        /// The data the pointer stores.
+        /// </summary>
         public T Data
         {
             get
@@ -44,14 +52,37 @@ namespace SteelQuiz
             }
         }
 
+        /// <summary>
+        /// The event to invoke when changing Data, before it has been actually changed.
+        /// </summary>
         public event EventHandler<T> BeforeDataChanged;
+
+        /// <summary>
+        /// The event to invoke when changing Data, after it has been changed.
+        /// </summary>
         public event EventHandler<T> AfterDataChanged;
 
+        /// <summary>
+        /// Represents a reference type that can be used to store value types, to access them via reference.
+        /// </summary>
         public Pointer() { }
 
+        /// <summary>
+        /// Represents a reference type that can be used to store value types, to access them via reference.
+        /// </summary>
+        /// <param name="data">The data to set the pointer to store.</param>
         public Pointer(T data)
         {
             Data = data;
+        }
+
+        /// <summary>
+        /// Sets the data without invoking Before-/AfterDataChanged events.
+        /// </summary>
+        /// <param name="value">The value to set data to.</param>
+        public void SetSilent(T value)
+        {
+            __data = value;
         }
     }
 }
