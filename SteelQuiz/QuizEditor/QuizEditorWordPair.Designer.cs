@@ -48,7 +48,7 @@ namespace SteelQuiz.QuizEditor
         {
             this.pnl_translationRules = new System.Windows.Forms.Panel();
             this.btn_smartCompSettings = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lbl_ansCompRules = new System.Windows.Forms.Label();
             this.chk_smartComp = new System.Windows.Forms.CheckBox();
             this.txt_word1 = new System.Windows.Forms.TextBox();
             this.btn_editSynonyms_w1 = new System.Windows.Forms.Button();
@@ -64,7 +64,7 @@ namespace SteelQuiz.QuizEditor
             // 
             this.pnl_translationRules.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.pnl_translationRules.Controls.Add(this.btn_smartCompSettings);
-            this.pnl_translationRules.Controls.Add(this.label4);
+            this.pnl_translationRules.Controls.Add(this.lbl_ansCompRules);
             this.pnl_translationRules.Controls.Add(this.chk_smartComp);
             this.pnl_translationRules.Location = new System.Drawing.Point(217, 29);
             this.pnl_translationRules.Name = "pnl_translationRules";
@@ -87,16 +87,16 @@ namespace SteelQuiz.QuizEditor
             this.btn_smartCompSettings.UseVisualStyleBackColor = false;
             this.btn_smartCompSettings.Click += new System.EventHandler(this.Btn_smartCompSettings_Click);
             // 
-            // label4
+            // lbl_ansCompRules
             // 
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.LightGray;
-            this.label4.Location = new System.Drawing.Point(3, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(282, 13);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Translation rules";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_ansCompRules.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_ansCompRules.ForeColor = System.Drawing.Color.LightGray;
+            this.lbl_ansCompRules.Location = new System.Drawing.Point(3, 0);
+            this.lbl_ansCompRules.Name = "lbl_ansCompRules";
+            this.lbl_ansCompRules.Size = new System.Drawing.Size(282, 13);
+            this.lbl_ansCompRules.TabIndex = 1;
+            this.lbl_ansCompRules.Text = "Answer Comparison Rules";
+            this.lbl_ansCompRules.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // chk_smartComp
             // 
@@ -247,7 +247,7 @@ namespace SteelQuiz.QuizEditor
         #endregion
 
         private System.Windows.Forms.Panel pnl_translationRules;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lbl_ansCompRules;
         internal System.Windows.Forms.CheckBox chk_smartComp;
         internal System.Windows.Forms.TextBox txt_word1;
         private System.Windows.Forms.Button btn_editSynonyms_w1;

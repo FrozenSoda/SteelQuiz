@@ -96,6 +96,11 @@ namespace SteelQuiz.QuizEditor
 
         public override void SetTheme(GeneralTheme theme = null)
         {
+            if (theme == null)
+            {
+                theme = new GeneralTheme();
+            }
+
             base.SetTheme(theme);
 
             if (ConfigManager.Config.Theme == ThemeManager.ThemeCore.Theme.Dark)
@@ -106,6 +111,9 @@ namespace SteelQuiz.QuizEditor
             {
                 btn_smartCompSettings.BackgroundImage = CachedResourceManager.LoadResource<Bitmap>("gear_1077563_black_with_bigger_border_512x512");
             }
+
+            lbl_ansCompRules.ForeColor = theme.GetBackgroundLabelForeColor();
+            chk_smartComp.ForeColor = theme.GetBackgroundLabelForeColor();
         }
 
         public void InitEditWordSynonyms(int language)
@@ -327,8 +335,10 @@ namespace SteelQuiz.QuizEditor
 
         private void QuizEditorWordPair_SizeChanged(object sender, EventArgs e)
         {
-            txt_word1.Size = new Size((int)Math.Floor(335 / 730d * Size.Width), txt_word1.Size.Height);
-            txt_word2.Size = new Size((int)Math.Floor(335 / 730d * Size.Width), txt_word2.Size.Height);
+            int width = (int)Math.Floor(Size.Width / 2d - 30);
+
+            txt_word1.Size = new Size(width, txt_word1.Size.Height);
+            txt_word2.Size = new Size(width, txt_word2.Size.Height);
         }
     }
 }
