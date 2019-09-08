@@ -788,5 +788,15 @@ namespace SteelQuiz.QuizEditor
                 throw new Exception("SetGlobalSmartComparisonState() reached end");
             }
         }
+
+        private void ModifySmartComparisonSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var smartCompSettings = new SmartComparisonSettings(flp_words.Controls.OfType<QuizEditorWordPair>().Select(x => x.ComparisonRules.Data));
+            var result = smartCompSettings.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+
+            }
+        }
     }
 }

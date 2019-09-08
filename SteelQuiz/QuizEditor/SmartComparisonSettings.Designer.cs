@@ -1,4 +1,22 @@
-﻿namespace SteelQuiz.QuizEditor
+﻿/*
+    SteelQuiz - A quiz program designed to make learning words easier
+    Copyright (C) 2019  Steel9Apps
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
+namespace SteelQuiz.QuizEditor
 {
     partial class SmartComparisonSettings
     {
@@ -39,6 +57,7 @@
             // 
             // chk_ignoreCapitalizationFirstChar
             // 
+            this.chk_ignoreCapitalizationFirstChar.AutoCheck = false;
             this.chk_ignoreCapitalizationFirstChar.AutoSize = true;
             this.chk_ignoreCapitalizationFirstChar.Checked = true;
             this.chk_ignoreCapitalizationFirstChar.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -47,10 +66,13 @@
             this.chk_ignoreCapitalizationFirstChar.Size = new System.Drawing.Size(223, 17);
             this.chk_ignoreCapitalizationFirstChar.TabIndex = 0;
             this.chk_ignoreCapitalizationFirstChar.Text = "Ignore capitalization for first character";
+            this.chk_ignoreCapitalizationFirstChar.ThreeState = true;
             this.chk_ignoreCapitalizationFirstChar.UseVisualStyleBackColor = true;
+            this.chk_ignoreCapitalizationFirstChar.Click += new System.EventHandler(this.Chk_Click);
             // 
             // chk_ignoreOpeningWhitespace
             // 
+            this.chk_ignoreOpeningWhitespace.AutoCheck = false;
             this.chk_ignoreOpeningWhitespace.AutoSize = true;
             this.chk_ignoreOpeningWhitespace.Checked = true;
             this.chk_ignoreOpeningWhitespace.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -59,10 +81,13 @@
             this.chk_ignoreOpeningWhitespace.Size = new System.Drawing.Size(168, 17);
             this.chk_ignoreOpeningWhitespace.TabIndex = 1;
             this.chk_ignoreOpeningWhitespace.Text = "Ignore opening whitespace";
+            this.chk_ignoreOpeningWhitespace.ThreeState = true;
             this.chk_ignoreOpeningWhitespace.UseVisualStyleBackColor = true;
+            this.chk_ignoreOpeningWhitespace.Click += new System.EventHandler(this.Chk_Click);
             // 
             // chk_ignoreEndingWhitespace
             // 
+            this.chk_ignoreEndingWhitespace.AutoCheck = false;
             this.chk_ignoreEndingWhitespace.AutoSize = true;
             this.chk_ignoreEndingWhitespace.Checked = true;
             this.chk_ignoreEndingWhitespace.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -71,10 +96,13 @@
             this.chk_ignoreEndingWhitespace.Size = new System.Drawing.Size(161, 17);
             this.chk_ignoreEndingWhitespace.TabIndex = 2;
             this.chk_ignoreEndingWhitespace.Text = "Ignore ending whitespace";
+            this.chk_ignoreEndingWhitespace.ThreeState = true;
             this.chk_ignoreEndingWhitespace.UseVisualStyleBackColor = true;
+            this.chk_ignoreEndingWhitespace.Click += new System.EventHandler(this.Chk_Click);
             // 
             // chk_ignoreDotsInEnd
             // 
+            this.chk_ignoreDotsInEnd.AutoCheck = false;
             this.chk_ignoreDotsInEnd.AutoSize = true;
             this.chk_ignoreDotsInEnd.Checked = true;
             this.chk_ignoreDotsInEnd.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -83,10 +111,13 @@
             this.chk_ignoreDotsInEnd.Size = new System.Drawing.Size(122, 17);
             this.chk_ignoreDotsInEnd.TabIndex = 3;
             this.chk_ignoreDotsInEnd.Text = "Ignore dots in end";
+            this.chk_ignoreDotsInEnd.ThreeState = true;
             this.chk_ignoreDotsInEnd.UseVisualStyleBackColor = true;
+            this.chk_ignoreDotsInEnd.Click += new System.EventHandler(this.Chk_Click);
             // 
             // chk_treatTextInParenthesisAsSynonym
             // 
+            this.chk_treatTextInParenthesisAsSynonym.AutoCheck = false;
             this.chk_treatTextInParenthesisAsSynonym.AutoSize = true;
             this.chk_treatTextInParenthesisAsSynonym.Checked = true;
             this.chk_treatTextInParenthesisAsSynonym.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -95,10 +126,13 @@
             this.chk_treatTextInParenthesisAsSynonym.Size = new System.Drawing.Size(265, 17);
             this.chk_treatTextInParenthesisAsSynonym.TabIndex = 4;
             this.chk_treatTextInParenthesisAsSynonym.Text = "Treat text in parenthesis as synonym / optional";
+            this.chk_treatTextInParenthesisAsSynonym.ThreeState = true;
             this.chk_treatTextInParenthesisAsSynonym.UseVisualStyleBackColor = true;
+            this.chk_treatTextInParenthesisAsSynonym.Click += new System.EventHandler(this.Chk_Click);
             // 
             // chk_treatWordsBetweenSlashAsSynonyms
             // 
+            this.chk_treatWordsBetweenSlashAsSynonyms.AutoCheck = false;
             this.chk_treatWordsBetweenSlashAsSynonyms.AutoSize = true;
             this.chk_treatWordsBetweenSlashAsSynonyms.Checked = true;
             this.chk_treatWordsBetweenSlashAsSynonyms.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -107,7 +141,9 @@
             this.chk_treatWordsBetweenSlashAsSynonyms.Size = new System.Drawing.Size(230, 17);
             this.chk_treatWordsBetweenSlashAsSynonyms.TabIndex = 5;
             this.chk_treatWordsBetweenSlashAsSynonyms.Text = "Treat words between slash as synonyms";
+            this.chk_treatWordsBetweenSlashAsSynonyms.ThreeState = true;
             this.chk_treatWordsBetweenSlashAsSynonyms.UseVisualStyleBackColor = true;
+            this.chk_treatWordsBetweenSlashAsSynonyms.Click += new System.EventHandler(this.Chk_Click);
             // 
             // btn_apply
             // 
