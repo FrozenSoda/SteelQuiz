@@ -211,5 +211,17 @@ namespace SteelQuiz
                 (int)Math.Floor(progress * 255),
                 0);
         }
+
+        private void Btn_more_Click(object sender, EventArgs e)
+        {
+            var cm = new ContextMenu();
+            cm.MenuItems.Add("Export", (a, b) =>
+            {
+                var quizExport = new QuizExport(QuizCore.Quiz);
+                quizExport.ShowDialog();
+            });
+
+            cm.Show(btn_more, new Point(0, btn_more.Size.Height));
+        }
     }
 }

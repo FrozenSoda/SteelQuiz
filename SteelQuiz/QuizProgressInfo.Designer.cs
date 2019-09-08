@@ -56,6 +56,7 @@ namespace SteelQuiz
             this.lbl_learningProgress_bar = new System.Windows.Forms.Label();
             this.lbl_learningProgress_desc = new System.Windows.Forms.Label();
             this.lbl_learningProgress = new System.Windows.Forms.Label();
+            this.btn_more = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_practiseQuiz
@@ -139,11 +140,28 @@ namespace SteelQuiz
             this.lbl_learningProgress.Text = "100 %";
             this.lbl_learningProgress.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // btn_more
+            // 
+            this.btn_more.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btn_more.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.btn_more.FlatAppearance.BorderSize = 0;
+            this.btn_more.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_more.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_more.Location = new System.Drawing.Point(9, 381);
+            this.btn_more.Name = "btn_more";
+            this.btn_more.Size = new System.Drawing.Size(33, 45);
+            this.btn_more.TabIndex = 11;
+            this.btn_more.Text = "...";
+            this.btn_more.UseCompatibleTextRendering = true;
+            this.btn_more.UseVisualStyleBackColor = false;
+            this.btn_more.Click += new System.EventHandler(this.Btn_more_Click);
+            // 
             // QuizProgressInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.Controls.Add(this.btn_more);
             this.Controls.Add(this.lbl_learningProgress);
             this.Controls.Add(this.lbl_learningProgress_desc);
             this.Controls.Add(this.lbl_learningProgress_bar);
@@ -170,5 +188,6 @@ namespace SteelQuiz
         private System.Windows.Forms.Label lbl_learningProgress_bar;
         private System.Windows.Forms.Label lbl_learningProgress_desc;
         private System.Windows.Forms.Label lbl_learningProgress;
+        private System.Windows.Forms.Button btn_more;
     }
 }

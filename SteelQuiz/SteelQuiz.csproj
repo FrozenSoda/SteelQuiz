@@ -76,6 +76,12 @@
     <Compile Include="QuizEditor\SmartComparisonSettings.Designer.cs">
       <DependentUpon>SmartComparisonSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuizExport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuizExport.Designer.cs">
+      <DependentUpon>QuizExport.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuizImport\Guide\IStep.cs" />
     <Compile Include="QuizImport\Guide\TextImport\Step2.cs">
       <SubType>UserControl</SubType>
@@ -515,6 +521,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="QuizEditor\SmartComparisonSettings.resx">
       <DependentUpon>SmartComparisonSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuizExport.resx">
+      <DependentUpon>QuizExport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuizImport\Guide\QuizFolder.resx">
       <DependentUpon>QuizFolder.cs</DependentUpon>
