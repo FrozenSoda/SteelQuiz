@@ -158,7 +158,7 @@ namespace SteelQuiz.QuizPractise
             int difference = Fastenshtein.Levenshtein.Distance(userAnswer, correctAnswer);
             similarityDatas.Add(new SimilarityData(difference, certainty, correctAnswer, wordPair));
             KeepBestSimilarityData();
-#warning the best similarity data that is being kept is not necessarily equal to the written answer in the quiz!!! this potentially shows a wrong answer in "ProbablyCorrectAnswer" dialog
+//#warning the best similarity data that is being kept is not necessarily equal to the written answer in the quiz!!! this potentially shows a wrong answer in "ProbablyCorrectAnswer" dialog
             SimilarityData best = similarityDatas.First();
 
             return best;

@@ -372,12 +372,13 @@ namespace SteelQuiz.QuizEditor
         {
             if (QEOwner.UndoStack.Count > 0)
             {
-                var pop = QEOwner.UndoStack.Pop();
-                if (pop.OwnerControlData.Control != this)
+                if (QEOwner.UndoStack.Peek().OwnerControlData.Control != this)
                 {
                     // do not allow undoing stuff outside this window
                     return;
                 }
+
+                var pop = QEOwner.UndoStack.Pop();
 
                 foreach (var undo in pop.UndoActions)
                 {
@@ -393,12 +394,13 @@ namespace SteelQuiz.QuizEditor
         {
             if (QEOwner.RedoStack.Count > 0)
             {
-                var pop = QEOwner.RedoStack.Pop();
-                if (pop.OwnerControlData.Control != this)
+                if (QEOwner.RedoStack.Peek().OwnerControlData.Control != this)
                 {
                     // do not allow redoing stuff outside this window
                     return;
                 }
+
+                var pop = QEOwner.RedoStack.Pop();
 
                 foreach (var redo in pop.RedoActions)
                 {
@@ -420,16 +422,33 @@ namespace SteelQuiz.QuizEditor
             Redo();
         }
 
+        /*
+        private void RemoveUndoRedoStuff()
+        {
+            while (QEOwner.UndoStack.Peek().OwnerControlData.Control == this)
+            {
+                QEOwner.UndoStack.Pop();
+            }
+
+            while (QEOwner.RedoStack.Peek().OwnerControlData.Control == this)
+            {
+                QEOwner.RedoStack.Pop();
+            }
+        }
+        */
+
         private void EditWordSynonyms_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (!closeWarning || (!ListBoxChanged() && (txt_wordAdd.Text == "" || lst_synonyms.Items.Contains(txt_wordAdd.Text))))
             {
+                //RemoveUndoRedoStuff();
                 return;
             }
 
             if (MessageBox.Show("Are you sure you want to cancel? The changes will not be applied", "SteelQuiz", MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning) == DialogResult.Yes)
             {
+                //RemoveUndoRedoStuff();
                 DialogResult = DialogResult.Cancel;
             }
             else
