@@ -74,7 +74,7 @@ namespace SteelQuiz.QuizEditor
 
             ComparisonRules.AfterDataChanged += (sender, e) =>
             {
-                chk_smartComp.CheckedChanged -= Chk_smartComp_CheckedChanged;
+                chk_smartComp.CheckStateChanged -= Chk_smartComp_CheckStateChanged;
                 if (ComparisonRules.Data.HasFlag(StringComp.SMART_RULES))
                 {
                     chk_smartComp.CheckState = CheckState.Checked;
@@ -87,7 +87,7 @@ namespace SteelQuiz.QuizEditor
                 {
                     chk_smartComp.CheckState = CheckState.Indeterminate;
                 }
-                chk_smartComp.CheckedChanged += Chk_smartComp_CheckedChanged;
+                chk_smartComp.CheckStateChanged += Chk_smartComp_CheckStateChanged;
             };
 
             SetTheme();
@@ -288,7 +288,23 @@ namespace SteelQuiz.QuizEditor
             }
         }
 
-        private void Chk_smartComp_CheckedChanged(object sender, EventArgs e)
+        private void Chk_smartComp_Click(object sender, EventArgs e)
+        {
+            if (chk_smartComp.CheckState == CheckState.Checked)
+            {
+                chk_smartComp.CheckState = CheckState.Unchecked;
+            }
+            else if (chk_smartComp.CheckState == CheckState.Unchecked)
+            {
+                chk_smartComp.CheckState = CheckState.Checked;
+            }
+            else if (chk_smartComp.CheckState == CheckState.Indeterminate)
+            {
+                chk_smartComp.CheckState = CheckState.Checked;
+            }
+        }
+
+        private void Chk_smartComp_CheckStateChanged(object sender, EventArgs e)
         {
             if (ignore_chk_smartComp_change)
             {

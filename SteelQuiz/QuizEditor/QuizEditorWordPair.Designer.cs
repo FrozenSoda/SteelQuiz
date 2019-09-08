@@ -99,6 +99,7 @@ namespace SteelQuiz.QuizEditor
             // 
             // chk_smartComp
             // 
+            this.chk_smartComp.AutoCheck = false;
             this.chk_smartComp.AutoSize = true;
             this.chk_smartComp.Checked = true;
             this.chk_smartComp.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -112,7 +113,8 @@ namespace SteelQuiz.QuizEditor
             this.chk_smartComp.Text = "Smart Comparison";
             this.chk_smartComp.ThreeState = true;
             this.chk_smartComp.UseVisualStyleBackColor = true;
-            this.chk_smartComp.CheckedChanged += new System.EventHandler(this.Chk_smartComp_CheckedChanged);
+            this.chk_smartComp.CheckStateChanged += new System.EventHandler(this.Chk_smartComp_CheckStateChanged);
+            this.chk_smartComp.Click += new System.EventHandler(this.Chk_smartComp_Click);
             // 
             // txt_word1
             // 
