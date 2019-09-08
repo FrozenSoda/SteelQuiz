@@ -80,9 +80,24 @@ namespace SteelQuiz
         /// Sets the data without invoking Before-/AfterDataChanged events.
         /// </summary>
         /// <param name="value">The value to set data to.</param>
-        public void SetSilent(T value)
+        public void SetCompletelySilent(T value)
         {
             __data = value;
+        }
+
+        /// <summary>
+        /// Sets the data without invoking BeforeDataChanged events.
+        /// </summary>
+        /// <param name="value">The value to set data to.</param>
+        public void SetSemiSilent(T value)
+        {
+            __data = value;
+            AfterDataChanged.Invoke(this, __data);
+        }
+
+        public void InvokeAfterDataChanged()
+        {
+            AfterDataChanged.Invoke(this, Data);
         }
     }
 }

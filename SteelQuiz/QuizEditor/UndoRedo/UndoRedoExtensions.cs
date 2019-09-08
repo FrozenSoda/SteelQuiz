@@ -170,5 +170,13 @@ namespace SteelQuiz.QuizEditor.UndoRedo
                 ptr.Data = val;
             };
         }
+
+        public static Action SetSemiSilentUR<T>(this Pointer<T> ptr, T val)
+        {
+            return () =>
+            {
+                ptr.SetSemiSilent(val);
+            };
+        }
     }
 }

@@ -56,6 +56,20 @@ namespace SteelQuiz.QuizEditor
             Number = number;
             RemoveSynonymsEqualToWords();
 
+            ComparisonRules.BeforeDataChanged += (sender, e) =>
+            {
+                if (QEOwner.UpdateUndoRedoStacks)
+                {
+                    QEOwner.UndoStack.Push(new UndoRedoFuncPair(
+                        new Action[] { ComparisonRules.SetSemiSilentUR(ComparisonRules.Data) },
+                        new Action[] { ComparisonRules.SetSemiSilentUR(e) },
+                        "Change comparison rules",
+                        new OwnerControlData(this, this.Parent)
+                        ));
+                    QEOwner.UpdateUndoRedoTooltips();
+                }
+            };
+
             ComparisonRules.AfterDataChanged += (sender, e) =>
             {
                 if (e.HasFlag(StringComp.SMART_RULES))
@@ -71,7 +85,6 @@ namespace SteelQuiz.QuizEditor
                     chk_smartComp.CheckState = CheckState.Indeterminate;
                 }
 
-#warning push to undo/redo stack
                 QEOwner.ChangedSinceLastSave = true;
             };
 
@@ -302,20 +315,15 @@ namespace SteelQuiz.QuizEditor
                 return;
             }
 
-            /*
-            if (QEOwner.UpdateUndoRedoStacks)
+            if (chk_smartComp.Checked)
             {
-                QEOwner.UndoStack.Push(new UndoRedoFuncPair(
-                    new Action[] { chk_smartComp.SetChecked(!chk_smartComp.Checked, () => { ignore_chk_smartComp_change = true; }) },
-                    new Action[] { chk_smartComp.SetChecked(chk_smartComp.Checked, () => { ignore_chk_smartComp_change = true; }) },
-                    "Checkbox switch",
-                    new OwnerControlData(this, this.Parent)
-                    ));
-                QEOwner.UpdateUndoRedoTooltips();
+                ComparisonRules.Data = StringComp.SMART_RULES;
             }
-            */
+            else
+            {
+                ComparisonRules.Data = StringComp.Rules.None;
+            }
 
-#warning implement proper undo/redo
             QEOwner.ChangedSinceLastSave = true;
         }
     }

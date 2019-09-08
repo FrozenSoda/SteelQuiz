@@ -704,9 +704,9 @@ namespace SteelQuiz.QuizEditor
                 foreach (var wp in flp_words.Controls.OfType<QuizEditorWordPair>())
                 {
                     var compRules = wp.ComparisonRules.Data;
-                    undoActions.Add(new Action(wp.ComparisonRules.Set(compRules)));
-                    redoActions.Add(new Action(wp.ComparisonRules.Set(StringComp.SMART_RULES)));
-                    wp.ComparisonRules.Data = StringComp.SMART_RULES;
+                    undoActions.Add(wp.ComparisonRules.SetSemiSilentUR(compRules));
+                    redoActions.Add(wp.ComparisonRules.SetSemiSilentUR(StringComp.SMART_RULES));
+                    wp.ComparisonRules.SetSemiSilent(StringComp.SMART_RULES);
                 }
 
                 UndoStack.Push(new UndoRedoFuncPair(
@@ -721,9 +721,9 @@ namespace SteelQuiz.QuizEditor
                 foreach (var wp in flp_words.Controls.OfType<QuizEditorWordPair>())
                 {
                     var compRules = wp.ComparisonRules.Data;
-                    undoActions.Add(new Action(wp.ComparisonRules.Set(compRules)));
-                    redoActions.Add(new Action(wp.ComparisonRules.Set(StringComp.Rules.None)));
-                    wp.ComparisonRules.Data = StringComp.Rules.None;
+                    undoActions.Add(wp.ComparisonRules.SetSemiSilentUR(compRules));
+                    redoActions.Add(wp.ComparisonRules.SetSemiSilentUR(StringComp.Rules.None));
+                    wp.ComparisonRules.SetSemiSilent(StringComp.Rules.None);
                 }
 
                 UndoStack.Push(new UndoRedoFuncPair(
