@@ -323,5 +323,11 @@ namespace SteelQuiz.QuizEditor
 
             QEOwner.ChangedSinceLastSave = true;
         }
+
+        private void QuizEditorWordPair_SizeChanged(object sender, EventArgs e)
+        {
+            txt_word1.Size = new Size((int)Math.Floor(335 / 730d * Size.Width), txt_word1.Size.Height);
+            txt_word2.Size = new Size((int)Math.Floor(335 / 730d * Size.Width), txt_word2.Size.Height);
+        }
     }
 }

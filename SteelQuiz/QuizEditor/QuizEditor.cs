@@ -111,6 +111,7 @@ namespace SteelQuiz.QuizEditor
             {
                 var w = new QuizEditorWordPair(this, flp_words.Controls.Count);
                 flp_words.Controls.Add(w);
+                flp_words.SetFlowBreak(w, true);
             }
         }
 
@@ -575,6 +576,11 @@ namespace SteelQuiz.QuizEditor
         {
             // resize wordpair collection
             flp_words.Size = new Size(this.Size.Width - 40, this.Size.Height - 124);
+
+            foreach (var c in flp_words.Controls.OfType<QuizEditorWordPair>())
+            {
+                c.Size = new Size(flp_words.Size.Width - 46, c.Size.Height);
+            }
 
             /*
             // resize notification

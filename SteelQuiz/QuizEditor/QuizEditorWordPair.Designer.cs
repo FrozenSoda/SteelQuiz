@@ -62,6 +62,7 @@ namespace SteelQuiz.QuizEditor
             // 
             // pnl_translationRules
             // 
+            this.pnl_translationRules.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.pnl_translationRules.Controls.Add(this.btn_smartCompSettings);
             this.pnl_translationRules.Controls.Add(this.label4);
             this.pnl_translationRules.Controls.Add(this.chk_smartComp);
@@ -149,6 +150,7 @@ namespace SteelQuiz.QuizEditor
             // 
             // txt_word2
             // 
+            this.txt_word2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.txt_word2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
             this.txt_word2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_word2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -164,6 +166,7 @@ namespace SteelQuiz.QuizEditor
             // 
             // btn_editSynonyms_w2
             // 
+            this.btn_editSynonyms_w2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_editSynonyms_w2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
             this.btn_editSynonyms_w2.FlatAppearance.BorderSize = 0;
             this.btn_editSynonyms_w2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -180,6 +183,7 @@ namespace SteelQuiz.QuizEditor
             // 
             // btn_delete
             // 
+            this.btn_delete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_delete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
             this.btn_delete.FlatAppearance.BorderSize = 0;
             this.btn_delete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -207,6 +211,7 @@ namespace SteelQuiz.QuizEditor
             // 
             // label2
             // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
@@ -231,6 +236,7 @@ namespace SteelQuiz.QuizEditor
             this.Controls.Add(this.pnl_translationRules);
             this.Name = "QuizEditorWordPair";
             this.Size = new System.Drawing.Size(730, 97);
+            this.SizeChanged += new System.EventHandler(this.QuizEditorWordPair_SizeChanged);
             this.pnl_translationRules.ResumeLayout(false);
             this.pnl_translationRules.PerformLayout();
             this.ResumeLayout(false);

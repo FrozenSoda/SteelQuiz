@@ -128,10 +128,12 @@ namespace SteelQuiz.QuizEditor
             this.flp_words.AutoScroll = true;
             this.flp_words.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.flp_words.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flp_words.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flp_words.Location = new System.Drawing.Point(12, 73);
             this.flp_words.Name = "flp_words";
             this.flp_words.Size = new System.Drawing.Size(776, 365);
             this.flp_words.TabIndex = 3;
+            this.flp_words.WrapContents = false;
             // 
             // mns_top
             // 
