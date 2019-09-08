@@ -388,7 +388,7 @@ namespace SteelQuiz.QuizEditor
                 if (peek.OwnerControlData.Control == this || this.Controls.Contains(peek.OwnerControlData.Parent))
                 {
                     var pop = UndoStack.Pop();
-                    foreach (var undo in pop.UndoActions)
+                    foreach (var undo in pop.UndoActions.Reverse())
                     {
                         undo();
                     }
@@ -435,7 +435,7 @@ namespace SteelQuiz.QuizEditor
                 if (peek.OwnerControlData.Control == this || this.Controls.Contains(peek.OwnerControlData.Parent))
                 {
                     var pop = RedoStack.Pop();
-                    foreach (var redo in pop.RedoActions)
+                    foreach (var redo in pop.RedoActions.Reverse())
                     {
                         redo();
                     }
