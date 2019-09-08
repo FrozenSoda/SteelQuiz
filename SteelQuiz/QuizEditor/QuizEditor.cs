@@ -169,11 +169,7 @@ namespace SteelQuiz.QuizEditor
             {
                 wordPair.RemoveSynonymsEqualToWords();
 
-                StringComp.Rules comparisonRules = StringComp.Rules.None;
-                if (wordPair.chk_smartComp.Checked)
-                {
-                    comparisonRules = wordPair.ComparisonRules.Data;
-                }
+                StringComp.Rules comparisonRules = wordPair.ComparisonRules.Data;
 
                 var wp = new WordPair(wordPair.txt_word1.Text, wordPair.txt_word2.Text, comparisonRules, wordPair.Synonyms1, wordPair.Synonyms2);
                 quiz.WordPairs.Add(wp);
@@ -699,7 +695,7 @@ namespace SteelQuiz.QuizEditor
             var undoActions = new List<Action>();
             var redoActions = new List<Action>();
 
-            if (enableSmartComparisonToolStripMenuItem.Checked)
+            if (enableSmartComparisonToolStripMenuItem.CheckState == CheckState.Checked)
             {
                 foreach (var wp in flp_words.Controls.OfType<QuizEditorWordPair>())
                 {
@@ -716,7 +712,7 @@ namespace SteelQuiz.QuizEditor
                     new OwnerControlData(this, this.Parent)
                     ));
             }
-            else
+            else if (enableSmartComparisonToolStripMenuItem.CheckState == CheckState.Unchecked)
             {
                 foreach (var wp in flp_words.Controls.OfType<QuizEditorWordPair>())
                 {

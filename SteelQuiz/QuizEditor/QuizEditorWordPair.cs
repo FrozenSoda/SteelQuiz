@@ -199,27 +199,6 @@ namespace SteelQuiz.QuizEditor
             txt_word2_text_old = txt_word2.Text;
         }
 
-        private void chk_ignoreExcl_CheckedChanged(object sender, EventArgs e)
-        {
-            if (ignore_chk_smartComp_change)
-            {
-                ignore_chk_smartComp_change = false;
-                return;
-            }
-
-            if (QEOwner.UpdateUndoRedoStacks)
-            {
-                QEOwner.UndoStack.Push(new UndoRedoFuncPair(
-                    new Action[] { chk_smartComp.SetChecked(!chk_smartComp.Checked, () => { ignore_chk_smartComp_change = true; }) },
-                    new Action[] { chk_smartComp.SetChecked(chk_smartComp.Checked, () => { ignore_chk_smartComp_change = true; }) },
-                    "Checkbox switch",
-                    new OwnerControlData(this, this.Parent)
-                    ));
-                QEOwner.UpdateUndoRedoTooltips();
-            }
-            QEOwner.ChangedSinceLastSave = true;
-        }
-
         private void txt_word_Click(object sender, EventArgs e)
         {
             QEOwner.ChkFixWordsCount();
@@ -315,11 +294,11 @@ namespace SteelQuiz.QuizEditor
                 return;
             }
 
-            if (chk_smartComp.Checked)
+            if (chk_smartComp.CheckState == CheckState.Checked)
             {
                 ComparisonRules.Data = StringComp.SMART_RULES;
             }
-            else
+            else if (chk_smartComp.CheckState == CheckState.Unchecked)
             {
                 ComparisonRules.Data = StringComp.Rules.None;
             }

@@ -128,6 +128,15 @@ namespace SteelQuiz.QuizEditor.UndoRedo
             };
         }
 
+        public static Action SetCheckState(this CheckBox checkBox, CheckState checkState, Action beforeRevertAction)
+        {
+            return () =>
+            {
+                beforeRevertAction?.Invoke();
+                checkBox.CheckState = checkState;
+            };
+        }
+
         public static Action RemoveWordPair(this QuizEditor quizEditor, QuizEditorWordPair wordPair)
         {
             return () =>

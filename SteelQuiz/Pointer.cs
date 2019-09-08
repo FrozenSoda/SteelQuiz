@@ -92,12 +92,12 @@ namespace SteelQuiz
         public void SetSemiSilent(T value)
         {
             __data = value;
-            AfterDataChanged.Invoke(this, __data);
+            AfterDataChanged?.Invoke(this, __data);
         }
 
         public void InvokeAfterDataChanged()
         {
-            AfterDataChanged.Invoke(this, Data);
+            AfterDataChanged?.Invoke(this, Data);
         }
     }
 }
