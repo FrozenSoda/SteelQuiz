@@ -68,15 +68,18 @@ namespace SteelQuiz.QuizEditor
                         ));
                     QEOwner.UpdateUndoRedoTooltips();
                 }
+
+                QEOwner.ChangedSinceLastSave = true;
             };
 
             ComparisonRules.AfterDataChanged += (sender, e) =>
             {
-                if (e.HasFlag(StringComp.SMART_RULES))
+                chk_smartComp.CheckedChanged -= Chk_smartComp_CheckedChanged;
+                if (ComparisonRules.Data.HasFlag(StringComp.SMART_RULES))
                 {
                     chk_smartComp.CheckState = CheckState.Checked;
                 }
-                else if (e == StringComp.Rules.None)
+                else if (ComparisonRules.Data == StringComp.Rules.None)
                 {
                     chk_smartComp.CheckState = CheckState.Unchecked;
                 }
@@ -84,8 +87,7 @@ namespace SteelQuiz.QuizEditor
                 {
                     chk_smartComp.CheckState = CheckState.Indeterminate;
                 }
-
-                QEOwner.ChangedSinceLastSave = true;
+                chk_smartComp.CheckedChanged += Chk_smartComp_CheckedChanged;
             };
 
             SetTheme();

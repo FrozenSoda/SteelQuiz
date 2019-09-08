@@ -44,7 +44,10 @@ namespace SteelQuiz
 
             set
             {
-                BeforeDataChanged?.Invoke(this, value);
+                if (!EqualityComparer<T>.Default.Equals(value, __data))
+                {
+                    BeforeDataChanged?.Invoke(this, value);
+                }
 
                 __data = value;
 

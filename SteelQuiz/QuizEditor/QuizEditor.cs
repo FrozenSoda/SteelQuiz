@@ -251,7 +251,7 @@ namespace SteelQuiz.QuizEditor
                 ctrl.Synonyms1 = wp.Word1Synonyms;
                 ctrl.txt_word2.Text = wp.Word2;
                 ctrl.Synonyms2 = wp.Word2Synonyms;
-                ctrl.ComparisonRules.Data = wp.TranslationRules;
+                ctrl.ComparisonRules.Data = (StringComp.Rules)FixEnum(wp.TranslationRules);
             }
 
             if (!fromRecovery)
@@ -265,6 +265,31 @@ namespace SteelQuiz.QuizEditor
             UpdateUndoRedoStacks = true;
 
             SetGlobalSmartComparisonState();
+        }
+
+        /// <summary>
+        /// Fixes an enum that contains values that doesn't exist.
+        /// </summary>
+        /// <typeparam name="T">The enum type.</typeparam>
+        /// <param name="theEnum">The enum.</param>
+        /// <returns>Returns an integer representing the fixed enum.</returns>
+        private int FixEnum<T>(T theEnum) where T : struct, IConvertible
+        {
+            if (!typeof(T).IsEnum)
+            {
+                throw new ArgumentException("T must be enum type");
+            }
+
+            int result = 0x0;
+            foreach (T val in (T[])Enum.GetValues(typeof(T)))
+            {
+                if ((Convert.ToInt32(theEnum) & Convert.ToInt32(val)) != 0)
+                {
+                    result |= Convert.ToInt32(val);
+                }
+            }
+
+            return result;
         }
 
         private void DeleteRecovery()
