@@ -368,7 +368,7 @@ namespace SteelQuiz.QuizPractise
                     bool allLearned100 = true;
                     foreach (var word in QuizCore.QuizProgress.WordProgDatas)
                     {
-                        if (word.GetLearningProgress() < 1 || word.GetWordTriesCount() < WordProgData.WORD_TRIES_FOR_LEARNING_PROGRESS)
+                        if (word.GetLearningProgress() < 1 || word.GetWordTriesCount() < WordProgData.WORD_TRIES_FOR_LEARNING_PROGRESS_DEFAULT)
                         {
                             allLearned100 = false;
                         }

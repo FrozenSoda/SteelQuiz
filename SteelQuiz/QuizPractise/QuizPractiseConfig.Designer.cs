@@ -52,10 +52,10 @@ namespace SteelQuiz.QuizPractise
             this.cmb_langAns = new System.Windows.Forms.ComboBox();
             this.btn_switchTestMode = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.rdo_last3attemptsIntelligentLearning = new System.Windows.Forms.RadioButton();
-            this.rdo_allAttemptsIntelligentLearning = new System.Windows.Forms.RadioButton();
-            this.rdo_lastNattemptsIntelligentLearning = new System.Windows.Forms.RadioButton();
             this.nud_intelligentLearningAttempsCount = new System.Windows.Forms.NumericUpDown();
+            this.rdo_lastNattemptsIntelligentLearning = new System.Windows.Forms.RadioButton();
+            this.rdo_allAttemptsIntelligentLearning = new System.Windows.Forms.RadioButton();
+            this.rdo_last3attemptsIntelligentLearning = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_intelligentLearningAttempsCount)).BeginInit();
             this.SuspendLayout();
@@ -117,40 +117,8 @@ namespace SteelQuiz.QuizPractise
             this.panel1.Controls.Add(this.rdo_last3attemptsIntelligentLearning);
             this.panel1.Location = new System.Drawing.Point(12, 42);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(503, 96);
+            this.panel1.Size = new System.Drawing.Size(503, 92);
             this.panel1.TabIndex = 16;
-            // 
-            // rdo_last3attemptsIntelligentLearning
-            // 
-            this.rdo_last3attemptsIntelligentLearning.AutoSize = true;
-            this.rdo_last3attemptsIntelligentLearning.Checked = true;
-            this.rdo_last3attemptsIntelligentLearning.Location = new System.Drawing.Point(0, 3);
-            this.rdo_last3attemptsIntelligentLearning.Name = "rdo_last3attemptsIntelligentLearning";
-            this.rdo_last3attemptsIntelligentLearning.Size = new System.Drawing.Size(492, 17);
-            this.rdo_last3attemptsIntelligentLearning.TabIndex = 0;
-            this.rdo_last3attemptsIntelligentLearning.Text = "Use only last 3 attempts as basis for Intelligent Learning question selection (re" +
-    "commended)";
-            this.rdo_last3attemptsIntelligentLearning.UseVisualStyleBackColor = true;
-            // 
-            // rdo_allAttemptsIntelligentLearning
-            // 
-            this.rdo_allAttemptsIntelligentLearning.AutoSize = true;
-            this.rdo_allAttemptsIntelligentLearning.Location = new System.Drawing.Point(0, 26);
-            this.rdo_allAttemptsIntelligentLearning.Name = "rdo_allAttemptsIntelligentLearning";
-            this.rdo_allAttemptsIntelligentLearning.Size = new System.Drawing.Size(425, 17);
-            this.rdo_allAttemptsIntelligentLearning.TabIndex = 1;
-            this.rdo_allAttemptsIntelligentLearning.Text = "Use all attempts ever made as basis for Intelligent Learning question selection";
-            this.rdo_allAttemptsIntelligentLearning.UseVisualStyleBackColor = true;
-            // 
-            // rdo_lastNattemptsIntelligentLearning
-            // 
-            this.rdo_lastNattemptsIntelligentLearning.AutoSize = true;
-            this.rdo_lastNattemptsIntelligentLearning.Location = new System.Drawing.Point(0, 58);
-            this.rdo_lastNattemptsIntelligentLearning.Name = "rdo_lastNattemptsIntelligentLearning";
-            this.rdo_lastNattemptsIntelligentLearning.Size = new System.Drawing.Size(411, 17);
-            this.rdo_lastNattemptsIntelligentLearning.TabIndex = 2;
-            this.rdo_lastNattemptsIntelligentLearning.Text = "Use only last n attempts as basis for Intelligent Learning question selection";
-            this.rdo_lastNattemptsIntelligentLearning.UseVisualStyleBackColor = true;
             // 
             // nud_intelligentLearningAttempsCount
             // 
@@ -173,6 +141,39 @@ namespace SteelQuiz.QuizPractise
             0,
             0,
             0});
+            // 
+            // rdo_lastNattemptsIntelligentLearning
+            // 
+            this.rdo_lastNattemptsIntelligentLearning.AutoSize = true;
+            this.rdo_lastNattemptsIntelligentLearning.Location = new System.Drawing.Point(0, 58);
+            this.rdo_lastNattemptsIntelligentLearning.Name = "rdo_lastNattemptsIntelligentLearning";
+            this.rdo_lastNattemptsIntelligentLearning.Size = new System.Drawing.Size(414, 17);
+            this.rdo_lastNattemptsIntelligentLearning.TabIndex = 2;
+            this.rdo_lastNattemptsIntelligentLearning.Text = "Use only last n attempts as basis for Intelligent Learning question selection:";
+            this.rdo_lastNattemptsIntelligentLearning.UseVisualStyleBackColor = true;
+            // 
+            // rdo_allAttemptsIntelligentLearning
+            // 
+            this.rdo_allAttemptsIntelligentLearning.AutoSize = true;
+            this.rdo_allAttemptsIntelligentLearning.Location = new System.Drawing.Point(0, 26);
+            this.rdo_allAttemptsIntelligentLearning.Name = "rdo_allAttemptsIntelligentLearning";
+            this.rdo_allAttemptsIntelligentLearning.Size = new System.Drawing.Size(425, 17);
+            this.rdo_allAttemptsIntelligentLearning.TabIndex = 1;
+            this.rdo_allAttemptsIntelligentLearning.Text = "Use all attempts ever made as basis for Intelligent Learning question selection";
+            this.rdo_allAttemptsIntelligentLearning.UseVisualStyleBackColor = true;
+            // 
+            // rdo_last3attemptsIntelligentLearning
+            // 
+            this.rdo_last3attemptsIntelligentLearning.AutoSize = true;
+            this.rdo_last3attemptsIntelligentLearning.Checked = true;
+            this.rdo_last3attemptsIntelligentLearning.Location = new System.Drawing.Point(0, 3);
+            this.rdo_last3attemptsIntelligentLearning.Name = "rdo_last3attemptsIntelligentLearning";
+            this.rdo_last3attemptsIntelligentLearning.Size = new System.Drawing.Size(492, 17);
+            this.rdo_last3attemptsIntelligentLearning.TabIndex = 0;
+            this.rdo_last3attemptsIntelligentLearning.TabStop = true;
+            this.rdo_last3attemptsIntelligentLearning.Text = "Use only last 3 attempts as basis for Intelligent Learning question selection (re" +
+    "commended)";
+            this.rdo_last3attemptsIntelligentLearning.UseVisualStyleBackColor = true;
             // 
             // QuizPractiseConfig
             // 

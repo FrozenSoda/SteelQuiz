@@ -77,6 +77,18 @@ namespace SteelQuiz.QuizPractise
             }
         }
 
+        private static double GetLearningProgress(WordProgData wordProgData)
+        {
+            if (QuizCore.QuizProgress.IntelligentLearningLastAnswersBasisCount == 0)
+            {
+                return wordProgData.GetSuccessRate();
+            }
+            else
+            {
+                return wordProgData.GetLearningProgress(QuizCore.QuizProgress.IntelligentLearningLastAnswersBasisCount);
+            }
+        }
+
         /// <summary>
         /// Generates a question/word to be asked, without taking Intelligent Learning progress into account, that is, pure random (excluding already asked words)
         /// </summary>
@@ -139,7 +151,7 @@ namespace SteelQuiz.QuizPractise
 
             // universal probability
             //double u = QuizCore.QuizProgress.WordProgDatas.Where(x => !alreadyAsked.Contains(x.WordPair)).Sum(p => askProb(p.GetSuccessRate()));
-            double u = QuizCore.QuizProgress.WordProgDatas.Where(x => !alreadyAsked.Contains(x.WordPair)).Sum(p => askProb(p.GetLearningProgress()));
+            double u = QuizCore.QuizProgress.WordProgDatas.Where(x => !alreadyAsked.Contains(x.WordPair)).Sum(p => askProb(GetLearningProgress(p)));
 
             // random number between 0 and u
             double r = new Random().NextDouble() * u;
@@ -148,7 +160,7 @@ namespace SteelQuiz.QuizPractise
             foreach (var wordPairData in QuizCore.QuizProgress.WordProgDatas.Where(x => !alreadyAsked.Contains(x.WordPair)))
             {
                 //var askPrb = askProb(wordPairData.GetSuccessRate());
-                var askPrb = askProb(wordPairData.GetLearningProgress());
+                var askPrb = askProb(GetLearningProgress(wordPairData));
                 sum += askPrb;
                 if (r <= sum)
                 {
@@ -201,7 +213,7 @@ namespace SteelQuiz.QuizPractise
                 // Eventually skip asking the word
 
                 //var dontAskAgainPrb = dontAskProb(wordPairData.GetSuccessRate(), wordPairData.GetWordTriesCount());
-                var dontAskAgainPrb = dontAskProb(wordPairData.GetLearningProgress(), wordPairData.GetWordTriesCount());
+                var dontAskAgainPrb = dontAskProb(GetLearningProgress(wordPairData), wordPairData.GetWordTriesCount());
 
                 if (!QuizCore.QuizProgress.FullTestInProgress
                     && wordPairData.GetWordTriesCount() >= MINIMUM_TRIES_COUNT_TO_CONSIDER_SKIPPING

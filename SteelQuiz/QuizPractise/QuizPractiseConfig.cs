@@ -115,22 +115,46 @@ namespace SteelQuiz.QuizPractise
 
         private void Rdo_last3attemptsIntelligentLearning_CheckedChanged(object sender, EventArgs e)
         {
+            if (rdo_last3attemptsIntelligentLearning.Checked)
+            {
+                QuizCore.QuizProgress.IntelligentLearningLastAnswersBasisCount = 3;
+            }
 
+            QuestionSelector.NewRound();
+            Program.frmInQuiz.NewWord();
         }
 
         private void Rdo_allAttemptsIntelligentLearning_CheckedChanged(object sender, EventArgs e)
         {
+            if (rdo_allAttemptsIntelligentLearning.Checked)
+            {
+                QuizCore.QuizProgress.IntelligentLearningLastAnswersBasisCount = 0;
+            }
 
+            QuestionSelector.NewRound();
+            Program.frmInQuiz.NewWord();
         }
 
         private void Rdo_lastNattemptsIntelligentLearning_CheckedChanged(object sender, EventArgs e)
         {
+            if (rdo_lastNattemptsIntelligentLearning.Checked)
+            {
+                QuizCore.QuizProgress.IntelligentLearningLastAnswersBasisCount = (int)nud_intelligentLearningAttempsCount.Value;
+            }
 
+            QuestionSelector.NewRound();
+            Program.frmInQuiz.NewWord();
         }
 
         private void Nud_intelligentLearningAttempsCount_ValueChanged(object sender, EventArgs e)
         {
+            if (rdo_lastNattemptsIntelligentLearning.Checked)
+            {
+                QuizCore.QuizProgress.IntelligentLearningLastAnswersBasisCount = (int)nud_intelligentLearningAttempsCount.Value;
+            }
 
+            QuestionSelector.NewRound();
+            Program.frmInQuiz.NewWord();
         }
     }
 }
