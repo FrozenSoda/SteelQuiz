@@ -1,5 +1,5 @@
 v4.0.0 (v4.0.0.22):
-One of the biggest updates ever to SteelQuiz!
+One of the biggest updates ever for SteelQuiz!
 
 New features:
 - Re-designed dashboard to give a better overview of quizzes, word pairs, and learning progress.
