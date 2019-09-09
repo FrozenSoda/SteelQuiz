@@ -1,5 +1,6 @@
 v4.1.0:
 Added customization options for Intelligent Learning. They can be found in the Quiz Practise Config, which is opened by pressing the gear in the bottom right corner while practising the quiz.
+The default option has been changed from previous versions.
 
 v4.0.2:
 - Fixed an issue with Smart Comparison answer parsing.
