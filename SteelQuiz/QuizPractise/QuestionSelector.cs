@@ -124,10 +124,11 @@ namespace SteelQuiz.QuizPractise
                 return null;
             }
 
-            double askProb(double successRate)
+            //double askProb(double successRate)
+            double askProb(double learningProgress)
             {
                 const double PROB_OFFSET = 0.15;
-                var prb = 1 - successRate;
+                var prb = 1 - learningProgress;
                 if (prb == 0)
                 {
                     prb += PROB_OFFSET;
@@ -137,7 +138,8 @@ namespace SteelQuiz.QuizPractise
             }
 
             // universal probability
-            double u = QuizCore.QuizProgress.WordProgDatas.Where(x => !alreadyAsked.Contains(x.WordPair)).Sum(p => askProb(p.GetSuccessRate()));
+            //double u = QuizCore.QuizProgress.WordProgDatas.Where(x => !alreadyAsked.Contains(x.WordPair)).Sum(p => askProb(p.GetSuccessRate()));
+            double u = QuizCore.QuizProgress.WordProgDatas.Where(x => !alreadyAsked.Contains(x.WordPair)).Sum(p => askProb(p.GetLearningProgress()));
 
             // random number between 0 and u
             double r = new Random().NextDouble() * u;
@@ -145,7 +147,8 @@ namespace SteelQuiz.QuizPractise
             double sum = 0;
             foreach (var wordPairData in QuizCore.QuizProgress.WordProgDatas.Where(x => !alreadyAsked.Contains(x.WordPair)))
             {
-                var askPrb = askProb(wordPairData.GetSuccessRate());
+                //var askPrb = askProb(wordPairData.GetSuccessRate());
+                var askPrb = askProb(wordPairData.GetLearningProgress());
                 sum += askPrb;
                 if (r <= sum)
                 {
@@ -166,7 +169,8 @@ namespace SteelQuiz.QuizPractise
         {
             const int MINIMUM_TRIES_COUNT_TO_CONSIDER_SKIPPING = 2;
 
-            double dontAskProb(double successRate, int triesCount)
+            //double dontAskProb(double successRate, int triesCount)
+            double dontAskProb(double learningProgress, int triesCount)
             {
                 if (triesCount == 0)
                 {
@@ -174,7 +178,7 @@ namespace SteelQuiz.QuizPractise
                 }
 
                 const double PROB_OFFSET = 0.15;
-                var prb = successRate;
+                var prb = learningProgress;
                 if (prb == 1)
                 {
                     prb -= PROB_OFFSET / (triesCount - (MINIMUM_TRIES_COUNT_TO_CONSIDER_SKIPPING - 1));
@@ -196,7 +200,8 @@ namespace SteelQuiz.QuizPractise
 
                 // Eventually skip asking the word
 
-                var dontAskAgainPrb = dontAskProb(wordPairData.GetSuccessRate(), wordPairData.GetWordTriesCount());
+                //var dontAskAgainPrb = dontAskProb(wordPairData.GetSuccessRate(), wordPairData.GetWordTriesCount());
+                var dontAskAgainPrb = dontAskProb(wordPairData.GetLearningProgress(), wordPairData.GetWordTriesCount());
 
                 if (!QuizCore.QuizProgress.FullTestInProgress
                     && wordPairData.GetWordTriesCount() >= MINIMUM_TRIES_COUNT_TO_CONSIDER_SKIPPING
