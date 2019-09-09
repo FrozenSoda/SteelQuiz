@@ -1,3 +1,21 @@
+v4.0.0 (v4.0.0.22):
+One of the biggest updates ever to SteelQuiz!
+
+New features:
+- Re-designed dashboard to give a better overview of quizzes, word pairs, and learning progress.
+- Added feature to import and export quizzes from/to text.
+- Brand new multi-answer system in quiz practise.
+
+Improvements:
+- Re-wrote the answer parsing system to better analyze the answers.
+- Changed Intelligent Learning algorithms for the better.
+- Improved design of quiz editor.
+
+Other:
+- Fixed undo/redo bugs in quiz editor.
+- Other important bug fixes and improvements.
+
+
 v4.0.0-pre6 (v4.0.0.10):
 - Bug fixes.
 

@@ -10,7 +10,7 @@
 ;--------------------------------
 
 ;Add version info
-!define PRODUCT_VERSION "4.0.0.10"
+!define PRODUCT_VERSION "4.0.0.22"
 
 VIProductVersion "${PRODUCT_VERSION}"
 VIFileVersion "${PRODUCT_VERSION}"
@@ -69,6 +69,7 @@ Section "SteelQuiz" SecSteelQuiz
   File "..\SteelQuiz\bin\Release\SteelQuiz.exe"
   File "..\SteelQuiz\bin\Release\Newtonsoft.Json.dll"
   File "..\SteelQuiz\bin\Release\AutoUpdater.NET.dll"
+  File "..\SteelQuiz\bin\Release\Fastenshtein.dll"
   
   ; Prevent SteelQuiz from asking user to accept license again
   File "..\SteelQuiz\ACCEPTED_LICENSE"
@@ -127,6 +128,7 @@ Section "Uninstall"
   Delete "$INSTDIR\SteelQuiz.exe"
   Delete "$INSTDIR\Newtonsoft.Json.dll"
   Delete "$INSTDIR\AutoUpdater.NET.dll"
+  Delete "$INSTDIR\Fastenshtein.dll"
   Delete "$INSTDIR\ACCEPTED_LICENSE"
   Delete "$INSTDIR\uninstall.exe"
 
