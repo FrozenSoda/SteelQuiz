@@ -49,8 +49,26 @@ namespace SteelQuiz.QuizPractise
                 btn_switchTestMode.Text = "Disable Intelligent Learning (do full test)";
             }
 
+            if (QuizCore.QuizProgress.IntelligentLearningLastAnswersBasisCount == 3)
+            {
+                rdo_last3attemptsIntelligentLearning.Checked = true;
+            }
+            else if (QuizCore.QuizProgress.IntelligentLearningLastAnswersBasisCount == 0)
+            {
+                rdo_allAttemptsIntelligentLearning.Checked = true;
+            }
+            else
+            {
+                rdo_lastNattemptsIntelligentLearning.Checked = true;
+                nud_intelligentLearningAttempsCount.Value = QuizCore.QuizProgress.IntelligentLearningLastAnswersBasisCount;
+            }
+
 
             cmb_langAns.SelectedIndexChanged += new EventHandler(Cmb_langAns_SelectedIndexChanged);
+            rdo_last3attemptsIntelligentLearning.CheckedChanged += new EventHandler(Rdo_last3attemptsIntelligentLearning_CheckedChanged);
+            rdo_allAttemptsIntelligentLearning.CheckedChanged += new EventHandler(Rdo_allAttemptsIntelligentLearning_CheckedChanged);
+            rdo_lastNattemptsIntelligentLearning.CheckedChanged += new EventHandler(Rdo_lastNattemptsIntelligentLearning_CheckedChanged);
+            nud_intelligentLearningAttempsCount.ValueChanged += new EventHandler(Nud_intelligentLearningAttempsCount_ValueChanged);
         }
 
         private void Btn_dontAgree_Click(object sender, EventArgs e)
@@ -93,6 +111,26 @@ namespace SteelQuiz.QuizPractise
 
             QuestionSelector.NewRound();
             Program.frmInQuiz.NewWord();
+        }
+
+        private void Rdo_last3attemptsIntelligentLearning_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Rdo_allAttemptsIntelligentLearning_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Rdo_lastNattemptsIntelligentLearning_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Nud_intelligentLearningAttempsCount_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -89,6 +89,11 @@ namespace SteelQuiz.QuizProgressData
             }
         }
 
+        /// <summary>
+        /// How many of the last attempts to use as basis for Intelligent Learning question selection. 0 if all attempts ever made should count
+        /// </summary>
+        public int IntelligentLearningLastAnswersBasisCount { get; set; } = 3;
+
         [JsonProperty] // required for deserialization of property with private setter
         internal List<WordPair> CurrentWordPairs { get; set; } = new List<WordPair>();
 

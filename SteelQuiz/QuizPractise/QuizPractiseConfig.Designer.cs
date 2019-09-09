@@ -51,6 +51,13 @@ namespace SteelQuiz.QuizPractise
             this.label1 = new System.Windows.Forms.Label();
             this.cmb_langAns = new System.Windows.Forms.ComboBox();
             this.btn_switchTestMode = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.rdo_last3attemptsIntelligentLearning = new System.Windows.Forms.RadioButton();
+            this.rdo_allAttemptsIntelligentLearning = new System.Windows.Forms.RadioButton();
+            this.rdo_lastNattemptsIntelligentLearning = new System.Windows.Forms.RadioButton();
+            this.nud_intelligentLearningAttempsCount = new System.Windows.Forms.NumericUpDown();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_intelligentLearningAttempsCount)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_dontAgree
@@ -102,12 +109,78 @@ namespace SteelQuiz.QuizPractise
             this.btn_switchTestMode.UseVisualStyleBackColor = false;
             this.btn_switchTestMode.Click += new System.EventHandler(this.Btn_switchTestMode_Click);
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.nud_intelligentLearningAttempsCount);
+            this.panel1.Controls.Add(this.rdo_lastNattemptsIntelligentLearning);
+            this.panel1.Controls.Add(this.rdo_allAttemptsIntelligentLearning);
+            this.panel1.Controls.Add(this.rdo_last3attemptsIntelligentLearning);
+            this.panel1.Location = new System.Drawing.Point(12, 42);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(503, 96);
+            this.panel1.TabIndex = 16;
+            // 
+            // rdo_last3attemptsIntelligentLearning
+            // 
+            this.rdo_last3attemptsIntelligentLearning.AutoSize = true;
+            this.rdo_last3attemptsIntelligentLearning.Checked = true;
+            this.rdo_last3attemptsIntelligentLearning.Location = new System.Drawing.Point(0, 3);
+            this.rdo_last3attemptsIntelligentLearning.Name = "rdo_last3attemptsIntelligentLearning";
+            this.rdo_last3attemptsIntelligentLearning.Size = new System.Drawing.Size(492, 17);
+            this.rdo_last3attemptsIntelligentLearning.TabIndex = 0;
+            this.rdo_last3attemptsIntelligentLearning.Text = "Use only last 3 attempts as basis for Intelligent Learning question selection (re" +
+    "commended)";
+            this.rdo_last3attemptsIntelligentLearning.UseVisualStyleBackColor = true;
+            // 
+            // rdo_allAttemptsIntelligentLearning
+            // 
+            this.rdo_allAttemptsIntelligentLearning.AutoSize = true;
+            this.rdo_allAttemptsIntelligentLearning.Location = new System.Drawing.Point(0, 26);
+            this.rdo_allAttemptsIntelligentLearning.Name = "rdo_allAttemptsIntelligentLearning";
+            this.rdo_allAttemptsIntelligentLearning.Size = new System.Drawing.Size(425, 17);
+            this.rdo_allAttemptsIntelligentLearning.TabIndex = 1;
+            this.rdo_allAttemptsIntelligentLearning.Text = "Use all attempts ever made as basis for Intelligent Learning question selection";
+            this.rdo_allAttemptsIntelligentLearning.UseVisualStyleBackColor = true;
+            // 
+            // rdo_lastNattemptsIntelligentLearning
+            // 
+            this.rdo_lastNattemptsIntelligentLearning.AutoSize = true;
+            this.rdo_lastNattemptsIntelligentLearning.Location = new System.Drawing.Point(0, 58);
+            this.rdo_lastNattemptsIntelligentLearning.Name = "rdo_lastNattemptsIntelligentLearning";
+            this.rdo_lastNattemptsIntelligentLearning.Size = new System.Drawing.Size(411, 17);
+            this.rdo_lastNattemptsIntelligentLearning.TabIndex = 2;
+            this.rdo_lastNattemptsIntelligentLearning.Text = "Use only last n attempts as basis for Intelligent Learning question selection";
+            this.rdo_lastNattemptsIntelligentLearning.UseVisualStyleBackColor = true;
+            // 
+            // nud_intelligentLearningAttempsCount
+            // 
+            this.nud_intelligentLearningAttempsCount.Location = new System.Drawing.Point(417, 58);
+            this.nud_intelligentLearningAttempsCount.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.nud_intelligentLearningAttempsCount.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nud_intelligentLearningAttempsCount.Name = "nud_intelligentLearningAttempsCount";
+            this.nud_intelligentLearningAttempsCount.Size = new System.Drawing.Size(68, 22);
+            this.nud_intelligentLearningAttempsCount.TabIndex = 3;
+            this.nud_intelligentLearningAttempsCount.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            // 
             // QuizPractiseConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(527, 314);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.btn_switchTestMode);
             this.Controls.Add(this.cmb_langAns);
             this.Controls.Add(this.label1);
@@ -121,6 +194,9 @@ namespace SteelQuiz.QuizPractise
             this.Name = "QuizPractiseConfig";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Quiz Practise Config";
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_intelligentLearningAttempsCount)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -132,5 +208,10 @@ namespace SteelQuiz.QuizPractise
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmb_langAns;
         private System.Windows.Forms.Button btn_switchTestMode;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.RadioButton rdo_allAttemptsIntelligentLearning;
+        private System.Windows.Forms.RadioButton rdo_last3attemptsIntelligentLearning;
+        private System.Windows.Forms.RadioButton rdo_lastNattemptsIntelligentLearning;
+        private System.Windows.Forms.NumericUpDown nud_intelligentLearningAttempsCount;
     }
 }
