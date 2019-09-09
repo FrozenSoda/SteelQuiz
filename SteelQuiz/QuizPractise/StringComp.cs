@@ -131,7 +131,7 @@ namespace SteelQuiz.QuizPractise
                 if (correctAnswer.Contains("/"))
                 {
                     string[] correctAnswers = correctAnswer.Split('/');
-                    foreach (var ans in correctAnswers)
+                    foreach (var ans in correctAnswers.Where(x => !string.IsNullOrWhiteSpace(x)))
                     {
                         similarityDatas.Add(Similarity(userAnswer, ans.TrimStart(' '), wordPair, rules,
                             (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));

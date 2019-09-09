@@ -1,3 +1,8 @@
+v4.0.2:
+- Fixed an issue with Smart Comparison answer parsing.
+- Dashboard and quiz editor window sizes are now consistent.
+- Newly created quizzes will now appear in the top in the Recent Quizzes list.
+
 v4.0.1:
 Fixed an issue causing newly added word pairs to have an incorrect size in the quiz editor.
 

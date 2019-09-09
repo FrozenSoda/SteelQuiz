@@ -63,9 +63,29 @@ namespace SteelQuiz.QuizEditor
         {
             InitializeComponent();
             ++Program.QuizEditorsOpen;
+
+            if (Program.openQuizEditors.Count > 0)
+            {
+                var last = Program.openQuizEditors.Last();
+                WindowState = last.WindowState;
+                if (WindowState == FormWindowState.Normal)
+                {
+                    Size = last.Size;
+                }
+            }
+            else
+            {
+                WindowState = Program.frmWelcome.WindowState;
+                if (WindowState == FormWindowState.Normal)
+                {
+                    Size = Program.frmWelcome.Size;
+                }
+            }
+
             this.Location = new Point(Program.frmWelcome.Location.X + (Program.frmWelcome.Size.Width / 2) - (this.Size.Width / 2),
                               Program.frmWelcome.Location.Y + (Program.frmWelcome.Size.Height / 2) - (this.Size.Height / 2)
                             );
+
             AddWordPair(EMPTY_WORD_PAIRS_COUNT);
             QuizRecoveryData = new QuizRecoveryData(QuizPath);
             if (chkRecovery)
@@ -360,6 +380,13 @@ namespace SteelQuiz.QuizEditor
                     Program.frmWelcome.PopulateQuizList();
                     Program.frmWelcome.SetControlStates();
                     Program.frmWelcome.GenerateWelcomeMsg();
+
+                    Program.frmWelcome.WindowState = WindowState;
+                    if (WindowState == FormWindowState.Normal)
+                    {
+                        Program.frmWelcome.Size = Size;
+                    }
+
                     Program.frmWelcome.Show();
                     Program.openQuizEditors.Remove(this);
                 }
@@ -417,6 +444,14 @@ namespace SteelQuiz.QuizEditor
             {
                 QuizPath = path;
                 ChangedSinceLastSave = false;
+            }
+
+            if (QuizCore.LoadQuizAccessData())
+            {
+                QuizCore.QuizIdentities[quiz.GUID] = new QuizIdentity(quiz.GUID, QuizPath);
+                QuizCore.QuizAccessTimes[quiz.GUID] = DateTime.Now;
+
+                QuizCore.SaveQuizData();
             }
 
             UseWaitCursor = false;
