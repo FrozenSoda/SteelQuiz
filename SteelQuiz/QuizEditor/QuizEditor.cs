@@ -105,6 +105,7 @@ namespace SteelQuiz.QuizEditor
                 var w = new QuizEditorWordPair(this, flp_words.Controls.Count);
                 flp_words.Controls.Add(w);
                 flp_words.SetFlowBreak(w, true);
+                w.Size = new Size(flp_words.Size.Width - 46, w.Size.Height);
             }
         }
 

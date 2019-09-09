@@ -1,3 +1,6 @@
+v4.0.1:
+Fixed an issue causing newly added word pairs to have an incorrect size in the quiz editor.
+
 v4.0.0 (v4.0.0.22):
 One of the biggest updates ever for SteelQuiz!
 
