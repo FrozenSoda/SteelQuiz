@@ -30,10 +30,10 @@ namespace SteelQuiz.QuizData
     public class WordPair
     {
         public string Word1 { get; set; }
-        public List<string> Word1Synonyms { get; set; }
+        public List<string> Word1Synonyms { get; set; } = new List<string>();
 
         public string Word2 { get; set; }
-        public List<string> Word2Synonyms { get; set; }
+        public List<string> Word2Synonyms { get; set; } = new List<string>();
 
         public StringComp.Rules TranslationRules { get; set; }
 
@@ -73,6 +73,7 @@ namespace SteelQuiz.QuizData
             Word1Synonyms = word1Synonyms;
             Word2Synonyms = word2Synonyms;
 
+            /*
             if (Word1Synonyms == null)
             {
                 Word1Synonyms = new List<string>();
@@ -82,6 +83,7 @@ namespace SteelQuiz.QuizData
             {
                 Word2Synonyms = new List<string>();
             }
+            */
         }
 
         public override bool Equals(object obj)

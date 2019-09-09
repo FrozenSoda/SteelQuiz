@@ -25,32 +25,51 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SteelQuiz.Extensions;
 using SteelQuiz.QuizEditor.UndoRedo;
 
 namespace SteelQuiz.QuizEditor
 {
-    public partial class EditWordSynonyms : AutoThemeableForm, IUndoRedo
+    public partial class EditWordSynonyms : AutoThemeableUndoRedoForm, IUndoRedo
     {
-        public List<string> Synonyms { get; set; }
         public int Language { get; set; }
+        public List<string> Synonyms
+        {
+            get
+            {
+                return Language == 1 ? Parent.Synonyms1 : Parent.Synonyms2;
+            }
+
+            set
+            {
+                if (Language == 1)
+                {
+                    Parent.Synonyms1 = value;
+                }
+                else
+                {
+                    Parent.Synonyms2 = value;
+                }
+            }
+        }
 
         private new QuizEditorWordPair Parent { get; set; }
-        private QuizEditor QEOwner => Parent.QEOwner;
+        private QuizEditor QuizEditor => Parent.QuizEditor;
 
         private bool changedTextBox = false; // since listbox select switch
         private object[] initialListBoxCollection;
         private bool closeWarning = true;
 
-        public EditWordSynonyms(QuizEditorWordPair parent, string word, List<string> currentSynonyms, int language)
+        public EditWordSynonyms(QuizEditorWordPair parent, string word, int language)
         {
             InitializeComponent();
             Parent = parent;
             Language = language;
             lbl_synForWord.Text = $"Synonyms for word: {word}";
 
-            if (currentSynonyms != null)
+            if (Synonyms != null)
             {
-                foreach (var synonym in currentSynonyms)
+                foreach (var synonym in Synonyms)
                 {
                     lst_synonyms.Items.Add(synonym);
                 }
@@ -97,7 +116,19 @@ namespace SteelQuiz.QuizEditor
                     return false;
                 }
             }
-            Synonyms = lst_synonyms.Items.OfType<string>().ToList();
+
+            var oldSynonyms = Synonyms.Clone().ToList();
+            var newSynonyms = lst_synonyms.Items.OfType<string>().ToList();
+
+            QuizEditor.UndoStack.Push(new UndoRedoFuncPair(
+                new Action[] { () => { Synonyms = oldSynonyms; } },
+                new Action[] { () => { Synonyms = newSynonyms; } },
+                "Change Synonyms",
+                new OwnerControlData(this, QuizEditor)));
+            QuizEditor.ChangedSinceLastSave = true;
+            QuizEditor.UpdateUndoRedoTooltips();
+
+            Synonyms = newSynonyms;
 
             // update last saved state
             initialListBoxCollection = new object[lst_synonyms.Items.Count];
@@ -207,13 +238,13 @@ namespace SteelQuiz.QuizEditor
 
             lst_synonyms.Items.Add(txt_wordAdd.Text);
 
-            QEOwner.UndoStack.Push(new UndoRedoFuncPair(
+            UndoStack.Push(new UndoRedoFuncPair(
                 new Action[] { lst_synonyms.RemoveItem(() => { return this.Parent.EditWordSynonyms; }, lst_synonyms.Name, txt_wordAdd.Text) },
                 new Action[] { lst_synonyms.AddItem(() => { return this.Parent.EditWordSynonyms; }, lst_synonyms.Name, txt_wordAdd.Text) },
                 "Add synonym(s)",
                 new OwnerControlData(this, this.Parent, Language)));
             UpdateUndoRedoTooltips();
-            QEOwner.ChangedSinceLastSave = true;
+            ChangedSinceLastSave = true;
 
             txt_wordAdd.Text = "";
             changedTextBox = false;
@@ -292,9 +323,9 @@ namespace SteelQuiz.QuizEditor
                 redoes.Add(lst_synonyms.ChangeItem(() => { return this.Parent.EditWordSynonyms; }, lst_synonyms.Name, _new, old));
             }
 
-            QEOwner.UndoStack.Push(new UndoRedoFuncPair(undoes.ToArray(), redoes.ToArray(), "Update synonym(s)", new OwnerControlData(this, this.Parent, Language)));
+            UndoStack.Push(new UndoRedoFuncPair(undoes.ToArray(), redoes.ToArray(), "Update synonym(s)", new OwnerControlData(this, this.Parent, Language)));
             UpdateUndoRedoTooltips();
-            QEOwner.ChangedSinceLastSave = true;
+            ChangedSinceLastSave = true;
 
             txt_wordAdd.Text = "";
             changedTextBox = false;
@@ -320,9 +351,9 @@ namespace SteelQuiz.QuizEditor
                 redoes.Add(lst_synonyms.RemoveItem(() => { return this.Parent.EditWordSynonyms; }, lst_synonyms.Name, item));
             }
 
-            QEOwner.UndoStack.Push(new UndoRedoFuncPair(undoes.ToArray(), redoes.ToArray(), "Remove synonym(s)", new OwnerControlData(this, this.Parent, Language)));
+            UndoStack.Push(new UndoRedoFuncPair(undoes.ToArray(), redoes.ToArray(), "Remove synonym(s)", new OwnerControlData(this, this.Parent, Language)));
             UpdateUndoRedoTooltips();
-            QEOwner.ChangedSinceLastSave = true;
+            ChangedSinceLastSave = true;
         }
 
         private void lst_synonyms_SelectedIndexChanged(object sender, EventArgs e)
@@ -368,50 +399,6 @@ namespace SteelQuiz.QuizEditor
             }
         }
 
-        public void Undo()
-        {
-            if (QEOwner.UndoStack.Count > 0)
-            {
-                if (QEOwner.UndoStack.Peek().OwnerControlData.Control != this)
-                {
-                    // do not allow undoing stuff outside this window
-                    return;
-                }
-
-                var pop = QEOwner.UndoStack.Pop();
-
-                foreach (var undo in pop.UndoActions)
-                {
-                    undo();
-                }
-                QEOwner.RedoStack.Push(pop);
-                UpdateUndoRedoTooltips();
-                QEOwner.ChangedSinceLastSave = true;
-            }
-        }
-
-        public void Redo()
-        {
-            if (QEOwner.RedoStack.Count > 0)
-            {
-                if (QEOwner.RedoStack.Peek().OwnerControlData.Control != this)
-                {
-                    // do not allow redoing stuff outside this window
-                    return;
-                }
-
-                var pop = QEOwner.RedoStack.Pop();
-
-                foreach (var redo in pop.RedoActions)
-                {
-                    redo();
-                }
-                QEOwner.UndoStack.Push(pop);
-                UpdateUndoRedoTooltips();
-                QEOwner.ChangedSinceLastSave = true;
-            }
-        }
-
         private void undoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Undo();
@@ -421,21 +408,6 @@ namespace SteelQuiz.QuizEditor
         {
             Redo();
         }
-
-        /*
-        private void RemoveUndoRedoStuff()
-        {
-            while (QEOwner.UndoStack.Peek().OwnerControlData.Control == this)
-            {
-                QEOwner.UndoStack.Pop();
-            }
-
-            while (QEOwner.RedoStack.Peek().OwnerControlData.Control == this)
-            {
-                QEOwner.RedoStack.Pop();
-            }
-        }
-        */
 
         private void EditWordSynonyms_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -463,27 +435,25 @@ namespace SteelQuiz.QuizEditor
             btn_add.Enabled = txt_wordAdd.Text.Length > 0 && !duplicate;
         }
 
-        public void UpdateUndoRedoTooltips()
+        public override void UpdateUndoRedoTooltips()
         {
-            if (QEOwner.UndoStack.Count > 0)
+            if (UndoStack.Count > 0)
             {
-                undoToolStripMenuItem.Text = $"Undo {QEOwner.UndoStack.Peek().Description}";
+                undoToolStripMenuItem.Text = $"Undo {UndoStack.Peek().Description}";
             }
             else
             {
                 undoToolStripMenuItem.Text = "Undo";
             }
 
-            if (QEOwner.RedoStack.Count > 0)
+            if (RedoStack.Count > 0)
             {
-                redoToolStripMenuItem.Text = $"Redo {QEOwner.RedoStack.Peek().Description}";
+                redoToolStripMenuItem.Text = $"Redo {RedoStack.Peek().Description}";
             }
             else
             {
                 redoToolStripMenuItem.Text = "Redo";
             }
-
-            QEOwner.UpdateUndoRedoTooltips();
         }
 
 

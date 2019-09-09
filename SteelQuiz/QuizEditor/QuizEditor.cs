@@ -35,16 +35,9 @@ using SteelQuiz.Util;
 
 namespace SteelQuiz.QuizEditor
 {
-    public partial class QuizEditor : AutoThemeableForm, IUndoRedo
+    public partial class QuizEditor : AutoThemeableUndoRedoForm
     {
         private const int EMPTY_WORD_PAIRS_COUNT = 2;
-
-        public Stack<UndoRedoFuncPair> UndoStack { get; set; } = new Stack<UndoRedoFuncPair>();
-        public Stack<UndoRedoFuncPair> RedoStack { get; set; } = new Stack<UndoRedoFuncPair>();
-
-        public bool UpdateUndoRedoStacks { get; private set; } = true;
-
-        public bool ChangedSinceLastSave { get; set; } = false;
 
         private string _quizPath = null;
         private string QuizPath
@@ -376,101 +369,6 @@ namespace SteelQuiz.QuizEditor
             }
         }
 
-        public void Undo()
-        {
-            if (!UpdateUndoRedoStacks)
-            {
-                return;
-            }
-
-            if (UndoStack.Count > 0)
-            {
-                var peek = UndoStack.Peek();
-                if (peek.OwnerControlData.Control == this || this.Controls.Contains(peek.OwnerControlData.Parent))
-                {
-                    var pop = UndoStack.Pop();
-                    foreach (var undo in pop.UndoActions.Reverse())
-                    {
-                        undo();
-                    }
-                    RedoStack.Push(pop);
-                }
-                else if (peek.OwnerControlData.Control is EditWordSynonyms)
-                {
-                    foreach (var qwrd in flp_words.Controls.OfType<QuizEditorWordPair>())
-                    {
-                        if (peek.OwnerControlData.Parent == qwrd)
-                        {
-                            qwrd.InitEditWordSynonyms(peek.OwnerControlData.Language);
-                            qwrd.EditWordSynonyms.Undo();
-                            qwrd.EditWordSynonyms.ApplyChanges();
-                            if (peek.OwnerControlData.Language == 1)
-                            {
-                                qwrd.Synonyms1 = qwrd.EditWordSynonyms.Synonyms;
-                            }
-                            else
-                            {
-                                qwrd.Synonyms2 = qwrd.EditWordSynonyms.Synonyms;
-                            }
-                            qwrd.DisposeEditWordSynonyms();
-                            break;
-                        }
-                    }
-                }
-
-                UpdateUndoRedoTooltips();
-                ChangedSinceLastSave = true;
-            }
-        }
-
-        public void Redo()
-        {
-            if (!UpdateUndoRedoStacks)
-            {
-                return;
-            }
-
-            if (RedoStack.Count > 0)
-            {
-                var peek = RedoStack.Peek();
-                if (peek.OwnerControlData.Control == this || this.Controls.Contains(peek.OwnerControlData.Parent))
-                {
-                    var pop = RedoStack.Pop();
-                    foreach (var redo in pop.RedoActions.Reverse())
-                    {
-                        redo();
-                    }
-                    UndoStack.Push(pop);
-                    UpdateUndoRedoTooltips();
-                }
-                else if (peek.OwnerControlData.Control is EditWordSynonyms)
-                {
-                    foreach (var qwrd in flp_words.Controls.OfType<QuizEditorWordPair>())
-                    {
-                        if (peek.OwnerControlData.Parent == qwrd)
-                        {
-                            qwrd.InitEditWordSynonyms(peek.OwnerControlData.Language);
-                            qwrd.EditWordSynonyms.Redo();
-                            qwrd.EditWordSynonyms.ApplyChanges();
-                            if (peek.OwnerControlData.Language == 1)
-                            {
-                                qwrd.Synonyms1 = qwrd.EditWordSynonyms.Synonyms;
-                            }
-                            else
-                            {
-                                qwrd.Synonyms2 = qwrd.EditWordSynonyms.Synonyms;
-                            }
-                            qwrd.DisposeEditWordSynonyms();
-                            break;
-                        }
-                    }
-                }
-
-                UpdateUndoRedoTooltips();
-                ChangedSinceLastSave = true;
-            }
-        }
-
         private bool SaveQuiz(bool saveAs = false, string customPath = null)
         {
             string path = null;
@@ -526,7 +424,7 @@ namespace SteelQuiz.QuizEditor
             return true;
         }
 
-        public void UpdateUndoRedoTooltips()
+        public override void UpdateUndoRedoTooltips()
         {
             if (UndoStack.Count > 0)
             {

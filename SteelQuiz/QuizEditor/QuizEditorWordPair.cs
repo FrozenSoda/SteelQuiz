@@ -37,14 +37,14 @@ namespace SteelQuiz.QuizEditor
         public string Word1 => txt_word1.Text;
         public string Word2 => txt_word2.Text;
 
-        public List<string> Synonyms1 { get; set; } = null;
-        public List<string> Synonyms2 { get; set; } = null;
+        public List<string> Synonyms1 { get; set; } = new List<string>();
+        public List<string> Synonyms2 { get; set; } = new List<string>();
 
         public Pointer<StringComp.Rules> ComparisonRules { get; set; } = new Pointer<StringComp.Rules>(StringComp.SMART_RULES);
 
         public EditWordSynonyms EditWordSynonyms { get; set; } = null;
 
-        public QuizEditor QEOwner { get; set; }
+        public QuizEditor QuizEditor { get; set; }
 
         public bool ignore_txt_word_change = false;
         public bool ignore_chk_smartComp_change = false;
@@ -52,24 +52,24 @@ namespace SteelQuiz.QuizEditor
         public QuizEditorWordPair(QuizEditor owner, int number)
         {
             InitializeComponent();
-            QEOwner = owner;
+            QuizEditor = owner;
             Number = number;
             RemoveSynonymsEqualToWords();
 
             ComparisonRules.BeforeDataChanged += (sender, e) =>
             {
-                if (QEOwner.UpdateUndoRedoStacks)
+                if (QuizEditor.UpdateUndoRedoStacks)
                 {
-                    QEOwner.UndoStack.Push(new UndoRedoFuncPair(
+                    QuizEditor.UndoStack.Push(new UndoRedoFuncPair(
                         new Action[] { ComparisonRules.SetSemiSilentUR(ComparisonRules.Data) },
                         new Action[] { ComparisonRules.SetSemiSilentUR(e) },
                         "Change comparison rules",
                         new OwnerControlData(this, this.Parent)
                         ));
-                    QEOwner.UpdateUndoRedoTooltips();
+                    QuizEditor.UpdateUndoRedoTooltips();
                 }
 
-                QEOwner.ChangedSinceLastSave = true;
+                QuizEditor.ChangedSinceLastSave = true;
             };
 
             ComparisonRules.AfterDataChanged += (sender, e) =>
@@ -88,7 +88,7 @@ namespace SteelQuiz.QuizEditor
                     chk_smartComp.CheckState = CheckState.Indeterminate;
                 }
                 chk_smartComp.CheckStateChanged += Chk_smartComp_CheckStateChanged;
-                QEOwner.SetGlobalSmartComparisonState();
+                QuizEditor.SetGlobalSmartComparisonState();
             };
 
             SetTheme();
@@ -120,7 +120,7 @@ namespace SteelQuiz.QuizEditor
         {
             if (EditWordSynonyms == null)
             {
-                EditWordSynonyms = new EditWordSynonyms(this, language == 1 ? txt_word1.Text : txt_word2.Text, language == 1 ? Synonyms1 : Synonyms2, language);
+                EditWordSynonyms = new EditWordSynonyms(this, language == 1 ? txt_word1.Text : txt_word2.Text, language);
             }
         }
 
@@ -140,7 +140,7 @@ namespace SteelQuiz.QuizEditor
             if (EditWordSynonyms.ShowDialog() == DialogResult.OK)
             {
                 Synonyms1 = EditWordSynonyms.Synonyms;
-                QEOwner.ChkFixWordsCount();
+                QuizEditor.ChkFixWordsCount();
             }
             DisposeEditWordSynonyms();
         }
@@ -151,7 +151,7 @@ namespace SteelQuiz.QuizEditor
             if (EditWordSynonyms.ShowDialog() == DialogResult.OK)
             {
                 Synonyms2 = EditWordSynonyms.Synonyms;
-                QEOwner.ChkFixWordsCount();
+                QuizEditor.ChkFixWordsCount();
             }
             DisposeEditWordSynonyms();
         }
@@ -160,7 +160,7 @@ namespace SteelQuiz.QuizEditor
 
         private void txt_word1_TextChanged(object sender, EventArgs e)
         {
-            QEOwner.ChkFixWordsCount();
+            QuizEditor.ChkFixWordsCount();
 
             if (ignore_txt_word_change)
             {
@@ -169,16 +169,16 @@ namespace SteelQuiz.QuizEditor
                 return;
             }
 
-            if (QEOwner.UpdateUndoRedoStacks)
+            if (QuizEditor.UpdateUndoRedoStacks)
             {
-                QEOwner.UndoStack.Push(new UndoRedoFuncPair(
+                QuizEditor.UndoStack.Push(new UndoRedoFuncPair(
                     new Action[] { txt_word1.ChangeText(txt_word1_text_old, () => { ignore_txt_word_change = true; }) },
                     new Action[] { txt_word1.ChangeText(txt_word1.Text, () => { ignore_txt_word_change = true; }) },
                     "Change word",
                     new OwnerControlData(this, this.Parent)));
-                QEOwner.UpdateUndoRedoTooltips();
+                QuizEditor.UpdateUndoRedoTooltips();
             }
-            QEOwner.ChangedSinceLastSave = true;
+            QuizEditor.ChangedSinceLastSave = true;
 
             txt_word1_text_old = txt_word1.Text;
         }
@@ -187,7 +187,7 @@ namespace SteelQuiz.QuizEditor
 
         private void txt_word2_TextChanged(object sender, EventArgs e)
         {
-            QEOwner.ChkFixWordsCount();
+            QuizEditor.ChkFixWordsCount();
 
             if (ignore_txt_word_change)
             {
@@ -196,45 +196,45 @@ namespace SteelQuiz.QuizEditor
                 return;
             }
 
-            if (QEOwner.UpdateUndoRedoStacks)
+            if (QuizEditor.UpdateUndoRedoStacks)
             {
-                QEOwner.UndoStack.Push(new UndoRedoFuncPair(
+                QuizEditor.UndoStack.Push(new UndoRedoFuncPair(
                 new Action[] { txt_word2.ChangeText(txt_word2_text_old, () => { ignore_txt_word_change = true; }) },
                 new Action[] { txt_word2.ChangeText(txt_word2.Text, () => { ignore_txt_word_change = true; }) },
                 "Change word",
                 new OwnerControlData(this, this.Parent)));
-                QEOwner.UpdateUndoRedoTooltips();
+                QuizEditor.UpdateUndoRedoTooltips();
             }
-            QEOwner.ChangedSinceLastSave = true;
+            QuizEditor.ChangedSinceLastSave = true;
 
             txt_word2_text_old = txt_word2.Text;
         }
 
         private void txt_word_Click(object sender, EventArgs e)
         {
-            QEOwner.ChkFixWordsCount();
+            QuizEditor.ChkFixWordsCount();
         }
 
         private void txt_word1_Enter(object sender, EventArgs e)
         {
-            QEOwner.ChkFixWordsCount();
+            QuizEditor.ChkFixWordsCount();
         }
 
         private void Btn_delete_Click(object sender, EventArgs e)
         {
-            if (QEOwner.UpdateUndoRedoStacks)
+            if (QuizEditor.UpdateUndoRedoStacks)
             {
-                QEOwner.UndoStack.Push(new UndoRedoFuncPair(
-                    new Action[] { QEOwner.AddWordPair(this, QEOwner.flp_words.Controls.GetChildIndex(this)) },
-                    new Action[] { QEOwner.RemoveWordPair(this) },
+                QuizEditor.UndoStack.Push(new UndoRedoFuncPair(
+                    new Action[] { QuizEditor.AddWordPair(this, QuizEditor.flp_words.Controls.GetChildIndex(this)) },
+                    new Action[] { QuizEditor.RemoveWordPair(this) },
                     "Remove word pair",
                     new OwnerControlData(this, this.Parent)
                     ));
             }
-            QEOwner.UpdateUndoRedoTooltips();
-            QEOwner.flp_words.Controls.Remove(this);
-            QEOwner.ChkFixWordsCount();
-            QEOwner.ChangedSinceLastSave = true;
+            QuizEditor.UpdateUndoRedoTooltips();
+            QuizEditor.flp_words.Controls.Remove(this);
+            QuizEditor.ChkFixWordsCount();
+            QuizEditor.ChangedSinceLastSave = true;
         }
 
         public void RemoveSynonymsEqualToWords(int word = -1)
@@ -243,37 +243,37 @@ namespace SteelQuiz.QuizEditor
 
             if ((word == -1 || word == 1) && Synonyms1 != null && Synonyms1.Contains(Word1))
             {
-                QEOwner.UndoStack.Push(new UndoRedoFuncPair(
+                QuizEditor.UndoStack.Push(new UndoRedoFuncPair(
                     new Action[] { Synonyms1.AddItem(Word1) },
                     new Action[] { Synonyms1.RemoveItem(Word1) },
                     "Auto-remove synonym",
                     new OwnerControlData(this, this.Parent)
                     ));
-                QEOwner.UpdateUndoRedoTooltips();
+                QuizEditor.UpdateUndoRedoTooltips();
                 Synonyms1.Remove(Word1);
                 /*
 #warning dont use messageboxes
                 var msg = MessageBox.Show($"A synonym to {Word1} has been removed, that was equal to the word", "SteelQuiz",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                     */
-                QEOwner.ShowNotification($"A synonym to '{Word1}' has been removed, due to it being equal to the word itself", 0);
+                QuizEditor.ShowNotification($"A synonym to '{Word1}' has been removed, due to it being equal to the word itself", 0);
             }
 
             if ((word == -1 || word == 2) && Synonyms2 != null && Synonyms2.Contains(Word2))
             {
-                QEOwner.UndoStack.Push(new UndoRedoFuncPair(
+                QuizEditor.UndoStack.Push(new UndoRedoFuncPair(
                     new Action[] { Synonyms2.AddItem(Word2) },
                     new Action[] { Synonyms2.RemoveItem(Word2) },
                     "Auto-remove synonym",
                     new OwnerControlData(this, this.Parent)
                     ));
-                QEOwner.UpdateUndoRedoTooltips();
+                QuizEditor.UpdateUndoRedoTooltips();
                 Synonyms2.Remove(Word2);
                 /*
                 var msg = MessageBox.Show($"A synonym to word {Word2} has been removed, that was equal to the word", "SteelQuiz",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                     */
-                QEOwner.ShowNotification($"A synonym to '{Word2}' has been removed, due to it being equal to the word itself", 0);
+                QuizEditor.ShowNotification($"A synonym to '{Word2}' has been removed, due to it being equal to the word itself", 0);
             }
         }
 
@@ -330,7 +330,7 @@ namespace SteelQuiz.QuizEditor
                 ComparisonRules.Data = StringComp.Rules.None;
             }
 
-            QEOwner.ChangedSinceLastSave = true;
+            QuizEditor.ChangedSinceLastSave = true;
         }
 
         private void QuizEditorWordPair_SizeChanged(object sender, EventArgs e)
