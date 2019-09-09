@@ -9,6 +9,7 @@ New features:
 Improvements:
 - Re-wrote the answer parsing system to better analyze the answers.
 - Changed Intelligent Learning algorithms for the better.
+- Added ability to switch languages during practise.
 - Improved design of quiz editor.
 
 Other:
