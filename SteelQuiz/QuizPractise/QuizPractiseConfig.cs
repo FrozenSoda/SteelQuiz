@@ -121,8 +121,11 @@ namespace SteelQuiz.QuizPractise
             {
                 QuizCore.QuizProgress.IntelligentLearningLastAnswersBasisCount = 3;
 
-                QuestionSelector.NewRound();
-                Program.frmInQuiz.NewWord();
+                if (!QuizCore.QuizProgress.FullTestInProgress)
+                {
+                    QuestionSelector.NewRound();
+                    Program.frmInQuiz.NewWord();
+                }
             }
         }
 
@@ -132,8 +135,11 @@ namespace SteelQuiz.QuizPractise
             {
                 QuizCore.QuizProgress.IntelligentLearningLastAnswersBasisCount = 0;
 
-                QuestionSelector.NewRound();
-                Program.frmInQuiz.NewWord();
+                if (!QuizCore.QuizProgress.FullTestInProgress)
+                {
+                    QuestionSelector.NewRound();
+                    Program.frmInQuiz.NewWord();
+                }
             }
         }
 
@@ -143,8 +149,11 @@ namespace SteelQuiz.QuizPractise
             {
                 QuizCore.QuizProgress.IntelligentLearningLastAnswersBasisCount = (int)nud_intelligentLearningAttempsCount.Value;
 
-                QuestionSelector.NewRound();
-                Program.frmInQuiz.NewWord();
+                if (!QuizCore.QuizProgress.FullTestInProgress)
+                {
+                    QuestionSelector.NewRound();
+                    Program.frmInQuiz.NewWord();
+                }
             }
         }
 
@@ -154,8 +163,11 @@ namespace SteelQuiz.QuizPractise
             {
                 QuizCore.QuizProgress.IntelligentLearningLastAnswersBasisCount = (int)nud_intelligentLearningAttempsCount.Value;
 
-                QuestionSelector.NewRound();
-                Program.frmInQuiz.NewWord();
+                if (!QuizCore.QuizProgress.FullTestInProgress)
+                {
+                    QuestionSelector.NewRound();
+                    Program.frmInQuiz.NewWord();
+                }
             }
         }
 
