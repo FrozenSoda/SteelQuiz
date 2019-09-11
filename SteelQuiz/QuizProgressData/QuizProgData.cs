@@ -127,6 +127,8 @@ namespace SteelQuiz.QuizProgressData
         public TermsOrderBy TermsDisplayOrder { get; set; } = TermsOrderBy.SuccessRate;
         public TermsOrderByOrder TermsDisplayOrderOrder { get; set; } = TermsOrderByOrder.Ascending;
 
+        public bool AskQuestionsInRandomOrder { get; set; } = true;
+
         public QuizProgData(Quiz quiz, bool initWordProgDatas = true)
         {
             if (quiz == null)

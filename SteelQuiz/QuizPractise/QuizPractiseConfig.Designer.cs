@@ -56,6 +56,7 @@ namespace SteelQuiz.QuizPractise
             this.rdo_lastNattemptsIntelligentLearning = new System.Windows.Forms.RadioButton();
             this.rdo_allAttemptsIntelligentLearning = new System.Windows.Forms.RadioButton();
             this.rdo_last3attemptsIntelligentLearning = new System.Windows.Forms.RadioButton();
+            this.chk_randomOrderQuestions = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_intelligentLearningAttempsCount)).BeginInit();
             this.SuspendLayout();
@@ -72,7 +73,7 @@ namespace SteelQuiz.QuizPractise
             this.btn_dontAgree.Size = new System.Drawing.Size(503, 23);
             this.btn_dontAgree.TabIndex = 12;
             this.btn_dontAgree.TabStop = false;
-            this.btn_dontAgree.Text = "Fix quiz errors";
+            this.btn_dontAgree.Text = "Fix Quiz Errors";
             this.btn_dontAgree.UseVisualStyleBackColor = false;
             this.btn_dontAgree.Click += new System.EventHandler(this.Btn_dontAgree_Click);
             // 
@@ -105,7 +106,7 @@ namespace SteelQuiz.QuizPractise
             this.btn_switchTestMode.Size = new System.Drawing.Size(503, 23);
             this.btn_switchTestMode.TabIndex = 15;
             this.btn_switchTestMode.TabStop = false;
-            this.btn_switchTestMode.Text = "Disable Intelligent Learning (do full test)";
+            this.btn_switchTestMode.Text = "Disable Intelligent Learning - Do Full Test";
             this.btn_switchTestMode.UseVisualStyleBackColor = false;
             this.btn_switchTestMode.Click += new System.EventHandler(this.Btn_switchTestMode_Click);
             // 
@@ -117,12 +118,12 @@ namespace SteelQuiz.QuizPractise
             this.panel1.Controls.Add(this.rdo_last3attemptsIntelligentLearning);
             this.panel1.Location = new System.Drawing.Point(12, 42);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(503, 92);
+            this.panel1.Size = new System.Drawing.Size(503, 81);
             this.panel1.TabIndex = 16;
             // 
             // nud_intelligentLearningAttempsCount
             // 
-            this.nud_intelligentLearningAttempsCount.Location = new System.Drawing.Point(417, 58);
+            this.nud_intelligentLearningAttempsCount.Location = new System.Drawing.Point(417, 49);
             this.nud_intelligentLearningAttempsCount.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -145,7 +146,7 @@ namespace SteelQuiz.QuizPractise
             // rdo_lastNattemptsIntelligentLearning
             // 
             this.rdo_lastNattemptsIntelligentLearning.AutoSize = true;
-            this.rdo_lastNattemptsIntelligentLearning.Location = new System.Drawing.Point(0, 58);
+            this.rdo_lastNattemptsIntelligentLearning.Location = new System.Drawing.Point(0, 49);
             this.rdo_lastNattemptsIntelligentLearning.Name = "rdo_lastNattemptsIntelligentLearning";
             this.rdo_lastNattemptsIntelligentLearning.Size = new System.Drawing.Size(414, 17);
             this.rdo_lastNattemptsIntelligentLearning.TabIndex = 2;
@@ -175,12 +176,26 @@ namespace SteelQuiz.QuizPractise
     "commended)";
             this.rdo_last3attemptsIntelligentLearning.UseVisualStyleBackColor = true;
             // 
+            // chk_randomOrderQuestions
+            // 
+            this.chk_randomOrderQuestions.AutoSize = true;
+            this.chk_randomOrderQuestions.Checked = true;
+            this.chk_randomOrderQuestions.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk_randomOrderQuestions.Location = new System.Drawing.Point(12, 138);
+            this.chk_randomOrderQuestions.Name = "chk_randomOrderQuestions";
+            this.chk_randomOrderQuestions.Size = new System.Drawing.Size(185, 17);
+            this.chk_randomOrderQuestions.TabIndex = 17;
+            this.chk_randomOrderQuestions.Text = "Ask questions in random order";
+            this.chk_randomOrderQuestions.UseVisualStyleBackColor = true;
+            this.chk_randomOrderQuestions.CheckedChanged += new System.EventHandler(this.Chk_randomOrderQuestions_CheckedChanged);
+            // 
             // QuizPractiseConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(527, 314);
+            this.Controls.Add(this.chk_randomOrderQuestions);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btn_switchTestMode);
             this.Controls.Add(this.cmb_langAns);
@@ -214,5 +229,6 @@ namespace SteelQuiz.QuizPractise
         private System.Windows.Forms.RadioButton rdo_last3attemptsIntelligentLearning;
         private System.Windows.Forms.RadioButton rdo_lastNattemptsIntelligentLearning;
         private System.Windows.Forms.NumericUpDown nud_intelligentLearningAttempsCount;
+        private System.Windows.Forms.CheckBox chk_randomOrderQuestions;
     }
 }

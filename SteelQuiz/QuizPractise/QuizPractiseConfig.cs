@@ -119,11 +119,8 @@ namespace SteelQuiz.QuizPractise
             {
                 QuizCore.QuizProgress.IntelligentLearningLastAnswersBasisCount = 3;
 
-                if (MessageBox.Show("Start a new round to apply the changes?", "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
-                {
-                    QuestionSelector.NewRound();
-                    Program.frmInQuiz.NewWord();
-                }
+                QuestionSelector.NewRound();
+                Program.frmInQuiz.NewWord();
             }
         }
 
@@ -133,11 +130,8 @@ namespace SteelQuiz.QuizPractise
             {
                 QuizCore.QuizProgress.IntelligentLearningLastAnswersBasisCount = 0;
 
-                if (MessageBox.Show("Start a new round to apply the changes?", "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
-                {
-                    QuestionSelector.NewRound();
-                    Program.frmInQuiz.NewWord();
-                }
+                QuestionSelector.NewRound();
+                Program.frmInQuiz.NewWord();
             }
         }
 
@@ -147,11 +141,8 @@ namespace SteelQuiz.QuizPractise
             {
                 QuizCore.QuizProgress.IntelligentLearningLastAnswersBasisCount = (int)nud_intelligentLearningAttempsCount.Value;
 
-                if (MessageBox.Show("Start a new round to apply the changes?", "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
-                {
-                    QuestionSelector.NewRound();
-                    Program.frmInQuiz.NewWord();
-                }
+                QuestionSelector.NewRound();
+                Program.frmInQuiz.NewWord();
             }
         }
 
@@ -161,12 +152,17 @@ namespace SteelQuiz.QuizPractise
             {
                 QuizCore.QuizProgress.IntelligentLearningLastAnswersBasisCount = (int)nud_intelligentLearningAttempsCount.Value;
 
-                if (MessageBox.Show("Start a new round to apply the changes?", "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
-                {
-                    QuestionSelector.NewRound();
-                    Program.frmInQuiz.NewWord();
-                }
+                QuestionSelector.NewRound();
+                Program.frmInQuiz.NewWord();
             }
+        }
+
+        private void Chk_randomOrderQuestions_CheckedChanged(object sender, EventArgs e)
+        {
+            QuizCore.QuizProgress.AskQuestionsInRandomOrder = chk_randomOrderQuestions.Checked;
+
+            QuestionSelector.NewRound();
+            Program.frmInQuiz.NewWord();
         }
     }
 }
