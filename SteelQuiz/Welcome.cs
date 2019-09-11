@@ -353,6 +353,8 @@ namespace SteelQuiz
 
         private void btn_importQuizFromSite_Click(object sender, EventArgs e)
         {
+            AddQuizButtonsExpanded = false;
+
             var import = new QuizImportGuide();
             if (import.ShowDialog() == DialogResult.OK)
             {
@@ -360,12 +362,14 @@ namespace SteelQuiz
                 Program.frmInQuiz.Show();
                 Hide();
             }
-
-            AddQuizButtonsExpanded = false;
         }
 
         private void btn_loadQuiz_Click(object sender, EventArgs e)
         {
+            // The ShowDialog is performance intensive, so skip animation to prevent lag
+            SkipAddQuizButtonsExpandedAnimation = true;
+            AddQuizButtonsExpanded = false;
+
             //ofd_loadQuiz.InitialDirectory = QuizCore.QUIZ_FOLDER_DEFAULT;
             if (ofd_loadQuiz.ShowDialog() == DialogResult.OK)
             {
@@ -379,8 +383,6 @@ namespace SteelQuiz
 
                 LoadQuiz(ofd_loadQuiz.FileName);
             }
-
-            AddQuizButtonsExpanded = false;
         }
 
         public void LoadQuiz(string quizPath)
@@ -444,9 +446,9 @@ namespace SteelQuiz
 
         private void btn_createQuiz_Click(object sender, EventArgs e)
         {
-            OpenQuizEditor();
-
             AddQuizButtonsExpanded = false;
+
+            OpenQuizEditor();
         }
 
         private void Tmr_chkUpdate_Tick(object sender, EventArgs e)
@@ -466,16 +468,16 @@ namespace SteelQuiz
 
         private void Btn_preferences_Click(object sender, EventArgs e)
         {
-            ShowPreferences();
-
             AddQuizButtonsExpanded = false;
+
+            ShowPreferences();
         }
 
         private void Btn_chkUpdates_Click(object sender, EventArgs e)
         {
-            Updater.Update(Updater.UpdateMode.Verbose);
-
             AddQuizButtonsExpanded = false;
+
+            Updater.Update(Updater.UpdateMode.Verbose);
         }
 
         private void Welcome_Shown(object sender, EventArgs e)
@@ -490,6 +492,8 @@ namespace SteelQuiz
                 GenerateWelcomeMsg();
             }
         }
+
+        private bool SkipAddQuizButtonsExpandedAnimation { get; set; }
 
         private bool __addQuizButtonsExpanded = false;
         private bool AddQuizButtonsExpanded
@@ -519,52 +523,80 @@ namespace SteelQuiz
                     btn_preferences.Visible = true;
                     btn_chkUpdates.Visible = true;
 
-                    btn_createQuiz.Location = btn_addQuiz.Location;
-                    btn_loadQuizFromFile.Location = btn_addQuiz.Location;
-                    btn_importQuiz.Location = btn_addQuiz.Location;
-                    btn_preferences.Location = btn_addQuiz.Location;
-                    btn_chkUpdates.Location = btn_addQuiz.Location;
+                    if (!SkipAddQuizButtonsExpandedAnimation)
+                    {
+                        btn_createQuiz.Location = btn_addQuiz.Location;
+                        btn_loadQuizFromFile.Location = btn_addQuiz.Location;
+                        btn_importQuiz.Location = btn_addQuiz.Location;
+                        btn_preferences.Location = btn_addQuiz.Location;
+                        btn_chkUpdates.Location = btn_addQuiz.Location;
 
-                    ControlMove.SmoothMove(btn_createQuiz, btn_createQuiz_loc, 80);
-                    ControlMove.SmoothMove(btn_loadQuizFromFile, btn_loadQuizFromFile_loc, 80);
-                    ControlMove.SmoothMove(btn_importQuiz, btn_importQuiz_loc, 80);
-                    ControlMove.SmoothMove(btn_preferences, btn_preferences_loc, 80);
-                    ControlMove.SmoothMove(btn_chkUpdates, btn_chkUpdates_loc, 80);
+                        ControlMove.SmoothMove(btn_createQuiz, btn_createQuiz_loc, 80);
+                        ControlMove.SmoothMove(btn_loadQuizFromFile, btn_loadQuizFromFile_loc, 80);
+                        ControlMove.SmoothMove(btn_importQuiz, btn_importQuiz_loc, 80);
+                        ControlMove.SmoothMove(btn_preferences, btn_preferences_loc, 80);
+                        ControlMove.SmoothMove(btn_chkUpdates, btn_chkUpdates_loc, 80);
+                    }
+                    else
+                    {
+                        btn_createQuiz.Location = btn_createQuiz_loc;
+                        btn_loadQuizFromFile.Location = btn_loadQuizFromFile_loc;
+                        btn_importQuiz.Location = btn_importQuiz_loc;
+                        btn_preferences.Location = btn_preferences_loc;
+                        btn_chkUpdates.Location = btn_chkUpdates_loc;
+                    }
                 }
                 else
                 {
                     flp_lastQuizzes.Enabled = true;
 
-                    ControlMove.SmoothMove(btn_createQuiz, btn_addQuiz.Location, 80, () =>
+                    if (!SkipAddQuizButtonsExpandedAnimation)
+                    {
+                        ControlMove.SmoothMove(btn_createQuiz, btn_addQuiz.Location, 80, () =>
+                        {
+                            btn_createQuiz.Visible = false;
+
+                            btn_createQuiz.Location = btn_createQuiz_loc;
+                        });
+                        ControlMove.SmoothMove(btn_loadQuizFromFile, btn_addQuiz.Location, 80, () =>
+                        {
+                            btn_loadQuizFromFile.Visible = false;
+
+                            btn_loadQuizFromFile.Location = btn_loadQuizFromFile_loc;
+                        });
+                        ControlMove.SmoothMove(btn_importQuiz, btn_addQuiz.Location, 80, () =>
+                        {
+                            btn_importQuiz.Visible = false;
+
+                            btn_importQuiz.Location = btn_importQuiz_loc;
+                        });
+                        ControlMove.SmoothMove(btn_preferences, btn_addQuiz.Location, 80, () =>
+                        {
+                            btn_preferences.Visible = false;
+
+                            btn_preferences.Location = btn_preferences_loc;
+                        });
+                        ControlMove.SmoothMove(btn_chkUpdates, btn_addQuiz.Location, 80, () =>
+                        {
+                            btn_chkUpdates.Visible = false;
+
+                            btn_chkUpdates.Location = btn_chkUpdates_loc;
+                        });
+                    }
+                    else
                     {
                         btn_createQuiz.Visible = false;
-
-                        btn_createQuiz.Location = btn_createQuiz_loc;
-                    });
-                    ControlMove.SmoothMove(btn_loadQuizFromFile, btn_addQuiz.Location, 80, () =>
-                    {
                         btn_loadQuizFromFile.Visible = false;
-
-                        btn_loadQuizFromFile.Location = btn_loadQuizFromFile_loc;
-                    });
-                    ControlMove.SmoothMove(btn_importQuiz, btn_addQuiz.Location, 80, () =>
-                    {
                         btn_importQuiz.Visible = false;
-
-                        btn_importQuiz.Location = btn_importQuiz_loc;
-                    });
-                    ControlMove.SmoothMove(btn_preferences, btn_addQuiz.Location, 80, () =>
-                    {
                         btn_preferences.Visible = false;
-
-                        btn_preferences.Location = btn_preferences_loc;
-                    });
-                    ControlMove.SmoothMove(btn_chkUpdates, btn_addQuiz.Location, 80, () =>
-                    {
                         btn_chkUpdates.Visible = false;
 
+                        btn_createQuiz.Location = btn_createQuiz_loc;
+                        btn_loadQuizFromFile.Location = btn_loadQuizFromFile_loc;
+                        btn_importQuiz.Location = btn_importQuiz_loc;
+                        btn_preferences.Location = btn_preferences_loc;
                         btn_chkUpdates.Location = btn_chkUpdates_loc;
-                    });
+                    }
                 }
 
                 if (AddQuizButtonsExpanded)
@@ -575,6 +607,8 @@ namespace SteelQuiz
                 {
                     btn_addQuiz.Text = "+";
                 }
+
+                SkipAddQuizButtonsExpandedAnimation = false;
             }
         }
 
