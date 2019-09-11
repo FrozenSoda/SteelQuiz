@@ -3,6 +3,7 @@ v4.2.0 (v4.2.0.2):
 - Improved Intelligent Learning algorithm, to better select questions with a low learning progress.
 - Added option to disable term randomization when practising quizzes, which is useful if you are practising days of the week, or months, in a different language for instance.
 - Added quiz terms count in dashboard.
+- Updates to libraries.
 - Minor UI improvements.
 - Bug fixes and other improvements.
 
