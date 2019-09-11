@@ -240,6 +240,12 @@ namespace SteelQuiz
 
         private void Btn_practiseQuiz_Click(object sender, EventArgs e)
         {
+            if (QuizCore.Quiz.WordPairs.Count == 0)
+            {
+                MessageBox.Show("Cannot practise quiz with no terms", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             (ParentForm as Welcome).LoadQuiz(QuizIdentity.FindQuizPath());
         }
 

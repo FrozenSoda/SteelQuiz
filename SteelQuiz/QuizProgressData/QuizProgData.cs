@@ -172,7 +172,12 @@ namespace SteelQuiz.QuizProgressData
         /// <returns>Returns the success rate between 0 and 1 for answering this word, for the amount of tries completed</returns>
         public double GetSuccessRate()
         {
-            return WordProgDatas.Sum(x => x.GetSuccessRate()) / WordProgDatas.Count();
+            double val = WordProgDatas.Sum(x => x.GetSuccessRate()) / WordProgDatas.Count();
+            if (double.IsNaN(val))
+            {
+                return 0d;
+            }
+            return val;
         }
 
         /// <summary>
@@ -182,7 +187,12 @@ namespace SteelQuiz.QuizProgressData
         /// <returns></returns>
         public double GetLearningProgress()
         {
-            return WordProgDatas.Sum(x => x.GetLearningProgress()) / WordProgDatas.Count();
+            double val = WordProgDatas.Sum(x => x.GetLearningProgress()) / WordProgDatas.Count();
+            if (double.IsNaN(val))
+            {
+                return 0d;
+            }
+            return val;
         }
 
         // due to CurrentWordPair not preserving references due to serialization, implement setter through method instead, to avoid confusion regarding references
