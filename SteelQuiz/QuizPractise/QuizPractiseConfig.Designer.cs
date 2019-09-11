@@ -187,7 +187,6 @@ namespace SteelQuiz.QuizPractise
             this.chk_randomOrderQuestions.TabIndex = 17;
             this.chk_randomOrderQuestions.Text = "Ask questions in random order";
             this.chk_randomOrderQuestions.UseVisualStyleBackColor = true;
-            this.chk_randomOrderQuestions.CheckedChanged += new System.EventHandler(this.Chk_randomOrderQuestions_CheckedChanged);
             // 
             // QuizPractiseConfig
             // 

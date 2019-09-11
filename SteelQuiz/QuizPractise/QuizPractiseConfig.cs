@@ -63,12 +63,14 @@ namespace SteelQuiz.QuizPractise
                 nud_intelligentLearningAttempsCount.Value = QuizCore.QuizProgress.IntelligentLearningLastAnswersBasisCount;
             }
 
+            chk_randomOrderQuestions.Checked = QuizCore.QuizProgress.AskQuestionsInRandomOrder;
 
             cmb_langAns.SelectedIndexChanged += new EventHandler(Cmb_langAns_SelectedIndexChanged);
             rdo_last3attemptsIntelligentLearning.CheckedChanged += new EventHandler(Rdo_last3attemptsIntelligentLearning_CheckedChanged);
             rdo_allAttemptsIntelligentLearning.CheckedChanged += new EventHandler(Rdo_allAttemptsIntelligentLearning_CheckedChanged);
             rdo_lastNattemptsIntelligentLearning.CheckedChanged += new EventHandler(Rdo_lastNattemptsIntelligentLearning_CheckedChanged);
             nud_intelligentLearningAttempsCount.ValueChanged += new EventHandler(Nud_intelligentLearningAttempsCount_ValueChanged);
+            chk_randomOrderQuestions.CheckedChanged += Chk_randomOrderQuestions_CheckedChanged;
         }
 
         private void Btn_dontAgree_Click(object sender, EventArgs e)

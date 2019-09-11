@@ -118,8 +118,16 @@ namespace SteelQuiz.QuizPractise
                 }
             }
 
-            var rndIndex = new Random().RandomNext(0, QuizCore.Quiz.WordPairs.Count, wordsNotToAsk_Indexes.ToArray());
-            var wordPair = QuizCore.Quiz.WordPairs[rndIndex];
+            int index;
+            if (QuizCore.QuizProgress.AskQuestionsInRandomOrder)
+            {
+                index = new Random().RandomNext(0, QuizCore.Quiz.WordPairs.Count, wordsNotToAsk_Indexes.ToArray());
+            }
+            else
+            {
+                index = Enumerable.Range(0, int.MaxValue).Except(wordsNotToAsk_Indexes).FirstOrDefault();
+            }
+            var wordPair = QuizCore.Quiz.WordPairs[index];
             QuizCore.QuizProgress.SetCurrentWordPair(wordPair);
             QuizCore.SaveQuizProgress();
             return wordPair;
@@ -231,7 +239,14 @@ namespace SteelQuiz.QuizPractise
                 }
             }
 
-            QuizCore.QuizProgress.WordProgDatas.QuizRandomize();
+            if (QuizCore.QuizProgress.AskQuestionsInRandomOrder)
+            {
+                QuizCore.QuizProgress.WordProgDatas.QuizRandomize();
+            }
+            else
+            {
+                QuizCore.QuizProgress.WordProgDatas = QuizCore.QuizProgress.WordProgDatas.OrderBy(x => QuizCore.Quiz.WordPairs.IndexOf(x.WordPair)).ToList();
+            }
 
             QuizCore.SaveQuizProgress();
         }
