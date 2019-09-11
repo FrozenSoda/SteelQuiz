@@ -48,6 +48,9 @@ namespace SteelQuiz
             SetTheme(WelcomeTheme);
             LoadLearningProgressPercentage();
             LoadWordPairs();
+
+            cmb_order.SelectedIndex = 0;
+            cmb_orderAscendingDescending.SelectedIndex = 0;
         }
 
         public void LoadLearningProgressPercentage()
@@ -106,7 +109,63 @@ namespace SteelQuiz
                 controls.Add(c);
             }
 
-            controls = controls.OrderBy(x => x.LearningProgress).ToList();
+            //controls = controls.OrderBy(x => x.SuccessRate).ToList();
+            /*
+            controls = controls.OrderBy(x =>
+            {
+                switch (cmb_order.SelectedItem)
+                {
+                    case "Success Rate":
+                        return x.SuccessRate;
+                    case "Quiz Order":
+                        return x;
+                    case "Alphabetical Phrase 1":
+                        return x.WordPair.Word1;
+                    case "Alphabetical Phrase 2":
+                        return x.WordPair.Word2;
+                    default:
+                        return x;
+                }
+            });
+            */
+
+            switch (cmb_orderAscendingDescending.SelectedItem)
+            {
+                case "Ascending":
+                    switch (cmb_order.SelectedItem)
+                    {
+                        case "Success Rate":
+                            controls = controls.OrderBy(x => x.SuccessRate).ToList();
+                            break;
+                        case "Quiz Order":
+                            break;
+                        case "Alphabetical Phrase 1":
+                            controls = controls.OrderBy(x => x.WordPair.Word1).ToList();
+                            break;
+                        case "Alphabetical Phrase 2":
+                            controls = controls.OrderBy(x => x.WordPair.Word2).ToList();
+                            break;
+                    }
+                    break;
+
+                case "Descending":
+                    switch (cmb_order.SelectedItem)
+                    {
+                        case "Success Rate":
+                            controls = controls.OrderByDescending(x => x.SuccessRate).ToList();
+                            break;
+                        case "Quiz Order":
+                            controls.Reverse();
+                            break;
+                        case "Alphabetical Phrase 1":
+                            controls = controls.OrderByDescending(x => x.WordPair.Word1).ToList();
+                            break;
+                        case "Alphabetical Phrase 2":
+                            controls = controls.OrderByDescending(x => x.WordPair.Word2).ToList();
+                            break;
+                    }
+                    break;
+            }
 
             int count = 0;
             foreach (var c in controls)
@@ -222,6 +281,11 @@ namespace SteelQuiz
             });
 
             cm.Show(btn_more, new Point(0, btn_more.Size.Height));
+        }
+
+        private void Cmb_order_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadWordPairs();
         }
     }
 }

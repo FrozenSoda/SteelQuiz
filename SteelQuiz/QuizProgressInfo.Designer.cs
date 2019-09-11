@@ -57,6 +57,9 @@ namespace SteelQuiz
             this.lbl_learningProgress_desc = new System.Windows.Forms.Label();
             this.lbl_learningProgress = new System.Windows.Forms.Label();
             this.btn_more = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cmb_order = new System.Windows.Forms.ComboBox();
+            this.cmb_orderAscendingDescending = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // btn_practiseQuiz
@@ -135,7 +138,7 @@ namespace SteelQuiz
             this.lbl_learningProgress.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_learningProgress.Location = new System.Drawing.Point(152, 65);
             this.lbl_learningProgress.Name = "lbl_learningProgress";
-            this.lbl_learningProgress.Size = new System.Drawing.Size(431, 38);
+            this.lbl_learningProgress.Size = new System.Drawing.Size(88, 38);
             this.lbl_learningProgress.TabIndex = 10;
             this.lbl_learningProgress.Text = "100 %";
             this.lbl_learningProgress.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -156,11 +159,54 @@ namespace SteelQuiz
             this.btn_more.UseVisualStyleBackColor = false;
             this.btn_more.Click += new System.EventHandler(this.Btn_more_Click);
             // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(398, 65);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(55, 13);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Order by:";
+            // 
+            // cmb_order
+            // 
+            this.cmb_order.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmb_order.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_order.FormattingEnabled = true;
+            this.cmb_order.Items.AddRange(new object[] {
+            "Success Rate",
+            "Quiz Order",
+            "Alphabetical Phrase 1",
+            "Alphabetical Phrase 2"});
+            this.cmb_order.Location = new System.Drawing.Point(459, 52);
+            this.cmb_order.Name = "cmb_order";
+            this.cmb_order.Size = new System.Drawing.Size(124, 21);
+            this.cmb_order.TabIndex = 13;
+            this.cmb_order.SelectedIndexChanged += new System.EventHandler(this.Cmb_order_SelectedIndexChanged);
+            // 
+            // cmb_orderAscendingDescending
+            // 
+            this.cmb_orderAscendingDescending.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmb_orderAscendingDescending.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_orderAscendingDescending.FormattingEnabled = true;
+            this.cmb_orderAscendingDescending.Items.AddRange(new object[] {
+            "Ascending",
+            "Descending"});
+            this.cmb_orderAscendingDescending.Location = new System.Drawing.Point(459, 79);
+            this.cmb_orderAscendingDescending.Name = "cmb_orderAscendingDescending";
+            this.cmb_orderAscendingDescending.Size = new System.Drawing.Size(124, 21);
+            this.cmb_orderAscendingDescending.TabIndex = 14;
+            this.cmb_orderAscendingDescending.SelectedIndexChanged += new System.EventHandler(this.Cmb_order_SelectedIndexChanged);
+            // 
             // QuizProgressInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.Controls.Add(this.cmb_orderAscendingDescending);
+            this.Controls.Add(this.cmb_order);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_more);
             this.Controls.Add(this.lbl_learningProgress);
             this.Controls.Add(this.lbl_learningProgress_desc);
@@ -175,6 +221,7 @@ namespace SteelQuiz
             this.Size = new System.Drawing.Size(586, 426);
             this.SizeChanged += new System.EventHandler(this.QuizProgressInfo_SizeChanged);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -189,5 +236,8 @@ namespace SteelQuiz
         private System.Windows.Forms.Label lbl_learningProgress_desc;
         private System.Windows.Forms.Label lbl_learningProgress;
         private System.Windows.Forms.Button btn_more;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cmb_order;
+        private System.Windows.Forms.ComboBox cmb_orderAscendingDescending;
     }
 }
