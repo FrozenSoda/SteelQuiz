@@ -26,6 +26,20 @@ using SteelQuiz.QuizData;
 
 namespace SteelQuiz.QuizProgressData
 {
+    public enum TermsOrderBy
+    {
+        SuccessRate,
+        QuizOrder,
+        AlphabeticalTerm1,
+        AlphabeticalTerm2,
+    }
+
+    public enum TermsOrderByOrder
+    {
+        Ascending,
+        Descending,
+    }
+
     public class QuizProgData
     {
         public Guid QuizGUID { get; set; }
@@ -109,6 +123,9 @@ namespace SteelQuiz.QuizProgressData
         /// Contains the number of correct answers during a full test
         /// </summary>
         public int CorrectAnswersThisRound { get; set; } = 0;
+
+        public TermsOrderBy TermsDisplayOrder { get; set; } = TermsOrderBy.SuccessRate;
+        public TermsOrderByOrder TermsDisplayOrderOrder { get; set; } = TermsOrderByOrder.Ascending;
 
         public QuizProgData(Quiz quiz, bool initWordProgDatas = true)
         {

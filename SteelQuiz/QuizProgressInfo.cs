@@ -49,8 +49,35 @@ namespace SteelQuiz
             LoadLearningProgressPercentage();
             LoadWordPairs();
 
-            cmb_order.SelectedIndex = 0;
-            cmb_orderAscendingDescending.SelectedIndex = 0;
+            switch (QuizCore.QuizProgress.TermsDisplayOrder)
+            {
+                case TermsOrderBy.SuccessRate:
+                    cmb_order.SelectedItem = "Success Rate";
+                    break;
+
+                case TermsOrderBy.QuizOrder:
+                    cmb_order.SelectedItem = "Quiz Order";
+                    break;
+
+                case TermsOrderBy.AlphabeticalTerm1:
+                    cmb_order.SelectedItem = "Alphabetical Term 1";
+                    break;
+
+                case TermsOrderBy.AlphabeticalTerm2:
+                    cmb_order.SelectedItem = "Alphabetical Term 2";
+                    break;
+            }
+
+            switch (QuizCore.QuizProgress.TermsDisplayOrderOrder)
+            {
+                case TermsOrderByOrder.Ascending:
+                    cmb_orderAscendingDescending.SelectedItem = "Ascending";
+                    break;
+
+                case TermsOrderByOrder.Descending:
+                    cmb_orderAscendingDescending.SelectedItem = "Descending";
+                    break;
+            }
 
             lbl_termsCount.Text = QuizCore.Quiz.WordPairs.Count().ToString();
         }
@@ -287,6 +314,38 @@ namespace SteelQuiz
 
         private void Cmb_order_SelectedIndexChanged(object sender, EventArgs e)
         {
+            switch (cmb_order.SelectedItem)
+            {
+                case "Success Rate":
+                    QuizCore.QuizProgress.TermsDisplayOrder = TermsOrderBy.SuccessRate;
+                    break;
+
+                case "Quiz Order":
+                    QuizCore.QuizProgress.TermsDisplayOrder = TermsOrderBy.QuizOrder;
+                    break;
+
+                case "Alphabetical Term 1":
+                    QuizCore.QuizProgress.TermsDisplayOrder = TermsOrderBy.AlphabeticalTerm1;
+                    break;
+
+                case "Alphabetical Term 2":
+                    QuizCore.QuizProgress.TermsDisplayOrder = TermsOrderBy.AlphabeticalTerm2;
+                    break;
+            }
+
+            switch (cmb_orderAscendingDescending.SelectedItem)
+            {
+                case "Ascending":
+                    QuizCore.QuizProgress.TermsDisplayOrderOrder = TermsOrderByOrder.Ascending;
+                    break;
+
+                case "Descending":
+                    QuizCore.QuizProgress.TermsDisplayOrderOrder = TermsOrderByOrder.Descending;
+                    break;
+            }
+
+            QuizCore.SaveQuizProgress();
+
             LoadWordPairs();
         }
     }

@@ -179,8 +179,8 @@ namespace SteelQuiz
             this.cmb_order.Items.AddRange(new object[] {
             "Success Rate",
             "Quiz Order",
-            "Alphabetical Phrase 1",
-            "Alphabetical Phrase 2"});
+            "Alphabetical Term 1",
+            "Alphabetical Term 2"});
             this.cmb_order.Location = new System.Drawing.Point(603, 52);
             this.cmb_order.Name = "cmb_order";
             this.cmb_order.Size = new System.Drawing.Size(124, 21);
