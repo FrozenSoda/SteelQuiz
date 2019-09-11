@@ -108,11 +108,11 @@ namespace SteelQuiz.QuizPractise
             this.lbl_intelligentLearning.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_intelligentLearning.AutoSize = true;
             this.lbl_intelligentLearning.ForeColor = System.Drawing.Color.LightGray;
-            this.lbl_intelligentLearning.Location = new System.Drawing.Point(552, 428);
+            this.lbl_intelligentLearning.Location = new System.Drawing.Point(550, 428);
             this.lbl_intelligentLearning.Name = "lbl_intelligentLearning";
-            this.lbl_intelligentLearning.Size = new System.Drawing.Size(212, 13);
+            this.lbl_intelligentLearning.Size = new System.Drawing.Size(214, 13);
             this.lbl_intelligentLearning.TabIndex = 4;
-            this.lbl_intelligentLearning.Text = "Intelligent learning: STATUS_UNKNOWN";
+            this.lbl_intelligentLearning.Text = "Intelligent Learning: STATUS_UNKNOWN";
             // 
             // lbl_lang1
             // 

@@ -168,10 +168,10 @@ namespace SteelQuiz
                             break;
                         case "Quiz Order":
                             break;
-                        case "Alphabetical Phrase 1":
+                        case "Alphabetical Term 1":
                             controls = controls.OrderBy(x => x.WordPair.Word1).ToList();
                             break;
-                        case "Alphabetical Phrase 2":
+                        case "Alphabetical Term 2":
                             controls = controls.OrderBy(x => x.WordPair.Word2).ToList();
                             break;
                     }
@@ -186,10 +186,10 @@ namespace SteelQuiz
                         case "Quiz Order":
                             controls.Reverse();
                             break;
-                        case "Alphabetical Phrase 1":
+                        case "Alphabetical Term 1":
                             controls = controls.OrderByDescending(x => x.WordPair.Word1).ToList();
                             break;
-                        case "Alphabetical Phrase 2":
+                        case "Alphabetical Term 2":
                             controls = controls.OrderByDescending(x => x.WordPair.Word2).ToList();
                             break;
                     }

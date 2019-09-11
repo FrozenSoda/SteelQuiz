@@ -75,12 +75,12 @@ namespace SteelQuiz.QuizPractise
             NewWord(false);
             if (QuizCore.QuizProgress.FullTestInProgress)
             {
-                lbl_intelligentLearning.Text = "Intelligent learning: Disabled";
+                lbl_intelligentLearning.Text = "Intelligent Learning: Disabled";
                 //lbl_AI.ForeColor = Color.Gray;
             }
             else
             {
-                lbl_intelligentLearning.Text = "Intelligent learning: Enabled";
+                lbl_intelligentLearning.Text = "Intelligent Learning: Enabled";
                 //lbl_AI.ForeColor = Color.DarkGreen;
             }
 
