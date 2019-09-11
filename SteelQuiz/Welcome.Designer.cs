@@ -286,6 +286,7 @@ namespace SteelQuiz
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.White;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(831, 496);
             this.Name = "Welcome";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SteelQuiz";

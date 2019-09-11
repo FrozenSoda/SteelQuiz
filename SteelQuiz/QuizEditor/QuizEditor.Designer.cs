@@ -107,7 +107,7 @@ namespace SteelQuiz.QuizEditor
             this.cmb_lang2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmb_lang2.ForeColor = System.Drawing.Color.White;
             this.cmb_lang2.FormattingEnabled = true;
-            this.cmb_lang2.Location = new System.Drawing.Point(458, 30);
+            this.cmb_lang2.Location = new System.Drawing.Point(473, 30);
             this.cmb_lang2.Name = "cmb_lang2";
             this.cmb_lang2.Size = new System.Drawing.Size(288, 21);
             this.cmb_lang2.TabIndex = 2;
@@ -119,7 +119,7 @@ namespace SteelQuiz.QuizEditor
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(382, 33);
+            this.label3.Location = new System.Drawing.Point(397, 33);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(70, 13);
             this.label3.TabIndex = 5;
@@ -133,7 +133,7 @@ namespace SteelQuiz.QuizEditor
             this.flp_words.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flp_words.Location = new System.Drawing.Point(12, 73);
             this.flp_words.Name = "flp_words";
-            this.flp_words.Size = new System.Drawing.Size(776, 365);
+            this.flp_words.Size = new System.Drawing.Size(791, 372);
             this.flp_words.TabIndex = 3;
             this.flp_words.WrapContents = false;
             // 
@@ -147,7 +147,7 @@ namespace SteelQuiz.QuizEditor
             this.helpToolStripMenuItem});
             this.mns_top.Location = new System.Drawing.Point(0, 0);
             this.mns_top.Name = "mns_top";
-            this.mns_top.Size = new System.Drawing.Size(800, 24);
+            this.mns_top.Size = new System.Drawing.Size(815, 24);
             this.mns_top.TabIndex = 10;
             this.mns_top.Text = "menuStrip1";
             // 
@@ -290,7 +290,7 @@ namespace SteelQuiz.QuizEditor
             // 
             this.pnl_msg.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pnl_msg.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.pnl_msg.Location = new System.Drawing.Point(511, 338);
+            this.pnl_msg.Location = new System.Drawing.Point(526, 345);
             this.pnl_msg.Name = "pnl_msg";
             this.pnl_msg.Size = new System.Drawing.Size(277, 100);
             this.pnl_msg.TabIndex = 0;
@@ -302,7 +302,7 @@ namespace SteelQuiz.QuizEditor
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(815, 457);
             this.Controls.Add(this.pnl_msg);
             this.Controls.Add(this.flp_words);
             this.Controls.Add(this.cmb_lang2);
@@ -313,6 +313,7 @@ namespace SteelQuiz.QuizEditor
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MainMenuStrip = this.mns_top;
+            this.MinimumSize = new System.Drawing.Size(831, 496);
             this.Name = "QuizEditor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Quiz Editor | SteelQuiz";
