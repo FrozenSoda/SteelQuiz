@@ -1,3 +1,11 @@
+v4.2.0 (v4.2.0.2):
+- Added feature to sort terms in quizzes in Dashboard.
+- Improved Intelligent Learning algorithm, to better select questions with a low learning progress.
+- Added option to disable term randomization when practising quizzes, which is useful if you are practising days of the week, or months, in a different language for instance.
+- Added quiz terms count in dashboard.
+- Minor UI improvements.
+- Bug fixes and other improvements.
+
 v4.1.0:
 Added customization options for Intelligent Learning. They can be found in the Quiz Practise Config, which is opened by pressing the gear in the bottom right corner while practising the quiz.
 The default option has been changed from previous versions.
