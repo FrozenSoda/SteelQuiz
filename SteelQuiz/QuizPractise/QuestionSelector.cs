@@ -189,6 +189,8 @@ namespace SteelQuiz.QuizPractise
         /// </summary>
         public static void NewRound()
         {
+            QuizCore.QuizProgress.CurrentWordPairs?.Clear();
+
             const int MINIMUM_TRIES_COUNT_TO_CONSIDER_SKIPPING = 2;
 
             //double dontAskProb(double successRate, int triesCount)
