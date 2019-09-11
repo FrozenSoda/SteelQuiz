@@ -60,6 +60,8 @@ namespace SteelQuiz
             this.label1 = new System.Windows.Forms.Label();
             this.cmb_order = new System.Windows.Forms.ComboBox();
             this.cmb_orderAscendingDescending = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lbl_termsCount = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btn_practiseQuiz
@@ -69,7 +71,7 @@ namespace SteelQuiz
             this.btn_practiseQuiz.FlatAppearance.BorderSize = 0;
             this.btn_practiseQuiz.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_practiseQuiz.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_practiseQuiz.Location = new System.Drawing.Point(428, 381);
+            this.btn_practiseQuiz.Location = new System.Drawing.Point(572, 527);
             this.btn_practiseQuiz.Name = "btn_practiseQuiz";
             this.btn_practiseQuiz.Size = new System.Drawing.Size(158, 45);
             this.btn_practiseQuiz.TabIndex = 0;
@@ -84,7 +86,7 @@ namespace SteelQuiz
             this.btn_editQuiz.FlatAppearance.BorderSize = 0;
             this.btn_editQuiz.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_editQuiz.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_editQuiz.Location = new System.Drawing.Point(264, 381);
+            this.btn_editQuiz.Location = new System.Drawing.Point(408, 527);
             this.btn_editQuiz.Name = "btn_editQuiz";
             this.btn_editQuiz.Size = new System.Drawing.Size(158, 45);
             this.btn_editQuiz.TabIndex = 1;
@@ -108,7 +110,7 @@ namespace SteelQuiz
             this.flp_words.Location = new System.Drawing.Point(9, 106);
             this.flp_words.MinimumSize = new System.Drawing.Size(574, 269);
             this.flp_words.Name = "flp_words";
-            this.flp_words.Size = new System.Drawing.Size(574, 269);
+            this.flp_words.Size = new System.Drawing.Size(718, 415);
             this.flp_words.TabIndex = 7;
             this.flp_words.WrapContents = false;
             // 
@@ -128,7 +130,7 @@ namespace SteelQuiz
             this.lbl_learningProgress_desc.Font = new System.Drawing.Font("Segoe UI Semilight", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_learningProgress_desc.Location = new System.Drawing.Point(6, 65);
             this.lbl_learningProgress_desc.Name = "lbl_learningProgress_desc";
-            this.lbl_learningProgress_desc.Size = new System.Drawing.Size(140, 38);
+            this.lbl_learningProgress_desc.Size = new System.Drawing.Size(128, 38);
             this.lbl_learningProgress_desc.TabIndex = 9;
             this.lbl_learningProgress_desc.Text = "Learning Progress:";
             this.lbl_learningProgress_desc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -136,7 +138,7 @@ namespace SteelQuiz
             // lbl_learningProgress
             // 
             this.lbl_learningProgress.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_learningProgress.Location = new System.Drawing.Point(152, 65);
+            this.lbl_learningProgress.Location = new System.Drawing.Point(140, 65);
             this.lbl_learningProgress.Name = "lbl_learningProgress";
             this.lbl_learningProgress.Size = new System.Drawing.Size(88, 38);
             this.lbl_learningProgress.TabIndex = 10;
@@ -150,7 +152,7 @@ namespace SteelQuiz
             this.btn_more.FlatAppearance.BorderSize = 0;
             this.btn_more.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_more.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_more.Location = new System.Drawing.Point(9, 381);
+            this.btn_more.Location = new System.Drawing.Point(9, 527);
             this.btn_more.Name = "btn_more";
             this.btn_more.Size = new System.Drawing.Size(33, 45);
             this.btn_more.TabIndex = 11;
@@ -163,7 +165,7 @@ namespace SteelQuiz
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(398, 65);
+            this.label1.Location = new System.Drawing.Point(542, 65);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(55, 13);
             this.label1.TabIndex = 12;
@@ -179,7 +181,7 @@ namespace SteelQuiz
             "Quiz Order",
             "Alphabetical Phrase 1",
             "Alphabetical Phrase 2"});
-            this.cmb_order.Location = new System.Drawing.Point(459, 52);
+            this.cmb_order.Location = new System.Drawing.Point(603, 52);
             this.cmb_order.Name = "cmb_order";
             this.cmb_order.Size = new System.Drawing.Size(124, 21);
             this.cmb_order.TabIndex = 13;
@@ -193,17 +195,39 @@ namespace SteelQuiz
             this.cmb_orderAscendingDescending.Items.AddRange(new object[] {
             "Ascending",
             "Descending"});
-            this.cmb_orderAscendingDescending.Location = new System.Drawing.Point(459, 79);
+            this.cmb_orderAscendingDescending.Location = new System.Drawing.Point(603, 79);
             this.cmb_orderAscendingDescending.Name = "cmb_orderAscendingDescending";
             this.cmb_orderAscendingDescending.Size = new System.Drawing.Size(124, 21);
             this.cmb_orderAscendingDescending.TabIndex = 14;
             this.cmb_orderAscendingDescending.SelectedIndexChanged += new System.EventHandler(this.Cmb_order_SelectedIndexChanged);
+            // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("Segoe UI Semilight", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(246, 65);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(125, 38);
+            this.label2.TabIndex = 15;
+            this.label2.Text = "Number of Terms:";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lbl_termsCount
+            // 
+            this.lbl_termsCount.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_termsCount.Location = new System.Drawing.Point(377, 65);
+            this.lbl_termsCount.Name = "lbl_termsCount";
+            this.lbl_termsCount.Size = new System.Drawing.Size(88, 38);
+            this.lbl_termsCount.TabIndex = 16;
+            this.lbl_termsCount.Text = "0";
+            this.lbl_termsCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // QuizProgressInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.Controls.Add(this.lbl_termsCount);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.cmb_orderAscendingDescending);
             this.Controls.Add(this.cmb_order);
             this.Controls.Add(this.label1);
@@ -218,7 +242,7 @@ namespace SteelQuiz
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.White;
             this.Name = "QuizProgressInfo";
-            this.Size = new System.Drawing.Size(586, 426);
+            this.Size = new System.Drawing.Size(730, 572);
             this.SizeChanged += new System.EventHandler(this.QuizProgressInfo_SizeChanged);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -239,5 +263,7 @@ namespace SteelQuiz
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmb_order;
         private System.Windows.Forms.ComboBox cmb_orderAscendingDescending;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lbl_termsCount;
     }
 }

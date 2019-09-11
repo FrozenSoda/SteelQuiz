@@ -51,6 +51,8 @@ namespace SteelQuiz
 
             cmb_order.SelectedIndex = 0;
             cmb_orderAscendingDescending.SelectedIndex = 0;
+
+            lbl_termsCount.Text = QuizCore.Quiz.WordPairs.Count().ToString();
         }
 
         public void LoadLearningProgressPercentage()

@@ -85,10 +85,6 @@ namespace SteelQuiz
             this.lbl_word2.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.lbl_word2.SizeChanged += new System.EventHandler(this.Lbl_word_SizeChanged);
             // 
-            // toolTip1
-            // 
-
-            // 
             // lbl_learningProgress_bar
             // 
             this.lbl_learningProgress_bar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -115,9 +111,9 @@ namespace SteelQuiz
             // 
             this.lbl_learningProgress_desc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_learningProgress_desc.Font = new System.Drawing.Font("Segoe UI Semilight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_learningProgress_desc.Location = new System.Drawing.Point(382, 60);
+            this.lbl_learningProgress_desc.Location = new System.Drawing.Point(399, 60);
             this.lbl_learningProgress_desc.Name = "lbl_learningProgress_desc";
-            this.lbl_learningProgress_desc.Size = new System.Drawing.Size(95, 38);
+            this.lbl_learningProgress_desc.Size = new System.Drawing.Size(78, 38);
             this.lbl_learningProgress_desc.TabIndex = 11;
             this.lbl_learningProgress_desc.Text = "Success rate:";
             this.lbl_learningProgress_desc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
