@@ -30,6 +30,8 @@ namespace SteelQuiz.QuizPractise
 {
     public static class QuestionSelector
     {
+        private const int MINIMUM_QUESTIONS_PER_ROUND = 5;
+
         private static int __skipNextMasterNotice = 0;
         /// <summary>
         /// How many times to skip the next "Congratulations - you have learned all the words" notification during this practise session. Can be decremented without checking, it won't allow values under 0
@@ -203,13 +205,18 @@ namespace SteelQuiz.QuizPractise
             QuizCore.ResetWordsAskedThisRoundMemo();
             QuizCore.QuizProgress.CorrectAnswersThisRound = 0;
 
-            var rnd = new Random();
-            var skipCount = 0;
             foreach (var wordPairData in QuizCore.QuizProgress.WordProgDatas)
             {
                 wordPairData.AskedThisRound = false;
                 wordPairData.SkipThisRound = false;
+            }
 
+            var rnd = new Random();
+            var skipCount = 0;
+
+            // prevent the MINIMUM_QUESTIONS_PER_ROUND number of questions with worst success rate, from being skipped
+            foreach (var wordPairData in QuizCore.QuizProgress.WordProgDatas.OrderBy(x => GetLearningProgress(x)).Skip(MINIMUM_QUESTIONS_PER_ROUND))
+            {
                 // Eventually skip asking the word
 
                 //var dontAskAgainPrb = dontAskProb(wordPairData.GetSuccessRate(), wordPairData.GetWordTriesCount());
@@ -221,21 +228,6 @@ namespace SteelQuiz.QuizPractise
                 {
                     wordPairData.SkipThisRound = true;
                     ++skipCount;
-                }
-            }
-
-            if (skipCount == QuizCore.QuizProgress.WordProgDatas.Count)
-            {
-                // if all words are skipped, select five random words to ask (remove skip sign)
-                const int MAXIMUM_WORDS_TO_GENERATE = 5;
-                var toAsk = new Random().RandomUnique(0, QuizCore.QuizProgress.WordProgDatas.Count,
-                    QuizCore.QuizProgress.WordProgDatas.Count >= MAXIMUM_WORDS_TO_GENERATE ? MAXIMUM_WORDS_TO_GENERATE : QuizCore.QuizProgress.WordProgDatas.Count);
-                for (int i = 0; i < QuizCore.QuizProgress.WordProgDatas.Count; ++i)
-                {
-                    if (toAsk.Contains(i))
-                    {
-                        QuizCore.QuizProgress.WordProgDatas[i].SkipThisRound = false;
-                    }
                 }
             }
 
