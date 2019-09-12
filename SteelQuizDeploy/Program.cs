@@ -17,9 +17,11 @@
 */
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Xml;
 
@@ -27,13 +29,66 @@ namespace SteelQuizDeploy
 {
     class Program
     {
+        static string SolutionRoot { get; set; }
+        static bool DevRelease { get; set; }
+
         static void Main(string[] args)
         {
-            Console.WriteLine(@"Running SteelQuizDeploy from 'SteelQuiz\SteelQuizDeploy\bin\Release'? (y/n)");
-            if (char.ToLower(Console.ReadKey().KeyChar) != 'y')
+            SolutionRoot = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
+            while (new List<string>(Directory.GetFiles(SolutionRoot)).Where(x => Path.GetFileName(x) == "SteelQuiz.sln").Count() == 0)
             {
-                return;
+                if (new DirectoryInfo(SolutionRoot).Parent == null)
+                {
+                    Console.WriteLine("Solution root directory cannot be found. Make sure you run the deployment tool from within the solution directory.\n");
+                    SolutionRoot = "";
+                    break;
+                }
+                SolutionRoot = Path.GetFullPath(Path.Combine(SolutionRoot, ".."));
             }
+
+
+            if (!string.IsNullOrWhiteSpace(SolutionRoot))
+            {
+                Console.WriteLine($"Is this solution root directory correct: '{SolutionRoot}'? (y/n)");
+            }
+            if (string.IsNullOrWhiteSpace(SolutionRoot) || char.ToLower(Console.ReadKey().KeyChar) != 'y')
+            {
+                string dir = "";
+                while (!Directory.Exists(dir))
+                {
+                    if (dir != "")
+                    {
+                        Console.WriteLine("Directory doesn't exist");
+                    }
+
+                    Console.WriteLine("\nEnter the correct solution root directory: ");
+                    dir = Console.ReadLine();
+                    if (dir == "")
+                    {
+                        // exit
+                        return;
+                    }
+                }
+                SolutionRoot = dir;
+            }
+            Console.Write("\n");
+            string updateChannel = "";
+            while (updateChannel != "stable" && updateChannel != "dev")
+            {
+                Console.WriteLine("Which update channel to release for? (stable/dev)");
+                updateChannel = Console.ReadLine().ToLower();
+                if (updateChannel != "stable" && updateChannel != "dev")
+                {
+                    if (updateChannel == "")
+                    {
+                        // exit
+                        return;
+                    }
+                    Console.WriteLine("Invalid choice");
+                }
+            }
+            DevRelease = updateChannel == "dev";
+
             Console.Write("\n");
             Console.WriteLine("Version number set in manifest? (y/n)");
             if (char.ToLower(Console.ReadKey().KeyChar) != 'y')
@@ -88,18 +143,17 @@ namespace SteelQuizDeploy
 
         private static bool Deploy()
         {
-            string solutionRoot = Path.GetFullPath(Path.Combine(System.Reflection.Assembly.GetEntryAssembly().Location, "..", "..", "..", ".."));
-
-
+            //string solutionRoot = Path.GetFullPath(Path.Combine(System.Reflection.Assembly.GetEntryAssembly().Location, "..", "..", "..", ".."));
+            
             Console.Write("Creating SteelQuizPortable.zip ...");
 
-            string portableZipPath = Path.Combine(solutionRoot, @"SteelQuiz\bin\Release\SteelQuizPortable.zip");
+            string portableZipPath = Path.Combine(SolutionRoot, @"SteelQuiz\bin\Release\SteelQuizPortable.zip");
             string[] portableZipFiles =
             {
-                Path.Combine(solutionRoot, @"SteelQuiz\bin\Release\SteelQuiz.exe"),
-                Path.Combine(solutionRoot, @"SteelQuiz\bin\Release\AutoUpdater.NET.dll"),
-                Path.Combine(solutionRoot, @"SteelQuiz\bin\Release\Fastenshtein.dll"),
-                Path.Combine(solutionRoot, @"SteelQuiz\bin\Release\Newtonsoft.Json.dll"),
+                Path.Combine(SolutionRoot, @"SteelQuiz\bin\Release\SteelQuiz.exe"),
+                Path.Combine(SolutionRoot, @"SteelQuiz\bin\Release\AutoUpdater.NET.dll"),
+                Path.Combine(SolutionRoot, @"SteelQuiz\bin\Release\Fastenshtein.dll"),
+                Path.Combine(SolutionRoot, @"SteelQuiz\bin\Release\Newtonsoft.Json.dll"),
             };
 
             File.Delete(portableZipPath);
@@ -122,14 +176,22 @@ namespace SteelQuizDeploy
 
             Console.Write("\nCreating update_pkg.zip ...");
 
-            string updatePkgPath = Path.Combine(solutionRoot, @"Updater\update_pkg.zip");
+            string updatePkgPath;
+            if (!DevRelease)
+            {
+                updatePkgPath = Path.Combine(SolutionRoot, @"Updater\update_pkg.zip");
+            }
+            else
+            {
+                updatePkgPath = Path.Combine(SolutionRoot, @"Updater\channel_dev\update_pkg.zip");
+            }
             string[] updatePkgFiles =
             {
-                Path.Combine(solutionRoot, @"SteelQuiz\bin\Release\SteelQuiz.exe"),
-                Path.Combine(solutionRoot, @"SteelQuiz\bin\Release\AutoUpdater.NET.dll"),
-                Path.Combine(solutionRoot, @"SteelQuiz\bin\Release\Fastenshtein.dll"),
-                Path.Combine(solutionRoot, @"SteelQuiz\bin\Release\Newtonsoft.Json.dll"),
-                Path.Combine(solutionRoot, @"Setup\Uninstall.exe"),
+                Path.Combine(SolutionRoot, @"SteelQuiz\bin\Release\SteelQuiz.exe"),
+                Path.Combine(SolutionRoot, @"SteelQuiz\bin\Release\AutoUpdater.NET.dll"),
+                Path.Combine(SolutionRoot, @"SteelQuiz\bin\Release\Fastenshtein.dll"),
+                Path.Combine(SolutionRoot, @"SteelQuiz\bin\Release\Newtonsoft.Json.dll"),
+                Path.Combine(SolutionRoot, @"Setup\Uninstall.exe"),
             };
 
             File.Delete(updatePkgPath);
@@ -150,37 +212,9 @@ namespace SteelQuizDeploy
             Console.WriteLine(" OK!");
 
             
-            Console.Write("\nGetting manifest version ...");
+            Console.Write("\nGetting SteelQuiz manifest version ...");
 
-            /*
-            string manifestPath = Path.Combine(solutionRoot, @"SteelQuiz\Properties\AssemblyInfo.cs");
-
-            string[] manifest = File.ReadAllLines(manifestPath);
-            string steelQuizVersion = null;
-            bool inComment = false;
-            foreach (var line in manifest)
-            {
-                if (line.Contains("/*"))
-                {
-                    inComment = true;
-                }
-
-                if (line.StartsWith("[assembly: AssemblyVersion(\""))
-                {
-                    steelQuizVersion = line.Split(new string[] { "[assembly: AssemblyVersion(\"" }, StringSplitOptions.None)[1]
-                        .Split('"')[0];
-                }
-            }
-
-            if (steelQuizVersion == null)
-            {
-                Console.WriteLine(" FAIL");
-                Console.WriteLine("Could not find SteelQuiz assembly version!");
-                return false;
-            }
-            */
-
-            string steelQuizVersion = FileVersionInfo.GetVersionInfo(Path.Combine(solutionRoot, @"SteelQuiz\bin\Release\SteelQuiz.exe")).ProductVersion;
+            string steelQuizVersion = FileVersionInfo.GetVersionInfo(Path.Combine(SolutionRoot, @"SteelQuiz\bin\Release\SteelQuiz.exe")).ProductVersion;
 
             Console.WriteLine(" OK!");
             Console.WriteLine("Found SteelQuiz version: " + steelQuizVersion);
@@ -188,7 +222,7 @@ namespace SteelQuizDeploy
 
             Console.Write("\nSetting version in setup.nsi ...");
 
-            string setupNsiPath = Path.Combine(solutionRoot, @"Setup\setup.nsi");
+            string setupNsiPath = Path.Combine(SolutionRoot, @"Setup\setup.nsi");
             string[] nsi = File.ReadAllLines(setupNsiPath);
 
             bool nsiSuccess = false;
@@ -260,7 +294,15 @@ namespace SteelQuizDeploy
 
             Console.Write("\nUpdating update_meta.xml ...");
 
-            string updateMetaPath = Path.Combine(solutionRoot, @"Updater\update_meta.xml");
+            string updateMetaPath;
+            if (!DevRelease)
+            {
+                updateMetaPath = Path.Combine(SolutionRoot, @"Updater\update_meta.xml");
+            }
+            else
+            {
+                updateMetaPath = Path.Combine(SolutionRoot, @"Updater\channel_dev\update_meta.xml");
+            }
 
             var xml = new XmlDocument();
             xml.Load(updateMetaPath);
