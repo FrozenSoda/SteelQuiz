@@ -101,12 +101,14 @@ namespace SteelQuizDeploy
             {
                 return;
             }
+            /*
             Console.Write("\n");
             Console.WriteLine("Release notes updated? (y/n)");
             if (char.ToLower(Console.ReadKey().KeyChar) != 'y')
             {
                 return;
             }
+            */
             Console.Clear();
             Console.WriteLine("Deploy? (y/n)");
             if (char.ToLower(Console.ReadKey().KeyChar) != 'y')
@@ -130,6 +132,15 @@ namespace SteelQuizDeploy
             if (success)
             {
                 Console.WriteLine("Deployment finished successfully!");
+
+                //Process.Start("https://github.com/steel9/SteelQuiz/releases/new");
+                var github = new Process();
+                github.StartInfo.UseShellExecute = true;
+                github.StartInfo.FileName = "https://github.com/steel9/SteelQuiz/releases/new";
+                github.Start();
+                Process.Start("explorer.exe", Path.Combine(SolutionRoot, "Setup"));
+                Process.Start("explorer.exe", Path.Combine(SolutionRoot, "SteelQuiz", "bin", "Release"));
+                Process.Start("notepad.exe", Path.Combine(SolutionRoot, "Updater", "release_notes.txt"));
             }
             else
             {
