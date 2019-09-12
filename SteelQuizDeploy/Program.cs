@@ -247,14 +247,14 @@ namespace SteelQuizDeploy
                 }
             }
 
-            File.WriteAllLines(setupNsiPath, nsi);
-
             if (!nsiSuccess)
             {
                 Console.WriteLine(" FAIL");
                 Console.WriteLine("Could not find '!define PRODUCT_VERSION'");
                 return false;
             }
+
+            File.WriteAllLines(setupNsiPath, nsi);
 
             Console.WriteLine(" OK!");
 
