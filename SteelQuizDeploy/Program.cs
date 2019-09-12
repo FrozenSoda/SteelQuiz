@@ -35,13 +35,13 @@ namespace SteelQuizDeploy
                 return;
             }
             Console.Write("\n");
-            Console.WriteLine("Release build finished? (y/n)");
+            Console.WriteLine("Version number set in manifest? (y/n)");
             if (char.ToLower(Console.ReadKey().KeyChar) != 'y')
             {
                 return;
             }
             Console.Write("\n");
-            Console.WriteLine("Version number set in manifest? (y/n)");
+            Console.WriteLine("Release build finished? (y/n)");
             if (char.ToLower(Console.ReadKey().KeyChar) != 'y')
             {
                 return;

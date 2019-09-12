@@ -4,5 +4,5 @@
   <url>https://raw.githubusercontent.com/steel9/SteelQuiz/master/Updater/update_pkg.zip</url>
   <changelog>https://github.com/steel9/SteelQuiz/releases</changelog>
   <mandatory>false</mandatory>
-  <checksum algorithm="SHA512">e8df1927d090df1e336cc61827bc709d7cdd4dafe20e521ba722db06788eaeaf6f64ea1b2de29e9c4d2480f5dd315ecbd1aa3f614735a45cc530b5cab4785703</checksum>
+  <checksum algorithm="SHA512">d6e0deafb8a7ae9bf4322b057ad8c54c18fcd64fe761ebde8bb379197c5ad6e78fd14397c14952c3725e70082ccdfdcca75e8fe23b9cf534bfedf5ee4ab23f99</checksum>
 </item>
