@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteelQuiz", "SteelQuiz\Stee
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteelQuizTests", "SteelQuizTests\SteelQuizTests.csproj", "{4F25C6D1-98D6-4750-9238-B9AFD82924F7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteelQuizDeploy", "SteelQuizDeploy\SteelQuizDeploy.csproj", "{F49C47E0-C8AB-4570-83F0-A66B7B0EFDE9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{4F25C6D1-98D6-4750-9238-B9AFD82924F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F25C6D1-98D6-4750-9238-B9AFD82924F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F25C6D1-98D6-4750-9238-B9AFD82924F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F49C47E0-C8AB-4570-83F0-A66B7B0EFDE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F49C47E0-C8AB-4570-83F0-A66B7B0EFDE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F49C47E0-C8AB-4570-83F0-A66B7B0EFDE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F49C47E0-C8AB-4570-83F0-A66B7B0EFDE9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
