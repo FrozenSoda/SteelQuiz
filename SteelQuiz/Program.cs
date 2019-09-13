@@ -20,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AutoUpdaterDotNET;
@@ -41,6 +42,8 @@ namespace SteelQuiz
 
         public static int QuizEditorsOpen { get; set; } = 0;
 
+        private static Mutex mutex = new Mutex(true, "40467036-2cfe-4c10-a190-426d3544496a");
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -55,6 +58,13 @@ namespace SteelQuiz
             Application.ThreadException += Application_ThreadException;
             Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+
+            if (!mutex.WaitOne(TimeSpan.Zero, true))
+            {
+                MessageBox.Show("SteelQuiz is already running.", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Application.Exit();
+                return;
+            }
 
             QuizCore.CheckInitDirectories();
             if (!ConfigManager.LoadConfig())
