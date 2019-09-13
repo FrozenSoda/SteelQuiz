@@ -131,9 +131,8 @@ namespace SteelQuiz
                         if (msg == DialogResult.OK)
                         {
                             UpdateExitInProgress = true;
-                            if (Program.CloseQuizEditors())
+                            if (Program.CloseQuizEditors() && AutoUpdater.DownloadUpdate())
                             {
-                                AutoUpdater.DownloadUpdate();
                                 Application.Exit();
                             }
                             UpdateExitInProgress = false;
@@ -151,9 +150,8 @@ namespace SteelQuiz
                     else if (uargs.Mandatory && uargs.UpdateMode == Mode.ForcedDownload)
                     {
                         UpdateExitInProgress = true;
-                        if (Program.CloseQuizEditors())
+                        if (Program.CloseQuizEditors() && AutoUpdater.DownloadUpdate())
                         {
-                            AutoUpdater.DownloadUpdate();
                             Application.Exit();
                         }
                         UpdateExitInProgress = false;
@@ -171,9 +169,8 @@ namespace SteelQuiz
                         }
 
                         UpdateExitInProgress = true;
-                        if (Program.CloseQuizEditors())
+                        if (Program.CloseQuizEditors() && AutoUpdater.DownloadUpdate())
                         {
-                            AutoUpdater.DownloadUpdate();
                             Application.Exit();
                         }
                         UpdateExitInProgress = false;
@@ -232,9 +229,8 @@ namespace SteelQuiz
                 {
                     if (uargs.Mandatory || new UpdateAvailable(uargs.InstalledVersion, uargs.CurrentVersion).ShowDialog() == DialogResult.OK)
                     {
-                        if (Program.CloseQuizEditors())
+                        if (Program.CloseQuizEditors() && AutoUpdater.DownloadUpdate())
                         {
-                            AutoUpdater.DownloadUpdate();
                             Application.Exit();
                         }
                     }
@@ -247,9 +243,8 @@ namespace SteelQuiz
             }
             else if (CurrentUpdateMode == UpdateMode.Force)
             {
-                if (Program.CloseQuizEditors())
+                if (Program.CloseQuizEditors() && AutoUpdater.DownloadUpdate())
                 {
-                    AutoUpdater.DownloadUpdate();
                     Application.Exit();
                 }
             }

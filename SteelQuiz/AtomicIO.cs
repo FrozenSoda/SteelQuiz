@@ -139,7 +139,7 @@ namespace SteelQuiz
                         // Operation was interrupted while writing to atomic copy, and no original file exists, so there's no file to read
 
                         throw new AtomicException(
-                            "Last atomic write operation to this file was interrupted while writing to atomic copy, " +
+                            $"Last atomic write operation to file '{path}' was interrupted while writing to atomic copy, " +
                             "and no original file exists, so there's no file to read");
                     }
                 }
@@ -151,7 +151,7 @@ namespace SteelQuiz
                     // Write operation didn't even finish, or file doesn't exist
 
                     throw new AtomicException(
-                        "Last atomic write operation to this file didn't finish, or file doesn't exist");
+                        $"Last atomic write operation to file '{path}' didn't finish, or file doesn't exist");
                 }
             }
 
