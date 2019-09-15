@@ -77,36 +77,42 @@ namespace SteelQuiz.Animations
 
                 control.Location = new Point(x, y);
 
-                if (!ControlsStopMoving.Contains(control))
+                lock (ControlsMoving) lock (ControlsStopMoving)
                 {
-                    if (((dX >= 0 && control.Location.X >= to.X) || (dX <= 0 && control.Location.X <= to.X))
-                        && ((dY >= 0 && control.Location.Y >= to.Y) || (dY <= 0 && control.Location.Y <= to.Y)))
+                    if (!ControlsStopMoving.Contains(control))
                     {
-                        control.Location = to;
+                        if (((dX >= 0 && control.Location.X >= to.X) || (dX <= 0 && control.Location.X <= to.X))
+                            && ((dY >= 0 && control.Location.Y >= to.Y) || (dY <= 0 && control.Location.Y <= to.Y)))
+                        {
+                            control.Location = to;
 
-                        ControlsMoving.Remove(control);
-                        ControlsStopMoving.Remove(control);
+                            ControlsMoving.Remove(control);
+                            ControlsStopMoving.Remove(control);
 
-                        onComplete?.Invoke();
+                            onComplete?.Invoke();
+                        }
+                        else
+                        {
+                            tmr.Enabled = true;
+                        }
                     }
                     else
                     {
-                        tmr.Enabled = true;
+                        ControlsMoving.Remove(control);
+                        ControlsStopMoving.Remove(control);
                     }
                 }
-                else
-                {
-                    ControlsMoving.Remove(control);
-                    ControlsStopMoving.Remove(control);
-                }
             };
-            if (ControlsMoving.Keys.Contains(control))
+            lock (ControlsMoving)
             {
-                ControlsMoving[control].Stop();
-                ControlsMoving.Remove(control);
+                if (ControlsMoving.Keys.Contains(control))
+                {
+                    ControlsMoving[control].Stop();
+                    ControlsMoving.Remove(control);
+                }
+                tmr.Start();
+                ControlsMoving.Add(control, tmr);
             }
-            tmr.Start();
-            ControlsMoving.Add(control, tmr);
         }
     }
 }
