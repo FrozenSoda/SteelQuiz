@@ -391,6 +391,7 @@ namespace SteelQuiz.QuizEditor
             (Parent as DraggableFlowLayoutPanel).Align(this, () =>
             {
                 //ParentUC.Save(true);
+                QuizEditor.ChangedSinceLastSave = true;
             });
         }
     }
