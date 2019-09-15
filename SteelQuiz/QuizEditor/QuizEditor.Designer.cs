@@ -52,7 +52,7 @@ namespace SteelQuiz.QuizEditor
             this.cmb_lang1 = new System.Windows.Forms.ComboBox();
             this.cmb_lang2 = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.flp_words = new System.Windows.Forms.FlowLayoutPanel();
+            this.dflp_words = new SteelQuiz.Controls.DraggableFlowLayoutPanel();
             this.mns_top = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -127,15 +127,15 @@ namespace SteelQuiz.QuizEditor
             // 
             // flp_words
             // 
-            this.flp_words.AutoScroll = true;
-            this.flp_words.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.flp_words.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flp_words.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flp_words.Location = new System.Drawing.Point(12, 73);
-            this.flp_words.Name = "flp_words";
-            this.flp_words.Size = new System.Drawing.Size(791, 372);
-            this.flp_words.TabIndex = 3;
-            this.flp_words.WrapContents = false;
+            this.dflp_words.AutoScroll = true;
+            this.dflp_words.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.dflp_words.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            //this.dflp_words.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.dflp_words.Location = new System.Drawing.Point(12, 73);
+            this.dflp_words.Name = "flp_words";
+            this.dflp_words.Size = new System.Drawing.Size(791, 372);
+            this.dflp_words.TabIndex = 3;
+            //this.dflp_words.WrapContents = false;
             // 
             // mns_top
             // 
@@ -304,7 +304,7 @@ namespace SteelQuiz.QuizEditor
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.ClientSize = new System.Drawing.Size(815, 457);
             this.Controls.Add(this.pnl_msg);
-            this.Controls.Add(this.flp_words);
+            this.Controls.Add(this.dflp_words);
             this.Controls.Add(this.cmb_lang2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.cmb_lang1);
@@ -332,7 +332,7 @@ namespace SteelQuiz.QuizEditor
         private System.Windows.Forms.ComboBox cmb_lang1;
         private System.Windows.Forms.ComboBox cmb_lang2;
         private System.Windows.Forms.Label label3;
-        internal System.Windows.Forms.FlowLayoutPanel flp_words;
+        internal SteelQuiz.Controls.DraggableFlowLayoutPanel dflp_words;
         private System.Windows.Forms.MenuStrip mns_top;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;

@@ -225,14 +225,14 @@ namespace SteelQuiz.QuizEditor
             if (QuizEditor.UpdateUndoRedoStacks)
             {
                 QuizEditor.UndoStack.Push(new UndoRedoFuncPair(
-                    new Action[] { QuizEditor.AddWordPair(this, QuizEditor.flp_words.Controls.GetChildIndex(this)) },
+                    new Action[] { QuizEditor.AddWordPair(this, QuizEditor.dflp_words.Controls.GetChildIndex(this)) },
                     new Action[] { QuizEditor.RemoveWordPair(this) },
                     "Remove word pair",
                     new OwnerControlData(this, this.Parent)
                     ));
             }
             QuizEditor.UpdateUndoRedoTooltips();
-            QuizEditor.flp_words.Controls.Remove(this);
+            QuizEditor.dflp_words.Controls.Remove(this);
             QuizEditor.ChkFixWordsCount();
             QuizEditor.ChangedSinceLastSave = true;
         }
