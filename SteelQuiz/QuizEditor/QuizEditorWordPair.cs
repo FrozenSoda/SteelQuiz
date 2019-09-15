@@ -28,6 +28,8 @@ using System.Windows.Forms;
 using SteelQuiz.QuizEditor.UndoRedo;
 using SteelQuiz.ThemeManager.Colors;
 using SteelQuiz.QuizPractise;
+using SteelQuiz.Controls;
+using System.Diagnostics;
 
 namespace SteelQuiz.QuizEditor
 {
@@ -339,6 +341,57 @@ namespace SteelQuiz.QuizEditor
 
             txt_word1.Size = new Size(width, txt_word1.Size.Height);
             txt_word2.Size = new Size(width, txt_word2.Size.Height);
+        }
+
+        private Point MouseDownLocation { get; set; }
+        private Stopwatch hoverStopwatch = new Stopwatch();
+
+        private void Pnl_drag_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                hoverStopwatch.Start();
+                MouseDownLocation = e.Location;
+                BringToFront();
+            }
+        }
+
+        private void Pnl_drag_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                int left = e.X + Left - MouseDownLocation.X;
+                int top = e.Y + Top - MouseDownLocation.Y;
+
+                /*
+                // LOCK CONTROL TO DFLP BOUNDS
+                if (left > 0 && left + Size.Width <= (Parent as DraggableFlowLayoutPanel).Size.Width)
+                {
+                    Left = left;
+                }
+                if (top > 0 && top + Size.Height <= (Parent as DraggableFlowLayoutPanel).Size.Height)
+                {
+                    Top = top;
+                }
+                */
+                Left = left;
+                Top = top;
+
+                if (hoverStopwatch.ElapsedMilliseconds > 100)
+                {
+                    (Parent as DraggableFlowLayoutPanel).AlignAll(this);
+                    hoverStopwatch.Restart();
+                }
+            }
+        }
+
+        private void Pnl_drag_MouseUp(object sender, MouseEventArgs e)
+        {
+            hoverStopwatch.Reset();
+            (Parent as DraggableFlowLayoutPanel).Align(this, () =>
+            {
+                //ParentUC.Save(true);
+            });
         }
     }
 }

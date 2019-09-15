@@ -180,7 +180,7 @@ namespace SteelQuiz.QuizEditor
             quiz.GUID = QuizGuid;
 
             ulong i = 0;
-            foreach (var wordPair in dflp_words.Controls.OfType<QuizEditorWordPair>().Where(x => !QEWordEmpty(x)))
+            foreach (var wordPair in dflp_words.ControlsOrdered().OfType<QuizEditorWordPair>().Where(x => !QEWordEmpty(x)))
             {
                 wordPair.RemoveSynonymsEqualToWords();
 

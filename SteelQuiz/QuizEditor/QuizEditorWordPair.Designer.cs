@@ -57,7 +57,12 @@ namespace SteelQuiz.QuizEditor
             this.btn_delete = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.pnl_drag = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.pnl_translationRules.SuspendLayout();
+            this.pnl_drag.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnl_translationRules
@@ -139,9 +144,9 @@ namespace SteelQuiz.QuizEditor
             this.btn_editSynonyms_w1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_editSynonyms_w1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_editSynonyms_w1.ForeColor = System.Drawing.Color.White;
-            this.btn_editSynonyms_w1.Location = new System.Drawing.Point(3, 29);
+            this.btn_editSynonyms_w1.Location = new System.Drawing.Point(25, 29);
             this.btn_editSynonyms_w1.Name = "btn_editSynonyms_w1";
-            this.btn_editSynonyms_w1.Size = new System.Drawing.Size(75, 39);
+            this.btn_editSynonyms_w1.Size = new System.Drawing.Size(110, 27);
             this.btn_editSynonyms_w1.TabIndex = 4;
             this.btn_editSynonyms_w1.TabStop = false;
             this.btn_editSynonyms_w1.Text = "Edit synonyms";
@@ -172,9 +177,9 @@ namespace SteelQuiz.QuizEditor
             this.btn_editSynonyms_w2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_editSynonyms_w2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_editSynonyms_w2.ForeColor = System.Drawing.Color.White;
-            this.btn_editSynonyms_w2.Location = new System.Drawing.Point(650, 29);
+            this.btn_editSynonyms_w2.Location = new System.Drawing.Point(617, 31);
             this.btn_editSynonyms_w2.Name = "btn_editSynonyms_w2";
-            this.btn_editSynonyms_w2.Size = new System.Drawing.Size(75, 39);
+            this.btn_editSynonyms_w2.Size = new System.Drawing.Size(110, 27);
             this.btn_editSynonyms_w2.TabIndex = 6;
             this.btn_editSynonyms_w2.TabStop = false;
             this.btn_editSynonyms_w2.Text = "Edit synonyms";
@@ -189,9 +194,9 @@ namespace SteelQuiz.QuizEditor
             this.btn_delete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_delete.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_delete.ForeColor = System.Drawing.Color.White;
-            this.btn_delete.Location = new System.Drawing.Point(569, 29);
+            this.btn_delete.Location = new System.Drawing.Point(522, 31);
             this.btn_delete.Name = "btn_delete";
-            this.btn_delete.Size = new System.Drawing.Size(75, 39);
+            this.btn_delete.Size = new System.Drawing.Size(89, 27);
             this.btn_delete.TabIndex = 7;
             this.btn_delete.TabStop = false;
             this.btn_delete.Text = "Delete";
@@ -221,11 +226,64 @@ namespace SteelQuiz.QuizEditor
             this.label2.TabIndex = 9;
             this.label2.Text = "2:";
             // 
+            // pnl_drag
+            // 
+            this.pnl_drag.Controls.Add(this.label3);
+            this.pnl_drag.Controls.Add(this.label4);
+            this.pnl_drag.Controls.Add(this.label5);
+            this.pnl_drag.Location = new System.Drawing.Point(25, 62);
+            this.pnl_drag.Name = "pnl_drag";
+            this.pnl_drag.Size = new System.Drawing.Size(68, 35);
+            this.pnl_drag.TabIndex = 10;
+            this.pnl_drag.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseDown);
+            this.pnl_drag.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseMove);
+            this.pnl_drag.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseUp);
+            // 
+            // label3
+            // 
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(3, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(62, 10);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯" +
+    "⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯";
+            this.label3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseDown);
+            this.label3.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseMove);
+            this.label3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseUp);
+            // 
+            // label4
+            // 
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(3, 18);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(62, 10);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯" +
+    "⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯";
+            this.label4.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseDown);
+            this.label4.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseMove);
+            this.label4.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseUp);
+            // 
+            // label5
+            // 
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(3, 9);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(62, 10);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯" +
+    "⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯";
+            this.label5.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseDown);
+            this.label5.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseMove);
+            this.label5.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseUp);
+            // 
             // QuizEditorWordPair
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.Controls.Add(this.pnl_drag);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_delete);
@@ -234,11 +292,14 @@ namespace SteelQuiz.QuizEditor
             this.Controls.Add(this.btn_editSynonyms_w1);
             this.Controls.Add(this.txt_word1);
             this.Controls.Add(this.pnl_translationRules);
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ForeColor = System.Drawing.Color.White;
             this.Name = "QuizEditorWordPair";
             this.Size = new System.Drawing.Size(730, 97);
             this.SizeChanged += new System.EventHandler(this.QuizEditorWordPair_SizeChanged);
             this.pnl_translationRules.ResumeLayout(false);
             this.pnl_translationRules.PerformLayout();
+            this.pnl_drag.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -257,5 +318,9 @@ namespace SteelQuiz.QuizEditor
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btn_smartCompSettings;
+        private System.Windows.Forms.Panel pnl_drag;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
     }
 }
