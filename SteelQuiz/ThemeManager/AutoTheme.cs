@@ -16,6 +16,7 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using SteelQuiz.Controls;
 using SteelQuiz.Extensions;
 using SteelQuiz.ThemeManager.Colors;
 using System;
@@ -67,6 +68,11 @@ namespace SteelQuiz.ThemeManager
             }
 
             foreach (var flp in control.GetAllChildrenRecursive(typeof(FlowLayoutPanel)))
+            {
+                flp.BackColor = theme.GetBackColor();
+            }
+
+            foreach (var dflp in control.GetAllChildrenRecursive(typeof(DraggableFlowLayoutPanel)))
             {
                 flp.BackColor = theme.GetBackColor();
             }
