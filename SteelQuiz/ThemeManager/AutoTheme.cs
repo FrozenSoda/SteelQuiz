@@ -74,7 +74,7 @@ namespace SteelQuiz.ThemeManager
 
             foreach (var dflp in control.GetAllChildrenRecursive(typeof(DraggableFlowLayoutPanel)))
             {
-                flp.BackColor = theme.GetBackColor();
+                dflp.BackColor = theme.GetBackColor();
             }
 
             foreach (var lst in control.GetAllChildrenRecursive(typeof(ListBox)))
