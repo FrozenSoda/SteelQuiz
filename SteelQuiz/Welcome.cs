@@ -85,7 +85,10 @@ namespace SteelQuiz
             {
                 if (ConfigManager.Config.SyncWin10Theme)
                 {
-                    PullWin10Theme();
+                    if (!PullWin10Theme())
+                    {
+                        SetTheme();
+                    }
                 }
                 else
                 {
@@ -227,20 +230,22 @@ namespace SteelQuiz
         /// <summary>
         /// Sets and applies the app theme according to Windows 10 theme
         /// </summary>
-        public void PullWin10Theme()
+        public bool PullWin10Theme()
         {
             ThemeManager.ThemeCore.Theme? theme = Program.GetWin10Theme();
 
             if (theme == null)
             {
-                // User don't have Windows 10, or the Windows 10 build is too old for app theme
-                return;
+                // User don't have Windows 10, the Windows 10 build is too old for app theme, or the user has never set the app theme
+                return false;
             }
 
             ConfigManager.Config.Theme = (ThemeManager.ThemeCore.Theme)theme;
             ConfigManager.SaveConfig();
 
             SetThemeAll();
+
+            return true;
         }
 
         /// <summary>
