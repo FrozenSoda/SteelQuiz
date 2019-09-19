@@ -132,6 +132,7 @@ namespace SteelQuizDeploy
             if (success)
             {
                 Console.WriteLine("Deployment finished successfully!");
+                Console.WriteLine("-------------------------------------------------------");
 
                 Console.Write("\n");
                 Console.WriteLine("Open GitHub release page and app directories? (y/n)");
@@ -150,8 +151,8 @@ namespace SteelQuizDeploy
             else
             {
                 Console.WriteLine("(!) Deployment failed (!)");
+                Console.WriteLine("-------------------------------------------------------");
             }
-            Console.WriteLine("-------------------------------------------------------");
 
             Console.WriteLine("\n\nPress ENTER to exit");
             Console.ReadLine();
