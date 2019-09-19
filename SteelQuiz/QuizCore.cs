@@ -263,9 +263,24 @@ namespace SteelQuiz
             if (new Version(MetaData.QUIZ_FILE_FORMAT_VERSION).CompareTo(new Version(Quiz.FileFormatVersion)) > 0)
             {
                 Quiz.FileFormatVersion = MetaData.QUIZ_FILE_FORMAT_VERSION;
-                SaveQuiz();
+                //SaveQuiz();
             }
 
+            // Fix null synonym lists as they will cause a NullReferenceException later on
+            for (int i = 0; i < Quiz.WordPairs.Count(); ++i)
+            {
+                if (Quiz.WordPairs[i].Word1Synonyms == null)
+                {
+                    Quiz.WordPairs[i].Word1Synonyms = new List<string>();
+                }
+
+                if (Quiz.WordPairs[i].Word2Synonyms == null)
+                {
+                    Quiz.WordPairs[i].Word2Synonyms = new List<string>();
+                }
+            }
+
+            SaveQuiz();
             return LoadProgressData();
         }
 
