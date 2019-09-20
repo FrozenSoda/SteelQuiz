@@ -332,7 +332,8 @@ namespace SteelQuiz
                         MessageBox.Show("An error occurred during the update/update check:\r\n\r\n" + ex.ToString(), "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-                else if (CurrentUpdateMode == UpdateMode.Verbose || CurrentUpdateMode == UpdateMode.Notification)
+                //else if (CurrentUpdateMode == UpdateMode.Verbose || CurrentUpdateMode == UpdateMode.Notification)
+                else if (CurrentUpdateMode == UpdateMode.Verbose || CurrentUpdateMode == UpdateMode.Force)
                 {
                     MessageBox.Show("Internet connection could not be established", "Update Check Failed - SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
