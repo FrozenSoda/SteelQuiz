@@ -143,15 +143,23 @@ namespace SteelQuiz.QuizPractise
             {
                 if (correctAnswer.Contains("(") && correctAnswer.Contains(")"))
                 {
-                    string w1 = correctAnswer.Split('(')[0].TrimEnd(' '); // tarp (tarpaulin) => tarp
-                    string w2 = correctAnswer.Split('(')[1].Split(')')[0].TrimStart(' ').TrimEnd(' '); // tarp (tarpaulin) => tarpaulin
-                    string w3 = correctAnswer.Replace("(", "").Replace(")", ""); // (eye)lash => eyelash
-                    string w4 = correctAnswer.Split(')')[1].TrimStart(' '); // (eye)lash => lash
+                    if (!correctAnswer.TrimStart().StartsWith("("))
+                    {
+                        string w1 = correctAnswer.Split('(')[0].TrimEnd(' '); // tarp (tarpaulin) => tarp
+                        similarityDatas.Add(Similarity(userAnswer, w1, wordPair, rules, (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
+                    }
 
-                    similarityDatas.Add(Similarity(userAnswer, w1, wordPair, rules, (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
+                    string w2 = correctAnswer.Split('(')[1].Split(')')[0].TrimStart(' ').TrimEnd(' '); // tarp (tarpaulin) => tarpaulin
                     similarityDatas.Add(Similarity(userAnswer, w2, wordPair, rules, (CorrectCertainty)Math.Max((int)CorrectCertainty.MaybeCorrect, (int)certainty)));
+
+                    string w3 = correctAnswer.Replace("(", "").Replace(")", ""); // (eye)lash => eyelash
                     similarityDatas.Add(Similarity(userAnswer, w3, wordPair, rules, (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
-                    similarityDatas.Add(Similarity(userAnswer, w4, wordPair, rules, (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
+
+                    if (!correctAnswer.TrimEnd().EndsWith(")"))
+                    {
+                        string w4 = correctAnswer.Split(')')[1].TrimStart(' '); // (eye)lash => lash
+                        similarityDatas.Add(Similarity(userAnswer, w4, wordPair, rules, (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
+                    }
                 }
             }
 
