@@ -1,3 +1,6 @@
+v4.2.5:
+Fixed an issue causing blank answers to be marked as correct, in some cases (issue #38).
+
 v4.2.4:
 Fixed an issue causing random update error messages when not being connected to the Internet.
 
