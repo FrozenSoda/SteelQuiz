@@ -225,7 +225,7 @@ namespace SteelQuiz
             // 
             // btn_practiseWriting
             // 
-            this.btn_practiseWriting.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btn_practiseWriting.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_practiseWriting.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.btn_practiseWriting.FlatAppearance.BorderSize = 0;
             this.btn_practiseWriting.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -242,7 +242,7 @@ namespace SteelQuiz
             // 
             // btn_practiseFlashcards
             // 
-            this.btn_practiseFlashcards.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btn_practiseFlashcards.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_practiseFlashcards.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.btn_practiseFlashcards.FlatAppearance.BorderSize = 0;
             this.btn_practiseFlashcards.FlatStyle = System.Windows.Forms.FlatStyle.Flat;

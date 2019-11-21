@@ -56,11 +56,11 @@ namespace SteelQuiz
 
                 if (PractiseQuizButtonsExpanded)
                 {
-                    btn_practiseWriting.Visible = true;
-                    btn_practiseFlashcards.Visible = true;
-
                     btn_practiseWriting.Location = btn_practiseQuiz.Location;
                     btn_practiseFlashcards.Location = btn_practiseQuiz.Location;
+
+                    btn_practiseWriting.Visible = true;
+                    btn_practiseFlashcards.Visible = true;
 
                     ControlMove.SmoothMove(btn_practiseWriting, btn_practiseWriting_loc, 80);
                     ControlMove.SmoothMove(btn_practiseFlashcards, btn_practiseFlashcards_loc, 80);
