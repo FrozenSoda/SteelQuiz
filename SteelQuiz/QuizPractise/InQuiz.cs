@@ -190,7 +190,8 @@ namespace SteelQuiz.QuizPractise
                             //MultiAns.Dispose();
                             //lbl_word2.Text = string.Join("\r\n", CurrentWordPair.GetRequiredSynonyms().Select(x => x.Answer));
                             //lbl_word2.Text = CurrentWordPair.Answer;
-                            MultiAns.CurrentLabel.Text = CurrentWordPair.Answer;
+                            //MultiAns.CurrentLabel.Text = CurrentWordPair.Answer;
+                            MultiAns.CurrentLabel.Text = CurrentWordPair.GetRequiredSynonyms().Where(x => !x.GetWordProgData().AskedThisRound).First().Answer;
                             pnl_knewAnswer.Visible = true;
                         };
                         MultiAns.CurrentLabel.Click += (sender, e) =>
@@ -205,7 +206,8 @@ namespace SteelQuiz.QuizPractise
                             //MultiAns.Dispose();
                             //lbl_word2.Text = string.Join("\r\n", CurrentWordPair.GetRequiredSynonyms().Select(x => x.Answer));
                             //lbl_word2.Text = CurrentWordPair.Answer;
-                            MultiAns.CurrentLabel.Text = CurrentWordPair.Answer;
+                            //MultiAns.CurrentLabel.Text = CurrentWordPair.Answer;
+                            MultiAns.CurrentLabel.Text = CurrentWordPair.GetRequiredSynonyms().Where(x => !x.GetWordProgData().AskedThisRound).First().Answer;
                             pnl_knewAnswer.Visible = true;
                         };
                         MultiAns.CurrentLabel.Text = "Press here to reveal";
@@ -694,7 +696,8 @@ namespace SteelQuiz.QuizPractise
                 }
                 else
                 {
-                    MultiAns.CurrentLabel.Text = CurrentWordPair.Answer;
+                    //MultiAns.CurrentLabel.Text = CurrentWordPair.Answer;
+                    MultiAns.CurrentLabel.Text = CurrentWordPair.GetRequiredSynonyms().Where(x => !x.GetWordProgData().AskedThisRound).First().Answer;
                 }
                 pnl_knewAnswer.Visible = true;
             }
@@ -860,7 +863,8 @@ namespace SteelQuiz.QuizPractise
 
                 if (MultiAns != null)
                 {
-                    MultiAns.CurrentLabel.Text = CurrentWordPair.Answer;
+                    //MultiAns.CurrentLabel.Text = CurrentWordPair.Answer;
+                    MultiAns.CurrentLabel.Text = CurrentWordPair.GetRequiredSynonyms().Where(x => !x.GetWordProgData().AskedThisRound).First().Answer;
                 }
                 else
                 {
