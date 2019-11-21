@@ -197,7 +197,7 @@ namespace SteelQuiz.QuizPractise
             //double dontAskProb(double successRate, int triesCount)
             double dontAskProb(double learningProgress, int triesCount)
             {
-                if (triesCount == 0)
+                if (triesCount < QuizCore.QuizProgress.MinimumTriesCountToConsiderSkippingQuestion)
                 {
                     return 0;
                 }
