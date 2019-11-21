@@ -30,6 +30,7 @@ using SteelQuiz.Extensions;
 using SteelQuiz.QuizData;
 using SteelQuiz.QuizProgressData;
 using SteelQuiz.ThemeManager.Colors;
+using static SteelQuiz.Welcome;
 
 namespace SteelQuiz.QuizPractise
 {
@@ -52,7 +53,7 @@ namespace SteelQuiz.QuizPractise
 
         //private List<string> AnswersAlreadyEntered { get; set; } = null;
 
-        public InQuiz(bool welcomeLocationInitialized = true)
+        public InQuiz(QuizPractiseMode quizPractiseMode, bool welcomeLocationInitialized = true)
         {
             InitializeComponent();
             if (welcomeLocationInitialized)

@@ -62,6 +62,8 @@ namespace SteelQuiz
             this.cmb_orderAscendingDescending = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.lbl_termsCount = new System.Windows.Forms.Label();
+            this.btn_practiseWriting = new System.Windows.Forms.Button();
+            this.btn_practiseFlashcards = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_practiseQuiz
@@ -110,7 +112,7 @@ namespace SteelQuiz
             this.flp_words.Location = new System.Drawing.Point(9, 106);
             this.flp_words.MinimumSize = new System.Drawing.Size(574, 269);
             this.flp_words.Name = "flp_words";
-            this.flp_words.Size = new System.Drawing.Size(718, 415);
+            this.flp_words.Size = new System.Drawing.Size(718, 269);
             this.flp_words.TabIndex = 7;
             this.flp_words.WrapContents = false;
             // 
@@ -221,11 +223,48 @@ namespace SteelQuiz
             this.lbl_termsCount.Text = "0";
             this.lbl_termsCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // btn_practiseWriting
+            // 
+            this.btn_practiseWriting.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btn_practiseWriting.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.btn_practiseWriting.FlatAppearance.BorderSize = 0;
+            this.btn_practiseWriting.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_practiseWriting.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_practiseWriting.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btn_practiseWriting.Location = new System.Drawing.Point(572, 453);
+            this.btn_practiseWriting.Name = "btn_practiseWriting";
+            this.btn_practiseWriting.Size = new System.Drawing.Size(158, 31);
+            this.btn_practiseWriting.TabIndex = 12;
+            this.btn_practiseWriting.Text = "Writing";
+            this.btn_practiseWriting.UseVisualStyleBackColor = false;
+            this.btn_practiseWriting.Visible = false;
+            this.btn_practiseWriting.Click += new System.EventHandler(this.btn_practiseWriting_Click);
+            // 
+            // btn_practiseFlashcards
+            // 
+            this.btn_practiseFlashcards.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btn_practiseFlashcards.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.btn_practiseFlashcards.FlatAppearance.BorderSize = 0;
+            this.btn_practiseFlashcards.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_practiseFlashcards.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_practiseFlashcards.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btn_practiseFlashcards.Location = new System.Drawing.Point(572, 490);
+            this.btn_practiseFlashcards.Name = "btn_practiseFlashcards";
+            this.btn_practiseFlashcards.Size = new System.Drawing.Size(158, 31);
+            this.btn_practiseFlashcards.TabIndex = 17;
+            this.btn_practiseFlashcards.Text = "Flashcards";
+            this.btn_practiseFlashcards.UseVisualStyleBackColor = false;
+            this.btn_practiseFlashcards.Visible = false;
+            this.btn_practiseFlashcards.Click += new System.EventHandler(this.btn_practiseFlashcards_Click);
+            // 
             // QuizProgressInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.Controls.Add(this.btn_practiseQuiz);
+            this.Controls.Add(this.btn_practiseFlashcards);
+            this.Controls.Add(this.btn_practiseWriting);
             this.Controls.Add(this.lbl_termsCount);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cmb_orderAscendingDescending);
@@ -238,7 +277,6 @@ namespace SteelQuiz
             this.Controls.Add(this.flp_words);
             this.Controls.Add(this.lbl_quizNameHere);
             this.Controls.Add(this.btn_editQuiz);
-            this.Controls.Add(this.btn_practiseQuiz);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.White;
             this.Name = "QuizProgressInfo";
@@ -265,5 +303,7 @@ namespace SteelQuiz
         private System.Windows.Forms.ComboBox cmb_orderAscendingDescending;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lbl_termsCount;
+        private System.Windows.Forms.Button btn_practiseWriting;
+        private System.Windows.Forms.Button btn_practiseFlashcards;
     }
 }
