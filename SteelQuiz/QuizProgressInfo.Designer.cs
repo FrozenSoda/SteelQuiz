@@ -112,7 +112,7 @@ namespace SteelQuiz
             this.flp_words.Location = new System.Drawing.Point(9, 106);
             this.flp_words.MinimumSize = new System.Drawing.Size(574, 269);
             this.flp_words.Name = "flp_words";
-            this.flp_words.Size = new System.Drawing.Size(718, 269);
+            this.flp_words.Size = new System.Drawing.Size(718, 415);
             this.flp_words.TabIndex = 7;
             this.flp_words.WrapContents = false;
             // 
