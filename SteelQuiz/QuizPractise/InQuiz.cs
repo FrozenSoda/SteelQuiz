@@ -176,9 +176,9 @@ namespace SteelQuiz.QuizPractise
                     MultiAns = new MultiAnswer();
                     lbl_word2.Controls.Add(MultiAns);
                     MultiAns.Location = new Point(0, 0);
-                    MultiAns.Click += (sender, e) =>
+                    if (GameMode == QuizPractiseMode.Flashcards)
                     {
-                        if (GameMode == QuizPractiseMode.Flashcards)
+                        MultiAns.Click += (sender, e) =>
                         {
                             if (WaitingForEnter)
                             {
@@ -187,14 +187,13 @@ namespace SteelQuiz.QuizPractise
                                 return;
                             }
 
-                            MultiAns.Dispose();
-                            lbl_word2.Text = string.Join("\r\n", CurrentWordPair.GetRequiredSynonyms().Select(x => x.Answer));
+                            //MultiAns.Dispose();
+                            //lbl_word2.Text = string.Join("\r\n", CurrentWordPair.GetRequiredSynonyms().Select(x => x.Answer));
+                            //lbl_word2.Text = CurrentWordPair.Answer;
+                            MultiAns.CurrentLabel.Text = CurrentWordPair.Answer;
                             pnl_knewAnswer.Visible = true;
-                        }
-                    };
-                    MultiAns.CurrentLabel.Click += (sender, e) =>
-                    {
-                        if (GameMode == QuizPractiseMode.Flashcards)
+                        };
+                        MultiAns.CurrentLabel.Click += (sender, e) =>
                         {
                             if (WaitingForEnter)
                             {
@@ -203,16 +202,21 @@ namespace SteelQuiz.QuizPractise
                                 return;
                             }
 
-                            MultiAns.Dispose();
-                            lbl_word2.Text = string.Join("\r\n", CurrentWordPair.GetRequiredSynonyms().Select(x => x.Answer));
+                            //MultiAns.Dispose();
+                            //lbl_word2.Text = string.Join("\r\n", CurrentWordPair.GetRequiredSynonyms().Select(x => x.Answer));
+                            //lbl_word2.Text = CurrentWordPair.Answer;
+                            MultiAns.CurrentLabel.Text = CurrentWordPair.Answer;
                             pnl_knewAnswer.Visible = true;
-                        }
-                    };
+                        };
+                        MultiAns.CurrentLabel.Text = "Press here to reveal";
+                    }
                     MultiAns.Show();
 
                     bool first = true;
                     bool found = false;
                     //foreach (var wp in CurrentWordPair.GetRequiredSynonyms().Where(x => x != CurrentWordPair && x.GetWordProgData().AskedThisRound))
+
+                    // (Re)add correct answers to MultiAns list, as it's been disposed and recreated
                     foreach (var wp in CurrentWordPair.GetRequiredSynonyms().Where(x => x.GetWordProgData().AskedThisRound))
                     {
                         found = true;
@@ -273,17 +277,14 @@ namespace SteelQuiz.QuizPractise
                 CurrentInput = "";
                 lbl_progress.Text = $"Progress this round: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
 
+                var lbl = MultiAns.CurrentLabel.Clone();
                 if (GameMode == QuizPractiseMode.Writing)
                 {
-                    var lbl = MultiAns.CurrentLabel.Clone();
-                    if (GameMode == QuizPractiseMode.Writing)
-                    {
-                        lbl.Text = "Enter your answers...";
-                    }
-                    else if (GameMode == QuizPractiseMode.Flashcards)
-                    {
-                        lbl.Text = "Press here to reveal";
-                    }
+                    lbl.Text = "Enter your answers...";
+                }
+                else if (GameMode == QuizPractiseMode.Flashcards)
+                {
+                    lbl.Text = "Press here to reveal";
                 }
             }
         }
@@ -501,8 +502,12 @@ namespace SteelQuiz.QuizPractise
                         }
                     }
                 }
-                WaitingForEnter = true;
-                UserCopyingWord = false;
+
+                if (GameMode == QuizPractiseMode.Writing)
+                {
+                    WaitingForEnter = true;
+                    UserCopyingWord = false;
+                }
             }
             else
             {
@@ -683,7 +688,14 @@ namespace SteelQuiz.QuizPractise
         {
             if (GameMode == QuizPractiseMode.Flashcards && CurrentWordPair != null)
             {
-                lbl_word2.Text = CurrentWordPair.Answer;
+                if (MultiAns == null)
+                {
+                    lbl_word2.Text = CurrentWordPair.Answer;
+                }
+                else
+                {
+                    MultiAns.CurrentLabel.Text = CurrentWordPair.Answer;
+                }
                 pnl_knewAnswer.Visible = true;
             }
 
@@ -692,6 +704,12 @@ namespace SteelQuiz.QuizPractise
 
         private void lbl_word1_Click(object sender, EventArgs e)
         {
+            if (WaitingForEnter)
+            {
+                WaitingForEnter = false;
+                NewWord();
+            }
+
             lbl_word1.Focus();
         }
 
@@ -842,8 +860,7 @@ namespace SteelQuiz.QuizPractise
 
                 if (MultiAns != null)
                 {
-                    MultiAns.Dispose();
-                    lbl_word2.Text = string.Join("\r\n", CurrentWordPair.GetRequiredSynonyms().Select(x => x.Answer));
+                    MultiAns.CurrentLabel.Text = CurrentWordPair.Answer;
                 }
                 else
                 {
