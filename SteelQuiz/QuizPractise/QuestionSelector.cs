@@ -18,6 +18,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -191,7 +192,7 @@ namespace SteelQuiz.QuizPractise
         {
             QuizCore.QuizProgress.CurrentWordPairs?.Clear();
 
-            const int MINIMUM_TRIES_COUNT_TO_CONSIDER_SKIPPING = 2;
+            //const int MINIMUM_TRIES_COUNT_TO_CONSIDER_SKIPPING = 2;
 
             //double dontAskProb(double successRate, int triesCount)
             double dontAskProb(double learningProgress, int triesCount)
@@ -205,7 +206,8 @@ namespace SteelQuiz.QuizPractise
                 var prb = learningProgress;
                 if (prb == 1)
                 {
-                    prb -= PROB_OFFSET / (triesCount - (MINIMUM_TRIES_COUNT_TO_CONSIDER_SKIPPING - 1));
+                    Debug.Assert((triesCount - (QuizCore.QuizProgress.MinimumTriesCountToConsiderSkippingQuestion - 1)) > 0); // do not divide by zero
+                    prb -= PROB_OFFSET / (triesCount - (QuizCore.QuizProgress.MinimumTriesCountToConsiderSkippingQuestion - 1));
                 }
 
                 return prb;
@@ -233,7 +235,7 @@ namespace SteelQuiz.QuizPractise
                 var dontAskAgainPrb = dontAskProb(GetLearningProgress(wordPairData), wordPairData.GetWordTriesCount());
 
                 if (!QuizCore.QuizProgress.FullTestInProgress
-                    && wordPairData.GetWordTriesCount() >= MINIMUM_TRIES_COUNT_TO_CONSIDER_SKIPPING
+                    && wordPairData.GetWordTriesCount() >= QuizCore.QuizProgress.MinimumTriesCountToConsiderSkippingQuestion
                     && rnd.NextBool(dontAskAgainPrb))
                 {
                     wordPairData.SkipThisRound = true;
