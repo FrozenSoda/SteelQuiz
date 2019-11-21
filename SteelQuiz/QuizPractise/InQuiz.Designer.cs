@@ -58,8 +58,13 @@ namespace SteelQuiz.QuizPractise
             this.pnl_word2 = new System.Windows.Forms.Panel();
             this.btn_home = new System.Windows.Forms.Button();
             this.btn_cfg = new System.Windows.Forms.Button();
+            this.pnl_knewAnswer = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btn_knewAnswerYES = new System.Windows.Forms.Button();
+            this.btn_knewAnswerNO = new System.Windows.Forms.Button();
             this.pnl_word1.SuspendLayout();
             this.pnl_word2.SuspendLayout();
+            this.pnl_knewAnswer.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl_word1
@@ -165,6 +170,7 @@ namespace SteelQuiz.QuizPractise
             // pnl_word2
             // 
             this.pnl_word2.AutoScroll = true;
+            this.pnl_word2.Controls.Add(this.pnl_knewAnswer);
             this.pnl_word2.Controls.Add(this.lbl_word2);
             this.pnl_word2.Location = new System.Drawing.Point(401, 61);
             this.pnl_word2.Name = "pnl_word2";
@@ -202,6 +208,53 @@ namespace SteelQuiz.QuizPractise
             this.btn_cfg.UseVisualStyleBackColor = false;
             this.btn_cfg.Click += new System.EventHandler(this.Btn_cfg_Click);
             // 
+            // pnl_knewAnswer
+            // 
+            this.pnl_knewAnswer.Controls.Add(this.btn_knewAnswerNO);
+            this.pnl_knewAnswer.Controls.Add(this.btn_knewAnswerYES);
+            this.pnl_knewAnswer.Controls.Add(this.label1);
+            this.pnl_knewAnswer.Location = new System.Drawing.Point(6, 295);
+            this.pnl_knewAnswer.Name = "pnl_knewAnswer";
+            this.pnl_knewAnswer.Size = new System.Drawing.Size(381, 50);
+            this.pnl_knewAnswer.TabIndex = 1;
+            this.pnl_knewAnswer.Visible = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(78, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(210, 21);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Did you know the answer?";
+            // 
+            // btn_knewAnswerYES
+            // 
+            this.btn_knewAnswerYES.BackColor = System.Drawing.Color.Green;
+            this.btn_knewAnswerYES.FlatAppearance.BorderSize = 0;
+            this.btn_knewAnswerYES.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_knewAnswerYES.Location = new System.Drawing.Point(193, 24);
+            this.btn_knewAnswerYES.Name = "btn_knewAnswerYES";
+            this.btn_knewAnswerYES.Size = new System.Drawing.Size(75, 23);
+            this.btn_knewAnswerYES.TabIndex = 1;
+            this.btn_knewAnswerYES.Text = "Yes";
+            this.btn_knewAnswerYES.UseVisualStyleBackColor = false;
+            this.btn_knewAnswerYES.Click += new System.EventHandler(this.btn_knewAnswerYES_Click);
+            // 
+            // btn_knewAnswerNO
+            // 
+            this.btn_knewAnswerNO.BackColor = System.Drawing.Color.Maroon;
+            this.btn_knewAnswerNO.FlatAppearance.BorderSize = 0;
+            this.btn_knewAnswerNO.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_knewAnswerNO.Location = new System.Drawing.Point(112, 24);
+            this.btn_knewAnswerNO.Name = "btn_knewAnswerNO";
+            this.btn_knewAnswerNO.Size = new System.Drawing.Size(75, 23);
+            this.btn_knewAnswerNO.TabIndex = 2;
+            this.btn_knewAnswerNO.Text = "No";
+            this.btn_knewAnswerNO.UseVisualStyleBackColor = false;
+            this.btn_knewAnswerNO.Click += new System.EventHandler(this.btn_knewAnswerNO_Click);
+            // 
             // InQuiz
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -233,6 +286,8 @@ namespace SteelQuiz.QuizPractise
             this.pnl_word1.PerformLayout();
             this.pnl_word2.ResumeLayout(false);
             this.pnl_word2.PerformLayout();
+            this.pnl_knewAnswer.ResumeLayout(false);
+            this.pnl_knewAnswer.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -251,5 +306,9 @@ namespace SteelQuiz.QuizPractise
         private System.Windows.Forms.Panel pnl_word2;
         private System.Windows.Forms.Button btn_home;
         private System.Windows.Forms.Button btn_cfg;
+        private System.Windows.Forms.Panel pnl_knewAnswer;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btn_knewAnswerYES;
+        private System.Windows.Forms.Button btn_knewAnswerNO;
     }
 }

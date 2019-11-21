@@ -38,11 +38,12 @@ namespace SteelQuiz.QuizPractise
     {
         private GeneralTheme GeneralTheme = new GeneralTheme();
 
-        public bool ExitAppOnClose { get; set; } = true;
-        private bool PerformOnCloseEvents { get; set; } = true;
-
+        private QuizPractiseMode GameMode { get; set; }
         private WordPair CurrentWordPair { get; set; } = null;
         private string CurrentInput { get; set; } = "";
+
+        public bool ExitAppOnClose { get; set; } = true;
+        private bool PerformOnCloseEvents { get; set; } = true;
 
         private bool WaitingForEnter { get; set; } = false;
         private bool UserCopyingWord { get; set; } = false;
@@ -66,6 +67,9 @@ namespace SteelQuiz.QuizPractise
             {
                 this.StartPosition = FormStartPosition.CenterScreen;
             }
+
+            GameMode = quizPractiseMode;
+
             lbl_lang1.Text = QuizCore.Quiz.Language1;
             lbl_lang2.Text = QuizCore.Quiz.Language2;
             this.Text += $" | v{Application.ProductVersion}";
@@ -190,13 +194,27 @@ namespace SteelQuiz.QuizPractise
                     if (found)
                     {
                         var lbl = MultiAns.CurrentLabel.Clone();
-                        lbl.Text = "Enter your answers...";
+                        if (GameMode == QuizPractiseMode.Writing)
+                        {
+                            lbl.Text = "Enter your answers...";
+                        }
+                        else if (GameMode == QuizPractiseMode.Flashcards)
+                        {
+                            lbl.Text = "Press here to reveal";
+                        }
                         lbl.Show();
                     }
                 }
                 else
                 {
-                    lbl_word2.Text = "Enter your answer...";
+                    if (GameMode == QuizPractiseMode.Writing)
+                    {
+                        lbl_word2.Text = "Enter your answer...";
+                    }
+                    else if (GameMode == QuizPractiseMode.Flashcards)
+                    {
+                        lbl_word2.Text = "Press here to reveal";
+                    }
                 }
             }
             else
@@ -215,7 +233,14 @@ namespace SteelQuiz.QuizPractise
                 lbl_progress.Text = $"Progress this round: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
 
                 var lbl = MultiAns.CurrentLabel.Clone();
-                lbl.Text = "Enter your answers...";
+                if (GameMode == QuizPractiseMode.Writing)
+                {
+                    lbl.Text = "Enter your answers...";
+                }
+                else if (GameMode == QuizPractiseMode.Flashcards)
+                {
+                    lbl.Text = "Press here to reveal";
+                }
             }
         }
 
@@ -276,6 +301,7 @@ namespace SteelQuiz.QuizPractise
         private void CheckWord()
         {
             lbl_lang1.Text = "Info";
+
             WordPair.AnswerDiff ansDiff;
             if (MultiAns == null)
             {
@@ -429,17 +455,36 @@ namespace SteelQuiz.QuizPractise
 
                 if (MultiAns == null)
                 {
-                    lbl_word2.Text = "Enter your answer...";
+                    if (GameMode == QuizPractiseMode.Writing)
+                    {
+                        lbl_word2.Text = "Enter your answer...";
+                    }
+                    else if (GameMode == QuizPractiseMode.Flashcards)
+                    {
+                        lbl_word2.Text = "Press here to reveal";
+                    }
                 }
                 else
                 {
-                    MultiAns.CurrentLabel.Text = "Enter your answer...";
+                    if (GameMode == QuizPractiseMode.Writing)
+                    {
+                        MultiAns.CurrentLabel.Text = "Enter your answer...";
+                    }
+                    else if (GameMode == QuizPractiseMode.Flashcards)
+                    {
+                        MultiAns.CurrentLabel.Text = "Press here to reveal";
+                    }
                 }
             }
         }
 
         private void InQuiz_KeyPress(object sender, KeyPressEventArgs e)
         {
+            if (GameMode != QuizPractiseMode.Writing)
+            {
+                return;
+            }
+
             var updateInputLbl = true;
 
             if (e.KeyChar == '\u001b')
@@ -551,6 +596,12 @@ namespace SteelQuiz.QuizPractise
 
         private void lbl_word2_Click(object sender, EventArgs e)
         {
+            if (GameMode == QuizPractiseMode.Flashcards)
+            {
+                lbl_word2.Text = CurrentWordPair.Answer;
+                pnl_knewAnswer.Visible = true;
+            }
+
             lbl_word2.Focus();
         }
 
@@ -646,6 +697,11 @@ namespace SteelQuiz.QuizPractise
 
         private void InQuiz_KeyDown(object sender, KeyEventArgs e)
         {
+            if (GameMode != QuizPractiseMode.Writing)
+            {
+                return;
+            }
+
             if (e.KeyData.HasFlag(Keys.Oemplus) && e.Shift && e.Alt && e.Control)
             {
                 CurrentInput += "¿";
@@ -664,6 +720,16 @@ namespace SteelQuiz.QuizPractise
             cfg.ShowDialog();
 
             lbl_word2.Focus();
+        }
+
+        private void btn_knewAnswerYES_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btn_knewAnswerNO_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
