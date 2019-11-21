@@ -100,6 +100,7 @@ namespace SteelQuiz.QuizPractise
             // 
             // lbl_progress
             // 
+            this.lbl_progress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbl_progress.AutoSize = true;
             this.lbl_progress.ForeColor = System.Drawing.Color.LightGray;
             this.lbl_progress.Location = new System.Drawing.Point(12, 428);
@@ -121,6 +122,7 @@ namespace SteelQuiz.QuizPractise
             // 
             // lbl_lang1
             // 
+            this.lbl_lang1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lbl_lang1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_lang1.ForeColor = System.Drawing.Color.LightGray;
             this.lbl_lang1.Location = new System.Drawing.Point(12, 9);
@@ -132,6 +134,7 @@ namespace SteelQuiz.QuizPractise
             // 
             // lbl_lang2
             // 
+            this.lbl_lang2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lbl_lang2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_lang2.ForeColor = System.Drawing.Color.LightGray;
             this.lbl_lang2.Location = new System.Drawing.Point(398, 9);
@@ -143,6 +146,7 @@ namespace SteelQuiz.QuizPractise
             // 
             // btn_w1_synonyms
             // 
+            this.btn_w1_synonyms.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btn_w1_synonyms.BackColor = System.Drawing.Color.Gray;
             this.btn_w1_synonyms.Enabled = false;
             this.btn_w1_synonyms.FlatAppearance.BorderSize = 0;
@@ -160,6 +164,7 @@ namespace SteelQuiz.QuizPractise
             // 
             // pnl_word1
             // 
+            this.pnl_word1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pnl_word1.AutoScroll = true;
             this.pnl_word1.Controls.Add(this.lbl_word1);
             this.pnl_word1.Location = new System.Drawing.Point(18, 61);
@@ -169,6 +174,7 @@ namespace SteelQuiz.QuizPractise
             // 
             // pnl_word2
             // 
+            this.pnl_word2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pnl_word2.AutoScroll = true;
             this.pnl_word2.Controls.Add(this.pnl_knewAnswer);
             this.pnl_word2.Controls.Add(this.lbl_word2);
@@ -276,7 +282,6 @@ namespace SteelQuiz.QuizPractise
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
-            this.MaximizeBox = false;
             this.Name = "InQuiz";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "SteelQuiz";
