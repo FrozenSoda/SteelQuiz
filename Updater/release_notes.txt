@@ -1,6 +1,7 @@
 v4.3.0 beta 1 (v4.3.0.0):
 - Added flashcards-similar practise mode.
 - Added ability to change quiz practise window size.
+- Added more Intelligent Learning settings.
 - Bug fixes and improvements.
 
 KNOWN ISSUES:
