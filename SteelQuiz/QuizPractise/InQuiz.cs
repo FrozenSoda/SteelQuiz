@@ -106,6 +106,9 @@ namespace SteelQuiz.QuizPractise
             lbl_lang1.ForeColor = GeneralTheme.GetBackgroundLabelForeColor();
             lbl_lang2.ForeColor = GeneralTheme.GetBackgroundLabelForeColor();
 
+            btn_knewAnswerYES.BackColor = Color.Green;
+            btn_knewAnswerNO.BackColor = Color.Maroon;
+
             if (ConfigManager.Config.Theme == ThemeManager.ThemeCore.Theme.Dark)
             {
                 btn_cfg.BackgroundImage = Properties.Resources.gear_1077563_white_with_bigger_border_512x512;
@@ -171,6 +174,13 @@ namespace SteelQuiz.QuizPractise
                     {
                         if (GameMode == QuizPractiseMode.Flashcards)
                         {
+                            if (WaitingForEnter)
+                            {
+                                WaitingForEnter = false;
+                                NewWord();
+                                return;
+                            }
+
                             MultiAns.Dispose();
                             lbl_word2.Text = string.Join("\r\n", CurrentWordPair.GetRequiredSynonyms().Select(x => x.Answer));
                             pnl_knewAnswer.Visible = true;
@@ -180,6 +190,13 @@ namespace SteelQuiz.QuizPractise
                     {
                         if (GameMode == QuizPractiseMode.Flashcards)
                         {
+                            if (WaitingForEnter)
+                            {
+                                WaitingForEnter = false;
+                                NewWord();
+                                return;
+                            }
+
                             MultiAns.Dispose();
                             lbl_word2.Text = string.Join("\r\n", CurrentWordPair.GetRequiredSynonyms().Select(x => x.Answer));
                             pnl_knewAnswer.Visible = true;
@@ -297,7 +314,15 @@ namespace SteelQuiz.QuizPractise
             if (newRoundMsg)
             {
                 lbl_lang1.Text = "Info";
-                lbl_word1.Text = "Round completed! Press ENTER to continue";
+                
+                if (GameMode == QuizPractiseMode.Writing)
+                {
+                    lbl_word1.Text = "Round completed! Press ENTER to continue";
+                }
+                else if (GameMode == QuizPractiseMode.Flashcards)
+                {
+                    lbl_word1.Text = "Round completed! Click here to continue";
+                }
                 WaitingForEnter = true;
             }
             else
@@ -650,7 +675,7 @@ namespace SteelQuiz.QuizPractise
 
         private void lbl_word2_Click(object sender, EventArgs e)
         {
-            if (GameMode == QuizPractiseMode.Flashcards)
+            if (GameMode == QuizPractiseMode.Flashcards && CurrentWordPair != null)
             {
                 lbl_word2.Text = CurrentWordPair.Answer;
                 pnl_knewAnswer.Visible = true;
@@ -792,8 +817,16 @@ namespace SteelQuiz.QuizPractise
 
         private void pnl_word2_Click(object sender, EventArgs e)
         {
+            //if (GameMode == QuizPractiseMode.Flashcards && CurrentWordPair != null)
             if (GameMode == QuizPractiseMode.Flashcards)
             {
+                if (WaitingForEnter)
+                {
+                    WaitingForEnter = false;
+                    NewWord();
+                    return;
+                }
+
                 if (MultiAns != null)
                 {
                     MultiAns.Dispose();
