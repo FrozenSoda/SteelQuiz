@@ -57,6 +57,12 @@ namespace SteelQuiz.QuizPractise
         public InQuiz(QuizPractiseMode quizPractiseMode, bool welcomeLocationInitialized = true)
         {
             InitializeComponent();
+
+            WindowState = Program.frmWelcome.WindowState;
+            if (WindowState == FormWindowState.Normal)
+            {
+                Size = Program.frmWelcome.Size;
+            }
             if (welcomeLocationInitialized)
             {
                 this.Location = new Point(Program.frmWelcome.Location.X + (Program.frmWelcome.Size.Width / 2) - (this.Size.Width / 2),
@@ -723,9 +729,16 @@ namespace SteelQuiz.QuizPractise
         private void btn_home_Click(object sender, EventArgs e)
         {
             Hide();
+
+            Program.frmWelcome.WindowState = WindowState;
+            if (WindowState == FormWindowState.Normal)
+            {
+                Program.frmWelcome.Size = Size;
+            }
             Program.frmWelcome.Location = new Point(Location.X + (Size.Width / 2) - (Program.frmWelcome.Size.Width / 2),
                               Location.Y + (Size.Height / 2) - (Program.frmWelcome.Size.Height / 2)
                             );
+
             Program.frmWelcome.PopulateQuizList();
             Program.frmWelcome.SetControlStates();
             Program.frmWelcome.GenerateWelcomeMsg();
