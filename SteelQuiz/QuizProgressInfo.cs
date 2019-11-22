@@ -362,7 +362,7 @@ namespace SteelQuiz
                 quizExport.ShowDialog();
             });
 
-            cm.Show(btn_more, new Point(0, btn_more.Size.Height));
+            //cm.Show(btn_more, new Point(0, btn_more.Size.Height));
         }
 
         private void Cmb_order_SelectedIndexChanged(object sender, EventArgs e)

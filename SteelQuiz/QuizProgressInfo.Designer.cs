@@ -56,7 +56,6 @@ namespace SteelQuiz
             this.lbl_learningProgress_bar = new System.Windows.Forms.Label();
             this.lbl_learningProgress_desc = new System.Windows.Forms.Label();
             this.lbl_learningProgress = new System.Windows.Forms.Label();
-            this.btn_more = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.cmb_order = new System.Windows.Forms.ComboBox();
             this.cmb_orderAscendingDescending = new System.Windows.Forms.ComboBox();
@@ -147,22 +146,6 @@ namespace SteelQuiz
             this.lbl_learningProgress.Text = "100 %";
             this.lbl_learningProgress.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // btn_more
-            // 
-            this.btn_more.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_more.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.btn_more.FlatAppearance.BorderSize = 0;
-            this.btn_more.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_more.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_more.Location = new System.Drawing.Point(9, 527);
-            this.btn_more.Name = "btn_more";
-            this.btn_more.Size = new System.Drawing.Size(33, 45);
-            this.btn_more.TabIndex = 11;
-            this.btn_more.Text = "...";
-            this.btn_more.UseCompatibleTextRendering = true;
-            this.btn_more.UseVisualStyleBackColor = false;
-            this.btn_more.Click += new System.EventHandler(this.Btn_more_Click);
-            // 
             // label1
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -187,7 +170,6 @@ namespace SteelQuiz
             this.cmb_order.Name = "cmb_order";
             this.cmb_order.Size = new System.Drawing.Size(124, 21);
             this.cmb_order.TabIndex = 13;
-            //this.cmb_order.SelectedIndexChanged += new System.EventHandler(this.Cmb_order_SelectedIndexChanged);
             // 
             // cmb_orderAscendingDescending
             // 
@@ -201,7 +183,6 @@ namespace SteelQuiz
             this.cmb_orderAscendingDescending.Name = "cmb_orderAscendingDescending";
             this.cmb_orderAscendingDescending.Size = new System.Drawing.Size(124, 21);
             this.cmb_orderAscendingDescending.TabIndex = 14;
-            //this.cmb_orderAscendingDescending.SelectedIndexChanged += new System.EventHandler(this.Cmb_order_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -270,7 +251,6 @@ namespace SteelQuiz
             this.Controls.Add(this.cmb_orderAscendingDescending);
             this.Controls.Add(this.cmb_order);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.btn_more);
             this.Controls.Add(this.lbl_learningProgress);
             this.Controls.Add(this.lbl_learningProgress_desc);
             this.Controls.Add(this.lbl_learningProgress_bar);
@@ -297,7 +277,6 @@ namespace SteelQuiz
         private System.Windows.Forms.Label lbl_learningProgress_bar;
         private System.Windows.Forms.Label lbl_learningProgress_desc;
         private System.Windows.Forms.Label lbl_learningProgress;
-        private System.Windows.Forms.Button btn_more;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmb_order;
         private System.Windows.Forms.ComboBox cmb_orderAscendingDescending;
