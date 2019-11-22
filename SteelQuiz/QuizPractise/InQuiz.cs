@@ -30,6 +30,7 @@ using SteelQuiz.Extensions;
 using SteelQuiz.QuizData;
 using SteelQuiz.QuizProgressData;
 using SteelQuiz.ThemeManager.Colors;
+using static SteelQuiz.Welcome;
 
 namespace SteelQuiz.QuizPractise
 {
@@ -37,11 +38,12 @@ namespace SteelQuiz.QuizPractise
     {
         private GeneralTheme GeneralTheme = new GeneralTheme();
 
-        public bool ExitAppOnClose { get; set; } = true;
-        private bool PerformOnCloseEvents { get; set; } = true;
-
+        private QuizPractiseMode GameMode { get; set; }
         private WordPair CurrentWordPair { get; set; } = null;
         private string CurrentInput { get; set; } = "";
+
+        public bool ExitAppOnClose { get; set; } = true;
+        private bool PerformOnCloseEvents { get; set; } = true;
 
         private bool WaitingForEnter { get; set; } = false;
         private bool UserCopyingWord { get; set; } = false;
@@ -52,9 +54,15 @@ namespace SteelQuiz.QuizPractise
 
         //private List<string> AnswersAlreadyEntered { get; set; } = null;
 
-        public InQuiz(bool welcomeLocationInitialized = true)
+        public InQuiz(QuizPractiseMode quizPractiseMode, bool welcomeLocationInitialized = true)
         {
             InitializeComponent();
+
+            WindowState = Program.frmWelcome.WindowState;
+            if (WindowState == FormWindowState.Normal)
+            {
+                Size = Program.frmWelcome.Size;
+            }
             if (welcomeLocationInitialized)
             {
                 this.Location = new Point(Program.frmWelcome.Location.X + (Program.frmWelcome.Size.Width / 2) - (this.Size.Width / 2),
@@ -65,6 +73,9 @@ namespace SteelQuiz.QuizPractise
             {
                 this.StartPosition = FormStartPosition.CenterScreen;
             }
+
+            GameMode = quizPractiseMode;
+
             lbl_lang1.Text = QuizCore.Quiz.Language1;
             lbl_lang2.Text = QuizCore.Quiz.Language2;
             this.Text += $" | v{Application.ProductVersion}";
@@ -100,6 +111,9 @@ namespace SteelQuiz.QuizPractise
             lbl_progress.ForeColor = GeneralTheme.GetBackgroundLabelForeColor();
             lbl_lang1.ForeColor = GeneralTheme.GetBackgroundLabelForeColor();
             lbl_lang2.ForeColor = GeneralTheme.GetBackgroundLabelForeColor();
+
+            btn_knewAnswerYES.BackColor = Color.Green;
+            btn_knewAnswerNO.BackColor = Color.Maroon;
 
             if (ConfigManager.Config.Theme == ThemeManager.ThemeCore.Theme.Dark)
             {
@@ -162,11 +176,25 @@ namespace SteelQuiz.QuizPractise
                     MultiAns = new MultiAnswer();
                     lbl_word2.Controls.Add(MultiAns);
                     MultiAns.Location = new Point(0, 0);
+                    if (GameMode == QuizPractiseMode.Flashcards)
+                    {
+                        MultiAns.Click += (sender, e) =>
+                        {
+                            MultiAnsReveal();
+                        };
+                        MultiAns.CurrentLabel.Click += (sender, e) =>
+                        {
+                            MultiAnsReveal();
+                        };
+                        MultiAns.CurrentLabel.Text = "Press here to reveal";
+                    }
                     MultiAns.Show();
 
                     bool first = true;
                     bool found = false;
                     //foreach (var wp in CurrentWordPair.GetRequiredSynonyms().Where(x => x != CurrentWordPair && x.GetWordProgData().AskedThisRound))
+
+                    // (Re)add correct answers to MultiAns list, as it's been disposed and recreated
                     foreach (var wp in CurrentWordPair.GetRequiredSynonyms().Where(x => x.GetWordProgData().AskedThisRound))
                     {
                         found = true;
@@ -181,6 +209,13 @@ namespace SteelQuiz.QuizPractise
                         else
                         {
                             var lbl = MultiAns.CurrentLabel.Clone();
+                            if (GameMode == QuizPractiseMode.Flashcards)
+                            {
+                                lbl.Click += (sender, e) =>
+                                {
+                                    MultiAnsReveal();
+                                };
+                            }
                             lbl.Text = wp.Answer;
                             lbl.Show();
                         }
@@ -189,13 +224,34 @@ namespace SteelQuiz.QuizPractise
                     if (found)
                     {
                         var lbl = MultiAns.CurrentLabel.Clone();
-                        lbl.Text = "Enter your answers...";
+                        if (GameMode == QuizPractiseMode.Flashcards)
+                        {
+                            lbl.Click += (sender, e) =>
+                            {
+                                MultiAnsReveal();
+                            };
+                        }
+                        if (GameMode == QuizPractiseMode.Writing)
+                        {
+                            lbl.Text = "Enter your answers...";
+                        }
+                        else if (GameMode == QuizPractiseMode.Flashcards)
+                        {
+                            lbl.Text = "Press here to reveal";
+                        }
                         lbl.Show();
                     }
                 }
                 else
                 {
-                    lbl_word2.Text = "Enter your answer...";
+                    if (GameMode == QuizPractiseMode.Writing)
+                    {
+                        lbl_word2.Text = "Enter your answer...";
+                    }
+                    else if (GameMode == QuizPractiseMode.Flashcards)
+                    {
+                        lbl_word2.Text = "Press here to reveal";
+                    }
                 }
             }
             else
@@ -214,7 +270,18 @@ namespace SteelQuiz.QuizPractise
                 lbl_progress.Text = $"Progress this round: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
 
                 var lbl = MultiAns.CurrentLabel.Clone();
-                lbl.Text = "Enter your answers...";
+                if (GameMode == QuizPractiseMode.Writing)
+                {
+                    lbl.Text = "Enter your answers...";
+                }
+                else if (GameMode == QuizPractiseMode.Flashcards)
+                {
+                    lbl.Click += (sender, e) =>
+                    {
+                        MultiAnsReveal();
+                    };
+                    lbl.Text = "Press here to reveal";
+                }
             }
         }
 
@@ -250,7 +317,15 @@ namespace SteelQuiz.QuizPractise
             if (newRoundMsg)
             {
                 lbl_lang1.Text = "Info";
-                lbl_word1.Text = "Round completed! Press ENTER to continue";
+                
+                if (GameMode == QuizPractiseMode.Writing)
+                {
+                    lbl_word1.Text = "Round completed! Press ENTER to continue";
+                }
+                else if (GameMode == QuizPractiseMode.Flashcards)
+                {
+                    lbl_word1.Text = "Round completed! Click here to continue";
+                }
                 WaitingForEnter = true;
             }
             else
@@ -272,21 +347,25 @@ namespace SteelQuiz.QuizPractise
             return CurrentWordPair.GetRequiredSynonyms().Where(x => x.GetWordProgData().AskedThisRound);
         }
 
-        private void CheckWord()
+        private void CheckWord(bool flashcardsCorrect = false)
         {
             lbl_lang1.Text = "Info";
-            WordPair.AnswerDiff ansDiff;
-            if (MultiAns == null)
+
+            WordPair.AnswerDiff ansDiff = null;
+            if (GameMode == QuizPractiseMode.Writing)
             {
-                ansDiff = CurrentWordPair.AnswerCheck(CurrentInput, null, CountThisTranslationToProgress && !UserCopyingWord);
-            }
-            else
-            {
-                ansDiff = CurrentWordPair.AnswerCheck(CurrentInput, MultiAnswersAlreadyEntered().Select(x => x.Answer),
-                    CountThisTranslationToProgress && !UserCopyingWord);
+                if (MultiAns == null)
+                {
+                    ansDiff = CurrentWordPair.AnswerCheck(CurrentInput, null, CountThisTranslationToProgress && !UserCopyingWord);
+                }
+                else
+                {
+                    ansDiff = CurrentWordPair.AnswerCheck(CurrentInput, MultiAnswersAlreadyEntered().Select(x => x.Answer),
+                        CountThisTranslationToProgress && !UserCopyingWord);
+                }
             }
 
-            if (ansDiff.Correct())
+            if ((GameMode == QuizPractiseMode.Flashcards && flashcardsCorrect) || (GameMode == QuizPractiseMode.Writing && ansDiff.Correct()))
             {
                 foreach (var c in lbl_word1.Controls.OfType<WrongAnswer>())
                 {
@@ -304,41 +383,59 @@ namespace SteelQuiz.QuizPractise
                 }
                 */
 
-                //if (!mismatch.AskingForSynonym)
-                if (!UserCopyingWord)
+                if (GameMode == QuizPractiseMode.Writing)
+                {
+                    //if (!mismatch.AskingForSynonym)
+                    if (!UserCopyingWord)
+                    {
+                        ++QuizCore.QuizProgress.CorrectAnswersThisRound;
+
+                        QuizCore.SaveQuizProgress();
+                    }
+
+                    if (ansDiff.Certainty == StringComp.CorrectCertainty.CompletelyCorrect)
+                    {
+                        lbl_word1.Text = "Correct! Press ENTER to continue";
+                        if (ConfigManager.Config.Theme == ThemeManager.ThemeCore.Theme.Dark)
+                        {
+                            lbl_word1.ForeColor = Color.MediumSpringGreen;
+                        }
+                        else
+                        {
+                            lbl_word1.ForeColor = Color.DarkGreen;
+                        }
+                    }
+                    else if (ansDiff.Certainty == StringComp.CorrectCertainty.ProbablyCorrect)
+                    {
+                        var probablyCorrectAns = new ProbablyCorrectAnswer(CurrentWordPair.Question, QuizCore.QuizProgress.QuestionLanguage, ansDiff.WordPair.Answer, QuizCore.QuizProgress.AnswerLanguage,
+                            "Probably correct!");
+                        lbl_word1.Controls.Add(probablyCorrectAns);
+                        probablyCorrectAns.Location = new Point(0, 0);
+                        probablyCorrectAns.Show();
+                    }
+                    else if (ansDiff.Certainty == StringComp.CorrectCertainty.MaybeCorrect)
+                    {
+                        var probablyCorrectAns = new ProbablyCorrectAnswer(CurrentWordPair.Question, QuizCore.QuizProgress.QuestionLanguage, ansDiff.WordPair.Answer, QuizCore.QuizProgress.AnswerLanguage,
+                            "Might be correct!");
+                        lbl_word1.Controls.Add(probablyCorrectAns);
+                        probablyCorrectAns.Location = new Point(0, 0);
+                        probablyCorrectAns.Show();
+                    }
+                }
+                else if (GameMode == QuizPractiseMode.Flashcards)
                 {
                     ++QuizCore.QuizProgress.CorrectAnswersThisRound;
+                    CurrentWordPair.GetWordProgData().AddWordTry(new WordTry(true));
+                    //CurrentWordPair.GetWordProgData().AskedThisRound = true;
+                    //CurrentWordPair.GetRequiredSynonyms().Where(x => !x.GetWordProgData().AskedThisRound).First().GetWordProgData().AskedThisRound = true;
+                    CurrentWordPair.GetRequiredSynonyms().Select(x => x.GetWordProgData()).Where(x => !x.AskedThisRound).First().AskedThisRound = true;
+
+                    if (CurrentWordPair.GetRequiredSynonyms().Select(x => x.GetWordProgData().AskedThisRound).All(x => x == true))
+                    {
+                        QuizCore.QuizProgress.SetCurrentWordPair(null);
+                    }
 
                     QuizCore.SaveQuizProgress();
-                }
-
-                if (ansDiff.Certainty == StringComp.CorrectCertainty.CompletelyCorrect)
-                {
-                    lbl_word1.Text = "Correct! Press ENTER to continue";
-                    if (ConfigManager.Config.Theme == ThemeManager.ThemeCore.Theme.Dark)
-                    {
-                        lbl_word1.ForeColor = Color.MediumSpringGreen;
-                    }
-                    else
-                    {
-                        lbl_word1.ForeColor = Color.DarkGreen;
-                    }
-                }
-                else if (ansDiff.Certainty == StringComp.CorrectCertainty.ProbablyCorrect)
-                {
-                    var probablyCorrectAns = new ProbablyCorrectAnswer(CurrentWordPair.Question, QuizCore.QuizProgress.QuestionLanguage, ansDiff.WordPair.Answer, QuizCore.QuizProgress.AnswerLanguage,
-                        "Probably correct!");
-                    lbl_word1.Controls.Add(probablyCorrectAns);
-                    probablyCorrectAns.Location = new Point(0, 0);
-                    probablyCorrectAns.Show();
-                }
-                else if (ansDiff.Certainty == StringComp.CorrectCertainty.MaybeCorrect)
-                {
-                    var probablyCorrectAns = new ProbablyCorrectAnswer(CurrentWordPair.Question, QuizCore.QuizProgress.QuestionLanguage, ansDiff.WordPair.Answer, QuizCore.QuizProgress.AnswerLanguage,
-                        "Might be correct!");
-                    lbl_word1.Controls.Add(probablyCorrectAns);
-                    probablyCorrectAns.Location = new Point(0, 0);
-                    probablyCorrectAns.Show();
                 }
 
                 QuizCore.ResetWordsAskedThisRoundMemo();
@@ -404,8 +501,12 @@ namespace SteelQuiz.QuizPractise
                         }
                     }
                 }
-                WaitingForEnter = true;
-                UserCopyingWord = false;
+
+                if (GameMode == QuizPractiseMode.Writing)
+                {
+                    WaitingForEnter = true;
+                    UserCopyingWord = false;
+                }
             }
             else
             {
@@ -418,27 +519,63 @@ namespace SteelQuiz.QuizPractise
                     c.Dispose();
                 }
 
-                var wrongAnswer = new WrongAnswer(CurrentWordPair.Question, QuizCore.QuizProgress.QuestionLanguage, ansDiff.WordPair.Answer, QuizCore.QuizProgress.AnswerLanguage);
-                lbl_word1.Controls.Add(wrongAnswer);
-                wrongAnswer.Location = new Point(0, 0);
-                wrongAnswer.Show();
-
-                UserCopyingWord = true;
-                CurrentInput = "";
-
-                if (MultiAns == null)
+                if (GameMode == QuizPractiseMode.Writing)
                 {
-                    lbl_word2.Text = "Enter your answer...";
+                    var wrongAnswer = new WrongAnswer(CurrentWordPair.Question, QuizCore.QuizProgress.QuestionLanguage, ansDiff.WordPair.Answer, QuizCore.QuizProgress.AnswerLanguage);
+                    lbl_word1.Controls.Add(wrongAnswer);
+                    wrongAnswer.Location = new Point(0, 0);
+                    wrongAnswer.Show();
+
+                    UserCopyingWord = true;
+                    CurrentInput = "";
+
+                    if (MultiAns == null)
+                    {
+                        if (GameMode == QuizPractiseMode.Writing)
+                        {
+                            lbl_word2.Text = "Enter your answer...";
+                        }
+                        else if (GameMode == QuizPractiseMode.Flashcards)
+                        {
+                            lbl_word2.Text = "Press here to reveal";
+                        }
+                    }
+                    else
+                    {
+                        if (GameMode == QuizPractiseMode.Writing)
+                        {
+                            MultiAns.CurrentLabel.Text = "Enter your answer...";
+                        }
+                        else if (GameMode == QuizPractiseMode.Flashcards)
+                        {
+                            MultiAns.CurrentLabel.Text = "Press here to reveal";
+                        }
+                    }
                 }
-                else
+                else if (GameMode == QuizPractiseMode.Flashcards)
                 {
-                    MultiAns.CurrentLabel.Text = "Enter your answer...";
+                    CurrentWordPair.GetWordProgData().AddWordTry(new WordTry(false));
+                    //CurrentWordPair.GetWordProgData().AskedThisRound = true;
+                    //CurrentWordPair.GetRequiredSynonyms().Where(x => !x.GetWordProgData().AskedThisRound).First().GetWordProgData().AskedThisRound = true;
+                    CurrentWordPair.GetRequiredSynonyms().Select(x => x.GetWordProgData()).Where(x => !x.AskedThisRound).First().AskedThisRound = true;
+
+                    if (CurrentWordPair.GetRequiredSynonyms().Select(x => x.GetWordProgData().AskedThisRound).All(x => x == true))
+                    {
+                        QuizCore.QuizProgress.SetCurrentWordPair(null);
+                    }
+
+                    QuizCore.SaveQuizProgress();
                 }
             }
         }
 
         private void InQuiz_KeyPress(object sender, KeyPressEventArgs e)
         {
+            if (GameMode != QuizPractiseMode.Writing)
+            {
+                return;
+            }
+
             var updateInputLbl = true;
 
             if (e.KeyChar == '\u001b')
@@ -550,11 +687,34 @@ namespace SteelQuiz.QuizPractise
 
         private void lbl_word2_Click(object sender, EventArgs e)
         {
+            if (GameMode == QuizPractiseMode.Flashcards && CurrentWordPair != null)
+            {
+                /*
+                if (MultiAns == null)
+                {
+                    lbl_word2.Text = CurrentWordPair.Answer;
+                }
+                else
+                {
+                    //MultiAns.CurrentLabel.Text = CurrentWordPair.Answer;
+                    MultiAns.CurrentLabel.Text = CurrentWordPair.GetRequiredSynonyms().Where(x => !x.GetWordProgData().AskedThisRound).First().Answer;
+                }
+                pnl_knewAnswer.Visible = true;
+                */
+                MultiAnsReveal();
+            }
+
             lbl_word2.Focus();
         }
 
         private void lbl_word1_Click(object sender, EventArgs e)
         {
+            if (WaitingForEnter)
+            {
+                WaitingForEnter = false;
+                NewWord();
+            }
+
             lbl_word1.Focus();
         }
 
@@ -592,9 +752,16 @@ namespace SteelQuiz.QuizPractise
         private void btn_home_Click(object sender, EventArgs e)
         {
             Hide();
+
+            Program.frmWelcome.WindowState = WindowState;
+            if (WindowState == FormWindowState.Normal)
+            {
+                Program.frmWelcome.Size = Size;
+            }
             Program.frmWelcome.Location = new Point(Location.X + (Size.Width / 2) - (Program.frmWelcome.Size.Width / 2),
                               Location.Y + (Size.Height / 2) - (Program.frmWelcome.Size.Height / 2)
                             );
+
             Program.frmWelcome.PopulateQuizList();
             Program.frmWelcome.SetControlStates();
             Program.frmWelcome.GenerateWelcomeMsg();
@@ -645,6 +812,11 @@ namespace SteelQuiz.QuizPractise
 
         private void InQuiz_KeyDown(object sender, KeyEventArgs e)
         {
+            if (GameMode != QuizPractiseMode.Writing)
+            {
+                return;
+            }
+
             if (e.KeyData.HasFlag(Keys.Oemplus) && e.Shift && e.Alt && e.Control)
             {
                 CurrentInput += "¿";
@@ -663,6 +835,49 @@ namespace SteelQuiz.QuizPractise
             cfg.ShowDialog();
 
             lbl_word2.Focus();
+        }
+
+        private void btn_knewAnswerYES_Click(object sender, EventArgs e)
+        {
+            CheckWord(true);
+            NewWord();
+            pnl_knewAnswer.Visible = false;
+        }
+
+        private void btn_knewAnswerNO_Click(object sender, EventArgs e)
+        {
+            CheckWord(false);
+            NewWord();
+            pnl_knewAnswer.Visible = false;
+        }
+
+        private void pnl_word2_Click(object sender, EventArgs e)
+        {
+            //if (GameMode == QuizPractiseMode.Flashcards && CurrentWordPair != null)
+            if (GameMode == QuizPractiseMode.Flashcards)
+            {
+                MultiAnsReveal();
+            }
+        }
+
+        private void MultiAnsReveal()
+        {
+            if (WaitingForEnter)
+            {
+                WaitingForEnter = false;
+                NewWord();
+                return;
+            }
+
+            if (MultiAns != null)
+            {
+                MultiAns.CurrentLabel.Text = CurrentWordPair.GetRequiredSynonyms().Where(x => !x.GetWordProgData().AskedThisRound).First().Answer;
+            }
+            else
+            {
+                lbl_word2.Text = CurrentWordPair.Answer;
+            }
+            pnl_knewAnswer.Visible = true;
         }
     }
 }

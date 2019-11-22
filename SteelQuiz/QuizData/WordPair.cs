@@ -70,8 +70,15 @@ namespace SteelQuiz.QuizData
             Word1 = word1;
             Word2 = word2;
             TranslationRules = translationRules;
-            Word1Synonyms = word1Synonyms;
-            Word2Synonyms = word2Synonyms;
+
+            if (word1Synonyms != null)
+            {
+                Word1Synonyms = word1Synonyms;
+            }
+            if (word2Synonyms != null)
+            {
+                Word2Synonyms = word2Synonyms;
+            }
 
             /*
             if (Word1Synonyms == null)

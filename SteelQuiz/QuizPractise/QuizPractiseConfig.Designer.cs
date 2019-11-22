@@ -57,8 +57,11 @@ namespace SteelQuiz.QuizPractise
             this.rdo_allAttemptsIntelligentLearning = new System.Windows.Forms.RadioButton();
             this.rdo_last3attemptsIntelligentLearning = new System.Windows.Forms.RadioButton();
             this.chk_randomOrderQuestions = new System.Windows.Forms.CheckBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.nud_minAnsTriesSkip = new System.Windows.Forms.NumericUpDown();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_intelligentLearningAttempsCount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_minAnsTriesSkip)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_dontAgree
@@ -181,12 +184,43 @@ namespace SteelQuiz.QuizPractise
             this.chk_randomOrderQuestions.AutoSize = true;
             this.chk_randomOrderQuestions.Checked = true;
             this.chk_randomOrderQuestions.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk_randomOrderQuestions.Location = new System.Drawing.Point(12, 138);
+            this.chk_randomOrderQuestions.Location = new System.Drawing.Point(12, 202);
             this.chk_randomOrderQuestions.Name = "chk_randomOrderQuestions";
             this.chk_randomOrderQuestions.Size = new System.Drawing.Size(185, 17);
             this.chk_randomOrderQuestions.TabIndex = 17;
             this.chk_randomOrderQuestions.Text = "Ask questions in random order";
             this.chk_randomOrderQuestions.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 138);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(358, 13);
+            this.label2.TabIndex = 18;
+            this.label2.Text = "Minimum number of answer tries per question to consider skipping:";
+            // 
+            // nud_minAnsTriesSkip
+            // 
+            this.nud_minAnsTriesSkip.Location = new System.Drawing.Point(376, 136);
+            this.nud_minAnsTriesSkip.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.nud_minAnsTriesSkip.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nud_minAnsTriesSkip.Name = "nud_minAnsTriesSkip";
+            this.nud_minAnsTriesSkip.Size = new System.Drawing.Size(68, 22);
+            this.nud_minAnsTriesSkip.TabIndex = 19;
+            this.nud_minAnsTriesSkip.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
             // 
             // QuizPractiseConfig
             // 
@@ -194,6 +228,8 @@ namespace SteelQuiz.QuizPractise
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(527, 314);
+            this.Controls.Add(this.nud_minAnsTriesSkip);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.chk_randomOrderQuestions);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btn_switchTestMode);
@@ -212,6 +248,7 @@ namespace SteelQuiz.QuizPractise
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_intelligentLearningAttempsCount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_minAnsTriesSkip)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -229,5 +266,7 @@ namespace SteelQuiz.QuizPractise
         private System.Windows.Forms.RadioButton rdo_lastNattemptsIntelligentLearning;
         private System.Windows.Forms.NumericUpDown nud_intelligentLearningAttempsCount;
         private System.Windows.Forms.CheckBox chk_randomOrderQuestions;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.NumericUpDown nud_minAnsTriesSkip;
     }
 }

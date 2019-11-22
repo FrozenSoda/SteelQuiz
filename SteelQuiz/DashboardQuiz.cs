@@ -131,5 +131,13 @@ namespace SteelQuiz
             quizProgressInfo?.LoadLearningProgressPercentage();
             quizProgressInfo?.LoadWordPairs();
         }
+
+        private void exportQuizToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            QuizCore.Load(QuizIdentity.FindQuizPath());
+
+            var quizExport = new QuizExport(QuizCore.Quiz);
+            quizExport.ShowDialog();
+        }
     }
 }

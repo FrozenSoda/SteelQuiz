@@ -1,5 +1,37 @@
+v4.3.0 beta 2 (v4.3.0.2):
+- Fixed Flashcards practise mode bugs with multi answer questions.
+- Fixed Flashcards full test results.
+- Performance optimizations.
+- Moved Export Quiz tool to right-click menu.
+- Other bug fixes, UI adjustments and improvements.
+
+v4.3.0 beta 1 (v4.3.0.0):
+- Added flashcards-similar practise mode.
+- Added ability to change quiz practise window size.
+- Added more Intelligent Learning settings.
+- Bug fixes and improvements.
+
+KNOWN ISSUES:
+- Flashcards practise mode does NOT work well with multi answer questions.
+
+
+v4.2.5:
+Fixed an issue causing blank answers to be marked as correct, in some cases (issue #38).
+
+v4.2.4:
+Fixed an issue causing random update error messages when not being connected to the Internet.
+
+v4.2.3 (v4.2.3.1):
+Fixed an issue causing NullReferenceException when loading an imported quiz.
+
+v4.2.2:
+- Fixed a bug causing the application theme to look strange when Windows 10 app theme never had been set.
+- Fixed thread safety bugs.
+
 v4.2.1 (v4.2.1.1):
-Bug fixes and improvements
+- Fixed a bug causing SteelQuiz to exit when cancelling an update.
+- Only one instance of SteelQuiz is now allowed at a time, to prevent data loss. Note that you can still edit multiple quizzes simultaneously. Multiple instances of SteelQuiz is not needed.
+- Improved error messages.
 
 v4.2.0 (v4.2.0.2):
 - Added feature to sort terms in quizzes in Dashboard.
