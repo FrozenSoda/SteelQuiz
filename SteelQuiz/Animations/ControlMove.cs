@@ -78,30 +78,30 @@ namespace SteelQuiz.Animations
                 control.Location = new Point(x, y);
 
                 lock (ControlsMoving) lock (ControlsStopMoving)
+                {
+                    if (!ControlsStopMoving.Contains(control))
                     {
-                        if (!ControlsStopMoving.Contains(control))
+                        if (((dX >= 0 && control.Location.X >= to.X) || (dX <= 0 && control.Location.X <= to.X))
+                            && ((dY >= 0 && control.Location.Y >= to.Y) || (dY <= 0 && control.Location.Y <= to.Y)))
                         {
-                            if (((dX >= 0 && control.Location.X >= to.X) || (dX <= 0 && control.Location.X <= to.X))
-                                && ((dY >= 0 && control.Location.Y >= to.Y) || (dY <= 0 && control.Location.Y <= to.Y)))
-                            {
-                                control.Location = to;
+                            control.Location = to;
 
-                                ControlsMoving.Remove(control);
-                                ControlsStopMoving.Remove(control);
+                            ControlsMoving.Remove(control);
+                            ControlsStopMoving.Remove(control);
 
-                                onComplete?.Invoke();
-                            }
-                            else
-                            {
-                                tmr.Enabled = true;
-                            }
+                            onComplete?.Invoke();
                         }
                         else
                         {
-                            ControlsMoving.Remove(control);
-                            ControlsStopMoving.Remove(control);
+                            tmr.Enabled = true;
                         }
                     }
+                    else
+                    {
+                        ControlsMoving.Remove(control);
+                        ControlsStopMoving.Remove(control);
+                    }
+                }
             };
             lock (ControlsMoving)
             {
