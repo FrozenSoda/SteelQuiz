@@ -424,6 +424,7 @@ namespace SteelQuiz.QuizPractise
                 }
                 else if (GameMode == QuizPractiseMode.Flashcards)
                 {
+                    ++QuizCore.QuizProgress.CorrectAnswersThisRound;
                     CurrentWordPair.GetWordProgData().AddWordTry(new WordTry(true));
                     //CurrentWordPair.GetWordProgData().AskedThisRound = true;
                     //CurrentWordPair.GetRequiredSynonyms().Where(x => !x.GetWordProgData().AskedThisRound).First().GetWordProgData().AskedThisRound = true;
