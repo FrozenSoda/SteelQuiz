@@ -50,9 +50,7 @@ namespace SteelQuiz.QuizEditor
             this.btn_smartCompSettings = new System.Windows.Forms.Button();
             this.lbl_ansCompRules = new System.Windows.Forms.Label();
             this.chk_smartComp = new System.Windows.Forms.CheckBox();
-            this.txt_word1 = new System.Windows.Forms.TextBox();
             this.btn_editSynonyms_w1 = new System.Windows.Forms.Button();
-            this.txt_word2 = new System.Windows.Forms.TextBox();
             this.btn_editSynonyms_w2 = new System.Windows.Forms.Button();
             this.btn_delete = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -61,6 +59,8 @@ namespace SteelQuiz.QuizEditor
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.rtf_word1 = new System.Windows.Forms.RichTextBox();
+            this.rtf_word2 = new System.Windows.Forms.RichTextBox();
             this.pnl_translationRules.SuspendLayout();
             this.pnl_drag.SuspendLayout();
             this.SuspendLayout();
@@ -122,21 +122,6 @@ namespace SteelQuiz.QuizEditor
             this.chk_smartComp.CheckStateChanged += new System.EventHandler(this.Chk_smartComp_CheckStateChanged);
             this.chk_smartComp.Click += new System.EventHandler(this.Chk_smartComp_Click);
             // 
-            // txt_word1
-            // 
-            this.txt_word1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
-            this.txt_word1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txt_word1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_word1.ForeColor = System.Drawing.Color.White;
-            this.txt_word1.Location = new System.Drawing.Point(25, 3);
-            this.txt_word1.Name = "txt_word1";
-            this.txt_word1.Size = new System.Drawing.Size(335, 22);
-            this.txt_word1.TabIndex = 0;
-            this.txt_word1.Click += new System.EventHandler(this.txt_word_Click);
-            this.txt_word1.TextChanged += new System.EventHandler(this.txt_word1_TextChanged);
-            this.txt_word1.Enter += new System.EventHandler(this.txt_word1_Enter);
-            this.txt_word1.Leave += new System.EventHandler(this.Txt_word1_Leave);
-            // 
             // btn_editSynonyms_w1
             // 
             this.btn_editSynonyms_w1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
@@ -152,22 +137,6 @@ namespace SteelQuiz.QuizEditor
             this.btn_editSynonyms_w1.Text = "Edit synonyms";
             this.btn_editSynonyms_w1.UseVisualStyleBackColor = false;
             this.btn_editSynonyms_w1.Click += new System.EventHandler(this.btn_editSynonyms_w1_Click);
-            // 
-            // txt_word2
-            // 
-            this.txt_word2.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.txt_word2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
-            this.txt_word2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txt_word2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_word2.ForeColor = System.Drawing.Color.White;
-            this.txt_word2.Location = new System.Drawing.Point(390, 3);
-            this.txt_word2.Name = "txt_word2";
-            this.txt_word2.Size = new System.Drawing.Size(335, 22);
-            this.txt_word2.TabIndex = 5;
-            this.txt_word2.Click += new System.EventHandler(this.txt_word_Click);
-            this.txt_word2.TextChanged += new System.EventHandler(this.txt_word2_TextChanged);
-            this.txt_word2.Enter += new System.EventHandler(this.txt_word1_Enter);
-            this.txt_word2.Leave += new System.EventHandler(this.Txt_word2_Leave);
             // 
             // btn_editSynonyms_w2
             // 
@@ -278,19 +247,59 @@ namespace SteelQuiz.QuizEditor
             this.label5.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseMove);
             this.label5.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseUp);
             // 
+            // rtf_word1
+            // 
+            this.rtf_word1.AcceptsTab = true;
+            this.rtf_word1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.rtf_word1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.rtf_word1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rtf_word1.ForeColor = System.Drawing.Color.White;
+            this.rtf_word1.Location = new System.Drawing.Point(25, 4);
+            this.rtf_word1.Name = "rtf_word1";
+            this.rtf_word1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.rtf_word1.Size = new System.Drawing.Size(337, 20);
+            this.rtf_word1.TabIndex = 11;
+            this.rtf_word1.Text = "";
+            this.rtf_word1.Click += new System.EventHandler(this.txt_word_Click);
+            this.rtf_word1.TextChanged += new System.EventHandler(this.rtf_word1_TextChanged);
+            this.rtf_word1.Enter += new System.EventHandler(this.rtf_word1_Enter);
+            this.rtf_word1.Leave += new System.EventHandler(this.Rtf_word1_Leave);
+            // 
+            // rtf_word2
+            // 
+            this.rtf_word2.AcceptsTab = true;
+            this.rtf_word2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.rtf_word2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.rtf_word2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rtf_word2.ForeColor = System.Drawing.Color.White;
+            this.rtf_word2.Location = new System.Drawing.Point(390, 4);
+            this.rtf_word2.Name = "rtf_word2";
+            this.rtf_word2.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.rtf_word2.Size = new System.Drawing.Size(337, 20);
+            this.rtf_word2.TabIndex = 12;
+            this.rtf_word2.Text = "";
+            this.rtf_word2.Click += new System.EventHandler(this.txt_word_Click);
+            this.rtf_word2.TextChanged += new System.EventHandler(this.rtf_word2_TextChanged);
+            this.rtf_word2.Enter += new System.EventHandler(this.rtf_word2_Enter);
+            this.rtf_word2.Leave += new System.EventHandler(this.Rtf_word2_Leave);
+            // 
             // QuizEditorWordPair
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.Controls.Add(this.rtf_word2);
+            this.Controls.Add(this.rtf_word1);
             this.Controls.Add(this.pnl_drag);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_delete);
             this.Controls.Add(this.btn_editSynonyms_w2);
-            this.Controls.Add(this.txt_word2);
             this.Controls.Add(this.btn_editSynonyms_w1);
-            this.Controls.Add(this.txt_word1);
             this.Controls.Add(this.pnl_translationRules);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.White;
@@ -310,9 +319,7 @@ namespace SteelQuiz.QuizEditor
         private System.Windows.Forms.Panel pnl_translationRules;
         private System.Windows.Forms.Label lbl_ansCompRules;
         internal System.Windows.Forms.CheckBox chk_smartComp;
-        internal System.Windows.Forms.TextBox txt_word1;
         private System.Windows.Forms.Button btn_editSynonyms_w1;
-        internal System.Windows.Forms.TextBox txt_word2;
         private System.Windows.Forms.Button btn_editSynonyms_w2;
         private System.Windows.Forms.Button btn_delete;
         private System.Windows.Forms.Label label1;
@@ -322,5 +329,7 @@ namespace SteelQuiz.QuizEditor
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        internal System.Windows.Forms.RichTextBox rtf_word1;
+        internal System.Windows.Forms.RichTextBox rtf_word2;
     }
 }

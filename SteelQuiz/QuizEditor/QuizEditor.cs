@@ -160,7 +160,7 @@ namespace SteelQuiz.QuizEditor
         private bool QEWordEmpty(QuizEditorWordPair qew)
         {
             return qew != null ?
-                qew.txt_word1.Text == "" && qew.Synonyms1.IsNullOrEmpty() && qew.txt_word2.Text == "" && qew.Synonyms2.IsNullOrEmpty()
+                qew.rtf_word1.Text == "" && qew.Synonyms1.IsNullOrEmpty() && qew.rtf_word2.Text == "" && qew.Synonyms2.IsNullOrEmpty()
                 : false;
         }
 
@@ -187,7 +187,7 @@ namespace SteelQuiz.QuizEditor
 
                 StringComp.Rules comparisonRules = wordPair.ComparisonRules.Data;
 
-                var wp = new WordPair(wordPair.txt_word1.Text, wordPair.txt_word2.Text, comparisonRules, wordPair.Synonyms1, wordPair.Synonyms2);
+                var wp = new WordPair(wordPair.rtf_word1.Text, wordPair.rtf_word2.Text, comparisonRules, wordPair.Synonyms1, wordPair.Synonyms2);
                 quiz.WordPairs.Add(wp);
                 ++i;
             }
@@ -263,9 +263,9 @@ namespace SteelQuiz.QuizEditor
                 var ctrl = dflp_words.Controls.OfType<QuizEditorWordPair>().ElementAt(i);
                 var wp = quiz.WordPairs[i];
 
-                ctrl.txt_word1.Text = wp.Word1;
+                ctrl.rtf_word1.Text = wp.Word1;
                 ctrl.Synonyms1 = wp.Word1Synonyms;
-                ctrl.txt_word2.Text = wp.Word2;
+                ctrl.rtf_word2.Text = wp.Word2;
                 ctrl.Synonyms2 = wp.Word2Synonyms;
                 ctrl.ComparisonRules.Data = (StringComp.Rules)FixEnum(wp.TranslationRules);
             }

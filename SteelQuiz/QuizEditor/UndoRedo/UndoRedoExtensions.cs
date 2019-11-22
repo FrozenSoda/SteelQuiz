@@ -37,28 +37,28 @@ namespace SteelQuiz.QuizEditor.UndoRedo
          * formPtr is a Func which returns the appropriate form
          */ 
 
-        public static Action ChangeText(this TextBox textBox, string to, Action beforeRevertAction)
+        public static Action ChangeText(this RichTextBox RichTextBox, string to, Action beforeRevertAction)
         {
             return () => {
                 beforeRevertAction?.Invoke();
-                textBox.Text = to;
-                textBox.SelectionStart = textBox.Text.Length;
-                textBox.SelectionLength = 0;
+                RichTextBox.Text = to;
+                RichTextBox.SelectionStart = RichTextBox.Text.Length;
+                RichTextBox.SelectionLength = 0;
             };
         }
 
 
-        public static Action ChangeText(this TextBox textBox, Func<Form> formPtr, string textBoxName, string to)
+        public static Action ChangeText(this RichTextBox RichTextBox, Func<Form> formPtr, string RichTextBoxName, string to)
         {
             return () => {
-                var txt = formPtr().Controls[textBoxName] as TextBox;
+                var txt = formPtr().Controls[RichTextBoxName] as RichTextBox;
                 if (txt == null)
                 {
                     return;
                 }
                 txt.Text = to;
-                textBox.SelectionStart = textBox.Text.Length;
-                textBox.SelectionLength = 0;
+                RichTextBox.SelectionStart = RichTextBox.Text.Length;
+                RichTextBox.SelectionLength = 0;
             };
         }
 
