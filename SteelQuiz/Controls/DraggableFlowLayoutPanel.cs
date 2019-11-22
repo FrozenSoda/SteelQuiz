@@ -76,7 +76,10 @@ namespace SteelQuiz.Controls
             Control closestControl = null;
             foreach (var ctrl in Controls.OfType<Control>().Where(x => x != control))
             {
-                if (closestControl == null || Math.Abs(ctrl.Location.Y - control.Location.Y) < Math.Abs(closestControl.Location.Y - control.Location.Y))
+                //if (closestControl == null || Math.Abs(ctrl.Location.Y - control.Location.Y) < Math.Abs(closestControl.Location.Y - control.Location.Y))
+                if (closestControl == null ||
+                    Math.Abs(ControlMove.GetDestination(ctrl).Y - ControlMove.GetDestination(control).Y) <
+                    Math.Abs(ControlMove.GetDestination(closestControl).Y - ControlMove.GetDestination(control).Y))
                 {
                     closestControl = ctrl;
                 }
@@ -88,37 +91,69 @@ namespace SteelQuiz.Controls
         /// <summary>
         /// Alligns a dragged control in the panel
         /// </summary>
-        /// <param name="control">The control being dragged</param>
-        public void Align(Control control, Action onAlignCompleted = null)
+        /// <param name="control">The control being dragged.</param>
+        /// <param name="onAlignCompleted">The action to be invoked after finishing the alignment.</param>
+        /// <param name="order">Override of control location, with a specified position, specifying which number from the top the control should have.</param>
+        public void Align(Control control, Action onAlignCompleted = null, int order = -1)
         {
-            var closestControl = ClosestControl(control);
-
-            if (closestControl == null)
+            if (order >= 0)
             {
-                control.SmoothMove(new Point(Padding.Left, Padding.Top), 100, () =>
+                int y = Padding.Top + AutoScrollPosition.Y;
+
+                var controlsOrdered = ControlsOrdered().ToList();
+                int latestHeight = 0;
+
+                for (int i = 0; i < order; ++i)
+                {
+                    if (controlsOrdered.Count >= i - 1 && controlsOrdered[i].Height > latestHeight)
+                    {
+                        latestHeight = controlsOrdered[i].Height;
+                    }
+
+                    y += latestHeight + Padding.Bottom;
+                }
+
+                if (latestHeight == 0)
+                {
+                    y -= Padding.Bottom;
+                }
+
+                control.SmoothMove(new Point(Padding.Left, y), 100, () =>
                 {
                     AlignAll(null, onAlignCompleted);
                 });
             }
             else
             {
-                int x = Padding.Left;
-                int y;
+                var closestControl = ClosestControl(control);
 
-                int dY = control.Top - closestControl.Top;
-                if (dY > 1)
+                if (closestControl == null)
                 {
-                    y = closestControl.Bottom + Padding.Top;
+                    control.SmoothMove(new Point(Padding.Left, Padding.Top), 100, () =>
+                    {
+                        AlignAll(null, onAlignCompleted);
+                    });
                 }
                 else
                 {
-                    y = -control.Size.Height + closestControl.Top - Padding.Bottom;
-                }
+                    int x = Padding.Left;
+                    int y;
 
-                control.SmoothMove(new Point(x, y), 100, () =>
-                {
-                    AlignAll(null, onAlignCompleted);
-                });
+                    int dY = control.Top - closestControl.Top;
+                    if (dY > 1)
+                    {
+                        y = closestControl.Bottom + Padding.Top;
+                    }
+                    else
+                    {
+                        y = -control.Size.Height + closestControl.Top - Padding.Bottom;
+                    }
+
+                    control.SmoothMove(new Point(x, y), 100, () =>
+                    {
+                        AlignAll(null, onAlignCompleted);
+                    });
+                }
             }
         }
 
@@ -128,7 +163,8 @@ namespace SteelQuiz.Controls
         /// <returns>Returns an ordered collection of all children controls</returns>
         public IEnumerable<Control> ControlsOrdered()
         {
-            return Controls.Cast<Control>().OrderBy(x => x.Location.Y).ToList();
+            //return Controls.Cast<Control>().OrderBy(x => x.Location.Y).ToList();
+            return Controls.Cast<Control>().OrderBy(x => ControlMove.GetDestination(x).Y).ToList();
         }
 
         /// <summary>
@@ -143,6 +179,7 @@ namespace SteelQuiz.Controls
         /// Aligns all the controls in the panel, except for the dragged control
         /// </summary>
         /// <param name="draggedControl">The control being dragged (to not align), if being dragged</param>
+        /// <param name="onAlignCompleted">The action to be invoked after finishing the alignment.</param>
         public void AlignAll(Control draggedControl = null, Action onAlignCompleted = null)
         {
             var controlsOrdered = ControlsOrdered().ToList();
@@ -177,6 +214,8 @@ namespace SteelQuiz.Controls
                             multiAsyncWait.CompletedActions++;
                         });
                     }
+
+                    Controls.SetChildIndex(controlsOrdered[i], i);
                 }
                 //Debug.WriteLine("y: " + y);
                 y += controlsOrdered[i].Size.Height + Padding.Top;

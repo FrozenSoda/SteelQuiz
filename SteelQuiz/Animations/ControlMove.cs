@@ -29,6 +29,7 @@ namespace SteelQuiz.Animations
     public static class ControlMove
     {
         public static Dictionary<Control, System.Timers.Timer> ControlsMoving = new Dictionary<Control, System.Timers.Timer>();
+        public static Dictionary<Control, Point> ControlDestinations = new Dictionary<Control, Point>();
         public static List<Control> ControlsStopMoving = new List<Control>();
 
         /// <summary>
@@ -77,7 +78,7 @@ namespace SteelQuiz.Animations
 
                 control.Location = new Point(x, y);
 
-                lock (ControlsMoving) lock (ControlsStopMoving)
+                lock (ControlsMoving) lock (ControlsStopMoving) lock (ControlDestinations)
                 {
                     if (!ControlsStopMoving.Contains(control))
                     {
@@ -88,6 +89,7 @@ namespace SteelQuiz.Animations
 
                             ControlsMoving.Remove(control);
                             ControlsStopMoving.Remove(control);
+                            ControlDestinations.Remove(control);
 
                             onComplete?.Invoke();
                         }
@@ -100,6 +102,7 @@ namespace SteelQuiz.Animations
                     {
                         ControlsMoving.Remove(control);
                         ControlsStopMoving.Remove(control);
+                        ControlDestinations.Remove(control);
                     }
                 }
             };
@@ -112,6 +115,25 @@ namespace SteelQuiz.Animations
                 }
                 tmr.Start();
                 ControlsMoving.Add(control, tmr);
+            }
+            lock (ControlDestinations)
+            {
+                ControlDestinations[control] = to;
+            }
+        }
+
+        public static Point GetDestination(Control control)
+        {
+            lock (ControlDestinations)
+            {
+                if (ControlDestinations.Keys.Contains(control))
+                {
+                    return ControlDestinations[control];
+                }
+                else
+                {
+                    return control.Location;
+                }
             }
         }
     }
