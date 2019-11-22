@@ -180,20 +180,20 @@ namespace SteelQuiz
 
         public void LoadWordPairs()
         {
-            var watch = new Stopwatch();
-            watch.Start();
+            //var watch = new Stopwatch();
+            //watch.Start();
 
-            Debug.WriteLine(watch.ElapsedMilliseconds);
+            //Debug.WriteLine(watch.ElapsedMilliseconds);
             foreach (var c in flp_words.Controls.OfType<Control>())
             {
                 c.Dispose();
             }
 
-            Debug.WriteLine(watch.ElapsedMilliseconds);
+            //Debug.WriteLine(watch.ElapsedMilliseconds);
 
             flp_words.Controls.Clear();
 
-            Debug.WriteLine(watch.ElapsedMilliseconds);
+            //Debug.WriteLine(watch.ElapsedMilliseconds);
 
             var controls = new List<DashboardQuizWordPair>();
             foreach (var wordPair in QuizCore.Quiz.WordPairs)
@@ -203,7 +203,7 @@ namespace SteelQuiz
                 controls.Add(c);
             }
 
-            Debug.WriteLine(watch.ElapsedMilliseconds);
+            //Debug.WriteLine(watch.ElapsedMilliseconds);
 
             switch (cmb_orderAscendingDescending.SelectedItem)
             {
@@ -243,7 +243,7 @@ namespace SteelQuiz
                     break;
             }
 
-            Debug.WriteLine(watch.ElapsedMilliseconds);
+            //Debug.WriteLine(watch.ElapsedMilliseconds);
 
             int count = 0;
             foreach (var c in controls)
@@ -264,8 +264,8 @@ namespace SteelQuiz
                 ++count;
             }
 
-            Debug.WriteLine(watch.ElapsedMilliseconds);
-            watch.Stop();
+            //Debug.WriteLine(watch.ElapsedMilliseconds);
+            //watch.Stop();
         }
 
         public override void SetTheme(GeneralTheme theme = null)
