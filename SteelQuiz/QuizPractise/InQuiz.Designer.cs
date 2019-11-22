@@ -85,7 +85,7 @@ namespace SteelQuiz.QuizPractise
             // lbl_word2
             // 
             this.lbl_word2.AutoSize = true;
-            this.lbl_word2.Font = new System.Drawing.Font("Segoe UI Semilight", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_word2.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_word2.ForeColor = System.Drawing.Color.White;
             this.lbl_word2.Location = new System.Drawing.Point(0, 0);
             this.lbl_word2.MaximumSize = new System.Drawing.Size(387, 0);
