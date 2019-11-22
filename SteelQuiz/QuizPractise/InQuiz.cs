@@ -203,10 +203,6 @@ namespace SteelQuiz.QuizPractise
                                 return;
                             }
 
-                            //MultiAns.Dispose();
-                            //lbl_word2.Text = string.Join("\r\n", CurrentWordPair.GetRequiredSynonyms().Select(x => x.Answer));
-                            //lbl_word2.Text = CurrentWordPair.Answer;
-                            //MultiAns.CurrentLabel.Text = CurrentWordPair.Answer;
                             MultiAns.CurrentLabel.Text = CurrentWordPair.GetRequiredSynonyms().Where(x => !x.GetWordProgData().AskedThisRound).First().Answer;
                             pnl_knewAnswer.Visible = true;
                         };
@@ -233,6 +229,7 @@ namespace SteelQuiz.QuizPractise
                         else
                         {
                             var lbl = MultiAns.CurrentLabel.Clone();
+                            lbl.Click += MultiAns.CurrentLabel.Click;
                             lbl.Text = wp.Answer;
                             lbl.Show();
                         }
@@ -431,7 +428,8 @@ namespace SteelQuiz.QuizPractise
                 else if (GameMode == QuizPractiseMode.Flashcards)
                 {
                     CurrentWordPair.GetWordProgData().AddWordTry(new WordTry(true));
-                    CurrentWordPair.GetWordProgData().AskedThisRound = true;
+                    //CurrentWordPair.GetWordProgData().AskedThisRound = true;
+                    CurrentWordPair.GetRequiredSynonyms().Where(x => !x.GetWordProgData().AskedThisRound).First().GetWordProgData().AskedThisRound = true;
 
                     if (CurrentWordPair.GetRequiredSynonyms().Select(x => x.GetWordProgData().AskedThisRound).All(x => x == true))
                     {
@@ -872,6 +870,26 @@ namespace SteelQuiz.QuizPractise
                 }
                 pnl_knewAnswer.Visible = true;
             }
+        }
+
+        private void MultiAnsReveal()
+        {
+            if (WaitingForEnter)
+            {
+                WaitingForEnter = false;
+                NewWord();
+                return;
+            }
+
+            if (MultiAns != null)
+            {
+                MultiAns.CurrentLabel.Text = CurrentWordPair.GetRequiredSynonyms().Where(x => !x.GetWordProgData().AskedThisRound).First().Answer;
+            }
+            else
+            {
+                lbl_word2.Text = CurrentWordPair.Answer;
+            }
+            pnl_knewAnswer.Visible = true;
         }
     }
 }
