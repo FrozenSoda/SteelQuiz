@@ -101,7 +101,6 @@ namespace SteelQuiz
 
             SetTheme(WelcomeTheme);
             LoadLearningProgressPercentage();
-            LoadWordPairs();
 
             switch (QuizCore.QuizProgress.TermsDisplayOrder)
             {
@@ -132,6 +131,8 @@ namespace SteelQuiz
                     cmb_orderAscendingDescending.SelectedItem = "Descending";
                     break;
             }
+
+            LoadWordPairs();
 
             cmb_order.SelectedIndexChanged += Cmb_order_SelectedIndexChanged;
             cmb_orderAscendingDescending.SelectedIndexChanged += Cmb_order_SelectedIndexChanged;
