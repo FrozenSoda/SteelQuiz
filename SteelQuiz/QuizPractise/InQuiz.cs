@@ -426,7 +426,8 @@ namespace SteelQuiz.QuizPractise
                 {
                     CurrentWordPair.GetWordProgData().AddWordTry(new WordTry(true));
                     //CurrentWordPair.GetWordProgData().AskedThisRound = true;
-                    CurrentWordPair.GetRequiredSynonyms().Where(x => !x.GetWordProgData().AskedThisRound).First().GetWordProgData().AskedThisRound = true;
+                    //CurrentWordPair.GetRequiredSynonyms().Where(x => !x.GetWordProgData().AskedThisRound).First().GetWordProgData().AskedThisRound = true;
+                    CurrentWordPair.GetRequiredSynonyms().Select(x => x.GetWordProgData()).Where(x => !x.AskedThisRound).First().AskedThisRound = true;
 
                     if (CurrentWordPair.GetRequiredSynonyms().Select(x => x.GetWordProgData().AskedThisRound).All(x => x == true))
                     {
@@ -554,7 +555,8 @@ namespace SteelQuiz.QuizPractise
                 {
                     CurrentWordPair.GetWordProgData().AddWordTry(new WordTry(false));
                     //CurrentWordPair.GetWordProgData().AskedThisRound = true;
-                    CurrentWordPair.GetRequiredSynonyms().Where(x => !x.GetWordProgData().AskedThisRound).First().GetWordProgData().AskedThisRound = true;
+                    //CurrentWordPair.GetRequiredSynonyms().Where(x => !x.GetWordProgData().AskedThisRound).First().GetWordProgData().AskedThisRound = true;
+                    CurrentWordPair.GetRequiredSynonyms().Select(x => x.GetWordProgData()).Where(x => !x.AskedThisRound).First().AskedThisRound = true;
 
                     if (CurrentWordPair.GetRequiredSynonyms().Select(x => x.GetWordProgData().AskedThisRound).All(x => x == true))
                     {
