@@ -63,7 +63,7 @@ namespace SteelQuiz.Controls
 
         private void DraggableFlowLayoutPanel_ControlRemoved(object sender, ControlEventArgs e)
         {
-            AlignAll();
+            //AlignAll();
         }
 
         /// <summary>
@@ -134,11 +134,20 @@ namespace SteelQuiz.Controls
         /// <summary>
         /// Aligns all the controls in the panel, except for the dragged control
         /// </summary>
+        public void AlignAll()
+        {
+            AlignAll(null, null);
+        }
+
+        /// <summary>
+        /// Aligns all the controls in the panel, except for the dragged control
+        /// </summary>
         /// <param name="draggedControl">The control being dragged (to not align), if being dragged</param>
         public void AlignAll(Control draggedControl = null, Action onAlignCompleted = null)
         {
             var controlsOrdered = ControlsOrdered().ToList();
 
+#warning when deleting terms at the end of the dflp, the scroll gets changed during the alignment
             int y = Padding.Top + AutoScrollPosition.Y;
 
             var multiAsyncWait = new MultiAsyncWait(controlsOrdered.Count, onAlignCompleted);

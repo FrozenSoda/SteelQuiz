@@ -143,6 +143,7 @@ namespace SteelQuiz.QuizEditor.UndoRedo
             {
                 quizEditor.dflp_words.Controls.Remove(wordPair);
                 quizEditor.ChkFixWordsCount();
+                quizEditor.dflp_words.AlignAll();
             };
         }
 
@@ -153,6 +154,7 @@ namespace SteelQuiz.QuizEditor.UndoRedo
                 quizEditor.dflp_words.Controls.Add(wordPair);
                 quizEditor.dflp_words.Controls.SetChildIndex(wordPair, index);
                 quizEditor.ChkFixWordsCount();
+                quizEditor.dflp_words.AlignAll();
             };
         }
 
@@ -185,6 +187,14 @@ namespace SteelQuiz.QuizEditor.UndoRedo
             return () =>
             {
                 ptr.SetSemiSilent(val);
+            };
+        }
+
+        public static Action RunMethod(this Action method)
+        {
+            return () =>
+            {
+                method.Invoke();
             };
         }
     }

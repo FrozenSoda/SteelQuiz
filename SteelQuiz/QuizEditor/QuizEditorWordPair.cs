@@ -236,6 +236,7 @@ namespace SteelQuiz.QuizEditor
             QuizEditor.UpdateUndoRedoTooltips();
             QuizEditor.dflp_words.Controls.Remove(this);
             QuizEditor.ChkFixWordsCount();
+            QuizEditor.dflp_words.AlignAll();
             QuizEditor.ChangedSinceLastSave = true;
         }
 

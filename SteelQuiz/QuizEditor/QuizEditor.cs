@@ -37,7 +37,8 @@ namespace SteelQuiz.QuizEditor
 {
     public partial class QuizEditor : AutoThemeableUndoRedoForm
     {
-        private const int EMPTY_WORD_PAIRS_COUNT = 2;
+        //private const int EMPTY_WORD_PAIRS_COUNT = 2;
+        private const int EMPTY_WORD_PAIRS_COUNT = 10;
 
         private string _quizPath = null;
         private string QuizPath
@@ -854,12 +855,14 @@ namespace SteelQuiz.QuizEditor
 
         private void dflp_words_Scroll(object sender, ScrollEventArgs e)
         {
+            /*
             if (dflp_words.Controls.Count == 0)
             {
                 return;
             }
 
             Debug.WriteLine(dflp_words.Controls[0].Location.Y);
+            */
         }
     }
 }
