@@ -133,6 +133,9 @@ namespace SteelQuiz
                     break;
             }
 
+            cmb_order.SelectedIndexChanged += Cmb_order_SelectedIndexChanged;
+            cmb_orderAscendingDescending.SelectedIndexChanged += Cmb_order_SelectedIndexChanged;
+
             lbl_termsCount.Text = QuizCore.Quiz.WordPairs.Count().ToString();
         }
 
@@ -177,12 +180,20 @@ namespace SteelQuiz
 
         public void LoadWordPairs()
         {
+            var watch = new Stopwatch();
+            watch.Start();
+
+            Debug.WriteLine(watch.ElapsedMilliseconds);
             foreach (var c in flp_words.Controls.OfType<Control>())
             {
                 c.Dispose();
             }
 
+            Debug.WriteLine(watch.ElapsedMilliseconds);
+
             flp_words.Controls.Clear();
+
+            Debug.WriteLine(watch.ElapsedMilliseconds);
 
             var controls = new List<DashboardQuizWordPair>();
             foreach (var wordPair in QuizCore.Quiz.WordPairs)
@@ -192,25 +203,7 @@ namespace SteelQuiz
                 controls.Add(c);
             }
 
-            //controls = controls.OrderBy(x => x.SuccessRate).ToList();
-            /*
-            controls = controls.OrderBy(x =>
-            {
-                switch (cmb_order.SelectedItem)
-                {
-                    case "Success Rate":
-                        return x.SuccessRate;
-                    case "Quiz Order":
-                        return x;
-                    case "Alphabetical Phrase 1":
-                        return x.WordPair.Word1;
-                    case "Alphabetical Phrase 2":
-                        return x.WordPair.Word2;
-                    default:
-                        return x;
-                }
-            });
-            */
+            Debug.WriteLine(watch.ElapsedMilliseconds);
 
             switch (cmb_orderAscendingDescending.SelectedItem)
             {
@@ -250,6 +243,8 @@ namespace SteelQuiz
                     break;
             }
 
+            Debug.WriteLine(watch.ElapsedMilliseconds);
+
             int count = 0;
             foreach (var c in controls)
             {
@@ -268,6 +263,9 @@ namespace SteelQuiz
 
                 ++count;
             }
+
+            Debug.WriteLine(watch.ElapsedMilliseconds);
+            watch.Stop();
         }
 
         public override void SetTheme(GeneralTheme theme = null)

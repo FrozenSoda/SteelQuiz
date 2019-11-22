@@ -187,7 +187,7 @@ namespace SteelQuiz
             this.cmb_order.Name = "cmb_order";
             this.cmb_order.Size = new System.Drawing.Size(124, 21);
             this.cmb_order.TabIndex = 13;
-            this.cmb_order.SelectedIndexChanged += new System.EventHandler(this.Cmb_order_SelectedIndexChanged);
+            //this.cmb_order.SelectedIndexChanged += new System.EventHandler(this.Cmb_order_SelectedIndexChanged);
             // 
             // cmb_orderAscendingDescending
             // 
@@ -201,7 +201,7 @@ namespace SteelQuiz
             this.cmb_orderAscendingDescending.Name = "cmb_orderAscendingDescending";
             this.cmb_orderAscendingDescending.Size = new System.Drawing.Size(124, 21);
             this.cmb_orderAscendingDescending.TabIndex = 14;
-            this.cmb_orderAscendingDescending.SelectedIndexChanged += new System.EventHandler(this.Cmb_order_SelectedIndexChanged);
+            //this.cmb_orderAscendingDescending.SelectedIndexChanged += new System.EventHandler(this.Cmb_order_SelectedIndexChanged);
             // 
             // label2
             // 
