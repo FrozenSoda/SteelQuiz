@@ -125,17 +125,16 @@ namespace SteelQuiz.QuizEditor
             this.label3.TabIndex = 5;
             this.label3.Text = "Language 2:";
             // 
-            // flp_words
+            // dflp_words
             // 
             this.dflp_words.AutoScroll = true;
             this.dflp_words.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.dflp_words.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            //this.dflp_words.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.dflp_words.Location = new System.Drawing.Point(12, 73);
-            this.dflp_words.Name = "flp_words";
+            this.dflp_words.Name = "dflp_words";
             this.dflp_words.Size = new System.Drawing.Size(791, 372);
             this.dflp_words.TabIndex = 3;
-            //this.dflp_words.WrapContents = false;
+            this.dflp_words.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dflp_words_Scroll);
             // 
             // mns_top
             // 

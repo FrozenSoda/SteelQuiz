@@ -851,5 +851,15 @@ namespace SteelQuiz.QuizEditor
             UpdateUndoRedoTooltips();
             SetGlobalSmartComparisonState();
         }
+
+        private void dflp_words_Scroll(object sender, ScrollEventArgs e)
+        {
+            if (dflp_words.Controls.Count == 0)
+            {
+                return;
+            }
+
+            Debug.WriteLine(dflp_words.Controls[0].Location.Y);
+        }
     }
 }

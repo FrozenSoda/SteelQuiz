@@ -352,6 +352,9 @@ namespace SteelQuiz.QuizEditor
             {
                 hoverStopwatch.Start();
                 MouseDownLocation = e.Location;
+                //Point scrolledPoint = new Point(e.X - (Parent as Panel).AutoScrollPosition.X,
+                //                       e.Y - (Parent as Panel).AutoScrollPosition.Y);
+                //MouseDownLocation = scrolledPoint;
                 BringToFront();
             }
         }
@@ -360,8 +363,16 @@ namespace SteelQuiz.QuizEditor
         {
             if (e.Button == MouseButtons.Left)
             {
-                int left = e.X + Left - MouseDownLocation.X;
-                int top = e.Y + Top - MouseDownLocation.Y;
+                //Point scrolledPoint = new Point(e.X - (Parent as Panel).AutoScrollPosition.X,
+                //                      e.Y - (Parent as Panel).AutoScrollPosition.Y);
+                int left = e.X - MouseDownLocation.X + Left;
+                int top = e.Y - MouseDownLocation.Y + Top;
+
+                //Debug.WriteLine("dleft: " + (left - e.X));
+                //Debug.WriteLine("dtop: " + (top - e.Y));
+
+                //int left = scrolledPoint.X - MouseDownLocation.X + Left;
+                //int top = scrolledPoint.Y - MouseDownLocation.Y + Top;
 
                 /*
                 // LOCK CONTROL TO DFLP BOUNDS

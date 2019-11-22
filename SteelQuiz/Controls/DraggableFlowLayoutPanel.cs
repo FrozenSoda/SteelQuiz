@@ -18,6 +18,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -138,7 +139,7 @@ namespace SteelQuiz.Controls
         {
             var controlsOrdered = ControlsOrdered().ToList();
 
-            int y = Padding.Top;
+            int y = Padding.Top + AutoScrollPosition.Y;
 
             var multiAsyncWait = new MultiAsyncWait(controlsOrdered.Count, onAlignCompleted);
             for (int i = 0; i < controlsOrdered.Count; ++i)
@@ -147,6 +148,16 @@ namespace SteelQuiz.Controls
                 {
                     if (onAlignCompleted == null)
                     {
+                        /*
+                        if (controlsOrdered[i].Location.Y != y)
+                        {
+                            Debug.WriteLine("=======");
+                            Debug.WriteLine("Old Y: " + controlsOrdered[i].Location.Y);
+                            Debug.WriteLine("New Y: " + y);
+                            Debug.WriteLine("=======");
+                        }
+                        */
+
                         controlsOrdered[i].SmoothMove(new Point(Padding.Left, y), 100);
                     }
                     else
@@ -158,6 +169,7 @@ namespace SteelQuiz.Controls
                         });
                     }
                 }
+                //Debug.WriteLine("y: " + y);
                 y += controlsOrdered[i].Size.Height + Padding.Top;
             }
         }
