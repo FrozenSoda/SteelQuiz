@@ -67,7 +67,7 @@ namespace SteelQuiz.QuizEditor
             // 
             // pnl_translationRules
             // 
-            this.pnl_translationRules.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.pnl_translationRules.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.pnl_translationRules.Controls.Add(this.btn_smartCompSettings);
             this.pnl_translationRules.Controls.Add(this.lbl_ansCompRules);
             this.pnl_translationRules.Controls.Add(this.chk_smartComp);
@@ -124,6 +124,7 @@ namespace SteelQuiz.QuizEditor
             // 
             // btn_editSynonyms_w1
             // 
+            this.btn_editSynonyms_w1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btn_editSynonyms_w1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
             this.btn_editSynonyms_w1.FlatAppearance.BorderSize = 0;
             this.btn_editSynonyms_w1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -140,7 +141,7 @@ namespace SteelQuiz.QuizEditor
             // 
             // btn_editSynonyms_w2
             // 
-            this.btn_editSynonyms_w2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_editSynonyms_w2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_editSynonyms_w2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
             this.btn_editSynonyms_w2.FlatAppearance.BorderSize = 0;
             this.btn_editSynonyms_w2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -157,7 +158,7 @@ namespace SteelQuiz.QuizEditor
             // 
             // btn_delete
             // 
-            this.btn_delete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_delete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_delete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
             this.btn_delete.FlatAppearance.BorderSize = 0;
             this.btn_delete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -197,6 +198,7 @@ namespace SteelQuiz.QuizEditor
             // 
             // pnl_drag
             // 
+            this.pnl_drag.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pnl_drag.Controls.Add(this.label3);
             this.pnl_drag.Controls.Add(this.label4);
             this.pnl_drag.Controls.Add(this.label5);
@@ -259,7 +261,9 @@ namespace SteelQuiz.QuizEditor
             this.rtf_word1.Size = new System.Drawing.Size(337, 20);
             this.rtf_word1.TabIndex = 11;
             this.rtf_word1.Text = "";
-            this.rtf_word1.Click += new System.EventHandler(this.txt_word_Click);
+            this.rtf_word1.ContentsResized += new System.Windows.Forms.ContentsResizedEventHandler(this.rtf_word_ContentsResized);
+            this.rtf_word1.Click += new System.EventHandler(this.rtf_word_Click);
+            this.rtf_word1.SizeChanged += new System.EventHandler(this.rtf_word_SizeChanged);
             this.rtf_word1.TextChanged += new System.EventHandler(this.rtf_word1_TextChanged);
             this.rtf_word1.Enter += new System.EventHandler(this.rtf_word1_Enter);
             this.rtf_word1.Leave += new System.EventHandler(this.Rtf_word1_Leave);
@@ -267,6 +271,7 @@ namespace SteelQuiz.QuizEditor
             // rtf_word2
             // 
             this.rtf_word2.AcceptsTab = true;
+            this.rtf_word2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.rtf_word2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.rtf_word2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rtf_word2.ForeColor = System.Drawing.Color.White;
@@ -276,7 +281,9 @@ namespace SteelQuiz.QuizEditor
             this.rtf_word2.Size = new System.Drawing.Size(337, 20);
             this.rtf_word2.TabIndex = 12;
             this.rtf_word2.Text = "";
-            this.rtf_word2.Click += new System.EventHandler(this.txt_word_Click);
+            this.rtf_word2.ContentsResized += new System.Windows.Forms.ContentsResizedEventHandler(this.rtf_word_ContentsResized);
+            this.rtf_word2.Click += new System.EventHandler(this.rtf_word_Click);
+            this.rtf_word2.SizeChanged += new System.EventHandler(this.rtf_word_SizeChanged);
             this.rtf_word2.TextChanged += new System.EventHandler(this.rtf_word2_TextChanged);
             this.rtf_word2.Enter += new System.EventHandler(this.rtf_word2_Enter);
             this.rtf_word2.Leave += new System.EventHandler(this.Rtf_word2_Leave);

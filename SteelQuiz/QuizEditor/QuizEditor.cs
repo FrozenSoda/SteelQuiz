@@ -261,6 +261,9 @@ namespace SteelQuiz.QuizEditor
             for (int i = 0; i < quiz.WordPairs.Count; ++i)
             {
                 var ctrl = dflp_words.Controls.OfType<QuizEditorWordPair>().ElementAt(i);
+
+                ctrl.alignOnResize = false;
+
                 var wp = quiz.WordPairs[i];
 
                 ctrl.rtf_word1.Text = wp.Word1;
@@ -268,6 +271,8 @@ namespace SteelQuiz.QuizEditor
                 ctrl.rtf_word2.Text = wp.Word2;
                 ctrl.Synonyms2 = wp.Word2Synonyms;
                 ctrl.ComparisonRules.Data = (StringComp.Rules)FixEnum(wp.TranslationRules);
+
+                ctrl.alignOnResize = true;
             }
 
             if (!fromRecovery)

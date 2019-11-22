@@ -48,7 +48,7 @@ namespace SteelQuiz.QuizEditor
 
         public QuizEditor QuizEditor { get; set; }
 
-        public bool ignore_txt_word_change = false;
+        public bool ignore_rtf_word_change = false;
         public bool ignore_chk_smartComp_change = false;
 
         public QuizEditorWordPair(QuizEditor owner, int number)
@@ -164,18 +164,18 @@ namespace SteelQuiz.QuizEditor
         {
             QuizEditor.ChkFixWordsCount();
 
-            if (ignore_txt_word_change)
+            if (ignore_rtf_word_change)
             {
                 rtf_word1_text_old = rtf_word1.Text;
-                ignore_txt_word_change = false;
+                ignore_rtf_word_change = false;
                 return;
             }
 
             if (QuizEditor.UpdateUndoRedoStacks)
             {
                 QuizEditor.UndoStack.Push(new UndoRedoFuncPair(
-                    new Action[] { rtf_word1.ChangeText(rtf_word1_text_old, () => { ignore_txt_word_change = true; }) },
-                    new Action[] { rtf_word1.ChangeText(rtf_word1.Text, () => { ignore_txt_word_change = true; }) },
+                    new Action[] { rtf_word1.ChangeText(rtf_word1_text_old, () => { ignore_rtf_word_change = true; }) },
+                    new Action[] { rtf_word1.ChangeText(rtf_word1.Text, () => { ignore_rtf_word_change = true; }) },
                     "Change word",
                     new OwnerControlData(this, this.Parent)));
                 QuizEditor.UpdateUndoRedoTooltips();
@@ -191,18 +191,18 @@ namespace SteelQuiz.QuizEditor
         {
             QuizEditor.ChkFixWordsCount();
 
-            if (ignore_txt_word_change)
+            if (ignore_rtf_word_change)
             {
                 rtf_word2_text_old = rtf_word2.Text;
-                ignore_txt_word_change = false;
+                ignore_rtf_word_change = false;
                 return;
             }
 
             if (QuizEditor.UpdateUndoRedoStacks)
             {
                 QuizEditor.UndoStack.Push(new UndoRedoFuncPair(
-                new Action[] { rtf_word2.ChangeText(rtf_word2_text_old, () => { ignore_txt_word_change = true; }) },
-                new Action[] { rtf_word2.ChangeText(rtf_word2.Text, () => { ignore_txt_word_change = true; }) },
+                new Action[] { rtf_word2.ChangeText(rtf_word2_text_old, () => { ignore_rtf_word_change = true; }) },
+                new Action[] { rtf_word2.ChangeText(rtf_word2.Text, () => { ignore_rtf_word_change = true; }) },
                 "Change word",
                 new OwnerControlData(this, this.Parent)));
                 QuizEditor.UpdateUndoRedoTooltips();
@@ -212,7 +212,7 @@ namespace SteelQuiz.QuizEditor
             rtf_word2_text_old = rtf_word2.Text;
         }
 
-        private void txt_word_Click(object sender, EventArgs e)
+        private void rtf_word_Click(object sender, EventArgs e)
         {
             QuizEditor.ChkFixWordsCount();
         }
@@ -410,6 +410,24 @@ namespace SteelQuiz.QuizEditor
         private void rtf_word2_Enter(object sender, EventArgs e)
         {
             QuizEditor.ChkFixWordsCount();
+        }
+
+        public bool alignOnResize = true;
+
+        private void rtf_word_ContentsResized(object sender, ContentsResizedEventArgs e)
+        {
+            ((RichTextBox)sender).Height = e.NewRectangle.Height + 5;
+            Size = new Size(Width, ((RichTextBox)sender).Height + 77);
+
+            if (alignOnResize)
+            {
+                (Parent as DraggableFlowLayoutPanel).AlignAll();
+            }
+        }
+
+        private void rtf_word_SizeChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -51,7 +51,7 @@ namespace SteelQuiz.QuizEditor
             this.lst_synonyms = new System.Windows.Forms.ListBox();
             this.btn_apply = new System.Windows.Forms.Button();
             this.btn_cancel = new System.Windows.Forms.Button();
-            this.txt_wordAdd = new System.Windows.Forms.TextBox();
+            this.rtf_wordAdd = new System.Windows.Forms.TextBox();
             this.btn_add = new System.Windows.Forms.Button();
             this.btn_update = new System.Windows.Forms.Button();
             this.btn_remove = new System.Windows.Forms.Button();
@@ -120,18 +120,18 @@ namespace SteelQuiz.QuizEditor
             this.btn_cancel.UseVisualStyleBackColor = false;
             this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
             // 
-            // txt_wordAdd
+            // rtf_wordAdd
             // 
-            this.txt_wordAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
-            this.txt_wordAdd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txt_wordAdd.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_wordAdd.ForeColor = System.Drawing.Color.White;
-            this.txt_wordAdd.Location = new System.Drawing.Point(15, 59);
-            this.txt_wordAdd.Name = "txt_wordAdd";
-            this.txt_wordAdd.Size = new System.Drawing.Size(443, 22);
-            this.txt_wordAdd.TabIndex = 0;
-            this.txt_wordAdd.TextChanged += new System.EventHandler(this.txt_wordAdd_TextChanged);
-            this.txt_wordAdd.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_wordAdd_KeyPress);
+            this.rtf_wordAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.rtf_wordAdd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.rtf_wordAdd.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtf_wordAdd.ForeColor = System.Drawing.Color.White;
+            this.rtf_wordAdd.Location = new System.Drawing.Point(15, 59);
+            this.rtf_wordAdd.Name = "rtf_wordAdd";
+            this.rtf_wordAdd.Size = new System.Drawing.Size(443, 22);
+            this.rtf_wordAdd.TabIndex = 0;
+            this.rtf_wordAdd.TextChanged += new System.EventHandler(this.rtf_wordAdd_TextChanged);
+            this.rtf_wordAdd.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.rtf_wordAdd_KeyPress);
             // 
             // btn_add
             // 
@@ -225,7 +225,7 @@ namespace SteelQuiz.QuizEditor
             this.Controls.Add(this.btn_remove);
             this.Controls.Add(this.btn_update);
             this.Controls.Add(this.btn_add);
-            this.Controls.Add(this.txt_wordAdd);
+            this.Controls.Add(this.rtf_wordAdd);
             this.Controls.Add(this.btn_cancel);
             this.Controls.Add(this.btn_apply);
             this.Controls.Add(this.lst_synonyms);
@@ -253,7 +253,7 @@ namespace SteelQuiz.QuizEditor
         private System.Windows.Forms.ListBox lst_synonyms;
         private System.Windows.Forms.Button btn_apply;
         private System.Windows.Forms.Button btn_cancel;
-        private System.Windows.Forms.TextBox txt_wordAdd;
+        private System.Windows.Forms.TextBox rtf_wordAdd;
         private System.Windows.Forms.Button btn_add;
         private System.Windows.Forms.Button btn_update;
         private System.Windows.Forms.Button btn_remove;

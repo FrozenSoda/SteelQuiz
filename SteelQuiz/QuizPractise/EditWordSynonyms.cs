@@ -85,7 +85,7 @@ namespace SteelQuiz.QuizPractise
 
         private void btn_apply_Click(object sender, EventArgs e)
         {
-            if (txt_wordAdd.Text != "")
+            if (rtf_wordAdd.Text != "")
             {
                 var msg = MessageBox.Show("Warning! The textbox contains text not added to the list. Add it to the list and exit?", "SteelQuiz",
                     MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
@@ -121,20 +121,20 @@ namespace SteelQuiz.QuizPractise
 
         private void AddSynonym()
         {
-            if (lst_synonyms.Items.Contains(txt_wordAdd.Text))
+            if (lst_synonyms.Items.Contains(rtf_wordAdd.Text))
             {
                 MessageBox.Show("Duplicates are not allowed", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (txt_wordAdd.Text.StartsWith(" ") || txt_wordAdd.Text.EndsWith(" "))
+            if (rtf_wordAdd.Text.StartsWith(" ") || rtf_wordAdd.Text.EndsWith(" "))
             {
                 var msg = MessageBox.Show("The text contains whitespace in the beginning/end. Remove this whitespace (trim the text)?"
                     + "\r\n\r\nThis is strongly recommended if you did not intend this",
                     "SteelQuiz", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (msg == DialogResult.Yes)
                 {
-                    txt_wordAdd.Text = txt_wordAdd.Text.Trim();
+                    rtf_wordAdd.Text = rtf_wordAdd.Text.Trim();
                 }
                 else if (msg == DialogResult.Cancel)
                 {
@@ -142,15 +142,15 @@ namespace SteelQuiz.QuizPractise
                 }
             }
 
-            if (txt_wordAdd.Text.Contains("  "))
+            if (rtf_wordAdd.Text.Contains("  "))
             {
                 var msg = MessageBox.Show("The text contains double-/multispaces. Replace the double-/multispaces with single spaces?" +
                     "\r\n\r\nThis is strongly recommended if you did not intend this", "SteelQuiz", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (msg == DialogResult.Yes)
                 {
-                    while (txt_wordAdd.Text.Contains("  "))
+                    while (rtf_wordAdd.Text.Contains("  "))
                     {
-                        txt_wordAdd.Text = txt_wordAdd.Text.Replace("  ", " ");
+                        rtf_wordAdd.Text = rtf_wordAdd.Text.Replace("  ", " ");
                     }
                 }
                 else if (msg == DialogResult.Cancel)
@@ -159,35 +159,35 @@ namespace SteelQuiz.QuizPractise
                 }
             }
 
-            lst_synonyms.Items.Add(txt_wordAdd.Text);
+            lst_synonyms.Items.Add(rtf_wordAdd.Text);
 
             UndoStack.Push(new UndoRedoFuncPair(
-                new Action[] { lst_synonyms.RemoveItem(txt_wordAdd.Text) },
-                new Action[] { lst_synonyms.AddItem(txt_wordAdd.Text) },
+                new Action[] { lst_synonyms.RemoveItem(rtf_wordAdd.Text) },
+                new Action[] { lst_synonyms.AddItem(rtf_wordAdd.Text) },
                 "Add synonym(s)",
                 new OwnerControlData(this, this.Parent, Language)));
             UpdateUndoRedoTooltips();
 
-            txt_wordAdd.Text = "";
+            rtf_wordAdd.Text = "";
             changedTextBox = false;
         }
 
         private void btn_update_Click(object sender, EventArgs e)
         {
-            if (lst_synonyms.Items.Contains(txt_wordAdd.Text))
+            if (lst_synonyms.Items.Contains(rtf_wordAdd.Text))
             {
                 MessageBox.Show("Duplicates are not allowed", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (txt_wordAdd.Text.StartsWith(" ") || txt_wordAdd.Text.EndsWith(" "))
+            if (rtf_wordAdd.Text.StartsWith(" ") || rtf_wordAdd.Text.EndsWith(" "))
             {
                 var msg = MessageBox.Show("The text contains whitespace in the beginning/end. Remove this whitespace (trim the text)?"
                     + "\r\n\r\nThis is strongly recommended if you did not intend this",
                     "SteelQuiz", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (msg == DialogResult.Yes)
                 {
-                    txt_wordAdd.Text = txt_wordAdd.Text.Trim();
+                    rtf_wordAdd.Text = rtf_wordAdd.Text.Trim();
                 }
                 else if (msg == DialogResult.Cancel)
                 {
@@ -195,15 +195,15 @@ namespace SteelQuiz.QuizPractise
                 }
             }
 
-            if (txt_wordAdd.Text.Contains("  "))
+            if (rtf_wordAdd.Text.Contains("  "))
             {
                 var msg = MessageBox.Show("The text contains double-/multispaces. Replace the double-/multispaces with single spaces?" +
                     "\r\n\r\nThis is strongly recommended if you did not intend this", "SteelQuiz", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (msg == DialogResult.Yes)
                 {
-                    while (txt_wordAdd.Text.Contains("  "))
+                    while (rtf_wordAdd.Text.Contains("  "))
                     {
-                        txt_wordAdd.Text = txt_wordAdd.Text.Replace("  ", " ");
+                        rtf_wordAdd.Text = rtf_wordAdd.Text.Replace("  ", " ");
                     }
                 }
                 else if (msg == DialogResult.Cancel)
@@ -236,7 +236,7 @@ namespace SteelQuiz.QuizPractise
             foreach (var item in toUpdate)
             {
                 var old = lst_synonyms.Items[lst_synonyms.Items.IndexOf(item)];
-                var _new = txt_wordAdd.Text;
+                var _new = rtf_wordAdd.Text;
 
                 lst_synonyms.Items[lst_synonyms.Items.IndexOf(item)] = _new;
 
@@ -247,7 +247,7 @@ namespace SteelQuiz.QuizPractise
             UndoStack.Push(new UndoRedoFuncPair(undoes.ToArray(), redoes.ToArray(), "Update synonym(s)", new OwnerControlData(this, this.Parent, Language)));
             UpdateUndoRedoTooltips();
 
-            txt_wordAdd.Text = "";
+            rtf_wordAdd.Text = "";
             changedTextBox = false;
         }
 
@@ -277,17 +277,17 @@ namespace SteelQuiz.QuizPractise
 
         private void lst_synonyms_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if ((!changedTextBox || txt_wordAdd.Text.Length == 0))
+            if ((!changedTextBox || rtf_wordAdd.Text.Length == 0))
             {
                 if (lst_synonyms.SelectedItems.Count == 1)
                 {
                     // only update textbox if only one item is selected, and the textbox hasn't been changed since last selection
-                    txt_wordAdd.Text = (string)lst_synonyms.Items[lst_synonyms.SelectedIndex];
+                    rtf_wordAdd.Text = (string)lst_synonyms.Items[lst_synonyms.SelectedIndex];
                 }
                 else if (lst_synonyms.SelectedItems.Count == 0)
                 {
                     // clear textbox if no items are left in the list, and the textbox hasn't been changed since last selection
-                    txt_wordAdd.Text = "";
+                    rtf_wordAdd.Text = "";
                 }
             }
 
@@ -303,7 +303,7 @@ namespace SteelQuiz.QuizPractise
             }
         }
 
-        private void txt_wordAdd_KeyPress(object sender, KeyPressEventArgs e)
+        private void rtf_wordAdd_KeyPress(object sender, KeyPressEventArgs e)
         {
             changedTextBox = true;
         }
@@ -313,7 +313,7 @@ namespace SteelQuiz.QuizPractise
             if (lst_synonyms.SelectedItems.Count == 1)
             {
                 // only update textbox if only one item is selected
-                txt_wordAdd.Text = (string)lst_synonyms.Items[lst_synonyms.SelectedIndex];
+                rtf_wordAdd.Text = (string)lst_synonyms.Items[lst_synonyms.SelectedIndex];
                 changedTextBox = false;
             }
         }
@@ -370,7 +370,7 @@ namespace SteelQuiz.QuizPractise
 
         private void EditWordSynonyms_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!closeWarning || (!ListBoxChanged() && (txt_wordAdd.Text == "" || lst_synonyms.Items.Contains(txt_wordAdd.Text))))
+            if (!closeWarning || (!ListBoxChanged() && (rtf_wordAdd.Text == "" || lst_synonyms.Items.Contains(rtf_wordAdd.Text))))
             {
                 return;
             }
@@ -386,10 +386,10 @@ namespace SteelQuiz.QuizPractise
             }
         }
 
-        private void txt_wordAdd_TextChanged(object sender, EventArgs e)
+        private void rtf_wordAdd_TextChanged(object sender, EventArgs e)
         {
-            var duplicate = lst_synonyms.Items.Contains(txt_wordAdd.Text);
-            btn_add.Enabled = txt_wordAdd.Text.Length > 0 && !duplicate;
+            var duplicate = lst_synonyms.Items.Contains(rtf_wordAdd.Text);
+            btn_add.Enabled = rtf_wordAdd.Text.Length > 0 && !duplicate;
         }
 
         public void UpdateUndoRedoTooltips()

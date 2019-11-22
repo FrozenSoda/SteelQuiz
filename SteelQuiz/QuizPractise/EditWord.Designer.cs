@@ -49,7 +49,7 @@ namespace SteelQuiz.QuizPractise
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditWord));
             this.label1 = new System.Windows.Forms.Label();
-            this.txt_word = new System.Windows.Forms.TextBox();
+            this.rtf_word = new System.Windows.Forms.TextBox();
             this.btn_ok = new System.Windows.Forms.Button();
             this.btn_cancel = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -66,15 +66,15 @@ namespace SteelQuiz.QuizPractise
             this.label1.TabIndex = 0;
             this.label1.Text = "Enter new value for word \'NULL\':";
             // 
-            // txt_word
+            // rtf_word
             // 
-            this.txt_word.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.txt_word.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txt_word.ForeColor = System.Drawing.Color.White;
-            this.txt_word.Location = new System.Drawing.Point(12, 28);
-            this.txt_word.Name = "txt_word";
-            this.txt_word.Size = new System.Drawing.Size(483, 20);
-            this.txt_word.TabIndex = 1;
+            this.rtf_word.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.rtf_word.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.rtf_word.ForeColor = System.Drawing.Color.White;
+            this.rtf_word.Location = new System.Drawing.Point(12, 28);
+            this.rtf_word.Name = "rtf_word";
+            this.rtf_word.Size = new System.Drawing.Size(483, 20);
+            this.rtf_word.TabIndex = 1;
             // 
             // btn_ok
             // 
@@ -114,7 +114,7 @@ namespace SteelQuiz.QuizPractise
             this.ClientSize = new System.Drawing.Size(507, 91);
             this.Controls.Add(this.btn_cancel);
             this.Controls.Add(this.btn_ok);
-            this.Controls.Add(this.txt_word);
+            this.Controls.Add(this.rtf_word);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -130,7 +130,7 @@ namespace SteelQuiz.QuizPractise
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txt_word;
+        private System.Windows.Forms.TextBox rtf_word;
         private System.Windows.Forms.Button btn_ok;
         private System.Windows.Forms.Button btn_cancel;
         private System.Windows.Forms.ToolTip toolTip1;

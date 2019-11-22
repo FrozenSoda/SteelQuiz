@@ -43,12 +43,12 @@ namespace SteelQuiz.QuizPractise
 
         private void btn_ok_Click(object sender, EventArgs e)
         {
-            if (txt_word.Text == "")
+            if (rtf_word.Text == "")
             {
                 MessageBox.Show("Word cannot be empty", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            Word = txt_word.Text;
+            Word = rtf_word.Text;
             DialogResult = DialogResult.OK;
         }
 
