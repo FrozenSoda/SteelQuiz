@@ -252,8 +252,7 @@ namespace SteelQuiz.QuizEditor
 
             UpdateUndoRedoStacks = false;
 
-#warning 2 might be wrong here
-            SetWordPairs(quiz.WordPairs.Count + 2);
+            SetWordPairs(quiz.WordPairs.Count + EMPTY_WORD_PAIRS_COUNT);
 
             QuizGuid = quiz.GUID;
             cmb_lang1.Text = quiz.Language1;
@@ -262,9 +261,9 @@ namespace SteelQuiz.QuizEditor
             for (int i = 0; i < quiz.WordPairs.Count; ++i)
             {
                 var ctrl = dflp_words.Controls.OfType<QuizEditorWordPair>().ElementAt(i);
-#warning exception here
 
                 ctrl.alignOnResize = false;
+                ctrl.rtfEditFixWordsCount = false;
 
                 var wp = quiz.WordPairs[i];
 
@@ -275,6 +274,7 @@ namespace SteelQuiz.QuizEditor
                 ctrl.ComparisonRules.Data = (StringComp.Rules)FixEnum(wp.TranslationRules);
 
                 ctrl.alignOnResize = true;
+                ctrl.rtfEditFixWordsCount = true;
             }
 
             if (!fromRecovery)

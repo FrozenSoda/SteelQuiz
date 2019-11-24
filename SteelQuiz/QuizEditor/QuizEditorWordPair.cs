@@ -158,11 +158,16 @@ namespace SteelQuiz.QuizEditor
             DisposeEditWordSynonyms();
         }
 
+        public bool rtfEditFixWordsCount = true;
+
         private string rtf_word1_text_old = "";
 
         private void rtf_word1_TextChanged(object sender, EventArgs e)
         {
-            QuizEditor.ChkFixWordsCount();
+            if (rtfEditFixWordsCount)
+            {
+                QuizEditor.ChkFixWordsCount();
+            }
 
             if (ignore_rtf_word_change)
             {
@@ -189,7 +194,10 @@ namespace SteelQuiz.QuizEditor
 
         private void rtf_word2_TextChanged(object sender, EventArgs e)
         {
-            QuizEditor.ChkFixWordsCount();
+            if (rtfEditFixWordsCount)
+            {
+                QuizEditor.ChkFixWordsCount();
+            }
 
             if (ignore_rtf_word_change)
             {
@@ -419,7 +427,7 @@ namespace SteelQuiz.QuizEditor
             ((RichTextBox)sender).Height = e.NewRectangle.Height + 5;
             Size = new Size(Width, ((RichTextBox)sender).Height + 77);
 
-            if (alignOnResize)
+            if (alignOnResize && (rtf_word1.Text.Length > 0 || rtf_word2.Text.Length > 0))
             {
                 (Parent as DraggableFlowLayoutPanel).AlignAll();
             }
