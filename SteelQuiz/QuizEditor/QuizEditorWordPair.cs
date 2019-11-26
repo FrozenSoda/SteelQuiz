@@ -93,6 +93,11 @@ namespace SteelQuiz.QuizEditor
                 QuizEditor.SetGlobalSmartComparisonState();
             };
 
+            QuizEditor.dflp_words.RegisterMoveSurface(this, pnl_drag, () =>
+            {
+                QuizEditor.ChangedSinceLastSave = true;
+            });
+
             SetTheme();
         }
 
@@ -357,6 +362,7 @@ namespace SteelQuiz.QuizEditor
 
         private void Pnl_drag_MouseDown(object sender, MouseEventArgs e)
         {
+            /*
             if (e.Button == MouseButtons.Left)
             {
                 hoverStopwatch.Start();
@@ -366,34 +372,17 @@ namespace SteelQuiz.QuizEditor
                 //MouseDownLocation = scrolledPoint;
                 BringToFront();
             }
+            */
         }
 
         private void Pnl_drag_MouseMove(object sender, MouseEventArgs e)
         {
+            /*
             if (e.Button == MouseButtons.Left)
             {
-                //Point scrolledPoint = new Point(e.X - (Parent as Panel).AutoScrollPosition.X,
-                //                      e.Y - (Parent as Panel).AutoScrollPosition.Y);
                 int left = e.X - MouseDownLocation.X + Left;
                 int top = e.Y - MouseDownLocation.Y + Top;
 
-                //Debug.WriteLine("dleft: " + (left - e.X));
-                //Debug.WriteLine("dtop: " + (top - e.Y));
-
-                //int left = scrolledPoint.X - MouseDownLocation.X + Left;
-                //int top = scrolledPoint.Y - MouseDownLocation.Y + Top;
-
-                /*
-                // LOCK CONTROL TO DFLP BOUNDS
-                if (left > 0 && left + Size.Width <= (Parent as DraggableFlowLayoutPanel).Size.Width)
-                {
-                    Left = left;
-                }
-                if (top > 0 && top + Size.Height <= (Parent as DraggableFlowLayoutPanel).Size.Height)
-                {
-                    Top = top;
-                }
-                */
                 Left = left;
                 Top = top;
 
@@ -403,16 +392,19 @@ namespace SteelQuiz.QuizEditor
                     hoverStopwatch.Restart();
                 }
             }
+            */
         }
 
         private void Pnl_drag_MouseUp(object sender, MouseEventArgs e)
         {
+            /*
             hoverStopwatch.Reset();
             (Parent as DraggableFlowLayoutPanel).Align(this, () =>
             {
                 //ParentUC.Save(true);
                 QuizEditor.ChangedSinceLastSave = true;
             });
+            */
         }
 
         private void rtf_word2_Enter(object sender, EventArgs e)

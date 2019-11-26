@@ -77,10 +77,10 @@ namespace SteelQuiz.Controls
                 {
                     if (e.Button == MouseButtons.Left)
                     {
-                        int left = e.X - dragData[owner].MouseDownLocation.X + Left;
-                        int top = e.Y - dragData[owner].MouseDownLocation.Y + Top;
-                        Left = left;
-                        Top = top;
+                        int left = e.X - dragData[owner].MouseDownLocation.X + owner.Left;
+                        int top = e.Y - dragData[owner].MouseDownLocation.Y + owner.Top;
+                        owner.Left = left;
+                        owner.Top = top;
 
                         if (dragData[owner].DragStopwatch.ElapsedMilliseconds > 100)
                         {
