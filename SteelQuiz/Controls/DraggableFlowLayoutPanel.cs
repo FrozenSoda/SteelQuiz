@@ -94,7 +94,7 @@ namespace SteelQuiz.Controls
         /// <param name="control">The control being dragged.</param>
         /// <param name="onAlignCompleted">The action to be invoked after finishing the alignment.</param>
         /// <param name="order">Override of control location, with a specified position, specifying which number from the top the control should have.</param>
-        public void Align(Control control, Action onAlignCompleted = null, int order = -1)
+        public void Align(Control control, Action onAlignCompleted = null, int order = -1, bool animate = true)
         {
             if (order >= 0)
             {
@@ -118,9 +118,9 @@ namespace SteelQuiz.Controls
                     y -= Padding.Bottom;
                 }
 
-                control.SmoothMove(new Point(Padding.Left, y), 100, () =>
+                control.SmoothMove(new Point(Padding.Left, y), 100 * (animate ? 1 : 0), () =>
                 {
-                    AlignAll(null, onAlignCompleted);
+                    AlignAll(null, onAlignCompleted, animate);
                 });
             }
             else
@@ -129,9 +129,9 @@ namespace SteelQuiz.Controls
 
                 if (closestControl == null)
                 {
-                    control.SmoothMove(new Point(Padding.Left, Padding.Top), 100, () =>
+                    control.SmoothMove(new Point(Padding.Left, Padding.Top), 100 * (animate ? 1 : 0), () =>
                     {
-                        AlignAll(null, onAlignCompleted);
+                        AlignAll(null, onAlignCompleted, animate);
                     });
                 }
                 else
@@ -149,9 +149,9 @@ namespace SteelQuiz.Controls
                         y = -control.Size.Height + closestControl.Top - Padding.Bottom;
                     }
 
-                    control.SmoothMove(new Point(x, y), 100, () =>
+                    control.SmoothMove(new Point(x, y), 100 * (animate ? 1 : 0), () =>
                     {
-                        AlignAll(null, onAlignCompleted);
+                        AlignAll(null, onAlignCompleted, animate);
                     });
                 }
             }
@@ -167,6 +167,21 @@ namespace SteelQuiz.Controls
             return Controls.Cast<Control>().OrderBy(x => ControlMove.GetDestination(x).Y).ToList();
         }
 
+        /*
+        private void MoveControl(Control ctrl, Point destination, bool animate, Action onComplete = null)
+        {
+            if (animate)
+            {
+                ctrl.SmoothMove(destination, 100, onComplete);
+            }
+            else
+            {
+                ctrl.Location = destination;
+                onComplete?.Invoke();
+            }
+        }
+        */
+
         /// <summary>
         /// Aligns all the controls in the panel, except for the dragged control
         /// </summary>
@@ -180,7 +195,7 @@ namespace SteelQuiz.Controls
         /// </summary>
         /// <param name="draggedControl">The control being dragged (to not align), if being dragged</param>
         /// <param name="onAlignCompleted">The action to be invoked after finishing the alignment.</param>
-        public void AlignAll(Control draggedControl = null, Action onAlignCompleted = null)
+        public void AlignAll(Control draggedControl = null, Action onAlignCompleted = null, bool animate = true)
         {
             var controlsOrdered = ControlsOrdered().ToList();
 
@@ -204,11 +219,12 @@ namespace SteelQuiz.Controls
                         }
                         */
 
-                        controlsOrdered[i].SmoothMove(new Point(Padding.Left, y), 100);
+                        controlsOrdered[i].SmoothMove(new Point(Padding.Left, y), 100 * (animate ? 1 : 0));
+                        //MoveControl(controlsOrdered[i], new Point(Padding.Left, y), animate);
                     }
                     else
                     {
-                        controlsOrdered[i].SmoothMove(new Point(Padding.Left, y), 100, () =>
+                        controlsOrdered[i].SmoothMove(new Point(Padding.Left, y), 100 * (animate ? 1 : 0), () =>
                         {
                             //when all these smooth moves are complete, onAlignCompleted should be invoked
                             multiAsyncWait.CompletedActions++;

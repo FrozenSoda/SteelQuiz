@@ -41,6 +41,13 @@ namespace SteelQuiz.Animations
         /// <param name="onComplete">Delegate to call after completing animation. Will NOT be invoked if animation is canceled</param>
         public static void SmoothMove(this Control control, Point to, int time, Action onComplete = null)
         {
+            if (time == 0)
+            {
+                control.Location = to;
+                onComplete?.Invoke();
+                return;
+            }
+
             double dX_d = (to.X - control.Location.X) / (time / 10D);
             double dY_d = (to.Y - control.Location.Y) / (time / 10D);
 
