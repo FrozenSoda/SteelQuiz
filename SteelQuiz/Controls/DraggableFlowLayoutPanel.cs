@@ -25,6 +25,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SteelQuiz.Animations;
+using SteelQuiz.Extensions;
 
 namespace SteelQuiz.Controls
 {
@@ -37,6 +38,64 @@ namespace SteelQuiz.Controls
         {
             ControlAdded += DraggableFlowLayoutPanel_ControlAdded;
             ControlRemoved += DraggableFlowLayoutPanel_ControlRemoved;
+        }
+
+        private class ControlDragData
+        {
+            public Stopwatch DragStopwatch { get; set; } = new Stopwatch();
+            public Point MouseDownLocation { get; set; }
+        }
+
+        private Dictionary<Control, ControlDragData> dragData = new Dictionary<Control, ControlDragData>();
+
+        /// <summary>
+        /// Registers Mouse events for a Control, so that it can be used as a dragging surface for the owner.
+        /// </summary>
+        /// <param name="owner">The owner of the dragging surface, for instance a UserControl.</param>
+        /// <param name="surface">The dragging surface - the surface that the mouse must be positioned over to move the owner.</param>
+        /// <param name="onReleaseAligned">The action to invoke when the dragging surface has been released and all controls aligned.</param>
+        public void RegisterMoveSurface(Control owner, Control surface, Action onReleaseAligned = null)
+        {
+            if (!dragData.Keys.Contains(owner))
+            {
+                dragData.Add(owner, new ControlDragData());
+            }
+
+            foreach (var c in surface.GetAllChildrenRecursive().Concat(new List<Control> { owner })) // add owner
+            {
+                c.MouseDown += (sender, e) =>
+                {
+                    if (e.Button == MouseButtons.Left)
+                    {
+                        dragData[owner].DragStopwatch.Start();
+                        dragData[owner].MouseDownLocation = e.Location;
+                        owner.BringToFront();
+                    }
+                };
+
+                c.MouseMove += (sender, e) =>
+                {
+                    if (e.Button == MouseButtons.Left)
+                    {
+                        int left = e.X - dragData[owner].MouseDownLocation.X + Left;
+                        int top = e.Y - dragData[owner].MouseDownLocation.Y + Top;
+                        Left = left;
+                        Top = top;
+
+                        if (dragData[owner].DragStopwatch.ElapsedMilliseconds > 100)
+                        {
+                            AlignAll(owner);
+                            dragData[owner].DragStopwatch.Restart();
+                        }
+                    }
+                };
+
+                c.MouseUp += (sender, e) =>
+                {
+                    dragData[owner].DragStopwatch.Reset();
+                    Align(owner, onReleaseAligned);
+                };
+            }
         }
 
         /// <summary>
@@ -166,21 +225,6 @@ namespace SteelQuiz.Controls
             //return Controls.Cast<Control>().OrderBy(x => x.Location.Y).ToList();
             return Controls.Cast<Control>().OrderBy(x => ControlMove.GetDestination(x).Y).ToList();
         }
-
-        /*
-        private void MoveControl(Control ctrl, Point destination, bool animate, Action onComplete = null)
-        {
-            if (animate)
-            {
-                ctrl.SmoothMove(destination, 100, onComplete);
-            }
-            else
-            {
-                ctrl.Location = destination;
-                onComplete?.Invoke();
-            }
-        }
-        */
 
         /// <summary>
         /// Aligns all the controls in the panel, except for the dragged control
