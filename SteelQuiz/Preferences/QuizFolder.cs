@@ -71,6 +71,11 @@ namespace SteelQuiz.Preferences
                 txt_path.Text = path;
             }
 
+            ParentUC.dflp_quizFolders.RegisterMoveSurface(this, pnl_drag, () =>
+            {
+                ParentUC.Save(true);
+            });
+
             SetTheme();
         }
 
@@ -102,37 +107,29 @@ namespace SteelQuiz.Preferences
             ParentUC.Save(true);
         }
 
-        private Point MouseDownLocation { get; set; }
-        private Stopwatch hoverStopwatch = new Stopwatch();
+        //private Point MouseDownLocation { get; set; }
+        //private Stopwatch hoverStopwatch = new Stopwatch();
 
         private void Pnl_drag_MouseDown(object sender, MouseEventArgs e)
         {
+            /*
             if (e.Button == MouseButtons.Left)
             {
                 hoverStopwatch.Start();
                 MouseDownLocation = e.Location;
                 BringToFront();
             }
+            */
         }
 
         private void Pnl_drag_MouseMove(object sender, MouseEventArgs e)
         {
+            /*
             if (e.Button == MouseButtons.Left)
             {
                 int left = e.X + Left - MouseDownLocation.X;
                 int top = e.Y + Top - MouseDownLocation.Y;
 
-                /*
-                // LOCK CONTROL TO DFLP BOUNDS
-                if (left > 0 && left + Size.Width <= (Parent as DraggableFlowLayoutPanel).Size.Width)
-                {
-                    Left = left;
-                }
-                if (top > 0 && top + Size.Height <= (Parent as DraggableFlowLayoutPanel).Size.Height)
-                {
-                    Top = top;
-                }
-                */
                 Left = left;
                 Top = top;
 
@@ -142,15 +139,18 @@ namespace SteelQuiz.Preferences
                     hoverStopwatch.Restart();
                 }
             }
+            */
         }
 
         private void Pnl_drag_MouseUp(object sender, MouseEventArgs e)
         {
+            /*
             hoverStopwatch.Reset();
             (Parent as DraggableFlowLayoutPanel).Align(this, () =>
             {
                 ParentUC.Save(true);
             });
+            */
         }
 
         private void Btn_moveAllQuizzesHere_Click(object sender, EventArgs e)

@@ -115,6 +115,6 @@ namespace SteelQuiz.Preferences
         private System.Windows.Forms.Panel pnl_quizFolders;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btn_add;
-        private Controls.DraggableFlowLayoutPanel dflp_quizFolders;
+        internal Controls.DraggableFlowLayoutPanel dflp_quizFolders;
     }
 }

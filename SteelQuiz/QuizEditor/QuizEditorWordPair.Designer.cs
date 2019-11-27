@@ -251,7 +251,6 @@ namespace SteelQuiz.QuizEditor
             // 
             // rtf_word1
             // 
-            this.rtf_word1.AcceptsTab = true;
             this.rtf_word1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.rtf_word1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rtf_word1.ForeColor = System.Drawing.Color.White;
@@ -270,7 +269,6 @@ namespace SteelQuiz.QuizEditor
             // 
             // rtf_word2
             // 
-            this.rtf_word2.AcceptsTab = true;
             this.rtf_word2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.rtf_word2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.rtf_word2.BorderStyle = System.Windows.Forms.BorderStyle.None;
