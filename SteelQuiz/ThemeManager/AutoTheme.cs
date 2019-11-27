@@ -101,6 +101,12 @@ namespace SteelQuiz.ThemeManager
                 rtf.ForeColor = theme.GetTextBoxForeColor();
             }
 
+            foreach (var rtf in control.GetAllChildrenRecursive(typeof(ScrollSupportedRichTextBox)))
+            {
+                rtf.BackColor = theme.GetTextBoxBackColor();
+                rtf.ForeColor = theme.GetTextBoxForeColor();
+            }
+
             foreach (var cmb in control.GetAllChildrenRecursive(typeof(ComboBox)))
             {
                 cmb.BackColor = theme.GetTextBoxBackColor();
