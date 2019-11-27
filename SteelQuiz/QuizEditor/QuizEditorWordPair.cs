@@ -56,6 +56,10 @@ namespace SteelQuiz.QuizEditor
             InitializeComponent();
             QuizEditor = owner;
             Number = number;
+
+            //rtf_word1_lastSize = rtf_word1.Size;
+            //rtf_word2_lastSize = rtf_word2.Size;
+
             RemoveSynonymsEqualToWords();
 
             ComparisonRules.BeforeDataChanged += (sender, e) =>
@@ -429,10 +433,16 @@ namespace SteelQuiz.QuizEditor
             ((RichTextBox)sender).Height = e.NewRectangle.Height + 5;
             Size = new Size(Width, ((RichTextBox)sender).Height + 77);
 
-            if (alignOnResize && (rtf_word1.Text.Length > 0 || rtf_word2.Text.Length > 0))
+            //if (alignOnResize && (rtf_word1.Text.Length > 0 || rtf_word2.Text.Length > 0))
+            //if (alignOnResize && (rtf_word1_lastSize != rtf_word1.Size || rtf_word2_lastSize != rtf_word2.Size))
+            if (alignOnResize)
             {
+#warning this gets called when it's not needed
                 (Parent as DraggableFlowLayoutPanel).AlignAll();
             }
+
+            //rtf_word1_lastSize = rtf_word1.Size;
+            //rtf_word2_lastSize = rtf_word2.Size;
         }
 
         private void rtf_word_SizeChanged(object sender, EventArgs e)

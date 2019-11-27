@@ -59,8 +59,6 @@ namespace SteelQuiz.QuizEditor
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            //this.rtf_word1 = new System.Windows.Forms.RichTextBox();
-            //this.rtf_word2 = new System.Windows.Forms.RichTextBox();
             this.rtf_word1 = new SteelQuiz.Controls.ScrollSupportedRichTextBox();
             this.rtf_word2 = new SteelQuiz.Controls.ScrollSupportedRichTextBox();
             this.pnl_translationRules.SuspendLayout();
@@ -257,6 +255,7 @@ namespace SteelQuiz.QuizEditor
             this.rtf_word1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rtf_word1.ForeColor = System.Drawing.Color.White;
             this.rtf_word1.Location = new System.Drawing.Point(25, 4);
+            this.rtf_word1.MinimumSize = new System.Drawing.Size(337, 20);
             this.rtf_word1.Name = "rtf_word1";
             this.rtf_word1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
             this.rtf_word1.Size = new System.Drawing.Size(337, 20);
@@ -276,6 +275,7 @@ namespace SteelQuiz.QuizEditor
             this.rtf_word2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rtf_word2.ForeColor = System.Drawing.Color.White;
             this.rtf_word2.Location = new System.Drawing.Point(390, 4);
+            this.rtf_word2.MinimumSize = new System.Drawing.Size(337, 20);
             this.rtf_word2.Name = "rtf_word2";
             this.rtf_word2.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
             this.rtf_word2.Size = new System.Drawing.Size(337, 20);
