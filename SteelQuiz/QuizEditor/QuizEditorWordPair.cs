@@ -98,7 +98,17 @@ namespace SteelQuiz.QuizEditor
                 QuizEditor.ChangedSinceLastSave = true;
             });
 
+            rtf_word1.MouseWheel += Rtf_word_MouseWheel;
+            rtf_word2.MouseWheel += Rtf_word_MouseWheel;
+
             SetTheme();
+        }
+
+        private void Rtf_word_MouseWheel(object sender, MouseEventArgs e)
+        {
+            // Prevent RichTextBox from capturing mouse wheel, which would prevent scrolling in Quiz Editor
+            HandledMouseEventArgs ee = (HandledMouseEventArgs)e;
+            ee.Handled = true;
         }
 
         public override void SetTheme(GeneralTheme theme = null)

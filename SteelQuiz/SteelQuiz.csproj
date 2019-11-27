@@ -69,6 +69,9 @@
     <Compile Include="Animations\ControlMove.cs" />
     <Compile Include="Animations\LabelFade.cs" />
     <Compile Include="CachedResourceManager.cs" />
+    <Compile Include="Controls\ScrollSupportedRichTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Pointer.cs" />
     <Compile Include="QuizEditor\SmartComparisonSettings.cs">

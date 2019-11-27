@@ -59,8 +59,10 @@ namespace SteelQuiz.QuizEditor
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.rtf_word1 = new System.Windows.Forms.RichTextBox();
-            this.rtf_word2 = new System.Windows.Forms.RichTextBox();
+            //this.rtf_word1 = new System.Windows.Forms.RichTextBox();
+            //this.rtf_word2 = new System.Windows.Forms.RichTextBox();
+            this.rtf_word1 = new SteelQuiz.Controls.ScrollSupportedRichTextBox();
+            this.rtf_word2 = new SteelQuiz.Controls.ScrollSupportedRichTextBox();
             this.pnl_translationRules.SuspendLayout();
             this.pnl_drag.SuspendLayout();
             this.SuspendLayout();
@@ -328,7 +330,10 @@ namespace SteelQuiz.QuizEditor
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        internal System.Windows.Forms.RichTextBox rtf_word1;
-        internal System.Windows.Forms.RichTextBox rtf_word2;
+        //internal System.Windows.Forms.RichTextBox rtf_word1;
+        //internal System.Windows.Forms.RichTextBox rtf_word2;
+
+        internal SteelQuiz.Controls.ScrollSupportedRichTextBox rtf_word1;
+        internal SteelQuiz.Controls.ScrollSupportedRichTextBox rtf_word2;
     }
 }
