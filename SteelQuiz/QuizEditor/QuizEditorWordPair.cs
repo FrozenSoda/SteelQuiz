@@ -371,78 +371,40 @@ namespace SteelQuiz.QuizEditor
             rtf_word2.Size = new Size(width, rtf_word2.Size.Height);
         }
 
-        private Point MouseDownLocation { get; set; }
-        private Stopwatch hoverStopwatch = new Stopwatch();
-
-        private void Pnl_drag_MouseDown(object sender, MouseEventArgs e)
-        {
-            /*
-            if (e.Button == MouseButtons.Left)
-            {
-                hoverStopwatch.Start();
-                MouseDownLocation = e.Location;
-                //Point scrolledPoint = new Point(e.X - (Parent as Panel).AutoScrollPosition.X,
-                //                       e.Y - (Parent as Panel).AutoScrollPosition.Y);
-                //MouseDownLocation = scrolledPoint;
-                BringToFront();
-            }
-            */
-        }
-
-        private void Pnl_drag_MouseMove(object sender, MouseEventArgs e)
-        {
-            /*
-            if (e.Button == MouseButtons.Left)
-            {
-                int left = e.X - MouseDownLocation.X + Left;
-                int top = e.Y - MouseDownLocation.Y + Top;
-
-                Left = left;
-                Top = top;
-
-                if (hoverStopwatch.ElapsedMilliseconds > 100)
-                {
-                    (Parent as DraggableFlowLayoutPanel).AlignAll(this);
-                    hoverStopwatch.Restart();
-                }
-            }
-            */
-        }
-
-        private void Pnl_drag_MouseUp(object sender, MouseEventArgs e)
-        {
-            /*
-            hoverStopwatch.Reset();
-            (Parent as DraggableFlowLayoutPanel).Align(this, () =>
-            {
-                //ParentUC.Save(true);
-                QuizEditor.ChangedSinceLastSave = true;
-            });
-            */
-        }
-
         private void rtf_word2_Enter(object sender, EventArgs e)
         {
             QuizEditor.ChkFixWordsCount();
         }
 
-        public bool alignOnResize = true;
+        //public bool alignOnResize = true;
+        private int lastContentHeight1 = 0;
+        private int lastContentHeight2 = 0;
 
         private void rtf_word_ContentsResized(object sender, ContentsResizedEventArgs e)
         {
             ((RichTextBox)sender).Height = e.NewRectangle.Height + 5;
             Size = new Size(Width, ((RichTextBox)sender).Height + 77);
 
-            //if (alignOnResize && (rtf_word1.Text.Length > 0 || rtf_word2.Text.Length > 0))
-            //if (alignOnResize && (rtf_word1_lastSize != rtf_word1.Size || rtf_word2_lastSize != rtf_word2.Size))
-            if (alignOnResize)
+            if ((RichTextBox)sender == rtf_word1)
             {
-#warning this gets called when it's not needed
-                (Parent as DraggableFlowLayoutPanel).AlignAll();
-            }
+                if (lastContentHeight1 != 0 && e.NewRectangle.Height != lastContentHeight1)
+                {
+#warning gets called unnecessarily
+                    (Parent as DraggableFlowLayoutPanel).AlignAll();
+                }
 
-            //rtf_word1_lastSize = rtf_word1.Size;
-            //rtf_word2_lastSize = rtf_word2.Size;
+                lastContentHeight1 = e.NewRectangle.Height;
+            }
+            else if ((RichTextBox)sender == rtf_word2)
+            {
+                if (lastContentHeight2 != 0 && e.NewRectangle.Height != lastContentHeight2)
+                {
+#warning gets called unnecessarily
+                    (Parent as DraggableFlowLayoutPanel).AlignAll();
+                }
+
+                lastContentHeight2 = e.NewRectangle.Height;
+            }
         }
 
         private void rtf_word_SizeChanged(object sender, EventArgs e)

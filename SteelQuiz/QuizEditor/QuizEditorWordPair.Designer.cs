@@ -206,9 +206,6 @@ namespace SteelQuiz.QuizEditor
             this.pnl_drag.Name = "pnl_drag";
             this.pnl_drag.Size = new System.Drawing.Size(68, 35);
             this.pnl_drag.TabIndex = 10;
-            this.pnl_drag.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseDown);
-            this.pnl_drag.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseMove);
-            this.pnl_drag.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseUp);
             // 
             // label3
             // 
@@ -219,9 +216,6 @@ namespace SteelQuiz.QuizEditor
             this.label3.TabIndex = 5;
             this.label3.Text = "⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯" +
     "⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯";
-            this.label3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseDown);
-            this.label3.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseMove);
-            this.label3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseUp);
             // 
             // label4
             // 
@@ -232,9 +226,6 @@ namespace SteelQuiz.QuizEditor
             this.label4.TabIndex = 7;
             this.label4.Text = "⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯" +
     "⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯";
-            this.label4.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseDown);
-            this.label4.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseMove);
-            this.label4.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseUp);
             // 
             // label5
             // 
@@ -245,9 +236,6 @@ namespace SteelQuiz.QuizEditor
             this.label5.TabIndex = 6;
             this.label5.Text = "⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯" +
     "⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯";
-            this.label5.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseDown);
-            this.label5.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseMove);
-            this.label5.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Pnl_drag_MouseUp);
             // 
             // rtf_word1
             // 

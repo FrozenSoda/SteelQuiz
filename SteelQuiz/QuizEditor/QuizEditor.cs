@@ -262,7 +262,7 @@ namespace SteelQuiz.QuizEditor
             {
                 var ctrl = dflp_words.Controls.OfType<QuizEditorWordPair>().ElementAt(i);
 
-                ctrl.alignOnResize = false;
+                //ctrl.alignOnResize = false;
                 ctrl.rtfEditFixWordsCount = false;
 
                 var wp = quiz.WordPairs[i];
@@ -273,7 +273,7 @@ namespace SteelQuiz.QuizEditor
                 ctrl.Synonyms2 = wp.Word2Synonyms;
                 ctrl.ComparisonRules.Data = (StringComp.Rules)FixEnum(wp.TranslationRules);
 
-                ctrl.alignOnResize = true;
+                //ctrl.alignOnResize = true;
                 ctrl.rtfEditFixWordsCount = true;
             }
 
