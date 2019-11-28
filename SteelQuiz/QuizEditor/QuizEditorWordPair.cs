@@ -389,7 +389,7 @@ namespace SteelQuiz.QuizEditor
             {
                 if (e.NewRectangle.Height != lastContentHeight1)
                 {
-#warning gets called unnecessarily
+#warning Gets called unnecessarily, causing excessive load times
                     (Parent as DraggableFlowLayoutPanel).AlignAll();
                 }
 
@@ -399,7 +399,7 @@ namespace SteelQuiz.QuizEditor
             {
                 if (e.NewRectangle.Height != lastContentHeight2)
                 {
-#warning gets called unnecessarily
+#warning Gets called unnecessarily, causing excessive load times
                     (Parent as DraggableFlowLayoutPanel).AlignAll();
                 }
 
