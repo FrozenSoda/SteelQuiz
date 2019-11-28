@@ -47,5 +47,20 @@ namespace SteelQuiz.Controls
                 base.WndProc(ref m);
             }
         }
+
+        /*
+        public override string Text
+        {
+            set
+            {
+                base.Text = value;
+            }
+
+            get
+            {
+                return base.Text;
+            }
+        }
+        */
     }
 }

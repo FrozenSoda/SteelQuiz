@@ -380,14 +380,15 @@ namespace SteelQuiz.QuizEditor
         private int lastContentHeight1 = 0;
         private int lastContentHeight2 = 0;
 
-        public int skipNextContentsResizedAlignCount = 0;
+        public bool skipContentsResizedAlign = false;
 
         private void rtf_word_ContentsResized(object sender, ContentsResizedEventArgs e)
         {
             ((RichTextBox)sender).Height = e.NewRectangle.Height + 5;
-            Size = new Size(Width, ((RichTextBox)sender).Height + 77);
+            //Size = new Size(Width, ((RichTextBox)sender).Height + 77);
+            Size = new Size(Width, Math.Max(rtf_word1.Height, rtf_word2.Height) + 77);
 
-            if (skipNextContentsResizedAlignCount == 0) {
+            if (!skipContentsResizedAlign) {
                 if ((RichTextBox)sender == rtf_word1)
                 {
                     if (lastContentHeight1 != 0 && e.NewRectangle.Height != lastContentHeight1)
@@ -408,10 +409,6 @@ namespace SteelQuiz.QuizEditor
 
                     lastContentHeight2 = e.NewRectangle.Height;
                 }
-            }
-            else
-            {
-                --skipNextContentsResizedAlignCount;
             }
         }
 
