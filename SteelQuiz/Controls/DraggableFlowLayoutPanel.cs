@@ -61,7 +61,7 @@ namespace SteelQuiz.Controls
                 dragData.Add(owner, new ControlDragData());
             }
 
-            foreach (var c in surface.GetAllChildrenRecursive().Concat(new List<Control> { owner })) // add owner
+            foreach (var c in surface.GetAllChildrenRecursive().Concat(new List<Control> { surface })) // add surface itself
             {
                 c.MouseDown += (sender, e) =>
                 {

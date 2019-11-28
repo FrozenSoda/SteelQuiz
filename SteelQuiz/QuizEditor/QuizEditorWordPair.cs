@@ -380,30 +380,38 @@ namespace SteelQuiz.QuizEditor
         private int lastContentHeight1 = 0;
         private int lastContentHeight2 = 0;
 
+        public int skipNextContentsResizedAlignCount = 0;
+
         private void rtf_word_ContentsResized(object sender, ContentsResizedEventArgs e)
         {
             ((RichTextBox)sender).Height = e.NewRectangle.Height + 5;
             Size = new Size(Width, ((RichTextBox)sender).Height + 77);
 
-            if ((RichTextBox)sender == rtf_word1)
-            {
-                if (lastContentHeight1 != 0 && e.NewRectangle.Height != lastContentHeight1)
+            if (skipNextContentsResizedAlignCount == 0) {
+                if ((RichTextBox)sender == rtf_word1)
                 {
+                    if (lastContentHeight1 != 0 && e.NewRectangle.Height != lastContentHeight1)
+                    {
 #warning gets called unnecessarily
-                    (Parent as DraggableFlowLayoutPanel).AlignAll();
-                }
+                        (Parent as DraggableFlowLayoutPanel).AlignAll();
+                    }
 
-                lastContentHeight1 = e.NewRectangle.Height;
+                    lastContentHeight1 = e.NewRectangle.Height;
+                }
+                else if ((RichTextBox)sender == rtf_word2)
+                {
+                    if (lastContentHeight2 != 0 && e.NewRectangle.Height != lastContentHeight2)
+                    {
+#warning gets called unnecessarily
+                        (Parent as DraggableFlowLayoutPanel).AlignAll();
+                    }
+
+                    lastContentHeight2 = e.NewRectangle.Height;
+                }
             }
-            else if ((RichTextBox)sender == rtf_word2)
+            else
             {
-                if (lastContentHeight2 != 0 && e.NewRectangle.Height != lastContentHeight2)
-                {
-#warning gets called unnecessarily
-                    (Parent as DraggableFlowLayoutPanel).AlignAll();
-                }
-
-                lastContentHeight2 = e.NewRectangle.Height;
+                --skipNextContentsResizedAlignCount;
             }
         }
 

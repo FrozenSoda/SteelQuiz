@@ -263,6 +263,7 @@ namespace SteelQuiz.QuizEditor
                 var ctrl = dflp_words.Controls.OfType<QuizEditorWordPair>().ElementAt(i);
 
                 //ctrl.alignOnResize = false;
+                ctrl.skipNextContentsResizedAlignCount = 2;
                 ctrl.rtfEditFixWordsCount = false;
 
                 var wp = quiz.WordPairs[i];
