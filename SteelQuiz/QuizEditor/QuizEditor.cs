@@ -124,6 +124,7 @@ namespace SteelQuiz.QuizEditor
             for (int i = 0; i < count; ++i)
             {
                 var w = new QuizEditorWordPair(this, dflp_words.Controls.Count);
+
                 dflp_words.Controls.Add(w);
                 //dflp_words.SetFlowBreak(w, true);
                 w.Size = new Size(dflp_words.Size.Width - 46, w.Size.Height);

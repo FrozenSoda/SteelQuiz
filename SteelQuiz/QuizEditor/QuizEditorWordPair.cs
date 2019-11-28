@@ -376,11 +376,8 @@ namespace SteelQuiz.QuizEditor
             QuizEditor.ChkFixWordsCount();
         }
 
-        //public bool alignOnResize = true;
         private int lastContentHeight1 = 0;
         private int lastContentHeight2 = 0;
-
-        public bool skipContentsResizedAlign = false;
 
         private void rtf_word_ContentsResized(object sender, ContentsResizedEventArgs e)
         {
@@ -388,27 +385,25 @@ namespace SteelQuiz.QuizEditor
             //Size = new Size(Width, ((RichTextBox)sender).Height + 77);
             Size = new Size(Width, Math.Max(rtf_word1.Height, rtf_word2.Height) + 77);
 
-            if (!skipContentsResizedAlign) {
-                if ((RichTextBox)sender == rtf_word1)
+            if ((RichTextBox)sender == rtf_word1)
+            {
+                if (e.NewRectangle.Height != lastContentHeight1)
                 {
-                    if (lastContentHeight1 != 0 && e.NewRectangle.Height != lastContentHeight1)
-                    {
 #warning gets called unnecessarily
-                        (Parent as DraggableFlowLayoutPanel).AlignAll();
-                    }
-
-                    lastContentHeight1 = e.NewRectangle.Height;
+                    (Parent as DraggableFlowLayoutPanel).AlignAll();
                 }
-                else if ((RichTextBox)sender == rtf_word2)
+
+                lastContentHeight1 = e.NewRectangle.Height;
+            }
+            else if ((RichTextBox)sender == rtf_word2)
+            {
+                if (e.NewRectangle.Height != lastContentHeight2)
                 {
-                    if (lastContentHeight2 != 0 && e.NewRectangle.Height != lastContentHeight2)
-                    {
 #warning gets called unnecessarily
-                        (Parent as DraggableFlowLayoutPanel).AlignAll();
-                    }
-
-                    lastContentHeight2 = e.NewRectangle.Height;
+                    (Parent as DraggableFlowLayoutPanel).AlignAll();
                 }
+
+                lastContentHeight2 = e.NewRectangle.Height;
             }
         }
 
