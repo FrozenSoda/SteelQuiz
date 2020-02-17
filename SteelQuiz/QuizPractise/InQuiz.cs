@@ -76,8 +76,12 @@ namespace SteelQuiz.QuizPractise
 
             GameMode = quizPractiseMode;
 
-            lbl_lang1.Text = QuizCore.Quiz.Language1;
-            lbl_lang2.Text = QuizCore.Quiz.Language2;
+            //lbl_lang1.Text = QuizCore.Quiz.Language1;
+            //lbl_lang2.Text = QuizCore.Quiz.Language2;
+
+            lbl_lang1.Text = QuizCore.QuizProgress.QuestionLanguage;
+            lbl_lang2.Text = QuizCore.QuizProgress.AnswerLanguage;
+
             this.Text += $" | v{Application.ProductVersion}";
             if (MetaData.PRE_RELEASE)
             {
@@ -130,7 +134,9 @@ namespace SteelQuiz.QuizPractise
             Debug.WriteLine("InQuiz.NewWord()");
 
             WaitingForEnter = false;
-            lbl_lang1.Text = QuizCore.Quiz.Language1;
+            //lbl_lang1.Text = QuizCore.Quiz.Language1;
+            lbl_lang1.Text = QuizCore.QuizProgress.QuestionLanguage;
+            lbl_lang2.Text = QuizCore.QuizProgress.AnswerLanguage;
             lbl_word2.Text = "";
 
             foreach (var c in lbl_word1.Controls.OfType<WrongAnswer>())

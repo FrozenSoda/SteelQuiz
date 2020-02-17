@@ -1,3 +1,20 @@
+v4.3.0 (v4.3.0.3):
+
+New features:
+- Added flashcards-similar practise mode.
+- Added ability to change quiz practise window size.
+- Added more Intelligent Learning settings.
+
+Improvements:
+- Moved Export Quiz tool to right-click menu.
+- Performance optimizations.
+
+Fixes:
+- Fixed issue: Reverse answer order with "Smart Comparison Treat words between slash as synonyms" is marked as wrong #40
+- Fixed issue: Language titles in practise mode are sometimes swapped #39
+- Other bug fixes, UI adjustments and improvements.
+
+
 v4.3.0 beta 2 (v4.3.0.2):
 - Fixed Flashcards practise mode bugs with multi answer questions.
 - Fixed Flashcards full test results.

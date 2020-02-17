@@ -66,6 +66,7 @@ namespace SteelQuiz.Preferences
             // 
             // dflp_quizFolders
             // 
+            this.dflp_quizFolders.AutoScroll = true;
             this.dflp_quizFolders.Location = new System.Drawing.Point(15, 40);
             this.dflp_quizFolders.Name = "dflp_quizFolders";
             this.dflp_quizFolders.Size = new System.Drawing.Size(617, 393);
