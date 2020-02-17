@@ -138,7 +138,8 @@ namespace SteelQuiz.Controls
         {
             var controlsOrdered = ControlsOrdered().ToList();
 
-            int y = Padding.Top;
+            //int y = Padding.Top;
+            int y = Padding.Top + AutoScrollPosition.Y;
 
             var multiAsyncWait = new MultiAsyncWait(controlsOrdered.Count, onAlignCompleted);
             for (int i = 0; i < controlsOrdered.Count; ++i)
