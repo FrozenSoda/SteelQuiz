@@ -130,11 +130,36 @@ namespace SteelQuiz.QuizPractise
             {
                 if (correctAnswer.Contains("/"))
                 {
-                    string[] correctAnswers = correctAnswer.Split('/');
-                    foreach (var ans in correctAnswers.Where(x => !string.IsNullOrWhiteSpace(x)))
+                    var synonymSimilarities = new List<SimilarityData>();
+                    bool any = false;
+                    foreach (var userSynonym in userAnswer.Split('/').Where(x => !string.IsNullOrWhiteSpace(x)))
                     {
-                        similarityDatas.Add(Similarity(userAnswer, ans.TrimStart(' '), wordPair, rules,
-                            (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
+                        any = true;
+
+                        var matches = new List<SimilarityData>();
+                        foreach (var correctSynonym in correctAnswer.Split('/').Where(x => !string.IsNullOrWhiteSpace(x)))
+                        {
+                            matches.Add(Similarity(userSynonym, correctSynonym.TrimStart(' '), wordPair, rules,
+                                (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
+                        }
+
+                        // Add best match
+                        synonymSimilarities.Add(matches.OrderBy(x => x.Difference).First());
+                    }
+
+                    if (any)
+                    {
+                        // At least one synonym was entered!
+
+                        if (synonymSimilarities.All(x => x.Difference == 0))
+                        {
+                            // Provided synonyms are correct
+                            similarityDatas.Add(new SimilarityData(0, CorrectCertainty.ProbablyCorrect, correctAnswer, wordPair));
+                        }
+                        else
+                        {
+                            similarityDatas.Add(new SimilarityData(synonymSimilarities.Select(x => x.Difference).Max(), CorrectCertainty.ProbablyCorrect, correctAnswer, wordPair));
+                        }
                     }
                 }
             }
