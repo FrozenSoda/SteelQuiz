@@ -164,7 +164,8 @@ namespace SteelQuiz
                 return;
             }
 
-            Program.frmInQuiz = new InQuiz(false);
+            Program.frmInQuiz = new InQuiz(Welcome.QuizPractiseMode.Writing, false);
+#warning implement selector
             Program.frmInQuiz.Show();
         }
 

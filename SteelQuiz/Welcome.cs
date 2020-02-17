@@ -363,7 +363,8 @@ namespace SteelQuiz
             var import = new QuizImportGuide();
             if (import.ShowDialog() == DialogResult.OK)
             {
-                Program.frmInQuiz = new InQuiz();
+                Program.frmInQuiz = new InQuiz(QuizPractiseMode.Writing);
+#warning implement selector
                 Program.frmInQuiz.Show();
                 Hide();
             }
@@ -386,11 +387,18 @@ namespace SteelQuiz
                 }
                 */
 
-                LoadQuiz(ofd_loadQuiz.FileName);
+                LoadQuiz(ofd_loadQuiz.FileName, QuizPractiseMode.Writing);
+                #warning add selector
             }
         }
 
-        public void LoadQuiz(string quizPath)
+        public enum QuizPractiseMode
+        {
+            Writing,
+            Flashcards,
+        }
+
+        public void LoadQuiz(string quizPath, QuizPractiseMode quizPractiseMode)
         {
             try
             {
@@ -406,7 +414,7 @@ namespace SteelQuiz
                 return;
             }
 
-            Program.frmInQuiz = new InQuiz();
+            Program.frmInQuiz = new InQuiz(quizPractiseMode);
             Program.frmInQuiz.Show();
             Hide();
         }
@@ -416,31 +424,6 @@ namespace SteelQuiz
             themeMonitor?.Stop();
             ConfigManager.SaveConfig();
             Application.Exit();
-        }
-
-        private void btn_continueLast_Click(object sender, EventArgs e)
-        {
-#if !DEBUG
-            try
-            {
-#endif
-                var load = QuizCore.Load(ConfigManager.Config.LastQuiz);
-                if (!load)
-                {
-                    return;
-                }
-#if !DEBUG
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("The quiz file could not be loaded:\r\n\r\n" + ex.ToString(), "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-#endif
-
-            Hide();
-            Program.frmInQuiz = new InQuiz();
-            Program.frmInQuiz.Show();
         }
 
         public void OpenQuizEditor(Quiz quiz = null, string quizPath = null)

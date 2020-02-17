@@ -63,6 +63,8 @@ namespace SteelQuiz.QuizPractise
                 nud_intelligentLearningAttempsCount.Value = QuizCore.QuizProgress.IntelligentLearningLastAnswersBasisCount;
             }
 
+            nud_minAnsTriesSkip.Value = QuizCore.QuizProgress.MinimumTriesCountToConsiderSkippingQuestion;
+
             chk_randomOrderQuestions.Checked = QuizCore.QuizProgress.AskQuestionsInRandomOrder;
 
             cmb_langAns.SelectedIndexChanged += new EventHandler(Cmb_langAns_SelectedIndexChanged);
@@ -70,6 +72,7 @@ namespace SteelQuiz.QuizPractise
             rdo_allAttemptsIntelligentLearning.CheckedChanged += new EventHandler(Rdo_allAttemptsIntelligentLearning_CheckedChanged);
             rdo_lastNattemptsIntelligentLearning.CheckedChanged += new EventHandler(Rdo_lastNattemptsIntelligentLearning_CheckedChanged);
             nud_intelligentLearningAttempsCount.ValueChanged += new EventHandler(Nud_intelligentLearningAttempsCount_ValueChanged);
+            nud_minAnsTriesSkip.ValueChanged += new EventHandler(nud_minAnsTriesSkip_ValueChanged);
             chk_randomOrderQuestions.CheckedChanged += Chk_randomOrderQuestions_CheckedChanged;
         }
 
@@ -177,6 +180,17 @@ namespace SteelQuiz.QuizPractise
 
             QuestionSelector.NewRound();
             Program.frmInQuiz.NewWord();
+        }
+
+        private void nud_minAnsTriesSkip_ValueChanged(object sender, EventArgs e)
+        {
+            QuizCore.QuizProgress.MinimumTriesCountToConsiderSkippingQuestion = (int)nud_minAnsTriesSkip.Value;
+
+            if (!QuizCore.QuizProgress.FullTestInProgress)
+            {
+                QuestionSelector.NewRound();
+                Program.frmInQuiz.NewWord();
+            }
         }
     }
 }

@@ -108,6 +108,11 @@ namespace SteelQuiz.QuizProgressData
         /// </summary>
         public int IntelligentLearningLastAnswersBasisCount { get; set; } = 3;
 
+        /// <summary>
+        /// The Minimum number of answer tries per question to consider skipping it with Intelligent Learning.
+        /// </summary>
+        public int MinimumTriesCountToConsiderSkippingQuestion { get; set; } = 2;
+
         [JsonProperty] // required for deserialization of property with private setter
         internal List<WordPair> CurrentWordPairs { get; set; } = new List<WordPair>();
 

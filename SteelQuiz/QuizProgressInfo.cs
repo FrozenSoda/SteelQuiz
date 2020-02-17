@@ -30,6 +30,7 @@ using SteelQuiz.QuizData;
 using System.IO;
 using SteelQuiz.QuizProgressData;
 using System.Diagnostics;
+using SteelQuiz.Animations;
 
 namespace SteelQuiz
 {
@@ -37,6 +38,59 @@ namespace SteelQuiz
     {
         private WelcomeTheme WelcomeTheme { get; set; } = new WelcomeTheme();
         public QuizIdentity QuizIdentity { get; private set; }
+
+        private bool __practiseQuizButtonsExpanded = false;
+        private bool PractiseQuizButtonsExpanded
+        {
+            get
+            {
+                return __practiseQuizButtonsExpanded;
+            }
+
+            set
+            {
+                __practiseQuizButtonsExpanded = value;
+
+                var btn_practiseWriting_loc = btn_practiseWriting.Location;
+                var btn_practiseFlashcards_loc = btn_practiseFlashcards.Location;
+
+                if (PractiseQuizButtonsExpanded)
+                {
+                    btn_practiseWriting.Location = btn_practiseQuiz.Location;
+                    btn_practiseFlashcards.Location = btn_practiseQuiz.Location;
+
+                    btn_practiseWriting.Visible = true;
+                    btn_practiseFlashcards.Visible = true;
+
+                    ControlMove.SmoothMove(btn_practiseWriting, btn_practiseWriting_loc, 80);
+                    ControlMove.SmoothMove(btn_practiseFlashcards, btn_practiseFlashcards_loc, 80);
+                }
+                else
+                {
+                    ControlMove.SmoothMove(btn_practiseWriting, btn_practiseQuiz.Location, 80, () =>
+                    {
+                        btn_practiseWriting.Visible = false;
+
+                        btn_practiseWriting.Location = btn_practiseWriting_loc;
+                    });
+                    ControlMove.SmoothMove(btn_practiseFlashcards, btn_practiseQuiz.Location, 80, () =>
+                    {
+                        btn_practiseFlashcards.Visible = false;
+
+                        btn_practiseFlashcards.Location = btn_practiseFlashcards_loc;
+                    });
+                }
+
+                if (PractiseQuizButtonsExpanded)
+                {
+                    btn_practiseQuiz.Text = "←";
+                }
+                else
+                {
+                    btn_practiseQuiz.Text = "Practise Quiz";
+                }
+            }
+        }
 
         public QuizProgressInfo(QuizIdentity quizIdentity)
         {
@@ -47,7 +101,6 @@ namespace SteelQuiz
 
             SetTheme(WelcomeTheme);
             LoadLearningProgressPercentage();
-            LoadWordPairs();
 
             switch (QuizCore.QuizProgress.TermsDisplayOrder)
             {
@@ -78,6 +131,11 @@ namespace SteelQuiz
                     cmb_orderAscendingDescending.SelectedItem = "Descending";
                     break;
             }
+
+            LoadWordPairs();
+
+            cmb_order.SelectedIndexChanged += Cmb_order_SelectedIndexChanged;
+            cmb_orderAscendingDescending.SelectedIndexChanged += Cmb_order_SelectedIndexChanged;
 
             lbl_termsCount.Text = QuizCore.Quiz.WordPairs.Count().ToString();
         }
@@ -123,12 +181,20 @@ namespace SteelQuiz
 
         public void LoadWordPairs()
         {
+            //var watch = new Stopwatch();
+            //watch.Start();
+
+            //Debug.WriteLine(watch.ElapsedMilliseconds);
             foreach (var c in flp_words.Controls.OfType<Control>())
             {
                 c.Dispose();
             }
 
+            //Debug.WriteLine(watch.ElapsedMilliseconds);
+
             flp_words.Controls.Clear();
+
+            //Debug.WriteLine(watch.ElapsedMilliseconds);
 
             var controls = new List<DashboardQuizWordPair>();
             foreach (var wordPair in QuizCore.Quiz.WordPairs)
@@ -138,25 +204,7 @@ namespace SteelQuiz
                 controls.Add(c);
             }
 
-            //controls = controls.OrderBy(x => x.SuccessRate).ToList();
-            /*
-            controls = controls.OrderBy(x =>
-            {
-                switch (cmb_order.SelectedItem)
-                {
-                    case "Success Rate":
-                        return x.SuccessRate;
-                    case "Quiz Order":
-                        return x;
-                    case "Alphabetical Phrase 1":
-                        return x.WordPair.Word1;
-                    case "Alphabetical Phrase 2":
-                        return x.WordPair.Word2;
-                    default:
-                        return x;
-                }
-            });
-            */
+            //Debug.WriteLine(watch.ElapsedMilliseconds);
 
             switch (cmb_orderAscendingDescending.SelectedItem)
             {
@@ -196,6 +244,8 @@ namespace SteelQuiz
                     break;
             }
 
+            //Debug.WriteLine(watch.ElapsedMilliseconds);
+
             int count = 0;
             foreach (var c in controls)
             {
@@ -214,6 +264,9 @@ namespace SteelQuiz
 
                 ++count;
             }
+
+            //Debug.WriteLine(watch.ElapsedMilliseconds);
+            //watch.Stop();
         }
 
         public override void SetTheme(GeneralTheme theme = null)
@@ -240,13 +293,7 @@ namespace SteelQuiz
 
         private void Btn_practiseQuiz_Click(object sender, EventArgs e)
         {
-            if (QuizCore.Quiz.WordPairs.Count == 0)
-            {
-                MessageBox.Show("Cannot practise quiz with no terms", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            (ParentForm as Welcome).LoadQuiz(QuizIdentity.FindQuizPath());
+            PractiseQuizButtonsExpanded = !PractiseQuizButtonsExpanded;
         }
 
         public void UpdateLearningProgressBar()
@@ -315,7 +362,7 @@ namespace SteelQuiz
                 quizExport.ShowDialog();
             });
 
-            cm.Show(btn_more, new Point(0, btn_more.Size.Height));
+            //cm.Show(btn_more, new Point(0, btn_more.Size.Height));
         }
 
         private void Cmb_order_SelectedIndexChanged(object sender, EventArgs e)
@@ -353,6 +400,28 @@ namespace SteelQuiz
             QuizCore.SaveQuizProgress();
 
             LoadWordPairs();
+        }
+
+        private void btn_practiseWriting_Click(object sender, EventArgs e)
+        {
+            if (QuizCore.Quiz.WordPairs.Count == 0)
+            {
+                MessageBox.Show("Cannot practise quiz with no terms", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            (ParentForm as Welcome).LoadQuiz(QuizIdentity.FindQuizPath(), Welcome.QuizPractiseMode.Writing);
+        }
+
+        private void btn_practiseFlashcards_Click(object sender, EventArgs e)
+        {
+            if (QuizCore.Quiz.WordPairs.Count == 0)
+            {
+                MessageBox.Show("Cannot practise quiz with no terms", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            (ParentForm as Welcome).LoadQuiz(QuizIdentity.FindQuizPath(), Welcome.QuizPractiseMode.Flashcards);
         }
     }
 }

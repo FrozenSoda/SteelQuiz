@@ -56,12 +56,13 @@ namespace SteelQuiz
             this.lbl_learningProgress_bar = new System.Windows.Forms.Label();
             this.lbl_learningProgress_desc = new System.Windows.Forms.Label();
             this.lbl_learningProgress = new System.Windows.Forms.Label();
-            this.btn_more = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.cmb_order = new System.Windows.Forms.ComboBox();
             this.cmb_orderAscendingDescending = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.lbl_termsCount = new System.Windows.Forms.Label();
+            this.btn_practiseWriting = new System.Windows.Forms.Button();
+            this.btn_practiseFlashcards = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_practiseQuiz
@@ -145,22 +146,6 @@ namespace SteelQuiz
             this.lbl_learningProgress.Text = "100 %";
             this.lbl_learningProgress.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // btn_more
-            // 
-            this.btn_more.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_more.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.btn_more.FlatAppearance.BorderSize = 0;
-            this.btn_more.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_more.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_more.Location = new System.Drawing.Point(9, 527);
-            this.btn_more.Name = "btn_more";
-            this.btn_more.Size = new System.Drawing.Size(33, 45);
-            this.btn_more.TabIndex = 11;
-            this.btn_more.Text = "...";
-            this.btn_more.UseCompatibleTextRendering = true;
-            this.btn_more.UseVisualStyleBackColor = false;
-            this.btn_more.Click += new System.EventHandler(this.Btn_more_Click);
-            // 
             // label1
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -185,7 +170,6 @@ namespace SteelQuiz
             this.cmb_order.Name = "cmb_order";
             this.cmb_order.Size = new System.Drawing.Size(124, 21);
             this.cmb_order.TabIndex = 13;
-            this.cmb_order.SelectedIndexChanged += new System.EventHandler(this.Cmb_order_SelectedIndexChanged);
             // 
             // cmb_orderAscendingDescending
             // 
@@ -199,7 +183,6 @@ namespace SteelQuiz
             this.cmb_orderAscendingDescending.Name = "cmb_orderAscendingDescending";
             this.cmb_orderAscendingDescending.Size = new System.Drawing.Size(124, 21);
             this.cmb_orderAscendingDescending.TabIndex = 14;
-            this.cmb_orderAscendingDescending.SelectedIndexChanged += new System.EventHandler(this.Cmb_order_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -221,24 +204,59 @@ namespace SteelQuiz
             this.lbl_termsCount.Text = "0";
             this.lbl_termsCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // btn_practiseWriting
+            // 
+            this.btn_practiseWriting.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_practiseWriting.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.btn_practiseWriting.FlatAppearance.BorderSize = 0;
+            this.btn_practiseWriting.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_practiseWriting.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_practiseWriting.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btn_practiseWriting.Location = new System.Drawing.Point(572, 453);
+            this.btn_practiseWriting.Name = "btn_practiseWriting";
+            this.btn_practiseWriting.Size = new System.Drawing.Size(158, 31);
+            this.btn_practiseWriting.TabIndex = 12;
+            this.btn_practiseWriting.Text = "Writing";
+            this.btn_practiseWriting.UseVisualStyleBackColor = false;
+            this.btn_practiseWriting.Visible = false;
+            this.btn_practiseWriting.Click += new System.EventHandler(this.btn_practiseWriting_Click);
+            // 
+            // btn_practiseFlashcards
+            // 
+            this.btn_practiseFlashcards.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_practiseFlashcards.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.btn_practiseFlashcards.FlatAppearance.BorderSize = 0;
+            this.btn_practiseFlashcards.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_practiseFlashcards.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_practiseFlashcards.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btn_practiseFlashcards.Location = new System.Drawing.Point(572, 490);
+            this.btn_practiseFlashcards.Name = "btn_practiseFlashcards";
+            this.btn_practiseFlashcards.Size = new System.Drawing.Size(158, 31);
+            this.btn_practiseFlashcards.TabIndex = 17;
+            this.btn_practiseFlashcards.Text = "Flashcards";
+            this.btn_practiseFlashcards.UseVisualStyleBackColor = false;
+            this.btn_practiseFlashcards.Visible = false;
+            this.btn_practiseFlashcards.Click += new System.EventHandler(this.btn_practiseFlashcards_Click);
+            // 
             // QuizProgressInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.Controls.Add(this.btn_practiseQuiz);
+            this.Controls.Add(this.btn_practiseFlashcards);
+            this.Controls.Add(this.btn_practiseWriting);
             this.Controls.Add(this.lbl_termsCount);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cmb_orderAscendingDescending);
             this.Controls.Add(this.cmb_order);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.btn_more);
             this.Controls.Add(this.lbl_learningProgress);
             this.Controls.Add(this.lbl_learningProgress_desc);
             this.Controls.Add(this.lbl_learningProgress_bar);
             this.Controls.Add(this.flp_words);
             this.Controls.Add(this.lbl_quizNameHere);
             this.Controls.Add(this.btn_editQuiz);
-            this.Controls.Add(this.btn_practiseQuiz);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.White;
             this.Name = "QuizProgressInfo";
@@ -259,11 +277,12 @@ namespace SteelQuiz
         private System.Windows.Forms.Label lbl_learningProgress_bar;
         private System.Windows.Forms.Label lbl_learningProgress_desc;
         private System.Windows.Forms.Label lbl_learningProgress;
-        private System.Windows.Forms.Button btn_more;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmb_order;
         private System.Windows.Forms.ComboBox cmb_orderAscendingDescending;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lbl_termsCount;
+        private System.Windows.Forms.Button btn_practiseWriting;
+        private System.Windows.Forms.Button btn_practiseFlashcards;
     }
 }

@@ -49,8 +49,10 @@ namespace SteelQuiz
             this.components = new System.ComponentModel.Container();
             this.lbl_name = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.exportQuizToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeFromListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetProgressDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dasdToolStripMenuItem = new System.Windows.Forms.ToolStripSeparator();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -71,24 +73,38 @@ namespace SteelQuiz
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exportQuizToolStripMenuItem,
+            this.dasdToolStripMenuItem,
             this.removeFromListToolStripMenuItem,
             this.resetProgressDataToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 98);
+            // 
+            // exportQuizToolStripMenuItem
+            // 
+            this.exportQuizToolStripMenuItem.Name = "exportQuizToolStripMenuItem";
+            this.exportQuizToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exportQuizToolStripMenuItem.Text = "Export Quiz";
+            this.exportQuizToolStripMenuItem.Click += new System.EventHandler(this.exportQuizToolStripMenuItem_Click);
             // 
             // removeFromListToolStripMenuItem
             // 
             this.removeFromListToolStripMenuItem.Name = "removeFromListToolStripMenuItem";
             this.removeFromListToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.removeFromListToolStripMenuItem.Text = "Remove from list";
+            this.removeFromListToolStripMenuItem.Text = "Remove from List";
             this.removeFromListToolStripMenuItem.Click += new System.EventHandler(this.RemoveFromListToolStripMenuItem_Click);
             // 
             // resetProgressDataToolStripMenuItem
             // 
             this.resetProgressDataToolStripMenuItem.Name = "resetProgressDataToolStripMenuItem";
             this.resetProgressDataToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.resetProgressDataToolStripMenuItem.Text = "Reset progress data";
+            this.resetProgressDataToolStripMenuItem.Text = "Reset Progress Data";
             this.resetProgressDataToolStripMenuItem.Click += new System.EventHandler(this.ResetProgressDataToolStripMenuItem_Click);
+            // 
+            // dasdToolStripMenuItem
+            // 
+            this.dasdToolStripMenuItem.Name = "dasdToolStripMenuItem";
+            this.dasdToolStripMenuItem.Size = new System.Drawing.Size(177, 6);
             // 
             // DashboardQuiz
             // 
@@ -114,5 +130,7 @@ namespace SteelQuiz
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem removeFromListToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resetProgressDataToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportQuizToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator dasdToolStripMenuItem;
     }
 }
