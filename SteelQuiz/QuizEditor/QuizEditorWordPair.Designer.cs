@@ -57,6 +57,9 @@ namespace SteelQuiz.QuizEditor
             this.btn_delete = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.btn_setImage1 = new System.Windows.Forms.Button();
+            this.btn_setImage2 = new System.Windows.Forms.Button();
+            this.ofd_image = new System.Windows.Forms.OpenFileDialog();
             this.pnl_translationRules.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,9 +69,9 @@ namespace SteelQuiz.QuizEditor
             this.pnl_translationRules.Controls.Add(this.btn_smartCompSettings);
             this.pnl_translationRules.Controls.Add(this.lbl_ansCompRules);
             this.pnl_translationRules.Controls.Add(this.chk_smartComp);
-            this.pnl_translationRules.Location = new System.Drawing.Point(217, 29);
+            this.pnl_translationRules.Location = new System.Drawing.Point(251, 29);
             this.pnl_translationRules.Name = "pnl_translationRules";
-            this.pnl_translationRules.Size = new System.Drawing.Size(299, 65);
+            this.pnl_translationRules.Size = new System.Drawing.Size(218, 65);
             this.pnl_translationRules.TabIndex = 2;
             // 
             // btn_smartCompSettings
@@ -79,7 +82,7 @@ namespace SteelQuiz.QuizEditor
             this.btn_smartCompSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_smartCompSettings.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_smartCompSettings.ForeColor = System.Drawing.Color.White;
-            this.btn_smartCompSettings.Location = new System.Drawing.Point(214, 19);
+            this.btn_smartCompSettings.Location = new System.Drawing.Point(173, 19);
             this.btn_smartCompSettings.Name = "btn_smartCompSettings";
             this.btn_smartCompSettings.Size = new System.Drawing.Size(20, 20);
             this.btn_smartCompSettings.TabIndex = 8;
@@ -91,9 +94,9 @@ namespace SteelQuiz.QuizEditor
             // 
             this.lbl_ansCompRules.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_ansCompRules.ForeColor = System.Drawing.Color.LightGray;
-            this.lbl_ansCompRules.Location = new System.Drawing.Point(3, 0);
+            this.lbl_ansCompRules.Location = new System.Drawing.Point(2, 0);
             this.lbl_ansCompRules.Name = "lbl_ansCompRules";
-            this.lbl_ansCompRules.Size = new System.Drawing.Size(282, 13);
+            this.lbl_ansCompRules.Size = new System.Drawing.Size(225, 13);
             this.lbl_ansCompRules.TabIndex = 1;
             this.lbl_ansCompRules.Text = "Answer Comparison Rules";
             this.lbl_ansCompRules.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -106,7 +109,7 @@ namespace SteelQuiz.QuizEditor
             this.chk_smartComp.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chk_smartComp.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chk_smartComp.ForeColor = System.Drawing.Color.LightGray;
-            this.chk_smartComp.Location = new System.Drawing.Point(88, 22);
+            this.chk_smartComp.Location = new System.Drawing.Point(47, 22);
             this.chk_smartComp.Name = "chk_smartComp";
             this.chk_smartComp.Size = new System.Drawing.Size(120, 17);
             this.chk_smartComp.TabIndex = 0;
@@ -172,7 +175,7 @@ namespace SteelQuiz.QuizEditor
             this.btn_editSynonyms_w2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_editSynonyms_w2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_editSynonyms_w2.ForeColor = System.Drawing.Color.White;
-            this.btn_editSynonyms_w2.Location = new System.Drawing.Point(650, 29);
+            this.btn_editSynonyms_w2.Location = new System.Drawing.Point(569, 29);
             this.btn_editSynonyms_w2.Name = "btn_editSynonyms_w2";
             this.btn_editSynonyms_w2.Size = new System.Drawing.Size(75, 39);
             this.btn_editSynonyms_w2.TabIndex = 6;
@@ -189,7 +192,7 @@ namespace SteelQuiz.QuizEditor
             this.btn_delete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_delete.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_delete.ForeColor = System.Drawing.Color.White;
-            this.btn_delete.Location = new System.Drawing.Point(569, 29);
+            this.btn_delete.Location = new System.Drawing.Point(650, 29);
             this.btn_delete.Name = "btn_delete";
             this.btn_delete.Size = new System.Drawing.Size(75, 39);
             this.btn_delete.TabIndex = 7;
@@ -221,11 +224,49 @@ namespace SteelQuiz.QuizEditor
             this.label2.TabIndex = 9;
             this.label2.Text = "2:";
             // 
+            // btn_setImage1
+            // 
+            this.btn_setImage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.btn_setImage1.FlatAppearance.BorderSize = 0;
+            this.btn_setImage1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_setImage1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_setImage1.ForeColor = System.Drawing.Color.White;
+            this.btn_setImage1.Location = new System.Drawing.Point(84, 29);
+            this.btn_setImage1.Name = "btn_setImage1";
+            this.btn_setImage1.Size = new System.Drawing.Size(75, 39);
+            this.btn_setImage1.TabIndex = 10;
+            this.btn_setImage1.TabStop = false;
+            this.btn_setImage1.Text = "Set Image 1";
+            this.btn_setImage1.UseVisualStyleBackColor = false;
+            this.btn_setImage1.Click += new System.EventHandler(this.btn_setImage1_Click);
+            // 
+            // btn_setImage2
+            // 
+            this.btn_setImage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.btn_setImage2.FlatAppearance.BorderSize = 0;
+            this.btn_setImage2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_setImage2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_setImage2.ForeColor = System.Drawing.Color.White;
+            this.btn_setImage2.Location = new System.Drawing.Point(488, 29);
+            this.btn_setImage2.Name = "btn_setImage2";
+            this.btn_setImage2.Size = new System.Drawing.Size(75, 39);
+            this.btn_setImage2.TabIndex = 11;
+            this.btn_setImage2.TabStop = false;
+            this.btn_setImage2.Text = "Set Image 2";
+            this.btn_setImage2.UseVisualStyleBackColor = false;
+            // 
+            // ofd_image
+            // 
+            this.ofd_image.Filter = "Image Files|*.bmp;*.gif;*.jpeg;*.jpg;*.png;*.tiff";
+            this.ofd_image.Title = "Select an Image";
+            // 
             // QuizEditorWordPair
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.Controls.Add(this.btn_setImage2);
+            this.Controls.Add(this.btn_setImage1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_delete);
@@ -257,5 +298,8 @@ namespace SteelQuiz.QuizEditor
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btn_smartCompSettings;
+        private System.Windows.Forms.Button btn_setImage1;
+        private System.Windows.Forms.Button btn_setImage2;
+        private System.Windows.Forms.OpenFileDialog ofd_image;
     }
 }

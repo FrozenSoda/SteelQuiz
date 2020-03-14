@@ -32,13 +32,11 @@ namespace SteelQuiz.QuizData
     {
         public string Word1 { get; set; }
         public List<string> Word1Synonyms { get; set; } = new List<string>();
-        [JsonConverter(typeof(ImageConverter))]
-        public Image Term1Image { get; set; }
+        public Guid Term1Image { get; set; }
 
         public string Word2 { get; set; }
         public List<string> Word2Synonyms { get; set; } = new List<string>();
-        [JsonConverter(typeof(ImageConverter))]
-        public Image Term2Image { get; set; }
+        public Guid Term2Image { get; set; }
 
         public StringComp.Rules TranslationRules { get; set; }
 
@@ -84,18 +82,16 @@ namespace SteelQuiz.QuizData
             {
                 Word2Synonyms = word2Synonyms;
             }
+        }
 
-            /*
-            if (Word1Synonyms == null)
-            {
-                Word1Synonyms = new List<string>();
-            }
+        public Image GetTerm1Image(Quiz quiz)
+        {
+            return quiz.QuizImages.Where(x => x.Guid == Term1Image).Select(x => x.Image).FirstOrDefault();
+        }
 
-            if (Word2Synonyms == null)
-            {
-                Word2Synonyms = new List<string>();
-            }
-            */
+        public Image GetTerm2Image(Quiz quiz)
+        {
+            return quiz.QuizImages.Where(x => x.Guid == Term2Image).Select(x => x.Image).FirstOrDefault();
         }
 
         public override bool Equals(object obj)
@@ -125,6 +121,8 @@ namespace SteelQuiz.QuizData
             hashCode = hashCode * -1521134295 + EqualityComparer<List<string>>.Default.GetHashCode(Word1Synonyms);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Word2);
             hashCode = hashCode * -1521134295 + EqualityComparer<List<string>>.Default.GetHashCode(Word2Synonyms);
+            hashCode = hashCode * -1521134295 + EqualityComparer<Guid>.Default.GetHashCode(Term1Image);
+            hashCode = hashCode * -1521134295 + EqualityComparer<Guid>.Default.GetHashCode(Term2Image);
             hashCode = hashCode * -1521134295 + TranslationRules.GetHashCode();
             return hashCode;
         }

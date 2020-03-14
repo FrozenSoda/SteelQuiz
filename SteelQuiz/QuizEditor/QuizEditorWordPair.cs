@@ -54,6 +54,7 @@ namespace SteelQuiz.QuizEditor
             InitializeComponent();
             QuizEditor = owner;
             Number = number;
+            ofd_image.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
             RemoveSynonymsEqualToWords();
 
             ComparisonRules.BeforeDataChanged += (sender, e) =>
@@ -339,6 +340,17 @@ namespace SteelQuiz.QuizEditor
 
             txt_word1.Size = new Size(width, txt_word1.Size.Height);
             txt_word2.Size = new Size(width, txt_word2.Size.Height);
+        }
+
+        private void btn_setImage1_Click(object sender, EventArgs e)
+        {
+            if (ofd_image.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+
+            var img = Image.FromFile(ofd_image.FileName);
+
         }
     }
 }
