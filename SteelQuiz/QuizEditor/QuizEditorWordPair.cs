@@ -377,5 +377,23 @@ namespace SteelQuiz.QuizEditor
                 QuizEditor.ChangedSinceLastSave = true;
             }
         }
+
+        private void btn_clearImage1_Click(object sender, EventArgs e)
+        {
+            if (Term1Images.Count > 0)
+            {
+                Term1Images.Clear();
+                QuizEditor.ChangedSinceLastSave = true;
+            }
+        }
+
+        private void btn_clearImage2_Click(object sender, EventArgs e)
+        {
+            if (Term2Images.Count > 0)
+            {
+                Term2Images.Clear();
+                QuizEditor.ChangedSinceLastSave = true;
+            }
+        }
     }
 }
