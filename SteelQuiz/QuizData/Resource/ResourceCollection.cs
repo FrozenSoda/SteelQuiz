@@ -16,6 +16,7 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -27,6 +28,7 @@ namespace SteelQuiz.QuizData.Resource
 {
     public class ResourceCollection<T>
     {
+        [JsonProperty]
         private List<ResourceContainer<T>> resources = new List<ResourceContainer<T>>();
 
         /// <summary>
