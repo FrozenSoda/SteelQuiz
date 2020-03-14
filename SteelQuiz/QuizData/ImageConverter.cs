@@ -37,6 +37,10 @@ namespace SteelQuiz.QuizData
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             var base64 = (string)reader.Value;
+            if (base64 == null)
+            {
+                return null;
+            }
             var img = Image.FromStream(new MemoryStream(Convert.FromBase64String(base64)));
             return img;
         }

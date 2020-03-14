@@ -106,7 +106,7 @@ namespace SteelQuiz
             {
                 var msg = MessageBox.Show("SteelQuiz must be updated to load this quiz.\r\n\r\nUpdating will make sure you get the latest features, " +
                     "improvements and bug fixes.\r\n\r\nUpdate now? (recommended)",
-                    "Update required - SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    "Update Required - SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (msg == DialogResult.Yes)
                 {
                     if (AutoUpdaterDotNET.AutoUpdater.DownloadUpdate())
@@ -307,8 +307,7 @@ namespace SteelQuiz
             var progressVer = SUtil.PropertyDefined(cfgDz.FileFormatVersion) && cfgDz.FileFormatVersion != null
                 ? new Version((string)cfgDz.FileFormatVersion) : new Version(1, 0, 0);
             var currVer = new Version(MetaData.QUIZ_FILE_FORMAT_VERSION);
-            int cmp = currVer.CompareTo(progressVer);
-            if (cmp > 0)
+            if (progressVer.CompareTo(new Version(3, 0, 0)) < 0)
             {
                 var msg = MessageBox.Show("Due to major changes in the quiz progress format, your quiz progress data has to be reset to work with the new version." +
                         " The old format contained unfixable problems, and a conversion would have been too complex and buggy.\r\n\r\nA backup will automatically" +
@@ -330,7 +329,7 @@ namespace SteelQuiz
 
                 return ChkUpgradeProgressDataResult.UpgradedDowngraded;
             }
-            else if (cmp < 0)
+            else if (currVer.CompareTo(progressVer) < 0)
             {
                 var msg = MessageBox.Show("Your progress data file is made for a newer version of SteelQuiz. Revert progress data from backup?",
                     "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
