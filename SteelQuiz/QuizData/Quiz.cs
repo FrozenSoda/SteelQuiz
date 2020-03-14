@@ -18,6 +18,7 @@
 
 using Newtonsoft.Json;
 using SteelQuiz.Extensions;
+using SteelQuiz.QuizData.Resource;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -38,8 +39,7 @@ namespace SteelQuiz.QuizData
         public string Language2 { get; set; }
 
         [JsonProperty]
-        private readonly List<QuizImageResource> __quizImages;
-        public ReadOnlyCollection<QuizImageResource> QuizImages { get; set; }
+        public ResourceCollection<ImageResourceContainer> QuizImages { get; set; }
 
         public List<WordPair> WordPairs { get; set; }
 
@@ -57,32 +57,6 @@ namespace SteelQuiz.QuizData
             Language2 = lang2;
             WordPairs = new List<WordPair>();
             FileFormatVersion = quizFileFormatVersion;
-        }
-
-        /// <summary>
-        /// Adds an image resource to the quiz containing the specified image, and returns the Guid of the resource. If a resource with the specified image already exists, its Guid will be returned.
-        /// </summary>
-        /// <param name="img">The image to add.</param>
-        /// <returns>Guid of the resource with the image.</returns>
-        public Guid AddImageResource(Image img)
-        {
-            // Calculate SHA512 of image
-            string sha512 = img.CalculateSHA512();
-
-            // Look if a resource with the specified image already exists
-            foreach (var x in QuizImages)
-            {
-                if (x.SHA512 == sha512)
-                {
-                    // A resource with the image already exists
-                    return x.Guid;
-                }
-            }
-
-            // Resource with same image does not exist - create new
-            var res = new QuizImageResource(img);
-            __quizImages.Add(res);
-            return res.Guid;
         }
     }
 }
