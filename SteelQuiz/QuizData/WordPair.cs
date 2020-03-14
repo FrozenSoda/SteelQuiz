@@ -21,6 +21,7 @@ using SteelQuiz.QuizPractise;
 using SteelQuiz.QuizProgressData;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,9 +32,13 @@ namespace SteelQuiz.QuizData
     {
         public string Word1 { get; set; }
         public List<string> Word1Synonyms { get; set; } = new List<string>();
+        [JsonConverter(typeof(ImageConverter))]
+        public Image Term1Image { get; set; }
 
         public string Word2 { get; set; }
         public List<string> Word2Synonyms { get; set; } = new List<string>();
+        [JsonConverter(typeof(ImageConverter))]
+        public Image Term2Image { get; set; }
 
         public StringComp.Rules TranslationRules { get; set; }
 

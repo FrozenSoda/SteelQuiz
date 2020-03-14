@@ -71,6 +71,7 @@
     <Compile Include="CachedResourceManager.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Pointer.cs" />
+    <Compile Include="QuizData\ImageConverter.cs" />
     <Compile Include="QuizEditor\SmartComparisonSettings.cs">
       <SubType>Form</SubType>
     </Compile>
