@@ -118,7 +118,10 @@ namespace SteelQuiz
                 return;
             }
 
-            QuizCore.Load(QuizIdentity.FindQuizPath());
+            if (!QuizCore.Load(QuizIdentity.FindQuizPath()))
+            {
+                return;
+            }
 
             // Ensure we are not resetting the wrong progress data
             SAssert.Assert(QuizCore.QuizProgress.QuizGUID == QuizIdentity.QuizGuid);
@@ -134,7 +137,10 @@ namespace SteelQuiz
 
         private void exportQuizToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            QuizCore.Load(QuizIdentity.FindQuizPath());
+            if (!QuizCore.Load(QuizIdentity.FindQuizPath()))
+            {
+                return;
+            }
 
             var quizExport = new QuizExport(QuizCore.Quiz);
             quizExport.ShowDialog();

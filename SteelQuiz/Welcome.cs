@@ -169,7 +169,10 @@ namespace SteelQuiz
 
         public void SwitchQuizProgressInfo(QuizIdentity quizIdentity)
         {
-            QuizCore.Load(quizIdentity.FindQuizPath());
+            if (!QuizCore.Load(quizIdentity.FindQuizPath()))
+            {
+                return;
+            }
 
             foreach (var q in pnl_quizInfo.Controls.OfType<QuizProgressInfo>())
             {

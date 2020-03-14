@@ -112,6 +112,7 @@ namespace SteelQuiz
                     if (AutoUpdaterDotNET.AutoUpdater.DownloadUpdate())
                     {
                         Application.Exit();
+                        return false;
                     }
                     else
                     {
