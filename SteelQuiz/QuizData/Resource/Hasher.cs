@@ -16,6 +16,7 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using SteelQuiz.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -25,13 +26,14 @@ using System.Threading.Tasks;
 
 namespace SteelQuiz.QuizData.Resource
 {
-    public static class ResourceContainerFactory
+    public static class Hasher
     {
-        public static ResourceContainer<T> CreateFrom<T>(T obj)
+        public static string CalculateSHA512<T>(T obj)
         {
-            if (typeof(T) == typeof(Image))
+            if (obj is Image)
             {
-                return (ResourceContainer<T>)(object)new ImageResourceContainer((Image)(object)obj);
+                var img = obj as Image;
+                return img.CalculateSHA512();
             }
 
             throw new NotSupportedException("Type of obj is not supported.");

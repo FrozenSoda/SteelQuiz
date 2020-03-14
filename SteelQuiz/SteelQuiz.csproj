@@ -73,6 +73,7 @@
     <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Pointer.cs" />
     <Compile Include="QuizData\ImageConverter.cs" />
+    <Compile Include="QuizData\Resource\Hasher.cs" />
     <Compile Include="QuizData\Resource\ImageResourceContainer.cs" />
     <Compile Include="QuizData\Resource\ResourceCollection.cs" />
     <Compile Include="QuizData\Resource\ResourceContainer.cs" />

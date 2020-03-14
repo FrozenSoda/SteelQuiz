@@ -39,7 +39,7 @@ namespace SteelQuiz.QuizData
         public string Language2 { get; set; }
 
         [JsonProperty]
-        public ResourceCollection<ImageResourceContainer> QuizImages { get; set; }
+        public ResourceCollection<ImageResourceContainer> QuizImages { get; set; } = new ResourceCollection<ImageResourceContainer>();
 
         public List<WordPair> WordPairs { get; set; }
 
