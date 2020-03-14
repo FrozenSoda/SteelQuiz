@@ -17,6 +17,7 @@
 */
 
 using Newtonsoft.Json;
+using SteelQuiz.QuizData.Resource;
 using SteelQuiz.QuizPractise;
 using SteelQuiz.QuizProgressData;
 using System;
@@ -32,11 +33,11 @@ namespace SteelQuiz.QuizData
     {
         public string Word1 { get; set; }
         public List<string> Word1Synonyms { get; set; } = new List<string>();
-        public Guid Term1Image { get; set; }
+        public List<Guid> Term1Images { get; set; } = new List<Guid>();
 
         public string Word2 { get; set; }
         public List<string> Word2Synonyms { get; set; } = new List<string>();
-        public Guid Term2Image { get; set; }
+        public List<Guid> Term2Images { get; set; } = new List<Guid>();
 
         public StringComp.Rules TranslationRules { get; set; }
 
@@ -84,14 +85,14 @@ namespace SteelQuiz.QuizData
             }
         }
 
-        public Image GetTerm1Image(Quiz quiz)
+        public IEnumerable<ResourceContainer<Image>> GetTerm1Images(ResourceCollection<Image> quizImages)
         {
-            return quiz.QuizImages.Where(x => x.Guid == Term1Image).Select(x => x.Image).FirstOrDefault();
+            return quizImages.GetAll().Where(x => Term1Images.Contains(x.Guid));
         }
 
-        public Image GetTerm2Image(Quiz quiz)
+        public IEnumerable<ResourceContainer<Image>> GetTerm2Images(ResourceCollection<Image> quizImages)
         {
-            return quiz.QuizImages.Where(x => x.Guid == Term2Image).Select(x => x.Image).FirstOrDefault();
+            return quizImages.GetAll().Where(x => Term2Images.Contains(x.Guid));
         }
 
         public override bool Equals(object obj)
@@ -121,8 +122,8 @@ namespace SteelQuiz.QuizData
             hashCode = hashCode * -1521134295 + EqualityComparer<List<string>>.Default.GetHashCode(Word1Synonyms);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Word2);
             hashCode = hashCode * -1521134295 + EqualityComparer<List<string>>.Default.GetHashCode(Word2Synonyms);
-            hashCode = hashCode * -1521134295 + EqualityComparer<Guid>.Default.GetHashCode(Term1Image);
-            hashCode = hashCode * -1521134295 + EqualityComparer<Guid>.Default.GetHashCode(Term2Image);
+            hashCode = hashCode * -1521134295 + EqualityComparer<List<Guid>>.Default.GetHashCode(Term1Images);
+            hashCode = hashCode * -1521134295 + EqualityComparer<List<Guid>>.Default.GetHashCode(Term2Images);
             hashCode = hashCode * -1521134295 + TranslationRules.GetHashCode();
             return hashCode;
         }

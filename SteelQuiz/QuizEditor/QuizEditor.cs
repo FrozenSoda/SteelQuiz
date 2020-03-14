@@ -29,6 +29,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using SteelQuiz.QuizData;
+using SteelQuiz.QuizData.Resource;
 using SteelQuiz.QuizEditor.UndoRedo;
 using SteelQuiz.QuizPractise;
 using SteelQuiz.Util;
@@ -55,6 +56,7 @@ namespace SteelQuiz.QuizEditor
         }
 
         private Guid QuizGuid { get; set; } = Guid.NewGuid();
+        public ResourceCollection<Image> QuizImages { get; set; } = new ResourceCollection<Image>();
         private QuizRecoveryData QuizRecoveryData { get; set; }
 
         private bool returningToMainMenu = false;
@@ -177,16 +179,20 @@ namespace SteelQuiz.QuizEditor
         {
             var quiz = new Quiz(cmb_lang1.Text, cmb_lang2.Text, MetaData.QUIZ_FILE_FORMAT_VERSION);
 
+            var wps = flp_words.Controls.OfType<QuizEditorWordPair>();
+            quiz.QuizImages = QuizImages; // remove unused
             quiz.GUID = QuizGuid;
 
             ulong i = 0;
-            foreach (var wordPair in flp_words.Controls.OfType<QuizEditorWordPair>().Where(x => !QEWordEmpty(x)))
+            foreach (var wordPairControl in wps.Where(x => !QEWordEmpty(x)))
             {
-                wordPair.RemoveSynonymsEqualToWords();
+                wordPairControl.RemoveSynonymsEqualToWords();
 
-                StringComp.Rules comparisonRules = wordPair.ComparisonRules.Data;
+                StringComp.Rules comparisonRules = wordPairControl.ComparisonRules.Data;
 
-                var wp = new WordPair(wordPair.txt_word1.Text, wordPair.txt_word2.Text, comparisonRules, wordPair.Synonyms1, wordPair.Synonyms2);
+                var wp = new WordPair(wordPairControl.txt_word1.Text, wordPairControl.txt_word2.Text, comparisonRules, wordPairControl.Synonyms1, wordPairControl.Synonyms2);
+                wp.Term1Images = wordPairControl.Term1Images;
+                wp.Term2Images = wordPairControl.Term2Images;
                 quiz.WordPairs.Add(wp);
                 ++i;
             }
@@ -253,6 +259,7 @@ namespace SteelQuiz.QuizEditor
 
             SetWordPairs(quiz.WordPairs.Count + 2);
 
+            QuizImages = quiz.QuizImages;
             QuizGuid = quiz.GUID;
             cmb_lang1.Text = quiz.Language1;
             cmb_lang2.Text = quiz.Language2;
@@ -263,8 +270,10 @@ namespace SteelQuiz.QuizEditor
                 var wp = quiz.WordPairs[i];
 
                 ctrl.txt_word1.Text = wp.Word1;
+                ctrl.Term1Images = wp.GetTerm1Images(QuizImages).Select(x => x.Guid).ToList();
                 ctrl.Synonyms1 = wp.Word1Synonyms;
                 ctrl.txt_word2.Text = wp.Word2;
+                ctrl.Term2Images = wp.GetTerm2Images(QuizImages).Select(x => x.Guid).ToList();
                 ctrl.Synonyms2 = wp.Word2Synonyms;
                 ctrl.ComparisonRules.Data = (StringComp.Rules)FixEnum(wp.TranslationRules);
             }

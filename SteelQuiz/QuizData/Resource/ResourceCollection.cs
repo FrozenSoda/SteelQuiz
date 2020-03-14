@@ -31,6 +31,12 @@ namespace SteelQuiz.QuizData.Resource
         [JsonProperty]
         private List<ResourceContainer<T>> resources = new List<ResourceContainer<T>>();
 
+        public ResourceCollection() { }
+        public ResourceCollection(IEnumerable<ResourceContainer<T>> existingResources)
+        {
+            resources = existingResources.ToList();
+        }
+
         /// <summary>
         /// Adds a resource with the specified object to the collection, and returns its Guid. If a resource with the specified object already exists, its Guid will be returned.
         /// </summary>

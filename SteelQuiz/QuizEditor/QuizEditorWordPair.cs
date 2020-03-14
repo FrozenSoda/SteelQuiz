@@ -28,6 +28,7 @@ using System.Windows.Forms;
 using SteelQuiz.QuizEditor.UndoRedo;
 using SteelQuiz.ThemeManager.Colors;
 using SteelQuiz.QuizPractise;
+using SteelQuiz.QuizData.Resource;
 
 namespace SteelQuiz.QuizEditor
 {
@@ -36,6 +37,9 @@ namespace SteelQuiz.QuizEditor
         public int Number { get; set; } // number in flowlayoutpanel, the first one has number 0 for instance
         public string Word1 => txt_word1.Text;
         public string Word2 => txt_word2.Text;
+
+        public List<Guid> Term1Images = new List<Guid>();
+        public List<Guid> Term2Images = new List<Guid>();
 
         public List<string> Synonyms1 { get; set; } = new List<string>();
         public List<string> Synonyms2 { get; set; } = new List<string>();
@@ -350,7 +354,28 @@ namespace SteelQuiz.QuizEditor
             }
 
             var img = Image.FromFile(ofd_image.FileName);
+            var imgGuid = QuizEditor.QuizImages.Add(img);
+            if (!Term1Images.Contains(imgGuid))
+            {
+                Term1Images.Add(imgGuid);
+                QuizEditor.ChangedSinceLastSave = true;
+            }
+        }
 
+        private void btn_setImage2_Click(object sender, EventArgs e)
+        {
+            if (ofd_image.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+
+            var img = Image.FromFile(ofd_image.FileName);
+            var imgGuid = QuizEditor.QuizImages.Add(img);
+            if (!Term2Images.Contains(imgGuid))
+            {
+                Term2Images.Add(imgGuid);
+                QuizEditor.ChangedSinceLastSave = true;
+            }
         }
     }
 }

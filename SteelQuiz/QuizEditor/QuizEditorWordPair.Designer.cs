@@ -242,6 +242,7 @@ namespace SteelQuiz.QuizEditor
             // 
             // btn_setImage2
             // 
+            this.btn_setImage2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_setImage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
             this.btn_setImage2.FlatAppearance.BorderSize = 0;
             this.btn_setImage2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -254,6 +255,7 @@ namespace SteelQuiz.QuizEditor
             this.btn_setImage2.TabStop = false;
             this.btn_setImage2.Text = "Set Image 2";
             this.btn_setImage2.UseVisualStyleBackColor = false;
+            this.btn_setImage2.Click += new System.EventHandler(this.btn_setImage2_Click);
             // 
             // ofd_image
             // 

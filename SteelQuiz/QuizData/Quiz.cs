@@ -37,7 +37,7 @@ namespace SteelQuiz.QuizData
         public string FileFormatVersion { get; set; }
         public string Language1 { get; set; }
         public string Language2 { get; set; }
-        public ResourceCollection<ImageResourceContainer> QuizImages { get; set; } = new ResourceCollection<ImageResourceContainer>();
+        public ResourceCollection<Image> QuizImages { get; set; } = new ResourceCollection<Image>();
         public List<WordPair> WordPairs { get; set; }
 
         public Quiz(string lang1, string lang2, string quizFileFormatVersion, Guid? guid = null)

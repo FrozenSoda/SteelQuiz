@@ -25,7 +25,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SteelQuiz.QuizData
+namespace SteelQuiz.QuizData.Resource
 {
     public class ImageConverter : JsonConverter
     {

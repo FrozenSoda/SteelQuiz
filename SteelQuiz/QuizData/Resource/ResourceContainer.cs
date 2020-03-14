@@ -28,8 +28,11 @@ namespace SteelQuiz.QuizData.Resource
     /// <summary>
     /// A container for a resource.
     /// </summary>
+    [JsonConverter(typeof(ResourceContainerConverter))]
     public abstract class ResourceContainer<T>
     {
+        public string ObjType { get; private set; } = typeof(T).ToString();
+
         /// <summary>
         /// The Guid for this resource.
         /// </summary>

@@ -38,6 +38,7 @@ namespace SteelQuiz.QuizData.Resource
         [JsonConverter(typeof(ImageConverter))]
         public override Image Object { get; protected set; }
 
+        public ImageResourceContainer() { }
         /// <summary>
         /// Creates a new image resource container from the specified image.
         /// </summary>
