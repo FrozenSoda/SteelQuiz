@@ -18,6 +18,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -52,6 +53,21 @@ namespace SteelQuiz.QuizData.Resource
             var res = ResourceContainerFactory.CreateFrom(obj);
             resources.Add(res);
             return res.Guid;
+        }
+
+        public ReadOnlyCollection<ResourceContainer<T>> GetAll()
+        {
+            return new ReadOnlyCollection<ResourceContainer<T>>(resources);
+        }
+
+        public T Get(Guid guid)
+        {
+            return resources.Where(x => x.Guid == guid).Select(x => x.Object).FirstOrDefault();
+        }
+
+        public void Remove(Guid guid)
+        {
+            resources = resources.Where(x => x.Guid != guid).ToList();
         }
     }
 }
