@@ -154,11 +154,14 @@ namespace SteelQuiz.QuizPractise
                         if (synonymSimilarities.All(x => x.Difference == 0))
                         {
                             // Provided synonyms are correct
-                            similarityDatas.Add(new SimilarityData(0, CorrectCertainty.ProbablyCorrect, correctAnswer, wordPair));
+                            similarityDatas.Add(
+                                new SimilarityData(0, (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty), correctAnswer, wordPair));
                         }
                         else
                         {
-                            similarityDatas.Add(new SimilarityData(synonymSimilarities.Select(x => x.Difference).Max(), CorrectCertainty.ProbablyCorrect, correctAnswer, wordPair));
+                            similarityDatas.Add(
+                                new SimilarityData(synonymSimilarities.Select(x => x.Difference).Max(),
+                                (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty), correctAnswer, wordPair));
                         }
                     }
                 }

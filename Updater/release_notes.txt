@@ -12,6 +12,7 @@ Improvements:
 Fixes:
 - Fixed issue: Reverse answer order with "Smart Comparison Treat words between slash as synonyms" is marked as wrong #40
 - Fixed issue: Language titles in practise mode are sometimes swapped #39
+- Fixed scrolling issues when adding many quiz folders in Sync settings.
 - Other bug fixes, UI adjustments and improvements.
 
 
