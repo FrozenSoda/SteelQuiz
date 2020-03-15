@@ -95,6 +95,26 @@ namespace SteelQuiz.QuizData
             return quizImages.GetAll().Where(x => Term2Images.Contains(x.Guid));
         }
 
+        public IEnumerable<ResourceContainer<Image>> GetQuestionImages(ResourceCollection<Image> quizImages)
+        {
+            if (QuizCore.Quiz == null || QuizCore.QuizProgress == null || QuizCore.Quiz.GUID != QuizCore.QuizProgress.QuizGUID)
+            {
+                return null;
+            }
+
+            return QuizCore.QuizProgress.AnswerLanguageNum == 2 ? GetTerm1Images(quizImages) : GetTerm2Images(quizImages);
+        }
+
+        public IEnumerable<ResourceContainer<Image>> GetAnswerImages(ResourceCollection<Image> quizImages)
+        {
+            if (QuizCore.Quiz == null || QuizCore.QuizProgress == null || QuizCore.Quiz.GUID != QuizCore.QuizProgress.QuizGUID)
+            {
+                return null;
+            }
+
+            return QuizCore.QuizProgress.AnswerLanguageNum == 2 ? GetTerm2Images(quizImages) : GetTerm1Images(quizImages);
+        }
+
         public override bool Equals(object obj)
         {
             return Equals(obj as WordPair, true, true);

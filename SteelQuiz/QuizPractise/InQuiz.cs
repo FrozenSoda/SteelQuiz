@@ -156,14 +156,35 @@ namespace SteelQuiz.QuizPractise
 
                 lbl_word1.ForeColor = GeneralTheme.GetMainLabelForeColor();
 
-                if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language2)
+                // Remove pictureboxes
+                foreach (var pic in tlp_qAns.Controls.OfType<PictureBox>())
                 {
-                    lbl_word1.Text = CurrentWordPair.Word1;
+                    pic.Dispose();
                 }
-                else if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language1)
+
+                var picSize = lbl_word1.Size;
+                if (string.IsNullOrEmpty(CurrentWordPair.Question))
                 {
-                    lbl_word1.Text = CurrentWordPair.Word2;
+                    tlp_qAns.Controls.Remove(lbl_word1);
                 }
+                else if (!tlp_qAns.Controls.Contains(lbl_word1))
+                {
+                    tlp_qAns.Controls.Add(lbl_word1, 0, 1);
+                }
+                lbl_word1.Text = CurrentWordPair.Question;
+
+                foreach (var imgContainer in CurrentWordPair.GetQuestionImages(QuizCore.Quiz.QuizImages))
+                {
+                    var pic = new PictureBox();
+                    pic.BackColor = GeneralTheme.GetBackColor();
+                    pic.Size = picSize;
+                    pic.Dock = DockStyle.Fill;
+                    pic.BackgroundImage = imgContainer.Object;
+                    pic.BackgroundImageLayout = ImageLayout.Zoom;
+
+                    tlp_qAns.Controls.Add(pic);
+                }
+
                 CurrentInput = "";
                 lbl_progress.Text = $"Progress this round: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
 
@@ -365,6 +386,11 @@ namespace SteelQuiz.QuizPractise
                 }
             }
 
+            if (!tlp_qAns.Controls.Contains(lbl_word1))
+            {
+                tlp_qAns.Controls.Add(lbl_word1, 0, 1);
+            }
+
             if ((GameMode == QuizPractiseMode.Flashcards && flashcardsCorrect) || (GameMode == QuizPractiseMode.Writing && ansDiff.Correct()))
             {
                 foreach (var c in lbl_word1.Controls.OfType<WrongAnswer>())
@@ -382,6 +408,12 @@ namespace SteelQuiz.QuizPractise
                     AnswersAlreadyEntered.Add(ansDiff.MostSimilarAnswer);
                 }
                 */
+
+                // Remove pictureboxes
+                foreach (var pic in tlp_qAns.Controls.OfType<PictureBox>())
+                {
+                    pic.Dispose();
+                }
 
                 if (GameMode == QuizPractiseMode.Writing)
                 {

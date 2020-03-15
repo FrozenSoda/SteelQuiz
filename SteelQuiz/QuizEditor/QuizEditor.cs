@@ -161,7 +161,7 @@ namespace SteelQuiz.QuizEditor
         private bool QEWordEmpty(QuizEditorWordPair qew)
         {
             return qew != null ?
-                qew.txt_word1.Text == "" && qew.Synonyms1.IsNullOrEmpty() && qew.txt_word2.Text == "" && qew.Synonyms2.IsNullOrEmpty()
+                qew.txt_word1.Text == "" && qew.Synonyms1.IsNullOrEmpty() && qew.txt_word2.Text == "" && qew.Synonyms2.IsNullOrEmpty() && !qew.Term1Images.Any() && !qew.Term2Images.Any()
                 : false;
         }
 

@@ -76,7 +76,6 @@ namespace SteelQuiz.QuizPractise
             this.lbl_word1.Font = new System.Drawing.Font("Segoe UI Semilight", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_word1.ForeColor = System.Drawing.Color.White;
             this.lbl_word1.Location = new System.Drawing.Point(3, 60);
-            this.lbl_word1.MinimumSize = new System.Drawing.Size(325, 345);
             this.lbl_word1.Name = "lbl_word1";
             this.lbl_word1.Size = new System.Drawing.Size(435, 387);
             this.lbl_word1.TabIndex = 0;
@@ -91,7 +90,6 @@ namespace SteelQuiz.QuizPractise
             this.lbl_word2.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_word2.ForeColor = System.Drawing.Color.White;
             this.lbl_word2.Location = new System.Drawing.Point(444, 60);
-            this.lbl_word2.MinimumSize = new System.Drawing.Size(387, 345);
             this.lbl_word2.Name = "lbl_word2";
             this.lbl_word2.Size = new System.Drawing.Size(436, 387);
             this.lbl_word2.TabIndex = 1;
@@ -259,7 +257,7 @@ namespace SteelQuiz.QuizPractise
             this.tlp_qAns.Name = "tlp_qAns";
             this.tlp_qAns.RowCount = 2;
             this.tlp_qAns.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tlp_qAns.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tlp_qAns.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlp_qAns.Size = new System.Drawing.Size(883, 447);
             this.tlp_qAns.TabIndex = 14;
             // 
