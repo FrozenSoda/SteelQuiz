@@ -66,6 +66,8 @@ namespace SteelQuiz.QuizEditor
             this.globalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.enableSmartComparisonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modifySmartComparisonSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.manageResourcesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sorryThereIsNoneYetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sfd_quiz = new System.Windows.Forms.SaveFileDialog();
@@ -232,7 +234,9 @@ namespace SteelQuiz.QuizEditor
             // 
             this.globalToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.enableSmartComparisonToolStripMenuItem,
-            this.modifySmartComparisonSettingsToolStripMenuItem});
+            this.modifySmartComparisonSettingsToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.manageResourcesToolStripMenuItem});
             this.globalToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.globalToolStripMenuItem.Name = "globalToolStripMenuItem";
             this.globalToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
@@ -254,6 +258,18 @@ namespace SteelQuiz.QuizEditor
             this.modifySmartComparisonSettingsToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
             this.modifySmartComparisonSettingsToolStripMenuItem.Text = "Modify Smart Comparison Settings";
             this.modifySmartComparisonSettingsToolStripMenuItem.Click += new System.EventHandler(this.ModifySmartComparisonSettingsToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(256, 6);
+            // 
+            // manageResourcesToolStripMenuItem
+            // 
+            this.manageResourcesToolStripMenuItem.Name = "manageResourcesToolStripMenuItem";
+            this.manageResourcesToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
+            this.manageResourcesToolStripMenuItem.Text = "Manage Resources";
+            this.manageResourcesToolStripMenuItem.Click += new System.EventHandler(this.manageResourcesToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -352,5 +368,7 @@ namespace SteelQuiz.QuizEditor
         private System.Windows.Forms.ToolStripMenuItem globalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem enableSmartComparisonToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem modifySmartComparisonSettingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem manageResourcesToolStripMenuItem;
     }
 }

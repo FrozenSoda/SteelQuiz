@@ -860,5 +860,11 @@ namespace SteelQuiz.QuizEditor
             UpdateUndoRedoTooltips();
             SetGlobalSmartComparisonState();
         }
+
+        private void manageResourcesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var resEditor = new QuizResources(QuizImages);
+            resEditor.ShowDialog();
+        }
     }
 }

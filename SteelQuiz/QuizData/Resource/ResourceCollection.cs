@@ -73,9 +73,20 @@ namespace SteelQuiz.QuizData.Resource
             return resources.Where(x => x.Guid == guid).Select(x => x.Object).FirstOrDefault();
         }
 
+        public ResourceContainer<T> GetContainer(Guid guid)
+        {
+            return resources.Where(x => x.Guid == guid).FirstOrDefault();
+        }
+
         public void Remove(Guid guid)
         {
             resources = resources.Where(x => x.Guid != guid).ToList();
+        }
+
+        public bool Contains(T obj)
+        {
+            var sha512 = Hasher.CalculateSHA512(obj);
+            return resources.Where(x => x.Hash == sha512).Any();
         }
     }
 }
