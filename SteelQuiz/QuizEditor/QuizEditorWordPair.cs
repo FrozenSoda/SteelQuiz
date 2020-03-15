@@ -395,5 +395,17 @@ namespace SteelQuiz.QuizEditor
                 QuizEditor.ChangedSinceLastSave = true;
             }
         }
+
+        private void btn_setImages1_Click(object sender, EventArgs e)
+        {
+            var picker = new TermImagePicker(QuizEditor, QuizEditor.QuizImages, Term1Images);
+            picker.ShowDialog();
+        }
+
+        private void btn_setImages2_Click(object sender, EventArgs e)
+        {
+            var picker = new TermImagePicker(QuizEditor, QuizEditor.QuizImages, Term2Images);
+            picker.ShowDialog();
+        }
     }
 }

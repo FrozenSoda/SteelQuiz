@@ -29,10 +29,11 @@ using System.Windows.Forms;
 
 namespace SteelQuiz.QuizEditor
 {
-    public partial class QuizResources : AutoThemeableForm
+    public partial class TermImagePicker : AutoThemeableForm
     {
         private QuizEditor QuizEditor { get; set; }
         private ResourceCollection<Image> QuizImages { get; set; } = new ResourceCollection<Image>();
+        private List<Guid> TermImages { get; set; }
 
         private PictureBox __selectedPictureBox = null;
         private PictureBox SelectedPictureBox
@@ -45,21 +46,35 @@ namespace SteelQuiz.QuizEditor
             set
             {
                 __selectedPictureBox = value;
-                btn_chg.Enabled = value != null;
                 btn_del.Enabled = value != null;
             }
         }
 
-        public QuizResources(QuizEditor quizEditor, ResourceCollection<Image> quizImages)
+        public TermImagePicker(QuizEditor quizEditor, ResourceCollection<Image> quizImages, List<Guid> termImages)
         {
             InitializeComponent();
 
             QuizEditor = quizEditor;
             QuizImages = quizImages;
+            TermImages = termImages;
 
-            foreach (var imgContainer in QuizImages.GetAll())
+            var referencesToRemove = new List<Guid>();
+            foreach (var imgGuid in termImages)
             {
+                var imgContainer = quizImages.GetContainer(imgGuid);
+                if (imgContainer == null)
+                {
+                    MessageBox.Show($"Image resource with Guid {imgGuid} is missing; removing reference", "Missing Resource", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    referencesToRemove.Add(imgGuid);
+                    continue;
+                }
                 AddImageCtrl(imgContainer.Object, imgContainer.Guid);
+            }
+
+            foreach (var x in referencesToRemove)
+            {
+                termImages.Remove(x);
+                QuizEditor.ChangedSinceLastSave = true;
             }
 
             SetTheme();
@@ -102,13 +117,15 @@ namespace SteelQuiz.QuizEditor
             }
 
             var img = Image.FromFile(ofd_image.FileName);
-            if (!QuizImages.Contains(img))
-            {
-                var guid = QuizImages.Add(img);
-                AddImageCtrl(img, guid);
+            var guid = QuizImages.Add(img);
 
-                QuizEditor.ChangedSinceLastSave = true;
+            if (!TermImages.Contains(guid))
+            {
+                TermImages.Add(guid);
+                AddImageCtrl(img, guid);
             }
+
+            QuizEditor.ChangedSinceLastSave = true;
         }
 
         private void btn_chg_Click(object sender, EventArgs e)
@@ -128,22 +145,7 @@ namespace SteelQuiz.QuizEditor
 
         private void btn_del_Click(object sender, EventArgs e)
         {
-            var confirm = MessageBox.Show("Are you sure?", "Delete Resource", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (confirm != DialogResult.Yes)
-            {
-                return;
-            }
-
-            var guid = (Guid)SelectedPictureBox.Tag;
-            QuizImages.Remove((Guid)SelectedPictureBox.Tag);
-
-            // Remove references to this resource
-            foreach (var term in QuizEditor.flp_words.Controls.OfType<QuizEditorWordPair>())
-            {
-                term.Term1Images.Remove(guid);
-                term.Term2Images.Remove(guid);
-            }
-
+            TermImages.Remove((Guid)SelectedPictureBox.Tag);
             SelectedPictureBox.Dispose();
             SelectedPictureBox = null;
 

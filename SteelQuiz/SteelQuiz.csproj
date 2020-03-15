@@ -79,6 +79,12 @@
     <Compile Include="QuizData\Resource\ResourceContainer.cs" />
     <Compile Include="QuizData\Resource\ResourceContainerConverter.cs" />
     <Compile Include="QuizData\Resource\ResourceContainerFactory.cs" />
+    <Compile Include="QuizEditor\TermImagePicker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuizEditor\TermImagePicker.Designer.cs">
+      <DependentUpon>TermImagePicker.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuizEditor\QuizResources.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -536,6 +542,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Preferences\QuizProgressConflictRecommended.resx">
       <DependentUpon>QuizProgressConflictRecommended.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuizEditor\TermImagePicker.resx">
+      <DependentUpon>TermImagePicker.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuizEditor\QuizResources.resx">
       <DependentUpon>QuizResources.cs</DependentUpon>

@@ -57,11 +57,9 @@ namespace SteelQuiz.QuizEditor
             this.btn_delete = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.btn_setImage1 = new System.Windows.Forms.Button();
-            this.btn_setImage2 = new System.Windows.Forms.Button();
             this.ofd_image = new System.Windows.Forms.OpenFileDialog();
-            this.btn_clearImage1 = new System.Windows.Forms.Button();
-            this.btn_clearImage2 = new System.Windows.Forms.Button();
+            this.btn_setImages1 = new System.Windows.Forms.Button();
+            this.btn_setImages2 = new System.Windows.Forms.Button();
             this.pnl_translationRules.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,7 +71,7 @@ namespace SteelQuiz.QuizEditor
             this.pnl_translationRules.Controls.Add(this.chk_smartComp);
             this.pnl_translationRules.Location = new System.Drawing.Point(251, 29);
             this.pnl_translationRules.Name = "pnl_translationRules";
-            this.pnl_translationRules.Size = new System.Drawing.Size(218, 65);
+            this.pnl_translationRules.Size = new System.Drawing.Size(218, 39);
             this.pnl_translationRules.TabIndex = 2;
             // 
             // btn_smartCompSettings
@@ -144,7 +142,7 @@ namespace SteelQuiz.QuizEditor
             this.btn_editSynonyms_w1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_editSynonyms_w1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_editSynonyms_w1.ForeColor = System.Drawing.Color.White;
-            this.btn_editSynonyms_w1.Location = new System.Drawing.Point(3, 48);
+            this.btn_editSynonyms_w1.Location = new System.Drawing.Point(3, 32);
             this.btn_editSynonyms_w1.Name = "btn_editSynonyms_w1";
             this.btn_editSynonyms_w1.Size = new System.Drawing.Size(75, 35);
             this.btn_editSynonyms_w1.TabIndex = 4;
@@ -177,7 +175,7 @@ namespace SteelQuiz.QuizEditor
             this.btn_editSynonyms_w2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_editSynonyms_w2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_editSynonyms_w2.ForeColor = System.Drawing.Color.White;
-            this.btn_editSynonyms_w2.Location = new System.Drawing.Point(569, 48);
+            this.btn_editSynonyms_w2.Location = new System.Drawing.Point(569, 32);
             this.btn_editSynonyms_w2.Name = "btn_editSynonyms_w2";
             this.btn_editSynonyms_w2.Size = new System.Drawing.Size(75, 35);
             this.btn_editSynonyms_w2.TabIndex = 6;
@@ -194,7 +192,7 @@ namespace SteelQuiz.QuizEditor
             this.btn_delete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_delete.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_delete.ForeColor = System.Drawing.Color.White;
-            this.btn_delete.Location = new System.Drawing.Point(650, 48);
+            this.btn_delete.Location = new System.Drawing.Point(650, 32);
             this.btn_delete.Name = "btn_delete";
             this.btn_delete.Size = new System.Drawing.Size(75, 35);
             this.btn_delete.TabIndex = 7;
@@ -226,85 +224,51 @@ namespace SteelQuiz.QuizEditor
             this.label2.TabIndex = 9;
             this.label2.Text = "2:";
             // 
-            // btn_setImage1
-            // 
-            this.btn_setImage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
-            this.btn_setImage1.FlatAppearance.BorderSize = 0;
-            this.btn_setImage1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_setImage1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_setImage1.ForeColor = System.Drawing.Color.White;
-            this.btn_setImage1.Location = new System.Drawing.Point(84, 29);
-            this.btn_setImage1.Name = "btn_setImage1";
-            this.btn_setImage1.Size = new System.Drawing.Size(85, 24);
-            this.btn_setImage1.TabIndex = 10;
-            this.btn_setImage1.TabStop = false;
-            this.btn_setImage1.Text = "Add Image 1";
-            this.btn_setImage1.UseVisualStyleBackColor = false;
-            this.btn_setImage1.Click += new System.EventHandler(this.btn_setImage1_Click);
-            // 
-            // btn_setImage2
-            // 
-            this.btn_setImage2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_setImage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
-            this.btn_setImage2.FlatAppearance.BorderSize = 0;
-            this.btn_setImage2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_setImage2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_setImage2.ForeColor = System.Drawing.Color.White;
-            this.btn_setImage2.Location = new System.Drawing.Point(484, 29);
-            this.btn_setImage2.Name = "btn_setImage2";
-            this.btn_setImage2.Size = new System.Drawing.Size(79, 24);
-            this.btn_setImage2.TabIndex = 11;
-            this.btn_setImage2.TabStop = false;
-            this.btn_setImage2.Text = "Add Image 2";
-            this.btn_setImage2.UseVisualStyleBackColor = false;
-            this.btn_setImage2.Click += new System.EventHandler(this.btn_setImage2_Click);
-            // 
             // ofd_image
             // 
             this.ofd_image.Filter = "Image Files|*.bmp;*.gif;*.jpeg;*.jpg;*.png;*.tiff";
             this.ofd_image.Title = "Select an Image";
             // 
-            // btn_clearImage1
+            // btn_setImages1
             // 
-            this.btn_clearImage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
-            this.btn_clearImage1.FlatAppearance.BorderSize = 0;
-            this.btn_clearImage1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_clearImage1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_clearImage1.ForeColor = System.Drawing.Color.White;
-            this.btn_clearImage1.Location = new System.Drawing.Point(84, 59);
-            this.btn_clearImage1.Name = "btn_clearImage1";
-            this.btn_clearImage1.Size = new System.Drawing.Size(85, 24);
-            this.btn_clearImage1.TabIndex = 12;
-            this.btn_clearImage1.TabStop = false;
-            this.btn_clearImage1.Text = "Clr Image 1";
-            this.btn_clearImage1.UseVisualStyleBackColor = false;
-            this.btn_clearImage1.Click += new System.EventHandler(this.btn_clearImage1_Click);
+            this.btn_setImages1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.btn_setImages1.FlatAppearance.BorderSize = 0;
+            this.btn_setImages1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_setImages1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_setImages1.ForeColor = System.Drawing.Color.White;
+            this.btn_setImages1.Location = new System.Drawing.Point(84, 32);
+            this.btn_setImages1.Name = "btn_setImages1";
+            this.btn_setImages1.Size = new System.Drawing.Size(75, 35);
+            this.btn_setImages1.TabIndex = 10;
+            this.btn_setImages1.TabStop = false;
+            this.btn_setImages1.Text = "Set Images";
+            this.btn_setImages1.UseVisualStyleBackColor = false;
+            this.btn_setImages1.Click += new System.EventHandler(this.btn_setImages1_Click);
             // 
-            // btn_clearImage2
+            // btn_setImages2
             // 
-            this.btn_clearImage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
-            this.btn_clearImage2.FlatAppearance.BorderSize = 0;
-            this.btn_clearImage2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_clearImage2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_clearImage2.ForeColor = System.Drawing.Color.White;
-            this.btn_clearImage2.Location = new System.Drawing.Point(484, 59);
-            this.btn_clearImage2.Name = "btn_clearImage2";
-            this.btn_clearImage2.Size = new System.Drawing.Size(79, 24);
-            this.btn_clearImage2.TabIndex = 13;
-            this.btn_clearImage2.TabStop = false;
-            this.btn_clearImage2.Text = "Clr Image 2";
-            this.btn_clearImage2.UseVisualStyleBackColor = false;
-            this.btn_clearImage2.Click += new System.EventHandler(this.btn_clearImage2_Click);
+            this.btn_setImages2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_setImages2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.btn_setImages2.FlatAppearance.BorderSize = 0;
+            this.btn_setImages2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_setImages2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_setImages2.ForeColor = System.Drawing.Color.White;
+            this.btn_setImages2.Location = new System.Drawing.Point(488, 32);
+            this.btn_setImages2.Name = "btn_setImages2";
+            this.btn_setImages2.Size = new System.Drawing.Size(75, 35);
+            this.btn_setImages2.TabIndex = 11;
+            this.btn_setImages2.TabStop = false;
+            this.btn_setImages2.Text = "Set Images";
+            this.btn_setImages2.UseVisualStyleBackColor = false;
+            this.btn_setImages2.Click += new System.EventHandler(this.btn_setImages2_Click);
             // 
             // QuizEditorWordPair
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.Controls.Add(this.btn_clearImage2);
-            this.Controls.Add(this.btn_clearImage1);
-            this.Controls.Add(this.btn_setImage2);
-            this.Controls.Add(this.btn_setImage1);
+            this.Controls.Add(this.btn_setImages2);
+            this.Controls.Add(this.btn_setImages1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_delete);
@@ -314,7 +278,7 @@ namespace SteelQuiz.QuizEditor
             this.Controls.Add(this.txt_word1);
             this.Controls.Add(this.pnl_translationRules);
             this.Name = "QuizEditorWordPair";
-            this.Size = new System.Drawing.Size(730, 97);
+            this.Size = new System.Drawing.Size(730, 78);
             this.SizeChanged += new System.EventHandler(this.QuizEditorWordPair_SizeChanged);
             this.pnl_translationRules.ResumeLayout(false);
             this.pnl_translationRules.PerformLayout();
@@ -336,10 +300,8 @@ namespace SteelQuiz.QuizEditor
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btn_smartCompSettings;
-        private System.Windows.Forms.Button btn_setImage1;
-        private System.Windows.Forms.Button btn_setImage2;
         private System.Windows.Forms.OpenFileDialog ofd_image;
-        private System.Windows.Forms.Button btn_clearImage1;
-        private System.Windows.Forms.Button btn_clearImage2;
+        private System.Windows.Forms.Button btn_setImages1;
+        private System.Windows.Forms.Button btn_setImages2;
     }
 }

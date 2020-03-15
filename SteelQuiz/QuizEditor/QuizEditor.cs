@@ -863,7 +863,7 @@ namespace SteelQuiz.QuizEditor
 
         private void manageResourcesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var resEditor = new QuizResources(QuizImages);
+            var resEditor = new QuizResources(this, QuizImages);
             resEditor.ShowDialog();
         }
     }
