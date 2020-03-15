@@ -54,6 +54,8 @@ namespace SteelQuiz.QuizPractise
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
@@ -64,6 +66,8 @@ namespace SteelQuiz.QuizPractise
             // 
             // lbl_word
             // 
+            this.lbl_word.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_word.Font = new System.Drawing.Font("Segoe UI Semilight", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_word.Location = new System.Drawing.Point(3, 0);
             this.lbl_word.Name = "lbl_word";
@@ -74,6 +78,9 @@ namespace SteelQuiz.QuizPractise
             // 
             // flp_answers
             // 
+            this.flp_answers.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.flp_answers.Controls.Add(this.lbl_word);
             this.flp_answers.Location = new System.Drawing.Point(3, 34);
             this.flp_answers.Name = "flp_answers";

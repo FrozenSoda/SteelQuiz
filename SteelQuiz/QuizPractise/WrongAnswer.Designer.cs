@@ -47,51 +47,30 @@ namespace SteelQuiz.QuizPractise
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.lbl_wrong = new System.Windows.Forms.Label();
-            this.lbl_questionLang = new System.Windows.Forms.Label();
-            this.lbl_questionWord = new System.Windows.Forms.Label();
-            this.lbl_correctAnswer = new System.Windows.Forms.Label();
-            this.lbl_answerLang = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.lbl_instruction = new System.Windows.Forms.Label();
+            this.lbl_correctAnswer = new System.Windows.Forms.Label();
+            this.lbl_answerLang = new System.Windows.Forms.Label();
+            this.lbl_questionWord = new System.Windows.Forms.Label();
+            this.lbl_questionLang = new System.Windows.Forms.Label();
+            this.lbl_wrong = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // lbl_wrong
+            // lbl_instruction
             // 
-            this.lbl_wrong.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_wrong.ForeColor = System.Drawing.Color.Red;
-            this.lbl_wrong.Location = new System.Drawing.Point(4, 18);
-            this.lbl_wrong.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbl_wrong.Name = "lbl_wrong";
-            this.lbl_wrong.Size = new System.Drawing.Size(317, 32);
-            this.lbl_wrong.TabIndex = 0;
-            this.lbl_wrong.Text = "Wrong!";
-            this.lbl_wrong.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lbl_questionLang
-            // 
-            this.lbl_questionLang.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_questionLang.Location = new System.Drawing.Point(4, 74);
-            this.lbl_questionLang.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbl_questionLang.Name = "lbl_questionLang";
-            this.lbl_questionLang.Size = new System.Drawing.Size(317, 32);
-            this.lbl_questionLang.TabIndex = 1;
-            this.lbl_questionLang.Text = "English word:";
-            this.lbl_questionLang.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lbl_questionWord
-            // 
-            this.lbl_questionWord.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_questionWord.Location = new System.Drawing.Point(4, 106);
-            this.lbl_questionWord.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbl_questionWord.Name = "lbl_questionWord";
-            this.lbl_questionWord.Size = new System.Drawing.Size(317, 76);
-            this.lbl_questionWord.TabIndex = 2;
-            this.lbl_questionWord.Text = "To eat";
-            this.lbl_questionWord.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lbl_instruction.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lbl_instruction.Font = new System.Drawing.Font("Segoe UI Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_instruction.Location = new System.Drawing.Point(4, 290);
+            this.lbl_instruction.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_instruction.Name = "lbl_instruction";
+            this.lbl_instruction.Size = new System.Drawing.Size(317, 32);
+            this.lbl_instruction.TabIndex = 5;
+            this.lbl_instruction.Text = "Type the Spanish word";
+            this.lbl_instruction.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbl_correctAnswer
             // 
+            this.lbl_correctAnswer.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lbl_correctAnswer.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_correctAnswer.Location = new System.Drawing.Point(4, 214);
             this.lbl_correctAnswer.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -103,6 +82,7 @@ namespace SteelQuiz.QuizPractise
             // 
             // lbl_answerLang
             // 
+            this.lbl_answerLang.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lbl_answerLang.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_answerLang.Location = new System.Drawing.Point(4, 182);
             this.lbl_answerLang.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -112,16 +92,42 @@ namespace SteelQuiz.QuizPractise
             this.lbl_answerLang.Text = "Correct Spanish word:";
             this.lbl_answerLang.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lbl_instruction
+            // lbl_questionWord
             // 
-            this.lbl_instruction.Font = new System.Drawing.Font("Segoe UI Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_instruction.Location = new System.Drawing.Point(4, 290);
-            this.lbl_instruction.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbl_instruction.Name = "lbl_instruction";
-            this.lbl_instruction.Size = new System.Drawing.Size(317, 32);
-            this.lbl_instruction.TabIndex = 5;
-            this.lbl_instruction.Text = "Type the Spanish word";
-            this.lbl_instruction.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_questionWord.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lbl_questionWord.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_questionWord.Location = new System.Drawing.Point(4, 106);
+            this.lbl_questionWord.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_questionWord.Name = "lbl_questionWord";
+            this.lbl_questionWord.Size = new System.Drawing.Size(317, 76);
+            this.lbl_questionWord.TabIndex = 2;
+            this.lbl_questionWord.Text = "To eat";
+            this.lbl_questionWord.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lbl_questionLang
+            // 
+            this.lbl_questionLang.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lbl_questionLang.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_questionLang.Location = new System.Drawing.Point(4, 74);
+            this.lbl_questionLang.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_questionLang.Name = "lbl_questionLang";
+            this.lbl_questionLang.Size = new System.Drawing.Size(317, 32);
+            this.lbl_questionLang.TabIndex = 1;
+            this.lbl_questionLang.Text = "English word:";
+            this.lbl_questionLang.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_wrong
+            // 
+            this.lbl_wrong.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lbl_wrong.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_wrong.ForeColor = System.Drawing.Color.Red;
+            this.lbl_wrong.Location = new System.Drawing.Point(4, 18);
+            this.lbl_wrong.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_wrong.Name = "lbl_wrong";
+            this.lbl_wrong.Size = new System.Drawing.Size(317, 32);
+            this.lbl_wrong.TabIndex = 0;
+            this.lbl_wrong.Text = "Wrong!";
+            this.lbl_wrong.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // WrongAnswer
             // 

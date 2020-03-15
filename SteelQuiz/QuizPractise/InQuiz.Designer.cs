@@ -54,29 +54,31 @@ namespace SteelQuiz.QuizPractise
             this.lbl_lang1 = new System.Windows.Forms.Label();
             this.lbl_lang2 = new System.Windows.Forms.Label();
             this.btn_w1_synonyms = new System.Windows.Forms.Button();
-            this.pnl_word1 = new System.Windows.Forms.Panel();
-            this.pnl_word2 = new System.Windows.Forms.Panel();
             this.pnl_knewAnswer = new System.Windows.Forms.Panel();
             this.btn_knewAnswerNO = new System.Windows.Forms.Button();
             this.btn_knewAnswerYES = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btn_home = new System.Windows.Forms.Button();
             this.btn_cfg = new System.Windows.Forms.Button();
-            this.pnl_word1.SuspendLayout();
-            this.pnl_word2.SuspendLayout();
+            this.tlp_qAns = new System.Windows.Forms.TableLayoutPanel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.pnl_knewAnswer.SuspendLayout();
+            this.tlp_qAns.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl_word1
             // 
             this.lbl_word1.AutoSize = true;
+            this.lbl_word1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbl_word1.Font = new System.Drawing.Font("Segoe UI Semilight", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_word1.ForeColor = System.Drawing.Color.White;
-            this.lbl_word1.Location = new System.Drawing.Point(0, 0);
-            this.lbl_word1.MaximumSize = new System.Drawing.Size(325, 0);
+            this.lbl_word1.Location = new System.Drawing.Point(3, 60);
             this.lbl_word1.MinimumSize = new System.Drawing.Size(325, 345);
             this.lbl_word1.Name = "lbl_word1";
-            this.lbl_word1.Size = new System.Drawing.Size(325, 345);
+            this.lbl_word1.Size = new System.Drawing.Size(435, 387);
             this.lbl_word1.TabIndex = 0;
             this.lbl_word1.Text = "lbl_word1";
             this.lbl_word1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -85,13 +87,13 @@ namespace SteelQuiz.QuizPractise
             // lbl_word2
             // 
             this.lbl_word2.AutoSize = true;
+            this.lbl_word2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbl_word2.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_word2.ForeColor = System.Drawing.Color.White;
-            this.lbl_word2.Location = new System.Drawing.Point(0, 0);
-            this.lbl_word2.MaximumSize = new System.Drawing.Size(387, 0);
+            this.lbl_word2.Location = new System.Drawing.Point(444, 60);
             this.lbl_word2.MinimumSize = new System.Drawing.Size(387, 345);
             this.lbl_word2.Name = "lbl_word2";
-            this.lbl_word2.Size = new System.Drawing.Size(387, 345);
+            this.lbl_word2.Size = new System.Drawing.Size(436, 387);
             this.lbl_word2.TabIndex = 1;
             this.lbl_word2.Text = "Enter your answer...";
             this.lbl_word2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -122,24 +124,24 @@ namespace SteelQuiz.QuizPractise
             // 
             // lbl_lang1
             // 
-            this.lbl_lang1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lbl_lang1.Dock = System.Windows.Forms.DockStyle.Top;
             this.lbl_lang1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_lang1.ForeColor = System.Drawing.Color.LightGray;
-            this.lbl_lang1.Location = new System.Drawing.Point(65, 9);
+            this.lbl_lang1.Location = new System.Drawing.Point(0, 0);
             this.lbl_lang1.Name = "lbl_lang1";
-            this.lbl_lang1.Size = new System.Drawing.Size(331, 23);
+            this.lbl_lang1.Size = new System.Drawing.Size(435, 23);
             this.lbl_lang1.TabIndex = 5;
             this.lbl_lang1.Text = "lbl_lang1";
             this.lbl_lang1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbl_lang2
             // 
-            this.lbl_lang2.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lbl_lang2.Dock = System.Windows.Forms.DockStyle.Top;
             this.lbl_lang2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_lang2.ForeColor = System.Drawing.Color.LightGray;
-            this.lbl_lang2.Location = new System.Drawing.Point(451, 9);
+            this.lbl_lang2.Location = new System.Drawing.Point(0, 0);
             this.lbl_lang2.Name = "lbl_lang2";
-            this.lbl_lang2.Size = new System.Drawing.Size(390, 23);
+            this.lbl_lang2.Size = new System.Drawing.Size(436, 23);
             this.lbl_lang2.TabIndex = 6;
             this.lbl_lang2.Text = "lbl_lang2";
             this.lbl_lang2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -153,7 +155,7 @@ namespace SteelQuiz.QuizPractise
             this.btn_w1_synonyms.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_w1_synonyms.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_w1_synonyms.ForeColor = System.Drawing.Color.White;
-            this.btn_w1_synonyms.Location = new System.Drawing.Point(193, 35);
+            this.btn_w1_synonyms.Location = new System.Drawing.Point(184, 28);
             this.btn_w1_synonyms.Name = "btn_w1_synonyms";
             this.btn_w1_synonyms.Size = new System.Drawing.Size(75, 23);
             this.btn_w1_synonyms.TabIndex = 7;
@@ -161,27 +163,6 @@ namespace SteelQuiz.QuizPractise
             this.btn_w1_synonyms.Text = "Synonyms";
             this.btn_w1_synonyms.UseVisualStyleBackColor = false;
             this.btn_w1_synonyms.Click += new System.EventHandler(this.btn_w1_synonyms_Click);
-            // 
-            // pnl_word1
-            // 
-            this.pnl_word1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pnl_word1.AutoScroll = true;
-            this.pnl_word1.Controls.Add(this.lbl_word1);
-            this.pnl_word1.Location = new System.Drawing.Point(71, 111);
-            this.pnl_word1.Name = "pnl_word1";
-            this.pnl_word1.Size = new System.Drawing.Size(325, 345);
-            this.pnl_word1.TabIndex = 8;
-            // 
-            // pnl_word2
-            // 
-            this.pnl_word2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pnl_word2.AutoScroll = true;
-            this.pnl_word2.Controls.Add(this.lbl_word2);
-            this.pnl_word2.Location = new System.Drawing.Point(454, 111);
-            this.pnl_word2.Name = "pnl_word2";
-            this.pnl_word2.Size = new System.Drawing.Size(387, 345);
-            this.pnl_word2.TabIndex = 9;
-            this.pnl_word2.Click += new System.EventHandler(this.pnl_word2_Click);
             // 
             // pnl_knewAnswer
             // 
@@ -237,7 +218,7 @@ namespace SteelQuiz.QuizPractise
             this.btn_home.FlatAppearance.BorderSize = 0;
             this.btn_home.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_home.ForeColor = System.Drawing.Color.White;
-            this.btn_home.Location = new System.Drawing.Point(12, 35);
+            this.btn_home.Location = new System.Drawing.Point(3, 28);
             this.btn_home.Name = "btn_home";
             this.btn_home.Size = new System.Drawing.Size(68, 23);
             this.btn_home.TabIndex = 10;
@@ -262,20 +243,55 @@ namespace SteelQuiz.QuizPractise
             this.btn_cfg.UseVisualStyleBackColor = false;
             this.btn_cfg.Click += new System.EventHandler(this.Btn_cfg_Click);
             // 
+            // tlp_qAns
+            // 
+            this.tlp_qAns.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tlp_qAns.ColumnCount = 2;
+            this.tlp_qAns.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlp_qAns.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlp_qAns.Controls.Add(this.panel2, 1, 0);
+            this.tlp_qAns.Controls.Add(this.panel1, 0, 0);
+            this.tlp_qAns.Controls.Add(this.lbl_word2, 1, 1);
+            this.tlp_qAns.Controls.Add(this.lbl_word1, 0, 1);
+            this.tlp_qAns.Location = new System.Drawing.Point(12, 12);
+            this.tlp_qAns.Name = "tlp_qAns";
+            this.tlp_qAns.RowCount = 2;
+            this.tlp_qAns.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tlp_qAns.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tlp_qAns.Size = new System.Drawing.Size(883, 447);
+            this.tlp_qAns.TabIndex = 14;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.lbl_lang2);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(444, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(436, 54);
+            this.panel2.TabIndex = 16;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.btn_home);
+            this.panel1.Controls.Add(this.btn_w1_synonyms);
+            this.panel1.Controls.Add(this.lbl_lang1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(435, 54);
+            this.panel1.TabIndex = 15;
+            // 
             // InQuiz
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(907, 550);
+            this.Controls.Add(this.tlp_qAns);
             this.Controls.Add(this.pnl_knewAnswer);
-            this.Controls.Add(this.lbl_lang2);
-            this.Controls.Add(this.lbl_lang1);
             this.Controls.Add(this.btn_cfg);
-            this.Controls.Add(this.btn_home);
-            this.Controls.Add(this.pnl_word2);
-            this.Controls.Add(this.pnl_word1);
-            this.Controls.Add(this.btn_w1_synonyms);
             this.Controls.Add(this.lbl_intelligentLearning);
             this.Controls.Add(this.lbl_progress);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -287,14 +303,15 @@ namespace SteelQuiz.QuizPractise
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "SteelQuiz";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.InQuiz_FormClosing);
+            this.SizeChanged += new System.EventHandler(this.InQuiz_SizeChanged);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InQuiz_KeyDown);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.InQuiz_KeyPress);
-            this.pnl_word1.ResumeLayout(false);
-            this.pnl_word1.PerformLayout();
-            this.pnl_word2.ResumeLayout(false);
-            this.pnl_word2.PerformLayout();
             this.pnl_knewAnswer.ResumeLayout(false);
             this.pnl_knewAnswer.PerformLayout();
+            this.tlp_qAns.ResumeLayout(false);
+            this.tlp_qAns.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -309,13 +326,14 @@ namespace SteelQuiz.QuizPractise
         private System.Windows.Forms.Label lbl_lang1;
         private System.Windows.Forms.Label lbl_lang2;
         private System.Windows.Forms.Button btn_w1_synonyms;
-        private System.Windows.Forms.Panel pnl_word1;
-        private System.Windows.Forms.Panel pnl_word2;
         private System.Windows.Forms.Button btn_home;
         private System.Windows.Forms.Button btn_cfg;
         private System.Windows.Forms.Panel pnl_knewAnswer;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btn_knewAnswerYES;
         private System.Windows.Forms.Button btn_knewAnswerNO;
+        private System.Windows.Forms.TableLayoutPanel tlp_qAns;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel1;
     }
 }

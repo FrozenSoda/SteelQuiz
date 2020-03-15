@@ -58,6 +58,7 @@ namespace SteelQuiz.QuizPractise
             // 
             // lbl_certainty
             // 
+            this.lbl_certainty.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lbl_certainty.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_certainty.ForeColor = System.Drawing.Color.MediumSpringGreen;
             this.lbl_certainty.Location = new System.Drawing.Point(4, 18);
@@ -70,6 +71,7 @@ namespace SteelQuiz.QuizPractise
             // 
             // lbl_questionLang
             // 
+            this.lbl_questionLang.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lbl_questionLang.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_questionLang.Location = new System.Drawing.Point(4, 74);
             this.lbl_questionLang.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -81,6 +83,7 @@ namespace SteelQuiz.QuizPractise
             // 
             // lbl_questionWord
             // 
+            this.lbl_questionWord.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lbl_questionWord.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_questionWord.Location = new System.Drawing.Point(4, 106);
             this.lbl_questionWord.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -92,6 +95,7 @@ namespace SteelQuiz.QuizPractise
             // 
             // lbl_correctAnswer
             // 
+            this.lbl_correctAnswer.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lbl_correctAnswer.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_correctAnswer.Location = new System.Drawing.Point(4, 214);
             this.lbl_correctAnswer.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -103,6 +107,7 @@ namespace SteelQuiz.QuizPractise
             // 
             // lbl_answerLang
             // 
+            this.lbl_answerLang.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lbl_answerLang.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_answerLang.Location = new System.Drawing.Point(4, 182);
             this.lbl_answerLang.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -114,6 +119,7 @@ namespace SteelQuiz.QuizPractise
             // 
             // lbl_instruction
             // 
+            this.lbl_instruction.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lbl_instruction.Font = new System.Drawing.Font("Segoe UI Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_instruction.Location = new System.Drawing.Point(4, 290);
             this.lbl_instruction.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);

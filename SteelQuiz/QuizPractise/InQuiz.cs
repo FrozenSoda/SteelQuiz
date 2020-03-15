@@ -52,8 +52,6 @@ namespace SteelQuiz.QuizPractise
 
         private MultiAnswer MultiAns { get; set; } = null;
 
-        //private List<string> AnswersAlreadyEntered { get; set; } = null;
-
         public InQuiz(QuizPractiseMode quizPractiseMode, bool welcomeLocationInitialized = true)
         {
             InitializeComponent();
@@ -76,9 +74,6 @@ namespace SteelQuiz.QuizPractise
 
             GameMode = quizPractiseMode;
 
-            //lbl_lang1.Text = QuizCore.Quiz.Language1;
-            //lbl_lang2.Text = QuizCore.Quiz.Language2;
-
             lbl_lang1.Text = QuizCore.QuizProgress.QuestionLanguage;
             lbl_lang2.Text = QuizCore.QuizProgress.AnswerLanguage;
 
@@ -91,12 +86,10 @@ namespace SteelQuiz.QuizPractise
             if (QuizCore.QuizProgress.FullTestInProgress)
             {
                 lbl_intelligentLearning.Text = "Intelligent Learning: Disabled";
-                //lbl_AI.ForeColor = Color.Gray;
             }
             else
             {
                 lbl_intelligentLearning.Text = "Intelligent Learning: Enabled";
-                //lbl_AI.ForeColor = Color.DarkGreen;
             }
 
             if (CurrentWordPair != null && CurrentWordPair.Word1Synonyms.Count > 0)
@@ -181,6 +174,7 @@ namespace SteelQuiz.QuizPractise
                     MultiAns?.Dispose();
                     MultiAns = new MultiAnswer();
                     lbl_word2.Controls.Add(MultiAns);
+                    MultiAns.Dock = DockStyle.Fill;
                     MultiAns.Location = new Point(0, 0);
                     if (GameMode == QuizPractiseMode.Flashcards)
                     {
@@ -416,6 +410,7 @@ namespace SteelQuiz.QuizPractise
                         var probablyCorrectAns = new ProbablyCorrectAnswer(CurrentWordPair.Question, QuizCore.QuizProgress.QuestionLanguage, ansDiff.WordPair.Answer, QuizCore.QuizProgress.AnswerLanguage,
                             "Probably correct!");
                         lbl_word1.Controls.Add(probablyCorrectAns);
+                        probablyCorrectAns.Dock = DockStyle.Fill;
                         probablyCorrectAns.Location = new Point(0, 0);
                         probablyCorrectAns.Show();
                     }
@@ -424,6 +419,7 @@ namespace SteelQuiz.QuizPractise
                         var probablyCorrectAns = new ProbablyCorrectAnswer(CurrentWordPair.Question, QuizCore.QuizProgress.QuestionLanguage, ansDiff.WordPair.Answer, QuizCore.QuizProgress.AnswerLanguage,
                             "Might be correct!");
                         lbl_word1.Controls.Add(probablyCorrectAns);
+                        probablyCorrectAns.Dock = DockStyle.Fill;
                         probablyCorrectAns.Location = new Point(0, 0);
                         probablyCorrectAns.Show();
                     }
@@ -530,8 +526,9 @@ namespace SteelQuiz.QuizPractise
                     var wrongAnswer = new WrongAnswer(CurrentWordPair.Question, QuizCore.QuizProgress.QuestionLanguage, ansDiff.WordPair.Answer, QuizCore.QuizProgress.AnswerLanguage);
                     lbl_word1.Controls.Add(wrongAnswer);
                     wrongAnswer.Location = new Point(0, 0);
+                    wrongAnswer.Dock = DockStyle.Fill;
                     wrongAnswer.Show();
-
+                    
                     UserCopyingWord = true;
                     CurrentInput = "";
 
@@ -695,18 +692,6 @@ namespace SteelQuiz.QuizPractise
         {
             if (GameMode == QuizPractiseMode.Flashcards && CurrentWordPair != null)
             {
-                /*
-                if (MultiAns == null)
-                {
-                    lbl_word2.Text = CurrentWordPair.Answer;
-                }
-                else
-                {
-                    //MultiAns.CurrentLabel.Text = CurrentWordPair.Answer;
-                    MultiAns.CurrentLabel.Text = CurrentWordPair.GetRequiredSynonyms().Where(x => !x.GetWordProgData().AskedThisRound).First().Answer;
-                }
-                pnl_knewAnswer.Visible = true;
-                */
                 MultiAnsReveal();
             }
 
@@ -884,6 +869,13 @@ namespace SteelQuiz.QuizPractise
                 lbl_word2.Text = CurrentWordPair.Answer;
             }
             pnl_knewAnswer.Visible = true;
+        }
+
+        private void InQuiz_SizeChanged(object sender, EventArgs e)
+        {
+            //flp_word1.Size = new Size(Size.Width - 598, Size.Height - 244);
+            //flp_word2.Location = new Point(Size.Width - 469, flp_word2.Location.Y);
+            //flp_word2.Size = new Size(Size.Width - 598, Size.Height - 244);
         }
     }
 }
