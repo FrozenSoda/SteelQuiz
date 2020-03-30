@@ -133,11 +133,14 @@ namespace SteelQuiz
             var quizProgressInfo = Program.frmWelcome.FindQuizProgressInfo(QuizIdentity.QuizGuid);
             quizProgressInfo?.LoadLearningProgressPercentage();
             quizProgressInfo?.LoadWordPairs();
+
+            (ParentForm as Welcome).SwitchQuizProgressInfo(QuizIdentity);
         }
 
         private void exportQuizToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!QuizCore.Load(QuizIdentity.FindQuizPath()))
+            // SwitchQuizProgressInfo() also loads the quiz with QuizCore
+            if (!(ParentForm as Welcome).SwitchQuizProgressInfo(QuizIdentity))
             {
                 return;
             }
