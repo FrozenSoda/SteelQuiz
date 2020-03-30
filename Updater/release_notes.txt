@@ -1,3 +1,11 @@
+v4.3.2:
+- Security updates to libraries, together with other updates.
+- Fixed issues in the quiz loading process that could theoretically cause data loss.
+- Fixed issues that in some cases cause other quizzes than the displayed one to load.
+- Fixed an issue causing SteelQuiz to allow loading incompatible quizzes.
+- Fixed minor issues with the string comparison algorithm.
+
+
 v4.3.0 (v4.3.0.3):
 
 New features:

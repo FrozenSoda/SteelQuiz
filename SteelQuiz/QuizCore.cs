@@ -87,8 +87,6 @@ namespace SteelQuiz
                 throw ex;
             }
 
-            QuizPath = quizPath;
-
             var quizVer = SUtil.PropertyDefined(quiz.FileFormatVersion) && quiz.FileFormatVersion != null
                     ? new Version((string)quiz.FileFormatVersion) : new Version(1, 0, 0);
             var currVer = new Version(MetaData.QUIZ_FILE_FORMAT_VERSION);
@@ -267,7 +265,7 @@ namespace SteelQuiz
                 //SaveQuiz();
             }
 
-            // Fix null synonym lists as they will cause a NullReferenceException later on
+            // Compatibility fix - Fix null synonym lists as they will cause a NullReferenceException later on
             for (int i = 0; i < Quiz.WordPairs.Count(); ++i)
             {
                 if (Quiz.WordPairs[i].Word1Synonyms == null)
