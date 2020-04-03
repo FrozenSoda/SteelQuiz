@@ -1,9 +1,7 @@
 # SteelQuiz
 ## A quiz program designed to make learning words easier  
 
-Tired of practising vocabulary in the traditional way, or with software/websites that ask the same questions over and over? Then you should take a look at SteelQuiz. SteelQuiz contains a feature (optional) which selects the words to ask based on what you know. Words you already know won't be asked as much as words you are a bit more unsure about.
-
-SteelQuiz is still in pre-release phase, so expect some bugs and issues.
+Tired of practising vocabulary/sets of questions in the traditional way, or with software/websites that ask the same questions over and over? Then you should take a look at SteelQuiz. SteelQuiz contains a feature which selects the questions to ask based on what you know. Questions you have already learned won't be asked for as much as those you are a bit more unsure about.
 
 **[Download latest stable setup (recommended)](https://github.com/steel9/SteelQuiz/releases/latest/download/SteelQuizSetup.exe)**   
 &NewLine;   
@@ -17,11 +15,8 @@ It is always recommended to do a full test of the quiz after learning everything
 ### Quiz Editor
 You can create and edit quizzes, with the built in quiz editor. It has full support for undo/redo, provides support for adding synonyms to words, and automatically creates recovery saves for your project in case SteelQuiz exits unexpectedly before you save.
 
-### Fix quiz problems quickly and easily
-Is there a spelling error in the quiz? Or do you want to add a synonym to a word? No problem - just click "Fix quiz errors" while practising, and change the quiz as you like. It only takes a few seconds.
-
 ### Automatic updates
-SteelQuiz automatically downloads and installs updates, or offers to download them, depending on your preferences. It is recommended to always install all available updates, as they often contain important bug fixes and improvements.    
+SteelQuiz automatically downloads and installs updates, offers to download them, or neither, depending on your preferences. It is recommended to always install all available updates, as they often contain important bug fixes and improvements.    
 &NewLine;   
 &NewLine;   
 &NewLine;   
