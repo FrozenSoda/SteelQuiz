@@ -8,7 +8,7 @@ Tired of practising vocabulary/sets of questions in the traditional way, or with
 &NewLine;   
 &NewLine;   
 ### Intelligent Learning
-SteelQuiz contains a feature called _**Intelligent Learning**_, which speeds up the learning process. Words you already know won't be asked as much as words you are unsure about. **This system activates after two rounds**, as it needs to gather some information first, before it can begin sorting out words.
+SteelQuiz contains a feature called _**Intelligent Learning**_, which speeds up the learning process. Questions you already know the answer to with certainty, won't be asked as much as those you are unsure about. **This system activates after two rounds by default**, as it needs to gather some information first, before it can begin sorting out questions.
    
 ### Smart Comparison
 Did you accidentally capitalize the first character of the answer? Did you put a dot in the end, that the stored quiz answer doesn't contain? No worries - SteelQuiz will ignore these minor differences along with others - as long as it is enabled for the quiz you are doing.
