@@ -7,6 +7,13 @@ Tired of practising vocabulary/sets of questions in the traditional way, or with
 **[![button](Res/Web/download_portable.png)](https://github.com/steel9/SteelQuiz/releases/latest/download/SteelQuizPortable.zip)**   
 &NewLine;   
 &NewLine;   
+### System Requirements
+- **Operating system:** Windows 7 SP1 or later
+- **Runtime:** Microsoft .NET Framework 4.7.2
+   
+SteelQuiz should be able to run on Mac and Linux, in CrossOver/Wine, but nothing is guaranteed.
+SteelQuiz has previously been tested in CrossOver on Ubuntu 18.04.2 LTS, and worked acceptably, but as said before, nothing is guaranteed to work.
+**Make sure you install .NET Framework in CrossOver/Wine before installing SteelQuiz!**
 ### Intelligent Learning
 SteelQuiz contains a feature called _**Intelligent Learning**_, which speeds up the learning process. Questions you already know the answer to with certainty, won't be asked as much as those you are unsure about. **This system activates after two rounds by default**, as it needs to gather some information first, before it can begin sorting out questions.
    
@@ -25,7 +32,7 @@ SteelQuiz can store your user data on your preferred cloud storage provider - sy
 ### Quiz Editor
 You can create and edit quizzes, with the built in quiz editor. It has full support for undo/redo, provides support for adding synonyms to words, and automatically creates recovery saves for your project in case SteelQuiz exits unexpectedly before you save.
 
-### Automatic updates
+### Automatic Updates
 SteelQuiz automatically downloads and installs updates, offers to download them, or neither, depending on your preferences. It is recommended to always install all available updates, as they often contain important bug fixes and improvements.    
 &NewLine;   
 &NewLine;   
@@ -36,15 +43,8 @@ SteelQuiz automatically downloads and installs updates, offers to download them,
 &NewLine;   
 &NewLine;   
 &NewLine;   
-### System requirements
-- **Operating system:** Windows 7 SP1 or later
-- **Runtime:** Microsoft .NET Framework 4.7.2
-   
-SteelQuiz should be able to run on Mac and Linux, in CrossOver/Wine, but nothing is guaranteed.
-SteelQuiz has been tested in CrossOver on Ubuntu 18.04.2 LTS, and worked acceptably, but as said before, nothing is guaranteed to work.
-**Make sure you install .NET Framework in CrossOver/Wine before installing SteelQuiz!**
 
-### Incompatible software
+### Incompatible Software
 - **f.lux Microsoft Store version**   
 Causes problems with installation, updates, and uninstallation of SteelQuiz. The specific cause of the problem is currently unknown. For some reason, it causes System PID 4 to lock SteelQuiz.exe.   
 **Solution:** Uninstall the f.lux Microsoft Store version, and install the non-Store version of f.lux instead (the one you download from their website).
@@ -52,7 +52,7 @@ Causes problems with installation, updates, and uninstallation of SteelQuiz. The
 ## Contributing
 Thank you for your interest in contributing to SteelQuiz! If you do so, please follow the [coding conventions](CODING_CONVENTIONS.md).   
 
-### Development tools
+### Development Tools
 - Microsoft Visual Studio Community 2019
 - Nullsoft Scriptable Install System v3
 - Git v2
