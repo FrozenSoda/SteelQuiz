@@ -10,9 +10,18 @@ Tired of practising vocabulary/sets of questions in the traditional way, or with
 ### Intelligent Learning
 SteelQuiz contains a feature called _**Intelligent Learning**_, which speeds up the learning process. Words you already know won't be asked as much as words you are unsure about. **This system activates after two rounds**, as it needs to gather some information first, before it can begin sorting out words.
    
+### Smart Comparison
+Did you accidentally capitalize the first character of the answer? Did you put a dot in the end, that the stored quiz answer doesn't contain? No worries - SteelQuiz will ignore these minor differences along with others - as long as it is enabled for the quiz you are doing.
+   
 ### Dark Mode Support
 SteelQuiz has a built-in light theme and dark theme - select the one that suits you best. It can also sync the theme with Windows 10.
-
+   
+### Quiz Import/Export Support
+You can import quizzes to SteelQuiz, from other sources that supports text exportation. And vice versa - SteelQuiz also supports quiz exportation.
+   
+### Sync your data across different computers
+SteelQuiz can store your user data on your preferred cloud storage provider - syncing your progress and quizzes across multiple devices.
+   
 ### Quiz Editor
 You can create and edit quizzes, with the built in quiz editor. It has full support for undo/redo, provides support for adding synonyms to words, and automatically creates recovery saves for your project in case SteelQuiz exits unexpectedly before you save.
 
