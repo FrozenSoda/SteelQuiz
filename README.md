@@ -8,8 +8,10 @@ Tired of practising vocabulary/sets of questions in the traditional way, or with
 &NewLine;   
 &NewLine;   
 ### Intelligent Learning
-SteelQuiz contains a feature called _**Intelligent Learning**_, which speeds up the learning process. Words you already know won't be asked as much as words you are unsure about. **This system activates after two rounds**, as it needs to gather some information first, before it can begin sorting out words. To disable Intelligent Learning, just click on the disable button while practising the quiz.
-It is always recommended to do a full test of the quiz after learning everything with Intelligent Learning, as you might have forgotten some words. Intelligent Learning also uses randomness, to occasionally ask questions you are sure of, to make sure you don't forget them.
+SteelQuiz contains a feature called _**Intelligent Learning**_, which speeds up the learning process. Words you already know won't be asked as much as words you are unsure about. **This system activates after two rounds**, as it needs to gather some information first, before it can begin sorting out words.
+   
+### Dark Mode Support
+SteelQuiz has a built-in light theme and dark theme - select the one that suits you best. It can also sync the theme with Windows 10.
 
 ### Quiz Editor
 You can create and edit quizzes, with the built in quiz editor. It has full support for undo/redo, provides support for adding synonyms to words, and automatically creates recovery saves for your project in case SteelQuiz exits unexpectedly before you save.
@@ -20,7 +22,7 @@ SteelQuiz automatically downloads and installs updates, offers to download them,
 &NewLine;   
 &NewLine;   
 ### Additional notes
-- The portable version (and the installed version) saves user data (config, quizzes, quiz progress etc.) in '%appdata%\SteelQuiz'.
+- The portable version (and the installed version) saves user data (config, quizzes, quiz progress etc.) in _%appdata%\SteelQuiz_.
 - The uninstaller does not remove user data.
 &NewLine;   
 &NewLine;   
