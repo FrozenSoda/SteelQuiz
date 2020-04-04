@@ -1,7 +1,7 @@
 # Should I "Download Setup" or "Download Portable"?
 ### If you are unsure - choose *Download Setup*
 &NewLine;\
-**Download Setup** if you want to install the program. Administrator privileges are not required.\
+**Download Setup** if you want to install the program. This is generally the best and easiest option for the vast majority of users. Administrator privileges are not required.\
 &NewLine;\
 **Download Portable** to get all program files in a ZIP archive - no installation needed. Do so if any of the following statements are true:
 - you will put the program on a USB stick for usage across multiple PCs
