@@ -1,5 +1,5 @@
-# Should I Download Setup or Download Portable?
-### If you are unsure - choose Download Setup
+# Should I "Download Setup" or "Download Portable"?
+### If you are unsure - choose *Download Setup*
 &NewLine;\
 **Download Setup** if you are installing the program on a PC. Administrator privileges are not required.\
 &NewLine;\
