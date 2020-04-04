@@ -5,10 +5,12 @@ Tired of practising vocabulary/sets of questions in the traditional way, or with
 
 **[![button](Res/Web/download_setup.png)](https://github.com/steel9/SteelQuiz/releases/latest/download/SteelQuizSetup.exe)**
 **[![button](Res/Web/download_portable.png)](https://github.com/steel9/SteelQuiz/releases/latest/download/SteelQuizPortable.zip)**   
-Windows 7 SP1 + .NET Framework 4.7.2 or later required.   
-For MacOS/Linux - try CrossOver, with .NET Framework installed. Might work, might not.   
-&NewLine;   
-&NewLine;   
+Windows 7 SP1 + .NET Framework 4.7.2 or later required.\
+For MacOS/Linux - try CrossOver, with .NET Framework installed. Might work, might not.\
+&NewLine;\
+[Which one to choose?](Setup_or_portable_download.md)\
+&NewLine;\
+&NewLine;
 ### Intelligent Learning
 SteelQuiz contains a feature called _**Intelligent Learning**_, which speeds up the learning process. Questions you already know the answer to with certainty, won't be asked as much as those you are unsure about. **This system activates after two rounds by default**, as it needs to gather some information first, before it can begin sorting out questions.
    
