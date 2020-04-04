@@ -1,7 +1,7 @@
 # SteelQuiz
 ## A quiz program designed to make learning easier  
 
-Tired of practising vocabulary/sets of questions in the traditional way, or with software/websites that ask the same questions over and over? Then you should take a look at SteelQuiz. SteelQuiz contains a feature which selects the questions to ask based on what you know. Questions you have already learned won't be asked for as much as those you are a bit more unsure about.
+Tired of practising vocabulary/sets of questions in the traditional way, or with software/websites that ask the same questions over and over? Then you should take a look at SteelQuiz. SteelQuiz picks questions to ask based on what you have already learned and what not. Thus, the process of learning will be much faster - increasing your effectivity and saving your time for things you like to do.
 
 **[![button](Res/Web/download_setup.png)](https://github.com/steel9/SteelQuiz/releases/latest/download/SteelQuizSetup.exe)**
 **[![button](Res/Web/download_portable.png)](https://github.com/steel9/SteelQuiz/releases/latest/download/SteelQuizPortable.zip)**   
