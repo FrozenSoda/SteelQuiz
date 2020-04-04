@@ -7,7 +7,6 @@ Tired of practising vocabulary/sets of questions in the traditional way, or with
 **[![button](Res/Web/download_portable.png)](https://github.com/steel9/SteelQuiz/releases/latest/download/SteelQuizPortable.zip)**   
 Windows 7 SP1 + .NET Framework 4.7.2 or later required.\
 For MacOS/Linux - try CrossOver, with .NET Framework installed. Might work, might not.\
-&NewLine;\
 [Which one to choose?](Setup_or_portable_download.md)\
 &NewLine;\
 &NewLine;
