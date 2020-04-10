@@ -50,10 +50,9 @@ namespace SteelQuiz.QuizImport.Guide
             }
         }
 
-        private QuizImporter.ImportSource ImportSource { get; set; }
+        private ImportSource ImportSource { get; set; }
         private bool MultipleTranslationsAsDifferentWordPairs { get; set; }
         private IEnumerable<WordPair> WordPairs { get; set; } = null;
-        private string QuizFolder { get; set; }
         private string QuizPath { get; set; }
         private string Language1 { get; set; }
         private string Language2 { get; set; }
@@ -74,11 +73,11 @@ namespace SteelQuiz.QuizImport.Guide
                 var uc = GetStep(Step, ImportSource.NULL) as Step1;
                 if (uc.rdo_studentlitteratur.Checked)
                 {
-                    ImportSource = QuizImporter.ImportSource.Studentlitteratur;
+                    ImportSource = ImportSource.Studentlitteratur;
                 }
                 else if (uc.rdo_textImport.Checked)
                 {
-                    ImportSource = QuizImporter.ImportSource.TextImport;
+                    ImportSource = ImportSource.TextImport;
                 }
                 else
                 {
@@ -87,12 +86,12 @@ namespace SteelQuiz.QuizImport.Guide
             }
             else if (Step == 2)
             {
-                if (ImportSource == QuizImporter.ImportSource.TextImport)
+                if (ImportSource == ImportSource.TextImport)
                 {
                     var uc = GetStep(Step, ImportSource) as TextImport.Step2;
                     MultipleTranslationsAsDifferentWordPairs = uc.rdo_multipleTranslationsAsDifferentWordPairs.Checked;
                 }
-                else if (ImportSource == QuizImporter.ImportSource.Studentlitteratur)
+                else if (ImportSource == ImportSource.Studentlitteratur)
                 {
                     var uc = GetStep(Step, ImportSource) as Studentlitteratur.Step2;
                     MultipleTranslationsAsDifferentWordPairs = uc.rdo_multipleTranslationsAsDifferentWordPairs.Checked;
@@ -100,7 +99,7 @@ namespace SteelQuiz.QuizImport.Guide
             }
             else if (Step == 3)
             {
-                if (ImportSource == QuizImporter.ImportSource.TextImport)
+                if (ImportSource == ImportSource.TextImport)
                 {
                     var uc = GetStep(Step, ImportSource) as TextImport.Step3;
 
@@ -148,14 +147,14 @@ namespace SteelQuiz.QuizImport.Guide
 
                     WordPairs = wordPairs;
                 }
-                else if (ImportSource == QuizImporter.ImportSource.Studentlitteratur)
+                else if (ImportSource == ImportSource.Studentlitteratur)
                 {
                     var uc = GetStep(Step, ImportSource) as Studentlitteratur.Step3;
                     string url = uc.txt_url.Text;
                     IEnumerable<WordPair> wordPairs;
-                    if (ImportSource == QuizImporter.ImportSource.Studentlitteratur)
+                    if (ImportSource == ImportSource.Studentlitteratur)
                     {
-                        wordPairs = QuizImporter.FromStudentlitteratur(url, MultipleTranslationsAsDifferentWordPairs);
+                        wordPairs = FromStudentlitteratur(url, MultipleTranslationsAsDifferentWordPairs);
                     }
                     else
                     {
@@ -178,7 +177,7 @@ namespace SteelQuiz.QuizImport.Guide
             }
             else if (Step == 4)
             {
-                if (ImportSource == QuizImporter.ImportSource.TextImport)
+                if (ImportSource == ImportSource.TextImport)
                 {
                     var uc = GetStep(Step, ImportSource) as TextImport.Step4;
                     if (uc.Language1 == "")
@@ -188,7 +187,7 @@ namespace SteelQuiz.QuizImport.Guide
                     }
                     Language1 = uc.Language1;
                 }
-                else if (ImportSource == QuizImporter.ImportSource.Studentlitteratur)
+                else if (ImportSource == ImportSource.Studentlitteratur)
                 {
                     var uc = GetStep(Step, ImportSource) as Studentlitteratur.Step4;
                     if (uc.Language1 == "")
@@ -201,7 +200,7 @@ namespace SteelQuiz.QuizImport.Guide
             }
             else if (Step == 5)
             {
-                if (ImportSource == QuizImporter.ImportSource.TextImport)
+                if (ImportSource == ImportSource.TextImport)
                 {
                     var uc = GetStep(Step, ImportSource) as TextImport.Step5;
                     if (uc.Language2 == "")
@@ -214,7 +213,7 @@ namespace SteelQuiz.QuizImport.Guide
                     Finish();
                     return;
                 }
-                else if (ImportSource == QuizImporter.ImportSource.Studentlitteratur)
+                else if (ImportSource == ImportSource.Studentlitteratur)
                 {
                     var uc = GetStep(Step, ImportSource) as Studentlitteratur.Step5;
                     if (uc.Language2 == "")
@@ -320,33 +319,33 @@ namespace SteelQuiz.QuizImport.Guide
             }
             else if (Step == 3)
             {
-                if (ImportSource == QuizImporter.ImportSource.TextImport)
+                if (ImportSource == ImportSource.TextImport)
                 {
                     (GetStep(Step, ImportSource) as TextImport.Step3).rtf_text.Focus();
                 }
-                else if (ImportSource == QuizImporter.ImportSource.Studentlitteratur)
+                else if (ImportSource == ImportSource.Studentlitteratur)
                 {
                     (GetStep(Step, ImportSource) as Control as Studentlitteratur.Step3).txt_url.Focus();
                 }
             }
             else if (Step == 4)
             {
-                if (ImportSource == QuizImporter.ImportSource.TextImport)
+                if (ImportSource == ImportSource.TextImport)
                 {
                     (GetStep(Step, ImportSource) as TextImport.Step4).txt_lang.Focus();
                 }
-                else if (ImportSource == QuizImporter.ImportSource.Studentlitteratur)
+                else if (ImportSource == ImportSource.Studentlitteratur)
                 {
                     (GetStep(Step, ImportSource) as Studentlitteratur.Step4).txt_lang.Focus();
                 }
             }
             else if (Step == 5)
             {
-                if (ImportSource == QuizImporter.ImportSource.TextImport)
+                if (ImportSource == ImportSource.TextImport)
                 {
                     (GetStep(Step, ImportSource) as TextImport.Step5).txt_lang.Focus();
                 }
-                else if (ImportSource == QuizImporter.ImportSource.Studentlitteratur)
+                else if (ImportSource == ImportSource.Studentlitteratur)
                 {
                     (GetStep(Step, ImportSource) as Studentlitteratur.Step5).txt_lang.Focus();
                 }
@@ -388,7 +387,7 @@ namespace SteelQuiz.QuizImport.Guide
                 var step1 = new Step1();
                 pnl_steps.Controls.Add(step1);
             }
-            if (ImportSource == QuizImporter.ImportSource.TextImport)
+            if (ImportSource == ImportSource.TextImport)
             {
                 if (step == 2)
                 {
@@ -411,7 +410,7 @@ namespace SteelQuiz.QuizImport.Guide
                     pnl_steps.Controls.Add(step5);
                 }
             }
-            else if (ImportSource == QuizImporter.ImportSource.Studentlitteratur)
+            else if (ImportSource == ImportSource.Studentlitteratur)
             {
                 if (step == 2)
                 {
