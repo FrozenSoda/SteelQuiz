@@ -57,8 +57,9 @@ namespace SteelQuiz.Preferences
             this.panel2 = new System.Windows.Forms.Panel();
             this.btn_resetToDefaultsQuizSavePath = new System.Windows.Forms.Button();
             this.btn_browseDefaultQuizSavePath = new System.Windows.Forms.Button();
-            this.txt_defaultQuizSavePath = new System.Windows.Forms.TextBox();
+            this.txt_defaultQuizSaveFolder = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.fbd_defaultQuizSaveFolder = new System.Windows.Forms.FolderBrowserDialog();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -141,7 +142,7 @@ namespace SteelQuiz.Preferences
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.panel2.Controls.Add(this.btn_resetToDefaultsQuizSavePath);
             this.panel2.Controls.Add(this.btn_browseDefaultQuizSavePath);
-            this.panel2.Controls.Add(this.txt_defaultQuizSavePath);
+            this.panel2.Controls.Add(this.txt_defaultQuizSaveFolder);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Location = new System.Drawing.Point(14, 178);
             this.panel2.Name = "panel2";
@@ -159,6 +160,7 @@ namespace SteelQuiz.Preferences
             this.btn_resetToDefaultsQuizSavePath.TabIndex = 5;
             this.btn_resetToDefaultsQuizSavePath.Text = "Reset to defaults";
             this.btn_resetToDefaultsQuizSavePath.UseVisualStyleBackColor = false;
+            this.btn_resetToDefaultsQuizSavePath.Click += new System.EventHandler(this.btn_resetToDefaultsQuizSavePath_Click);
             // 
             // btn_browseDefaultQuizSavePath
             // 
@@ -171,15 +173,16 @@ namespace SteelQuiz.Preferences
             this.btn_browseDefaultQuizSavePath.TabIndex = 3;
             this.btn_browseDefaultQuizSavePath.Text = "...";
             this.btn_browseDefaultQuizSavePath.UseVisualStyleBackColor = false;
+            this.btn_browseDefaultQuizSavePath.Click += new System.EventHandler(this.btn_browseDefaultQuizSavePath_Click);
             // 
-            // txt_defaultQuizSavePath
+            // txt_defaultQuizSaveFolder
             // 
-            this.txt_defaultQuizSavePath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txt_defaultQuizSavePath.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_defaultQuizSavePath.Location = new System.Drawing.Point(15, 40);
-            this.txt_defaultQuizSavePath.Name = "txt_defaultQuizSavePath";
-            this.txt_defaultQuizSavePath.Size = new System.Drawing.Size(536, 23);
-            this.txt_defaultQuizSavePath.TabIndex = 2;
+            this.txt_defaultQuizSaveFolder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_defaultQuizSaveFolder.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_defaultQuizSaveFolder.Location = new System.Drawing.Point(15, 40);
+            this.txt_defaultQuizSaveFolder.Name = "txt_defaultQuizSaveFolder";
+            this.txt_defaultQuizSaveFolder.Size = new System.Drawing.Size(536, 23);
+            this.txt_defaultQuizSaveFolder.TabIndex = 2;
             // 
             // label3
             // 
@@ -188,9 +191,13 @@ namespace SteelQuiz.Preferences
             this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(0, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(208, 25);
+            this.label3.Size = new System.Drawing.Size(267, 25);
             this.label3.TabIndex = 0;
-            this.label3.Text = "Default Quiz Save Path";
+            this.label3.Text = "Default Quiz Save Folder Path";
+            // 
+            // fbd_defaultQuizSaveFolder
+            // 
+            this.fbd_defaultQuizSaveFolder.Description = "Select the folder that should be the default folder for saving quizzes in";
             // 
             // PrefsStorage
             // 
@@ -223,7 +230,8 @@ namespace SteelQuiz.Preferences
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btn_resetToDefaultsQuizSavePath;
         private System.Windows.Forms.Button btn_browseDefaultQuizSavePath;
-        private System.Windows.Forms.TextBox txt_defaultQuizSavePath;
+        private System.Windows.Forms.TextBox txt_defaultQuizSaveFolder;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.FolderBrowserDialog fbd_defaultQuizSaveFolder;
     }
 }

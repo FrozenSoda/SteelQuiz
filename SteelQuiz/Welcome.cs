@@ -79,7 +79,7 @@ namespace SteelQuiz
 
             SetControlStates();
 
-            ofd_loadQuiz.InitialDirectory = ConfigManager.Config.StorageConfig.DefaultQuizSavePath;
+            ofd_loadQuiz.InitialDirectory = ConfigManager.Config.StorageConfig.DefaultQuizSaveFolder;
 
             if (Util.WinVer.WindowsVersion().Major >= 10) // if user runs Windows 10
             {

@@ -59,6 +59,7 @@ namespace SteelQuiz.Preferences
             this.rdo_chDev = new System.Windows.Forms.RadioButton();
             this.rdo_chStable = new System.Windows.Forms.RadioButton();
             this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.pnl_autoUpdate.SuspendLayout();
             this.pnl_updateDialog.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_buttonEnableDelay)).BeginInit();
@@ -132,6 +133,7 @@ namespace SteelQuiz.Preferences
             // pnl_updateDialog
             // 
             this.pnl_updateDialog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.pnl_updateDialog.Controls.Add(this.label4);
             this.pnl_updateDialog.Controls.Add(this.nud_buttonEnableDelay);
             this.pnl_updateDialog.Controls.Add(this.label3);
             this.pnl_updateDialog.Controls.Add(this.label2);
@@ -144,14 +146,14 @@ namespace SteelQuiz.Preferences
             // 
             this.nud_buttonEnableDelay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.nud_buttonEnableDelay.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nud_buttonEnableDelay.Location = new System.Drawing.Point(186, 33);
+            this.nud_buttonEnableDelay.Location = new System.Drawing.Point(167, 40);
             this.nud_buttonEnableDelay.Maximum = new decimal(new int[] {
             20,
             0,
             0,
             0});
             this.nud_buttonEnableDelay.Name = "nud_buttonEnableDelay";
-            this.nud_buttonEnableDelay.Size = new System.Drawing.Size(120, 23);
+            this.nud_buttonEnableDelay.Size = new System.Drawing.Size(50, 23);
             this.nud_buttonEnableDelay.TabIndex = 2;
             this.nud_buttonEnableDelay.Value = new decimal(new int[] {
             3,
@@ -165,11 +167,11 @@ namespace SteelQuiz.Preferences
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(9, 34);
+            this.label3.Location = new System.Drawing.Point(11, 40);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(171, 21);
+            this.label3.Size = new System.Drawing.Size(150, 21);
             this.label3.TabIndex = 1;
-            this.label3.Text = "Button enable delay (s):";
+            this.label3.Text = "Button enable delay:";
             // 
             // label2
             // 
@@ -231,6 +233,17 @@ namespace SteelQuiz.Preferences
             this.label5.TabIndex = 0;
             this.label5.Text = "Update Channel";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.Location = new System.Drawing.Point(223, 40);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(66, 21);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "seconds";
+            // 
             // PrefsUpdates
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -267,5 +280,6 @@ namespace SteelQuiz.Preferences
         internal System.Windows.Forms.RadioButton rdo_chStable;
         private System.Windows.Forms.Label label5;
         internal System.Windows.Forms.RadioButton rdo_doNotUpdate;
+        private System.Windows.Forms.Label label4;
     }
 }

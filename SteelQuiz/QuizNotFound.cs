@@ -35,7 +35,7 @@ namespace SteelQuiz
             }
             else
             {
-                ofd_quiz.InitialDirectory = ConfigManager.Config.StorageConfig.DefaultQuizSavePath;
+                ofd_quiz.InitialDirectory = ConfigManager.Config.StorageConfig.DefaultQuizSaveFolder;
             }
 
             SetTheme();

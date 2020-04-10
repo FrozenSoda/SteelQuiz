@@ -51,10 +51,19 @@ namespace SteelQuiz.Preferences
         public void LoadPreferences()
         {
             txt_quizProgPath.Text = Path.GetDirectoryName(ConfigManager.Config.StorageConfig.QuizProgressPath);
+            txt_defaultQuizSaveFolder.Text = ConfigManager.Config.StorageConfig.DefaultQuizSaveFolder;
         }
 
-        public bool Save(bool saveConfig)
+        public bool Save(bool writeToDisk)
         {
+            if (!Directory.Exists(txt_defaultQuizSaveFolder.Text))
+            {
+                MessageBox.Show("Specified default quiz save folder path doesn't exist", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            ConfigManager.Config.StorageConfig.DefaultQuizSaveFolder = txt_defaultQuizSaveFolder.Text;
+
             var oldPath = ConfigManager.Config.StorageConfig.QuizProgressPath;
 
             string newPath;
@@ -142,7 +151,7 @@ namespace SteelQuiz.Preferences
 
             ConfigManager.Config.StorageConfig.QuizProgressPath = newPath;
 
-            if (saveConfig)
+            if (writeToDisk)
             {
                 ConfigManager.SaveConfig();
             }
@@ -152,7 +161,7 @@ namespace SteelQuiz.Preferences
 
         private void Btn_resetToDefaults_Click(object sender, EventArgs e)
         {
-            var msg = MessageBox.Show("Reset quiz progress folder path to the default? Your current progress data will be moved to the new (default) path", "SteelQuiz",
+            var msg = MessageBox.Show("Reset quiz progress folder path to the default value? Your current progress data will be moved to the new (default) path", "SteelQuiz",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (msg == DialogResult.No)
@@ -166,6 +175,30 @@ namespace SteelQuiz.Preferences
 
         private void Txt_quizProgPath_Leave(object sender, EventArgs e)
         {
+            Save(true);
+        }
+
+        private void btn_browseDefaultQuizSavePath_Click(object sender, EventArgs e)
+        {
+            fbd_defaultQuizSaveFolder.SelectedPath = ConfigManager.Config.StorageConfig.DefaultQuizSaveFolder;
+            if (fbd_defaultQuizSaveFolder.ShowDialog() == DialogResult.OK)
+            {
+                txt_defaultQuizSaveFolder.Text = fbd_defaultQuizSaveFolder.SelectedPath;
+                Save(true);
+            }
+        }
+
+        private void btn_resetToDefaultsQuizSavePath_Click(object sender, EventArgs e)
+        {
+            var msg = MessageBox.Show("Reset default quiz save folder path to the default value?", "SteelQuiz",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (msg == DialogResult.No)
+            {
+                return;
+            }
+
+            txt_defaultQuizSaveFolder.Text = QuizCore.QUIZ_FOLDER_DEFAULT;
             Save(true);
         }
     }
