@@ -111,6 +111,12 @@
     <Compile Include="QuizImport\Guide\TextImport\Step5.Designer.cs">
       <DependentUpon>Step5.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuizNotFound.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuizNotFound.Designer.cs">
+      <DependentUpon>QuizNotFound.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuizPractise\MultiAnswer.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -474,6 +480,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="QuizImport\Guide\TextImport\Step5.resx">
       <DependentUpon>Step5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuizNotFound.resx">
+      <DependentUpon>QuizNotFound.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuizPractise\MultiAnswer.resx">
       <DependentUpon>MultiAnswer.cs</DependentUpon>

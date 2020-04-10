@@ -169,7 +169,13 @@ namespace SteelQuiz
 
         public bool SwitchQuizProgressInfo(QuizIdentity quizIdentity)
         {
-            if (!QuizCore.Load(quizIdentity.FindQuizPath()))
+            var quizPath = quizIdentity.FindQuizPath();
+            if (quizPath == null)
+            {
+                return false;
+            }
+
+            if (!QuizCore.Load(quizPath))
             {
                 return false;
             }

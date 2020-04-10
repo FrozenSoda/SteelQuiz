@@ -321,26 +321,6 @@ namespace SteelQuiz
             Program.frmWelcome.OpenQuizEditor(QuizCore.Quiz, QuizCore.QuizPath);
         }
 
-        private void Btn_resetProgress_Click(object sender, EventArgs e)
-        {
-            var msg = MessageBox.Show($"Are you sure you want to start over learning the quiz '{QuizIdentity.FindName()}'? This action cannot be undone.",
-                "Reset Quiz Progress data - SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
-            if (msg != DialogResult.Yes)
-            {
-                return;
-            }
-
-            // Ensure we are not resetting the wrong progress data
-            SAssert.Assert(QuizCore.QuizProgress.QuizGUID == QuizIdentity.QuizGuid);
-            SAssert.Assert(QuizCore.Quiz.GUID == QuizIdentity.QuizGuid);
-
-            QuizCore.QuizProgress = new QuizProgData(QuizCore.Quiz);
-            QuizCore.SaveQuizProgress();
-
-            LoadLearningProgressPercentage();
-            LoadWordPairs();
-        }
-
         private void Lbl_learningProgress_bar_SizeChanged(object sender, EventArgs e)
         {
             //double progress = lbl_learningProgress_bar.Size.Width / (double)Size.Width;

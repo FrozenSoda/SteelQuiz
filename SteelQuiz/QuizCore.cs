@@ -125,32 +125,35 @@ namespace SteelQuiz
         }
 
         /// <summary>
-        /// Finds the quiz path for the quiz with the specified Guid.
+        /// Attempts to quickly find the quiz path for the quiz with the specified Guid.
         /// </summary>
         /// <param name="quizGuid">The quiz Guid.</param>
+        /// <param name="oldQuizPath">The old path to the quiz.</param>
         /// <returns>Returns the path to the quiz if it can be found, otherwise returns null.</returns>
-        public static string FindQuizPath(Guid quizGuid)
+        public static string QuickFindQuizPath(Guid quizGuid, string oldQuizPath)
         {
+            if (!Directory.Exists(Path.GetDirectoryName(oldQuizPath)))
+            {
+                return null;
+            }
+
             Quiz quiz;
 
-            foreach (var quizFolder in ConfigManager.Config.StorageConfig.QuizFolders)
+            foreach (var file in Directory.GetFiles(Path.GetDirectoryName(oldQuizPath), $"*.{QUIZ_EXTENSION}", SearchOption.TopDirectoryOnly))
             {
-                foreach (var file in Directory.GetFiles(quizFolder, $"*.{QUIZ_EXTENSION}", SearchOption.AllDirectories))
+                try
                 {
-                    try
-                    {
-                        string quizRaw = AtomicIO.AtomicRead(file);
-                        quiz = JsonConvert.DeserializeObject<Quiz>(quizRaw);
-                    }
-                    catch (AtomicException)
-                    {
-                        continue;
-                    }
+                    string quizRaw = AtomicIO.AtomicRead(file);
+                    quiz = JsonConvert.DeserializeObject<Quiz>(quizRaw);
+                }
+                catch (AtomicException)
+                {
+                    continue;
+                }
 
-                    if (quiz != null && quiz.GUID == quizGuid)
-                    {
-                        return file;
-                    }
+                if (quiz != null && quiz.GUID == quizGuid)
+                {
+                    return file;
                 }
             }
 
@@ -254,9 +257,8 @@ namespace SteelQuiz
 
             var progressVer = SUtil.PropertyDefined(cfgDz.FileFormatVersion) && cfgDz.FileFormatVersion != null
                 ? new Version((string)cfgDz.FileFormatVersion) : new Version(1, 0, 0);
-            var currVer = new Version(MetaData.QUIZ_FILE_FORMAT_VERSION);
-            int cmp = currVer.CompareTo(progressVer);
-            if (cmp > 0)
+            var currVer = new Version(MetaData.CONFIG_FILE_FORMAT_VERSION);
+            if (new Version(3, 0, 0).CompareTo(progressVer) > 0)
             {
                 var msg = MessageBox.Show("Due to major changes in the quiz progress format, your quiz progress data has to be reset to work with the new version." +
                         " The old format contained unfixable problems, and a conversion would have been too complex and buggy.\r\n\r\nA backup will automatically" +
@@ -278,7 +280,7 @@ namespace SteelQuiz
 
                 return ChkUpgradeProgressDataResult.UpgradedDowngraded;
             }
-            else if (cmp < 0)
+            else if (currVer.CompareTo(progressVer) < 0)
             {
                 var msg = MessageBox.Show("Your progress data file is made for a newer version of SteelQuiz. Revert progress data from backup?",
                     "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);

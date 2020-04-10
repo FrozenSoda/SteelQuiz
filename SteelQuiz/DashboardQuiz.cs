@@ -46,7 +46,8 @@ namespace SteelQuiz
 
             QuizIdentity = quizIdentity;
 
-            lbl_name.Text = Path.GetFileNameWithoutExtension(QuizIdentity.FindQuizPath());
+            //lbl_name.Text = Path.GetFileNameWithoutExtension(QuizIdentity.FindQuizPath());
+            lbl_name.Text = Path.GetFileNameWithoutExtension(QuizIdentity.LastKnownPath);
         }
 
         public override void SetTheme(GeneralTheme theme)
@@ -101,7 +102,7 @@ namespace SteelQuiz
 
         private void RemoveFromListToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var msg = MessageBox.Show($"Are you sure you want to remove the quiz '{QuizIdentity.FindName()}' from the 'Recent Quizzes' list? The quiz file will not be removed.",
+            var msg = MessageBox.Show($"Are you sure you want to remove the quiz '{QuizIdentity.GetLastKnownName()}' from the 'Recent Quizzes' list? The quiz file will not be removed.",
                 "Remove Quiz - SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (msg == DialogResult.Yes)
             {
@@ -111,14 +112,20 @@ namespace SteelQuiz
 
         private void ResetProgressDataToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var msg = MessageBox.Show($"Are you sure you want to start over learning the quiz '{QuizIdentity.FindName()}'? This action cannot be undone.",
+            var msg = MessageBox.Show($"Are you sure you want to start over learning the quiz '{QuizIdentity.GetLastKnownName()}'? This action cannot be undone.",
                 "Reset Quiz Progress data - SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
             if (msg != DialogResult.Yes)
             {
                 return;
             }
 
-            if (!QuizCore.Load(QuizIdentity.FindQuizPath()))
+            var quizPath = QuizIdentity.FindQuizPath();
+            if (quizPath == null)
+            {
+                return;
+            }
+
+            if (!QuizCore.Load(quizPath))
             {
                 return;
             }

@@ -61,7 +61,7 @@ namespace SteelQuiz.Preferences
 
         private void Pcat_storage_OnPrefSelected(object sender, EventArgs e)
         {
-            
+            (ParentForm as Preferences).SwitchCategory(typeof(PrefsStorage));
         }
 
         private void Pcat_advanced_OnPrefSelected(object sender, EventArgs e)

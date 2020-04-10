@@ -41,12 +41,12 @@ namespace SteelQuiz.QuizData
         /// <summary>
         /// The last known path to the quiz. If the quiz at this path doesn't match QuizGuid, this property will be ignored.
         /// </summary>
-        private string QuizPath { get; set; }
+        public string LastKnownPath { get; private set; }
 
         public QuizIdentity(Guid quizGuid, string quizPath)
         {
             QuizGuid = quizGuid;
-            QuizPath = quizPath;
+            LastKnownPath = quizPath;
         }
 
         /// <summary>
@@ -55,22 +55,41 @@ namespace SteelQuiz.QuizData
         /// <returns>Returns the path of the quiz. Returns null if it can't be found.</returns>
         public string FindQuizPath()
         {
-            if (File.Exists(QuizPath))
+            if (File.Exists(LastKnownPath))
             {
-                Quiz quiz = JsonConvert.DeserializeObject<Quiz>(AtomicIO.AtomicRead(QuizPath));
+                Quiz quiz = JsonConvert.DeserializeObject<Quiz>(AtomicIO.AtomicRead(LastKnownPath));
                 if (quiz.GUID == QuizGuid)
                 {
                     // QuizPath is correct
-                    return QuizPath;
+                    return LastKnownPath;
                 }
             }
 
+
             // QuizPath is incorrect
-            var path = QuizCore.FindQuizPath(QuizGuid);
-            QuizPath = path;
-            return path;
+            var path = QuizCore.QuickFindQuizPath(QuizGuid, LastKnownPath);
+            if (path != null)
+            {
+                LastKnownPath = path;
+                return LastKnownPath;
+            }
+
+            var quizNotFound = new QuizNotFound(QuizGuid, LastKnownPath);
+            if (quizNotFound.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                LastKnownPath = quizNotFound.NewQuizPath;
+                return LastKnownPath;
+            }
+
+            return null;
         }
 
+        public string GetLastKnownName()
+        {
+            return Path.GetFileNameWithoutExtension(LastKnownPath);
+        }
+
+        [Obsolete("Use GetLastKnownName() instead")]
         /// <summary>
         /// Finds the name of this quiz, even when the quiz has been moved to a different location in a quiz folder.
         /// </summary>
