@@ -29,9 +29,9 @@ using System.IO;
 
 namespace SteelQuiz.Preferences
 {
-    public partial class PrefsProgressSync : AutoThemeableUserControl, IPreferenceCategory, ICustomSaveCategory
+    public partial class PrefsStorage : AutoThemeableUserControl, IPreferenceCategory, ICustomSaveCategory
     {
-        public PrefsProgressSync()
+        public PrefsStorage()
         {
             InitializeComponent();
             LoadPreferences();
@@ -40,7 +40,7 @@ namespace SteelQuiz.Preferences
 
         private void Btn_browseQuizProgPath_Click(object sender, EventArgs e)
         {
-            fbd_quizProgFolder.SelectedPath = Path.GetDirectoryName(ConfigManager.Config.SyncConfig.QuizProgressPath);
+            fbd_quizProgFolder.SelectedPath = Path.GetDirectoryName(ConfigManager.Config.StorageConfig.QuizProgressPath);
             if (fbd_quizProgFolder.ShowDialog() == DialogResult.OK)
             {
                 txt_quizProgPath.Text = fbd_quizProgFolder.SelectedPath;
@@ -50,12 +50,12 @@ namespace SteelQuiz.Preferences
 
         public void LoadPreferences()
         {
-            txt_quizProgPath.Text = Path.GetDirectoryName(ConfigManager.Config.SyncConfig.QuizProgressPath);
+            txt_quizProgPath.Text = Path.GetDirectoryName(ConfigManager.Config.StorageConfig.QuizProgressPath);
         }
 
         public bool Save(bool saveConfig)
         {
-            var oldPath = ConfigManager.Config.SyncConfig.QuizProgressPath;
+            var oldPath = ConfigManager.Config.StorageConfig.QuizProgressPath;
 
             string newPath;
             if (txt_quizProgPath.Text == Path.GetDirectoryName(QuizCore.PROGRESS_FILE_PATH_DEFAULT))
@@ -140,7 +140,7 @@ namespace SteelQuiz.Preferences
                 File.Move(oldPath, newPath);
             }
 
-            ConfigManager.Config.SyncConfig.QuizProgressPath = newPath;
+            ConfigManager.Config.StorageConfig.QuizProgressPath = newPath;
 
             if (saveConfig)
             {

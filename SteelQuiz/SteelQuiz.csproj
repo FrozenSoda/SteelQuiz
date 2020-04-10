@@ -162,12 +162,6 @@
     </Compile>
     <Compile Include="Extensions\FormExtensions.cs" />
     <Compile Include="Extensions\IntegerExtensions.cs" />
-    <Compile Include="Preferences\CategoriesSync.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Preferences\CategoriesSync.Designer.cs">
-      <DependentUpon>CategoriesSync.cs</DependentUpon>
-    </Compile>
     <Compile Include="Preferences\ICustomSaveCategory.cs" />
     <Compile Include="Preferences\PrefsAdvanced.cs">
       <SubType>UserControl</SubType>
@@ -175,11 +169,11 @@
     <Compile Include="Preferences\PrefsAdvanced.Designer.cs">
       <DependentUpon>PrefsAdvanced.cs</DependentUpon>
     </Compile>
-    <Compile Include="Preferences\PrefsProgressSync.cs">
+    <Compile Include="Preferences\PrefsStorage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Preferences\PrefsProgressSync.Designer.cs">
-      <DependentUpon>PrefsProgressSync.cs</DependentUpon>
+    <Compile Include="Preferences\PrefsStorage.Designer.cs">
+      <DependentUpon>PrefsStorage.cs</DependentUpon>
     </Compile>
     <Compile Include="Preferences\PrefsUpdates.cs">
       <SubType>UserControl</SubType>
@@ -442,14 +436,11 @@
     <EmbeddedResource Include="DashboardQuizWordPair.resx">
       <DependentUpon>DashboardQuizWordPair.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Preferences\CategoriesSync.resx">
-      <DependentUpon>CategoriesSync.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Preferences\PrefsAdvanced.resx">
       <DependentUpon>PrefsAdvanced.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Preferences\PrefsProgressSync.resx">
-      <DependentUpon>PrefsProgressSync.cs</DependentUpon>
+    <EmbeddedResource Include="Preferences\PrefsStorage.resx">
+      <DependentUpon>PrefsStorage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Preferences\PrefsUpdates.resx">
       <DependentUpon>PrefsUpdates.cs</DependentUpon>

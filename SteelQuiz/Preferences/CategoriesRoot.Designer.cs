@@ -50,7 +50,7 @@ namespace SteelQuiz.Preferences
             this.pcat_general = new SteelQuiz.PrefCategoryItem();
             this.pcat_quizEditor = new SteelQuiz.PrefCategoryItem();
             this.pcat_updates = new SteelQuiz.PrefCategoryItem();
-            this.pcat_sync = new SteelQuiz.PrefCategoryItem();
+            this.pcat_storage = new SteelQuiz.PrefCategoryItem();
             this.pcat_advanced = new SteelQuiz.PrefCategoryItem();
             this.SuspendLayout();
             // 
@@ -80,7 +80,7 @@ namespace SteelQuiz.Preferences
             // 
             this.pcat_quizEditor.Location = new System.Drawing.Point(0, 83);
             this.pcat_quizEditor.Name = "pcat_quizEditor";
-            this.pcat_quizEditor.PrefText = "Quiz Editor";
+            this.pcat_quizEditor.PrefText = "Editor";
             this.pcat_quizEditor.Selectable = true;
             this.pcat_quizEditor.Selected = false;
             this.pcat_quizEditor.Size = new System.Drawing.Size(130, 29);
@@ -98,16 +98,16 @@ namespace SteelQuiz.Preferences
             this.pcat_updates.TabIndex = 15;
             this.pcat_updates.OnPrefSelected += new System.EventHandler(this.Pcat_updates_OnPrefSelected);
             // 
-            // pcat_sync
+            // pcat_storage
             // 
-            this.pcat_sync.Location = new System.Drawing.Point(0, 118);
-            this.pcat_sync.Name = "pcat_sync";
-            this.pcat_sync.PrefText = "Sync >";
-            this.pcat_sync.Selectable = false;
-            this.pcat_sync.Selected = false;
-            this.pcat_sync.Size = new System.Drawing.Size(130, 29);
-            this.pcat_sync.TabIndex = 16;
-            this.pcat_sync.OnPrefSelected += new System.EventHandler(this.Pcat_sync_OnPrefSelected);
+            this.pcat_storage.Location = new System.Drawing.Point(0, 118);
+            this.pcat_storage.Name = "pcat_storage";
+            this.pcat_storage.PrefText = "Storage";
+            this.pcat_storage.Selectable = false;
+            this.pcat_storage.Selected = false;
+            this.pcat_storage.Size = new System.Drawing.Size(130, 29);
+            this.pcat_storage.TabIndex = 16;
+            this.pcat_storage.OnPrefSelected += new System.EventHandler(this.Pcat_storage_OnPrefSelected);
             // 
             // pcat_advanced
             // 
@@ -126,7 +126,7 @@ namespace SteelQuiz.Preferences
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
             this.Controls.Add(this.pcat_advanced);
-            this.Controls.Add(this.pcat_sync);
+            this.Controls.Add(this.pcat_storage);
             this.Controls.Add(this.pcat_updates);
             this.Controls.Add(this.pcat_quizEditor);
             this.Controls.Add(this.pcat_maintenance);
@@ -144,7 +144,7 @@ namespace SteelQuiz.Preferences
         private PrefCategoryItem pcat_general;
         private PrefCategoryItem pcat_quizEditor;
         private PrefCategoryItem pcat_updates;
-        private PrefCategoryItem pcat_sync;
+        private PrefCategoryItem pcat_storage;
         private PrefCategoryItem pcat_advanced;
     }
 }

@@ -25,9 +25,10 @@ using System.Threading.Tasks;
 
 namespace SteelQuiz.ConfigData
 {
-    public class SyncConfig
+    public class StorageConfig
     {
         public string QuizProgressPath { get; set; } = QuizCore.PROGRESS_FILE_PATH_DEFAULT;
+        public string DefaultQuizSavePath { get; set; } = QuizCore.QUIZ_FOLDER_DEFAULT;
 
         [Obsolete("Quiz Folder system is deprecated and no longer used. The property is only kept for better downgrade support.")]
         [JsonProperty("QuizFolders", ObjectCreationHandling = ObjectCreationHandling.Replace)] // replace list instead of appending to it (otherwise, QUIZ_FOLDER_DEFAULT will be added to the list every deserialization)

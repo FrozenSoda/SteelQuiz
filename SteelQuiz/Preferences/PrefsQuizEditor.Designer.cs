@@ -47,7 +47,7 @@ namespace SteelQuiz.Preferences
         private void InitializeComponent()
         {
             this.pnl_closeBehaviour = new System.Windows.Forms.Panel();
-            this.rdo_returnToWelcome = new System.Windows.Forms.RadioButton();
+            this.rdo_returnToDashboard = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
             this.rdo_closeApp = new System.Windows.Forms.RadioButton();
             this.pnl_closeBehaviour.SuspendLayout();
@@ -55,7 +55,7 @@ namespace SteelQuiz.Preferences
             // 
             // pnl_closeBehaviour
             // 
-            this.pnl_closeBehaviour.Controls.Add(this.rdo_returnToWelcome);
+            this.pnl_closeBehaviour.Controls.Add(this.rdo_returnToDashboard);
             this.pnl_closeBehaviour.Controls.Add(this.label1);
             this.pnl_closeBehaviour.Controls.Add(this.rdo_closeApp);
             this.pnl_closeBehaviour.Location = new System.Drawing.Point(14, 14);
@@ -63,19 +63,19 @@ namespace SteelQuiz.Preferences
             this.pnl_closeBehaviour.Size = new System.Drawing.Size(635, 130);
             this.pnl_closeBehaviour.TabIndex = 2;
             // 
-            // rdo_returnToWelcome
+            // rdo_returnToDashboard
             // 
-            this.rdo_returnToWelcome.AutoSize = true;
-            this.rdo_returnToWelcome.Checked = true;
-            this.rdo_returnToWelcome.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdo_returnToWelcome.ForeColor = System.Drawing.Color.White;
-            this.rdo_returnToWelcome.Location = new System.Drawing.Point(15, 40);
-            this.rdo_returnToWelcome.Name = "rdo_returnToWelcome";
-            this.rdo_returnToWelcome.Size = new System.Drawing.Size(200, 24);
-            this.rdo_returnToWelcome.TabIndex = 1;
-            this.rdo_returnToWelcome.TabStop = true;
-            this.rdo_returnToWelcome.Text = "Return to Welcome screen";
-            this.rdo_returnToWelcome.UseVisualStyleBackColor = true;
+            this.rdo_returnToDashboard.AutoSize = true;
+            this.rdo_returnToDashboard.Checked = true;
+            this.rdo_returnToDashboard.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdo_returnToDashboard.ForeColor = System.Drawing.Color.White;
+            this.rdo_returnToDashboard.Location = new System.Drawing.Point(15, 40);
+            this.rdo_returnToDashboard.Name = "rdo_returnToDashboard";
+            this.rdo_returnToDashboard.Size = new System.Drawing.Size(165, 24);
+            this.rdo_returnToDashboard.TabIndex = 1;
+            this.rdo_returnToDashboard.TabStop = true;
+            this.rdo_returnToDashboard.Text = "Return to Dashboard";
+            this.rdo_returnToDashboard.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -84,9 +84,9 @@ namespace SteelQuiz.Preferences
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(435, 25);
+            this.label1.Size = new System.Drawing.Size(182, 25);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Behaviour when closing editor (with close button)";
+            this.label1.Text = "Close Button Action";
             // 
             // rdo_closeApp
             // 
@@ -118,7 +118,7 @@ namespace SteelQuiz.Preferences
         #endregion
 
         private System.Windows.Forms.Panel pnl_closeBehaviour;
-        internal System.Windows.Forms.RadioButton rdo_returnToWelcome;
+        internal System.Windows.Forms.RadioButton rdo_returnToDashboard;
         private System.Windows.Forms.Label label1;
         internal System.Windows.Forms.RadioButton rdo_closeApp;
     }

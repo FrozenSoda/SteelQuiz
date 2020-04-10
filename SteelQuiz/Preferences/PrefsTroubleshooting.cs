@@ -87,7 +87,7 @@ namespace SteelQuiz.Preferences
 
         private void Btn_resetAppConfig_Click(object sender, EventArgs e)
         {
-            if (ConfigManager.Config.SyncConfig.QuizProgressPath != QuizCore.PROGRESS_FILE_PATH_DEFAULT)
+            if (ConfigManager.Config.StorageConfig.QuizProgressPath != QuizCore.PROGRESS_FILE_PATH_DEFAULT)
             {
                 MessageBox.Show("The Quiz Progress path must be set to defaults before you can restore everything to defaults. You can find the settings under " +
                     "Sync > Progress Sync (from the root of preferences)", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -142,7 +142,7 @@ namespace SteelQuiz.Preferences
 
                 try
                 {
-                    System.IO.File.Delete(ConfigManager.Config.SyncConfig.QuizProgressPath);
+                    System.IO.File.Delete(ConfigManager.Config.StorageConfig.QuizProgressPath);
                 }
                 catch (Exception ex)
                 {

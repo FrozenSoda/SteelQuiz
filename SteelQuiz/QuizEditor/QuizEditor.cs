@@ -404,7 +404,7 @@ namespace SteelQuiz.QuizEditor
             {
                 if (QuizPath == null || saveAs)
                 {
-                    sfd_quiz.InitialDirectory = ConfigManager.Config.SyncConfig.QuizFolders[0];
+                    sfd_quiz.InitialDirectory = ConfigManager.Config.StorageConfig.DefaultQuizSavePath;
                     int untitledCounter = 1;
                     path = $"Untitled{ untitledCounter }.steelquiz";
                     while (File.Exists(Path.Combine(QuizCore.QUIZ_FOLDER_DEFAULT, path)))

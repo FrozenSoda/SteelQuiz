@@ -16,6 +16,7 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using Newtonsoft.Json;
 using SteelQuiz.ThemeManager;
 using System;
 using System.Collections.Generic;
@@ -70,9 +71,16 @@ namespace SteelQuiz.ConfigData
         public UpdateConfig UpdateConfig { get; set; } = new UpdateConfig();
 
         /// <summary>
+        /// The config for storage.
+        /// </summary>
+        public StorageConfig StorageConfig { get; set; } = new StorageConfig();
+
+        [Obsolete("Use StorageConfig instead")]
+        [JsonProperty]
+        /// <summary>
         /// The config for synchronization
         /// </summary>
-        public SyncConfig SyncConfig { get; set; } = new SyncConfig();
+        private StorageConfig SyncConfig { set => StorageConfig = value; }
 
         /// <summary>
         /// Contains the date and time for when a quiz with a specific Guid was last accessed (edited/practised)

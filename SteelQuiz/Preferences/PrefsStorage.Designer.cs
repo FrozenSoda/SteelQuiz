@@ -18,7 +18,7 @@
 
 namespace SteelQuiz.Preferences
 {
-    partial class PrefsProgressSync
+    partial class PrefsStorage
     {
         /// <summary> 
         /// Required designer variable.
@@ -46,21 +46,27 @@ namespace SteelQuiz.Preferences
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PrefsProgressSync));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PrefsStorage));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btn_resetToDefaults = new System.Windows.Forms.Button();
+            this.btn_resetToDefaultsProgressData = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btn_browseQuizProgPath = new System.Windows.Forms.Button();
             this.txt_quizProgPath = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.fbd_quizProgFolder = new System.Windows.Forms.FolderBrowserDialog();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.btn_resetToDefaultsQuizSavePath = new System.Windows.Forms.Button();
+            this.btn_browseDefaultQuizSavePath = new System.Windows.Forms.Button();
+            this.txt_defaultQuizSavePath = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.panel1.Controls.Add(this.btn_resetToDefaults);
+            this.panel1.Controls.Add(this.btn_resetToDefaultsProgressData);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.btn_browseQuizProgPath);
             this.panel1.Controls.Add(this.txt_quizProgPath);
@@ -70,18 +76,18 @@ namespace SteelQuiz.Preferences
             this.panel1.Size = new System.Drawing.Size(635, 158);
             this.panel1.TabIndex = 4;
             // 
-            // btn_resetToDefaults
+            // btn_resetToDefaultsProgressData
             // 
-            this.btn_resetToDefaults.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.btn_resetToDefaults.FlatAppearance.BorderSize = 0;
-            this.btn_resetToDefaults.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_resetToDefaults.Location = new System.Drawing.Point(505, 132);
-            this.btn_resetToDefaults.Name = "btn_resetToDefaults";
-            this.btn_resetToDefaults.Size = new System.Drawing.Size(127, 23);
-            this.btn_resetToDefaults.TabIndex = 5;
-            this.btn_resetToDefaults.Text = "Reset to defaults";
-            this.btn_resetToDefaults.UseVisualStyleBackColor = false;
-            this.btn_resetToDefaults.Click += new System.EventHandler(this.Btn_resetToDefaults_Click);
+            this.btn_resetToDefaultsProgressData.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.btn_resetToDefaultsProgressData.FlatAppearance.BorderSize = 0;
+            this.btn_resetToDefaultsProgressData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_resetToDefaultsProgressData.Location = new System.Drawing.Point(505, 132);
+            this.btn_resetToDefaultsProgressData.Name = "btn_resetToDefaultsProgressData";
+            this.btn_resetToDefaultsProgressData.Size = new System.Drawing.Size(127, 23);
+            this.btn_resetToDefaultsProgressData.TabIndex = 5;
+            this.btn_resetToDefaultsProgressData.Text = "Reset to defaults";
+            this.btn_resetToDefaultsProgressData.UseVisualStyleBackColor = false;
+            this.btn_resetToDefaultsProgressData.Click += new System.EventHandler(this.Btn_resetToDefaults_Click);
             // 
             // label1
             // 
@@ -130,18 +136,77 @@ namespace SteelQuiz.Preferences
             // 
             this.fbd_quizProgFolder.Description = "Select the folder where SteelQuiz should store your quiz progress";
             // 
-            // PrefsProgressSync
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.panel2.Controls.Add(this.btn_resetToDefaultsQuizSavePath);
+            this.panel2.Controls.Add(this.btn_browseDefaultQuizSavePath);
+            this.panel2.Controls.Add(this.txt_defaultQuizSavePath);
+            this.panel2.Controls.Add(this.label3);
+            this.panel2.Location = new System.Drawing.Point(14, 178);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(635, 101);
+            this.panel2.TabIndex = 5;
+            // 
+            // btn_resetToDefaultsQuizSavePath
+            // 
+            this.btn_resetToDefaultsQuizSavePath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.btn_resetToDefaultsQuizSavePath.FlatAppearance.BorderSize = 0;
+            this.btn_resetToDefaultsQuizSavePath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_resetToDefaultsQuizSavePath.Location = new System.Drawing.Point(505, 69);
+            this.btn_resetToDefaultsQuizSavePath.Name = "btn_resetToDefaultsQuizSavePath";
+            this.btn_resetToDefaultsQuizSavePath.Size = new System.Drawing.Size(127, 23);
+            this.btn_resetToDefaultsQuizSavePath.TabIndex = 5;
+            this.btn_resetToDefaultsQuizSavePath.Text = "Reset to defaults";
+            this.btn_resetToDefaultsQuizSavePath.UseVisualStyleBackColor = false;
+            // 
+            // btn_browseDefaultQuizSavePath
+            // 
+            this.btn_browseDefaultQuizSavePath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.btn_browseDefaultQuizSavePath.FlatAppearance.BorderSize = 0;
+            this.btn_browseDefaultQuizSavePath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_browseDefaultQuizSavePath.Location = new System.Drawing.Point(557, 40);
+            this.btn_browseDefaultQuizSavePath.Name = "btn_browseDefaultQuizSavePath";
+            this.btn_browseDefaultQuizSavePath.Size = new System.Drawing.Size(75, 23);
+            this.btn_browseDefaultQuizSavePath.TabIndex = 3;
+            this.btn_browseDefaultQuizSavePath.Text = "...";
+            this.btn_browseDefaultQuizSavePath.UseVisualStyleBackColor = false;
+            // 
+            // txt_defaultQuizSavePath
+            // 
+            this.txt_defaultQuizSavePath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_defaultQuizSavePath.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_defaultQuizSavePath.Location = new System.Drawing.Point(15, 40);
+            this.txt_defaultQuizSavePath.Name = "txt_defaultQuizSavePath";
+            this.txt_defaultQuizSavePath.Size = new System.Drawing.Size(536, 23);
+            this.txt_defaultQuizSavePath.TabIndex = 2;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(0, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(208, 25);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Default Quiz Save Path";
+            // 
+            // PrefsStorage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.White;
-            this.Name = "PrefsProgressSync";
+            this.Name = "PrefsStorage";
             this.Size = new System.Drawing.Size(652, 450);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -154,6 +219,11 @@ namespace SteelQuiz.Preferences
         private System.Windows.Forms.Button btn_browseQuizProgPath;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.FolderBrowserDialog fbd_quizProgFolder;
-        private System.Windows.Forms.Button btn_resetToDefaults;
+        private System.Windows.Forms.Button btn_resetToDefaultsProgressData;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button btn_resetToDefaultsQuizSavePath;
+        private System.Windows.Forms.Button btn_browseDefaultQuizSavePath;
+        private System.Windows.Forms.TextBox txt_defaultQuizSavePath;
+        private System.Windows.Forms.Label label3;
     }
 }

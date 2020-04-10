@@ -35,7 +35,7 @@ namespace SteelQuiz
         public const string QUIZ_EXTENSION = "steelquiz";
         public static readonly string APP_CFG_FOLDER = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SteelQuiz");
         public static readonly string BACKUP_FOLDER = Path.Combine(APP_CFG_FOLDER, "Backups");
-        public static readonly string QUIZ_FOLDER_DEFAULT = Path.Combine(APP_CFG_FOLDER, "Quizzes");
+        public static readonly string QUIZ_FOLDER_DEFAULT = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "SteelQuiz");
         public static readonly string QUIZ_RECOVERY_FOLDER = Path.Combine(QUIZ_FOLDER_DEFAULT, "Recovery");
         public static readonly string QUIZ_BACKUP_FOLDER = Path.Combine(QUIZ_FOLDER_DEFAULT, "Backups");
         public static readonly string PROGRESS_FILE_PATH_DEFAULT = Path.Combine(APP_CFG_FOLDER, "QuizProgress.json");
@@ -133,7 +133,7 @@ namespace SteelQuiz
         {
             Quiz quiz;
 
-            foreach (var quizFolder in ConfigManager.Config.SyncConfig.QuizFolders)
+            foreach (var quizFolder in ConfigManager.Config.StorageConfig.QuizFolders)
             {
                 foreach (var file in Directory.GetFiles(quizFolder, $"*.{QUIZ_EXTENSION}", SearchOption.AllDirectories))
                 {
@@ -245,7 +245,7 @@ namespace SteelQuiz
             dynamic cfgDz;
             try
             {
-                cfgDz = JsonConvert.DeserializeObject(AtomicIO.AtomicRead(ConfigManager.Config.SyncConfig.QuizProgressPath));
+                cfgDz = JsonConvert.DeserializeObject(AtomicIO.AtomicRead(ConfigManager.Config.StorageConfig.QuizProgressPath));
             }
             catch (AtomicException)
             {
@@ -274,7 +274,7 @@ namespace SteelQuiz
                     return ChkUpgradeProgressDataResult.Fail;
                 }
 
-                File.Delete(ConfigManager.Config.SyncConfig.QuizProgressPath);
+                File.Delete(ConfigManager.Config.StorageConfig.QuizProgressPath);
 
                 return ChkUpgradeProgressDataResult.UpgradedDowngraded;
             }
@@ -320,8 +320,8 @@ namespace SteelQuiz
 
                 if (latestBackup != null)
                 {
-                    File.Delete(ConfigManager.Config.SyncConfig.QuizProgressPath);
-                    File.Copy(latestBackup, ConfigManager.Config.SyncConfig.QuizProgressPath);
+                    File.Delete(ConfigManager.Config.StorageConfig.QuizProgressPath);
+                    File.Copy(latestBackup, ConfigManager.Config.StorageConfig.QuizProgressPath);
                 }
                 else
                 {
@@ -334,7 +334,7 @@ namespace SteelQuiz
                         return ChkUpgradeProgressDataResult.Fail;
                     }
 
-                    File.Delete(ConfigManager.Config.SyncConfig.QuizProgressPath);
+                    File.Delete(ConfigManager.Config.StorageConfig.QuizProgressPath);
                 }
                 return ChkUpgradeProgressDataResult.UpgradedDowngraded;
             }
@@ -346,12 +346,12 @@ namespace SteelQuiz
 
         public static bool ChkCreateQuizProgress()
         {
-            if (!File.Exists(ConfigManager.Config.SyncConfig.QuizProgressPath))
+            if (!File.Exists(ConfigManager.Config.StorageConfig.QuizProgressPath))
             {
                 var cfgDz = new QuizProgDataRoot(MetaData.QUIZ_FILE_FORMAT_VERSION);
                 var cfgSz = JsonConvert.SerializeObject(cfgDz, Formatting.Indented);
 
-                AtomicIO.AtomicWrite(ConfigManager.Config.SyncConfig.QuizProgressPath, cfgSz);
+                AtomicIO.AtomicWrite(ConfigManager.Config.StorageConfig.QuizProgressPath, cfgSz);
             }
             return true;
         }
@@ -362,7 +362,7 @@ namespace SteelQuiz
         /// <returns>Returns true if successful</returns>
         public static bool LoadQuizAccessData()
         {
-            if (File.Exists(ConfigManager.Config.SyncConfig.QuizProgressPath))
+            if (File.Exists(ConfigManager.Config.StorageConfig.QuizProgressPath))
             {
                 var upg = ChkUpgradeProgressData();
                 if (upg == ChkUpgradeProgressDataResult.UpgradedDowngraded)
@@ -376,7 +376,7 @@ namespace SteelQuiz
                 QuizProgDataRoot quizProgDataRoot;
                 try
                 {
-                    quizProgDataRoot = JsonConvert.DeserializeObject<QuizProgDataRoot>(AtomicIO.AtomicRead(ConfigManager.Config.SyncConfig.QuizProgressPath));
+                    quizProgDataRoot = JsonConvert.DeserializeObject<QuizProgDataRoot>(AtomicIO.AtomicRead(ConfigManager.Config.StorageConfig.QuizProgressPath));
                 }
                 catch (AtomicException)
                 {
@@ -393,7 +393,7 @@ namespace SteelQuiz
 
         private static bool LoadProgressData()
         {
-            if (File.Exists(ConfigManager.Config.SyncConfig.QuizProgressPath))
+            if (File.Exists(ConfigManager.Config.StorageConfig.QuizProgressPath))
             {
                 var upg = ChkUpgradeProgressData();
                 if (upg == ChkUpgradeProgressDataResult.UpgradedDowngraded)
@@ -407,7 +407,7 @@ namespace SteelQuiz
                 QuizProgDataRoot quizProgDataRoot;
                 try
                 {
-                    quizProgDataRoot = JsonConvert.DeserializeObject<QuizProgDataRoot>(AtomicIO.AtomicRead(ConfigManager.Config.SyncConfig.QuizProgressPath));
+                    quizProgDataRoot = JsonConvert.DeserializeObject<QuizProgDataRoot>(AtomicIO.AtomicRead(ConfigManager.Config.StorageConfig.QuizProgressPath));
                 }
                 catch (AtomicException)
                 {
@@ -583,22 +583,22 @@ namespace SteelQuiz
 
         public static bool BackupProgress(Version progressVer)
         {
-            var extStartIndex = ConfigManager.Config.SyncConfig.QuizProgressPath.Length - ".json".Length;
+            var extStartIndex = ConfigManager.Config.StorageConfig.QuizProgressPath.Length - ".json".Length;
             var bkpProgressPath = Path.Combine(
                 QuizCore.BACKUP_FOLDER,
-                Path.GetFileNameWithoutExtension(ConfigManager.Config.SyncConfig.QuizProgressPath) + "_" + progressVer.ToString() + ".json");
+                Path.GetFileNameWithoutExtension(ConfigManager.Config.StorageConfig.QuizProgressPath) + "_" + progressVer.ToString() + ".json");
             var exCount = 1;
             while (File.Exists(bkpProgressPath))
             {
                 ++exCount;
                 bkpProgressPath = Path.Combine(
                     QuizCore.BACKUP_FOLDER,
-                    Path.GetFileNameWithoutExtension(ConfigManager.Config.SyncConfig.QuizProgressPath) + "_" + progressVer.ToString() + "_" + exCount + ".json");
+                    Path.GetFileNameWithoutExtension(ConfigManager.Config.StorageConfig.QuizProgressPath) + "_" + progressVer.ToString() + "_" + exCount + ".json");
             }
 
             try
             {
-                File.Copy(ConfigManager.Config.SyncConfig.QuizProgressPath, bkpProgressPath);
+                File.Copy(ConfigManager.Config.StorageConfig.QuizProgressPath, bkpProgressPath);
             }
             catch (Exception ex)
             {
@@ -646,11 +646,11 @@ namespace SteelQuiz
         {
             // DESERIALIZE AND PROCESS
             QuizProgDataRoot cfgDz;
-            if (File.Exists(ConfigManager.Config.SyncConfig.QuizProgressPath))
+            if (File.Exists(ConfigManager.Config.StorageConfig.QuizProgressPath))
             {
                 try
                 {
-                    cfgDz = JsonConvert.DeserializeObject<QuizProgDataRoot>(AtomicIO.AtomicRead(ConfigManager.Config.SyncConfig.QuizProgressPath));
+                    cfgDz = JsonConvert.DeserializeObject<QuizProgDataRoot>(AtomicIO.AtomicRead(ConfigManager.Config.StorageConfig.QuizProgressPath));
                 }
                 catch (AtomicException ex)
                 {
@@ -671,7 +671,7 @@ namespace SteelQuiz
             // SERIALIZE AND SAVE
             var cfgSz = JsonConvert.SerializeObject(cfgDz, Formatting.Indented);
 
-            AtomicIO.AtomicWrite(ConfigManager.Config.SyncConfig.QuizProgressPath, cfgSz);
+            AtomicIO.AtomicWrite(ConfigManager.Config.StorageConfig.QuizProgressPath, cfgSz);
         }
 
         public static void SaveQuizProgress()
@@ -686,11 +686,11 @@ namespace SteelQuiz
 
             // DESERIALIZE AND PROCESS
             QuizProgDataRoot cfgDz;
-            if (File.Exists(ConfigManager.Config.SyncConfig.QuizProgressPath))
+            if (File.Exists(ConfigManager.Config.StorageConfig.QuizProgressPath))
             {
                 try
                 {
-                    cfgDz = JsonConvert.DeserializeObject<QuizProgDataRoot>(AtomicIO.AtomicRead(ConfigManager.Config.SyncConfig.QuizProgressPath));
+                    cfgDz = JsonConvert.DeserializeObject<QuizProgDataRoot>(AtomicIO.AtomicRead(ConfigManager.Config.StorageConfig.QuizProgressPath));
                 }
                 catch (AtomicException ex)
                 {
@@ -732,7 +732,7 @@ namespace SteelQuiz
             // SERIALIZE AND SAVE
             var cfgSz = JsonConvert.SerializeObject(cfgDz, Formatting.Indented);
 
-            AtomicIO.AtomicWrite(ConfigManager.Config.SyncConfig.QuizProgressPath, cfgSz);
+            AtomicIO.AtomicWrite(ConfigManager.Config.StorageConfig.QuizProgressPath, cfgSz);
 
             /*
             if (QuizRandomized)

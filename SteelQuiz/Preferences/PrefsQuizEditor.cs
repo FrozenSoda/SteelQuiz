@@ -48,7 +48,7 @@ namespace SteelQuiz.Preferences
             }
             else
             {
-                rdo_returnToWelcome.Checked = true;
+                rdo_returnToDashboard.Checked = true;
             }
             skipConfigApply = false;
         }

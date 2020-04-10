@@ -59,9 +59,9 @@ namespace SteelQuiz.Preferences
             (ParentForm as Preferences).SwitchCategory(typeof(PrefsUpdates));
         }
 
-        private void Pcat_sync_OnPrefSelected(object sender, EventArgs e)
+        private void Pcat_storage_OnPrefSelected(object sender, EventArgs e)
         {
-            (ParentForm as Preferences).SwitchCategoryCollection(typeof(CategoriesSync));
+            
         }
 
         private void Pcat_advanced_OnPrefSelected(object sender, EventArgs e)
