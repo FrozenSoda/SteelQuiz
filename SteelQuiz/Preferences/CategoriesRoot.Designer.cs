@@ -103,7 +103,7 @@ namespace SteelQuiz.Preferences
             this.pcat_storage.Location = new System.Drawing.Point(0, 118);
             this.pcat_storage.Name = "pcat_storage";
             this.pcat_storage.PrefText = "Storage";
-            this.pcat_storage.Selectable = false;
+            this.pcat_storage.Selectable = true;
             this.pcat_storage.Selected = false;
             this.pcat_storage.Size = new System.Drawing.Size(130, 29);
             this.pcat_storage.TabIndex = 16;
