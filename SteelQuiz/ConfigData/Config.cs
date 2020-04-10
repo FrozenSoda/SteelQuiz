@@ -83,11 +83,6 @@ namespace SteelQuiz.ConfigData
         private StorageConfig SyncConfig { set => StorageConfig = value; }
 
         /// <summary>
-        /// Contains the date and time for when a quiz with a specific Guid was last accessed (edited/practised)
-        /// </summary>
-        public Dictionary<DateTime, Guid> QuizAccessTimes { get; set; } = new Dictionary<DateTime, Guid>();
-
-        /// <summary>
         /// Statistics that have been collected
         /// </summary>
         public Statistics Statistics { get; set; } = new Statistics();
