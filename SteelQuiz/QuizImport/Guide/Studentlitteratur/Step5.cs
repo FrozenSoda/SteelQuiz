@@ -33,7 +33,7 @@ namespace SteelQuiz.QuizImport.Guide.Studentlitteratur
     public partial class Step5 : AutoThemeableUserControl, IStep
     {
         public ImportSource ImportSource { get; set; } = ImportSource.Studentlitteratur;
-        public int Step { get; set; } = 7;
+        public int Step { get; set; } = 5;
 
         public string Language2 => txt_lang.Text;
 
