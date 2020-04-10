@@ -50,6 +50,7 @@ namespace SteelQuiz.QuizImport.Guide
             this.btn_next = new System.Windows.Forms.Button();
             this.btn_prevCancel = new System.Windows.Forms.Button();
             this.pnl_steps = new System.Windows.Forms.Panel();
+            this.sfd_quiz = new System.Windows.Forms.SaveFileDialog();
             this.SuspendLayout();
             // 
             // btn_next
@@ -90,6 +91,11 @@ namespace SteelQuiz.QuizImport.Guide
             this.pnl_steps.TabIndex = 0;
             this.pnl_steps.TabStop = true;
             // 
+            // sfd_quiz
+            // 
+            this.sfd_quiz.Filter = "SteelQuiz Quiz|*.steelquiz";
+            this.sfd_quiz.Title = "Select a path to save the quiz to";
+            // 
             // QuizImportGuide
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -115,5 +121,6 @@ namespace SteelQuiz.QuizImport.Guide
         private System.Windows.Forms.Button btn_next;
         private System.Windows.Forms.Button btn_prevCancel;
         private System.Windows.Forms.Panel pnl_steps;
+        private System.Windows.Forms.SaveFileDialog sfd_quiz;
     }
 }

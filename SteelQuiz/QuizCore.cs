@@ -27,7 +27,6 @@ using SteelQuiz.QuizProgressData;
 using SteelQuiz.Util;
 using Newtonsoft.Json;
 using System.Windows.Forms;
-using SteelQuiz.QuizImport.Internal;
 
 namespace SteelQuiz
 {
@@ -62,6 +61,7 @@ namespace SteelQuiz
                 throw new FileNotFoundException("The quiz file cannot be found");
             }
 
+            /*
             //if (!ConfigManager.Config.SyncConfig.QuizFolders.Contains(Path.GetDirectoryName(quizPath)))
             if (!ConfigManager.Config.SyncConfig.QuizFolders.Any(x => quizPath.StartsWith(x)))
             {
@@ -75,6 +75,7 @@ namespace SteelQuiz
                     return false;
                 }
             }
+            */
 
             dynamic quiz;
             try
@@ -173,41 +174,6 @@ namespace SteelQuiz
             return null;
         }
 
-        public static bool ImportLocalQuiz(string quizPath)
-        {
-            // find quiz filename that does not exist
-            string importedPath;
-            int untitledCounter = 1;
-
-            var selectQuizFolder = new QuizFolderSelect();
-            if (selectQuizFolder.ShowDialog() != DialogResult.OK)
-            {
-                return false;
-            }
-
-            importedPath = Path.Combine(selectQuizFolder.QuizFolderPath, $"{Path.GetFileNameWithoutExtension(quizPath)}.steelquiz");
-            while (File.Exists(importedPath))
-            {
-                ++untitledCounter;
-                importedPath = Path.Combine(selectQuizFolder.QuizFolderPath,
-                        $"{Path.GetFileNameWithoutExtension(quizPath)}_{ untitledCounter.ToString() }.steelquiz");
-            }
-
-            try
-            {
-                File.Copy(quizPath, importedPath);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"An error occurred while copying the quiz file:\r\n\r\n{ex.ToString()}", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-
-            MessageBox.Show($"Success! The quiz has been imported to '{importedPath}'", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            return Load(importedPath);
-        }
-
         public static bool CheckInitDirectories()
         {
             try
@@ -279,6 +245,7 @@ namespace SteelQuiz
                 }
             }
 
+#warning check write permissions
             SaveQuiz();
             return LoadProgressData();
         }

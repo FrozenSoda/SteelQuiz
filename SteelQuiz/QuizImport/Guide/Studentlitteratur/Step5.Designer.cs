@@ -46,12 +46,44 @@ namespace SteelQuiz.QuizImport.Guide.Studentlitteratur
         /// </summary>
         private void InitializeComponent()
         {
-            this.lbl_question = new System.Windows.Forms.Label();
-            this.txt_quizName = new System.Windows.Forms.TextBox();
+            this.txt_lang = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lst_words = new System.Windows.Forms.ListBox();
+            this.lbl_question = new System.Windows.Forms.Label();
             this.SuspendLayout();
+            // 
+            // txt_lang
+            // 
+            this.txt_lang.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_lang.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_lang.Location = new System.Drawing.Point(144, 334);
+            this.txt_lang.Name = "txt_lang";
+            this.txt_lang.Size = new System.Drawing.Size(619, 22);
+            this.txt_lang.TabIndex = 0;
+            this.txt_lang.TextChanged += new System.EventHandler(this.Txt_lang_TextChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(3, 334);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(135, 17);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Language (in English):";
+            // 
+            // lst_words
+            // 
+            this.lst_words.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lst_words.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lst_words.ForeColor = System.Drawing.Color.White;
+            this.lst_words.FormattingEnabled = true;
+            this.lst_words.Location = new System.Drawing.Point(2, 55);
+            this.lst_words.Name = "lst_words";
+            this.lst_words.Size = new System.Drawing.Size(761, 275);
+            this.lst_words.TabIndex = 6;
+            this.lst_words.TabStop = false;
             // 
             // lbl_question
             // 
@@ -60,60 +92,19 @@ namespace SteelQuiz.QuizImport.Guide.Studentlitteratur
             this.lbl_question.Location = new System.Drawing.Point(3, 13);
             this.lbl_question.Name = "lbl_question";
             this.lbl_question.Size = new System.Drawing.Size(760, 43);
-            this.lbl_question.TabIndex = 19;
-            this.lbl_question.Text = "Choose a name for the quiz";
+            this.lbl_question.TabIndex = 4;
+            this.lbl_question.Text = "Which language are the following words written in?";
             // 
-            // txt_quizName
-            // 
-            this.txt_quizName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txt_quizName.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_quizName.Location = new System.Drawing.Point(80, 332);
-            this.txt_quizName.Name = "txt_quizName";
-            this.txt_quizName.Size = new System.Drawing.Size(683, 22);
-            this.txt_quizName.TabIndex = 17;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(10, 335);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(64, 13);
-            this.label1.TabIndex = 18;
-            this.label1.Text = "Quiz name:";
-            // 
-            // label2
-            // 
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(3, 56);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(760, 43);
-            this.label2.TabIndex = 20;
-            this.label2.Text = "Suggestions:\r\n    eg. p308, homework-2019-05-01, EuropeCapitals, ...";
-            // 
-            // label3
-            // 
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(4, 120);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(760, 43);
-            this.label3.TabIndex = 21;
-            this.label3.Text = "This name will be used as the filename for the quiz";
-            // 
-            // Step4
+            // Step6
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.lbl_question);
-            this.Controls.Add(this.txt_quizName);
+            this.Controls.Add(this.txt_lang);
             this.Controls.Add(this.label1);
-            this.Name = "Step4";
+            this.Controls.Add(this.lst_words);
+            this.Controls.Add(this.lbl_question);
+            this.Name = "Step6";
             this.Size = new System.Drawing.Size(766, 364);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -121,11 +112,9 @@ namespace SteelQuiz.QuizImport.Guide.Studentlitteratur
         }
 
         #endregion
-
-        private System.Windows.Forms.Label lbl_question;
-        internal System.Windows.Forms.TextBox txt_quizName;
+        internal System.Windows.Forms.TextBox txt_lang;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ListBox lst_words;
+        private System.Windows.Forms.Label lbl_question;
     }
 }

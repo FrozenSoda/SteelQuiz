@@ -181,12 +181,22 @@ namespace SteelQuiz.QuizImport.Guide
                 if (ImportSource == QuizImporter.ImportSource.TextImport)
                 {
                     var uc = GetStep(Step, ImportSource) as TextImport.Step4;
-                    QuizFolder = uc.QuizFolder;
+                    if (uc.Language1 == "")
+                    {
+                        MessageBox.Show("Language cannot be empty", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    Language1 = uc.Language1;
                 }
                 else if (ImportSource == QuizImporter.ImportSource.Studentlitteratur)
                 {
                     var uc = GetStep(Step, ImportSource) as Studentlitteratur.Step4;
-                    QuizFolder = uc.QuizFolder;
+                    if (uc.Language1 == "")
+                    {
+                        MessageBox.Show("Language cannot be empty", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    Language1 = uc.Language1;
                 }
             }
             else if (Step == 5)
@@ -194,98 +204,6 @@ namespace SteelQuiz.QuizImport.Guide
                 if (ImportSource == QuizImporter.ImportSource.TextImport)
                 {
                     var uc = GetStep(Step, ImportSource) as TextImport.Step5;
-                    var quizFilename = uc.txt_quizName.Text;
-                    if (quizFilename == "")
-                    {
-                        var msg = MessageBox.Show("Quiz name cannot be empty", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-
-                    var forbiddenCharacters = Path.GetInvalidFileNameChars();
-                    var isValid = quizFilename.IndexOfAny(forbiddenCharacters) < 0;
-                    if (!isValid)
-                    {
-                        var msg = MessageBox.Show("Quiz name contains forbidden characters",
-                            "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-
-                    var quizPath = Path.Combine(QuizFolder, quizFilename) + "." + QuizCore.QUIZ_EXTENSION;
-
-                    if (File.Exists(quizPath))
-                    {
-                        var msg = MessageBox.Show("A quiz with this name already exists. Replace?", "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning,
-                            MessageBoxDefaultButton.Button2);
-                        if (msg == DialogResult.No)
-                        {
-                            return;
-                        }
-                    }
-
-                    QuizPath = quizPath;
-                }
-                else if (ImportSource == QuizImporter.ImportSource.Studentlitteratur)
-                {
-                    var uc = GetStep(Step, ImportSource) as Studentlitteratur.Step5;
-                    var quizFilename = uc.txt_quizName.Text;
-                    if (quizFilename == "")
-                    {
-                        var msg = MessageBox.Show("Quiz name cannot be empty", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-
-                    var forbiddenCharacters = Path.GetInvalidFileNameChars();
-                    var isValid = quizFilename.IndexOfAny(forbiddenCharacters) < 0;
-                    if (!isValid)
-                    {
-                        var msg = MessageBox.Show("Quiz name contains forbidden characters",
-                            "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-
-                    var quizPath = Path.Combine(QuizFolder, quizFilename) + "." + QuizCore.QUIZ_EXTENSION;
-
-                    if (File.Exists(quizPath))
-                    {
-                        var msg = MessageBox.Show("A quiz with this name already exists. Replace?", "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning,
-                            MessageBoxDefaultButton.Button2);
-                        if (msg == DialogResult.No)
-                        {
-                            return;
-                        }
-                    }
-
-                    QuizPath = quizPath;
-                }
-            }
-            else if (Step == 6)
-            {
-                if (ImportSource == QuizImporter.ImportSource.TextImport)
-                {
-                    var uc = GetStep(Step, ImportSource) as TextImport.Step6;
-                    if (uc.Language1 == "")
-                    {
-                        MessageBox.Show("Language cannot be empty", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-                    Language1 = uc.Language1;
-                }
-                else if (ImportSource == QuizImporter.ImportSource.Studentlitteratur)
-                {
-                    var uc = GetStep(Step, ImportSource) as Studentlitteratur.Step6;
-                    if (uc.Language1 == "")
-                    {
-                        MessageBox.Show("Language cannot be empty", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-                    Language1 = uc.Language1;
-                }
-            }
-            else if (Step == 7)
-            {
-                if (ImportSource == QuizImporter.ImportSource.TextImport)
-                {
-                    var uc = GetStep(Step, ImportSource) as TextImport.Step7;
                     if (uc.Language2 == "")
                     {
                         MessageBox.Show("Language cannot be empty", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -298,7 +216,7 @@ namespace SteelQuiz.QuizImport.Guide
                 }
                 else if (ImportSource == QuizImporter.ImportSource.Studentlitteratur)
                 {
-                    var uc = GetStep(Step, ImportSource) as Studentlitteratur.Step7;
+                    var uc = GetStep(Step, ImportSource) as Studentlitteratur.Step5;
                     if (uc.Language2 == "")
                     {
                         MessageBox.Show("Language cannot be empty", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -335,6 +253,13 @@ namespace SteelQuiz.QuizImport.Guide
 
         private void Finish()
         {
+            if (sfd_quiz.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+
+            QuizPath = sfd_quiz.FileName;
+
             var quiz = new Quiz(Language1, Language2, MetaData.QUIZ_FILE_FORMAT_VERSION);
             quiz.WordPairs = WordPairs.ToList();
             bool loadSuccess = QuizCore.Load(quiz, QuizPath);
@@ -406,39 +331,24 @@ namespace SteelQuiz.QuizImport.Guide
             }
             else if (Step == 4)
             {
-                (GetStep(Step, ImportSource) as Control).Focus();
+                if (ImportSource == QuizImporter.ImportSource.TextImport)
+                {
+                    (GetStep(Step, ImportSource) as TextImport.Step4).txt_lang.Focus();
+                }
+                else if (ImportSource == QuizImporter.ImportSource.Studentlitteratur)
+                {
+                    (GetStep(Step, ImportSource) as Studentlitteratur.Step4).txt_lang.Focus();
+                }
             }
             else if (Step == 5)
             {
                 if (ImportSource == QuizImporter.ImportSource.TextImport)
                 {
-                    (GetStep(Step, ImportSource) as TextImport.Step5).txt_quizName.Focus();
+                    (GetStep(Step, ImportSource) as TextImport.Step5).txt_lang.Focus();
                 }
                 else if (ImportSource == QuizImporter.ImportSource.Studentlitteratur)
                 {
-                    (GetStep(Step, ImportSource) as Studentlitteratur.Step5).txt_quizName.Focus();
-                }
-            }
-            else if (Step == 6)
-            {
-                if (ImportSource == QuizImporter.ImportSource.TextImport)
-                {
-                    (GetStep(Step, ImportSource) as TextImport.Step6).txt_lang.Focus();
-                }
-                else if (ImportSource == QuizImporter.ImportSource.Studentlitteratur)
-                {
-                    (GetStep(Step, ImportSource) as Studentlitteratur.Step6).txt_lang.Focus();
-                }
-            }
-            else if (Step == 7)
-            {
-                if (ImportSource == QuizImporter.ImportSource.TextImport)
-                {
-                    (GetStep(Step, ImportSource) as TextImport.Step7).txt_lang.Focus();
-                }
-                else if (ImportSource == QuizImporter.ImportSource.Studentlitteratur)
-                {
-                    (GetStep(Step, ImportSource) as Studentlitteratur.Step7).txt_lang.Focus();
+                    (GetStep(Step, ImportSource) as Studentlitteratur.Step5).txt_lang.Focus();
                 }
             }
         }
@@ -492,23 +402,13 @@ namespace SteelQuiz.QuizImport.Guide
                 }
                 else if (step == 4)
                 {
-                    var step4 = new TextImport.Step4();
+                    var step4 = new TextImport.Step4(WordPairs);
                     pnl_steps.Controls.Add(step4);
                 }
                 else if (step == 5)
                 {
-                    var step5 = new TextImport.Step5();
+                    var step5 = new TextImport.Step5(WordPairs);
                     pnl_steps.Controls.Add(step5);
-                }
-                else if (step == 6)
-                {
-                    var step6 = new TextImport.Step6(WordPairs);
-                    pnl_steps.Controls.Add(step6);
-                }
-                else if (step == 7)
-                {
-                    var step7 = new TextImport.Step7(WordPairs);
-                    pnl_steps.Controls.Add(step7);
                 }
             }
             else if (ImportSource == QuizImporter.ImportSource.Studentlitteratur)
@@ -525,23 +425,13 @@ namespace SteelQuiz.QuizImport.Guide
                 }
                 else if (step == 4)
                 {
-                    var step4 = new Studentlitteratur.Step4();
+                    var step4 = new Studentlitteratur.Step4(WordPairs);
                     pnl_steps.Controls.Add(step4);
                 }
                 else if (step == 5)
                 {
-                    var step5 = new Studentlitteratur.Step5();
+                    var step5 = new Studentlitteratur.Step5(WordPairs);
                     pnl_steps.Controls.Add(step5);
-                }
-                else if (step == 6)
-                {
-                    var step6 = new Studentlitteratur.Step6(WordPairs);
-                    pnl_steps.Controls.Add(step6);
-                }
-                else if (step == 7)
-                {
-                    var step7 = new Studentlitteratur.Step7(WordPairs);
-                    pnl_steps.Controls.Add(step7);
                 }
             }
         }

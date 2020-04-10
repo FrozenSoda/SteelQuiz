@@ -111,18 +111,6 @@
     <Compile Include="QuizImport\Guide\TextImport\Step5.Designer.cs">
       <DependentUpon>Step5.cs</DependentUpon>
     </Compile>
-    <Compile Include="QuizImport\Guide\TextImport\Step6.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="QuizImport\Guide\TextImport\Step6.Designer.cs">
-      <DependentUpon>Step6.cs</DependentUpon>
-    </Compile>
-    <Compile Include="QuizImport\Guide\TextImport\Step7.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="QuizImport\Guide\TextImport\Step7.Designer.cs">
-      <DependentUpon>Step7.cs</DependentUpon>
-    </Compile>
     <Compile Include="QuizPractise\MultiAnswer.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -236,24 +224,6 @@
     <Compile Include="QuizImport\Guide\QuizFolder.Designer.cs">
       <DependentUpon>QuizFolder.cs</DependentUpon>
     </Compile>
-    <Compile Include="QuizImport\Guide\Studentlitteratur\Step4.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="QuizImport\Guide\Studentlitteratur\Step4.Designer.cs">
-      <DependentUpon>Step4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="QuizImport\Internal\QuizFolder.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="QuizImport\Internal\QuizFolder.Designer.cs">
-      <DependentUpon>QuizFolder.cs</DependentUpon>
-    </Compile>
-    <Compile Include="QuizImport\Internal\QuizFolderSelect.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="QuizImport\Internal\QuizFolderSelect.Designer.cs">
-      <DependentUpon>QuizFolderSelect.cs</DependentUpon>
-    </Compile>
     <Compile Include="QuizProgressInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -355,29 +325,23 @@
     <Compile Include="QuizImport\Guide\Studentlitteratur\Step3.Designer.cs">
       <DependentUpon>Step3.cs</DependentUpon>
     </Compile>
-    <Compile Include="QuizImport\Guide\Studentlitteratur\Step5.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="QuizImport\Guide\Studentlitteratur\Step5.Designer.cs">
-      <DependentUpon>Step5.cs</DependentUpon>
-    </Compile>
     <Compile Include="QuizImport\Guide\Studentlitteratur\Step2.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="QuizImport\Guide\Studentlitteratur\Step2.Designer.cs">
       <DependentUpon>Step2.cs</DependentUpon>
     </Compile>
-    <Compile Include="QuizImport\Guide\Studentlitteratur\Step7.cs">
+    <Compile Include="QuizImport\Guide\Studentlitteratur\Step5.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="QuizImport\Guide\Studentlitteratur\Step7.Designer.cs">
-      <DependentUpon>Step7.cs</DependentUpon>
+    <Compile Include="QuizImport\Guide\Studentlitteratur\Step5.Designer.cs">
+      <DependentUpon>Step5.cs</DependentUpon>
     </Compile>
-    <Compile Include="QuizImport\Guide\Studentlitteratur\Step6.cs">
+    <Compile Include="QuizImport\Guide\Studentlitteratur\Step4.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="QuizImport\Guide\Studentlitteratur\Step6.Designer.cs">
-      <DependentUpon>Step6.cs</DependentUpon>
+    <Compile Include="QuizImport\Guide\Studentlitteratur\Step4.Designer.cs">
+      <DependentUpon>Step4.cs</DependentUpon>
     </Compile>
     <Compile Include="QuizPractise\FixQuizErrors.cs">
       <SubType>Form</SubType>
@@ -544,21 +508,6 @@
     <EmbeddedResource Include="QuizImport\Guide\TextImport\Step5.resx">
       <DependentUpon>Step5.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="QuizImport\Guide\TextImport\Step6.resx">
-      <DependentUpon>Step6.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="QuizImport\Guide\TextImport\Step7.resx">
-      <DependentUpon>Step7.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="QuizImport\Guide\Studentlitteratur\Step4.resx">
-      <DependentUpon>Step4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="QuizImport\Internal\QuizFolder.resx">
-      <DependentUpon>QuizFolder.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="QuizImport\Internal\QuizFolderSelect.resx">
-      <DependentUpon>QuizFolderSelect.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="QuizPractise\MultiAnswer.resx">
       <DependentUpon>MultiAnswer.cs</DependentUpon>
     </EmbeddedResource>
@@ -617,17 +566,14 @@
     <EmbeddedResource Include="QuizImport\Guide\Studentlitteratur\Step3.resx">
       <DependentUpon>Step3.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="QuizImport\Guide\Studentlitteratur\Step5.resx">
-      <DependentUpon>Step5.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="QuizImport\Guide\Studentlitteratur\Step2.resx">
       <DependentUpon>Step2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="QuizImport\Guide\Studentlitteratur\Step7.resx">
-      <DependentUpon>Step7.cs</DependentUpon>
+    <EmbeddedResource Include="QuizImport\Guide\Studentlitteratur\Step5.resx">
+      <DependentUpon>Step5.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="QuizImport\Guide\Studentlitteratur\Step6.resx">
-      <DependentUpon>Step6.cs</DependentUpon>
+    <EmbeddedResource Include="QuizImport\Guide\Studentlitteratur\Step4.resx">
+      <DependentUpon>Step4.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuizPractise\FixQuizErrors.resx">
       <DependentUpon>FixQuizErrors.cs</DependentUpon>

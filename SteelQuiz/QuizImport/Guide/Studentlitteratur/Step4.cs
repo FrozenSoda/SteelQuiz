@@ -25,6 +25,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SteelQuiz.QuizData;
 using static SteelQuiz.QuizImport.QuizImporter;
 
 namespace SteelQuiz.QuizImport.Guide.Studentlitteratur
@@ -32,47 +33,37 @@ namespace SteelQuiz.QuizImport.Guide.Studentlitteratur
     public partial class Step4 : AutoThemeableUserControl, IStep
     {
         public ImportSource ImportSource { get; set; } = ImportSource.Studentlitteratur;
-        public int Step { get; set; } = 4;
+        public int Step { get; set; } = 6;
 
-        public string QuizFolder
-        {
-            get
-            {
-                foreach (var rdo in flp_quizFolders.Controls.OfType<RadioButton>())
-                {
-                    if (rdo.Checked)
-                    {
-                        return rdo.Text;
-                    }
-                }
+        public string Language1 => txt_lang.Text;
 
-                return null;
-            }
-        }
-
-        public Step4()
+        public Step4(IEnumerable<WordPair> wordPairs)
         {
             InitializeComponent();
-            for (int i = 0; i < ConfigManager.Config.SyncConfig.QuizFolders.Count; ++i)
+            foreach (var wordPair in wordPairs)
             {
-                var folder = ConfigManager.Config.SyncConfig.QuizFolders[i];
-
-                var rdo = new RadioButton();
-                rdo.AutoSize = true;
-                rdo.MaximumSize = new Size(flp_quizFolders.Size.Width - 20, 0);
-                rdo.Text = folder;
-                rdo.Font = new Font("Segoe UI", 12);
-                if (i == 0)
-                {
-                    rdo.Checked = true;
-                }
-                else
-                {
-                    rdo.Checked = false;
-                }
-                flp_quizFolders.Controls.Add(rdo);
+                lst_words.Items.Add(wordPair.Word1);
             }
+
             SetTheme();
+        }
+
+        private void Txt_lang_TextChanged(object sender, EventArgs e)
+        {
+            if (txt_lang.Text.Length < 1)
+            {
+                return;
+            }
+
+            // force first character to be uppercase
+            if (char.IsLower(txt_lang.Text.First()))
+            {
+                var initialSelection = txt_lang.SelectionStart;
+
+                //make it uppercase
+                txt_lang.Text = txt_lang.Text.First().ToString().ToUpper() + txt_lang.Text.Substring(1);
+                txt_lang.SelectionStart = initialSelection;
+            }
         }
     }
 }

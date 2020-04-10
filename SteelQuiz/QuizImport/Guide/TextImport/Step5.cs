@@ -25,6 +25,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SteelQuiz.QuizData;
 using static SteelQuiz.QuizImport.QuizImporter;
 
 namespace SteelQuiz.QuizImport.Guide.TextImport
@@ -32,13 +33,37 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
     public partial class Step5 : AutoThemeableUserControl, IStep
     {
         public ImportSource ImportSource { get; set; } = ImportSource.TextImport;
-        public int Step { get; set; } = 5;
+        public int Step { get; set; } = 7;
 
-        public Step5()
+        public string Language2 => txt_lang.Text;
+
+        public Step5(IEnumerable<WordPair> wordPairs)
         {
             InitializeComponent();
+            foreach (var wordPair in wordPairs)
+            {
+                lst_words.Items.Add(wordPair.Word2);
+            }
 
             SetTheme();
+        }
+
+        private void Txt_lang_TextChanged(object sender, EventArgs e)
+        {
+            if (txt_lang.Text.Length < 1)
+            {
+                return;
+            }
+
+            // force first character to be uppercase
+            if (char.IsLower(txt_lang.Text.First()))
+            {
+                var initialSelection = txt_lang.SelectionStart;
+
+                //make it uppercase
+                txt_lang.Text = txt_lang.Text.First().ToString().ToUpper() + txt_lang.Text.Substring(1);
+                txt_lang.SelectionStart = initialSelection;
+            }
         }
     }
 }

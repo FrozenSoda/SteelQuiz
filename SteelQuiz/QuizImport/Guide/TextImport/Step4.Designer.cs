@@ -46,47 +46,75 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
         /// </summary>
         private void InitializeComponent()
         {
-            this.lbl_title = new System.Windows.Forms.Label();
-            this.flp_quizFolders = new System.Windows.Forms.FlowLayoutPanel();
+            this.txt_lang = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lbl_question = new System.Windows.Forms.Label();
+            this.lst_words = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
-            // lbl_title
+            // txt_lang
             // 
-            this.lbl_title.Font = new System.Drawing.Font("Segoe UI Semilight", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_title.ForeColor = System.Drawing.Color.White;
-            this.lbl_title.Location = new System.Drawing.Point(3, 13);
-            this.lbl_title.Name = "lbl_title";
-            this.lbl_title.Size = new System.Drawing.Size(760, 43);
-            this.lbl_title.TabIndex = 20;
-            this.lbl_title.Text = "Select the folder to save the quiz in";
+            this.txt_lang.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_lang.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_lang.Location = new System.Drawing.Point(144, 334);
+            this.txt_lang.Name = "txt_lang";
+            this.txt_lang.Size = new System.Drawing.Size(619, 22);
+            this.txt_lang.TabIndex = 0;
+            this.txt_lang.TextChanged += new System.EventHandler(this.Txt_lang_TextChanged);
             // 
-            // flp_quizFolders
+            // label1
             // 
-            this.flp_quizFolders.AutoScroll = true;
-            this.flp_quizFolders.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flp_quizFolders.Location = new System.Drawing.Point(27, 56);
-            this.flp_quizFolders.Name = "flp_quizFolders";
-            this.flp_quizFolders.Size = new System.Drawing.Size(736, 305);
-            this.flp_quizFolders.TabIndex = 21;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(3, 334);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(135, 17);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Language (in English):";
             // 
-            // Step4
+            // lbl_question
+            // 
+            this.lbl_question.Font = new System.Drawing.Font("Segoe UI Semilight", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_question.ForeColor = System.Drawing.Color.White;
+            this.lbl_question.Location = new System.Drawing.Point(3, 13);
+            this.lbl_question.Name = "lbl_question";
+            this.lbl_question.Size = new System.Drawing.Size(760, 43);
+            this.lbl_question.TabIndex = 4;
+            this.lbl_question.Text = "Which language are the following words written in?";
+            // 
+            // lst_words
+            // 
+            this.lst_words.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lst_words.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lst_words.ForeColor = System.Drawing.Color.White;
+            this.lst_words.FormattingEnabled = true;
+            this.lst_words.Location = new System.Drawing.Point(2, 55);
+            this.lst_words.Name = "lst_words";
+            this.lst_words.Size = new System.Drawing.Size(761, 275);
+            this.lst_words.TabIndex = 6;
+            this.lst_words.TabStop = false;
+            // 
+            // Step5
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.Controls.Add(this.flp_quizFolders);
-            this.Controls.Add(this.lbl_title);
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.Color.White;
-            this.Name = "Step4";
+            this.Controls.Add(this.txt_lang);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lst_words);
+            this.Controls.Add(this.lbl_question);
+            this.Name = "Step5";
             this.Size = new System.Drawing.Size(766, 364);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label lbl_title;
-        private System.Windows.Forms.FlowLayoutPanel flp_quizFolders;
+        internal System.Windows.Forms.TextBox txt_lang;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbl_question;
+        private System.Windows.Forms.ListBox lst_words;
     }
 }
