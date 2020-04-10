@@ -280,14 +280,7 @@ namespace SteelQuiz.QuizImport.Guide
                 btn_prevCancel.Text = "Cancel";
             }
 
-            if (Step == 7)
-            {
-                btn_next.Text = "Finish";
-            }
-            else
-            {
-                btn_next.Text = "Next";
-            }
+            btn_next.Text = "Next";
         }
 
         private IStep GetStep(int step, ImportSource importSource)
