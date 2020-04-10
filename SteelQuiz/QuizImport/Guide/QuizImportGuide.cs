@@ -252,6 +252,8 @@ namespace SteelQuiz.QuizImport.Guide
 
         private void Finish()
         {
+            sfd_quiz.InitialDirectory = ConfigManager.Config.StorageConfig.DefaultQuizSaveFolder;
+
             if (sfd_quiz.ShowDialog() != DialogResult.OK)
             {
                 return;
