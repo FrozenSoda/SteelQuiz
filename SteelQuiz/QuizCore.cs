@@ -125,23 +125,6 @@ namespace SteelQuiz
         }
 
         /// <summary>
-        /// Loads a quiz and its progress data
-        /// </summary>
-        /// <param name="quizGuid">The quiz GUID</param>
-        /// <returns>True if the load was successful, otherwise false</returns>
-        public static bool Load(Guid quizGuid)
-        {
-            string quizPath = FindQuizPath(quizGuid);
-            if (quizPath != null)
-            {
-                return Load(quizPath);
-            }
-
-            MessageBox.Show("The quiz file could not be found", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return false;
-        }
-
-        /// <summary>
         /// Finds the quiz path for the quiz with the specified Guid.
         /// </summary>
         /// <param name="quizGuid">The quiz Guid.</param>

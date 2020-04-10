@@ -39,11 +39,6 @@ namespace SteelQuiz.Preferences
             SetTheme();
         }
 
-        private void Prefs_cleanUp_OnPrefSelected(object sender, EventArgs e)
-        {
-            (ParentForm as Preferences).SwitchCategory(typeof(PrefsProgDataCleanUp));
-        }
-
         private void Prefs_troubleshooting_OnPrefSelected(object sender, EventArgs e)
         {
             (ParentForm as Preferences).SwitchCategory(typeof(PrefsTroubleshooting));

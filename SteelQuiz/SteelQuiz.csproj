@@ -181,23 +181,11 @@
     <Compile Include="Preferences\PrefsProgressSync.Designer.cs">
       <DependentUpon>PrefsProgressSync.cs</DependentUpon>
     </Compile>
-    <Compile Include="Preferences\PrefsQuizFolders.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Preferences\PrefsQuizFolders.Designer.cs">
-      <DependentUpon>PrefsQuizFolders.cs</DependentUpon>
-    </Compile>
     <Compile Include="Preferences\PrefsUpdates.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Preferences\PrefsUpdates.Designer.cs">
       <DependentUpon>PrefsUpdates.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Preferences\QuizFolder.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Preferences\QuizFolder.Designer.cs">
-      <DependentUpon>QuizFolder.cs</DependentUpon>
     </Compile>
     <Compile Include="Preferences\QuizProgressConflict.cs">
       <SubType>Form</SubType>
@@ -261,12 +249,6 @@
     </Compile>
     <Compile Include="Preferences\Preferences.Designer.cs">
       <DependentUpon>Preferences.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Preferences\PrefsProgDataCleanUp.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Preferences\PrefsProgDataCleanUp.Designer.cs">
-      <DependentUpon>PrefsProgDataCleanUp.cs</DependentUpon>
     </Compile>
     <Compile Include="Preferences\PrefsGeneral.cs">
       <SubType>UserControl</SubType>
@@ -469,14 +451,8 @@
     <EmbeddedResource Include="Preferences\PrefsProgressSync.resx">
       <DependentUpon>PrefsProgressSync.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Preferences\PrefsQuizFolders.resx">
-      <DependentUpon>PrefsQuizFolders.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Preferences\PrefsUpdates.resx">
       <DependentUpon>PrefsUpdates.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Preferences\QuizFolder.resx">
-      <DependentUpon>QuizFolder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Preferences\QuizProgressConflict.resx">
       <DependentUpon>QuizProgressConflict.cs</DependentUpon>
@@ -535,9 +511,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Preferences\Preferences.resx">
       <DependentUpon>Preferences.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Preferences\PrefsProgDataCleanUp.resx">
-      <DependentUpon>PrefsProgDataCleanUp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Preferences\PrefsGeneral.resx">
       <DependentUpon>PrefsGeneral.cs</DependentUpon>

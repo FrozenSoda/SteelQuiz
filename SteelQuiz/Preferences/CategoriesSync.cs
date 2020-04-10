@@ -37,16 +37,6 @@ namespace SteelQuiz.Preferences
             SetTheme();
         }
 
-        private void Pcat_quizFolders_OnPrefSelected(object sender, EventArgs e)
-        {
-            (ParentForm as Preferences).SwitchCategory(typeof(PrefsQuizFolders));
-        }
-
-        private void Pcat_quizFolders_OnPrefDeselected(object sender, EventArgs e)
-        {
-            (ParentForm as Preferences).Save(typeof(PrefsQuizFolders));
-        }
-
         private void Pcat_progSync_OnPrefSelected(object sender, EventArgs e)
         {
             (ParentForm as Preferences).SwitchCategory(typeof(PrefsProgressSync));
