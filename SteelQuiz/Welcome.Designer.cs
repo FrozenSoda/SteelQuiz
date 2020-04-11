@@ -296,6 +296,7 @@ namespace SteelQuiz
             // 
             // Dashboard
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
@@ -312,6 +313,8 @@ namespace SteelQuiz
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Welcome_FormClosing);
             this.Shown += new System.EventHandler(this.Welcome_Shown);
             this.SizeChanged += new System.EventHandler(this.Welcome_SizeChanged);
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Dashboard_DragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.Dashboard_DragEnter);
             this.pnl_quizInfo.ResumeLayout(false);
             this.pnl_welcome.ResumeLayout(false);
             this.pnl_welcomeText.ResumeLayout(false);

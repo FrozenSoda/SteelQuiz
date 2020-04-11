@@ -681,5 +681,43 @@ namespace SteelQuiz
 
             QuizCore.SaveQuizData();
         }
+
+        private void Dashboard_DragDrop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                var files = ((string[])e.Data.GetData(DataFormats.FileDrop)).Where(x => x.EndsWith(".steelquiz"));
+                if (!files.Any())
+                {
+                    return;
+                }
+
+                foreach (var file in files)
+                {
+                    QuizCore.Load(file);
+                }
+
+                PopulateQuizList();
+                SwitchQuizProgressInfo(flp_lastQuizzes.Controls.Cast<RecentQuiz>()
+                    .Select(x => x.QuizIdentity)
+                    .First());
+            }
+        }
+
+        private void Dashboard_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                var files = ((string[])e.Data.GetData(DataFormats.FileDrop)).Where(x => x.EndsWith(".steelquiz"));
+                if (files.Any())
+                {
+                    e.Effect = DragDropEffects.Move;
+                }
+                else
+                {
+                    e.Effect = DragDropEffects.None;
+                }
+            }
+        }
     }
 }
