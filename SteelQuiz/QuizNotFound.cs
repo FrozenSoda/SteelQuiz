@@ -36,6 +36,7 @@ namespace SteelQuiz
         public string NewQuizPath { get; set; }
         private string OldQuizPath { get; set; }
         private Guid QuizGuid { get; set; }
+        private bool cancelResultAfterWorkerCompleted = false;
 
         public QuizNotFound(Guid quizGuid, string oldQuizPath)
         {
@@ -57,6 +58,8 @@ namespace SteelQuiz
             }
 
             SetTheme();
+
+            bgw_quizSearcher.RunWorkerAsync();
         }
 
         private class SearchDir
@@ -71,6 +74,10 @@ namespace SteelQuiz
             }
         }
 
+        /// <summary>
+        /// Generates a list of directories to search for the quiz in.
+        /// </summary>
+        /// <returns>The list of existing directories.</returns>
         private List<SearchDir> GetSearchDirs()
         {
             return new SearchDir[] {
@@ -90,7 +97,14 @@ namespace SteelQuiz
 
         private void btn_cancel_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.Cancel;
+            if (bgw_quizSearcher.IsBusy)
+            {
+                bgw_quizSearcher.CancelAsync();
+            }
+
+            btn_cancel.Enabled = false;
+            btn_specifyManually.Enabled = false;
+            cancelResultAfterWorkerCompleted = true;
         }
 
         private void btn_specifyManually_Click(object sender, EventArgs e)
@@ -112,7 +126,8 @@ namespace SteelQuiz
                 if (quiz.GUID == QuizGuid)
                 {
                     NewQuizPath = ofd_quiz.FileName;
-                    DialogResult = DialogResult.OK;
+
+                    bgw_quizSearcher.CancelAsync();
                 }
                 else
                 {
@@ -120,25 +135,6 @@ namespace SteelQuiz
                         $"Old name: {Path.GetFileNameWithoutExtension(OldQuizPath)}\r\nGuid:{QuizGuid.ToString()}",
                         "Guid does not match", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            }
-        }
-
-        private void btn_autoSearch_Click(object sender, EventArgs e)
-        {
-            if (!bgw_quizSearcher.IsBusy)
-            {
-                bgw_quizSearcher.RunWorkerAsync();
-
-                lbl_msg.Text = "Searching ...";
-                btn_cancel.Enabled = false;
-                btn_specifyManually.Enabled = false;
-                btn_autoSearch.Text = "Cancel";
-            }
-            else
-            {
-                bgw_quizSearcher.CancelAsync();
-
-                btn_autoSearch.Enabled = false;
             }
         }
 
@@ -189,15 +185,14 @@ namespace SteelQuiz
                 DialogResult = DialogResult.OK;
                 return;
             }
+            else if (cancelResultAfterWorkerCompleted)
+            {
+                DialogResult = DialogResult.Cancel;
+                return;
+            }
 
+            progressBar1.Visible = false;
             lbl_msg.Text = "Could not locate quiz. Did you rename or move it?";
-            btn_cancel.Enabled = true;
-            btn_specifyManually.Enabled = true;
-            btn_autoSearch.Enabled = true;
-            btn_autoSearch.Text = "Let SteelQuiz search";
-
-            MessageBox.Show("SteelQuiz could not locate the quiz. You must specify the path manually if you wish to load it.", "Could not locate Quiz",
-                MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }
