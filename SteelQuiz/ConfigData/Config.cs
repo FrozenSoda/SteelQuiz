@@ -75,10 +75,10 @@ namespace SteelQuiz.ConfigData
         /// </summary>
         public StorageConfig StorageConfig { get; set; } = new StorageConfig();
 
-        [Obsolete("Use StorageConfig instead")]
+        [Obsolete("Use StorageConfig instead", true)]
         [JsonProperty]
         /// <summary>
-        /// The config for synchronization
+        /// The legacy config for synchronization. Its property remains to ensure it gets copied over into StorageConfig upon upgrade to SteelQuiz v5.0.0.
         /// </summary>
         private StorageConfig SyncConfig { set => StorageConfig = value; }
 
@@ -94,7 +94,7 @@ namespace SteelQuiz.ConfigData
 
         public Config()
         {
-            FileFormatVersion = MetaData.QUIZ_FILE_FORMAT_VERSION;
+            FileFormatVersion = MetaData.CONFIG_FILE_FORMAT_VERSION;
         }
     }
 }
