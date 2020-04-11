@@ -53,7 +53,7 @@ namespace SteelQuiz.QuizImport.Guide
         private ImportSource ImportSource { get; set; }
         private bool MultipleTranslationsAsDifferentWordPairs { get; set; }
         private IEnumerable<WordPair> WordPairs { get; set; } = null;
-        private string QuizPath { get; set; }
+        public string QuizPath { get; set; }
         private string Language1 { get; set; }
         private string Language2 { get; set; }
 

@@ -374,10 +374,19 @@ namespace SteelQuiz
             var import = new QuizImportGuide();
             if (import.ShowDialog() == DialogResult.OK)
             {
-                Program.frmInQuiz = new InQuiz(QuizPractiseMode.Writing);
-#warning implement selector
-                Program.frmInQuiz.Show();
-                Hide();
+                //Program.frmInQuiz = new InQuiz(QuizPractiseMode.Writing);
+                //#warning implement selector
+                //Program.frmInQuiz.Show();
+                //Hide();
+                if (!QuizCore.Load(import.QuizPath))
+                {
+                    return;
+                }
+                PopulateQuizList();
+                SwitchQuizProgressInfo(flp_lastQuizzes.Controls.Cast<DashboardQuiz>()
+                    .Where(x => x.QuizIdentity.FindQuizPath() == import.QuizPath)
+                    .Select(x => x.QuizIdentity)
+                    .First());
             }
         }
 
@@ -392,13 +401,15 @@ namespace SteelQuiz
                 //LoadQuiz(ofd_loadQuiz.FileName, QuizPractiseMode.Writing);
                 //#warning add selector
 
-                QuizCore.Load(ofd_loadQuiz.FileName);
+                if (!QuizCore.Load(ofd_loadQuiz.FileName))
+                {
+                    return;
+                }
                 PopulateQuizList();
                 SwitchQuizProgressInfo(flp_lastQuizzes.Controls.Cast<DashboardQuiz>()
                     .Where(x => x.QuizIdentity.FindQuizPath() == ofd_loadQuiz.FileName)
                     .Select(x => x.QuizIdentity)
                     .First());
-#warning hereerereare
             }
         }
 
