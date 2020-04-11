@@ -171,6 +171,7 @@ namespace SteelQuizDeploy
                 Path.Combine(SolutionRoot, @"SteelQuiz\bin\Release\AutoUpdater.NET.dll"),
                 Path.Combine(SolutionRoot, @"SteelQuiz\bin\Release\Fastenshtein.dll"),
                 Path.Combine(SolutionRoot, @"SteelQuiz\bin\Release\Newtonsoft.Json.dll"),
+                Path.Combine(SolutionRoot, @"Portable Extras\README.txt"),
             };
 
             File.Delete(portableZipPath);
