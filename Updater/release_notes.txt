@@ -1,3 +1,16 @@
+v5.0.0 beta 1:
+- Implemented support for global quiz storage - quizzes must no longer be stored in specific quiz folders.
+- Implemented support for drag and dropping quiz files to load them.
+- Implemented an option to clear all entries in the Recent Quizzes list.
+
+- Implemented better control over save path while importing quizzes.
+- Improved window titles to contain more relevant information.
+
+- Fixed an issue causing recent quizzes list to be lost when merging quiz progress data files.
+- Adjustments in Preferences.
+- Minor user interface adjustments.
+
+
 v4.3.2:
 - Security updates to libraries, together with other updates.
 - Fixed issues in the quiz loading process that could theoretically cause data loss.
