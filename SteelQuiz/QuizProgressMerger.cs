@@ -77,6 +77,10 @@ namespace SteelQuiz
         public static QuizProgDataRoot Merge(QuizProgDataRoot prog1, QuizProgDataRoot prog2)
         {
             var result = new QuizProgDataRoot(MetaData.QUIZ_FILE_FORMAT_VERSION);
+
+            result.QuizAccessTimes = prog1.QuizAccessTimes;
+            result.QuizIdentities = prog1.QuizIdentities;
+
             var unfixedQuizProgDataList = new List<QuizProgData>();
 
             foreach (var q in prog1.QuizProgDatas)
