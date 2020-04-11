@@ -100,11 +100,15 @@ namespace SteelQuiz
             if (bgw_quizSearcher.IsBusy)
             {
                 bgw_quizSearcher.CancelAsync();
-            }
 
-            btn_cancel.Enabled = false;
-            btn_specifyManually.Enabled = false;
-            cancelResultAfterWorkerCompleted = true;
+                btn_cancel.Enabled = false;
+                btn_specifyManually.Enabled = false;
+                cancelResultAfterWorkerCompleted = true;
+            }
+            else
+            {
+                DialogResult = DialogResult.Cancel;
+            }
         }
 
         private void btn_specifyManually_Click(object sender, EventArgs e)
@@ -127,12 +131,19 @@ namespace SteelQuiz
                 {
                     NewQuizPath = ofd_quiz.FileName;
 
-                    bgw_quizSearcher.CancelAsync();
+                    if (bgw_quizSearcher.IsBusy)
+                    {
+                        bgw_quizSearcher.CancelAsync();
+                    }
+                    else
+                    {
+                        DialogResult = DialogResult.OK;
+                    }
                 }
                 else
                 {
                     MessageBox.Show("The selected quiz is not the right one. SteelQuiz is looking for the following quiz:\r\n\r\n" +
-                        $"Old name: {Path.GetFileNameWithoutExtension(OldQuizPath)}\r\nGuid:{QuizGuid.ToString()}",
+                        $"Old name: {Path.GetFileNameWithoutExtension(OldQuizPath)}\r\nGuid: {QuizGuid.ToString()}",
                         "Guid does not match", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -192,7 +203,7 @@ namespace SteelQuiz
             }
 
             progressBar1.Visible = false;
-            lbl_msg.Text = "Could not locate quiz. Did you rename or move it?";
+            lbl_msg.Text = "Could not locate quiz. Have you moved it?";
         }
     }
 }

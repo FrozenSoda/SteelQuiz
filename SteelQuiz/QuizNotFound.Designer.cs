@@ -63,7 +63,7 @@ namespace SteelQuiz
             this.lbl_msg.Name = "lbl_msg";
             this.lbl_msg.Size = new System.Drawing.Size(517, 37);
             this.lbl_msg.TabIndex = 0;
-            this.lbl_msg.Text = "Locating quiz ... Did you rename or move it?";
+            this.lbl_msg.Text = "Locating quiz ... Have you moved it?";
             this.lbl_msg.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btn_specifyManually
