@@ -387,19 +387,18 @@ namespace SteelQuiz
             SkipAddQuizButtonsExpandedAnimation = true;
             AddQuizButtonsExpanded = false;
 
-            //ofd_loadQuiz.InitialDirectory = QuizCore.QUIZ_FOLDER_DEFAULT;
             if (ofd_loadQuiz.ShowDialog() == DialogResult.OK)
             {
-                /*
-                if (Path.GetDirectoryName(ofd_loadQuiz.FileName) != QuizCore.QUIZ_FOLDER)
-                {
-                    MessageBox.Show("Quizzes can only be opened from %appdata%\\Quizzes", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                */
+                //LoadQuiz(ofd_loadQuiz.FileName, QuizPractiseMode.Writing);
+                //#warning add selector
 
-                LoadQuiz(ofd_loadQuiz.FileName, QuizPractiseMode.Writing);
-                #warning add selector
+                QuizCore.Load(ofd_loadQuiz.FileName);
+                PopulateQuizList();
+                SwitchQuizProgressInfo(flp_lastQuizzes.Controls.Cast<DashboardQuiz>()
+                    .Where(x => x.QuizIdentity.FindQuizPath() == ofd_loadQuiz.FileName)
+                    .Select(x => x.QuizIdentity)
+                    .First());
+#warning hereerereare
             }
         }
 
