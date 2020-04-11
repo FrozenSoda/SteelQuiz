@@ -253,6 +253,7 @@ namespace SteelQuiz
             // 
             // lbl_recentQuizzes
             // 
+            this.lbl_recentQuizzes.ContextMenuStrip = this.cms_recentQuizzes;
             this.lbl_recentQuizzes.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_recentQuizzes.Location = new System.Drawing.Point(6, 9);
             this.lbl_recentQuizzes.Name = "lbl_recentQuizzes";
@@ -260,11 +261,11 @@ namespace SteelQuiz
             this.lbl_recentQuizzes.TabIndex = 13;
             this.lbl_recentQuizzes.Text = "Recent Quizzes";
             this.lbl_recentQuizzes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbl_recentQuizzes.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lbl_recentQuizzes_MouseClick);
             // 
             // pnl_left
             // 
             this.pnl_left.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.pnl_left.ContextMenuStrip = this.cms_recentQuizzes;
             this.pnl_left.Controls.Add(this.lbl_recentQuizzes);
             this.pnl_left.Controls.Add(this.btn_chkUpdates);
             this.pnl_left.Controls.Add(this.btn_importQuiz);
@@ -278,7 +279,6 @@ namespace SteelQuiz
             this.pnl_left.Name = "pnl_left";
             this.pnl_left.Size = new System.Drawing.Size(197, 596);
             this.pnl_left.TabIndex = 14;
-            this.pnl_left.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnl_left_MouseClick);
             // 
             // cms_recentQuizzes
             // 

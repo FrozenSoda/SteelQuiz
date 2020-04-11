@@ -648,22 +648,6 @@ namespace SteelQuiz
             flp_lastQuizzes.Size = new Size(flp_lastQuizzes.Size.Width, Size.Height - 143);
         }
 
-        private void pnl_left_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Right)
-            {
-                cms_recentQuizzes.Show(Cursor.Position);
-            }
-        }
-
-        private void lbl_recentQuizzes_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Right)
-            {
-                cms_recentQuizzes.Show(Cursor.Position);
-            }
-        }
-
         private void clearRecentQuizzesListToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var msg = MessageBox.Show($"Are you sure you want to clear the recent quizzes list? The quiz files will not be removed.",
