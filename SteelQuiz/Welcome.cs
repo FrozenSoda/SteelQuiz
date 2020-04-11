@@ -443,9 +443,9 @@ namespace SteelQuiz
                 return;
             }
 
+            Hide();
             Program.frmInQuiz = new InQuiz(quizPractiseMode);
             Program.frmInQuiz.Show();
-            Hide();
         }
 
         private void Welcome_FormClosing(object sender, FormClosingEventArgs e)

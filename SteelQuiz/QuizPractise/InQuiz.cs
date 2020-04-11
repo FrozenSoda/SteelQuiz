@@ -768,6 +768,9 @@ namespace SteelQuiz.QuizPractise
         {
             Hide();
 
+            QuizCore.SaveQuizProgress();
+            ConfigManager.SaveConfig();
+
             Program.frmWelcome.WindowState = WindowState;
             if (WindowState == FormWindowState.Normal)
             {
@@ -780,9 +783,9 @@ namespace SteelQuiz.QuizPractise
             Program.frmWelcome.PopulateQuizList();
             Program.frmWelcome.SetControlStates();
             Program.frmWelcome.GenerateWelcomeMsg();
+
             Program.frmWelcome.Show();
-            QuizCore.SaveQuizProgress();
-            ConfigManager.SaveConfig();
+
             PerformOnCloseEvents = false;
             Close();
             Program.frmInQuiz = null;
