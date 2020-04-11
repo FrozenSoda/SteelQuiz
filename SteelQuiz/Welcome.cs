@@ -724,7 +724,7 @@ namespace SteelQuiz
             MessageBox.Show("SteelQuiz - A quiz program designed to make learning easier.\r\n\r\n" +
                 $"Version: {Application.ProductVersion}\r\n" + 
                 $"Version Type: {(MetaData.PRE_RELEASE ? "Pre-Release" : "Stable")}\r\n\r\n" + 
-                "Copyright (C) 2020 steel9", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                "Copyright (C) 2020 Steel9Apps", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
