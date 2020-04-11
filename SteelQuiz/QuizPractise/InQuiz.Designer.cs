@@ -105,9 +105,9 @@ namespace SteelQuiz.QuizPractise
             this.lbl_progress.ForeColor = System.Drawing.Color.LightGray;
             this.lbl_progress.Location = new System.Drawing.Point(12, 528);
             this.lbl_progress.Name = "lbl_progress";
-            this.lbl_progress.Size = new System.Drawing.Size(111, 13);
+            this.lbl_progress.Size = new System.Drawing.Size(92, 13);
             this.lbl_progress.TabIndex = 2;
-            this.lbl_progress.Text = "Progress this round:";
+            this.lbl_progress.Text = "Round Progress:";
             // 
             // lbl_intelligentLearning
             // 

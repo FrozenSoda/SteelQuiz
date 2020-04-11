@@ -181,7 +181,7 @@ namespace SteelQuiz.QuizPractise
                     lbl_word1.Text = CurrentWordPair.Word2;
                 }
                 CurrentInput = "";
-                lbl_progress.Text = $"Progress this round: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
+                lbl_progress.Text = $"Round Progress: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
 
                 if (CurrentWordPair.GetRequiredSynonyms().Count() > 1)
                 {
@@ -282,7 +282,7 @@ namespace SteelQuiz.QuizPractise
                 }
 
                 CurrentInput = "";
-                lbl_progress.Text = $"Progress this round: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
+                lbl_progress.Text = $"Round Progress: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
 
                 var lbl = MultiAns.CurrentLabel.Clone();
                 if (GameMode == QuizPractiseMode.Writing)
@@ -305,7 +305,7 @@ namespace SteelQuiz.QuizPractise
             Debug.WriteLine("InQuiz.NewRound()");
 
             CountThisTranslationToProgress = true;
-            lbl_progress.Text = $"Progress this round: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
+            lbl_progress.Text = $"Round Progress: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
 
             foreach (var c in lbl_word1.Controls.OfType<WrongAnswer>())
             {
@@ -350,7 +350,7 @@ namespace SteelQuiz.QuizPractise
                 NewWord(newRoundMsg);
             }
 
-            lbl_progress.Text = $"Progress this round: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
+            lbl_progress.Text = $"Round Progress: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
         }
 
         /// <summary>
@@ -454,7 +454,7 @@ namespace SteelQuiz.QuizPractise
                 }
 
                 QuizCore.ResetWordsAskedThisRoundMemo();
-                lbl_progress.Text = $"Progress this round: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
+                lbl_progress.Text = $"Round Progress: { QuizCore.GetWordsAskedThisRound() } / { QuizCore.GetTotalWordsThisRound() }";
 
                 if (QuizCore.QuizProgress.FullTestInProgress && QuizCore.GetWordsAskedThisRound() == QuizCore.GetTotalWordsThisRound())
                 {
