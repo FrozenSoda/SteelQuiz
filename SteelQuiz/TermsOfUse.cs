@@ -123,7 +123,7 @@ namespace SteelQuiz
         {
             Hide();
 
-            Program.frmWelcome = new Welcome();
+            Program.frmWelcome = new Dashboard();
             if (Program.Args.Length > 0 && File.Exists(Program.Args[0]) && Program.Args[0].EndsWith(".steelquiz"))
             {
                 LoadQuiz(Program.Args[0]);
@@ -164,7 +164,7 @@ namespace SteelQuiz
                 return;
             }
 
-            Program.frmInQuiz = new InQuiz(Welcome.QuizPractiseMode.Writing, false);
+            Program.frmInQuiz = new InQuiz(Dashboard.QuizPractiseMode.Writing, false);
 #warning implement selector
             Program.frmInQuiz.Show();
         }

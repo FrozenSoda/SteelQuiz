@@ -18,7 +18,7 @@
 
 namespace SteelQuiz
 {
-    partial class DashboardQuiz
+    partial class RecentQuiz
     {
         /// <summary> 
         /// Required designer variable.

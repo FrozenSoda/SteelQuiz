@@ -32,13 +32,13 @@ using SteelQuiz.QuizProgressData;
 
 namespace SteelQuiz
 {
-    public partial class DashboardQuiz : AutoThemeableUserControl
+    public partial class RecentQuiz : AutoThemeableUserControl
     {
         private WelcomeTheme WelcomeTheme = new WelcomeTheme();
 
         public QuizIdentity QuizIdentity { get; private set; }
 
-        public DashboardQuiz(QuizIdentity quizIdentity)
+        public RecentQuiz(QuizIdentity quizIdentity)
         {
             InitializeComponent();
 
@@ -97,17 +97,12 @@ namespace SteelQuiz
 
         private void Lbl_name_Click(object sender, EventArgs e)
         {
-            (ParentForm as Welcome).SwitchQuizProgressInfo(QuizIdentity);
+            (ParentForm as Dashboard).SwitchQuizProgressInfo(QuizIdentity);
         }
 
         private void RemoveFromListToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var msg = MessageBox.Show($"Are you sure you want to remove the quiz '{QuizIdentity.GetLastKnownName()}' from the 'Recent Quizzes' list? The quiz file will not be removed.",
-                "Remove Quiz - SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (msg == DialogResult.Yes)
-            {
-                Program.frmWelcome.RemoveQuiz(QuizIdentity.QuizGuid);
-            }
+            Program.frmWelcome.RemoveQuiz(QuizIdentity.QuizGuid);
         }
 
         private void ResetProgressDataToolStripMenuItem_Click(object sender, EventArgs e)
@@ -141,13 +136,13 @@ namespace SteelQuiz
             quizProgressInfo?.LoadLearningProgressPercentage();
             quizProgressInfo?.LoadWordPairs();
 
-            (ParentForm as Welcome).SwitchQuizProgressInfo(QuizIdentity);
+            (ParentForm as Dashboard).SwitchQuizProgressInfo(QuizIdentity);
         }
 
         private void exportQuizToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // SwitchQuizProgressInfo() also loads the quiz with QuizCore
-            if (!(ParentForm as Welcome).SwitchQuizProgressInfo(QuizIdentity))
+            if (!(ParentForm as Dashboard).SwitchQuizProgressInfo(QuizIdentity))
             {
                 return;
             }

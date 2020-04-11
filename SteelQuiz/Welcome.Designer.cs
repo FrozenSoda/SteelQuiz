@@ -18,7 +18,7 @@
 
 namespace SteelQuiz
 {
-    partial class Welcome
+    partial class Dashboard
     {
         /// <summary>
         /// Required designer variable.
@@ -47,7 +47,7 @@ namespace SteelQuiz
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Welcome));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
             this.lbl_welcome = new System.Windows.Forms.Label();
             this.btn_addQuiz = new System.Windows.Forms.Button();
             this.ofd_loadQuiz = new System.Windows.Forms.OpenFileDialog();
@@ -65,10 +65,13 @@ namespace SteelQuiz
             this.btn_importQuiz = new System.Windows.Forms.Button();
             this.lbl_recentQuizzes = new System.Windows.Forms.Label();
             this.pnl_left = new System.Windows.Forms.Panel();
+            this.cms_recentQuizzes = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.clearRecentQuizzesListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnl_quizInfo.SuspendLayout();
             this.pnl_welcome.SuspendLayout();
             this.pnl_welcomeText.SuspendLayout();
             this.pnl_left.SuspendLayout();
+            this.cms_recentQuizzes.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl_welcome
@@ -187,14 +190,14 @@ namespace SteelQuiz
             // 
             // lbl_toBegin
             // 
-            this.lbl_toBegin.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_toBegin.Font = new System.Drawing.Font("Segoe UI Semilight", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_toBegin.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.lbl_toBegin.Location = new System.Drawing.Point(0, 116);
             this.lbl_toBegin.Name = "lbl_toBegin";
             this.lbl_toBegin.Size = new System.Drawing.Size(373, 133);
             this.lbl_toBegin.TabIndex = 1;
-            this.lbl_toBegin.Text = "Select a quiz in the Recent Quizzes list, or add one by clicking the \'+\'-button i" +
-    "n the bottom left corner.";
+            this.lbl_toBegin.Text = "Select a quiz in the Recent Quizzes list, or add one by clicking the plus button " +
+    "in the bottom left corner.";
             this.lbl_toBegin.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // btn_loadQuizFromFile
@@ -257,6 +260,7 @@ namespace SteelQuiz
             this.lbl_recentQuizzes.TabIndex = 13;
             this.lbl_recentQuizzes.Text = "Recent Quizzes";
             this.lbl_recentQuizzes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_recentQuizzes.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lbl_recentQuizzes_MouseClick);
             // 
             // pnl_left
             // 
@@ -274,8 +278,23 @@ namespace SteelQuiz
             this.pnl_left.Name = "pnl_left";
             this.pnl_left.Size = new System.Drawing.Size(197, 596);
             this.pnl_left.TabIndex = 14;
+            this.pnl_left.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnl_left_MouseClick);
             // 
-            // Welcome
+            // cms_recentQuizzes
+            // 
+            this.cms_recentQuizzes.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clearRecentQuizzesListToolStripMenuItem});
+            this.cms_recentQuizzes.Name = "cms_recentQuizzes";
+            this.cms_recentQuizzes.Size = new System.Drawing.Size(205, 26);
+            // 
+            // clearRecentQuizzesListToolStripMenuItem
+            // 
+            this.clearRecentQuizzesListToolStripMenuItem.Name = "clearRecentQuizzesListToolStripMenuItem";
+            this.clearRecentQuizzesListToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.clearRecentQuizzesListToolStripMenuItem.Text = "Clear Recent Quizzes List";
+            this.clearRecentQuizzesListToolStripMenuItem.Click += new System.EventHandler(this.clearRecentQuizzesListToolStripMenuItem_Click);
+            // 
+            // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -287,7 +306,7 @@ namespace SteelQuiz
             this.ForeColor = System.Drawing.Color.White;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(831, 496);
-            this.Name = "Welcome";
+            this.Name = "Dashboard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SteelQuiz";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Welcome_FormClosing);
@@ -297,6 +316,7 @@ namespace SteelQuiz
             this.pnl_welcome.ResumeLayout(false);
             this.pnl_welcomeText.ResumeLayout(false);
             this.pnl_left.ResumeLayout(false);
+            this.cms_recentQuizzes.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -320,6 +340,8 @@ namespace SteelQuiz
         private System.Windows.Forms.Label lbl_toBegin;
         private System.Windows.Forms.Panel pnl_welcomeText;
         private System.Windows.Forms.Panel pnl_left;
+        private System.Windows.Forms.ContextMenuStrip cms_recentQuizzes;
+        private System.Windows.Forms.ToolStripMenuItem clearRecentQuizzesListToolStripMenuItem;
     }
 }
 

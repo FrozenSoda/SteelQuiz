@@ -154,11 +154,11 @@
     <Compile Include="Controls\DraggableFlowLayoutPanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="DashboardQuiz.cs">
+    <Compile Include="RecentQuiz.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="DashboardQuiz.Designer.cs">
-      <DependentUpon>DashboardQuiz.cs</DependentUpon>
+    <Compile Include="RecentQuiz.Designer.cs">
+      <DependentUpon>RecentQuiz.cs</DependentUpon>
     </Compile>
     <Compile Include="DashboardQuizWordPair.cs">
       <SubType>UserControl</SubType>
@@ -212,11 +212,11 @@
     <Compile Include="QuizImport\Guide\QuizFolder.Designer.cs">
       <DependentUpon>QuizFolder.cs</DependentUpon>
     </Compile>
-    <Compile Include="QuizProgressInfo.cs">
+    <Compile Include="QuizOverview.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="QuizProgressInfo.Designer.cs">
-      <DependentUpon>QuizProgressInfo.cs</DependentUpon>
+    <Compile Include="QuizOverview.Designer.cs">
+      <DependentUpon>QuizOverview.cs</DependentUpon>
     </Compile>
     <Compile Include="QuizProgressMerger.cs" />
     <Compile Include="AtomicIO.cs" />
@@ -436,8 +436,8 @@
     <Compile Include="QuizProgressData\WordTry.cs" />
     <Compile Include="WelcomeMessage.cs" />
     <Compile Include="WelcomeMessages.cs" />
-    <EmbeddedResource Include="DashboardQuiz.resx">
-      <DependentUpon>DashboardQuiz.cs</DependentUpon>
+    <EmbeddedResource Include="RecentQuiz.resx">
+      <DependentUpon>RecentQuiz.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DashboardQuizWordPair.resx">
       <DependentUpon>DashboardQuizWordPair.cs</DependentUpon>
@@ -496,8 +496,8 @@
     <EmbeddedResource Include="QuizPractise\WrongAnswer.resx">
       <DependentUpon>WrongAnswer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="QuizProgressInfo.resx">
-      <DependentUpon>QuizProgressInfo.cs</DependentUpon>
+    <EmbeddedResource Include="QuizOverview.resx">
+      <DependentUpon>QuizOverview.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StartupLoading.resx">
       <DependentUpon>StartupLoading.cs</DependentUpon>

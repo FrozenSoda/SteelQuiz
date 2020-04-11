@@ -30,7 +30,7 @@ using SteelQuiz.Extensions;
 using SteelQuiz.QuizData;
 using SteelQuiz.QuizProgressData;
 using SteelQuiz.ThemeManager.Colors;
-using static SteelQuiz.Welcome;
+using static SteelQuiz.Dashboard;
 
 namespace SteelQuiz.QuizPractise
 {

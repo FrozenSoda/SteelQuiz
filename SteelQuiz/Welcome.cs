@@ -40,7 +40,7 @@ using SteelQuiz.ThemeManager.Colors;
 
 namespace SteelQuiz
 {
-    public partial class Welcome : Form, ThemeManager.IThemeable
+    public partial class Dashboard : Form, ThemeManager.IThemeable
     {
         private WelcomeTheme WelcomeTheme;
         private WelcomeMessage[] welcomeMessages = new WelcomeMessage[]
@@ -68,7 +68,7 @@ namespace SteelQuiz
 
         private RegistryMonitor themeMonitor;
 
-        public Welcome()
+        public Dashboard()
         {
             InitializeComponent();
             this.Text += $" | v{Application.ProductVersion}";
@@ -123,7 +123,7 @@ namespace SteelQuiz
             }
             flp_lastQuizzes.Controls.Clear();
 
-            foreach (var q in pnl_quizInfo.Controls.OfType<QuizProgressInfo>())
+            foreach (var q in pnl_quizInfo.Controls.OfType<QuizOverview>())
             {
                 q.Dispose();
             }
@@ -135,34 +135,40 @@ namespace SteelQuiz
             {
                 var quizIdentity = QuizCore.QuizIdentities[quizAccessTimePair.Key];
 
-                var dashboardQuiz = new DashboardQuiz(quizIdentity);
-                flp_lastQuizzes.Controls.Add(dashboardQuiz);
+                var recentQuiz = new RecentQuiz(quizIdentity);
+                flp_lastQuizzes.Controls.Add(recentQuiz);
             }
         }
 
         /// <summary>
         /// Removes a quiz from the list
         /// </summary>
-        public void RemoveQuiz(Guid quizGuid)
+        public void RemoveQuiz(Guid quizGuid, bool save = true)
         {
             QuizCore.QuizAccessTimes.Remove(quizGuid);
-            QuizCore.SaveQuizData();
+
+            if (save)
+            {
+                QuizCore.SaveQuizData();
+            }
             
-            foreach (var c in flp_lastQuizzes.Controls.OfType<DashboardQuiz>())
+            foreach (var c in flp_lastQuizzes.Controls.OfType<RecentQuiz>())
             {
                 if (c.QuizIdentity.QuizGuid == quizGuid)
                 {
                     flp_lastQuizzes.Controls.Remove(c);
                     c.Dispose();
+                    break;
                 }
             }
 
-            foreach (var c in pnl_quizInfo.Controls.OfType<QuizProgressInfo>())
+            foreach (var c in pnl_quizInfo.Controls.OfType<QuizOverview>())
             {
                 if (c.QuizIdentity.QuizGuid == quizGuid)
                 {
                     pnl_quizInfo.Controls.Remove(c);
                     c.Dispose();
+                    break;
                 }
             }
         }
@@ -180,7 +186,7 @@ namespace SteelQuiz
                 return false;
             }
 
-            foreach (var q in pnl_quizInfo.Controls.OfType<QuizProgressInfo>())
+            foreach (var q in pnl_quizInfo.Controls.OfType<QuizOverview>())
             {
                 if (q.QuizIdentity.QuizGuid == quizIdentity.QuizGuid)
                 {
@@ -193,7 +199,7 @@ namespace SteelQuiz
                 }
             }
 
-            var quizProgressInfo = new QuizProgressInfo(quizIdentity);
+            var quizProgressInfo = new QuizOverview(quizIdentity);
             pnl_quizInfo.Controls.Add(quizProgressInfo);
             quizProgressInfo.Size = pnl_quizInfo.Size;
             quizProgressInfo.Show();
@@ -207,9 +213,9 @@ namespace SteelQuiz
         /// </summary>
         /// <param name="quizGuid">The Guid of the quiz whose QuizProgressInfo to return</param>
         /// <returns>Returns the QuizProgressInfo if found, otherwise null</returns>
-        public QuizProgressInfo FindQuizProgressInfo(Guid quizGuid)
+        public QuizOverview FindQuizProgressInfo(Guid quizGuid)
         {
-            foreach (var q in pnl_quizInfo.Controls.OfType<QuizProgressInfo>())
+            foreach (var q in pnl_quizInfo.Controls.OfType<QuizOverview>())
             {
                 if (q.QuizIdentity.QuizGuid == quizGuid)
                 {
@@ -383,7 +389,7 @@ namespace SteelQuiz
                     return;
                 }
                 PopulateQuizList();
-                SwitchQuizProgressInfo(flp_lastQuizzes.Controls.Cast<DashboardQuiz>()
+                SwitchQuizProgressInfo(flp_lastQuizzes.Controls.Cast<RecentQuiz>()
                     .Where(x => x.QuizIdentity.FindQuizPath() == import.QuizPath)
                     .Select(x => x.QuizIdentity)
                     .First());
@@ -406,7 +412,7 @@ namespace SteelQuiz
                     return;
                 }
                 PopulateQuizList();
-                SwitchQuizProgressInfo(flp_lastQuizzes.Controls.Cast<DashboardQuiz>()
+                SwitchQuizProgressInfo(flp_lastQuizzes.Controls.Cast<RecentQuiz>()
                     .Where(x => x.QuizIdentity.FindQuizPath() == ofd_loadQuiz.FileName)
                     .Select(x => x.QuizIdentity)
                     .First());
@@ -480,6 +486,8 @@ namespace SteelQuiz
             AddQuizButtonsExpanded = false;
 
             ShowPreferences();
+
+            ofd_loadQuiz.InitialDirectory = ConfigManager.Config.StorageConfig.DefaultQuizSaveFolder;
         }
 
         private void Btn_chkUpdates_Click(object sender, EventArgs e)
@@ -638,6 +646,40 @@ namespace SteelQuiz
                 c.Size = pnl_quizInfo.Size;
             }
             flp_lastQuizzes.Size = new Size(flp_lastQuizzes.Size.Width, Size.Height - 143);
+        }
+
+        private void pnl_left_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                cms_recentQuizzes.Show(Cursor.Position);
+            }
+        }
+
+        private void lbl_recentQuizzes_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                cms_recentQuizzes.Show(Cursor.Position);
+            }
+        }
+
+        private void clearRecentQuizzesListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var msg = MessageBox.Show($"Are you sure you want to clear the recent quizzes list? The quiz files will not be removed.",
+                "Clear Recent Quizzes - SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (msg != DialogResult.Yes)
+            {
+                return;
+            }
+
+            var recentQuizzes = flp_lastQuizzes.Controls.Cast<RecentQuiz>().Select(x => x.QuizIdentity.QuizGuid).ToList();
+            foreach (var quizGuid in recentQuizzes)
+            {
+                RemoveQuiz(quizGuid, false);
+            }
+
+            QuizCore.SaveQuizData();
         }
     }
 }

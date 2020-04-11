@@ -18,7 +18,7 @@
 
 namespace SteelQuiz
 {
-    partial class QuizProgressInfo
+    partial class QuizOverview
     {
         /// <summary> 
         /// Required designer variable.
@@ -47,7 +47,7 @@ namespace SteelQuiz
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QuizProgressInfo));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QuizOverview));
             this.btn_practiseQuiz = new System.Windows.Forms.Button();
             this.btn_editQuiz = new System.Windows.Forms.Button();
             this.lbl_quizNameHere = new System.Windows.Forms.Label();

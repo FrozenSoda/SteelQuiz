@@ -34,7 +34,7 @@ using SteelQuiz.Animations;
 
 namespace SteelQuiz
 {
-    public partial class QuizProgressInfo : AutoThemeableUserControl
+    public partial class QuizOverview : AutoThemeableUserControl
     {
         private WelcomeTheme WelcomeTheme { get; set; } = new WelcomeTheme();
         public QuizIdentity QuizIdentity { get; private set; }
@@ -92,7 +92,7 @@ namespace SteelQuiz
             }
         }
 
-        public QuizProgressInfo(QuizIdentity quizIdentity)
+        public QuizOverview(QuizIdentity quizIdentity)
         {
             InitializeComponent();
 
@@ -390,7 +390,7 @@ namespace SteelQuiz
                 return;
             }
 
-            (ParentForm as Welcome).LoadQuiz(QuizIdentity.FindQuizPath(), Welcome.QuizPractiseMode.Writing);
+            (ParentForm as Dashboard).LoadQuiz(QuizIdentity.FindQuizPath(), Dashboard.QuizPractiseMode.Writing);
         }
 
         private void btn_practiseFlashcards_Click(object sender, EventArgs e)
@@ -401,7 +401,7 @@ namespace SteelQuiz
                 return;
             }
 
-            (ParentForm as Welcome).LoadQuiz(QuizIdentity.FindQuizPath(), Welcome.QuizPractiseMode.Flashcards);
+            (ParentForm as Dashboard).LoadQuiz(QuizIdentity.FindQuizPath(), Dashboard.QuizPractiseMode.Flashcards);
         }
     }
 }
