@@ -22,6 +22,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -82,11 +83,19 @@ namespace SteelQuiz.QuizPractise
             lbl_lang1.Text = QuizCore.QuizProgress.QuestionLanguage;
             lbl_lang2.Text = QuizCore.QuizProgress.AnswerLanguage;
 
+            /*
             this.Text += $" | v{Application.ProductVersion}";
             if (MetaData.PRE_RELEASE)
             {
                 this.Text += " PRE-RELEASE";
             }
+            */
+            this.Text = $"{Path.GetFileNameWithoutExtension(QuizCore.QuizPath)} - SteelQuiz";
+            if (MetaData.PRE_RELEASE)
+            {
+                this.Text += $" v{Application.ProductVersion} PRE-RELEASE";
+            }
+
             NewWord(false);
             if (QuizCore.QuizProgress.FullTestInProgress)
             {

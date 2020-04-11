@@ -316,7 +316,7 @@ namespace SteelQuiz.QuizEditor
             this.MinimumSize = new System.Drawing.Size(831, 496);
             this.Name = "QuizEditor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "Quiz Editor | SteelQuiz";
+            this.Text = "Untitled - SteelQuiz";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.QuizEditor_FormClosing);
             this.SizeChanged += new System.EventHandler(this.QuizEditor_SizeChanged);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.QuizEditor_KeyDown);

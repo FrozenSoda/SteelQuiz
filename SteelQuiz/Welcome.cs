@@ -71,10 +71,10 @@ namespace SteelQuiz
         public Dashboard()
         {
             InitializeComponent();
-            this.Text += $" | v{Application.ProductVersion}";
+
             if (MetaData.PRE_RELEASE)
             {
-                this.Text += " PRE-RELEASE";
+                this.Text += $" v{Application.ProductVersion} PRE-RELEASE";
             }
 
             SetControlStates();

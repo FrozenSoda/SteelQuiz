@@ -50,7 +50,11 @@ namespace SteelQuiz.QuizEditor
             set
             {
                 _quizPath = value;
-                this.Text = $"{ Path.GetFileName(value) } - Quiz Editor | SteelQuiz";
+                this.Text = $"{ Path.GetFileName(value) } - SteelQuiz";
+                if (MetaData.PRE_RELEASE)
+                {
+                    this.Text += $" {Application.ProductVersion} PRE-RELEASE";
+                }
             }
         }
 
@@ -95,10 +99,17 @@ namespace SteelQuiz.QuizEditor
 
             SetTheme();
 
+            /*
             this.Text += $" | v{Application.ProductVersion}";
             if (MetaData.PRE_RELEASE)
             {
                 this.Text += " PRE-RELEASE";
+            }
+            */
+
+            if (MetaData.PRE_RELEASE)
+            {
+                this.Text += $" {Application.ProductVersion} PRE-RELEASE";
             }
         }
 
