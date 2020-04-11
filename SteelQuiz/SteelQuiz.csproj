@@ -149,7 +149,7 @@
     <Compile Include="ConfigData\QuizEditorConfig.cs" />
     <Compile Include="ConfigData\Statistic.cs" />
     <Compile Include="ConfigData\Statistics.cs" />
-    <Compile Include="ConfigData\SyncConfig.cs" />
+    <Compile Include="ConfigData\StorageConfig.cs" />
     <Compile Include="ConfigData\UpdateConfig.cs" />
     <Compile Include="Controls\DraggableFlowLayoutPanel.cs">
       <SubType>Component</SubType>
