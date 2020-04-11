@@ -348,9 +348,11 @@ namespace SteelQuiz
             var btnbc = WelcomeTheme.GetButtonBackColor();
             btn_chkUpdates.BackColor = Color.FromArgb(btnbc.A, btnbc.R - 10, btnbc.G - 10, btnbc.B - 10);
             btn_preferences.BackColor = Color.FromArgb(btnbc.A, btnbc.R - 10, btnbc.G - 10, btnbc.B - 10);
+            btn_about.BackColor = Color.FromArgb(btnbc.A, btnbc.R - 10, btnbc.G - 10, btnbc.B - 10);
 
             btn_chkUpdates.ForeColor = WelcomeTheme.GetButtonForeColor();
             btn_preferences.ForeColor = WelcomeTheme.GetButtonForeColor();
+            btn_about.ForeColor = WelcomeTheme.GetButtonForeColor();
 
             foreach (var uc in this.GetAllChildrenRecursiveDerives(typeof(AutoThemeableUserControl)))
             {
@@ -529,6 +531,7 @@ namespace SteelQuiz
                 var btn_importQuiz_loc = btn_importQuiz.Location;
                 var btn_preferences_loc = btn_preferences.Location;
                 var btn_chkUpdates_loc = btn_chkUpdates.Location;
+                var btn_about_loc = btn_about.Location;
 
                 if (AddQuizButtonsExpanded)
                 {
@@ -539,6 +542,7 @@ namespace SteelQuiz
                     btn_importQuiz.Visible = true;
                     btn_preferences.Visible = true;
                     btn_chkUpdates.Visible = true;
+                    btn_about.Visible = true;
 
                     if (!SkipAddQuizButtonsExpandedAnimation)
                     {
@@ -547,12 +551,14 @@ namespace SteelQuiz
                         btn_importQuiz.Location = btn_addQuiz.Location;
                         btn_preferences.Location = btn_addQuiz.Location;
                         btn_chkUpdates.Location = btn_addQuiz.Location;
+                        btn_about.Location = btn_addQuiz.Location;
 
                         ControlMove.SmoothMove(btn_createQuiz, btn_createQuiz_loc, 80);
                         ControlMove.SmoothMove(btn_loadQuizFromFile, btn_loadQuizFromFile_loc, 80);
                         ControlMove.SmoothMove(btn_importQuiz, btn_importQuiz_loc, 80);
                         ControlMove.SmoothMove(btn_preferences, btn_preferences_loc, 80);
                         ControlMove.SmoothMove(btn_chkUpdates, btn_chkUpdates_loc, 80);
+                        ControlMove.SmoothMove(btn_about, btn_about_loc, 80);
                     }
                     else
                     {
@@ -561,6 +567,7 @@ namespace SteelQuiz
                         btn_importQuiz.Location = btn_importQuiz_loc;
                         btn_preferences.Location = btn_preferences_loc;
                         btn_chkUpdates.Location = btn_chkUpdates_loc;
+                        btn_about.Location = btn_about_loc;
                     }
                 }
                 else
@@ -599,6 +606,12 @@ namespace SteelQuiz
 
                             btn_chkUpdates.Location = btn_chkUpdates_loc;
                         });
+                        ControlMove.SmoothMove(btn_about, btn_addQuiz.Location, 80, () =>
+                        {
+                            btn_about.Visible = false;
+
+                            btn_about.Location = btn_about_loc;
+                        });
                     }
                     else
                     {
@@ -607,12 +620,14 @@ namespace SteelQuiz
                         btn_importQuiz.Visible = false;
                         btn_preferences.Visible = false;
                         btn_chkUpdates.Visible = false;
+                        btn_about.Visible = false;
 
                         btn_createQuiz.Location = btn_createQuiz_loc;
                         btn_loadQuizFromFile.Location = btn_loadQuizFromFile_loc;
                         btn_importQuiz.Location = btn_importQuiz_loc;
                         btn_preferences.Location = btn_preferences_loc;
                         btn_chkUpdates.Location = btn_chkUpdates_loc;
+                        btn_about.Location = btn_about_loc;
                     }
                 }
 
@@ -702,6 +717,14 @@ namespace SteelQuiz
                     e.Effect = DragDropEffects.None;
                 }
             }
+        }
+
+        private void btn_about_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("SteelQuiz - A quiz program designed to make learning easier.\r\n\r\n" +
+                $"Version: {Application.ProductVersion}\r\n" + 
+                $"Version Type: {(MetaData.PRE_RELEASE ? "Pre-Release" : "Stable")}\r\n\r\n" + 
+                "Copyright (C) 2020 steel9", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
