@@ -691,15 +691,22 @@ namespace SteelQuiz
                     return;
                 }
 
+                bool anySuccess = false;
                 foreach (var file in files)
                 {
-                    QuizCore.Load(file);
+                    if (QuizCore.Load(file))
+                    {
+                        anySuccess = true;
+                    }
                 }
 
-                PopulateQuizList();
-                SwitchQuizProgressInfo(flp_lastQuizzes.Controls.Cast<RecentQuiz>()
-                    .Select(x => x.QuizIdentity)
-                    .First());
+                if (anySuccess)
+                {
+                    PopulateQuizList();
+                    SwitchQuizProgressInfo(flp_lastQuizzes.Controls.Cast<RecentQuiz>()
+                        .Select(x => x.QuizIdentity)
+                        .First());
+                }
             }
         }
 
