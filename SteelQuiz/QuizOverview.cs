@@ -318,7 +318,7 @@ namespace SteelQuiz
 
         private void Btn_editQuiz_Click(object sender, EventArgs e)
         {
-            Program.frmWelcome.OpenQuizEditor(QuizCore.Quiz, QuizCore.QuizPath);
+            Program.frmWelcome.OpenQuizEditor(QuizCore.Quiz, QuizIdentity.FindQuizPath());
         }
 
         private void Lbl_learningProgress_bar_SizeChanged(object sender, EventArgs e)
