@@ -752,6 +752,8 @@ namespace SteelQuiz
 
         private void btn_about_Click(object sender, EventArgs e)
         {
+            AddQuizButtonsExpanded = false;
+
             MessageBox.Show("SteelQuiz - A quiz program designed to make learning easier.\r\n\r\n" +
                 $"Version: {Application.ProductVersion}\r\n" + 
                 $"Version Type: {(MetaData.PRE_RELEASE ? "Pre-Release" : "Stable")}\r\n\r\n" + 
