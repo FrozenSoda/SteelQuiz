@@ -53,7 +53,7 @@ namespace SteelQuiz.QuizEditor
                 this.Text = $"{ Path.GetFileName(value) } - SteelQuiz";
                 if (MetaData.PRE_RELEASE)
                 {
-                    this.Text += $" {Application.ProductVersion} PRE-RELEASE";
+                    this.Text += $" v{Application.ProductVersion} PRE-RELEASE";
                 }
             }
         }
@@ -109,7 +109,7 @@ namespace SteelQuiz.QuizEditor
 
             if (MetaData.PRE_RELEASE)
             {
-                this.Text += $" {Application.ProductVersion} PRE-RELEASE";
+                this.Text += $" v{Application.ProductVersion} PRE-RELEASE";
             }
         }
 

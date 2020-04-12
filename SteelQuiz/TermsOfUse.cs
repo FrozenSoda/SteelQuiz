@@ -85,7 +85,11 @@ namespace SteelQuiz
             else
             {
                 InitializeComponent();
-                this.Text += $" | v{Application.ProductVersion}";
+                this.Text += $" v{Application.ProductVersion}";
+                if (MetaData.PRE_RELEASE)
+                {
+                    this.Text += " PRE-RELEASE";
+                }
                 Stage = 0;
 
                 SetTheme();

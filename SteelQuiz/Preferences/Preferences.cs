@@ -46,10 +46,16 @@ namespace SteelQuiz.Preferences
 
             SetTheme(null);
 
+            /*
             this.Text += $" | v{Application.ProductVersion}";
             if (MetaData.PRE_RELEASE)
             {
                 this.Text += " PRE-RELEASE";
+            }
+            */
+            if (MetaData.PRE_RELEASE)
+            {
+                this.Text += $" v{Application.ProductVersion} PRE-RELEASE";
             }
 
             if (selectedCategory != null)
