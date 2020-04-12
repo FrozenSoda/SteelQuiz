@@ -1,4 +1,4 @@
-v5.0.0 beta 1:
+v5.0.0 beta 1 (5.0.0.14):
 - Implemented support for global quiz storage - quizzes must no longer be stored in specific quiz folders.
 - Implemented support for drag and dropping quiz files to load them.
 - Implemented support for file associations - you can now double click quiz files to load them!
