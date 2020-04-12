@@ -172,6 +172,7 @@ Section "Uninstall"
   RMDir "$INSTDIR"
 
   ;Delete registry keys
+  DeleteRegKey HKCU "Software\SteelQuiz\Communication"
   DeleteRegKey /ifempty HKCU "Software\SteelQuiz"
   DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\SteelQuiz"
 
