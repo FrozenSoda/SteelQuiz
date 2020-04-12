@@ -21,6 +21,7 @@ using System.Collections.Generic;
 using System.DirectoryServices.AccountManagement;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -35,6 +36,9 @@ namespace SteelQuiz
 {
     public static class ConfigManager
     {
+        [DllImport("shell32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        public static extern void SHChangeNotify(uint wEventId, uint uFlags, IntPtr dwItem1, IntPtr dwItem2);
+
         public static readonly string CONFIG_PATH = Path.Combine(QuizCore.APP_CFG_FOLDER, "Config.json");
 
         public static Config Config { get; set; } = null;
@@ -140,6 +144,11 @@ namespace SteelQuiz
         /// </summary>
         public static void GetThingsReady()
         {
+            if (!((!Program.IsPortable() && !Config.FileAssociationsOfferedOrRegistered) || Config.FullName == null))
+            {
+                return;
+            }
+
             var startupLoading = new StartupLoading("Getting things ready...", "This should take no longer than one minute\r\nDo not close SteelQuiz", 8000);
             startupLoading.RunInNewThread(true);
 
@@ -192,6 +201,8 @@ namespace SteelQuiz
                 {
                     key.SetValue("", string.Format("\"{0}\" \"%1\"", Application.ExecutablePath));
                 }
+
+                SHChangeNotify(0x08000000, 0, IntPtr.Zero, IntPtr.Zero);
             }
 
             void GrabUserName()

@@ -100,7 +100,7 @@ namespace SteelQuiz
 
         public static bool IsPortable()
         {
-            return File.Exists("InstallInfo.json") || File.Exists("ACCEPTED_LICENSE");
+            return !File.Exists("InstallInfo.json") && !File.Exists("ACCEPTED_LICENSE");
         }
 
         /// <summary>
