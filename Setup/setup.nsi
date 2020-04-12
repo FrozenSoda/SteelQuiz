@@ -9,7 +9,7 @@
 ;--------------------------------
 
 ;Add version info
-!define PRODUCT_VERSION "5.0.0.4"
+!define PRODUCT_VERSION "5.0.0.6"
 
 VIProductVersion "${PRODUCT_VERSION}"
 VIFileVersion "${PRODUCT_VERSION}"
@@ -105,7 +105,7 @@ SectionEnd
 
 Section "Register File Associations" SecRegisterFileAssociations
   WriteRegStr HKCU "Software\Classes\.steelquiz" "" "SteelQuiz_Quiz_File"
-  WriteRegStr HKCU "Software\Classes\SteelQuiz_Quiz_File" "" "SteelQuiz Quiz File"
+  WriteRegStr HKCU "Software\Classes\SteelQuiz_Quiz_File" "" "SteelQuiz Quiz"
   WriteRegStr HKCU "Software\Classes\SteelQuiz_Quiz_File\DefaultIcon" "" "$INSTDIR\SteelQuiz.exe"
   WriteRegStr HKCU "Software\Classes\SteelQuiz_Quiz_File\shell\open\command" "" '"$INSTDIR\SteelQuiz.exe" "%1"'
   

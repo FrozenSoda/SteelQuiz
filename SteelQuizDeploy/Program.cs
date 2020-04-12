@@ -16,6 +16,7 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -258,6 +259,31 @@ namespace SteelQuizDeploy
             {
                 Console.WriteLine(" FAIL");
                 Console.WriteLine("Could not find '!define PRODUCT_VERSION'");
+                return false;
+            }
+
+            File.WriteAllLines(setupNsiPath, nsi);
+
+            Console.WriteLine(" OK!");
+
+
+            Console.Write("\nSetting version in InstallInfo.json ...");
+
+            try
+            {
+                string installInfoPath = Path.Combine(SolutionRoot, @"Setup\InstallInfo.json");
+                string installInfoRaw = File.ReadAllText(installInfoPath);
+
+                var installInfo = JObject.Parse(installInfoRaw);
+                installInfo["setup_version_run"] = steelQuizVersion;
+
+                installInfoRaw = installInfo.ToString();
+                File.WriteAllText(installInfoPath, installInfoRaw);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(" FAIL");
+                Console.WriteLine(ex.ToString() + "\r\n\r\n");
                 return false;
             }
 

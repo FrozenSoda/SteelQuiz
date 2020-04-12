@@ -25,7 +25,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Win32;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SteelQuiz.ConfigData;
 using SteelQuiz.Extensions;
 
@@ -146,9 +148,50 @@ namespace SteelQuiz
                 GrabUserName();
             }
 
+            string installInfoPath = "InstallInfo.json";
+            if (!Program.IsPortable() && !Config.FileAssociationsOfferedOrRegistered)
+            {
+                if (!File.Exists(installInfoPath))
+                {
+                    RegisterFileAssociations();
+                }
+                else
+                {
+                    var installInfoRaw = File.ReadAllText(installInfoPath);
+                    var installInfo = JObject.Parse(installInfoRaw);
+                    var regFileAssocOffered = installInfo["reg_file_assoc_offered"];
+
+                    if (regFileAssocOffered == null || !(bool)regFileAssocOffered)
+                    {
+                        RegisterFileAssociations();
+                    }
+                }
+
+                Config.FileAssociationsOfferedOrRegistered = true;
+                SaveConfig();
+            }
+
             void RegisterFileAssociations()
             {
+                using (var key = Registry.CurrentUser.CreateSubKey(@"Software\Classes\.steelquiz", true))
+                {
+                    key.SetValue("", "SteelQuiz_Quiz_File");
+                }
 
+                using (var key = Registry.CurrentUser.CreateSubKey(@"Software\Classes\SteelQuiz_Quiz_File", true))
+                {
+                    key.SetValue("", "SteelQuiz Quiz");
+                }
+
+                using (var key = Registry.CurrentUser.CreateSubKey(@"Software\Classes\SteelQuiz_Quiz_File\DefaultIcon", true))
+                {
+                    key.SetValue("", Application.ExecutablePath);
+                }
+
+                using (var key = Registry.CurrentUser.CreateSubKey(@"Software\Classes\SteelQuiz_Quiz_File\shell\open\command", true))
+                {
+                    key.SetValue("", string.Format("\"{0}\" \"%1\"", Application.ExecutablePath));
+                }
             }
 
             void GrabUserName()

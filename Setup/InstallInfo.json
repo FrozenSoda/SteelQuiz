@@ -1,5 +1,5 @@
 {
-	"setup_version_run": null,
-	"accepted_license": true,
-	"reg_file_assoc_offered": true
+  "setup_version_run": "5.0.0.6",
+  "accepted_license": true,
+  "reg_file_assoc_offered": true
 }

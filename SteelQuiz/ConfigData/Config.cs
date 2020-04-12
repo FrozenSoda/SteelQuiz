@@ -36,6 +36,11 @@ namespace SteelQuiz.ConfigData
         public bool AcceptedTermsOfUse { get; set; } = false;
 
         /// <summary>
+        /// True if file associations have been registered upon application upgrade (to v5.0), or if it has been offered during setup.
+        /// </summary>
+        public bool FileAssociationsOfferedOrRegistered { get; set; } = false;
+
+        /// <summary>
         /// The GUID of the last quiz practised.
         /// </summary>
         public Guid LastQuiz { get; set; } = Guid.Empty;
