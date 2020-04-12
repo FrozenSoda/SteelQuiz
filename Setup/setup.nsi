@@ -85,8 +85,8 @@ Section "SteelQuiz" SecSteelQuiz
   File "..\SteelQuiz\bin\Release\AutoUpdater.NET.dll"
   File "..\SteelQuiz\bin\Release\Fastenshtein.dll"
   
-  ; Prevent SteelQuiz from asking user to accept license again
-  File "..\SteelQuiz\ACCEPTED_LICENSE"
+  ; Extract InstallInfo.json, for example to prevent SteelQuiz from asking user to accept license again, to ensure SteelQuiz knowns that it's installed and not portable, and to prevent SteelQuiz from re-registering file associations
+  File "InstallInfo.json"
   
   ;Store installation folder
   WriteRegStr HKCU "Software\SteelQuiz" "" $INSTDIR

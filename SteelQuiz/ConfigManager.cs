@@ -133,50 +133,61 @@ namespace SteelQuiz
             SaveConfig();
         }
 
-        public static void ChkSetupForFirstUse()
+        /// <summary>
+        /// Finalizes the initial installation if required; registers file associations upon upgrade to v5.0.
+        /// </summary>
+        public static void GetThingsReady()
         {
-            if (Config.FullName != null)
-            {
-                return;
-            }
-
             var startupLoading = new StartupLoading("Getting things ready...", "This should take no longer than one minute\r\nDo not close SteelQuiz", 8000);
             startupLoading.RunInNewThread(true);
 
-            try
-            {
-                var givenName = UserPrincipal.Current.GivenName;
-                var surname = UserPrincipal.Current.Surname;
-                if (givenName != null && surname != null)
-                {
-                    Config.FullName = givenName + " " + surname;
-                }
-                else if (givenName != null)
-                {
-                    Config.FullName = givenName;
-                }
-                else
-                {
-                    Config.FullName = UserPrincipal.Current.DisplayName;
-                }
-            }
-            catch (EntryPointNotFoundException)
-            {
-                // Can't access user info, if running in Wine for instance
-                ;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Could not get full name from username:\r\n\r\n{ex.ToString()}", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
             if (Config.FullName == null)
             {
-                Config.FullName = "";
-                Config.ShowNameOnWelcomeScreen = false;
+                GrabUserName();
             }
 
-            SaveConfig();
+            void RegisterFileAssociations()
+            {
+
+            }
+
+            void GrabUserName()
+            {
+                try
+                {
+                    var givenName = UserPrincipal.Current.GivenName;
+                    var surname = UserPrincipal.Current.Surname;
+                    if (givenName != null && surname != null)
+                    {
+                        Config.FullName = givenName + " " + surname;
+                    }
+                    else if (givenName != null)
+                    {
+                        Config.FullName = givenName;
+                    }
+                    else
+                    {
+                        Config.FullName = UserPrincipal.Current.DisplayName;
+                    }
+                }
+                catch (EntryPointNotFoundException)
+                {
+                    // Can't access user info, if running in Wine for instance
+                    ;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Could not get full name from username:\r\n\r\n{ex.ToString()}", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                if (Config.FullName == null)
+                {
+                    Config.FullName = "";
+                    Config.ShowNameOnWelcomeScreen = false;
+                }
+
+                SaveConfig();
+            }
 
             startupLoading.SafeDispose();
         }

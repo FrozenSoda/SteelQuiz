@@ -98,6 +98,11 @@ namespace SteelQuiz
             Application.Run(new TermsOfUse());
         }
 
+        public static bool IsPortable()
+        {
+            return File.Exists("InstallInfo.json") || File.Exists("ACCEPTED_LICENSE");
+        }
+
         /// <summary>
         /// Processes a WndProc message sent from other instances of SteelQuiz. This method may only be called ONCE per message!
         /// </summary>

@@ -107,7 +107,7 @@ namespace SteelQuiz
 
             Updater.Update(Updater.UpdateMode.Normal);
 
-            ConfigManager.ChkSetupForFirstUse();
+            ConfigManager.GetThingsReady();
 
             UpdateCfg();
 
