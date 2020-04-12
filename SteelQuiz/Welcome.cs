@@ -120,7 +120,7 @@ namespace SteelQuiz
                 QuizCore.Load(path);
                 PopulateQuizList();
 
-                SwitchQuizProgressInfo(QuizCore.QuizIdentities.Where(x => x.Value.FindQuizPath() == path).Select(x => x.Value).First());
+                SwitchQuizProgressInfo(path);
             }
             else
             {
@@ -190,6 +190,11 @@ namespace SteelQuiz
                     break;
                 }
             }
+        }
+
+        public bool SwitchQuizProgressInfo(string quizPath)
+        {
+            return SwitchQuizProgressInfo(QuizCore.QuizIdentities.Where(x => x.Value.LastKnownPath == quizPath).Select(x => x.Value).First());
         }
 
         public bool SwitchQuizProgressInfo(QuizIdentity quizIdentity)

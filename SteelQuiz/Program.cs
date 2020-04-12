@@ -137,14 +137,15 @@ namespace SteelQuiz
                     quizPath = key.GetValue("QuizToLoadPath", null);
                     if (quizPath == null)
                     {
-                        throw new Exception("WM_LOAD_QUIZ message received but QuizToLoadPath does not exist");
+                        throw new Exception("WM_LOAD_QUIZ message received but QuizToLoadPath value does not exist");
                     }
                     key.DeleteValue("QuizToLoadPath");
                 }
 
                 QuizCore.Load((string)quizPath);
 
-                frmWelcome.SwitchQuizProgressInfo(QuizCore.QuizIdentities.Where(x => x.Value.FindQuizPath() == (string)quizPath).Select(x => x.Value).First());
+                frmWelcome.PopulateQuizList();
+                frmWelcome.SwitchQuizProgressInfo((string)quizPath);
 
                 ShowMe(frmWelcome);
             }
