@@ -112,7 +112,20 @@ namespace SteelQuiz
             UpdateCfg();
 
             QuizCore.LoadQuizAccessData();
-            PopulateQuizList();
+
+            if (Program.Args.Length > 0 && File.Exists(Program.Args[0]) && Program.Args[0].EndsWith(".steelquiz"))
+            {
+                string path = Program.Args[0];
+
+                QuizCore.Load(path);
+                PopulateQuizList();
+
+                SwitchQuizProgressInfo(QuizCore.QuizIdentities.Where(x => x.Value.FindQuizPath() == path).Select(x => x.Value).First());
+            }
+            else
+            {
+                PopulateQuizList();
+            }
         }
 
         public void PopulateQuizList()

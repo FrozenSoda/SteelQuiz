@@ -124,6 +124,7 @@ namespace SteelQuiz
             Hide();
 
             Program.frmWelcome = new Dashboard();
+            /*
             if (Program.Args.Length > 0 && File.Exists(Program.Args[0]) && Program.Args[0].EndsWith(".steelquiz"))
             {
                 LoadQuiz(Program.Args[0]);
@@ -132,6 +133,8 @@ namespace SteelQuiz
             {
                 Program.frmWelcome.Show();
             }
+            */
+            Program.frmWelcome.Show();
 
             if (!QuizCore.ChkCreateQuizProgress())
             {
@@ -148,6 +151,7 @@ namespace SteelQuiz
             }
         }
 
+        /*
         private void LoadQuiz(string quizPath)
         {
             try
@@ -168,6 +172,7 @@ namespace SteelQuiz
 #warning implement selector
             Program.frmInQuiz.Show();
         }
+        */
 
         private void timer_agree_unlock_Tick(object sender, EventArgs e)
         {
