@@ -6,6 +6,7 @@ v5.0.0 beta 1:
 
 - Implemented better control over save path when importing quizzes.
 - Improved window titles to contain more relevant information.
+- Improved application instance handling - no more "SteelQuiz is already running"-dialogs - SteelQuiz now forwards the launch call/quiz you want to load to the already running instance!
 
 - Fixed an issue causing the Recent Quizzes list to be lost when merging quiz progress data files.
 - Adjustments in Preferences.
