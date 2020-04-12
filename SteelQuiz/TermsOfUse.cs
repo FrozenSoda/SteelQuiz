@@ -16,6 +16,7 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using Newtonsoft.Json.Linq;
 using SteelQuiz.QuizPractise;
 using SteelQuiz.Util;
 using System;
@@ -96,15 +97,26 @@ namespace SteelQuiz
             // Check if TOS was accepted from setup, and if that's true, set the config variable
 
             string licenseAcceptedPath = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "ACCEPTED_LICENSE");
-
-            if (!File.Exists(licenseAcceptedPath))
+            if (File.Exists(licenseAcceptedPath))
             {
-                return;
+                using (var reader = new StreamReader(licenseAcceptedPath))
+                {
+                    if (reader.ReadToEnd() == "ACCEPTED_LICENSE=true")
+                    {
+                        ConfigManager.Config.AcceptedTermsOfUse = true;
+                        ConfigManager.SaveConfig();
+                    }
+                }
             }
 
-            using (var reader = new StreamReader(licenseAcceptedPath))
+            string installInfoPath = "InstallInfo.json";
+            if (File.Exists(installInfoPath))
             {
-                if (reader.ReadToEnd() == "ACCEPTED_LICENSE=true")
+                var installInfoRaw = File.ReadAllText(installInfoPath);
+                var installInfo = JObject.Parse(installInfoRaw);
+                var acceptedLicense = installInfo["accepted_license"];
+
+                if (acceptedLicense != null && (bool)acceptedLicense)
                 {
                     ConfigManager.Config.AcceptedTermsOfUse = true;
                     ConfigManager.SaveConfig();
