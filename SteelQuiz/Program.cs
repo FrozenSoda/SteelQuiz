@@ -61,7 +61,22 @@ namespace SteelQuiz
 
             if (!mutex.WaitOne(TimeSpan.Zero, true))
             {
-                MessageBox.Show("SteelQuiz is already running.", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //MessageBox.Show("SteelQuiz is already running.", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                if (Args.Length > 0 && File.Exists(Args[0]) && Args[0].EndsWith(".steelquiz"))
+                {
+                    using (var key = Registry.CurrentUser.CreateSubKey(@"Software\SteelQuiz\Communication", true))
+                    {
+                        key.SetValue("QuizToLoadPath", Args[0]);
+                    }
+
+                    NativeMethods.PostMessage((IntPtr)NativeMethods.HWND_BROADCAST, NativeMethods.WM_LOAD_QUIZ, IntPtr.Zero, IntPtr.Zero);
+                }
+                else
+                {
+                    NativeMethods.PostMessage((IntPtr)NativeMethods.HWND_BROADCAST, NativeMethods.WM_SHOW_ME, IntPtr.Zero, IntPtr.Zero);
+                }
+
                 Application.Exit();
                 return;
             }
@@ -81,6 +96,67 @@ namespace SteelQuiz
             ConfigManager.Configure();
 
             Application.Run(new TermsOfUse());
+        }
+
+        /// <summary>
+        /// Processes a WndProc message sent from other instances of SteelQuiz. This method may only be called ONCE per message!
+        /// </summary>
+        /// <param name="m">The message sent.</param>
+        /// <param name="form">The form that received the message.</param>
+        public static void ProcessWndProcMessage(ref Message m, Form form)
+        {
+            if (m.Msg == NativeMethods.WM_SHOW_ME)
+            {
+                ShowMe(form);
+            }
+            else if (m.Msg == NativeMethods.WM_LOAD_QUIZ)
+            {
+                if (frmInQuiz != null)
+                {
+                    frmInQuiz.ReturnToDashboard();
+                }
+                else if (QuizEditorsOpen > 0)
+                {
+                    ShowMe(openQuizEditors.Last());
+                    MessageBox.Show("Please close all quiz editors first to load the quiz.", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                object quizPath = null;
+                using (var key = Registry.CurrentUser.OpenSubKey(@"Software\SteelQuiz\Communication", true))
+                {
+                    if (key == null)
+                    {
+                        throw new Exception("WM_LOAD_QUIZ message received but HKCU\\Software\\SteelQuiz\\Communication does not exist");
+                    }
+                    quizPath = key.GetValue("QuizToLoadPath", null);
+                    if (quizPath == null)
+                    {
+                        throw new Exception("WM_LOAD_QUIZ message received but QuizToLoadPath does not exist");
+                    }
+                    key.DeleteValue("QuizToLoadPath");
+                }
+
+                QuizCore.Load((string)quizPath);
+
+                frmWelcome.SwitchQuizProgressInfo(QuizCore.QuizIdentities.Where(x => x.Value.FindQuizPath() == (string)quizPath).Select(x => x.Value).First());
+
+                ShowMe(frmWelcome);
+            }
+        }
+
+        public static void ShowMe(Form form)
+        {
+            if (form.WindowState == FormWindowState.Minimized)
+            {
+                form.WindowState = FormWindowState.Normal;
+            }
+            // Get current TopMost value
+            bool top = form.TopMost;
+            // Make form jump to the top of everything
+            form.TopMost = true;
+            // Revert it to previous value
+            form.TopMost = top;
         }
 
         /// <summary>

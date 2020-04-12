@@ -128,6 +128,12 @@ namespace SteelQuiz
             }
         }
 
+        protected override void WndProc(ref Message m)
+        {
+            Program.ProcessWndProcMessage(ref m, this);
+            base.WndProc(ref m);
+        }
+
         public void PopulateQuizList()
         {
             foreach (var c in flp_lastQuizzes.Controls.OfType<Control>())

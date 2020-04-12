@@ -70,6 +70,7 @@
     <Compile Include="Animations\LabelFade.cs" />
     <Compile Include="CachedResourceManager.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />
+    <Compile Include="NativeMethods.cs" />
     <Compile Include="Pointer.cs" />
     <Compile Include="QuizEditor\SmartComparisonSettings.cs">
       <SubType>Form</SubType>

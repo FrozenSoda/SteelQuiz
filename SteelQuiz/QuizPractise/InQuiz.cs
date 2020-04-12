@@ -764,7 +764,7 @@ namespace SteelQuiz.QuizPractise
             lbl_word2.Focus();
         }
 
-        private void btn_home_Click(object sender, EventArgs e)
+        public void ReturnToDashboard()
         {
             Hide();
 
@@ -789,6 +789,11 @@ namespace SteelQuiz.QuizPractise
             PerformOnCloseEvents = false;
             Close();
             Program.frmInQuiz = null;
+        }
+
+        private void btn_home_Click(object sender, EventArgs e)
+        {
+            ReturnToDashboard();
         }
 
         public void FixQuizErrors()
