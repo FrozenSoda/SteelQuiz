@@ -3,8 +3,7 @@
 ;Based on Basic Example Script by Joost Verburg
 
 ;--------------------------------
-;Include Modern UI
-
+  ;Include Modern UI
   !include "MUI2.nsh"
 
 ;--------------------------------
@@ -56,6 +55,21 @@ VIAddVersionKey "FileDescription" "A quiz program designed to make learning word
   !insertmacro MUI_LANGUAGE "English"
 
 ;--------------------------------
+
+  !define SHCNE_ASSOCCHANGED 0x08000000
+  !define SHCNF_IDLIST 0
+ 
+!macro REFRESH_SHELL_ICONS_MACRO un
+	Function ${un}RefreshShellIcons
+	  ; By jerome tremblay - april 2003
+	  System::Call 'shell32.dll::SHChangeNotify(i, i, i, i) v \
+	  (${SHCNE_ASSOCCHANGED}, ${SHCNF_IDLIST}, 0, 0)'
+	FunctionEnd
+!macroend
+
+!insertmacro REFRESH_SHELL_ICONS_MACRO ""
+!insertmacro REFRESH_SHELL_ICONS_MACRO "un."
+
 ;Installer Sections
 
 Section "SteelQuiz" SecSteelQuiz
@@ -89,6 +103,15 @@ Section "SteelQuiz" SecSteelQuiz
 
 SectionEnd
 
+Section "Register File Associations" SecRegisterFileAssociations
+  WriteRegStr HKCU "Software\Classes\.steelquiz" "" "SteelQuiz_Quiz_File"
+  WriteRegStr HKCU "Software\Classes\SteelQuiz_Quiz_File" "" "SteelQuiz Quiz File"
+  WriteRegStr HKCU "Software\Classes\SteelQuiz_Quiz_File\DefaultIcon" "" "$INSTDIR\SteelQuiz.exe"
+  WriteRegStr HKCU "Software\Classes\SteelQuiz_Quiz_File\shell\open\command" "" '"$INSTDIR\SteelQuiz.exe" "%1"'
+  
+  Call RefreshShellIcons
+SectionEnd
+
 Section "Start Menu Shortcuts" SecStartMenuShortcuts
   ;Create start menu shortcuts
   CreateDirectory "$SMPROGRAMS\SteelQuiz"
@@ -108,12 +131,14 @@ SectionEnd
   LangString DESC_SecSteelQuiz ${LANG_ENGLISH} "SteelQuiz (required)"
   LangString DESC_SecStartMenuShortcuts ${LANG_ENGLISH} "Start Menu Shortcuts"
   LangString DESC_SecDesktopShortcut ${LANG_ENGLISH} "Desktop Shortcut"
+  LangString DESC_SecRegisterFileAssociations ${LANG_ENGLISH} "Register File Associations (recommended)$\r$\n$\r$\nIf you register file associations, you can open quizzes just by double clicking their files!"
 
   ;Assign language strings to sections
   !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
     !insertmacro MUI_DESCRIPTION_TEXT ${SecSteelQuiz} $(DESC_SecSteelQuiz)
     !insertmacro MUI_DESCRIPTION_TEXT ${SecStartMenuShortcuts} $(DESC_SecStartMenuShortcuts)
 	!insertmacro MUI_DESCRIPTION_TEXT ${SecDesktopShortcut} $(DESC_SecDesktopShortcut)
+	!insertmacro MUI_DESCRIPTION_TEXT ${SecRegisterFileAssociations} $(DESC_SecRegisterFileAssociations)
   !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
 ;--------------------------------
@@ -123,6 +148,12 @@ Section "Uninstall"
   ;Delete app shortcuts
   Delete "$DESKTOP\SteelQuiz.lnk"
   Delete "$SMPROGRAMS\SteelQuiz\SteelQuiz.lnk"
+  
+  ;Unregister file associations
+  DeleteRegKey HKCU "Software\Classes\.steelquiz"
+  DeleteRegKey HKCU "Software\Classes\SteelQuiz_Quiz_File"
+  
+  Call un.RefreshShellIcons
   
   ;Delete files
   Delete "$INSTDIR\SteelQuiz.exe"
