@@ -682,6 +682,22 @@ namespace SteelQuiz
 
         private void Btn_addQuiz_Click(object sender, EventArgs e)
         {
+            var addControls = new List<Control>()
+            {
+                btn_createQuiz,
+                btn_loadQuizFromFile,
+                btn_importQuiz,
+                btn_chkUpdates,
+                btn_preferences,
+                btn_about,
+            };
+
+            if (ControlMove.ControlsMoving.Keys.Any(x => addControls.Contains(x)))
+            {
+                // Animation is already running
+                return;
+            }
+
             AddQuizButtonsExpanded = !AddQuizButtonsExpanded;
         }
 
