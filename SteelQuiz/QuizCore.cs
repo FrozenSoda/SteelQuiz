@@ -50,6 +50,61 @@ namespace SteelQuiz
         /// <returns>Returns the quiz file, with its progress data and path.</returns>
         public static Quiz LoadQuiz(string path)
         {
+            try
+            {
+                return LoadQuiz(path);
+            }
+            catch (VersionNotSupportedException ex)
+            {
+                if (ex.Reason == VersionNotSupportedException.NotSupportedReason.AppVersionTooOld)
+                {
+                    var msg = MessageBox.Show("A newer version of SteelQuiz is required to load this quiz.\r\n\r\nUpdate now?", "Update Required - SteelQuiz",
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                    if (msg == DialogResult.Yes)
+                    {
+                        Updater.Update(Updater.UpdateMode.Force);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("This quiz is designed for an older version of SteelQuiz and cannot be loaded", "Too Old Quiz - SteelQuiz",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+            return null;
+        }
+
+        public class VersionNotSupportedException : Exception
+        {
+            public enum NotSupportedReason
+            {
+                AppVersionTooNew,
+                AppVersionTooOld
+            }
+
+            public NotSupportedReason Reason { get; set; }
+
+            public VersionNotSupportedException(NotSupportedReason reason)
+            {
+                Reason = reason;
+            }
+
+            public VersionNotSupportedException(NotSupportedReason reason, string message)
+                : base(message)
+            {
+                Reason = reason;
+            }
+
+            public VersionNotSupportedException(NotSupportedReason reason, string message, Exception innerException)
+                : base(message, innerException)
+            {
+                Reason = reason;
+            }
+        }
+
+        public static Quiz InternalLoadQuiz(string path)
+        {
             if (!File.Exists(path))
             {
                 throw new FileNotFoundException("Quiz file does not exist!");
@@ -61,14 +116,7 @@ namespace SteelQuiz
 
             if (quizVersion.CompareTo(MetaData.GetLatestQuizVersion()) > 0)
             {
-                var msg = MessageBox.Show("A newer version of SteelQuiz is required to load this quiz.\r\n\r\nUpdate now?", "Update Required - SteelQuiz",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                if (msg == DialogResult.Yes)
-                {
-                    Updater.Update(Updater.UpdateMode.Force);
-                }
-
-                return null;
+                throw new VersionNotSupportedException(VersionNotSupportedException.NotSupportedReason.AppVersionTooOld);
             }
 
             quiz.QuizPath = path;
@@ -94,6 +142,29 @@ namespace SteelQuiz
             var dataRoot = JsonConvert.DeserializeObject<QuizProgressDataRoot>(dataRaw);
 
             return dataRoot.QuizProgressData.Where(x => x.QuizGUID == quiz.GUID).FirstOrDefault();
+        }
+
+        /// <summary>
+        /// Saves the quiz progress data contained in the specified quiz.
+        /// </summary>
+        /// <param name="quiz">The Quiz object containing the progress data</param>
+        public static void SaveQuizProgress(Quiz quiz)
+        {
+            string dataRaw = AtomicIO.AtomicRead(ConfigManager.Config.StorageConfig.QuizProgressPath);
+            var dataRoot = JsonConvert.DeserializeObject<QuizProgressDataRoot>(dataRaw);
+            var data = dataRoot.QuizProgressData.Where(x => x.QuizGUID == quiz.GUID).FirstOrDefault();
+
+            if (data != null)
+            {
+                data = quiz.ProgressData;
+            }
+            else
+            {
+                dataRoot.QuizProgressData.Add(quiz.ProgressData);
+            }
+
+            dataRaw = JsonConvert.SerializeObject(dataRoot);
+            AtomicIO.AtomicWrite(ConfigManager.Config.StorageConfig.QuizProgressPath, dataRaw);
         }
     }
 }
