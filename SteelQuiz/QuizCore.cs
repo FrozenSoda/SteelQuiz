@@ -52,7 +52,7 @@ namespace SteelQuiz
         {
             try
             {
-                return LoadQuiz(path);
+                return InternalLoadQuiz(path);
             }
             catch (VersionNotSupportedException ex)
             {
