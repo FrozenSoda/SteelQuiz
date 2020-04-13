@@ -241,7 +241,7 @@ namespace SteelQuiz.QuizPractise
 
             if (quiz.ProgressData.AskQuestionsInRandomOrder)
             {
-                quiz.ProgressData.QuestionProgressData.QuizRandomize();
+                QuizCore.QuizRandomize(quiz);
             }
             else
             {

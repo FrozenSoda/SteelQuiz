@@ -113,9 +113,9 @@ namespace SteelQuiz.QuizData
         }
 
 
-        public WordProgData GetWordProgData(QuizProgressData quizProgress)
+        public QuestionProgressData GetQuestionProgressData(QuizProgressData quizProgress)
         {
-            foreach (var wordProgData in quizProgress.WordProgDatas)
+            foreach (var wordProgData in quizProgress.QuestionProgressData)
             {
                 if (wordProgData.WordPair.Equals(this, true, true))
                 {
@@ -132,19 +132,19 @@ namespace SteelQuiz.QuizData
         /// Finds all synonyms to this wordpair that are required to be provided, including this wordpair. Only valid for the selected language.
         /// </summary>
         /// <returns>Returns the wordpairs that are synonyms to this wordpair (including this wordpair) and are required to be provided</returns>
-        public IEnumerable<QuestionAnswerPair> GetRequiredSynonyms()
+        public IEnumerable<QuestionAnswerPair> GetRequiredSynonyms(Quiz quiz)
         {
             if (__requiredSynonyms != null)
             {
                 ;
             }
-            else if (QuizCore.QuizProgress.AnswerLanguageNum == 2)
+            else if (quiz.ProgressData.AnswerLanguageNum == 2)
             {
-                __requiredSynonyms = QuizCore.Quiz.WordPairs.Where(x => x.Word1 == Word1);
+                __requiredSynonyms = quiz.WordPairs.Where(x => x.Word1 == Word1);
             }
-            else if (QuizCore.QuizProgress.AnswerLanguageNum == 1)
+            else if (quiz.ProgressData.AnswerLanguageNum == 1)
             {
-                __requiredSynonyms = QuizCore.Quiz.WordPairs.Where(x => x.Word2 == Word2);
+                __requiredSynonyms = quiz.WordPairs.Where(x => x.Word2 == Word2);
             }
             else
             {
@@ -188,11 +188,11 @@ namespace SteelQuiz.QuizData
         /// <param name="answerIgnores">In case of a question with multiple answers, contains the answers already provided</param>
         /// <param name="updateProgress">True if progress should be updated, otherwise false</param>
         /// <returns></returns>
-        public AnswerDiff AnswerCheck(string input, IEnumerable<string> answerIgnores = null, bool updateProgress = true)
+        public AnswerDiff AnswerCheck(Quiz quiz, string input, IEnumerable<string> answerIgnores = null, bool updateProgress = true)
         {
             var similarityData = new List<StringComp.SimilarityData>();
 
-            foreach (var wp in GetRequiredSynonyms().Where(x => answerIgnores == null || !answerIgnores.Contains(x.Answer)))
+            foreach (var wp in GetRequiredSynonyms(quiz).Where(x => answerIgnores == null || !answerIgnores.Contains(x.Answer)))
             {
                 similarityData = similarityData.Concat(SimilarityData(wp, input, updateProgress)).ToList();
             }
@@ -203,20 +203,20 @@ namespace SteelQuiz.QuizData
 
             if (updateProgress)
             {
-                ansDiff.WordPair.GetWordProgData().AddWordTry(new AnswerAttempt(ansDiff.Correct()));
+                ansDiff.WordPair.GetQuestionProgressData(quiz).AddWordTry(new AnswerAttempt(ansDiff.Correct()));
             }
 
             if (ansDiff.Correct())
             {
-                ansDiff.WordPair.GetWordProgData().AskedThisRound = true;
+                ansDiff.WordPair.GetQuestionProgressData(quiz).AskedThisRound = true;
 
-                if (ansDiff.WordPair.GetRequiredSynonyms().Select(x => x.GetWordProgData().AskedThisRound).All(x => x == true))
+                if (ansDiff.WordPair.GetRequiredSynonyms(quiz).Select(x => x.GetQuestionProgressData(quiz).AskedThisRound).All(x => x == true))
                 {
-                    QuizCore.QuizProgress.SetCurrentWordPair(null);
+                    quiz.ProgressData.SetCurrentQuestion(null);
                 }
             }
 
-            QuizCore.SaveQuizProgress();
+            QuizCore.SaveQuizProgress(quiz);
 
             return ansDiff;
         }

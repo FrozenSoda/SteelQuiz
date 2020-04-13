@@ -214,5 +214,21 @@ namespace SteelQuiz
             dataRaw = JsonConvert.SerializeObject(dataRoot);
             AtomicIO.AtomicWrite(ConfigManager.Config.StorageConfig.QuizProgressPath, dataRaw);
         }
+
+        public static void QuizRandomize(Quiz quiz)
+        {
+            //quiz.QuizRandomized = true;
+
+            var rnd = new Random();
+            int n = quiz.ProgressData.QuestionProgressData.Count;
+            while (n > 1)
+            {
+                --n;
+                int k = rnd.Next(n + 1);
+                var value = quiz.ProgressData.QuestionProgressData[k];
+                quiz.ProgressData.QuestionProgressData[k] = quiz.ProgressData.QuestionProgressData[n];
+                quiz.ProgressData.QuestionProgressData[n] = value;
+            }
+        }
     }
 }
