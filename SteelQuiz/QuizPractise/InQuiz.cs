@@ -40,7 +40,7 @@ namespace SteelQuiz.QuizPractise
         private GeneralTheme GeneralTheme = new GeneralTheme();
 
         private QuizPractiseMode GameMode { get; set; }
-        private WordPair CurrentWordPair { get; set; } = null;
+        private QuestionAnswerPair CurrentWordPair { get; set; } = null;
         private string CurrentInput { get; set; } = "";
 
         public bool ExitAppOnClose { get; set; } = true;
@@ -357,7 +357,7 @@ namespace SteelQuiz.QuizPractise
         /// Retrieves a collection of answers already entered in a multi-answer question
         /// </summary>
         /// <returns>Returns the collection</returns>
-        private IEnumerable<WordPair> MultiAnswersAlreadyEntered()
+        private IEnumerable<QuestionAnswerPair> MultiAnswersAlreadyEntered()
         {
             return CurrentWordPair.GetRequiredSynonyms().Where(x => x.GetWordProgData().AskedThisRound);
         }
@@ -366,7 +366,7 @@ namespace SteelQuiz.QuizPractise
         {
             lbl_lang1.Text = "Info";
 
-            WordPair.AnswerDiff ansDiff = null;
+            QuestionAnswerPair.AnswerDiff ansDiff = null;
             if (GameMode == QuizPractiseMode.Writing)
             {
                 if (MultiAns == null)

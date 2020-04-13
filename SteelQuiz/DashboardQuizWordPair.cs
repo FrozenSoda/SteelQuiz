@@ -33,10 +33,10 @@ namespace SteelQuiz
     public partial class DashboardQuizWordPair : AutoThemeableUserControl
     {
         private WelcomeTheme WelcomeTheme { get; set; } = new WelcomeTheme();
-        public WordPair WordPair { get; set; }
+        public QuestionAnswerPair WordPair { get; set; }
         public double SuccessRate { get; set; }
 
-        public DashboardQuizWordPair(WordPair wordPair)
+        public DashboardQuizWordPair(QuestionAnswerPair wordPair)
         {
             InitializeComponent();
             SetTheme(WelcomeTheme);

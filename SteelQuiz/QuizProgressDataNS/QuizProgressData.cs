@@ -43,7 +43,11 @@ namespace SteelQuiz.QuizProgressDataNS
     public class QuizProgressData
     {
         public Guid QuizGUID { get; set; }
-        public List<TermProgressData> WordProgDatas { get; set; } = null;
+        public List<QuestionProgressData> QuestionProgressData { get; set; } = new List<QuestionProgressData>();
+
+        [JsonProperty]
+        [Obsolete("Use QuestionProgressData instead", true)]
+        private List<QuestionProgressData> WordProgDatas { set => QuestionProgressData = value; }
 
         private int __answerLanguageNum = 2;
         /// <summary>
@@ -114,7 +118,7 @@ namespace SteelQuiz.QuizProgressDataNS
         public int MinimumTriesCountToConsiderSkippingQuestion { get; set; } = 2;
 
         [JsonProperty] // required for deserialization of property with private setter
-        internal List<WordPair> CurrentWordPairs { get; set; } = new List<WordPair>();
+        internal List<QuestionAnswerPair> CurrentWordPairs { get; set; } = new List<QuestionAnswerPair>();
 
         [JsonIgnore]
         /// <summary>
@@ -141,13 +145,6 @@ namespace SteelQuiz.QuizProgressDataNS
                 return;
             }
 
-            //AnswerLanguage = quiz.Language2;
-
-            if (WordProgDatas == null)
-            {
-                WordProgDatas = new List<TermProgressData>();
-            }
-
             if (initWordProgDatas)
             {
                 foreach (var wordPair in quiz.WordPairs)
@@ -163,7 +160,7 @@ namespace SteelQuiz.QuizProgressDataNS
 
                     if (!found)
                     {
-                        WordProgDatas.Add(new TermProgressData(wordPair));
+                        WordProgDatas.Add(new QuestionProgressData(wordPair));
                     }
                 }
             }
@@ -201,22 +198,22 @@ namespace SteelQuiz.QuizProgressDataNS
         }
 
         // due to CurrentWordPair not preserving references due to serialization, implement setter through method instead, to avoid confusion regarding references
-        public void SetCurrentWordPair(WordPair wordPair)
+        public void SetCurrentQuestion(QuestionAnswerPair question)
         {
-            if (wordPair == null)
+            if (question == null)
             {
                 CurrentWordPairs.Clear();
             }
             else
             {
-                CurrentWordPairs = wordPair.GetRequiredSynonyms().ToList();
+                CurrentWordPairs = question.GetRequiredSynonyms().ToList();
             }
         }
 
-        public IEnumerable<WordPair> WordsNotToAsk()
+        public IEnumerable<QuestionAnswerPair> WordsNotToAsk()
         {
             // find words already asked this round
-            var wordsAlreadyAsked = new List<WordPair>();
+            var wordsAlreadyAsked = new List<QuestionAnswerPair>();
             for (int i = 0; i < WordProgDatas.Count; ++i)
             {
                 if (WordProgDatas[i].AskedThisRound || WordProgDatas[i].SkipThisRound)

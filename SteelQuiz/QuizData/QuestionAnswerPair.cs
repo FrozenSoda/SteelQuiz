@@ -18,7 +18,7 @@
 
 using Newtonsoft.Json;
 using SteelQuiz.QuizPractise;
-using SteelQuiz.QuizProgressData;
+using SteelQuiz.QuizProgressDataNS;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +27,7 @@ using System.Threading.Tasks;
 
 namespace SteelQuiz.QuizData
 {
-    public class WordPair
+    public class QuestionAnswerPair
     {
         public string Word1 { get; set; }
         public List<string> Word1Synonyms { get; set; } = new List<string>();
@@ -65,7 +65,7 @@ namespace SteelQuiz.QuizData
             }
         }
 
-        public WordPair(string word1, string word2, StringComp.Rules translationRules, List<string> word1Synonyms = null, List<string> word2Synonyms = null)
+        public QuestionAnswerPair(string word1, string word2, StringComp.Rules translationRules, List<string> word1Synonyms = null, List<string> word2Synonyms = null)
         {
             Word1 = word1;
             Word2 = word2;
@@ -79,26 +79,14 @@ namespace SteelQuiz.QuizData
             {
                 Word2Synonyms = word2Synonyms;
             }
-
-            /*
-            if (Word1Synonyms == null)
-            {
-                Word1Synonyms = new List<string>();
-            }
-
-            if (Word2Synonyms == null)
-            {
-                Word2Synonyms = new List<string>();
-            }
-            */
         }
 
         public override bool Equals(object obj)
         {
-            return Equals(obj as WordPair, true, true);
+            return Equals(obj as QuestionAnswerPair, true, true);
         }
 
-        public bool Equals(WordPair wp2, bool ignoreSynonyms, bool ignoreTranslationRules)
+        public bool Equals(QuestionAnswerPair wp2, bool ignoreSynonyms, bool ignoreTranslationRules)
         {
             if (wp2 == null)
             {
@@ -106,11 +94,11 @@ namespace SteelQuiz.QuizData
             }
 
             return
-                this.Word1 == ((WordPair)wp2).Word1 &&
-                (ignoreSynonyms || this.Word1Synonyms.SequenceEqual(((WordPair)wp2).Word1Synonyms)) &&
-                this.Word2 == ((WordPair)wp2).Word2 &&
-                (ignoreSynonyms || this.Word2Synonyms.SequenceEqual(((WordPair)wp2).Word2Synonyms)) &&
-                (ignoreTranslationRules || this.TranslationRules == ((WordPair)wp2).TranslationRules);
+                this.Word1 == ((QuestionAnswerPair)wp2).Word1 &&
+                (ignoreSynonyms || this.Word1Synonyms.SequenceEqual(((QuestionAnswerPair)wp2).Word1Synonyms)) &&
+                this.Word2 == ((QuestionAnswerPair)wp2).Word2 &&
+                (ignoreSynonyms || this.Word2Synonyms.SequenceEqual(((QuestionAnswerPair)wp2).Word2Synonyms)) &&
+                (ignoreTranslationRules || this.TranslationRules == ((QuestionAnswerPair)wp2).TranslationRules);
         }
 
         public override int GetHashCode()
@@ -125,9 +113,9 @@ namespace SteelQuiz.QuizData
         }
 
 
-        public WordProgData GetWordProgData()
+        public WordProgData GetWordProgData(QuizProgressData quizProgress)
         {
-            foreach (var wordProgData in QuizCore.QuizProgress.WordProgDatas)
+            foreach (var wordProgData in quizProgress.WordProgDatas)
             {
                 if (wordProgData.WordPair.Equals(this, true, true))
                 {
@@ -138,13 +126,13 @@ namespace SteelQuiz.QuizData
             throw new Exception("No word progress data could be found for this word pair");
         }
 
-        private IEnumerable<WordPair> __requiredSynonyms = null;
+        private IEnumerable<QuestionAnswerPair> __requiredSynonyms = null;
 
         /// <summary>
         /// Finds all synonyms to this wordpair that are required to be provided, including this wordpair. Only valid for the selected language.
         /// </summary>
         /// <returns>Returns the wordpairs that are synonyms to this wordpair (including this wordpair) and are required to be provided</returns>
-        public IEnumerable<WordPair> GetRequiredSynonyms()
+        public IEnumerable<QuestionAnswerPair> GetRequiredSynonyms()
         {
             if (__requiredSynonyms != null)
             {
@@ -177,9 +165,9 @@ namespace SteelQuiz.QuizData
             public string MostSimilarAnswer { get; set; }
             public int Difference { get; set; }
             public StringComp.CorrectCertainty Certainty { get; set; }
-            public WordPair WordPair { get; set; }
+            public QuestionAnswerPair WordPair { get; set; }
 
-            public AnswerDiff(int difference, string mostSimilarAnswer, StringComp.CorrectCertainty certainty, WordPair wordPair)
+            public AnswerDiff(int difference, string mostSimilarAnswer, StringComp.CorrectCertainty certainty, QuestionAnswerPair wordPair)
             {
                 Difference = difference;
                 MostSimilarAnswer = mostSimilarAnswer;
@@ -215,7 +203,7 @@ namespace SteelQuiz.QuizData
 
             if (updateProgress)
             {
-                ansDiff.WordPair.GetWordProgData().AddWordTry(new WordTry(ansDiff.Correct()));
+                ansDiff.WordPair.GetWordProgData().AddWordTry(new AnswerAttempt(ansDiff.Correct()));
             }
 
             if (ansDiff.Correct())
@@ -233,7 +221,7 @@ namespace SteelQuiz.QuizData
             return ansDiff;
         }
 
-        private IEnumerable<StringComp.SimilarityData> SimilarityData(WordPair wordPair, string input, bool updateProgress = true)
+        private IEnumerable<StringComp.SimilarityData> SimilarityData(QuestionAnswerPair wordPair, string input, bool updateProgress = true)
         {
             var similarityData = new List<StringComp.SimilarityData>();
 

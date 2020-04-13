@@ -37,7 +37,7 @@ namespace SteelQuiz.QuizImport.Guide.Studentlitteratur
 
         public string Language2 => txt_lang.Text;
 
-        public Step5(IEnumerable<WordPair> wordPairs)
+        public Step5(IEnumerable<QuestionAnswerPair> wordPairs)
         {
             InitializeComponent();
             foreach (var wordPair in wordPairs)

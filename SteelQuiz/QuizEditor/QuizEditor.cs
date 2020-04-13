@@ -197,7 +197,7 @@ namespace SteelQuiz.QuizEditor
 
                 StringComp.Rules comparisonRules = wordPair.ComparisonRules.Data;
 
-                var wp = new WordPair(wordPair.txt_word1.Text, wordPair.txt_word2.Text, comparisonRules, wordPair.Synonyms1, wordPair.Synonyms2);
+                var wp = new QuestionAnswerPair(wordPair.txt_word1.Text, wordPair.txt_word2.Text, comparisonRules, wordPair.Synonyms1, wordPair.Synonyms2);
                 quiz.WordPairs.Add(wp);
                 ++i;
             }

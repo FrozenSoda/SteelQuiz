@@ -45,75 +45,55 @@ namespace SteelQuiz
 
         public static bool LoadConfig()
         {
-            var dirInit = QuizCore.CheckInitDirectories();
-            if (!dirInit)
-            {
-                return false;
-            }
+            Directory.CreateDirectory(QuizCore.APP_CFG_FOLDER);
 
-            if (File.Exists(CONFIG_PATH))
-            {
-                try
-                {
-                    try
-                    {
-                        Config = JsonConvert.DeserializeObject<Config>(AtomicIO.AtomicRead(CONFIG_PATH));
-                    }
-                    catch (AtomicException)
-                    {
-                        Config = new Config();
-                    }
-
-                    /*
-                    if (Config == null)
-                    {
-                        var msg = MessageBox.Show("The configuration file for SteelQuiz is corrupted, and must be reset. Reset configuration?", "SteelQuiz", MessageBoxButtons.YesNo,
-                            MessageBoxIcon.Error);
-                        if (msg == DialogResult.Yes)
-                        {
-                            var bkp = QuizCore.BackupConfig(new Version(0, 0, 0));
-                            if (!bkp)
-                            {
-                                return false;
-                            }
-                            File.Delete(CONFIG_PATH);
-                            return LoadConfig();
-                        }
-                        else
-                        {
-                            return false;
-                        }
-                    }
-                    */
-                    return true;
-                }
-                catch (Exception ex)
-                {
-#if DEBUG
-                    throw ex;
-#else
-                    MessageBox.Show("An error occurred while loading the config:\r\n\r\n" + ex.ToString(), "SteelQuiz", MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                    Application.Exit();
-                    return false;
-#endif
-                }
-            }
-            else
+            if (!File.Exists(CONFIG_PATH))
             {
                 Config = new Config();
                 SaveConfig();
                 return true;
             }
+
+            bool corrupt = false;
+            try
+            {
+                Config = JsonConvert.DeserializeObject<Config>(AtomicIO.AtomicRead(CONFIG_PATH));
+            }
+            catch (AtomicException)
+            {
+                corrupt = true;
+            }
+
+            if (Config == null)
+            {
+                corrupt = true;
+            }
+
+            if (corrupt)
+            {
+                var msg = MessageBox.Show("The configuration file for SteelQuiz is corrupt, and must be reset. Reset configuration?", "SteelQuiz", MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Error);
+                if (msg == DialogResult.Yes)
+                {
+                    var bkp = QuizCore.BackupConfig(new Version(0, 0, 0));
+                    if (!bkp)
+                    {
+                        return false;
+                    }
+                    File.Delete(CONFIG_PATH);
+                    return LoadConfig();
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         public static bool SaveConfig()
         {
-            var dirInit = QuizCore.CheckInitDirectories();
-            if (!dirInit)
-            {
-                return false;
-            }
+            Directory.CreateDirectory(QuizCore.APP_CFG_FOLDER);
 
             try
             {

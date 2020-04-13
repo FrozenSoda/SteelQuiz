@@ -24,11 +24,11 @@ using System.Threading.Tasks;
 
 namespace SteelQuiz.QuizProgressDataNS
 {
-    public class TermAttempt
+    public class AnswerAttempt
     {
         public bool Success { get; set; }
 
-        public TermAttempt(bool success)
+        public AnswerAttempt(bool success)
         {
             Success = success;
         }

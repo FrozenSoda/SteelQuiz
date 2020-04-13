@@ -75,6 +75,8 @@ namespace SteelQuiz
         private readonly Point btn_chkUpdates_originalLoc;
         private readonly Point btn_about_originalLoc;
 
+        private Quiz LoadedQuiz { get; set; }
+
         public Dashboard()
         {
             InitializeComponent();
@@ -131,10 +133,9 @@ namespace SteelQuiz
             {
                 string path = Program.Args[0];
 
-                QuizCore.Load(path);
+                LoadedQuiz = QuizCore.LoadQuiz(path);
                 PopulateQuizList();
-
-                SwitchQuizProgressInfo(path);
+                UpdateQuizOverview();
             }
             else
             {
@@ -182,7 +183,7 @@ namespace SteelQuiz
 
             if (save)
             {
-                QuizCore.SaveQuizData();
+                QuizCore.SaveQuizAccessData();
             }
             
             foreach (var c in flp_lastQuizzes.Controls.OfType<RecentQuiz>())
@@ -206,44 +207,31 @@ namespace SteelQuiz
             }
         }
 
-        public bool SwitchQuizProgressInfo(string quizPath)
+        /// <summary>
+        /// Updates the quiz overview to show the currently loaded quiz.
+        /// </summary>
+        public void UpdateQuizOverview()
         {
-            return SwitchQuizProgressInfo(QuizCore.QuizIdentities.Where(x => x.Value.LastKnownPath == quizPath).Select(x => x.Value).First());
-        }
-
-        public bool SwitchQuizProgressInfo(QuizIdentity quizIdentity)
-        {
-            var quizPath = quizIdentity.FindQuizPath();
-            if (quizPath == null)
-            {
-                return false;
-            }
-
-            if (!QuizCore.Load(quizPath))
-            {
-                return false;
-            }
-
             foreach (var q in pnl_quizInfo.Controls.OfType<QuizOverview>())
             {
-                if (q.QuizIdentity.QuizGuid == quizIdentity.QuizGuid)
+                if (q.QuizIdentity.QuizGuid == LoadedQuiz.GUID)
                 {
                     q.Size = pnl_quizInfo.Size;
                     q.UpdateLearningProgressBar();
                     q.Show();
                     q.BringToFront();
 
-                    return true;
+                    return;
                 }
             }
 
-            var quizProgressInfo = new QuizOverview(quizIdentity);
+            var quizProgressInfo = new QuizOverview(LoadedQuiz.QuizIdentity);
             pnl_quizInfo.Controls.Add(quizProgressInfo);
             quizProgressInfo.Size = pnl_quizInfo.Size;
             quizProgressInfo.Show();
             quizProgressInfo.BringToFront();
 
-            return true;
+            return;
         }
 
         /// <summary>
@@ -420,19 +408,9 @@ namespace SteelQuiz
             var import = new QuizImportGuide();
             if (import.ShowDialog() == DialogResult.OK)
             {
-                //Program.frmInQuiz = new InQuiz(QuizPractiseMode.Writing);
-                //#warning implement selector
-                //Program.frmInQuiz.Show();
-                //Hide();
-                if (!QuizCore.Load(import.QuizPath))
-                {
-                    return;
-                }
+                LoadedQuiz = QuizCore.LoadQuiz(import.QuizPath);
                 PopulateQuizList();
-                SwitchQuizProgressInfo(flp_lastQuizzes.Controls.Cast<RecentQuiz>()
-                    .Where(x => x.QuizIdentity.FindQuizPath() == import.QuizPath)
-                    .Select(x => x.QuizIdentity)
-                    .First());
+                UpdateQuizOverview();
             }
         }
 
@@ -444,18 +422,9 @@ namespace SteelQuiz
 
             if (ofd_loadQuiz.ShowDialog() == DialogResult.OK)
             {
-                //LoadQuiz(ofd_loadQuiz.FileName, QuizPractiseMode.Writing);
-                //#warning add selector
-
-                if (!QuizCore.Load(ofd_loadQuiz.FileName))
-                {
-                    return;
-                }
+                LoadedQuiz = QuizCore.LoadQuiz(ofd_loadQuiz.FileName);
                 PopulateQuizList();
-                SwitchQuizProgressInfo(flp_lastQuizzes.Controls.Cast<RecentQuiz>()
-                    .Where(x => x.QuizIdentity.FindQuizPath() == ofd_loadQuiz.FileName)
-                    .Select(x => x.QuizIdentity)
-                    .First());
+                UpdateQuizOverview();
             }
         }
 
@@ -465,22 +434,8 @@ namespace SteelQuiz
             Flashcards,
         }
 
-        public void LoadQuiz(string quizPath, QuizPractiseMode quizPractiseMode)
+        public void PractiseQuiz(QuizPractiseMode quizPractiseMode)
         {
-            try
-            {
-                var load = QuizCore.Load(quizPath);
-                if (!load)
-                {
-                    return;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("The quiz file could not be loaded:\r\n\r\n" + ex.ToString(), "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
             Hide();
             Program.frmInQuiz = new InQuiz(quizPractiseMode);
             Program.frmInQuiz.Show();
@@ -730,7 +685,7 @@ namespace SteelQuiz
                 RemoveQuiz(quizGuid, false);
             }
 
-            QuizCore.SaveQuizData();
+            QuizCore.SaveQuizAccessData();
         }
 
         private void Dashboard_DragDrop(object sender, DragEventArgs e)
@@ -746,7 +701,7 @@ namespace SteelQuiz
                 bool anySuccess = false;
                 foreach (var file in files)
                 {
-                    if (QuizCore.Load(file))
+                    if ((LoadedQuiz = QuizCore.LoadQuiz(file)) != null)
                     {
                         anySuccess = true;
                     }
@@ -755,9 +710,7 @@ namespace SteelQuiz
                 if (anySuccess)
                 {
                     PopulateQuizList();
-                    SwitchQuizProgressInfo(flp_lastQuizzes.Controls.Cast<RecentQuiz>()
-                        .Select(x => x.QuizIdentity)
-                        .First());
+                    UpdateQuizOverview();
                 }
             }
         }

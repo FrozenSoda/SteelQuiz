@@ -42,7 +42,7 @@ namespace SteelQuiz.QuizPractise
         private object[] initialListBoxCollection;
         private bool closeWarning = true;
 
-        public EditWordSynonyms(WordPair wordPair, int language)
+        public EditWordSynonyms(QuestionAnswerPair wordPair, int language)
         {
             InitializeComponent();
             Language = language;

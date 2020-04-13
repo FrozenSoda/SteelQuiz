@@ -24,7 +24,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SteelQuiz.QuizData;
-using SteelQuiz.QuizProgressData;
+using SteelQuiz.QuizProgressDataNS;
 using SteelQuiz.Util;
 
 namespace SteelQuiz.QuizPractise
@@ -61,7 +61,7 @@ namespace SteelQuiz.QuizPractise
         /// Generates a question/word to be asked, while taking current word and Intelligent Learning settings into account
         /// </summary>
         /// <returns>Returns a question/word to be asked</returns>
-        public static WordPair GenerateWordPair()
+        public static QuestionAnswerPair GenerateWordPair()
         {
             QuizCore.ResetWordsAskedThisRoundMemo();
 
@@ -96,7 +96,7 @@ namespace SteelQuiz.QuizPractise
         /// Generates a question/word to be asked, without taking Intelligent Learning progress into account, that is, pure random (excluding already asked words)
         /// </summary>
         /// <returns></returns>
-        private static WordPair GenerateWordPair_NoIntelligentLearning()
+        private static QuestionAnswerPair GenerateWordPair_NoIntelligentLearning()
         {
             var wordsNotToAsk = QuizCore.QuizProgress.WordsNotToAsk();
 
@@ -138,7 +138,7 @@ namespace SteelQuiz.QuizPractise
         /// Generates a question/word to be asked, while taking Intelligent Learning progress into account
         /// </summary>
         /// <returns></returns>
-        private static WordPair GenerateWordPair_IntelligentLearning()
+        private static QuestionAnswerPair GenerateWordPair_IntelligentLearning()
         {
             var alreadyAsked = QuizCore.QuizProgress.WordsNotToAsk();
 

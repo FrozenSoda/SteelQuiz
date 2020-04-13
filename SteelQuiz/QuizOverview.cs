@@ -390,7 +390,7 @@ namespace SteelQuiz
                 return;
             }
 
-            (ParentForm as Dashboard).LoadQuiz(QuizIdentity.FindQuizPath(), Dashboard.QuizPractiseMode.Writing);
+            (ParentForm as Dashboard).PractiseQuiz(QuizIdentity.FindQuizPath(), Dashboard.QuizPractiseMode.Writing);
         }
 
         private void btn_practiseFlashcards_Click(object sender, EventArgs e)
@@ -401,7 +401,7 @@ namespace SteelQuiz
                 return;
             }
 
-            (ParentForm as Dashboard).LoadQuiz(QuizIdentity.FindQuizPath(), Dashboard.QuizPractiseMode.Flashcards);
+            (ParentForm as Dashboard).PractiseQuiz(QuizIdentity.FindQuizPath(), Dashboard.QuizPractiseMode.Flashcards);
         }
     }
 }

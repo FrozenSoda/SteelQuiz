@@ -24,7 +24,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
-using SteelQuiz.QuizProgressData;
+using SteelQuiz.QuizProgressDataNS;
 
 namespace SteelQuiz
 {
@@ -81,14 +81,14 @@ namespace SteelQuiz
             result.QuizAccessTimes = prog1.QuizAccessTimes;
             result.QuizIdentities = prog1.QuizIdentities;
 
-            var unfixedQuizProgDataList = new List<QuizProgressData.QuizProgressData>();
+            var unfixedQuizProgDataList = new List<QuizProgressData>();
 
-            foreach (var q in prog1.QuizProgDatas)
+            foreach (var q in prog1.QuizProgressData)
             {
                 unfixedQuizProgDataList.Add(q);
             }
 
-            foreach (var q in prog2.QuizProgDatas)
+            foreach (var q in prog2.QuizProgressData)
             {
                 unfixedQuizProgDataList.Add(q);
             }
@@ -103,13 +103,13 @@ namespace SteelQuiz
                 {
                     // prioritize prog1
 
-                    if (prog1.QuizProgDatas.Contains(best.ElementAt(0)))
+                    if (prog1.QuizProgressData.Contains(best.ElementAt(0)))
                     {
-                        result.QuizProgDatas.Add(best.ElementAt(0));
+                        result.QuizProgressData.Add(best.ElementAt(0));
                     }
-                    else if (prog1.QuizProgDatas.Contains(best.ElementAt(1)))
+                    else if (prog1.QuizProgressData.Contains(best.ElementAt(1)))
                     {
-                        result.QuizProgDatas.Add(best.ElementAt(1));
+                        result.QuizProgressData.Add(best.ElementAt(1));
                     }
                     else
                     {
@@ -118,7 +118,7 @@ namespace SteelQuiz
                 }
                 else
                 {
-                    result.QuizProgDatas.Add(best.ElementAt(0));
+                    result.QuizProgressData.Add(best.ElementAt(0));
                 }
             }
 

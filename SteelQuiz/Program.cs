@@ -61,10 +61,12 @@ namespace SteelQuiz
 
             if (!mutex.WaitOne(TimeSpan.Zero, true))
             {
-                //MessageBox.Show("SteelQuiz is already running.", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // SteelQuiz is already running - communicate with existing instance!
 
                 if (Args.Length > 0 && File.Exists(Args[0]) && Args[0].EndsWith(".steelquiz"))
                 {
+                    // Load Quiz
+
                     using (var key = Registry.CurrentUser.CreateSubKey(@"Software\SteelQuiz\Communication", true))
                     {
                         key.SetValue("QuizToLoadPath", Args[0]);
@@ -81,10 +83,12 @@ namespace SteelQuiz
                 return;
             }
 
+            /*
             if (!QuizCore.CheckInitDirectories())
             {
                 Environment.Exit(1);
             }
+            */
 
             if (!ConfigManager.LoadConfig())
             {

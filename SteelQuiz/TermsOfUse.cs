@@ -140,18 +140,9 @@ namespace SteelQuiz
             Hide();
 
             Program.frmWelcome = new Dashboard();
-            /*
-            if (Program.Args.Length > 0 && File.Exists(Program.Args[0]) && Program.Args[0].EndsWith(".steelquiz"))
-            {
-                LoadQuiz(Program.Args[0]);
-            }
-            else
-            {
-                Program.frmWelcome.Show();
-            }
-            */
             Program.frmWelcome.Show();
 
+            /*
             if (!QuizCore.ChkCreateQuizProgress())
             {
                 // open troubleshooting
@@ -165,30 +156,8 @@ namespace SteelQuiz
                     return;
                 }
             }
+            */
         }
-
-        /*
-        private void LoadQuiz(string quizPath)
-        {
-            try
-            {
-                var load = QuizCore.Load(quizPath);
-                if (!load)
-                {
-                    return;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("The quiz file could not be loaded:\r\n\r\n" + ex.ToString(), "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            Program.frmInQuiz = new InQuiz(Dashboard.QuizPractiseMode.Writing, false);
-#warning implement selector
-            Program.frmInQuiz.Show();
-        }
-        */
 
         private void timer_agree_unlock_Tick(object sender, EventArgs e)
         {

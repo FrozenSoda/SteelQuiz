@@ -119,7 +119,7 @@ namespace SteelQuiz
                 throw new VersionNotSupportedException(VersionNotSupportedException.NotSupportedReason.AppVersionTooOld);
             }
 
-            quiz.QuizPath = path;
+            quiz.QuizIdentity = new QuizIdentity(quiz.GUID, path);
             quiz.ProgressData = LoadQuizProgressData(quiz);
 
             if (quiz.ProgressData == null)
@@ -127,6 +127,11 @@ namespace SteelQuiz
                 // Progress data for quiz does not exist - create new
                 quiz.ProgressData = new QuizProgressData(quiz);
             }
+
+            QuizIdentities[quiz.GUID] = quiz.QuizIdentity;
+            QuizAccessTimes[quiz.GUID] = DateTime.Now;
+
+            SaveQuizAccessData();
 
             return quiz;
         }
@@ -162,6 +167,49 @@ namespace SteelQuiz
             {
                 dataRoot.QuizProgressData.Add(quiz.ProgressData);
             }
+
+            dataRaw = JsonConvert.SerializeObject(dataRoot);
+            AtomicIO.AtomicWrite(ConfigManager.Config.StorageConfig.QuizProgressPath, dataRaw);
+        }
+
+        /// <summary>
+        /// Loads QuizAccessTimes and QuizIdentities from the progress data file.
+        /// </summary>
+        public static void LoadQuizAccessData()
+        {
+            if (!File.Exists(ConfigManager.Config.StorageConfig.QuizProgressPath))
+            {
+                return;
+            }
+
+            string dataRaw = AtomicIO.AtomicRead(ConfigManager.Config.StorageConfig.QuizProgressPath);
+            var dataRoot = JsonConvert.DeserializeObject<QuizProgressDataRoot>(dataRaw);
+
+            QuizAccessTimes = dataRoot.QuizAccessTimes;
+            QuizIdentities = dataRoot.QuizIdentities;
+        }
+
+        /// <summary>
+        /// Saves QuizAccessTimes and QuizIdentities to the progress data file.
+        /// </summary>
+        public static void SaveQuizAccessData()
+        {
+            Directory.CreateDirectory(APP_CFG_FOLDER);
+
+            QuizProgressDataRoot dataRoot;
+            string dataRaw;
+            if (File.Exists(ConfigManager.Config.StorageConfig.QuizProgressPath))
+            {
+                dataRaw = AtomicIO.AtomicRead(ConfigManager.Config.StorageConfig.QuizProgressPath);
+                dataRoot = JsonConvert.DeserializeObject<QuizProgressDataRoot>(dataRaw);
+            }
+            else
+            {
+                dataRoot = new QuizProgressDataRoot(MetaData.QUIZ_FILE_FORMAT_VERSION);
+            }
+
+            dataRoot.QuizAccessTimes = QuizAccessTimes;
+            dataRoot.QuizIdentities = QuizIdentities;
 
             dataRaw = JsonConvert.SerializeObject(dataRoot);
             AtomicIO.AtomicWrite(ConfigManager.Config.StorageConfig.QuizProgressPath, dataRaw);

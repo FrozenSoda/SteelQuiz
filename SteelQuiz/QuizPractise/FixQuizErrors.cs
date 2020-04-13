@@ -31,10 +31,10 @@ namespace SteelQuiz.QuizPractise
 {
     public partial class FixQuizErrors : AutoThemeableForm
     {
-        public WordPair WordPair { get; set; }
+        public QuestionAnswerPair WordPair { get; set; }
         private new InQuiz Parent { get; set; }
 
-        public FixQuizErrors(InQuiz parent, WordPair wordPair)
+        public FixQuizErrors(InQuiz parent, QuestionAnswerPair wordPair)
         {
             InitializeComponent();
             WordPair = wordPair;

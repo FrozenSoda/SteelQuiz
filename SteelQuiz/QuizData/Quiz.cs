@@ -17,7 +17,7 @@
 */
 
 using Newtonsoft.Json;
-using SteelQuiz.QuizProgressData;
+using SteelQuiz.QuizProgressDataNS;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -33,19 +33,19 @@ namespace SteelQuiz.QuizData
         public string FileFormatVersion { get; set; }
         public string Language1 { get; set; }
         public string Language2 { get; set; }
-        public List<WordPair> WordPairs { get; set; }
+        public List<QuestionAnswerPair> WordPairs { get; set; }
 
         /// <summary>
-        /// The path to this quiz, during this session.
+        /// The QuizIdentity object belonging to this quiz, during this session.
         /// </summary>
         [JsonIgnore]
-        public string QuizPath { get; set; }
+        public QuizIdentity QuizIdentity { get; set; }
 
         /// <summary>
         /// The progress data belonging to this quiz, during this session.
         /// </summary>
         [JsonIgnore]
-        public QuizProgressData.QuizProgressData ProgressData { get; set; }
+        public QuizProgressData ProgressData { get; set; }
 
         public Quiz(string lang1, string lang2, string quizFileFormatVersion, Guid? guid = null)
         {
@@ -59,7 +59,7 @@ namespace SteelQuiz.QuizData
             }
             Language1 = lang1;
             Language2 = lang2;
-            WordPairs = new List<WordPair>();
+            WordPairs = new List<QuestionAnswerPair>();
             FileFormatVersion = quizFileFormatVersion;
         }
     }
