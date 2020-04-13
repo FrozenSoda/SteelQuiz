@@ -92,11 +92,11 @@ namespace SteelQuiz
             this.btn_addQuiz.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.btn_addQuiz.FlatAppearance.BorderSize = 0;
             this.btn_addQuiz.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_addQuiz.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_addQuiz.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_addQuiz.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btn_addQuiz.Location = new System.Drawing.Point(10, 552);
+            this.btn_addQuiz.Location = new System.Drawing.Point(10, 539);
             this.btn_addQuiz.Name = "btn_addQuiz";
-            this.btn_addQuiz.Size = new System.Drawing.Size(173, 31);
+            this.btn_addQuiz.Size = new System.Drawing.Size(173, 45);
             this.btn_addQuiz.TabIndex = 1;
             this.btn_addQuiz.Text = "+";
             this.btn_addQuiz.UseVisualStyleBackColor = false;
@@ -121,7 +121,7 @@ namespace SteelQuiz
             this.btn_chkUpdates.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_chkUpdates.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_chkUpdates.ForeColor = System.Drawing.Color.White;
-            this.btn_chkUpdates.Location = new System.Drawing.Point(10, 389);
+            this.btn_chkUpdates.Location = new System.Drawing.Point(10, 375);
             this.btn_chkUpdates.Name = "btn_chkUpdates";
             this.btn_chkUpdates.Size = new System.Drawing.Size(173, 31);
             this.btn_chkUpdates.TabIndex = 6;
@@ -138,7 +138,7 @@ namespace SteelQuiz
             this.btn_preferences.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_preferences.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_preferences.ForeColor = System.Drawing.Color.White;
-            this.btn_preferences.Location = new System.Drawing.Point(10, 352);
+            this.btn_preferences.Location = new System.Drawing.Point(10, 338);
             this.btn_preferences.Name = "btn_preferences";
             this.btn_preferences.Size = new System.Drawing.Size(173, 31);
             this.btn_preferences.TabIndex = 7;
@@ -158,9 +158,9 @@ namespace SteelQuiz
             this.flp_lastQuizzes.AutoScroll = true;
             this.flp_lastQuizzes.Location = new System.Drawing.Point(0, 55);
             this.flp_lastQuizzes.MaximumSize = new System.Drawing.Size(196, 0);
-            this.flp_lastQuizzes.MinimumSize = new System.Drawing.Size(196, 491);
+            this.flp_lastQuizzes.MinimumSize = new System.Drawing.Size(196, 477);
             this.flp_lastQuizzes.Name = "flp_lastQuizzes";
-            this.flp_lastQuizzes.Size = new System.Drawing.Size(196, 491);
+            this.flp_lastQuizzes.Size = new System.Drawing.Size(196, 477);
             this.flp_lastQuizzes.TabIndex = 8;
             // 
             // pnl_quizInfo
@@ -209,7 +209,7 @@ namespace SteelQuiz
             this.btn_loadQuizFromFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_loadQuizFromFile.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_loadQuizFromFile.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btn_loadQuizFromFile.Location = new System.Drawing.Point(10, 478);
+            this.btn_loadQuizFromFile.Location = new System.Drawing.Point(10, 464);
             this.btn_loadQuizFromFile.Name = "btn_loadQuizFromFile";
             this.btn_loadQuizFromFile.Size = new System.Drawing.Size(173, 31);
             this.btn_loadQuizFromFile.TabIndex = 10;
@@ -226,7 +226,7 @@ namespace SteelQuiz
             this.btn_createQuiz.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_createQuiz.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_createQuiz.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btn_createQuiz.Location = new System.Drawing.Point(10, 515);
+            this.btn_createQuiz.Location = new System.Drawing.Point(10, 501);
             this.btn_createQuiz.Name = "btn_createQuiz";
             this.btn_createQuiz.Size = new System.Drawing.Size(173, 31);
             this.btn_createQuiz.TabIndex = 11;
@@ -243,7 +243,7 @@ namespace SteelQuiz
             this.btn_importQuiz.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_importQuiz.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_importQuiz.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btn_importQuiz.Location = new System.Drawing.Point(10, 441);
+            this.btn_importQuiz.Location = new System.Drawing.Point(10, 427);
             this.btn_importQuiz.Name = "btn_importQuiz";
             this.btn_importQuiz.Size = new System.Drawing.Size(173, 31);
             this.btn_importQuiz.TabIndex = 12;
@@ -304,7 +304,7 @@ namespace SteelQuiz
             this.btn_about.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_about.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_about.ForeColor = System.Drawing.Color.White;
-            this.btn_about.Location = new System.Drawing.Point(10, 300);
+            this.btn_about.Location = new System.Drawing.Point(10, 286);
             this.btn_about.Name = "btn_about";
             this.btn_about.Size = new System.Drawing.Size(173, 31);
             this.btn_about.TabIndex = 8;
