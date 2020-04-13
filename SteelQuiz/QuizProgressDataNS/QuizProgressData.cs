@@ -24,7 +24,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using SteelQuiz.QuizData;
 
-namespace SteelQuiz.QuizProgressData
+namespace SteelQuiz.QuizProgressDataNS
 {
     public enum TermsOrderBy
     {
@@ -40,10 +40,10 @@ namespace SteelQuiz.QuizProgressData
         Descending,
     }
 
-    public class QuizProgData
+    public class QuizProgressData
     {
         public Guid QuizGUID { get; set; }
-        public List<WordProgData> WordProgDatas { get; set; } = null;
+        public List<TermProgressData> WordProgDatas { get; set; } = null;
 
         private int __answerLanguageNum = 2;
         /// <summary>
@@ -134,7 +134,7 @@ namespace SteelQuiz.QuizProgressData
 
         public bool AskQuestionsInRandomOrder { get; set; } = true;
 
-        public QuizProgData(Quiz quiz, bool initWordProgDatas = true)
+        public QuizProgressData(Quiz quiz, bool initWordProgDatas = true)
         {
             if (quiz == null)
             {
@@ -145,7 +145,7 @@ namespace SteelQuiz.QuizProgressData
 
             if (WordProgDatas == null)
             {
-                WordProgDatas = new List<WordProgData>();
+                WordProgDatas = new List<TermProgressData>();
             }
 
             if (initWordProgDatas)
@@ -163,7 +163,7 @@ namespace SteelQuiz.QuizProgressData
 
                     if (!found)
                     {
-                        WordProgDatas.Add(new WordProgData(wordPair));
+                        WordProgDatas.Add(new TermProgressData(wordPair));
                     }
                 }
             }

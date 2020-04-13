@@ -16,6 +16,7 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using Newtonsoft.Json;
 using SteelQuiz.QuizData;
 using System;
 using System.Collections.Generic;
@@ -23,16 +24,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SteelQuiz.QuizProgressData
+namespace SteelQuiz.QuizProgressDataNS
 {
-    public class QuizProgDataRoot
+    public class QuizProgressDataRoot
     {
         public string FileFormatVersion { get; set; }
         public Dictionary<Guid, QuizIdentity> QuizIdentities { get; set; } = new Dictionary<Guid, QuizIdentity>();
         public Dictionary<Guid, DateTime> QuizAccessTimes { get; set; } = new Dictionary<Guid, DateTime>();
-        public List<QuizProgData> QuizProgDatas { get; set; } = new List<QuizProgData>();
+        public List<QuizProgressData> QuizProgressData { get; set; } = new List<QuizProgressData>();
 
-        public QuizProgDataRoot(string fileFormatVersion)
+        [JsonProperty]
+        [Obsolete("Use QuizProgressData instead", true)]
+        private List<QuizProgressData> QuizProgDatas { set => QuizProgressData = value; }
+
+        public QuizProgressDataRoot(string fileFormatVersion)
         {
             FileFormatVersion = fileFormatVersion;
             //QuizProgDatas = new List<QuizProgData>();

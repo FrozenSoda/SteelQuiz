@@ -46,14 +46,14 @@ namespace SteelQuiz
                 return false;
             }
 
-            QuizProgDataRoot prog1;
-            QuizProgDataRoot prog2;
+            QuizProgressDataRoot prog1;
+            QuizProgressDataRoot prog2;
 
             try
             {
-                prog1 = JsonConvert.DeserializeObject<QuizProgDataRoot>(AtomicIO.AtomicRead(progressFile1));
+                prog1 = JsonConvert.DeserializeObject<QuizProgressDataRoot>(AtomicIO.AtomicRead(progressFile1));
 
-                prog2 = JsonConvert.DeserializeObject<QuizProgDataRoot>(AtomicIO.AtomicRead(progressFile2));
+                prog2 = JsonConvert.DeserializeObject<QuizProgressDataRoot>(AtomicIO.AtomicRead(progressFile2));
             }
             catch (AtomicException ex)
             {
@@ -61,7 +61,7 @@ namespace SteelQuiz
                 return false;
             }
 
-            QuizProgDataRoot merged = Merge(prog1, prog2);
+            QuizProgressDataRoot merged = Merge(prog1, prog2);
 
             AtomicIO.AtomicWrite(savePath, JsonConvert.SerializeObject(merged, Formatting.Indented));
 
@@ -74,14 +74,14 @@ namespace SteelQuiz
         /// <param name="prog1">The first QuizProgDataRoot to merge. This one has priority over prog2</param>
         /// <param name="prog2">The second QuizProgDataRoot to merge</param>
         /// <returns></returns>
-        public static QuizProgDataRoot Merge(QuizProgDataRoot prog1, QuizProgDataRoot prog2)
+        public static QuizProgressDataRoot Merge(QuizProgressDataRoot prog1, QuizProgressDataRoot prog2)
         {
-            var result = new QuizProgDataRoot(MetaData.QUIZ_FILE_FORMAT_VERSION);
+            var result = new QuizProgressDataRoot(MetaData.QUIZ_FILE_FORMAT_VERSION);
 
             result.QuizAccessTimes = prog1.QuizAccessTimes;
             result.QuizIdentities = prog1.QuizIdentities;
 
-            var unfixedQuizProgDataList = new List<QuizProgData>();
+            var unfixedQuizProgDataList = new List<QuizProgressData.QuizProgressData>();
 
             foreach (var q in prog1.QuizProgDatas)
             {

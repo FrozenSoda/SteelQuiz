@@ -22,13 +22,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SteelQuiz.QuizProgressData
+namespace SteelQuiz.QuizProgressDataNS
 {
-    public class WordTry
+    public class TermAttempt
     {
         public bool Success { get; set; }
 
-        public WordTry(bool success)
+        public TermAttempt(bool success)
         {
             Success = success;
         }

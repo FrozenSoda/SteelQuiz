@@ -35,9 +35,9 @@ namespace SteelQuiz.Tests
         [TestMethod()]
         public void Merge_BestProgressSelectionTest()
         {
-            var progRoot1 = new QuizProgDataRoot(MetaData.QUIZ_FILE_FORMAT_VERSION);
+            var progRoot1 = new QuizProgressDataRoot(MetaData.QUIZ_FILE_FORMAT_VERSION);
 
-            var quizProg1 = new QuizProgData(new QuizData.Quiz("lang1", "lang2", MetaData.QUIZ_FILE_FORMAT_VERSION, Guid.Empty));
+            var quizProg1 = new QuizProgressData.QuizProgressData(new QuizData.Quiz("lang1", "lang2", MetaData.QUIZ_FILE_FORMAT_VERSION, Guid.Empty));
             var wp1 = new WordPair("What's 1 + 1?", "2", StringComp.Rules.None, null, new List<string>() { "two" });
             var wpProg1 = new WordProgData(wp1);
             wpProg1.AddWordTry(new WordTry(true));
@@ -49,9 +49,9 @@ namespace SteelQuiz.Tests
             quizProg1.WordProgDatas.Add(wpProg1);
             progRoot1.QuizProgDatas.Add(quizProg1);
 
-            var progRoot2 = new QuizProgDataRoot(MetaData.QUIZ_FILE_FORMAT_VERSION);
+            var progRoot2 = new QuizProgressDataRoot(MetaData.QUIZ_FILE_FORMAT_VERSION);
 
-            var quizProg2 = new QuizProgData(new QuizData.Quiz("lang1", "lang2", MetaData.QUIZ_FILE_FORMAT_VERSION, Guid.Empty));
+            var quizProg2 = new QuizProgressData.QuizProgressData(new QuizData.Quiz("lang1", "lang2", MetaData.QUIZ_FILE_FORMAT_VERSION, Guid.Empty));
             var wp2 = new WordPair("What's 1 + 1?", "2", StringComp.Rules.None, null, new List<string>() { "two" });
             var wpProg2 = new WordProgData(wp2);
             wpProg2.AddWordTry(new WordTry(true));
@@ -79,9 +79,9 @@ namespace SteelQuiz.Tests
         [TestMethod()]
         public void Merge_EqualProgressPriorityTest()
         {
-            var progRoot1 = new QuizProgDataRoot(MetaData.QUIZ_FILE_FORMAT_VERSION);
+            var progRoot1 = new QuizProgressDataRoot(MetaData.QUIZ_FILE_FORMAT_VERSION);
 
-            var quizProg1 = new QuizProgData(new QuizData.Quiz("lang1", "lang2", MetaData.QUIZ_FILE_FORMAT_VERSION, Guid.Empty));
+            var quizProg1 = new QuizProgressData.QuizProgressData(new QuizData.Quiz("lang1", "lang2", MetaData.QUIZ_FILE_FORMAT_VERSION, Guid.Empty));
             var wp1 = new WordPair("What's 2 + 2?", "4", StringComp.Rules.None, null, new List<string>() { "two" });
             var wpProg1 = new WordProgData(wp1);
             wpProg1.AddWordTry(new WordTry(true));
@@ -93,9 +93,9 @@ namespace SteelQuiz.Tests
             quizProg1.WordProgDatas.Add(wpProg1);
             progRoot1.QuizProgDatas.Add(quizProg1);
 
-            var progRoot2 = new QuizProgDataRoot(MetaData.QUIZ_FILE_FORMAT_VERSION);
+            var progRoot2 = new QuizProgressDataRoot(MetaData.QUIZ_FILE_FORMAT_VERSION);
 
-            var quizProg2 = new QuizProgData(new QuizData.Quiz("lang1", "lang2", MetaData.QUIZ_FILE_FORMAT_VERSION, Guid.Empty));
+            var quizProg2 = new QuizProgressData.QuizProgressData(new QuizData.Quiz("lang1", "lang2", MetaData.QUIZ_FILE_FORMAT_VERSION, Guid.Empty));
             var wp2 = new WordPair("What's 1 + 1?", "2", StringComp.Rules.None, null, new List<string>() { "two" });
             var wpProg2 = new WordProgData(wp2);
             wpProg2.AddWordTry(new WordTry(true));

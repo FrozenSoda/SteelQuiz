@@ -129,7 +129,7 @@ namespace SteelQuiz
             SAssert.Assert(QuizCore.QuizProgress.QuizGUID == QuizIdentity.QuizGuid);
             SAssert.Assert(QuizCore.Quiz.GUID == QuizIdentity.QuizGuid);
 
-            QuizCore.QuizProgress = new QuizProgData(QuizCore.Quiz);
+            QuizCore.QuizProgress = new QuizProgressData.QuizProgressData(QuizCore.Quiz);
             QuizCore.SaveQuizProgress();
 
             var quizProgressInfo = Program.frmWelcome.FindQuizProgressInfo(QuizIdentity.QuizGuid);
