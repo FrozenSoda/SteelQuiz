@@ -75,7 +75,7 @@ namespace SteelQuiz
             return null;
         }
 
-        public class VersionNotSupportedException : Exception
+        private class VersionNotSupportedException : Exception
         {
             public enum NotSupportedReason
             {
@@ -103,7 +103,7 @@ namespace SteelQuiz
             }
         }
 
-        public static Quiz InternalLoadQuiz(string path)
+        private static Quiz InternalLoadQuiz(string path)
         {
             if (!File.Exists(path))
             {
@@ -136,7 +136,7 @@ namespace SteelQuiz
         /// </summary>
         /// <param name="quiz">The quiz whose quiz progress data to load.</param>
         /// <returns>The QuizProgData object belonging to the quiz.</returns>
-        public static QuizProgressData LoadQuizProgressData(Quiz quiz)
+        private static QuizProgressData LoadQuizProgressData(Quiz quiz)
         {
             string dataRaw = AtomicIO.AtomicRead(ConfigManager.Config.StorageConfig.QuizProgressPath);
             var dataRoot = JsonConvert.DeserializeObject<QuizProgressDataRoot>(dataRaw);
