@@ -98,34 +98,7 @@ namespace SteelQuiz
 
         public static void BackupConfig()
         {
-            Directory.CreateDirectory(CONFIG_BKP_DIR);
-
-            const string BACKUP_FILENAME = "Config_{0}.json";
-
-            // Find vacant name for backup
-            int maxNum = -1;
-            foreach (var file in Directory.GetFiles(CONFIG_BKP_DIR))
-            {
-                try
-                {
-                    int num = Convert.ToInt32(Path.GetFileNameWithoutExtension(file).Split(new string[] { "Config_" }, StringSplitOptions.None)[1]);
-                    if (num > maxNum)
-                    {
-                        maxNum = num;
-                    }
-                }
-                catch (FormatException)
-                {
-                    continue;
-                }
-                catch (IndexOutOfRangeException)
-                {
-                    continue;
-                }
-            }
-
-            string backupFile = Path.Combine(CONFIG_BKP_DIR, string.Format(BACKUP_FILENAME, maxNum + 1));
-            File.Copy(CONFIG_FILE, backupFile);
+            BackupHelper.BackupFile(CONFIG_FILE, CONFIG_BKP_DIR, "Config", "json");
         }
 
         public static void Configure()

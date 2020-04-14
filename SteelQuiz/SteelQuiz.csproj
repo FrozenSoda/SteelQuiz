@@ -83,6 +83,7 @@
   <ItemGroup>
     <Compile Include="Animations\ControlMove.cs" />
     <Compile Include="Animations\LabelFade.cs" />
+    <Compile Include="BackupHelper.cs" />
     <Compile Include="CachedResourceManager.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="NativeMethods.cs" />
