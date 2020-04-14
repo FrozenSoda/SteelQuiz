@@ -277,7 +277,7 @@ namespace SteelQuiz.QuizEditor
                 ctrl.Synonyms1 = wp.FrontSynonyms;
                 ctrl.txt_word2.Text = wp.Back;
                 ctrl.Synonyms2 = wp.BackSynonyms;
-                ctrl.ComparisonRules.Data = (StringComp.Rules)FixEnum(wp.TranslationRules);
+                ctrl.ComparisonRules.Data = (StringComp.Rules)FixEnum(wp.SmartComparisonRules);
             }
 
             if (!fromRecovery)

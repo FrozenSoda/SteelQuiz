@@ -50,6 +50,8 @@ namespace SteelQuiz.QuizData
         /// </summary>
         public List<string> BackSynonyms { get; set; } = new List<string>();
 
+        public StringComp.Rules SmartComparisonRules { get; set; }
+
         #region Obsolete properties
         [JsonProperty]
         [Obsolete("Use Front instead", true)]
@@ -66,43 +68,17 @@ namespace SteelQuiz.QuizData
         [JsonProperty]
         [Obsolete("Use BackSynonyms instead", true)]
         private List<string> Word2Synonyms { set => BackSynonyms = value; }
+
+        [JsonProperty]
+        [Obsolete("Use SmartComparisonRules instead", true)]
+        private StringComp.Rules TranslationRules { set => SmartComparisonRules = value; }
         #endregion
 
-        public StringComp.Rules TranslationRules { get; set; }
-
-        [JsonIgnore]
-        public string Question
-        {
-            get
-            {
-                if (QuizCore.Quiz == null || QuizCore.QuizProgress == null || QuizCore.Quiz.GUID != QuizCore.QuizProgress.QuizGUID)
-                {
-                    return null;
-                }
-
-                return QuizCore.QuizProgress.AnswerLanguageNum == 2 ? Front : Back;
-            }
-        }
-
-        [JsonIgnore]
-        public string Answer
-        {
-            get
-            {
-                if (QuizCore.Quiz == null || QuizCore.QuizProgress == null || QuizCore.Quiz.GUID != QuizCore.QuizProgress.QuizGUID)
-                {
-                    return null;
-                }
-
-                return QuizCore.QuizProgress.AnswerLanguageNum == 2 ? Back : Front;
-            }
-        }
-
-        public Card(string word1, string word2, StringComp.Rules translationRules, List<string> frontSynonyms = null, List<string> backSynonyms = null)
+        public Card(string word1, string word2, StringComp.Rules smartComparisonRules, List<string> frontSynonyms = null, List<string> backSynonyms = null)
         {
             Front = word1;
             Back = word2;
-            TranslationRules = translationRules;
+            SmartComparisonRules = smartComparisonRules;
 
             if (FrontSynonyms != null)
             {
@@ -112,6 +88,26 @@ namespace SteelQuiz.QuizData
             {
                 BackSynonyms = backSynonyms;
             }
+        }
+
+        /// <summary>
+        /// Retrieves the content of the side of the flashcard which the user should be prompted with - and give an answer to.
+        /// </summary>
+        /// <param name="quiz">The Quiz which this Card belongs to.</param>
+        /// <returns>Returns the content of the question card.</returns>
+        public string GetSideToAsk(Quiz quiz)
+        {
+            return quiz.ProgressData.AnswerCardSide == CardSide.Back ? Front : Back;
+        }
+
+        /// <summary>
+        /// Retrieves the content of the side of the flashcard which the user's answer should be equal/similar to.
+        /// </summary>
+        /// <param name="quiz">The Quiz which this Card belongs to.</param>
+        /// <returns>Returns the content of the answer card.</returns>
+        public string GetSideToAnswer(Quiz quiz)
+        {
+            return quiz.ProgressData.AnswerCardSide == CardSide.Back ? Back : Front;
         }
 
         public override bool Equals(object obj)
@@ -131,7 +127,7 @@ namespace SteelQuiz.QuizData
                 (ignoreSynonyms || this.FrontSynonyms.SequenceEqual(((Card)wp2).FrontSynonyms)) &&
                 this.Back == ((Card)wp2).Back &&
                 (ignoreSynonyms || this.BackSynonyms.SequenceEqual(((Card)wp2).BackSynonyms)) &&
-                (ignoreTranslationRules || this.TranslationRules == ((Card)wp2).TranslationRules);
+                (ignoreTranslationRules || this.SmartComparisonRules == ((Card)wp2).SmartComparisonRules);
         }
 
         public override int GetHashCode()
@@ -141,56 +137,47 @@ namespace SteelQuiz.QuizData
             hashCode = hashCode * -1521134295 + EqualityComparer<List<string>>.Default.GetHashCode(FrontSynonyms);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Back);
             hashCode = hashCode * -1521134295 + EqualityComparer<List<string>>.Default.GetHashCode(BackSynonyms);
-            hashCode = hashCode * -1521134295 + TranslationRules.GetHashCode();
+            hashCode = hashCode * -1521134295 + SmartComparisonRules.GetHashCode();
             return hashCode;
         }
 
-
-        public CardProgress GetQuestionProgressData(QuizProgress quizProgress)
+        /// <summary>
+        /// Retrieves the progress data belonging to this Card, from the specified Quiz.
+        /// </summary>
+        /// <param name="quiz">The quiz this Card belongs to, and that contains the progress data for this Card.</param>
+        /// <returns>The CardProgress object belonging to this Card.</returns>
+        public CardProgress GetProgressData(Quiz quiz)
         {
-            foreach (var wordProgData in quizProgress.CardProgress)
+            foreach (var p in quiz.ProgressData.CardProgress)
             {
-                if (wordProgData.Card.Equals(this, true, true))
+                if (p.Card.Equals(this, true, true))
                 {
-                    return wordProgData;
+                    return p;
                 }
             }
 
-            throw new Exception("No word progress data could be found for this word pair");
+            throw new Exception("No progress data could be found for this card");
         }
 
-        private IEnumerable<Card> __requiredSynonyms = null;
-
         /// <summary>
-        /// Finds all synonyms to this wordpair that are required to be provided, including this wordpair. Only valid for the selected language.
+        /// Finds all synonyms to the answer side of this Card that are required to be provided, including the content in this Card.
         /// </summary>
-        /// <returns>Returns the wordpairs that are synonyms to this wordpair (including this wordpair) and are required to be provided</returns>
-        public IEnumerable<Card> GetRequiredSynonyms(Quiz quiz)
+        /// <returns>A collection of Cards required to be provided.</returns>
+        public IEnumerable<Card> GetRequiredAnswerSynonyms(Quiz quiz)
         {
-            if (__requiredSynonyms != null)
+            if (quiz.ProgressData.AnswerCardSide == CardSide.Back)
             {
-                ;
-            }
-            else if (quiz.ProgressData.AnswerCardSide == CardSide.Back)
-            {
-                __requiredSynonyms = quiz.Cards.Where(x => x.Front == Front);
+                return quiz.Cards.Where(x => x.Front == Front);
             }
             else if (quiz.ProgressData.AnswerCardSide == CardSide.Front)
             {
-                __requiredSynonyms = quiz.Cards.Where(x => x.Back == Back);
+                return quiz.Cards.Where(x => x.Back == Back);
             }
             else
             {
                 // should never be reached
-                throw new Exception("RequiredSynonyms() reached end");
+                throw new Exception("GetRequiredAnswerSynonyms() reached end");
             }
-
-            return __requiredSynonyms;
-        }
-
-        public void ResetRequiredSynonymsMemo()
-        {
-            __requiredSynonyms = null;
         }
 
         public class AnswerDiff
@@ -225,9 +212,9 @@ namespace SteelQuiz.QuizData
         {
             var similarityData = new List<StringComp.SimilarityData>();
 
-            foreach (var wp in GetRequiredSynonyms(quiz).Where(x => answerIgnores == null || !answerIgnores.Contains(x.Answer)))
+            foreach (var card in GetRequiredAnswerSynonyms(quiz).Where(x => answerIgnores == null || !answerIgnores.Contains(x.GetSideToAnswer(quiz))))
             {
-                similarityData = similarityData.Concat(SimilarityData(wp, input, updateProgress)).ToList();
+                similarityData = similarityData.Concat(SimilarityData(quiz, card, input, updateProgress)).ToList();
             }
 
             StringComp.SimilarityData bestSimilarityData = similarityData.OrderBy(x => x.Difference).ThenBy(x => (int)x.Certainty).First();
@@ -236,14 +223,14 @@ namespace SteelQuiz.QuizData
 
             if (updateProgress)
             {
-                ansDiff.WordPair.GetQuestionProgressData(quiz).AddAnswerAttempt(new AnswerAttempt(ansDiff.Correct()));
+                ansDiff.WordPair.GetProgressData(quiz).AddAnswerAttempt(new AnswerAttempt(ansDiff.Correct()));
             }
 
             if (ansDiff.Correct())
             {
-                ansDiff.WordPair.GetQuestionProgressData(quiz).AskedThisRound = true;
+                ansDiff.WordPair.GetProgressData(quiz).AskedThisRound = true;
 
-                if (ansDiff.WordPair.GetRequiredSynonyms(quiz).Select(x => x.GetQuestionProgressData(quiz).AskedThisRound).All(x => x == true))
+                if (ansDiff.WordPair.GetRequiredAnswerSynonyms(quiz).Select(x => x.GetProgressData(quiz).AskedThisRound).All(x => x == true))
                 {
                     quiz.ProgressData.SetCurrentQuestion(null);
                 }
@@ -254,29 +241,29 @@ namespace SteelQuiz.QuizData
             return ansDiff;
         }
 
-        private IEnumerable<StringComp.SimilarityData> SimilarityData(Card wordPair, string input, bool updateProgress = true)
+        private IEnumerable<StringComp.SimilarityData> SimilarityData(Quiz quiz, Card wordPair, string input, bool updateProgress = true)
         {
             var similarityData = new List<StringComp.SimilarityData>();
 
-            if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language2)
+            if (quiz.ProgressData.AnswerCardSide == CardSide.Back)
             {
-                similarityData.Add(StringComp.Similarity(input, wordPair.Back, wordPair, TranslationRules));
+                similarityData.Add(StringComp.Similarity(input, wordPair.Back, wordPair, SmartComparisonRules));
                 foreach (var synonym in wordPair.BackSynonyms)
                 {
-                    similarityData.Add(StringComp.Similarity(input, synonym, wordPair, TranslationRules));
+                    similarityData.Add(StringComp.Similarity(input, synonym, wordPair, SmartComparisonRules));
                 }
             }
-            else if (QuizCore.QuizProgress.AnswerLanguage == QuizCore.Quiz.Language1)
+            else if (quiz.ProgressData.AnswerCardSide == CardSide.Front)
             {
-                similarityData.Add(StringComp.Similarity(input, wordPair.Front, wordPair, TranslationRules));
+                similarityData.Add(StringComp.Similarity(input, wordPair.Front, wordPair, SmartComparisonRules));
                 foreach (var synonym in wordPair.FrontSynonyms)
                 {
-                    similarityData.Add(StringComp.Similarity(input, synonym, wordPair, TranslationRules));
+                    similarityData.Add(StringComp.Similarity(input, synonym, wordPair, SmartComparisonRules));
                 }
             }
             else
             {
-                throw new NotImplementedException("Error in WordPair.CharacterMismatches: All translation modes haven't been implemented!");
+                throw new NotImplementedException("What");
             }
 
             return similarityData;
