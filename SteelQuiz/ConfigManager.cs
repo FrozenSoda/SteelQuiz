@@ -39,16 +39,14 @@ namespace SteelQuiz
         [DllImport("shell32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         private static extern void SHChangeNotify(uint wEventId, uint uFlags, IntPtr dwItem1, IntPtr dwItem2);
 
-        public static readonly string APP_CFG_DIR = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SteelQuiz");
-
-        public static readonly string CONFIG_FILE = Path.Combine(APP_CFG_DIR, "Config.json");
-        public static readonly string CONFIG_BKP_DIR = Path.Combine(APP_CFG_DIR, "Config Backup");
+        public static readonly string CONFIG_FILE = Path.Combine(QuizCore.APP_CFG_DIR, "Config.json");
+        public static readonly string CONFIG_BKP_DIR = Path.Combine(QuizCore.APP_CFG_DIR, "Config Backup");
 
         public static Config Config { get; set; } = null;
 
         public static bool LoadConfig()
         {
-            Directory.CreateDirectory(APP_CFG_DIR);
+            Directory.CreateDirectory(QuizCore.APP_CFG_DIR);
 
             if (!File.Exists(CONFIG_FILE))
             {
@@ -92,7 +90,7 @@ namespace SteelQuiz
 
         public static void SaveConfig()
         {
-            Directory.CreateDirectory(APP_CFG_DIR);
+            Directory.CreateDirectory(QuizCore.APP_CFG_DIR);
             AtomicIO.AtomicWrite(CONFIG_FILE, JsonConvert.SerializeObject(Config, Formatting.Indented));
         }
 

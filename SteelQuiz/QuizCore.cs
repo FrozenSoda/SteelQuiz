@@ -33,11 +33,12 @@ namespace SteelQuiz
     public static class QuizCore
     {
         public const string QUIZ_EXTENSION = "steelquiz";
-        public static readonly string BACKUP_FOLDER = Path.Combine(APP_CFG_FOLDER, "Backups");
+        public static readonly string APP_CFG_DIR = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SteelQuiz");
+        public static readonly string BACKUP_FOLDER = Path.Combine(APP_CFG_DIR, "Backups");
         public static readonly string QUIZ_FOLDER_DEFAULT = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "SteelQuiz");
         public static readonly string QUIZ_RECOVERY_FOLDER = Path.Combine(QUIZ_FOLDER_DEFAULT, "Recovery");
         public static readonly string QUIZ_BACKUP_FOLDER = Path.Combine(QUIZ_FOLDER_DEFAULT, "Backups");
-        public static readonly string PROGRESS_FILE_PATH_DEFAULT = Path.Combine(APP_CFG_FOLDER, "QuizProgress.json");
+        public static readonly string PROGRESS_FILE_PATH_DEFAULT = Path.Combine(APP_CFG_DIR, "QuizProgress.json");
 
         public static Dictionary<Guid, QuizIdentity> QuizIdentities { get; set; } = new Dictionary<Guid, QuizIdentity>();
         public static Dictionary<Guid, DateTime> QuizAccessTimes { get; set; } = new Dictionary<Guid, DateTime>();
@@ -193,7 +194,7 @@ namespace SteelQuiz
         /// </summary>
         public static void SaveQuizAccessData()
         {
-            Directory.CreateDirectory(APP_CFG_FOLDER);
+            Directory.CreateDirectory(APP_CFG_DIR);
 
             QuizProgressDataRoot dataRoot;
             string dataRaw;
