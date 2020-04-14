@@ -146,10 +146,8 @@ namespace SteelQuiz
                     key.DeleteValue("QuizToLoadPath");
                 }
 
-                QuizCore.Load((string)quizPath);
-
-                frmWelcome.PopulateQuizList();
-                frmWelcome.SwitchQuizProgressInfo((string)quizPath);
+                frmWelcome.LoadedQuiz = QuizCore.LoadQuiz((string)quizPath);
+                frmWelcome.UpdateQuizOverview();
 
                 ShowMe(frmWelcome);
             }
