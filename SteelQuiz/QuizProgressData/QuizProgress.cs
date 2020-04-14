@@ -87,7 +87,6 @@ namespace SteelQuiz.QuizProgressData
         /// Contains the number of correct answers during a full test.
         /// </summary>
         public int CorrectAnswersThisRound { get; set; } = 0;
-#warning Is this property used?
 
         public CardsOrderBy CardsDisplayOrder { get; set; } = CardsOrderBy.SuccessRate;
         public CardsOrderByOrder CardsDisplayOrderOrder { get; set; } = CardsOrderByOrder.Ascending;

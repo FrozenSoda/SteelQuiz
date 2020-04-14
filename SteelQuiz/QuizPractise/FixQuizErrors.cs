@@ -31,24 +31,26 @@ namespace SteelQuiz.QuizPractise
 {
     public partial class FixQuizErrors : AutoThemeableForm
     {
-        public Card WordPair { get; set; }
+        public Card Card { get; set; }
+        private Quiz Quiz { get; set; }
         private new InQuiz Parent { get; set; }
 
-        public FixQuizErrors(InQuiz parent, Card wordPair)
+        public FixQuizErrors(InQuiz parent, Quiz quiz, Card wordPair)
         {
             InitializeComponent();
-            WordPair = wordPair;
+            Card = wordPair;
+            Quiz = quiz;
             Parent = parent;
 
-            UpdateWordLabels();
+            UpdateSideLabels();
 
             SetTheme();
         }
 
-        private void UpdateWordLabels()
+        private void UpdateSideLabels()
         {
-            lbl_word1.Text = $"Word 1:    {WordPair.Front}";
-            lbl_word2.Text = $"Word 2:    {WordPair.Back}";
+            lbl_word1.Text = $"Front Side:    {Card.Front}";
+            lbl_word2.Text = $"Back Side:     {Card.Back}";
         }
 
         private void btn_close_Click(object sender, EventArgs e)
@@ -58,43 +60,43 @@ namespace SteelQuiz.QuizPractise
 
         private void btn_editWord1_Click(object sender, EventArgs e)
         {
-            var editWord = new EditWord(WordPair.Front);
+            var editWord = new EditWord(Card.Front);
             if (editWord.ShowDialog() == DialogResult.OK)
             {
-                WordPair.Front = editWord.Word;
-                QuizCore.SaveQuiz();
-                UpdateWordLabels();
+                Card.Front = editWord.Word;
+                QuizCore.SaveQuiz(Quiz, Quiz.QuizIdentity.FindQuizPath());
+                UpdateSideLabels();
             }
         }
 
         private void btn_editWord2_Click(object sender, EventArgs e)
         {
-            var editWord = new EditWord(WordPair.Back);
+            var editWord = new EditWord(Card.Back);
             if (editWord.ShowDialog() == DialogResult.OK)
             {
-                WordPair.Back = editWord.Word;
-                QuizCore.SaveQuiz();
-                UpdateWordLabels();
+                Card.Back = editWord.Word;
+                QuizCore.SaveQuiz(Quiz, Quiz.QuizIdentity.FindQuizPath());
+                UpdateSideLabels();
             }
         }
 
         private void btn_editFrontSynonyms_Click(object sender, EventArgs e)
         {
-            var editWordSynonyms = new EditWordSynonyms(WordPair, 1);
+            var editWordSynonyms = new EditWordSynonyms(Card, 1);
             if (editWordSynonyms.ShowDialog() == DialogResult.OK)
             {
-                WordPair.FrontSynonyms = editWordSynonyms.Synonyms;
-                QuizCore.SaveQuiz();
+                Card.FrontSynonyms = editWordSynonyms.Synonyms;
+                QuizCore.SaveQuiz(Quiz, Quiz.QuizIdentity.FindQuizPath());
             }
         }
 
         private void btn_editBackSynonyms_Click(object sender, EventArgs e)
         {
-            var editWordSynonyms = new EditWordSynonyms(WordPair, 2);
+            var editWordSynonyms = new EditWordSynonyms(Card, 2);
             if (editWordSynonyms.ShowDialog() == DialogResult.OK)
             {
-                WordPair.BackSynonyms = editWordSynonyms.Synonyms;
-                QuizCore.SaveQuiz();
+                Card.BackSynonyms = editWordSynonyms.Synonyms;
+                QuizCore.SaveQuiz(Quiz, Quiz.QuizIdentity.FindQuizPath());
             }
         }
 
@@ -110,7 +112,7 @@ namespace SteelQuiz.QuizPractise
         {
             Parent.ExitAppOnClose = false;
             Program.frmWelcome.Show();
-            Program.frmWelcome.OpenQuizEditor(QuizCore.Quiz, QuizCore.QuizPath);
+            Program.frmWelcome.OpenQuizEditor(Quiz, Quiz.QuizIdentity.FindQuizPath());
             DialogResult = DialogResult.Abort;
         }
     }
