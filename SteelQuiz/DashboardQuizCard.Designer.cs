@@ -18,7 +18,7 @@
 
 namespace SteelQuiz
 {
-    partial class DashboardQuizWordPair
+    partial class DashboardQuizCard
     {
         /// <summary> 
         /// Required designer variable.
@@ -47,7 +47,7 @@ namespace SteelQuiz
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DashboardQuizWordPair));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DashboardQuizCard));
             this.lbl_word1 = new System.Windows.Forms.Label();
             this.lbl_word2 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);

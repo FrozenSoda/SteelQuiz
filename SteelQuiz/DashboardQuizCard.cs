@@ -30,29 +30,26 @@ using SteelQuiz.ThemeManager.Colors;
 
 namespace SteelQuiz
 {
-    public partial class DashboardQuizWordPair : AutoThemeableUserControl
+    public partial class DashboardQuizCard : AutoThemeableUserControl
     {
         private WelcomeTheme WelcomeTheme { get; set; } = new WelcomeTheme();
-        public Card WordPair { get; set; }
+        public Card Card { get; set; }
         public double SuccessRate { get; set; }
 
-        public DashboardQuizWordPair(Card wordPair)
+        public DashboardQuizCard(Quiz quiz, Card card)
         {
             InitializeComponent();
             SetTheme(WelcomeTheme);
 
-            WordPair = wordPair;
-            var wordProgData = WordPair.GetWordProgData();
+            Card = card;
+            var wordProgData = Card.GetProgressData(quiz);
             SuccessRate = wordProgData.GetSuccessRate();
-
-            //cpb_learningProgress.Value = (int)Math.Floor(LearningProgress * 100d);
-            //cpb_learningProgress.Text = cpb_learningProgress.Value.ToString() + " %";
 
             lbl_learningProgress_bar.Size = new Size((int)Math.Floor(Size.Width * SuccessRate), lbl_learningProgress_bar.Size.Height);
             lbl_learningProgress.Text = Math.Floor(SuccessRate * 100D).ToString() + " %";
 
-            lbl_word1.Text = WordPair.Front;
-            lbl_word2.Text = WordPair.Back;
+            lbl_word1.Text = Card.Front;
+            lbl_word2.Text = Card.Back;
         }
 
         public override void SetTheme(GeneralTheme theme = null)
@@ -72,10 +69,6 @@ namespace SteelQuiz
 
             // Revert learning progress bar color (it should not be changed)
             lbl_learningProgress_bar.ForeColor = lbl_learningProgress_bar_color;
-
-            //cpb_learningProgress.BackColor = theme.GetBackColor();
-            //cpb_learningProgress.InnerColor = theme.GetBackColor();
-            //cpb_learningProgress.ForeColor = theme.GetMainLabelForeColor();
         }
 
         public void UpdateLearningProgressBar()

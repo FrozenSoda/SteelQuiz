@@ -569,7 +569,7 @@ namespace SteelQuiz.QuizPractise
                 }
                 else if (GameMode == QuizPractiseMode.Flashcards)
                 {
-                    CurrentWordPair.GetWordProgData().AddWordTry(new WordTry(false));
+                    CurrentWordPair.GetWordProgData().AddWordTry(new AnswerAttempt(false));
                     //CurrentWordPair.GetWordProgData().AskedThisRound = true;
                     //CurrentWordPair.GetRequiredSynonyms().Where(x => !x.GetWordProgData().AskedThisRound).First().GetWordProgData().AskedThisRound = true;
                     CurrentWordPair.GetRequiredSynonyms().Select(x => x.GetWordProgData()).Where(x => !x.AskedThisRound).First().AskedThisRound = true;

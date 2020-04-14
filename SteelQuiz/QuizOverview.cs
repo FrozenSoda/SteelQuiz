@@ -196,10 +196,10 @@ namespace SteelQuiz
 
             //Debug.WriteLine(watch.ElapsedMilliseconds);
 
-            var controls = new List<DashboardQuizWordPair>();
+            var controls = new List<DashboardQuizCard>();
             foreach (var wordPair in QuizCore.Quiz.WordPairs)
             {
-                var c = new DashboardQuizWordPair(wordPair);
+                var c = new DashboardQuizCard(wordPair);
                 c.Size = new Size(flp_words.Size.Width - 34, c.Size.Height);
                 controls.Add(c);
             }
@@ -217,10 +217,10 @@ namespace SteelQuiz
                         case "Quiz Order":
                             break;
                         case "Alphabetical Term 1":
-                            controls = controls.OrderBy(x => x.WordPair.Front).ToList();
+                            controls = controls.OrderBy(x => x.Card.Front).ToList();
                             break;
                         case "Alphabetical Term 2":
-                            controls = controls.OrderBy(x => x.WordPair.Back).ToList();
+                            controls = controls.OrderBy(x => x.Card.Back).ToList();
                             break;
                     }
                     break;
@@ -235,10 +235,10 @@ namespace SteelQuiz
                             controls.Reverse();
                             break;
                         case "Alphabetical Term 1":
-                            controls = controls.OrderByDescending(x => x.WordPair.Front).ToList();
+                            controls = controls.OrderByDescending(x => x.Card.Front).ToList();
                             break;
                         case "Alphabetical Term 2":
-                            controls = controls.OrderByDescending(x => x.WordPair.Back).ToList();
+                            controls = controls.OrderByDescending(x => x.Card.Back).ToList();
                             break;
                     }
                     break;
@@ -299,7 +299,7 @@ namespace SteelQuiz
         public void UpdateLearningProgressBar()
         {
             lbl_learningProgress_bar.Size = new Size((int)Math.Floor(Size.Width * QuizCore.QuizProgress.GetLearningProgress()), lbl_learningProgress_bar.Size.Height);
-            foreach (var c in flp_words.Controls.OfType<DashboardQuizWordPair>())
+            foreach (var c in flp_words.Controls.OfType<DashboardQuizCard>())
             {
                 c.UpdateLearningProgressBar();
             }

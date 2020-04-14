@@ -176,11 +176,11 @@
     <Compile Include="RecentQuiz.Designer.cs">
       <DependentUpon>RecentQuiz.cs</DependentUpon>
     </Compile>
-    <Compile Include="DashboardQuizWordPair.cs">
+    <Compile Include="DashboardQuizCard.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="DashboardQuizWordPair.Designer.cs">
-      <DependentUpon>DashboardQuizWordPair.cs</DependentUpon>
+    <Compile Include="DashboardQuizCard.Designer.cs">
+      <DependentUpon>DashboardQuizCard.cs</DependentUpon>
     </Compile>
     <Compile Include="Extensions\FormExtensions.cs" />
     <Compile Include="Extensions\IntegerExtensions.cs" />
@@ -455,8 +455,8 @@
     <EmbeddedResource Include="RecentQuiz.resx">
       <DependentUpon>RecentQuiz.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DashboardQuizWordPair.resx">
-      <DependentUpon>DashboardQuizWordPair.cs</DependentUpon>
+    <EmbeddedResource Include="DashboardQuizCard.resx">
+      <DependentUpon>DashboardQuizCard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Preferences\PrefsAdvanced.resx">
       <DependentUpon>PrefsAdvanced.cs</DependentUpon>
