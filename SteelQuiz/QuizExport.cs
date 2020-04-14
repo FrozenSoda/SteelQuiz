@@ -47,18 +47,18 @@ namespace SteelQuiz
         private void GenerateText()
         {
             rtf_text.Text = "";
-            foreach (var wp in Quiz.WordPairs)
+            foreach (var wp in Quiz.Cards)
             {
-                rtf_text.Text += wp.Word1;
-                foreach (var synonym in wp.Word1Synonyms)
+                rtf_text.Text += wp.Front;
+                foreach (var synonym in wp.FrontSynonyms)
                 {
                     rtf_text.Text += $" / {synonym}";
                 }
 
                 rtf_text.Text += Regex.Unescape(txt_chBetweenWords.Text);
 
-                rtf_text.Text += wp.Word2;
-                foreach (var synonym in wp.Word2Synonyms)
+                rtf_text.Text += wp.Back;
+                foreach (var synonym in wp.BackSynonyms)
                 {
                     rtf_text.Text += $" / {synonym}";
                 }

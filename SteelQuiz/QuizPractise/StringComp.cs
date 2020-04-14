@@ -54,9 +54,9 @@ namespace SteelQuiz.QuizPractise
             /// <summary>
             /// The wordpair belonging to this class instance
             /// </summary>
-            public QuestionAnswerPair WordPair { get; set; }
+            public Card WordPair { get; set; }
 
-            public SimilarityData(int difference, CorrectCertainty certainty, string correctAnswer, QuestionAnswerPair wordPair)
+            public SimilarityData(int difference, CorrectCertainty certainty, string correctAnswer, Card wordPair)
             {
                 Difference = difference;
                 Certainty = certainty;
@@ -85,12 +85,12 @@ namespace SteelQuiz.QuizPractise
             | Rules.IgnoreOpeningWhitespace
             | Rules.IgnoreEndingWhitespace;
 
-        public static SimilarityData Similarity(string userAnswer, string correctAnswer, QuestionAnswerPair wordPair, Rules rules)
+        public static SimilarityData Similarity(string userAnswer, string correctAnswer, Card wordPair, Rules rules)
         {
             return Similarity(userAnswer, correctAnswer, wordPair, rules, CorrectCertainty.CompletelyCorrect);
         }
 
-        private static SimilarityData Similarity(string userAnswer, string correctAnswer, QuestionAnswerPair wordPair, Rules rules, CorrectCertainty certainty)
+        private static SimilarityData Similarity(string userAnswer, string correctAnswer, Card wordPair, Rules rules, CorrectCertainty certainty)
         {
             var similarityDatas = new List<SimilarityData>();
 

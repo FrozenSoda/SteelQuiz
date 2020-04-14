@@ -17,7 +17,7 @@
 */
 
 using Newtonsoft.Json;
-using SteelQuiz.QuizProgressDataNS;
+using SteelQuiz.QuizProgressData;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -31,23 +31,46 @@ namespace SteelQuiz.QuizData
     {
         public Guid GUID { get; set; }
         public string FileFormatVersion { get; set; }
-        public string Language1 { get; set; }
-        public string Language2 { get; set; }
-        public List<QuestionAnswerPair> WordPairs { get; set; }
+
+        /// <summary>
+        /// The type of text at the front of the flashcards - for example "Spanish", "Question", "Animal", etc.
+        /// </summary>
+        public string CardFrontType { get; set; }
+        /// <summary>
+        /// The type of text at the back of the flashcards - for example "Spanish", "Question", "Animal", etc.
+        /// </summary>
+        public string CardBackType { get; set; }
+        /// <summary>
+        /// The Cards, that is the question-answer-pairs, contained in this quiz.
+        /// </summary>
+        public List<Card> Cards { get; set; } = new List<Card>();
 
         /// <summary>
         /// The QuizIdentity object belonging to this quiz, during this session.
         /// </summary>
         [JsonIgnore]
         public QuizIdentity QuizIdentity { get; set; }
-
         /// <summary>
         /// The progress data belonging to this quiz, during this session.
         /// </summary>
         [JsonIgnore]
-        public QuizProgressData ProgressData { get; set; }
+        public QuizProgress ProgressData { get; set; }
 
-        public Quiz(string lang1, string lang2, string quizFileFormatVersion, Guid? guid = null)
+        #region Obsolete properties
+        [JsonProperty]
+        [Obsolete("Use CardFrontType instead", true)]
+        private string Language1 { set => CardFrontType = value; }
+
+        [JsonProperty]
+        [Obsolete("Use CardBackType instead", true)]
+        private string Language2 { set => CardBackType = value; }
+
+        [JsonProperty]
+        [Obsolete("Use Cards instead", true)]
+        private List<Card> WordPairs { set => Cards = value; }
+        #endregion
+
+        public Quiz(string cardFrontType, string cardBackType, string quizFileFormatVersion, Guid? guid = null)
         {
             if (guid == null)
             {
@@ -57,9 +80,8 @@ namespace SteelQuiz.QuizData
             {
                 GUID = (Guid)guid;
             }
-            Language1 = lang1;
-            Language2 = lang2;
-            WordPairs = new List<QuestionAnswerPair>();
+            CardFrontType = cardFrontType;
+            CardBackType = cardBackType;
             FileFormatVersion = quizFileFormatVersion;
         }
     }

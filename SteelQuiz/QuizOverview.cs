@@ -104,30 +104,30 @@ namespace SteelQuiz
 
             switch (QuizCore.QuizProgress.TermsDisplayOrder)
             {
-                case TermsOrderBy.SuccessRate:
+                case CardsOrderBy.SuccessRate:
                     cmb_order.SelectedItem = "Success Rate";
                     break;
 
-                case TermsOrderBy.QuizOrder:
+                case CardsOrderBy.QuizOrder:
                     cmb_order.SelectedItem = "Quiz Order";
                     break;
 
-                case TermsOrderBy.AlphabeticalTerm1:
+                case CardsOrderBy.AlphabeticalTerm1:
                     cmb_order.SelectedItem = "Alphabetical Term 1";
                     break;
 
-                case TermsOrderBy.AlphabeticalTerm2:
+                case CardsOrderBy.AlphabeticalTerm2:
                     cmb_order.SelectedItem = "Alphabetical Term 2";
                     break;
             }
 
             switch (QuizCore.QuizProgress.TermsDisplayOrderOrder)
             {
-                case TermsOrderByOrder.Ascending:
+                case CardsOrderByOrder.Ascending:
                     cmb_orderAscendingDescending.SelectedItem = "Ascending";
                     break;
 
-                case TermsOrderByOrder.Descending:
+                case CardsOrderByOrder.Descending:
                     cmb_orderAscendingDescending.SelectedItem = "Descending";
                     break;
             }
@@ -217,10 +217,10 @@ namespace SteelQuiz
                         case "Quiz Order":
                             break;
                         case "Alphabetical Term 1":
-                            controls = controls.OrderBy(x => x.WordPair.Word1).ToList();
+                            controls = controls.OrderBy(x => x.WordPair.Front).ToList();
                             break;
                         case "Alphabetical Term 2":
-                            controls = controls.OrderBy(x => x.WordPair.Word2).ToList();
+                            controls = controls.OrderBy(x => x.WordPair.Back).ToList();
                             break;
                     }
                     break;
@@ -235,10 +235,10 @@ namespace SteelQuiz
                             controls.Reverse();
                             break;
                         case "Alphabetical Term 1":
-                            controls = controls.OrderByDescending(x => x.WordPair.Word1).ToList();
+                            controls = controls.OrderByDescending(x => x.WordPair.Front).ToList();
                             break;
                         case "Alphabetical Term 2":
-                            controls = controls.OrderByDescending(x => x.WordPair.Word2).ToList();
+                            controls = controls.OrderByDescending(x => x.WordPair.Back).ToList();
                             break;
                     }
                     break;
@@ -350,30 +350,30 @@ namespace SteelQuiz
             switch (cmb_order.SelectedItem)
             {
                 case "Success Rate":
-                    QuizCore.QuizProgress.TermsDisplayOrder = TermsOrderBy.SuccessRate;
+                    QuizCore.QuizProgress.TermsDisplayOrder = CardsOrderBy.SuccessRate;
                     break;
 
                 case "Quiz Order":
-                    QuizCore.QuizProgress.TermsDisplayOrder = TermsOrderBy.QuizOrder;
+                    QuizCore.QuizProgress.TermsDisplayOrder = CardsOrderBy.QuizOrder;
                     break;
 
                 case "Alphabetical Term 1":
-                    QuizCore.QuizProgress.TermsDisplayOrder = TermsOrderBy.AlphabeticalTerm1;
+                    QuizCore.QuizProgress.TermsDisplayOrder = CardsOrderBy.AlphabeticalTerm1;
                     break;
 
                 case "Alphabetical Term 2":
-                    QuizCore.QuizProgress.TermsDisplayOrder = TermsOrderBy.AlphabeticalTerm2;
+                    QuizCore.QuizProgress.TermsDisplayOrder = CardsOrderBy.AlphabeticalTerm2;
                     break;
             }
 
             switch (cmb_orderAscendingDescending.SelectedItem)
             {
                 case "Ascending":
-                    QuizCore.QuizProgress.TermsDisplayOrderOrder = TermsOrderByOrder.Ascending;
+                    QuizCore.QuizProgress.TermsDisplayOrderOrder = CardsOrderByOrder.Ascending;
                     break;
 
                 case "Descending":
-                    QuizCore.QuizProgress.TermsDisplayOrderOrder = TermsOrderByOrder.Descending;
+                    QuizCore.QuizProgress.TermsDisplayOrderOrder = CardsOrderByOrder.Descending;
                     break;
             }
 

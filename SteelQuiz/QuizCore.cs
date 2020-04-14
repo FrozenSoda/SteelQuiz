@@ -23,7 +23,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SteelQuiz.QuizData;
-using SteelQuiz.QuizProgressDataNS;
+using SteelQuiz.QuizProgressData;
 using SteelQuiz.Util;
 using Newtonsoft.Json;
 using System.Windows.Forms;
@@ -125,7 +125,7 @@ namespace SteelQuiz
             if (quiz.ProgressData == null)
             {
                 // Progress data for quiz does not exist - create new
-                quiz.ProgressData = new QuizProgressData(quiz);
+                quiz.ProgressData = new QuizProgress(quiz);
             }
 
             QuizIdentities[quiz.GUID] = quiz.QuizIdentity;
@@ -141,7 +141,7 @@ namespace SteelQuiz
         /// </summary>
         /// <param name="quiz">The quiz whose quiz progress data to load.</param>
         /// <returns>The QuizProgData object belonging to the quiz.</returns>
-        private static QuizProgressData LoadQuizProgressData(Quiz quiz)
+        private static QuizProgress LoadQuizProgressData(Quiz quiz)
         {
             string dataRaw = AtomicIO.AtomicRead(ConfigManager.Config.StorageConfig.QuizProgressPath);
             var dataRoot = JsonConvert.DeserializeObject<QuizProgressDataRoot>(dataRaw);
@@ -220,14 +220,14 @@ namespace SteelQuiz
             //quiz.QuizRandomized = true;
 
             var rnd = new Random();
-            int n = quiz.ProgressData.QuestionProgressData.Count;
+            int n = quiz.ProgressData.CardProgress.Count;
             while (n > 1)
             {
                 --n;
                 int k = rnd.Next(n + 1);
-                var value = quiz.ProgressData.QuestionProgressData[k];
-                quiz.ProgressData.QuestionProgressData[k] = quiz.ProgressData.QuestionProgressData[n];
-                quiz.ProgressData.QuestionProgressData[n] = value;
+                var value = quiz.ProgressData.CardProgress[k];
+                quiz.ProgressData.CardProgress[k] = quiz.ProgressData.CardProgress[n];
+                quiz.ProgressData.CardProgress[n] = value;
             }
         }
     }

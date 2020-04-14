@@ -24,9 +24,9 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using SteelQuiz.QuizData;
 
-namespace SteelQuiz.QuizProgressDataNS
+namespace SteelQuiz.QuizProgressData
 {
-    public enum TermsOrderBy
+    public enum CardsOrderBy
     {
         SuccessRate,
         QuizOrder,
@@ -34,123 +34,101 @@ namespace SteelQuiz.QuizProgressDataNS
         AlphabeticalTerm2,
     }
 
-    public enum TermsOrderByOrder
+    public enum CardsOrderByOrder
     {
         Ascending,
         Descending,
     }
 
-    public class QuizProgressData
+    public enum CardSide
     {
+        Front,
+        Back,
+    }
+
+    public class QuizProgress
+    {
+        /// <summary>
+        /// The Guid of the Quiz belonging to this progress data container.
+        /// </summary>
         public Guid QuizGUID { get; set; }
-        public List<QuestionProgressData> QuestionProgressData { get; set; } = new List<QuestionProgressData>();
-
-        [JsonProperty]
-        [Obsolete("Use QuestionProgressData instead", true)]
-        private List<QuestionProgressData> WordProgDatas { set => QuestionProgressData = value; }
-
-        private int __answerLanguageNum = 2;
         /// <summary>
-        /// 1 if the answer language is Language1, otherwise 2
+        /// The progress related to each of the Cards in this quiz.
         /// </summary>
-        public int AnswerLanguageNum
-        {
-            get
-            {
-                return __answerLanguageNum;
-            }
-
-            set
-            {
-                __answerLanguageNum = value;
-
-                if (QuizCore.Quiz != null && QuizCore.Quiz.GUID == QuizGUID)
-                {
-                    foreach (var wordPair in QuizCore.Quiz.WordPairs)
-                    {
-                        wordPair.ResetRequiredSynonymsMemo();
-                    }
-                }
-            }
-        }
-
-        [JsonIgnore]
+        public List<CardProgress> CardProgress { get; set; } = new List<CardProgress>();
         /// <summary>
-        /// The language to answer in when practising the quiz
+        /// The side of the card that is hidden - whose content the user should answer with.
         /// </summary>
-        public string AnswerLanguage
-        {
-            get
-            {
-                if (QuizCore.Quiz != null && QuizCore.Quiz.GUID == QuizGUID)
-                {
-                    return AnswerLanguageNum == 2 ? QuizCore.Quiz.Language2 : QuizCore.Quiz.Language1;
-                }
-                else
-                {
-                    return null;
-                }
-            }
-        }
-
-        [JsonIgnore]
-        public string QuestionLanguage
-        {
-            get
-            {
-                if (QuizCore.Quiz.GUID != QuizGUID)
-                {
-                    return null;
-                }
-
-                return QuizCore.Quiz.Language2 == AnswerLanguage ? QuizCore.Quiz.Language1 : QuizCore.Quiz.Language2;
-            }
-        }
-
+        public CardSide AnswerCardSide { get; set; } = CardSide.Back;
         /// <summary>
         /// How many of the last attempts to use as basis for Intelligent Learning question selection. 0 if all attempts ever made should count
         /// </summary>
         public int IntelligentLearningLastAnswersBasisCount { get; set; } = 3;
-
         /// <summary>
         /// The Minimum number of answer tries per question to consider skipping it with Intelligent Learning.
         /// </summary>
         public int MinimumTriesCountToConsiderSkippingQuestion { get; set; } = 2;
-
-        [JsonProperty] // required for deserialization of property with private setter
-        internal List<QuestionAnswerPair> CurrentWordPairs { get; set; } = new List<QuestionAnswerPair>();
+        /// <summary>
+        /// Current card(s) to answer. Contains multiple elements if a card has multiple definitions through multiple cards.
+        /// </summary>
+        [JsonProperty]
+        internal List<Card> CurrentCards { get; set; } = new List<Card>();
 
         [JsonIgnore]
         /// <summary>
         /// True if the question to perform a full test has been asked (during this application instance)
         /// </summary>
         public bool MasterNoticeShowed { get; set; } = false;
-
-        public bool FullTestInProgress { get; set; } = false;
-
         /// <summary>
-        /// Contains the number of correct answers during a full test
+        /// True if a full test is in progress - that is, Intelligent Learning is disabled.
+        /// </summary>
+        public bool FullTestInProgress { get; set; } = false;
+        /// <summary>
+        /// Contains the number of correct answers during a full test.
         /// </summary>
         public int CorrectAnswersThisRound { get; set; } = 0;
+#warning Is this property used?
 
-        public TermsOrderBy TermsDisplayOrder { get; set; } = TermsOrderBy.SuccessRate;
-        public TermsOrderByOrder TermsDisplayOrderOrder { get; set; } = TermsOrderByOrder.Ascending;
+        public CardsOrderBy CardsDisplayOrder { get; set; } = CardsOrderBy.SuccessRate;
+        public CardsOrderByOrder CardsDisplayOrderOrder { get; set; } = CardsOrderByOrder.Ascending;
 
         public bool AskQuestionsInRandomOrder { get; set; } = true;
 
-        public QuizProgressData(Quiz quiz, bool initWordProgDatas = true)
+        #region Obsolete properties
+        [JsonProperty]
+        [Obsolete("Use CardProgress instead", true)]
+        private List<CardProgress> WordProgDatas { set => CardProgress = value; }
+
+        [JsonProperty]
+        [Obsolete("Use AnswerCardSide instead", true)]
+        private int AnswerLanguageNum { set => AnswerCardSide = value == 1 ? CardSide.Front : CardSide.Back; }
+
+        [JsonProperty]
+        [Obsolete("Use CurrentCards instead", true)]
+        private List<Card> CurrentWordPairs { set => CurrentCards = value; }
+
+        [JsonProperty]
+        [Obsolete("Use CardsDisplayOrder instead", true)]
+        private CardsOrderBy TermsDisplayOrder { set => CardsDisplayOrder = value; }
+
+        [JsonProperty]
+        [Obsolete("Use CardsDisplayOrderOrder instead", true)]
+        private CardsOrderByOrder TermsDisplayOrderOrder { set => CardsDisplayOrderOrder = value; }
+        #endregion
+
+        public QuizProgress(Quiz quiz, bool initCardProgress = true)
         {
             if (quiz == null)
             {
                 return;
             }
 
-            if (initWordProgDatas)
+            if (initCardProgress)
             {
-                foreach (var wordPair in quiz.WordPairs)
+                foreach (var wordPair in quiz.Cards)
                 {
                     bool found = false;
-                    foreach (var wordProgData in WordProgDatas)
+                    foreach (var wordProgData in CardProgress)
                     {
                         if (wordProgData.WordPair.Equals(wordPair))
                         {
@@ -160,7 +138,7 @@ namespace SteelQuiz.QuizProgressDataNS
 
                     if (!found)
                     {
-                        WordProgDatas.Add(new QuestionProgressData(wordPair));
+                        CardProgress.Add(new CardProgress(wordPair));
                     }
                 }
             }
@@ -174,7 +152,7 @@ namespace SteelQuiz.QuizProgressDataNS
         /// <returns>Returns the success rate between 0 and 1 for answering this word, for the amount of tries completed</returns>
         public double GetSuccessRate()
         {
-            double val = WordProgDatas.Sum(x => x.GetSuccessRate()) / WordProgDatas.Count();
+            double val = CardProgress.Sum(x => x.GetSuccessRate()) / CardProgress.Count();
             if (double.IsNaN(val))
             {
                 return 0d;
@@ -189,7 +167,7 @@ namespace SteelQuiz.QuizProgressDataNS
         /// <returns></returns>
         public double GetLearningProgress()
         {
-            double val = WordProgDatas.Sum(x => x.GetLearningProgress()) / WordProgDatas.Count();
+            double val = CardProgress.Sum(x => x.GetLearningProgress()) / CardProgress.Count();
             if (double.IsNaN(val))
             {
                 return 0d;
@@ -198,27 +176,27 @@ namespace SteelQuiz.QuizProgressDataNS
         }
 
         // due to CurrentWordPair not preserving references due to serialization, implement setter through method instead, to avoid confusion regarding references
-        public void SetCurrentQuestion(QuestionAnswerPair question)
+        public void SetCurrentQuestion(Card question)
         {
             if (question == null)
             {
-                CurrentWordPairs.Clear();
+                CurrentCards.Clear();
             }
             else
             {
-                CurrentWordPairs = question.GetRequiredSynonyms().ToList();
+                CurrentCards = question.GetRequiredSynonyms().ToList();
             }
         }
 
-        public IEnumerable<QuestionAnswerPair> WordsNotToAsk()
+        public IEnumerable<Card> WordsNotToAsk()
         {
             // find words already asked this round
-            var wordsAlreadyAsked = new List<QuestionAnswerPair>();
-            for (int i = 0; i < WordProgDatas.Count; ++i)
+            var wordsAlreadyAsked = new List<Card>();
+            for (int i = 0; i < CardProgress.Count; ++i)
             {
-                if (WordProgDatas[i].AskedThisRound || WordProgDatas[i].SkipThisRound)
+                if (CardProgress[i].AskedThisRound || CardProgress[i].SkipThisRound)
                 {
-                    wordsAlreadyAsked.Add(WordProgDatas[i].WordPair);
+                    wordsAlreadyAsked.Add(CardProgress[i].Card);
                 }
             }
 

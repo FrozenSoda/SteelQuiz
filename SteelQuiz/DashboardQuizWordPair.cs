@@ -33,10 +33,10 @@ namespace SteelQuiz
     public partial class DashboardQuizWordPair : AutoThemeableUserControl
     {
         private WelcomeTheme WelcomeTheme { get; set; } = new WelcomeTheme();
-        public QuestionAnswerPair WordPair { get; set; }
+        public Card WordPair { get; set; }
         public double SuccessRate { get; set; }
 
-        public DashboardQuizWordPair(QuestionAnswerPair wordPair)
+        public DashboardQuizWordPair(Card wordPair)
         {
             InitializeComponent();
             SetTheme(WelcomeTheme);
@@ -51,8 +51,8 @@ namespace SteelQuiz
             lbl_learningProgress_bar.Size = new Size((int)Math.Floor(Size.Width * SuccessRate), lbl_learningProgress_bar.Size.Height);
             lbl_learningProgress.Text = Math.Floor(SuccessRate * 100D).ToString() + " %";
 
-            lbl_word1.Text = WordPair.Word1;
-            lbl_word2.Text = WordPair.Word2;
+            lbl_word1.Text = WordPair.Front;
+            lbl_word2.Text = WordPair.Back;
         }
 
         public override void SetTheme(GeneralTheme theme = null)

@@ -24,18 +24,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SteelQuiz.QuizProgressDataNS
+namespace SteelQuiz.QuizProgressData
 {
     public class QuizProgressDataRoot
     {
         public string FileFormatVersion { get; set; }
         public Dictionary<Guid, QuizIdentity> QuizIdentities { get; set; } = new Dictionary<Guid, QuizIdentity>();
         public Dictionary<Guid, DateTime> QuizAccessTimes { get; set; } = new Dictionary<Guid, DateTime>();
-        public List<QuizProgressData> QuizProgressData { get; set; } = new List<QuizProgressData>();
+        public List<QuizProgress> QuizProgressData { get; set; } = new List<QuizProgress>();
 
         [JsonProperty]
         [Obsolete("Use QuizProgressData instead", true)]
-        private List<QuizProgressData> QuizProgDatas { set => QuizProgressData = value; }
+        private List<QuizProgress> QuizProgDatas { set => QuizProgressData = value; }
 
         public QuizProgressDataRoot(string fileFormatVersion)
         {

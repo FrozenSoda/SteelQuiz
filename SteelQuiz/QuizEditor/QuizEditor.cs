@@ -197,8 +197,8 @@ namespace SteelQuiz.QuizEditor
 
                 StringComp.Rules comparisonRules = wordPair.ComparisonRules.Data;
 
-                var wp = new QuestionAnswerPair(wordPair.txt_word1.Text, wordPair.txt_word2.Text, comparisonRules, wordPair.Synonyms1, wordPair.Synonyms2);
-                quiz.WordPairs.Add(wp);
+                var wp = new Card(wordPair.txt_word1.Text, wordPair.txt_word2.Text, comparisonRules, wordPair.Synonyms1, wordPair.Synonyms2);
+                quiz.Cards.Add(wp);
                 ++i;
             }
 
@@ -262,21 +262,21 @@ namespace SteelQuiz.QuizEditor
 
             UpdateUndoRedoStacks = false;
 
-            SetWordPairs(quiz.WordPairs.Count + 2);
+            SetWordPairs(quiz.Cards.Count + 2);
 
             QuizGuid = quiz.GUID;
-            cmb_lang1.Text = quiz.Language1;
-            cmb_lang2.Text = quiz.Language2;
+            cmb_lang1.Text = quiz.CardFrontType;
+            cmb_lang2.Text = quiz.CardBackType;
 
-            for (int i = 0; i < quiz.WordPairs.Count; ++i)
+            for (int i = 0; i < quiz.Cards.Count; ++i)
             {
                 var ctrl = flp_words.Controls.OfType<QuizEditorWordPair>().ElementAt(i);
-                var wp = quiz.WordPairs[i];
+                var wp = quiz.Cards[i];
 
-                ctrl.txt_word1.Text = wp.Word1;
-                ctrl.Synonyms1 = wp.Word1Synonyms;
-                ctrl.txt_word2.Text = wp.Word2;
-                ctrl.Synonyms2 = wp.Word2Synonyms;
+                ctrl.txt_word1.Text = wp.Front;
+                ctrl.Synonyms1 = wp.FrontSynonyms;
+                ctrl.txt_word2.Text = wp.Back;
+                ctrl.Synonyms2 = wp.BackSynonyms;
                 ctrl.ComparisonRules.Data = (StringComp.Rules)FixEnum(wp.TranslationRules);
             }
 

@@ -24,41 +24,43 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using SteelQuiz.QuizData;
 
-namespace SteelQuiz.QuizProgressDataNS
+namespace SteelQuiz.QuizProgressData
 {
-    public class QuestionProgressData : ICloneable
+    public class CardProgress : ICloneable
     {
-        public QuestionAnswerPair WordPair { get; set; }
+        public Card Card { get; set; }
 
         [JsonProperty]
-        internal List<AnswerAttempt> WordTries { get; set; }
+        internal List<AnswerAttempt> AnswerAttempts { get; set; } = new List<AnswerAttempt>();
 
-        public const int WORD_TRIES_FOR_LEARNING_PROGRESS_DEFAULT = 3;
+        public const int ANSWER_ATTEMPTS_FOR_LEARNING_PROGRESS_DEFAULT = 3;
 
         public bool AskedThisRound { get; set; } = false;
         public bool SkipThisRound { get; set; } = false;
 
-        public QuestionProgressData(QuestionAnswerPair wordPair)
+        #region Obsolete properties
+        [JsonProperty]
+        [Obsolete("Use Card instead", true)]
+        private Card WordPair { set => Card = value; }
+
+        [JsonProperty]
+        [Obsolete("Use AnswerAttempts instead", true)]
+        private List<AnswerAttempt> WordTries { set => AnswerAttempts = value; }
+        #endregion
+
+        public CardProgress(Card wordPair)
         {
-            WordTries = new List<AnswerAttempt>();
-            WordPair = wordPair;
+            Card = wordPair;
         }
 
-        public void AddWordTry(AnswerAttempt wordTry)
+        public void AddAnswerAttempt(AnswerAttempt answerAttempt)
         {
-            /*
-            while (WordTries.Count >= WORD_TRIES_FOR_LEARNING_PROGRESS)
-            {
-                WordTries.RemoveAt(0);
-            }
-            */
-
-            WordTries.Add(wordTry);
+            AnswerAttempts.Add(answerAttempt);
         }
 
-        public int GetWordTriesCount()
+        public int GetAnswerAttemptsCount()
         {
-            return WordTries.Count;
+            return AnswerAttempts.Count;
         }
 
         /// <summary>
@@ -67,12 +69,12 @@ namespace SteelQuiz.QuizProgressDataNS
         /// <returns>Returns the success rate between 0 and 1 for answering this word, for the amount of tries completed</returns>
         public double GetSuccessRate()
         {
-            var tries = GetWordTriesCount();
+            var tries = GetAnswerAttemptsCount();
             if (tries == 0)
             {
                 return 0;
             }
-            var successCount = WordTries.Where(x => x.Success).Count();
+            var successCount = AnswerAttempts.Where(x => x.Success).Count();
 
             return successCount / (double)tries;
         }
@@ -84,7 +86,7 @@ namespace SteelQuiz.QuizProgressDataNS
         /// <returns>Returns the learning progress</returns>
         public double GetLearningProgress()
         {
-            var latestTries = WordTries.Skip(Math.Max(0, WordTries.Count() - WORD_TRIES_FOR_LEARNING_PROGRESS_DEFAULT));
+            var latestTries = AnswerAttempts.Skip(Math.Max(0, AnswerAttempts.Count() - ANSWER_ATTEMPTS_FOR_LEARNING_PROGRESS_DEFAULT));
             var successCount = latestTries.Where(x => x.Success).Count();
 
             if (successCount == 0)
@@ -105,7 +107,7 @@ namespace SteelQuiz.QuizProgressDataNS
         /// <returns>Returns the learning progress</returns>
         public double GetLearningProgress(int triesToSave)
         {
-            var latestTries = WordTries.Skip(Math.Max(0, WordTries.Count() - triesToSave));
+            var latestTries = AnswerAttempts.Skip(Math.Max(0, AnswerAttempts.Count() - triesToSave));
             var successCount = latestTries.Where(x => x.Success).Count();
 
             if (successCount == 0)
@@ -120,8 +122,8 @@ namespace SteelQuiz.QuizProgressDataNS
 
         public object Clone()
         {
-            var cpy = new QuestionProgressData(WordPair);
-            cpy.WordTries = WordTries;
+            var cpy = new CardProgress(Card);
+            cpy.AnswerAttempts = AnswerAttempts;
             cpy.AskedThisRound = AskedThisRound;
             cpy.SkipThisRound = SkipThisRound;
 

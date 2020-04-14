@@ -286,7 +286,7 @@
     </Compile>
     <Compile Include="QuizData\Quiz.cs" />
     <Compile Include="QuizData\QuizRecoveryData.cs" />
-    <Compile Include="QuizData\QuestionAnswerPair.cs" />
+    <Compile Include="QuizData\Card.cs" />
     <Compile Include="QuizEditor\EditorNotification.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -399,9 +399,9 @@
     <Compile Include="QuizEditor\QuizRecovery.Designer.cs">
       <DependentUpon>QuizRecovery.cs</DependentUpon>
     </Compile>
-    <Compile Include="QuizProgressDataNS\QuizProgressDataRoot.cs" />
-    <Compile Include="QuizProgressDataNS\QuizProgressData.cs" />
-    <Compile Include="QuizProgressDataNS\QuestionProgressData.cs" />
+    <Compile Include="QuizProgressData\QuizProgressDataRoot.cs" />
+    <Compile Include="QuizProgressData\QuizProgress.cs" />
+    <Compile Include="QuizProgressData\CardProgress.cs" />
     <Compile Include="QuizCore.cs" />
     <Compile Include="ConfigData\Config.cs" />
     <Compile Include="QuizPractise\StringComp.cs" />
@@ -449,7 +449,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QuizProgressDataNS\AnswerAttempt.cs" />
+    <Compile Include="QuizProgressData\AnswerAttempt.cs" />
     <Compile Include="WelcomeMessage.cs" />
     <Compile Include="WelcomeMessages.cs" />
     <EmbeddedResource Include="RecentQuiz.resx">

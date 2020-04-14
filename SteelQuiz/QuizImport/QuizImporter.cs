@@ -39,7 +39,7 @@ namespace SteelQuiz.QuizImport
             NULL
         }
 
-        public static IEnumerable<QuestionAnswerPair> FromStudentlitteratur(string url, bool multipleTranslationsAsDifferentWordPairs)
+        public static IEnumerable<Card> FromStudentlitteratur(string url, bool multipleTranslationsAsDifferentWordPairs)
         {
             string quizEncoded;
             using (var wclient = new WebClient())
@@ -56,7 +56,7 @@ namespace SteelQuiz.QuizImport
                 }
             }
 
-            List<QuestionAnswerPair> wordPairs = null;
+            List<Card> wordPairs = null;
 
             if (quizEncoded.Contains("_____"))
             {
@@ -111,7 +111,7 @@ namespace SteelQuiz.QuizImport
             { ':', InString.Colon }
         };
 
-        private static IEnumerable<QuestionAnswerPair> FromStudentlitteratur_Idioms(string quizEncoded, bool multipleTranslationsAsDifferentWordPairs)
+        private static IEnumerable<Card> FromStudentlitteratur_Idioms(string quizEncoded, bool multipleTranslationsAsDifferentWordPairs)
         {
             var foundStr = "";
             var inString = InString.None;
@@ -122,7 +122,7 @@ namespace SteelQuiz.QuizImport
             var word2 = "";
             var inWord = false;
 
-            var wordPairs = new List<QuestionAnswerPair>();
+            var wordPairs = new List<Card>();
 
             for (int i = 0; i < quizEncoded.Length; ++i)
             {
@@ -208,7 +208,7 @@ namespace SteelQuiz.QuizImport
             return wordPairs;
         }
 
-        private static IEnumerable<QuestionAnswerPair> FromStudentlitteratur_VocabularyBank(string quizEncoded, bool multipleTranslationsAsDifferentWordPairs)
+        private static IEnumerable<Card> FromStudentlitteratur_VocabularyBank(string quizEncoded, bool multipleTranslationsAsDifferentWordPairs)
         {
             var foundStr = "";
             var inString = InString.None;
@@ -219,7 +219,7 @@ namespace SteelQuiz.QuizImport
             var word2 = "";
             var inWord = false;
 
-            var wordPairs = new List<QuestionAnswerPair>();
+            var wordPairs = new List<Card>();
 
             for (int i = 0; i < quizEncoded.Length; ++i)
             {
@@ -306,7 +306,7 @@ namespace SteelQuiz.QuizImport
             return wordPairs;
         }
 
-        private static IEnumerable<QuestionAnswerPair> FromStudentlitteratur_Spelling(string quizEncoded, bool multipleTranslationsAsDifferentWordPairs)
+        private static IEnumerable<Card> FromStudentlitteratur_Spelling(string quizEncoded, bool multipleTranslationsAsDifferentWordPairs)
         {
             var foundStr = "";
             var inString = false;
@@ -316,7 +316,7 @@ namespace SteelQuiz.QuizImport
             var word1 = "";
             var word2 = "";
 
-            var wordPairs = new List<QuestionAnswerPair>();
+            var wordPairs = new List<Card>();
 
             for (int i = 0; i < quizEncoded.Length; ++i)
             {
@@ -367,30 +367,30 @@ namespace SteelQuiz.QuizImport
             return wordPairs;
         }
 
-        private static void ChkAddWordPair(this IList<QuestionAnswerPair> wpList, string word1, string word2, StringComp.Rules rules, bool multipleTranslationsAsDifferentWordPairs)
+        private static void ChkAddWordPair(this IList<Card> wpList, string word1, string word2, StringComp.Rules rules, bool multipleTranslationsAsDifferentWordPairs)
         {
             foreach (var wp in wpList)
             {
-                if (word1 == wp.Word1)
+                if (word1 == wp.Front)
                 {
-                    if (word2 == wp.Word2)
+                    if (word2 == wp.Back)
                     {
                         return;
                     }
                     else if (!multipleTranslationsAsDifferentWordPairs)
                     {
-                        wp.Word2Synonyms.Add(word2);
+                        wp.BackSynonyms.Add(word2);
                         return;
                     }
                 }
-                else if (word2 == wp.Word2 && !multipleTranslationsAsDifferentWordPairs)
+                else if (word2 == wp.Back && !multipleTranslationsAsDifferentWordPairs)
                 {
-                    wp.Word1Synonyms.Add(word1);
+                    wp.FrontSynonyms.Add(word1);
                     return;
                 }
             }
 
-            var wordPair = new QuestionAnswerPair(word1, word2, rules);
+            var wordPair = new Card(word1, word2, rules);
             wpList.Add(wordPair);
         }
 

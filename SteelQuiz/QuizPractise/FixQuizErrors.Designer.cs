@@ -49,8 +49,8 @@ namespace SteelQuiz.QuizPractise
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FixQuizErrors));
             this.lbl_welcome = new System.Windows.Forms.Label();
             this.btn_editWord1 = new System.Windows.Forms.Button();
-            this.btn_editWord1synonyms = new System.Windows.Forms.Button();
-            this.btn_editWord2synonyms = new System.Windows.Forms.Button();
+            this.btn_editFrontSynonyms = new System.Windows.Forms.Button();
+            this.btn_editBackSynonyms = new System.Windows.Forms.Button();
             this.btn_editWord2 = new System.Windows.Forms.Button();
             this.lbl_word1 = new System.Windows.Forms.Label();
             this.lbl_word2 = new System.Windows.Forms.Label();
@@ -84,35 +84,35 @@ namespace SteelQuiz.QuizPractise
             this.btn_editWord1.UseVisualStyleBackColor = false;
             this.btn_editWord1.Click += new System.EventHandler(this.btn_editWord1_Click);
             // 
-            // btn_editWord1synonyms
+            // btn_editFrontSynonyms
             // 
-            this.btn_editWord1synonyms.BackColor = System.Drawing.Color.RoyalBlue;
-            this.btn_editWord1synonyms.FlatAppearance.BorderSize = 0;
-            this.btn_editWord1synonyms.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_editWord1synonyms.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_editWord1synonyms.ForeColor = System.Drawing.Color.White;
-            this.btn_editWord1synonyms.Location = new System.Drawing.Point(282, 194);
-            this.btn_editWord1synonyms.Name = "btn_editWord1synonyms";
-            this.btn_editWord1synonyms.Size = new System.Drawing.Size(237, 34);
-            this.btn_editWord1synonyms.TabIndex = 3;
-            this.btn_editWord1synonyms.Text = "I want to edit the synonyms for word 1";
-            this.btn_editWord1synonyms.UseVisualStyleBackColor = false;
-            this.btn_editWord1synonyms.Click += new System.EventHandler(this.btn_editWord1synonyms_Click);
+            this.btn_editFrontSynonyms.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btn_editFrontSynonyms.FlatAppearance.BorderSize = 0;
+            this.btn_editFrontSynonyms.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_editFrontSynonyms.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_editFrontSynonyms.ForeColor = System.Drawing.Color.White;
+            this.btn_editFrontSynonyms.Location = new System.Drawing.Point(282, 194);
+            this.btn_editFrontSynonyms.Name = "btn_editFrontSynonyms";
+            this.btn_editFrontSynonyms.Size = new System.Drawing.Size(237, 34);
+            this.btn_editFrontSynonyms.TabIndex = 3;
+            this.btn_editFrontSynonyms.Text = "I want to edit the synonyms for word 1";
+            this.btn_editFrontSynonyms.UseVisualStyleBackColor = false;
+            this.btn_editFrontSynonyms.Click += new System.EventHandler(this.btn_editFrontSynonyms_Click);
             // 
-            // btn_editWord2synonyms
+            // btn_editBackSynonyms
             // 
-            this.btn_editWord2synonyms.BackColor = System.Drawing.Color.RoyalBlue;
-            this.btn_editWord2synonyms.FlatAppearance.BorderSize = 0;
-            this.btn_editWord2synonyms.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_editWord2synonyms.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_editWord2synonyms.ForeColor = System.Drawing.Color.White;
-            this.btn_editWord2synonyms.Location = new System.Drawing.Point(282, 274);
-            this.btn_editWord2synonyms.Name = "btn_editWord2synonyms";
-            this.btn_editWord2synonyms.Size = new System.Drawing.Size(237, 34);
-            this.btn_editWord2synonyms.TabIndex = 4;
-            this.btn_editWord2synonyms.Text = "I want to edit the synonyms for word 2";
-            this.btn_editWord2synonyms.UseVisualStyleBackColor = false;
-            this.btn_editWord2synonyms.Click += new System.EventHandler(this.btn_editWord2synonyms_Click);
+            this.btn_editBackSynonyms.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btn_editBackSynonyms.FlatAppearance.BorderSize = 0;
+            this.btn_editBackSynonyms.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_editBackSynonyms.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_editBackSynonyms.ForeColor = System.Drawing.Color.White;
+            this.btn_editBackSynonyms.Location = new System.Drawing.Point(282, 274);
+            this.btn_editBackSynonyms.Name = "btn_editBackSynonyms";
+            this.btn_editBackSynonyms.Size = new System.Drawing.Size(237, 34);
+            this.btn_editBackSynonyms.TabIndex = 4;
+            this.btn_editBackSynonyms.Text = "I want to edit the synonyms for word 2";
+            this.btn_editBackSynonyms.UseVisualStyleBackColor = false;
+            this.btn_editBackSynonyms.Click += new System.EventHandler(this.btn_editBackSynonyms_Click);
             // 
             // btn_editWord2
             // 
@@ -192,8 +192,8 @@ namespace SteelQuiz.QuizPractise
             this.Controls.Add(this.lbl_word2);
             this.Controls.Add(this.lbl_word1);
             this.Controls.Add(this.btn_editWord2);
-            this.Controls.Add(this.btn_editWord2synonyms);
-            this.Controls.Add(this.btn_editWord1synonyms);
+            this.Controls.Add(this.btn_editBackSynonyms);
+            this.Controls.Add(this.btn_editFrontSynonyms);
             this.Controls.Add(this.btn_editWord1);
             this.Controls.Add(this.lbl_welcome);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -211,8 +211,8 @@ namespace SteelQuiz.QuizPractise
 
         private System.Windows.Forms.Label lbl_welcome;
         private System.Windows.Forms.Button btn_editWord1;
-        private System.Windows.Forms.Button btn_editWord1synonyms;
-        private System.Windows.Forms.Button btn_editWord2synonyms;
+        private System.Windows.Forms.Button btn_editFrontSynonyms;
+        private System.Windows.Forms.Button btn_editBackSynonyms;
         private System.Windows.Forms.Button btn_editWord2;
         private System.Windows.Forms.Label lbl_word1;
         private System.Windows.Forms.Label lbl_word2;

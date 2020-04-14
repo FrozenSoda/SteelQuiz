@@ -42,20 +42,20 @@ namespace SteelQuiz.QuizPractise
         private object[] initialListBoxCollection;
         private bool closeWarning = true;
 
-        public EditWordSynonyms(QuestionAnswerPair wordPair, int language)
+        public EditWordSynonyms(Card wordPair, int language)
         {
             InitializeComponent();
             Language = language;
             if (Language == 1)
             {
-                lbl_synForWord.Text = $"Synonyms for word: {wordPair.Word1}";
+                lbl_synForWord.Text = $"Synonyms for word: {wordPair.Front}";
             }
             else
             {
-                lbl_synForWord.Text = $"Synonyms for word: {wordPair.Word2}";
+                lbl_synForWord.Text = $"Synonyms for word: {wordPair.Back}";
             }
 
-            var currentSynonyms = language == 1 ? wordPair.Word1Synonyms : wordPair.Word2Synonyms;
+            var currentSynonyms = language == 1 ? wordPair.FrontSynonyms : wordPair.BackSynonyms;
             if (currentSynonyms != null)
             {
                 foreach (var synonym in currentSynonyms)

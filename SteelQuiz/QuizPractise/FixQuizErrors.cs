@@ -31,10 +31,10 @@ namespace SteelQuiz.QuizPractise
 {
     public partial class FixQuizErrors : AutoThemeableForm
     {
-        public QuestionAnswerPair WordPair { get; set; }
+        public Card WordPair { get; set; }
         private new InQuiz Parent { get; set; }
 
-        public FixQuizErrors(InQuiz parent, QuestionAnswerPair wordPair)
+        public FixQuizErrors(InQuiz parent, Card wordPair)
         {
             InitializeComponent();
             WordPair = wordPair;
@@ -47,8 +47,8 @@ namespace SteelQuiz.QuizPractise
 
         private void UpdateWordLabels()
         {
-            lbl_word1.Text = $"Word 1:    {WordPair.Word1}";
-            lbl_word2.Text = $"Word 2:    {WordPair.Word2}";
+            lbl_word1.Text = $"Word 1:    {WordPair.Front}";
+            lbl_word2.Text = $"Word 2:    {WordPair.Back}";
         }
 
         private void btn_close_Click(object sender, EventArgs e)
@@ -58,10 +58,10 @@ namespace SteelQuiz.QuizPractise
 
         private void btn_editWord1_Click(object sender, EventArgs e)
         {
-            var editWord = new EditWord(WordPair.Word1);
+            var editWord = new EditWord(WordPair.Front);
             if (editWord.ShowDialog() == DialogResult.OK)
             {
-                WordPair.Word1 = editWord.Word;
+                WordPair.Front = editWord.Word;
                 QuizCore.SaveQuiz();
                 UpdateWordLabels();
             }
@@ -69,31 +69,31 @@ namespace SteelQuiz.QuizPractise
 
         private void btn_editWord2_Click(object sender, EventArgs e)
         {
-            var editWord = new EditWord(WordPair.Word2);
+            var editWord = new EditWord(WordPair.Back);
             if (editWord.ShowDialog() == DialogResult.OK)
             {
-                WordPair.Word2 = editWord.Word;
+                WordPair.Back = editWord.Word;
                 QuizCore.SaveQuiz();
                 UpdateWordLabels();
             }
         }
 
-        private void btn_editWord1synonyms_Click(object sender, EventArgs e)
+        private void btn_editFrontSynonyms_Click(object sender, EventArgs e)
         {
             var editWordSynonyms = new EditWordSynonyms(WordPair, 1);
             if (editWordSynonyms.ShowDialog() == DialogResult.OK)
             {
-                WordPair.Word1Synonyms = editWordSynonyms.Synonyms;
+                WordPair.FrontSynonyms = editWordSynonyms.Synonyms;
                 QuizCore.SaveQuiz();
             }
         }
 
-        private void btn_editWord2synonyms_Click(object sender, EventArgs e)
+        private void btn_editBackSynonyms_Click(object sender, EventArgs e)
         {
             var editWordSynonyms = new EditWordSynonyms(WordPair, 2);
             if (editWordSynonyms.ShowDialog() == DialogResult.OK)
             {
-                WordPair.Word2Synonyms = editWordSynonyms.Synonyms;
+                WordPair.BackSynonyms = editWordSynonyms.Synonyms;
                 QuizCore.SaveQuiz();
             }
         }

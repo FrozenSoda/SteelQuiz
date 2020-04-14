@@ -25,7 +25,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SteelQuiz.QuizData;
 using SteelQuiz.QuizPractise;
-using SteelQuiz.QuizProgressDataNS;
+using SteelQuiz.QuizProgressData;
 
 namespace SteelQuiz.Tests
 {
@@ -37,30 +37,30 @@ namespace SteelQuiz.Tests
         {
             var progRoot1 = new QuizProgressDataRoot(MetaData.QUIZ_FILE_FORMAT_VERSION);
 
-            var quizProg1 = new QuizProgressData(new QuizData.Quiz("lang1", "lang2", MetaData.QUIZ_FILE_FORMAT_VERSION, Guid.Empty));
-            var wp1 = new QuestionAnswerPair("What's 1 + 1?", "2", StringComp.Rules.None, null, new List<string>() { "two" });
-            var wpProg1 = new QuestionProgressData(wp1);
-            wpProg1.AddWordTry(new AnswerAttempt(true));
-            wpProg1.AddWordTry(new AnswerAttempt(true));
-            wpProg1.AddWordTry(new AnswerAttempt(true));
-            wpProg1.AddWordTry(new AnswerAttempt(true));
-            wpProg1.AddWordTry(new AnswerAttempt(true));
+            var quizProg1 = new QuizProgress(new QuizData.Quiz("lang1", "lang2", MetaData.QUIZ_FILE_FORMAT_VERSION, Guid.Empty));
+            var wp1 = new Card("What's 1 + 1?", "2", StringComp.Rules.None, null, new List<string>() { "two" });
+            var wpProg1 = new CardProgress(wp1);
+            wpProg1.AddAnswerAttempt(new AnswerAttempt(true));
+            wpProg1.AddAnswerAttempt(new AnswerAttempt(true));
+            wpProg1.AddAnswerAttempt(new AnswerAttempt(true));
+            wpProg1.AddAnswerAttempt(new AnswerAttempt(true));
+            wpProg1.AddAnswerAttempt(new AnswerAttempt(true));
 
-            quizProg1.QuestionProgressData.Add(wpProg1);
+            quizProg1.CardProgress.Add(wpProg1);
             progRoot1.QuizProgressData.Add(quizProg1);
 
             var progRoot2 = new QuizProgressDataRoot(MetaData.QUIZ_FILE_FORMAT_VERSION);
 
-            var quizProg2 = new QuizProgressData(new QuizData.Quiz("lang1", "lang2", MetaData.QUIZ_FILE_FORMAT_VERSION, Guid.Empty));
-            var wp2 = new QuestionAnswerPair("What's 1 + 1?", "2", StringComp.Rules.None, null, new List<string>() { "two" });
-            var wpProg2 = new QuestionProgressData(wp2);
-            wpProg2.AddWordTry(new AnswerAttempt(true));
-            wpProg2.AddWordTry(new AnswerAttempt(false));
-            wpProg2.AddWordTry(new AnswerAttempt(true));
-            wpProg2.AddWordTry(new AnswerAttempt(true));
-            wpProg2.AddWordTry(new AnswerAttempt(true));
+            var quizProg2 = new QuizProgress(new QuizData.Quiz("lang1", "lang2", MetaData.QUIZ_FILE_FORMAT_VERSION, Guid.Empty));
+            var wp2 = new Card("What's 1 + 1?", "2", StringComp.Rules.None, null, new List<string>() { "two" });
+            var wpProg2 = new CardProgress(wp2);
+            wpProg2.AddAnswerAttempt(new AnswerAttempt(true));
+            wpProg2.AddAnswerAttempt(new AnswerAttempt(false));
+            wpProg2.AddAnswerAttempt(new AnswerAttempt(true));
+            wpProg2.AddAnswerAttempt(new AnswerAttempt(true));
+            wpProg2.AddAnswerAttempt(new AnswerAttempt(true));
 
-            quizProg2.QuestionProgressData.Add(wpProg2);
+            quizProg2.CardProgress.Add(wpProg2);
             progRoot2.QuizProgressData.Add(quizProg2);
 
             var merged = QuizProgressMerger.Merge(progRoot1, progRoot2);
@@ -73,7 +73,7 @@ namespace SteelQuiz.Tests
             /*
              * The quiz progress data with the best success rate should be selected
              */ 
-            Assert.IsTrue(merged.QuizProgressData[0].QuestionProgressData[0].GetLearningProgress() == 1, "The best quiz progress data was not selected");
+            Assert.IsTrue(merged.QuizProgressData[0].CardProgress[0].GetLearningProgress() == 1, "The best quiz progress data was not selected");
         }
 
         [TestMethod()]
@@ -81,30 +81,30 @@ namespace SteelQuiz.Tests
         {
             var progRoot1 = new QuizProgressDataRoot(MetaData.QUIZ_FILE_FORMAT_VERSION);
 
-            var quizProg1 = new QuizProgressData(new QuizData.Quiz("lang1", "lang2", MetaData.QUIZ_FILE_FORMAT_VERSION, Guid.Empty));
-            var wp1 = new QuestionAnswerPair("What's 2 + 2?", "4", StringComp.Rules.None, null, new List<string>() { "two" });
-            var wpProg1 = new QuestionProgressData(wp1);
-            wpProg1.AddWordTry(new AnswerAttempt(true));
-            wpProg1.AddWordTry(new AnswerAttempt(true));
-            wpProg1.AddWordTry(new AnswerAttempt(true));
-            wpProg1.AddWordTry(new AnswerAttempt(true));
-            wpProg1.AddWordTry(new AnswerAttempt(true));
+            var quizProg1 = new QuizProgress(new QuizData.Quiz("lang1", "lang2", MetaData.QUIZ_FILE_FORMAT_VERSION, Guid.Empty));
+            var wp1 = new Card("What's 2 + 2?", "4", StringComp.Rules.None, null, new List<string>() { "two" });
+            var wpProg1 = new CardProgress(wp1);
+            wpProg1.AddAnswerAttempt(new AnswerAttempt(true));
+            wpProg1.AddAnswerAttempt(new AnswerAttempt(true));
+            wpProg1.AddAnswerAttempt(new AnswerAttempt(true));
+            wpProg1.AddAnswerAttempt(new AnswerAttempt(true));
+            wpProg1.AddAnswerAttempt(new AnswerAttempt(true));
 
-            quizProg1.QuestionProgressData.Add(wpProg1);
+            quizProg1.CardProgress.Add(wpProg1);
             progRoot1.QuizProgressData.Add(quizProg1);
 
             var progRoot2 = new QuizProgressDataRoot(MetaData.QUIZ_FILE_FORMAT_VERSION);
 
-            var quizProg2 = new QuizProgressData(new QuizData.Quiz("lang1", "lang2", MetaData.QUIZ_FILE_FORMAT_VERSION, Guid.Empty));
-            var wp2 = new QuestionAnswerPair("What's 1 + 1?", "2", StringComp.Rules.None, null, new List<string>() { "two" });
-            var wpProg2 = new QuestionProgressData(wp2);
-            wpProg2.AddWordTry(new AnswerAttempt(true));
-            wpProg2.AddWordTry(new AnswerAttempt(true));
-            wpProg2.AddWordTry(new AnswerAttempt(true));
-            wpProg2.AddWordTry(new AnswerAttempt(true));
-            wpProg2.AddWordTry(new AnswerAttempt(true));
+            var quizProg2 = new QuizProgress(new QuizData.Quiz("lang1", "lang2", MetaData.QUIZ_FILE_FORMAT_VERSION, Guid.Empty));
+            var wp2 = new Card("What's 1 + 1?", "2", StringComp.Rules.None, null, new List<string>() { "two" });
+            var wpProg2 = new CardProgress(wp2);
+            wpProg2.AddAnswerAttempt(new AnswerAttempt(true));
+            wpProg2.AddAnswerAttempt(new AnswerAttempt(true));
+            wpProg2.AddAnswerAttempt(new AnswerAttempt(true));
+            wpProg2.AddAnswerAttempt(new AnswerAttempt(true));
+            wpProg2.AddAnswerAttempt(new AnswerAttempt(true));
 
-            quizProg2.QuestionProgressData.Add(wpProg2);
+            quizProg2.CardProgress.Add(wpProg2);
             progRoot2.QuizProgressData.Add(quizProg2);
 
             var merged = QuizProgressMerger.Merge(progRoot1, progRoot2);
@@ -117,7 +117,7 @@ namespace SteelQuiz.Tests
             /*
              * The first quiz progress data should be selected when the progress is equal, as it has priority
              */
-            Assert.IsTrue(merged.QuizProgressData[0].WordProgDatas[0].WordPair.Word1 == "What's 2 + 2?", "The first quiz progress data did not have priority");
+            Assert.IsTrue(merged.QuizProgressData[0].CardProgress[0].Card.Front == "What's 2 + 2?", "The first quiz progress data did not have priority");
         }
     }
 }

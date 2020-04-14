@@ -24,7 +24,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SteelQuiz.QuizData;
-using SteelQuiz.QuizProgressDataNS;
+using SteelQuiz.QuizProgressData;
 using SteelQuiz.Util;
 
 namespace SteelQuiz.QuizPractise
@@ -61,11 +61,11 @@ namespace SteelQuiz.QuizPractise
         /// Generates a question/word to be asked, while taking current word and Intelligent Learning settings into account
         /// </summary>
         /// <returns>Returns a question/word to be asked</returns>
-        public static QuestionAnswerPair GenerateWordPair(Quiz quiz)
+        public static Card GenerateWordPair(Quiz quiz)
         {
-            if (quiz.ProgressData.CurrentWordPairs != null && quiz.ProgressData.CurrentWordPairs.Count > 0)
+            if (quiz.ProgressData.CurrentCards != null && quiz.ProgressData.CurrentCards.Count > 0)
             {
-                return quiz.ProgressData.CurrentWordPairs[0];
+                return quiz.ProgressData.CurrentCards[0];
             }
 
             if (quiz.ProgressData.FullTestInProgress)
@@ -78,7 +78,7 @@ namespace SteelQuiz.QuizPractise
             }
         }
 
-        private static double GetLearningProgress(Quiz quiz, QuestionProgressData questionProgressData)
+        private static double GetLearningProgress(Quiz quiz, CardProgress questionProgressData)
         {
             if (quiz.ProgressData.IntelligentLearningLastAnswersBasisCount == 0)
             {
@@ -94,11 +94,11 @@ namespace SteelQuiz.QuizPractise
         /// Generates a question/word to be asked, without taking Intelligent Learning progress into account, that is, pure random (excluding already asked words)
         /// </summary>
         /// <returns></returns>
-        private static QuestionAnswerPair GenerateWordPair_NoIntelligentLearning(Quiz quiz)
+        private static Card GenerateWordPair_NoIntelligentLearning(Quiz quiz)
         {
             var wordsNotToAsk = quiz.ProgressData.WordsNotToAsk();
 
-            if (wordsNotToAsk.Count() == quiz.WordPairs.Count)
+            if (wordsNotToAsk.Count() == quiz.Cards.Count)
             {
                 //NewRound();
                 return null;
@@ -106,11 +106,11 @@ namespace SteelQuiz.QuizPractise
 
             var wordsNotToAsk_Indexes = new List<int>();
 
-            for (int i = 0; i < quiz.WordPairs.Count; ++i)
+            for (int i = 0; i < quiz.Cards.Count; ++i)
             {
                 for (int j = 0; j < wordsNotToAsk.Count(); ++j)
                 {
-                    if (quiz.WordPairs[i].Equals(wordsNotToAsk.ElementAt(j)))
+                    if (quiz.Cards[i].Equals(wordsNotToAsk.ElementAt(j)))
                     {
                         wordsNotToAsk_Indexes.Add(i);
                     }
@@ -120,13 +120,13 @@ namespace SteelQuiz.QuizPractise
             int index;
             if (quiz.ProgressData.AskQuestionsInRandomOrder)
             {
-                index = new Random().RandomNext(0, quiz.WordPairs.Count, wordsNotToAsk_Indexes.ToArray());
+                index = new Random().RandomNext(0, quiz.Cards.Count, wordsNotToAsk_Indexes.ToArray());
             }
             else
             {
                 index = Enumerable.Range(0, int.MaxValue).Except(wordsNotToAsk_Indexes).FirstOrDefault();
             }
-            var wordPair = quiz.WordPairs[index];
+            var wordPair = quiz.Cards[index];
             quiz.ProgressData.SetCurrentQuestion(wordPair);
             QuizCore.SaveQuizProgress(quiz);
             return wordPair;
@@ -136,11 +136,11 @@ namespace SteelQuiz.QuizPractise
         /// Generates a question/word to be asked, while taking Intelligent Learning progress into account
         /// </summary>
         /// <returns></returns>
-        private static QuestionAnswerPair GenerateWordPair_IntelligentLearning(Quiz quiz)
+        private static Card GenerateWordPair_IntelligentLearning(Quiz quiz)
         {
             var alreadyAsked = quiz.ProgressData.WordsNotToAsk();
 
-            if (alreadyAsked.Count() == quiz.WordPairs.Count)
+            if (alreadyAsked.Count() == quiz.Cards.Count)
             {
                 return null;
             }
@@ -159,23 +159,23 @@ namespace SteelQuiz.QuizPractise
             }
 
             // universal probability
-            //double u = QuizCore.QuizProgress.WordProgDatas.Where(x => !alreadyAsked.Contains(x.WordPair)).Sum(p => askProb(p.GetSuccessRate()));
-            double u = quiz.ProgressData.QuestionProgressData.Where(x => !alreadyAsked.Contains(x.WordPair)).Sum(p => askProb(GetLearningProgress(quiz, p)));
+            //double u = QuizCore.QuizProgress.CardProgress.Where(x => !alreadyAsked.Contains(x.WordPair)).Sum(p => askProb(p.GetSuccessRate()));
+            double u = quiz.ProgressData.CardProgress.Where(x => !alreadyAsked.Contains(x.Card)).Sum(p => askProb(GetLearningProgress(quiz, p)));
 
             // random number between 0 and u
             double r = new Random().NextDouble() * u;
 
             double sum = 0;
-            foreach (var wordPairData in quiz.ProgressData.QuestionProgressData.Where(x => !alreadyAsked.Contains(x.WordPair)))
+            foreach (var wordPairData in quiz.ProgressData.CardProgress.Where(x => !alreadyAsked.Contains(x.Card)))
             {
                 //var askPrb = askProb(wordPairData.GetSuccessRate());
                 var askPrb = askProb(GetLearningProgress(quiz, wordPairData));
                 sum += askPrb;
                 if (r <= sum)
                 {
-                    quiz.ProgressData.SetCurrentQuestion(wordPairData.WordPair);
+                    quiz.ProgressData.SetCurrentQuestion(wordPairData.Card);
                     QuizCore.SaveQuizProgress(quiz);
-                    return wordPairData.WordPair;
+                    return wordPairData.Card;
                 }
             }
 
@@ -188,7 +188,7 @@ namespace SteelQuiz.QuizPractise
         /// </summary>
         public static void NewRound(Quiz quiz)
         {
-            quiz.ProgressData.CurrentWordPairs?.Clear();
+            quiz.ProgressData.CurrentCards?.Clear();
 
             //const int MINIMUM_TRIES_COUNT_TO_CONSIDER_SKIPPING = 2;
 
@@ -213,7 +213,7 @@ namespace SteelQuiz.QuizPractise
 
             quiz.ProgressData.CorrectAnswersThisRound = 0;
 
-            foreach (var wordPairData in quiz.ProgressData.QuestionProgressData)
+            foreach (var wordPairData in quiz.ProgressData.CardProgress)
             {
                 wordPairData.AskedThisRound = false;
                 wordPairData.SkipThisRound = false;
@@ -223,15 +223,15 @@ namespace SteelQuiz.QuizPractise
             var skipCount = 0;
 
             // prevent the MINIMUM_QUESTIONS_PER_ROUND number of questions with worst success rate, from being skipped
-            foreach (var wordPairData in quiz.ProgressData.QuestionProgressData.OrderBy(x => GetLearningProgress(quiz, x)).Skip(MINIMUM_QUESTIONS_PER_ROUND))
+            foreach (var wordPairData in quiz.ProgressData.CardProgress.OrderBy(x => GetLearningProgress(quiz, x)).Skip(MINIMUM_QUESTIONS_PER_ROUND))
             {
                 // Eventually skip asking the word
 
                 //var dontAskAgainPrb = dontAskProb(wordPairData.GetSuccessRate(), wordPairData.GetWordTriesCount());
-                var dontAskAgainPrb = dontAskProb(GetLearningProgress(quiz, wordPairData), wordPairData.GetWordTriesCount());
+                var dontAskAgainPrb = dontAskProb(GetLearningProgress(quiz, wordPairData), wordPairData.GetAnswerAttemptsCount());
 
                 if (!quiz.ProgressData.FullTestInProgress
-                    && wordPairData.GetWordTriesCount() >= quiz.ProgressData.MinimumTriesCountToConsiderSkippingQuestion
+                    && wordPairData.GetAnswerAttemptsCount() >= quiz.ProgressData.MinimumTriesCountToConsiderSkippingQuestion
                     && rnd.NextBool(dontAskAgainPrb))
                 {
                     wordPairData.SkipThisRound = true;
@@ -245,7 +245,7 @@ namespace SteelQuiz.QuizPractise
             }
             else
             {
-                quiz.ProgressData.QuestionProgressData = quiz.ProgressData.QuestionProgressData.OrderBy(x => quiz.WordPairs.IndexOf(x.WordPair)).ToList();
+                quiz.ProgressData.CardProgress = quiz.ProgressData.CardProgress.OrderBy(x => quiz.Cards.IndexOf(x.Card)).ToList();
             }
 
             QuizCore.SaveQuizProgress(quiz);

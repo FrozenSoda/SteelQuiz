@@ -37,12 +37,12 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
 
         public string Language2 => txt_lang.Text;
 
-        public Step5(IEnumerable<QuestionAnswerPair> wordPairs)
+        public Step5(IEnumerable<Card> wordPairs)
         {
             InitializeComponent();
             foreach (var wordPair in wordPairs)
             {
-                lst_words.Items.Add(wordPair.Word2);
+                lst_words.Items.Add(wordPair.Back);
             }
 
             SetTheme();

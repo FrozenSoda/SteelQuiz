@@ -52,7 +52,7 @@ namespace SteelQuiz.QuizImport.Guide
 
         private ImportSource ImportSource { get; set; }
         private bool MultipleTranslationsAsDifferentWordPairs { get; set; }
-        private IEnumerable<QuestionAnswerPair> WordPairs { get; set; } = null;
+        private IEnumerable<Card> WordPairs { get; set; } = null;
         public string QuizPath { get; set; }
         private string Language1 { get; set; }
         private string Language2 { get; set; }
@@ -107,7 +107,7 @@ namespace SteelQuiz.QuizImport.Guide
                     string wordDelimeter = Regex.Unescape(uc.txt_chBetweenWords.Text);
                     string lineDelimeter = Regex.Unescape(uc.txt_chBetweenLines.Text);
 
-                    var wordPairs = new List<QuestionAnswerPair>();
+                    var wordPairs = new List<Card>();
 
                     try
                     {
@@ -115,20 +115,20 @@ namespace SteelQuiz.QuizImport.Guide
                         {
                             string[] words = line.Split(new string[] { wordDelimeter }, StringSplitOptions.None);
 
-                            var w1wordPair = wordPairs.Where(x => x.Word1 == words[0]).FirstOrDefault();
-                            var w2wordPair = wordPairs.Where(x => x.Word2 == words[1]).FirstOrDefault();
+                            var w1wordPair = wordPairs.Where(x => x.Front == words[0]).FirstOrDefault();
+                            var w2wordPair = wordPairs.Where(x => x.Back == words[1]).FirstOrDefault();
 
                             if (!MultipleTranslationsAsDifferentWordPairs && w1wordPair != null)
                             {
-                                w1wordPair.Word2Synonyms.Add(words[1]);
+                                w1wordPair.BackSynonyms.Add(words[1]);
                             }
                             else if (!MultipleTranslationsAsDifferentWordPairs && w2wordPair != null)
                             {
-                                w2wordPair.Word1Synonyms.Add(words[0]);
+                                w2wordPair.FrontSynonyms.Add(words[0]);
                             }
                             else
                             {
-                                var wordPair = new QuestionAnswerPair(words[0], words[1], StringComp.SMART_RULES);
+                                var wordPair = new Card(words[0], words[1], StringComp.SMART_RULES);
                                 wordPairs.Add(wordPair);
                             }
                         }
@@ -151,7 +151,7 @@ namespace SteelQuiz.QuizImport.Guide
                 {
                     var uc = GetStep(Step, ImportSource) as Studentlitteratur.Step3;
                     string url = uc.txt_url.Text;
-                    IEnumerable<QuestionAnswerPair> wordPairs;
+                    IEnumerable<Card> wordPairs;
                     if (ImportSource == ImportSource.Studentlitteratur)
                     {
                         wordPairs = FromStudentlitteratur(url, MultipleTranslationsAsDifferentWordPairs);
@@ -262,7 +262,7 @@ namespace SteelQuiz.QuizImport.Guide
             QuizPath = sfd_quiz.FileName;
 
             var quiz = new Quiz(Language1, Language2, MetaData.QUIZ_FILE_FORMAT_VERSION);
-            quiz.WordPairs = WordPairs.ToList();
+            quiz.Cards = WordPairs.ToList();
             bool loadSuccess = QuizCore.Load(quiz, QuizPath);
             if (loadSuccess)
             {

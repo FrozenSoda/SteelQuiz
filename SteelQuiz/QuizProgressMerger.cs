@@ -24,7 +24,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
-using SteelQuiz.QuizProgressDataNS;
+using SteelQuiz.QuizProgressData;
 
 namespace SteelQuiz
 {
@@ -81,7 +81,7 @@ namespace SteelQuiz
             result.QuizAccessTimes = prog1.QuizAccessTimes;
             result.QuizIdentities = prog1.QuizIdentities;
 
-            var unfixedQuizProgDataList = new List<QuizProgressData>();
+            var unfixedQuizProgDataList = new List<QuizProgress>();
 
             foreach (var q in prog1.QuizProgressData)
             {
