@@ -380,7 +380,7 @@ namespace SteelQuiz.QuizPractise
                 }
             }
 
-            if ((GameMode == QuizPractiseMode.Flashcards && flashcardsCorrect) || (GameMode == QuizPractiseMode.Writing && ansDiff.Correct()))
+            if ((GameMode == QuizPractiseMode.Flashcards && flashcardsCorrect) || (GameMode == QuizPractiseMode.Writing && ansDiff.IsCorrect()))
             {
                 foreach (var c in lbl_cardSideToAsk.Controls.OfType<WrongAnswer>())
                 {

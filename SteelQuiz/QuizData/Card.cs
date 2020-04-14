@@ -49,7 +49,9 @@ namespace SteelQuiz.QuizData
         /// The synonym(s) to Back
         /// </summary>
         public List<string> BackSynonyms { get; set; } = new List<string>();
-
+        /// <summary>
+        /// The Smart Comparison rules to use when comparing answers to this Card.
+        /// </summary>
         public StringComp.Rules SmartComparisonRules { get; set; }
 
         #region Obsolete properties
@@ -74,10 +76,18 @@ namespace SteelQuiz.QuizData
         private StringComp.Rules TranslationRules { set => SmartComparisonRules = value; }
         #endregion
 
-        public Card(string word1, string word2, StringComp.Rules smartComparisonRules, List<string> frontSynonyms = null, List<string> backSynonyms = null)
+        /// <summary>
+        /// Creates a new card, that is, a question and answer pair, with the specified content and Smart Comparison rules.
+        /// </summary>
+        /// <param name="frontContent">The text on the front of the Card.</param>
+        /// <param name="backContent">The text on the back of the Card.</param>
+        /// <param name="smartComparisonRules">The Smart Comparison rules to use when comparing answers to this Card.</param>
+        /// <param name="frontSynonyms">Eventual synonyms to frontContent</param>
+        /// <param name="backSynonyms">Eventual synonyms to backContent</param>
+        public Card(string frontContent, string backContent, StringComp.Rules smartComparisonRules, List<string> frontSynonyms = null, List<string> backSynonyms = null)
         {
-            Front = word1;
-            Back = word2;
+            Front = frontContent;
+            Back = backContent;
             SmartComparisonRules = smartComparisonRules;
 
             if (FrontSynonyms != null)
@@ -115,19 +125,19 @@ namespace SteelQuiz.QuizData
             return Equals(obj as Card, true, true);
         }
 
-        public bool Equals(Card wp2, bool ignoreSynonyms, bool ignoreTranslationRules)
+        public bool Equals(Card card2, bool ignoreSynonyms, bool ignoreTranslationRules)
         {
-            if (wp2 == null)
+            if (card2 == null)
             {
                 return false;
             }
 
             return
-                this.Front == ((Card)wp2).Front &&
-                (ignoreSynonyms || this.FrontSynonyms.SequenceEqual(((Card)wp2).FrontSynonyms)) &&
-                this.Back == ((Card)wp2).Back &&
-                (ignoreSynonyms || this.BackSynonyms.SequenceEqual(((Card)wp2).BackSynonyms)) &&
-                (ignoreTranslationRules || this.SmartComparisonRules == ((Card)wp2).SmartComparisonRules);
+                this.Front == ((Card)card2).Front &&
+                (ignoreSynonyms || this.FrontSynonyms.SequenceEqual(((Card)card2).FrontSynonyms)) &&
+                this.Back == ((Card)card2).Back &&
+                (ignoreSynonyms || this.BackSynonyms.SequenceEqual(((Card)card2).BackSynonyms)) &&
+                (ignoreTranslationRules || this.SmartComparisonRules == ((Card)card2).SmartComparisonRules);
         }
 
         public override int GetHashCode()
@@ -195,7 +205,7 @@ namespace SteelQuiz.QuizData
                 Card = card;
             }
 
-            public bool Correct()
+            public bool IsCorrect()
             {
                 return Difference == 0;
             }
@@ -223,10 +233,10 @@ namespace SteelQuiz.QuizData
 
             if (updateProgress)
             {
-                ansDiff.Card.GetProgressData(quiz).AddAnswerAttempt(new AnswerAttempt(ansDiff.Correct()));
+                ansDiff.Card.GetProgressData(quiz).AddAnswerAttempt(new AnswerAttempt(ansDiff.IsCorrect()));
             }
 
-            if (ansDiff.Correct())
+            if (ansDiff.IsCorrect())
             {
                 ansDiff.Card.GetProgressData(quiz).AskedThisRound = true;
 
