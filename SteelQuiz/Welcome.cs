@@ -75,7 +75,7 @@ namespace SteelQuiz
         private readonly Point btn_chkUpdates_originalLoc;
         private readonly Point btn_about_originalLoc;
 
-        private Quiz LoadedQuiz { get; set; }
+        public Quiz LoadedQuiz { get; set; }
 
         public Dashboard()
         {

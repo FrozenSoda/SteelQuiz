@@ -97,7 +97,20 @@ namespace SteelQuiz
 
         private void Lbl_name_Click(object sender, EventArgs e)
         {
-            (ParentForm as Dashboard).SwitchQuizProgressInfo(QuizIdentity);
+            var quizPath = QuizIdentity.FindQuizPath();
+            if (quizPath == null)
+            {
+                return;
+            }
+
+            var quiz = QuizCore.LoadQuiz(quizPath);
+            if (quiz == null)
+            {
+                return;
+            }
+
+            (ParentForm as Dashboard).LoadedQuiz = quiz;
+            (ParentForm as Dashboard).UpdateQuizOverview();
         }
 
         private void RemoveFromListToolStripMenuItem_Click(object sender, EventArgs e)
@@ -120,34 +133,42 @@ namespace SteelQuiz
                 return;
             }
 
-            if (!QuizCore.Load(quizPath))
+            var quiz = QuizCore.LoadQuiz(quizPath);
+            if (quiz == null)
             {
                 return;
             }
 
             // Ensure we are not resetting the wrong progress data
-            SAssert.Assert(QuizCore.QuizProgress.QuizGUID == QuizIdentity.QuizGuid);
-            SAssert.Assert(QuizCore.Quiz.GUID == QuizIdentity.QuizGuid);
+            SAssert.Assert(quiz.ProgressData.QuizGUID == QuizIdentity.QuizGuid);
+            SAssert.Assert(quiz.GUID == QuizIdentity.QuizGuid);
 
-            QuizCore.QuizProgress = new QuizProgressData.QuizProgressData(QuizCore.Quiz);
-            QuizCore.SaveQuizProgress();
+            quiz.ProgressData = new QuizProgress(quiz);
+            QuizCore.SaveQuizProgress(quiz);
 
             var quizProgressInfo = Program.frmWelcome.FindQuizProgressInfo(QuizIdentity.QuizGuid);
             quizProgressInfo?.LoadLearningProgressPercentage();
-            quizProgressInfo?.LoadWordPairs();
+            quizProgressInfo?.LoadCards();
 
-            (ParentForm as Dashboard).SwitchQuizProgressInfo(QuizIdentity);
+            (ParentForm as Dashboard).LoadedQuiz = quiz;
+            (ParentForm as Dashboard).UpdateQuizOverview();
         }
 
         private void exportQuizToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // SwitchQuizProgressInfo() also loads the quiz with QuizCore
-            if (!(ParentForm as Dashboard).SwitchQuizProgressInfo(QuizIdentity))
+            var quizPath = QuizIdentity.FindQuizPath();
+            if (quizPath == null)
             {
                 return;
             }
 
-            var quizExport = new QuizExport(QuizCore.Quiz);
+            var quiz = QuizCore.LoadQuiz(quizPath);
+            if (quiz == null)
+            {
+                return;
+            }
+
+            var quizExport = new QuizExport(quiz);
             quizExport.ShowDialog();
         }
     }
