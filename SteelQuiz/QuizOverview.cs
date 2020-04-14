@@ -37,7 +37,7 @@ namespace SteelQuiz
     public partial class QuizOverview : AutoThemeableUserControl
     {
         private WelcomeTheme WelcomeTheme { get; set; } = new WelcomeTheme();
-        public QuizIdentity QuizIdentity { get; private set; }
+        public Quiz Quiz { get; set; }
 
         private bool __practiseQuizButtonsExpanded = false;
         private bool PractiseQuizButtonsExpanded
@@ -92,17 +92,17 @@ namespace SteelQuiz
             }
         }
 
-        public QuizOverview(QuizIdentity quizIdentity)
+        public QuizOverview(Quiz quiz)
         {
             InitializeComponent();
 
-            QuizIdentity = quizIdentity;
-            lbl_quizNameHere.Text = Path.GetFileNameWithoutExtension(QuizIdentity.FindQuizPath());
+            Quiz = quiz;
+            lbl_quizNameHere.Text = Path.GetFileNameWithoutExtension(Quiz.QuizIdentity.FindQuizPath());
 
             SetTheme(WelcomeTheme);
             LoadLearningProgressPercentage();
 
-            switch (QuizCore.QuizProgress.TermsDisplayOrder)
+            switch (Quiz.ProgressData.CardsDisplayOrder)
             {
                 case CardsOrderBy.SuccessRate:
                     cmb_order.SelectedItem = "Success Rate";
@@ -121,7 +121,7 @@ namespace SteelQuiz
                     break;
             }
 
-            switch (QuizCore.QuizProgress.TermsDisplayOrderOrder)
+            switch (Quiz.ProgressData.TermsDisplayOrderOrder)
             {
                 case CardsOrderByOrder.Ascending:
                     cmb_orderAscendingDescending.SelectedItem = "Ascending";
@@ -142,18 +142,8 @@ namespace SteelQuiz
 
         public void LoadLearningProgressPercentage()
         {
-            /*
-            if (!QuizCore.Load(QuizIdentity.QuizGuid))
-            {
-                return;
-            }
-            */
-
-            //lbl_learningProgressPercentage.Text = Math.Round(QuizCore.QuizProgress.GetSuccessRate() * 100D, 1).ToString() + " %";
-            //cpb_learningProgress.Value = (int)Math.Floor(QuizCore.QuizProgress.GetSuccessRateStrict() * 100D);
-            //cpb_learningProgress.Text = cpb_learningProgress.Value.ToString() + " %";
-            lbl_learningProgress_bar.Size = new Size((int)Math.Floor(Size.Width * QuizCore.QuizProgress.GetLearningProgress()), lbl_learningProgress_bar.Size.Height);
-            lbl_learningProgress.Text = Math.Floor(QuizCore.QuizProgress.GetLearningProgress() * 100D).ToString() + " %";
+            lbl_learningProgress_bar.Size = new Size((int)Math.Floor(Size.Width * Quiz.ProgressData.GetLearningProgress()), lbl_learningProgress_bar.Size.Height);
+            lbl_learningProgress.Text = Math.Floor(Quiz.ProgressData.GetLearningProgress() * 100D).ToString() + " %";
         }
 
         /// <summary>
@@ -197,9 +187,9 @@ namespace SteelQuiz
             //Debug.WriteLine(watch.ElapsedMilliseconds);
 
             var controls = new List<DashboardQuizCard>();
-            foreach (var wordPair in QuizCore.Quiz.WordPairs)
+            foreach (var card in Quiz.Cards)
             {
-                var c = new DashboardQuizCard(wordPair);
+                var c = new DashboardQuizCard(Quiz, card);
                 c.Size = new Size(flp_words.Size.Width - 34, c.Size.Height);
                 controls.Add(c);
             }
@@ -298,7 +288,7 @@ namespace SteelQuiz
 
         public void UpdateLearningProgressBar()
         {
-            lbl_learningProgress_bar.Size = new Size((int)Math.Floor(Size.Width * QuizCore.QuizProgress.GetLearningProgress()), lbl_learningProgress_bar.Size.Height);
+            lbl_learningProgress_bar.Size = new Size((int)Math.Floor(Size.Width * Quiz.ProgressData.GetLearningProgress()), lbl_learningProgress_bar.Size.Height);
             foreach (var c in flp_words.Controls.OfType<DashboardQuizCard>())
             {
                 c.UpdateLearningProgressBar();
@@ -318,13 +308,12 @@ namespace SteelQuiz
 
         private void Btn_editQuiz_Click(object sender, EventArgs e)
         {
-            Program.frmWelcome.OpenQuizEditor(QuizCore.Quiz, QuizIdentity.FindQuizPath());
+            Program.frmWelcome.OpenQuizEditor(Quiz, Quiz.QuizIdentity.FindQuizPath());
         }
 
         private void Lbl_learningProgress_bar_SizeChanged(object sender, EventArgs e)
         {
-            //double progress = lbl_learningProgress_bar.Size.Width / (double)Size.Width;
-            double progress = QuizCore.QuizProgress.GetLearningProgress();
+            double progress = Quiz.ProgressData.GetLearningProgress();
 
             lbl_learningProgress_bar.ForeColor = Color.FromArgb(
                 255,
@@ -338,7 +327,7 @@ namespace SteelQuiz
             var cm = new ContextMenu();
             cm.MenuItems.Add("Export", (a, b) =>
             {
-                var quizExport = new QuizExport(QuizCore.Quiz);
+                var quizExport = new QuizExport(Quiz);
                 quizExport.ShowDialog();
             });
 
@@ -350,34 +339,34 @@ namespace SteelQuiz
             switch (cmb_order.SelectedItem)
             {
                 case "Success Rate":
-                    QuizCore.QuizProgress.TermsDisplayOrder = CardsOrderBy.SuccessRate;
+                    Quiz.ProgressData.CardsDisplayOrder = CardsOrderBy.SuccessRate;
                     break;
 
                 case "Quiz Order":
-                    QuizCore.QuizProgress.TermsDisplayOrder = CardsOrderBy.QuizOrder;
+                    Quiz.ProgressData.CardsDisplayOrder = CardsOrderBy.QuizOrder;
                     break;
 
                 case "Alphabetical Term 1":
-                    QuizCore.QuizProgress.TermsDisplayOrder = CardsOrderBy.AlphabeticalTerm1;
+                    Quiz.ProgressData.CardsDisplayOrder = CardsOrderBy.AlphabeticalTerm1;
                     break;
 
                 case "Alphabetical Term 2":
-                    QuizCore.QuizProgress.TermsDisplayOrder = CardsOrderBy.AlphabeticalTerm2;
+                    Quiz.ProgressData.CardsDisplayOrder = CardsOrderBy.AlphabeticalTerm2;
                     break;
             }
 
             switch (cmb_orderAscendingDescending.SelectedItem)
             {
                 case "Ascending":
-                    QuizCore.QuizProgress.TermsDisplayOrderOrder = CardsOrderByOrder.Ascending;
+                    Quiz.ProgressData.CardsDisplayOrderOrder = CardsOrderByOrder.Ascending;
                     break;
 
                 case "Descending":
-                    QuizCore.QuizProgress.TermsDisplayOrderOrder = CardsOrderByOrder.Descending;
+                    Quiz.ProgressData.CardsDisplayOrderOrder = CardsOrderByOrder.Descending;
                     break;
             }
 
-            QuizCore.SaveQuizProgress();
+            QuizCore.SaveQuizProgress(Quiz);
 
             LoadWordPairs();
         }
@@ -390,7 +379,7 @@ namespace SteelQuiz
                 return;
             }
 
-            (ParentForm as Dashboard).PractiseQuiz(QuizIdentity.FindQuizPath(), Dashboard.QuizPractiseMode.Writing);
+            (ParentForm as Dashboard).PractiseQuiz(Quiz.QuizIdentity.FindQuizPath(), Dashboard.QuizPractiseMode.Writing);
         }
 
         private void btn_practiseFlashcards_Click(object sender, EventArgs e)
@@ -401,7 +390,7 @@ namespace SteelQuiz
                 return;
             }
 
-            (ParentForm as Dashboard).PractiseQuiz(QuizIdentity.FindQuizPath(), Dashboard.QuizPractiseMode.Flashcards);
+            (ParentForm as Dashboard).PractiseQuiz(Quiz.QuizIdentity.FindQuizPath(), Dashboard.QuizPractiseMode.Flashcards);
         }
     }
 }
