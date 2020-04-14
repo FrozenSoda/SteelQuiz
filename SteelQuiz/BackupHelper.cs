@@ -33,14 +33,8 @@ namespace SteelQuiz
         /// <param name="fileToBackup">The file to make a backup of.</param>
         /// <param name="destinationDir">The directory where the backup will be stored.</param>
         /// <param name="destinationFileNameStart">The start of the filename for the backups. An additional part will then be added, to make the filename unique.</param>
-        /// <param name="fileExtension">The extension of the file to backup, with the dot excluded (for instance 'txt').</param>
-        public static void BackupFile(string fileToBackup, string destinationDir, string destinationFileNameStart, string fileExtension)
+        public static void BackupFile(string fileToBackup, string destinationDir, string destinationFileNameStart)
         {
-            if (fileExtension.StartsWith("."))
-            {
-                throw new ArgumentException("The dot shall not be included in fileExtension!");
-            }
-
             Directory.CreateDirectory(destinationDir);
 
             // Find vacant name for backup
@@ -65,7 +59,7 @@ namespace SteelQuiz
                 }
             }
 
-            string backupFile = Path.Combine(destinationDir, destinationFileNameStart + "_" + (maxNum + 1).ToString() + "." + fileExtension);
+            string backupFile = Path.Combine(destinationDir, destinationFileNameStart + "_" + (maxNum + 1).ToString() + "." + Path.GetExtension(fileToBackup));
             File.Copy(fileToBackup, backupFile);
         }
     }

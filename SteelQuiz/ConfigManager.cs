@@ -98,7 +98,7 @@ namespace SteelQuiz
 
         public static void BackupConfig()
         {
-            BackupHelper.BackupFile(CONFIG_FILE, CONFIG_BKP_DIR, "Config", "json");
+            BackupHelper.BackupFile(CONFIG_FILE, CONFIG_BKP_DIR, "Config");
         }
 
         public static void Configure()
