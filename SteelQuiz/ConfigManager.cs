@@ -91,22 +91,10 @@ namespace SteelQuiz
             return true;
         }
 
-        public static bool SaveConfig()
+        public static void SaveConfig()
         {
             Directory.CreateDirectory(QuizCore.APP_CFG_FOLDER);
-
-            try
-            {
-                AtomicIO.AtomicWrite(CONFIG_PATH, JsonConvert.SerializeObject(Config, Formatting.Indented));
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occurred while saving the config:\r\n\r\n" + ex.ToString(), "SteelQuiz", MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-                return false;
-            }
-
-            return true;
+            AtomicIO.AtomicWrite(CONFIG_PATH, JsonConvert.SerializeObject(Config, Formatting.Indented));
         }
 
         public static void Configure()
