@@ -49,7 +49,7 @@ namespace SteelQuiz.QuizPractise
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QuizPractiseConfig));
             this.btn_dontAgree = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.cmb_langAns = new System.Windows.Forms.ComboBox();
+            this.cmb_cardAnswerSide = new System.Windows.Forms.ComboBox();
             this.btn_switchTestMode = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.nud_intelligentLearningAttempsCount = new System.Windows.Forms.NumericUpDown();
@@ -83,19 +83,19 @@ namespace SteelQuiz.QuizPractise
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 9);
+            this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(128, 13);
+            this.label1.Size = new System.Drawing.Size(98, 13);
             this.label1.TabIndex = 13;
-            this.label1.Text = "Language to answer in:";
+            this.label1.Text = "Card answer side:";
             // 
-            // cmb_langAns
+            // cmb_cardAnswerSide
             // 
-            this.cmb_langAns.FormattingEnabled = true;
-            this.cmb_langAns.Location = new System.Drawing.Point(143, 6);
-            this.cmb_langAns.Name = "cmb_langAns";
-            this.cmb_langAns.Size = new System.Drawing.Size(372, 21);
-            this.cmb_langAns.TabIndex = 14;
+            this.cmb_cardAnswerSide.FormattingEnabled = true;
+            this.cmb_cardAnswerSide.Location = new System.Drawing.Point(116, 6);
+            this.cmb_cardAnswerSide.Name = "cmb_cardAnswerSide";
+            this.cmb_cardAnswerSide.Size = new System.Drawing.Size(399, 21);
+            this.cmb_cardAnswerSide.TabIndex = 14;
             // 
             // btn_switchTestMode
             // 
@@ -233,7 +233,7 @@ namespace SteelQuiz.QuizPractise
             this.Controls.Add(this.chk_randomOrderQuestions);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btn_switchTestMode);
-            this.Controls.Add(this.cmb_langAns);
+            this.Controls.Add(this.cmb_cardAnswerSide);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_dontAgree);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -258,7 +258,7 @@ namespace SteelQuiz.QuizPractise
 
         private System.Windows.Forms.Button btn_dontAgree;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cmb_langAns;
+        private System.Windows.Forms.ComboBox cmb_cardAnswerSide;
         private System.Windows.Forms.Button btn_switchTestMode;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.RadioButton rdo_allAttemptsIntelligentLearning;

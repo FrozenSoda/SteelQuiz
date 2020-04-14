@@ -27,7 +27,7 @@ namespace SteelQuiz.ConfigData
 {
     public class StorageConfig
     {
-        public string QuizProgressPath { get; set; } = QuizCore.PROGRESS_FILE_PATH_DEFAULT;
+        public string QuizProgressFile { get; set; } = QuizCore.PROGRESS_FILE_DEFAULT;
         public string DefaultQuizSaveFolder { get; set; } = QuizCore.QUIZ_FOLDER_DEFAULT;
     }
 }

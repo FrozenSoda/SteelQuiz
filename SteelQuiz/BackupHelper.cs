@@ -31,6 +31,17 @@ namespace SteelQuiz
     public static class BackupHelper
     {
         /// <summary>
+        /// Creates a backup of the specified file, to the specified directory.
+        /// </summary>
+        /// <param name="fileToBackup">The file to make a backup of.</param>
+        /// <param name="destinationDir">The directory where the backup will be stored.</param>
+        public static void BackupFile(string fileToBackup, string destinationDir)
+        {
+            string destinationFileNameStart = Path.GetFileNameWithoutExtension(fileToBackup);
+            BackupFile(fileToBackup, destinationDir, destinationFileNameStart);
+        }
+
+        /// <summary>
         /// Creates a backup of the specified file, to the specified directory, with the file name starting with the specified string.
         /// </summary>
         /// <param name="fileToBackup">The file to make a backup of.</param>

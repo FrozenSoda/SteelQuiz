@@ -126,10 +126,10 @@ namespace SteelQuiz.QuizPractise
             {
                 index = Enumerable.Range(0, int.MaxValue).Except(wordsNotToAsk_Indexes).FirstOrDefault();
             }
-            var wordPair = quiz.Cards[index];
-            quiz.ProgressData.SetCurrentCard(wordPair);
+            var card = quiz.Cards[index];
+            quiz.ProgressData.SetCurrentCard(quiz, card);
             QuizCore.SaveQuizProgress(quiz);
-            return wordPair;
+            return card;
         }
 
         /// <summary>
@@ -166,16 +166,16 @@ namespace SteelQuiz.QuizPractise
             double r = new Random().NextDouble() * u;
 
             double sum = 0;
-            foreach (var wordPairData in quiz.ProgressData.CardProgress.Where(x => !alreadyAsked.Contains(x.Card)))
+            foreach (var cardProgress in quiz.ProgressData.CardProgress.Where(x => !alreadyAsked.Contains(x.Card)))
             {
                 //var askPrb = askProb(wordPairData.GetSuccessRate());
-                var askPrb = askProb(GetLearningProgress(quiz, wordPairData));
+                var askPrb = askProb(GetLearningProgress(quiz, cardProgress));
                 sum += askPrb;
                 if (r <= sum)
                 {
-                    quiz.ProgressData.SetCurrentCard(wordPairData.Card);
+                    quiz.ProgressData.SetCurrentCard(quiz, cardProgress.Card);
                     QuizCore.SaveQuizProgress(quiz);
-                    return wordPairData.Card;
+                    return cardProgress.Card;
                 }
             }
 

@@ -263,12 +263,10 @@ namespace SteelQuiz.QuizImport.Guide
 
             var quiz = new Quiz(Language1, Language2, MetaData.QUIZ_FILE_FORMAT_VERSION);
             quiz.Cards = WordPairs.ToList();
-            bool loadSuccess = QuizCore.Load(quiz, QuizPath);
-            if (loadSuccess)
-            {
-                QuizCore.SaveQuiz();
-                DialogResult = DialogResult.OK;
-            }
+
+            QuizCore.SaveQuiz(quiz, QuizPath);
+
+            DialogResult = DialogResult.OK;
         }
 
         private void UpdateNavText()

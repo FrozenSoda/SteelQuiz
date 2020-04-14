@@ -96,7 +96,7 @@ namespace SteelQuiz
 
         public static void BackupConfig()
         {
-            BackupHelper.BackupFile(CONFIG_FILE, CONFIG_BKP_DIR, "Config");
+            BackupHelper.BackupFile(CONFIG_FILE, CONFIG_BKP_DIR);
         }
 
         public static void Configure()
@@ -172,6 +172,7 @@ namespace SteelQuiz
                     key.SetValue("", string.Format("\"{0}\" \"%1\"", Application.ExecutablePath));
                 }
 
+                // Notify Windows that file associations have changed
                 SHChangeNotify(0x08000000, 0, IntPtr.Zero, IntPtr.Zero);
             }
 

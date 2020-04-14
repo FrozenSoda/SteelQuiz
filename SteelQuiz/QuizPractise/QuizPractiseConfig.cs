@@ -16,6 +16,7 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using SteelQuiz.QuizData;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,17 +31,21 @@ namespace SteelQuiz.QuizPractise
 {
     public partial class QuizPractiseConfig : AutoThemeableForm
     {
-        public QuizPractiseConfig()
+        private Quiz Quiz { get; set; }
+
+        public QuizPractiseConfig(Quiz quiz)
         {
             InitializeComponent();
             SetTheme();
 
-            cmb_langAns.Items.Add(QuizCore.Quiz.Language1);
-            cmb_langAns.Items.Add(QuizCore.Quiz.Language2);
+            Quiz = quiz;
 
-            cmb_langAns.SelectedItem = QuizCore.QuizProgress.AnswerLanguage;
+            cmb_cardAnswerSide.Items.Add(Quiz.CardFrontType);
+            cmb_cardAnswerSide.Items.Add(Quiz.CardBackType);
 
-            if (QuizCore.QuizProgress.FullTestInProgress)
+            cmb_cardAnswerSide.SelectedItem = Quiz.ProgressData.AnswerCardSide == QuizProgressData.CardSide.Front ? Quiz.CardFrontType : Quiz.CardBackType;
+
+            if (Quiz.ProgressData.FullTestInProgress)
             {
                 btn_switchTestMode.Text = "Enable Intelligent Learning";
             }
@@ -49,25 +54,25 @@ namespace SteelQuiz.QuizPractise
                 btn_switchTestMode.Text = "Disable Intelligent Learning (do full test)";
             }
 
-            if (QuizCore.QuizProgress.IntelligentLearningLastAnswersBasisCount == 3)
+            if (Quiz.ProgressData.IntelligentLearningLastAnswersBasisCount == 3)
             {
                 rdo_last3attemptsIntelligentLearning.Checked = true;
             }
-            else if (QuizCore.QuizProgress.IntelligentLearningLastAnswersBasisCount == 0)
+            else if (Quiz.ProgressData.IntelligentLearningLastAnswersBasisCount == 0)
             {
                 rdo_allAttemptsIntelligentLearning.Checked = true;
             }
             else
             {
                 rdo_lastNattemptsIntelligentLearning.Checked = true;
-                nud_intelligentLearningAttempsCount.Value = QuizCore.QuizProgress.IntelligentLearningLastAnswersBasisCount;
+                nud_intelligentLearningAttempsCount.Value = Quiz.ProgressData.IntelligentLearningLastAnswersBasisCount;
             }
 
-            nud_minAnsTriesSkip.Value = QuizCore.QuizProgress.MinimumTriesCountToConsiderSkippingQuestion;
+            nud_minAnsTriesSkip.Value = Quiz.ProgressData.MinimumTriesCountToConsiderSkippingQuestion;
 
-            chk_randomOrderQuestions.Checked = QuizCore.QuizProgress.AskQuestionsInRandomOrder;
+            chk_randomOrderQuestions.Checked = Quiz.ProgressData.AskQuestionsInRandomOrder;
 
-            cmb_langAns.SelectedIndexChanged += new EventHandler(Cmb_langAns_SelectedIndexChanged);
+            cmb_cardAnswerSide.SelectedIndexChanged += new EventHandler(Cmb_cardAnswerSide_SelectedIndexChanged);
             rdo_last3attemptsIntelligentLearning.CheckedChanged += new EventHandler(Rdo_last3attemptsIntelligentLearning_CheckedChanged);
             rdo_allAttemptsIntelligentLearning.CheckedChanged += new EventHandler(Rdo_allAttemptsIntelligentLearning_CheckedChanged);
             rdo_lastNattemptsIntelligentLearning.CheckedChanged += new EventHandler(Rdo_lastNattemptsIntelligentLearning_CheckedChanged);
@@ -89,7 +94,7 @@ namespace SteelQuiz.QuizPractise
             {
                 Program.frmInQuiz.SwitchIntelligentLearningMode();
 
-                if (QuizCore.QuizProgress.FullTestInProgress)
+                if (Quiz.ProgressData.FullTestInProgress)
                 {
                     btn_switchTestMode.Text = "Enable Intelligent Learning";
                 }
@@ -100,21 +105,21 @@ namespace SteelQuiz.QuizPractise
             }
         }
 
-        private void Cmb_langAns_SelectedIndexChanged(object sender, EventArgs e)
+        private void Cmb_cardAnswerSide_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //QuizCore.QuizProgress.AnswerLanguage = cmb_langAns.SelectedItem.ToString();
-            if (cmb_langAns.SelectedItem.ToString() == QuizCore.Quiz.Language1)
+            //Quiz.ProgressData.AnswerLanguage = cmb_langAns.SelectedItem.ToString();
+            if (cmb_cardAnswerSide.SelectedItem.ToString() == Quiz.CardFrontType)
             {
-                QuizCore.QuizProgress.AnswerLanguageNum = 1;
+                Quiz.ProgressData.AnswerCardSide = QuizProgressData.CardSide.Front;
             }
-            else if (cmb_langAns.SelectedItem.ToString() == QuizCore.Quiz.Language2)
+            else if (cmb_cardAnswerSide.SelectedItem.ToString() == Quiz.CardBackType)
             {
-                QuizCore.QuizProgress.AnswerLanguageNum = 2;
+                Quiz.ProgressData.AnswerCardSide = QuizProgressData.CardSide.Back;
             }
 
-            QuizCore.SaveQuizProgress();
+            QuizCore.SaveQuizProgress(Quiz);
 
-            QuestionSelector.NewRound();
+            QuestionSelector.NewRound(Quiz);
             Program.frmInQuiz.NewWord();
         }
 
@@ -122,11 +127,11 @@ namespace SteelQuiz.QuizPractise
         {
             if (rdo_last3attemptsIntelligentLearning.Checked)
             {
-                QuizCore.QuizProgress.IntelligentLearningLastAnswersBasisCount = 3;
+                Quiz.ProgressData.IntelligentLearningLastAnswersBasisCount = 3;
 
-                if (!QuizCore.QuizProgress.FullTestInProgress)
+                if (!Quiz.ProgressData.FullTestInProgress)
                 {
-                    QuestionSelector.NewRound();
+                    QuestionSelector.NewRound(Quiz);
                     Program.frmInQuiz.NewWord();
                 }
             }
@@ -136,11 +141,11 @@ namespace SteelQuiz.QuizPractise
         {
             if (rdo_allAttemptsIntelligentLearning.Checked)
             {
-                QuizCore.QuizProgress.IntelligentLearningLastAnswersBasisCount = 0;
+                Quiz.ProgressData.IntelligentLearningLastAnswersBasisCount = 0;
 
-                if (!QuizCore.QuizProgress.FullTestInProgress)
+                if (!Quiz.ProgressData.FullTestInProgress)
                 {
-                    QuestionSelector.NewRound();
+                    QuestionSelector.NewRound(Quiz);
                     Program.frmInQuiz.NewWord();
                 }
             }
@@ -150,11 +155,11 @@ namespace SteelQuiz.QuizPractise
         {
             if (rdo_lastNattemptsIntelligentLearning.Checked)
             {
-                QuizCore.QuizProgress.IntelligentLearningLastAnswersBasisCount = (int)nud_intelligentLearningAttempsCount.Value;
+                Quiz.ProgressData.IntelligentLearningLastAnswersBasisCount = (int)nud_intelligentLearningAttempsCount.Value;
 
-                if (!QuizCore.QuizProgress.FullTestInProgress)
+                if (!Quiz.ProgressData.FullTestInProgress)
                 {
-                    QuestionSelector.NewRound();
+                    QuestionSelector.NewRound(Quiz);
                     Program.frmInQuiz.NewWord();
                 }
             }
@@ -164,11 +169,11 @@ namespace SteelQuiz.QuizPractise
         {
             if (rdo_lastNattemptsIntelligentLearning.Checked)
             {
-                QuizCore.QuizProgress.IntelligentLearningLastAnswersBasisCount = (int)nud_intelligentLearningAttempsCount.Value;
+                Quiz.ProgressData.IntelligentLearningLastAnswersBasisCount = (int)nud_intelligentLearningAttempsCount.Value;
 
-                if (!QuizCore.QuizProgress.FullTestInProgress)
+                if (!Quiz.ProgressData.FullTestInProgress)
                 {
-                    QuestionSelector.NewRound();
+                    QuestionSelector.NewRound(Quiz);
                     Program.frmInQuiz.NewWord();
                 }
             }
@@ -176,19 +181,19 @@ namespace SteelQuiz.QuizPractise
 
         private void Chk_randomOrderQuestions_CheckedChanged(object sender, EventArgs e)
         {
-            QuizCore.QuizProgress.AskQuestionsInRandomOrder = chk_randomOrderQuestions.Checked;
+            Quiz.ProgressData.AskQuestionsInRandomOrder = chk_randomOrderQuestions.Checked;
 
-            QuestionSelector.NewRound();
+            QuestionSelector.NewRound(Quiz);
             Program.frmInQuiz.NewWord();
         }
 
         private void nud_minAnsTriesSkip_ValueChanged(object sender, EventArgs e)
         {
-            QuizCore.QuizProgress.MinimumTriesCountToConsiderSkippingQuestion = (int)nud_minAnsTriesSkip.Value;
+            Quiz.ProgressData.MinimumTriesCountToConsiderSkippingQuestion = (int)nud_minAnsTriesSkip.Value;
 
-            if (!QuizCore.QuizProgress.FullTestInProgress)
+            if (!Quiz.ProgressData.FullTestInProgress)
             {
-                QuestionSelector.NewRound();
+                QuestionSelector.NewRound(Quiz);
                 Program.frmInQuiz.NewWord();
             }
         }

@@ -38,7 +38,7 @@ namespace SteelQuiz
         public static readonly string QUIZ_FOLDER_DEFAULT = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "SteelQuiz");
         public static readonly string QUIZ_RECOVERY_FOLDER = Path.Combine(QUIZ_FOLDER_DEFAULT, "Recovery");
         public static readonly string QUIZ_BACKUP_FOLDER = Path.Combine(QUIZ_FOLDER_DEFAULT, "Backups");
-        public static readonly string PROGRESS_FILE_PATH_DEFAULT = Path.Combine(APP_CFG_DIR, "QuizProgress.json");
+        public static readonly string PROGRESS_FILE_DEFAULT = Path.Combine(APP_CFG_DIR, "QuizProgress.json");
 
         public static Dictionary<Guid, QuizIdentity> QuizIdentities { get; set; } = new Dictionary<Guid, QuizIdentity>();
         public static Dictionary<Guid, DateTime> QuizAccessTimes { get; set; } = new Dictionary<Guid, DateTime>();
@@ -136,6 +136,12 @@ namespace SteelQuiz
             return quiz;
         }
 
+        public static void SaveQuiz(Quiz quiz, string path)
+        {
+            string quizRaw = JsonConvert.SerializeObject(quiz);
+            AtomicIO.AtomicWrite(path, quizRaw);
+        }
+
         /// <summary>
         /// Retrieves the quiz progress data object for the specified quiz.
         /// </summary>
@@ -143,7 +149,7 @@ namespace SteelQuiz
         /// <returns>The QuizProgData object belonging to the quiz.</returns>
         private static QuizProgress LoadQuizProgressData(Quiz quiz)
         {
-            string dataRaw = AtomicIO.AtomicRead(ConfigManager.Config.StorageConfig.QuizProgressPath);
+            string dataRaw = AtomicIO.AtomicRead(ConfigManager.Config.StorageConfig.QuizProgressFile);
             var dataRoot = JsonConvert.DeserializeObject<QuizProgressDataRoot>(dataRaw);
 
             return dataRoot.QuizProgressData.Where(x => x.QuizGUID == quiz.GUID).FirstOrDefault();
@@ -155,7 +161,7 @@ namespace SteelQuiz
         /// <param name="quiz">The Quiz object containing the progress data</param>
         public static void SaveQuizProgress(Quiz quiz)
         {
-            string dataRaw = AtomicIO.AtomicRead(ConfigManager.Config.StorageConfig.QuizProgressPath);
+            string dataRaw = AtomicIO.AtomicRead(ConfigManager.Config.StorageConfig.QuizProgressFile);
             var dataRoot = JsonConvert.DeserializeObject<QuizProgressDataRoot>(dataRaw);
             var data = dataRoot.QuizProgressData.Where(x => x.QuizGUID == quiz.GUID).FirstOrDefault();
 
@@ -169,7 +175,7 @@ namespace SteelQuiz
             }
 
             dataRaw = JsonConvert.SerializeObject(dataRoot);
-            AtomicIO.AtomicWrite(ConfigManager.Config.StorageConfig.QuizProgressPath, dataRaw);
+            AtomicIO.AtomicWrite(ConfigManager.Config.StorageConfig.QuizProgressFile, dataRaw);
         }
 
         /// <summary>
@@ -177,12 +183,12 @@ namespace SteelQuiz
         /// </summary>
         public static void LoadQuizAccessData()
         {
-            if (!File.Exists(ConfigManager.Config.StorageConfig.QuizProgressPath))
+            if (!File.Exists(ConfigManager.Config.StorageConfig.QuizProgressFile))
             {
                 return;
             }
 
-            string dataRaw = AtomicIO.AtomicRead(ConfigManager.Config.StorageConfig.QuizProgressPath);
+            string dataRaw = AtomicIO.AtomicRead(ConfigManager.Config.StorageConfig.QuizProgressFile);
             var dataRoot = JsonConvert.DeserializeObject<QuizProgressDataRoot>(dataRaw);
 
             QuizAccessTimes = dataRoot.QuizAccessTimes;
@@ -198,9 +204,9 @@ namespace SteelQuiz
 
             QuizProgressDataRoot dataRoot;
             string dataRaw;
-            if (File.Exists(ConfigManager.Config.StorageConfig.QuizProgressPath))
+            if (File.Exists(ConfigManager.Config.StorageConfig.QuizProgressFile))
             {
-                dataRaw = AtomicIO.AtomicRead(ConfigManager.Config.StorageConfig.QuizProgressPath);
+                dataRaw = AtomicIO.AtomicRead(ConfigManager.Config.StorageConfig.QuizProgressFile);
                 dataRoot = JsonConvert.DeserializeObject<QuizProgressDataRoot>(dataRaw);
             }
             else
@@ -212,7 +218,7 @@ namespace SteelQuiz
             dataRoot.QuizIdentities = QuizIdentities;
 
             dataRaw = JsonConvert.SerializeObject(dataRoot);
-            AtomicIO.AtomicWrite(ConfigManager.Config.StorageConfig.QuizProgressPath, dataRaw);
+            AtomicIO.AtomicWrite(ConfigManager.Config.StorageConfig.QuizProgressFile, dataRaw);
         }
 
         public static void QuizRandomize(Quiz quiz)
@@ -229,6 +235,12 @@ namespace SteelQuiz
                 quiz.ProgressData.CardProgress[k] = quiz.ProgressData.CardProgress[n];
                 quiz.ProgressData.CardProgress[n] = value;
             }
+        }
+
+        public static void BackupProgress()
+        {
+            string destDir = Path.Combine(Path.GetDirectoryName(ConfigManager.Config.StorageConfig.QuizProgressFile), "SteelQuiz Progress Data Backups");
+            BackupHelper.BackupFile(ConfigManager.Config.StorageConfig.QuizProgressFile, destDir);
         }
     }
 }

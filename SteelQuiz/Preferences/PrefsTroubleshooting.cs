@@ -87,7 +87,7 @@ namespace SteelQuiz.Preferences
 
         private void Btn_resetAppConfig_Click(object sender, EventArgs e)
         {
-            if (ConfigManager.Config.StorageConfig.QuizProgressPath != QuizCore.PROGRESS_FILE_PATH_DEFAULT)
+            if (ConfigManager.Config.StorageConfig.QuizProgressFile != QuizCore.PROGRESS_FILE_DEFAULT)
             {
                 MessageBox.Show("The Quiz Progress path must be set to defaults before you can restore everything to defaults. You can find the settings under " +
                     "Sync > Progress Sync (from the root of preferences)", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -98,11 +98,7 @@ namespace SteelQuiz.Preferences
                 "Reset Application Config - SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
             if (msg == DialogResult.Yes)
             {
-                var bkp = QuizCore.BackupConfig(new Version(ConfigManager.Config.FileFormatVersion));
-                if (!bkp)
-                {
-                    return;
-                }
+                ConfigManager.BackupConfig();
 
                 var msg2 = MessageBox.Show("Keep statistics (launch count etc.)? This is recommended unless you still experience problems. If you are unsure, select Yes",
                     "Keep Statistics - SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
@@ -134,15 +130,11 @@ namespace SteelQuiz.Preferences
                 "Reset Quiz Progress Data - SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
             if (msg == DialogResult.Yes)
             {
-                var bkp = QuizCore.BackupProgress(new Version(MetaData.QUIZ_FILE_FORMAT_VERSION));
-                if (!bkp)
-                {
-                    return;
-                }
+                QuizCore.BackupProgress();
 
                 try
                 {
-                    System.IO.File.Delete(ConfigManager.Config.StorageConfig.QuizProgressPath);
+                    System.IO.File.Delete(ConfigManager.Config.StorageConfig.QuizProgressFile);
                 }
                 catch (Exception ex)
                 {

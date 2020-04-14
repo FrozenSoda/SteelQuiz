@@ -457,13 +457,12 @@ namespace SteelQuiz.QuizEditor
                 ChangedSinceLastSave = false;
             }
 
-            if (QuizCore.LoadQuizAccessData())
-            {
-                QuizCore.QuizIdentities[quiz.GUID] = new QuizIdentity(quiz.GUID, QuizPath);
-                QuizCore.QuizAccessTimes[quiz.GUID] = DateTime.Now;
+            QuizCore.LoadQuizAccessData();
 
-                QuizCore.SaveQuizData();
-            }
+            QuizCore.QuizIdentities[quiz.GUID] = new QuizIdentity(quiz.GUID, QuizPath);
+            QuizCore.QuizAccessTimes[quiz.GUID] = DateTime.Now;
+
+            QuizCore.SaveQuizAccessData();
 
             UseWaitCursor = false;
 

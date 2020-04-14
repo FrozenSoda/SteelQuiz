@@ -40,7 +40,7 @@ namespace SteelQuiz.Preferences
 
         private void Btn_browseQuizProgPath_Click(object sender, EventArgs e)
         {
-            fbd_quizProgFolder.SelectedPath = Path.GetDirectoryName(ConfigManager.Config.StorageConfig.QuizProgressPath);
+            fbd_quizProgFolder.SelectedPath = Path.GetDirectoryName(ConfigManager.Config.StorageConfig.QuizProgressFile);
             if (fbd_quizProgFolder.ShowDialog() == DialogResult.OK)
             {
                 txt_quizProgPath.Text = fbd_quizProgFolder.SelectedPath;
@@ -50,7 +50,7 @@ namespace SteelQuiz.Preferences
 
         public void LoadPreferences()
         {
-            txt_quizProgPath.Text = Path.GetDirectoryName(ConfigManager.Config.StorageConfig.QuizProgressPath);
+            txt_quizProgPath.Text = Path.GetDirectoryName(ConfigManager.Config.StorageConfig.QuizProgressFile);
             txt_defaultQuizSaveFolder.Text = ConfigManager.Config.StorageConfig.DefaultQuizSaveFolder;
         }
 
@@ -64,13 +64,13 @@ namespace SteelQuiz.Preferences
 
             ConfigManager.Config.StorageConfig.DefaultQuizSaveFolder = txt_defaultQuizSaveFolder.Text;
 
-            var oldPath = ConfigManager.Config.StorageConfig.QuizProgressPath;
+            var oldPath = ConfigManager.Config.StorageConfig.QuizProgressFile;
 
             string newPath;
-            if (txt_quizProgPath.Text == Path.GetDirectoryName(QuizCore.PROGRESS_FILE_PATH_DEFAULT))
+            if (txt_quizProgPath.Text == Path.GetDirectoryName(QuizCore.PROGRESS_FILE_DEFAULT))
             {
                 // quiz progress file should have the filename "QuizProgress.json" in the default folder, for compatibility reasons
-                newPath = QuizCore.PROGRESS_FILE_PATH_DEFAULT;
+                newPath = QuizCore.PROGRESS_FILE_DEFAULT;
             }
             else
             {
@@ -88,11 +88,14 @@ namespace SteelQuiz.Preferences
                 return false;
             }
 
-            bool bkp = QuizCore.BackupProgress(new Version(MetaData.QUIZ_FILE_FORMAT_VERSION));
-            if (!bkp)
+            try
+            {
+                QuizCore.BackupProgress();
+            }
+            catch (Exception ex)
             {
                 txt_quizProgPath.Text = Path.GetDirectoryName(oldPath);
-                return false;
+                throw ex;
             }
 
             if (File.Exists(newPath))
@@ -124,21 +127,27 @@ namespace SteelQuiz.Preferences
                 }
                 else if (conflictSolution.ConflictResult == ConflictResult.KeepTarget)
                 {
-                    bkp = QuizCore.BackupFile(oldPath);
-                    if (!bkp)
+                    try
+                    {
+                        QuizCore.BackupProgress();
+                    }
+                    catch (Exception ex)
                     {
                         txt_quizProgPath.Text = Path.GetDirectoryName(oldPath);
-                        return false;
+                        throw ex;
                     }
                     File.Delete(oldPath);
                 }
                 else if (conflictSolution.ConflictResult == ConflictResult.OverwriteTarget)
                 {
-                    bkp = QuizCore.BackupFile(newPath);
-                    if (!bkp)
+                    try
+                    {
+                        QuizCore.BackupProgress();
+                    }
+                    catch (Exception ex)
                     {
                         txt_quizProgPath.Text = Path.GetDirectoryName(oldPath);
-                        return false;
+                        throw ex;
                     }
                     File.Delete(newPath);
                     File.Move(oldPath, newPath);
@@ -149,7 +158,7 @@ namespace SteelQuiz.Preferences
                 File.Move(oldPath, newPath);
             }
 
-            ConfigManager.Config.StorageConfig.QuizProgressPath = newPath;
+            ConfigManager.Config.StorageConfig.QuizProgressFile = newPath;
 
             if (writeToDisk)
             {
@@ -169,7 +178,7 @@ namespace SteelQuiz.Preferences
                 return;
             }
 
-            txt_quizProgPath.Text = Path.GetDirectoryName(QuizCore.PROGRESS_FILE_PATH_DEFAULT);
+            txt_quizProgPath.Text = Path.GetDirectoryName(QuizCore.PROGRESS_FILE_DEFAULT);
             Save(true);
         }
 

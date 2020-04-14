@@ -150,14 +150,12 @@ namespace SteelQuiz.Preferences
         /// </summary>
         /// <param name="category">The category whose configuration to save. The category MUST implement ICustomSaveCategory! If null, configuration for all 
         /// ICustomSaveCategory categories will be saved</param>
-        public bool Save(Type category = null)
+        public void Save(Type category = null)
         {
             if (!SaveConfig)
             {
-                return true;
+                return;
             }
-
-            bool result = true;
 
             if (category != null && !typeof(ICustomSaveCategory).IsAssignableFrom(category))
             {
@@ -169,11 +167,7 @@ namespace SteelQuiz.Preferences
             {
                 if (category == null || category == prefs.GetType())
                 {
-                    bool s = prefs.Save(false);
-                    if (result)
-                    {
-                        result = s;
-                    }
+                    prefs.Save(false);
                     found = true;
                 }
             }
@@ -183,13 +177,9 @@ namespace SteelQuiz.Preferences
                 throw new Exception("Save category could not be found");
             }
 
-            bool save = ConfigManager.SaveConfig();
-            if (result)
-            {
-                result = save;
-            }
+            ConfigManager.SaveConfig();
 
-            return result;
+            return;
         }
 
         private void Preferences_FormClosing(object sender, FormClosingEventArgs e)

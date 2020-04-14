@@ -67,13 +67,6 @@ namespace SteelQuiz.QuizData
 
 
             // QuizPath is incorrect
-            var path = QuizCore.QuickFindQuizPath(QuizGuid, LastKnownPath);
-            if (path != null)
-            {
-                LastKnownPath = path;
-                return LastKnownPath;
-            }
-
             var quizNotFound = new QuizNotFound(QuizGuid, LastKnownPath);
             if (quizNotFound.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
