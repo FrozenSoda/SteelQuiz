@@ -25,6 +25,9 @@ using System.Threading.Tasks;
 
 namespace SteelQuiz
 {
+    /// <summary>
+    /// A Helper class for backup related operations.
+    /// </summary>
     public static class BackupHelper
     {
         /// <summary>
