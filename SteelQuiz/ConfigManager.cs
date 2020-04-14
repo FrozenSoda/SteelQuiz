@@ -37,17 +37,20 @@ namespace SteelQuiz
     public static class ConfigManager
     {
         [DllImport("shell32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        public static extern void SHChangeNotify(uint wEventId, uint uFlags, IntPtr dwItem1, IntPtr dwItem2);
+        private static extern void SHChangeNotify(uint wEventId, uint uFlags, IntPtr dwItem1, IntPtr dwItem2);
 
-        public static readonly string CONFIG_PATH = Path.Combine(QuizCore.APP_CFG_FOLDER, "Config.json");
+        public static readonly string APP_CFG_DIR = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SteelQuiz");
+
+        public static readonly string CONFIG_FILE = Path.Combine(APP_CFG_DIR, "Config.json");
+        public static readonly string CONFIG_BKP_DIR = Path.Combine(APP_CFG_DIR, "Config Backup");
 
         public static Config Config { get; set; } = null;
 
         public static bool LoadConfig()
         {
-            Directory.CreateDirectory(QuizCore.APP_CFG_FOLDER);
+            Directory.CreateDirectory(APP_CFG_DIR);
 
-            if (!File.Exists(CONFIG_PATH))
+            if (!File.Exists(CONFIG_FILE))
             {
                 Config = new Config();
                 SaveConfig();
@@ -57,7 +60,7 @@ namespace SteelQuiz
             bool corrupt = false;
             try
             {
-                Config = JsonConvert.DeserializeObject<Config>(AtomicIO.AtomicRead(CONFIG_PATH));
+                Config = JsonConvert.DeserializeObject<Config>(AtomicIO.AtomicRead(CONFIG_FILE));
             }
             catch (AtomicException)
             {
@@ -75,12 +78,8 @@ namespace SteelQuiz
                     MessageBoxIcon.Error);
                 if (msg == DialogResult.Yes)
                 {
-                    var bkp = QuizCore.BackupConfig(new Version(0, 0, 0));
-                    if (!bkp)
-                    {
-                        return false;
-                    }
-                    File.Delete(CONFIG_PATH);
+                    BackupConfig();
+                    File.Delete(CONFIG_FILE);
                     return LoadConfig();
                 }
                 else
@@ -93,8 +92,40 @@ namespace SteelQuiz
 
         public static void SaveConfig()
         {
-            Directory.CreateDirectory(QuizCore.APP_CFG_FOLDER);
-            AtomicIO.AtomicWrite(CONFIG_PATH, JsonConvert.SerializeObject(Config, Formatting.Indented));
+            Directory.CreateDirectory(APP_CFG_DIR);
+            AtomicIO.AtomicWrite(CONFIG_FILE, JsonConvert.SerializeObject(Config, Formatting.Indented));
+        }
+
+        public static void BackupConfig()
+        {
+            Directory.CreateDirectory(CONFIG_BKP_DIR);
+
+            const string BACKUP_FILENAME = "Config_{0}.json";
+
+            // Find vacant name for backup
+            int maxNum = -1;
+            foreach (var file in Directory.GetFiles(CONFIG_BKP_DIR))
+            {
+                try
+                {
+                    int num = Convert.ToInt32(Path.GetFileNameWithoutExtension(file).Split(new string[] { "Config_" }, StringSplitOptions.None)[1]);
+                    if (num > maxNum)
+                    {
+                        maxNum = num;
+                    }
+                }
+                catch (FormatException)
+                {
+                    continue;
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    continue;
+                }
+            }
+
+            string backupFile = Path.Combine(CONFIG_BKP_DIR, string.Format(BACKUP_FILENAME, maxNum + 1));
+            File.Copy(CONFIG_FILE, backupFile);
         }
 
         public static void Configure()

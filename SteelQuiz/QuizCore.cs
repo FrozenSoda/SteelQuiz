@@ -33,7 +33,6 @@ namespace SteelQuiz
     public static class QuizCore
     {
         public const string QUIZ_EXTENSION = "steelquiz";
-        public static readonly string APP_CFG_FOLDER = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SteelQuiz");
         public static readonly string BACKUP_FOLDER = Path.Combine(APP_CFG_FOLDER, "Backups");
         public static readonly string QUIZ_FOLDER_DEFAULT = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "SteelQuiz");
         public static readonly string QUIZ_RECOVERY_FOLDER = Path.Combine(QUIZ_FOLDER_DEFAULT, "Recovery");
