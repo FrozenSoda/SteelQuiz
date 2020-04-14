@@ -18,7 +18,7 @@
 
 namespace SteelQuiz.QuizEditor
 {
-    partial class QuizEditorWordPair
+    partial class QuizEditorCard
     {
         /// <summary> 
         /// Required designer variable.

@@ -52,16 +52,16 @@ namespace SteelQuiz.QuizPractise
             public string CorrectAnswer { get; set; }
 
             /// <summary>
-            /// The wordpair belonging to this class instance
+            /// The card belonging to this class instance
             /// </summary>
-            public Card WordPair { get; set; }
+            public Card Card { get; set; }
 
-            public SimilarityData(int difference, CorrectCertainty certainty, string correctAnswer, Card wordPair)
+            public SimilarityData(int difference, CorrectCertainty certainty, string correctAnswer, Card card)
             {
                 Difference = difference;
                 Certainty = certainty;
                 CorrectAnswer = correctAnswer;
-                WordPair = wordPair;
+                Card = card;
             }
         }
 
@@ -85,12 +85,12 @@ namespace SteelQuiz.QuizPractise
             | Rules.IgnoreOpeningWhitespace
             | Rules.IgnoreEndingWhitespace;
 
-        public static SimilarityData Similarity(string userAnswer, string correctAnswer, Card wordPair, Rules rules)
+        public static SimilarityData Similarity(string userAnswer, string correctAnswer, Card card, Rules rules)
         {
-            return Similarity(userAnswer, correctAnswer, wordPair, rules, CorrectCertainty.CompletelyCorrect);
+            return Similarity(userAnswer, correctAnswer, card, rules, CorrectCertainty.CompletelyCorrect);
         }
 
-        private static SimilarityData Similarity(string userAnswer, string correctAnswer, Card wordPair, Rules rules, CorrectCertainty certainty)
+        private static SimilarityData Similarity(string userAnswer, string correctAnswer, Card card, Rules rules, CorrectCertainty certainty)
         {
             var similarityDatas = new List<SimilarityData>();
 
@@ -103,26 +103,26 @@ namespace SteelQuiz.QuizPractise
 
             if (rules.HasFlag(Rules.IgnoreOpeningWhitespace))
             {
-                similarityDatas.Add(Similarity(userAnswer.TrimStart(' '), correctAnswer.TrimStart(' '), wordPair, rules & ~Rules.IgnoreOpeningWhitespace,
+                similarityDatas.Add(Similarity(userAnswer.TrimStart(' '), correctAnswer.TrimStart(' '), card, rules & ~Rules.IgnoreOpeningWhitespace,
                     (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
                 // Math.Max to use worst certainty (if the certainty when calling this method was 'maybe correct', new certainty can't be 'probably correct' for instance)
             }
 
             if (rules.HasFlag(Rules.IgnoreEndingWhitespace))
             {
-                similarityDatas.Add(Similarity(userAnswer.TrimEnd(' '), correctAnswer.TrimEnd(' '), wordPair, rules & ~Rules.IgnoreEndingWhitespace,
+                similarityDatas.Add(Similarity(userAnswer.TrimEnd(' '), correctAnswer.TrimEnd(' '), card, rules & ~Rules.IgnoreEndingWhitespace,
                     (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
             }
 
             if (rules.HasFlag(Rules.IgnoreFirstCapitalization))
             {
-                similarityDatas.Add(Similarity(CapitalizeFirstChar(userAnswer), CapitalizeFirstChar(correctAnswer), wordPair, rules & ~Rules.IgnoreFirstCapitalization,
+                similarityDatas.Add(Similarity(CapitalizeFirstChar(userAnswer), CapitalizeFirstChar(correctAnswer), card, rules & ~Rules.IgnoreFirstCapitalization,
                     (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
             }
 
             if (rules.HasFlag(Rules.IgnoreDotsInEnd))
             {
-                similarityDatas.Add(Similarity(userAnswer.TrimEnd('.'), correctAnswer.TrimEnd('.'), wordPair, rules & ~Rules.IgnoreDotsInEnd,
+                similarityDatas.Add(Similarity(userAnswer.TrimEnd('.'), correctAnswer.TrimEnd('.'), card, rules & ~Rules.IgnoreDotsInEnd,
                     (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
             }
 
@@ -139,7 +139,7 @@ namespace SteelQuiz.QuizPractise
                         var matches = new List<SimilarityData>();
                         foreach (var correctSynonym in correctAnswer.Split('/').Where(x => !string.IsNullOrWhiteSpace(x)))
                         {
-                            matches.Add(Similarity(userSynonym, correctSynonym.TrimStart(' '), wordPair, rules,
+                            matches.Add(Similarity(userSynonym, correctSynonym.TrimStart(' '), card, rules,
                                 (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
                         }
 
@@ -155,13 +155,13 @@ namespace SteelQuiz.QuizPractise
                         {
                             // Provided synonyms are correct
                             similarityDatas.Add(
-                                new SimilarityData(0, (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty), correctAnswer, wordPair));
+                                new SimilarityData(0, (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty), correctAnswer, card));
                         }
                         else
                         {
                             similarityDatas.Add(
                                 new SimilarityData(synonymSimilarities.Select(x => x.Difference).Max(),
-                                (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty), correctAnswer, wordPair));
+                                (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty), correctAnswer, card));
                         }
                     }
                 }
@@ -174,25 +174,25 @@ namespace SteelQuiz.QuizPractise
                     if (!correctAnswer.TrimStart().StartsWith("("))
                     {
                         string w1 = correctAnswer.Split('(')[0].TrimEnd(' '); // tarp (tarpaulin) => tarp
-                        similarityDatas.Add(Similarity(userAnswer, w1, wordPair, rules, (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
+                        similarityDatas.Add(Similarity(userAnswer, w1, card, rules, (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
                     }
 
                     string w2 = correctAnswer.Split('(')[1].Split(')')[0].TrimStart(' ').TrimEnd(' '); // tarp (tarpaulin) => tarpaulin
-                    similarityDatas.Add(Similarity(userAnswer, w2, wordPair, rules, (CorrectCertainty)Math.Max((int)CorrectCertainty.MaybeCorrect, (int)certainty)));
+                    similarityDatas.Add(Similarity(userAnswer, w2, card, rules, (CorrectCertainty)Math.Max((int)CorrectCertainty.MaybeCorrect, (int)certainty)));
 
                     string w3 = correctAnswer.Replace("(", "").Replace(")", ""); // (eye)lash => eyelash
-                    similarityDatas.Add(Similarity(userAnswer, w3, wordPair, rules, (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
+                    similarityDatas.Add(Similarity(userAnswer, w3, card, rules, (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
 
                     if (!correctAnswer.TrimEnd().EndsWith(")"))
                     {
                         string w4 = correctAnswer.Split(')')[1].TrimStart(' '); // (eye)lash => lash
-                        similarityDatas.Add(Similarity(userAnswer, w4, wordPair, rules, (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
+                        similarityDatas.Add(Similarity(userAnswer, w4, card, rules, (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
                     }
                 }
             }
 
             int difference = Fastenshtein.Levenshtein.Distance(userAnswer, correctAnswer);
-            similarityDatas.Add(new SimilarityData(difference, certainty, correctAnswer, wordPair));
+            similarityDatas.Add(new SimilarityData(difference, certainty, correctAnswer, card));
             KeepBestSimilarityData();
 //#warning the best similarity data that is being kept is not necessarily equal to the written answer in the quiz!!! this potentially shows a wrong answer in "ProbablyCorrectAnswer" dialog
             SimilarityData best = similarityDatas.First();

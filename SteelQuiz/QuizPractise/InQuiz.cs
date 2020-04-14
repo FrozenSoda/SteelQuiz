@@ -422,7 +422,7 @@ namespace SteelQuiz.QuizPractise
                     }
                     else if (ansDiff.Certainty == StringComp.CorrectCertainty.ProbablyCorrect)
                     {
-                        var probablyCorrectAns = new ProbablyCorrectAnswer(CurrentWordPair.Question, QuizCore.QuizProgress.QuestionLanguage, ansDiff.WordPair.Answer, QuizCore.QuizProgress.AnswerLanguage,
+                        var probablyCorrectAns = new ProbablyCorrectAnswer(CurrentWordPair.Question, QuizCore.QuizProgress.QuestionLanguage, ansDiff.Card.Answer, QuizCore.QuizProgress.AnswerLanguage,
                             "Probably correct!");
                         lbl_word1.Controls.Add(probablyCorrectAns);
                         probablyCorrectAns.Location = new Point(0, 0);
@@ -430,7 +430,7 @@ namespace SteelQuiz.QuizPractise
                     }
                     else if (ansDiff.Certainty == StringComp.CorrectCertainty.MaybeCorrect)
                     {
-                        var probablyCorrectAns = new ProbablyCorrectAnswer(CurrentWordPair.Question, QuizCore.QuizProgress.QuestionLanguage, ansDiff.WordPair.Answer, QuizCore.QuizProgress.AnswerLanguage,
+                        var probablyCorrectAns = new ProbablyCorrectAnswer(CurrentWordPair.Question, QuizCore.QuizProgress.QuestionLanguage, ansDiff.Card.Answer, QuizCore.QuizProgress.AnswerLanguage,
                             "Might be correct!");
                         lbl_word1.Controls.Add(probablyCorrectAns);
                         probablyCorrectAns.Location = new Point(0, 0);
@@ -536,7 +536,7 @@ namespace SteelQuiz.QuizPractise
 
                 if (GameMode == QuizPractiseMode.Writing)
                 {
-                    var wrongAnswer = new WrongAnswer(CurrentWordPair.Question, QuizCore.QuizProgress.QuestionLanguage, ansDiff.WordPair.Answer, QuizCore.QuizProgress.AnswerLanguage);
+                    var wrongAnswer = new WrongAnswer(CurrentWordPair.Question, QuizCore.QuizProgress.QuestionLanguage, ansDiff.Card.Answer, QuizCore.QuizProgress.AnswerLanguage);
                     lbl_word1.Controls.Add(wrongAnswer);
                     wrongAnswer.Location = new Point(0, 0);
                     wrongAnswer.Show();

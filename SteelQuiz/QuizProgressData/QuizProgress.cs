@@ -125,12 +125,12 @@ namespace SteelQuiz.QuizProgressData
 
             if (initCardProgress)
             {
-                foreach (var wordPair in quiz.Cards)
+                foreach (var card in quiz.Cards)
                 {
                     bool found = false;
-                    foreach (var wordProgData in CardProgress)
+                    foreach (var c in CardProgress)
                     {
-                        if (wordProgData.WordPair.Equals(wordPair))
+                        if (c.Card.Equals(card))
                         {
                             found = true;
                         }
@@ -138,7 +138,7 @@ namespace SteelQuiz.QuizProgressData
 
                     if (!found)
                     {
-                        CardProgress.Add(new CardProgress(wordPair));
+                        CardProgress.Add(new CardProgress(card));
                     }
                 }
             }
@@ -162,7 +162,7 @@ namespace SteelQuiz.QuizProgressData
 
         /// <summary>
         /// Returns the learning progress for this quiz, 
-        /// that is, the average of the success rates for all wordpairs, that is between 0 and 1, divided by total amount of tries to save (WORD_TRIES_TO_KEEP)
+        /// that is, the average of the success rates for all Cards, that is between 0 and 1, divided by total amount of tries to save (WORD_TRIES_TO_KEEP)
         /// </summary>
         /// <returns></returns>
         public double GetLearningProgress()
@@ -175,16 +175,16 @@ namespace SteelQuiz.QuizProgressData
             return val;
         }
 
-        // due to CurrentWordPair not preserving references due to serialization, implement setter through method instead, to avoid confusion regarding references
-        public void SetCurrentQuestion(Card question)
+        // due to CurrentCards not preserving references due to serialization, implement setter through method instead, to avoid confusion regarding references
+        public void SetCurrentCard(Quiz quiz, Card card)
         {
-            if (question == null)
+            if (card == null)
             {
                 CurrentCards.Clear();
             }
             else
             {
-                CurrentCards = question.GetRequiredSynonyms().ToList();
+                CurrentCards = card.GetRequiredAnswerSynonyms(quiz).ToList();
             }
         }
 

@@ -137,7 +137,7 @@ namespace SteelQuiz.QuizEditor.UndoRedo
             };
         }
 
-        public static Action RemoveWordPair(this QuizEditor quizEditor, QuizEditorWordPair wordPair)
+        public static Action RemoveWordPair(this QuizEditor quizEditor, QuizEditorCard wordPair)
         {
             return () =>
             {
@@ -146,7 +146,7 @@ namespace SteelQuiz.QuizEditor.UndoRedo
             };
         }
 
-        public static Action AddWordPair(this QuizEditor quizEditor, QuizEditorWordPair wordPair, int index)
+        public static Action AddWordPair(this QuizEditor quizEditor, QuizEditorCard wordPair, int index)
         {
             return () =>
             {

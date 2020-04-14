@@ -118,7 +118,7 @@ namespace SteelQuiz
             this.lbl_learningProgress_desc.Text = "Success rate:";
             this.lbl_learningProgress_desc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // DashboardQuizWordPair
+            // DashboardQuizCard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -131,9 +131,9 @@ namespace SteelQuiz
             this.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.White;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "DashboardQuizWordPair";
+            this.Name = "DashboardQuizCard";
             this.Size = new System.Drawing.Size(540, 100);
-            this.SizeChanged += new System.EventHandler(this.DashboardQuizWordPair_SizeChanged);
+            this.SizeChanged += new System.EventHandler(this.DashboardQuizCard_SizeChanged);
             this.ResumeLayout(false);
             this.PerformLayout();
 

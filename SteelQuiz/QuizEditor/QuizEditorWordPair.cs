@@ -31,14 +31,14 @@ using SteelQuiz.QuizPractise;
 
 namespace SteelQuiz.QuizEditor
 {
-    public partial class QuizEditorWordPair : AutoThemeableUserControl
+    public partial class QuizEditorCard : AutoThemeableUserControl
     {
         public int Number { get; set; } // number in flowlayoutpanel, the first one has number 0 for instance
-        public string Word1 => txt_word1.Text;
-        public string Word2 => txt_word2.Text;
+        public string Front => txt_word1.Text;
+        public string Back => txt_word2.Text;
 
-        public List<string> Synonyms1 { get; set; } = new List<string>();
-        public List<string> Synonyms2 { get; set; } = new List<string>();
+        public List<string> FrontSynonyms { get; set; } = new List<string>();
+        public List<string> BackSynonyms { get; set; } = new List<string>();
 
         public Pointer<StringComp.Rules> ComparisonRules { get; set; } = new Pointer<StringComp.Rules>(StringComp.SMART_RULES);
 
@@ -49,7 +49,7 @@ namespace SteelQuiz.QuizEditor
         public bool ignore_txt_word_change = false;
         public bool ignore_chk_smartComp_change = false;
 
-        public QuizEditorWordPair(QuizEditor owner, int number)
+        public QuizEditorCard(QuizEditor owner, int number)
         {
             InitializeComponent();
             QuizEditor = owner;
@@ -139,7 +139,7 @@ namespace SteelQuiz.QuizEditor
             InitEditWordSynonyms(1);
             if (EditWordSynonyms.ShowDialog() == DialogResult.OK)
             {
-                Synonyms1 = EditWordSynonyms.Synonyms;
+                FrontSynonyms = EditWordSynonyms.Synonyms;
                 QuizEditor.ChkFixWordsCount();
             }
             DisposeEditWordSynonyms();
@@ -150,7 +150,7 @@ namespace SteelQuiz.QuizEditor
             InitEditWordSynonyms(2);
             if (EditWordSynonyms.ShowDialog() == DialogResult.OK)
             {
-                Synonyms2 = EditWordSynonyms.Synonyms;
+                BackSynonyms = EditWordSynonyms.Synonyms;
                 QuizEditor.ChkFixWordsCount();
             }
             DisposeEditWordSynonyms();
@@ -241,39 +241,39 @@ namespace SteelQuiz.QuizEditor
         {
             // check if synonyms contains word entered
 
-            if ((word == -1 || word == 1) && Synonyms1 != null && Synonyms1.Contains(Word1))
+            if ((word == -1 || word == 1) && FrontSynonyms != null && FrontSynonyms.Contains(Front))
             {
                 QuizEditor.UndoStack.Push(new UndoRedoFuncPair(
-                    new Action[] { Synonyms1.AddItem(Word1) },
-                    new Action[] { Synonyms1.RemoveItem(Word1) },
+                    new Action[] { FrontSynonyms.AddItem(Front) },
+                    new Action[] { FrontSynonyms.RemoveItem(Front) },
                     "Auto-remove synonym",
                     new OwnerControlData(this, this.Parent)
                     ));
                 QuizEditor.UpdateUndoRedoTooltips();
-                Synonyms1.Remove(Word1);
+                FrontSynonyms.Remove(Front);
                 /*
 #warning dont use messageboxes
                 var msg = MessageBox.Show($"A synonym to {Word1} has been removed, that was equal to the word", "SteelQuiz",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                     */
-                QuizEditor.ShowNotification($"A synonym to '{Word1}' has been removed, due to it being equal to the word itself", 0);
+                QuizEditor.ShowNotification($"A synonym to '{Front}' has been removed, due to it being equal to the word itself", 0);
             }
 
-            if ((word == -1 || word == 2) && Synonyms2 != null && Synonyms2.Contains(Word2))
+            if ((word == -1 || word == 2) && BackSynonyms != null && BackSynonyms.Contains(Back))
             {
                 QuizEditor.UndoStack.Push(new UndoRedoFuncPair(
-                    new Action[] { Synonyms2.AddItem(Word2) },
-                    new Action[] { Synonyms2.RemoveItem(Word2) },
+                    new Action[] { BackSynonyms.AddItem(Back) },
+                    new Action[] { BackSynonyms.RemoveItem(Back) },
                     "Auto-remove synonym",
                     new OwnerControlData(this, this.Parent)
                     ));
                 QuizEditor.UpdateUndoRedoTooltips();
-                Synonyms2.Remove(Word2);
+                BackSynonyms.Remove(Back);
                 /*
                 var msg = MessageBox.Show($"A synonym to word {Word2} has been removed, that was equal to the word", "SteelQuiz",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                     */
-                QuizEditor.ShowNotification($"A synonym to '{Word2}' has been removed, due to it being equal to the word itself", 0);
+                QuizEditor.ShowNotification($"A synonym to '{Back}' has been removed, due to it being equal to the word itself", 0);
             }
         }
 

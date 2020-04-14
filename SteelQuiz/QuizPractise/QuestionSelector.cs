@@ -127,7 +127,7 @@ namespace SteelQuiz.QuizPractise
                 index = Enumerable.Range(0, int.MaxValue).Except(wordsNotToAsk_Indexes).FirstOrDefault();
             }
             var wordPair = quiz.Cards[index];
-            quiz.ProgressData.SetCurrentQuestion(wordPair);
+            quiz.ProgressData.SetCurrentCard(wordPair);
             QuizCore.SaveQuizProgress(quiz);
             return wordPair;
         }
@@ -173,7 +173,7 @@ namespace SteelQuiz.QuizPractise
                 sum += askPrb;
                 if (r <= sum)
                 {
-                    quiz.ProgressData.SetCurrentQuestion(wordPairData.Card);
+                    quiz.ProgressData.SetCurrentCard(wordPairData.Card);
                     QuizCore.SaveQuizProgress(quiz);
                     return wordPairData.Card;
                 }

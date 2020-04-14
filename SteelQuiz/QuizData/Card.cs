@@ -185,14 +185,14 @@ namespace SteelQuiz.QuizData
             public string MostSimilarAnswer { get; set; }
             public int Difference { get; set; }
             public StringComp.CorrectCertainty Certainty { get; set; }
-            public Card WordPair { get; set; }
+            public Card Card { get; set; }
 
-            public AnswerDiff(int difference, string mostSimilarAnswer, StringComp.CorrectCertainty certainty, Card wordPair)
+            public AnswerDiff(int difference, string mostSimilarAnswer, StringComp.CorrectCertainty certainty, Card card)
             {
                 Difference = difference;
                 MostSimilarAnswer = mostSimilarAnswer;
                 Certainty = certainty;
-                WordPair = wordPair;
+                Card = card;
             }
 
             public bool Correct()
@@ -219,20 +219,20 @@ namespace SteelQuiz.QuizData
 
             StringComp.SimilarityData bestSimilarityData = similarityData.OrderBy(x => x.Difference).ThenBy(x => (int)x.Certainty).First();
 
-            var ansDiff = new AnswerDiff(bestSimilarityData.Difference, bestSimilarityData.CorrectAnswer, bestSimilarityData.Certainty, bestSimilarityData.WordPair);
+            var ansDiff = new AnswerDiff(bestSimilarityData.Difference, bestSimilarityData.CorrectAnswer, bestSimilarityData.Certainty, bestSimilarityData.Card);
 
             if (updateProgress)
             {
-                ansDiff.WordPair.GetProgressData(quiz).AddAnswerAttempt(new AnswerAttempt(ansDiff.Correct()));
+                ansDiff.Card.GetProgressData(quiz).AddAnswerAttempt(new AnswerAttempt(ansDiff.Correct()));
             }
 
             if (ansDiff.Correct())
             {
-                ansDiff.WordPair.GetProgressData(quiz).AskedThisRound = true;
+                ansDiff.Card.GetProgressData(quiz).AskedThisRound = true;
 
-                if (ansDiff.WordPair.GetRequiredAnswerSynonyms(quiz).Select(x => x.GetProgressData(quiz).AskedThisRound).All(x => x == true))
+                if (ansDiff.Card.GetRequiredAnswerSynonyms(quiz).Select(x => x.GetProgressData(quiz).AskedThisRound).All(x => x == true))
                 {
-                    quiz.ProgressData.SetCurrentQuestion(null);
+                    quiz.ProgressData.SetCurrentCard(quiz, null);
                 }
             }
 
@@ -241,24 +241,24 @@ namespace SteelQuiz.QuizData
             return ansDiff;
         }
 
-        private IEnumerable<StringComp.SimilarityData> SimilarityData(Quiz quiz, Card wordPair, string input, bool updateProgress = true)
+        private IEnumerable<StringComp.SimilarityData> SimilarityData(Quiz quiz, Card card, string input, bool updateProgress = true)
         {
             var similarityData = new List<StringComp.SimilarityData>();
 
             if (quiz.ProgressData.AnswerCardSide == CardSide.Back)
             {
-                similarityData.Add(StringComp.Similarity(input, wordPair.Back, wordPair, SmartComparisonRules));
-                foreach (var synonym in wordPair.BackSynonyms)
+                similarityData.Add(StringComp.Similarity(input, card.Back, card, SmartComparisonRules));
+                foreach (var synonym in card.BackSynonyms)
                 {
-                    similarityData.Add(StringComp.Similarity(input, synonym, wordPair, SmartComparisonRules));
+                    similarityData.Add(StringComp.Similarity(input, synonym, card, SmartComparisonRules));
                 }
             }
             else if (quiz.ProgressData.AnswerCardSide == CardSide.Front)
             {
-                similarityData.Add(StringComp.Similarity(input, wordPair.Front, wordPair, SmartComparisonRules));
-                foreach (var synonym in wordPair.FrontSynonyms)
+                similarityData.Add(StringComp.Similarity(input, card.Front, card, SmartComparisonRules));
+                foreach (var synonym in card.FrontSynonyms)
                 {
-                    similarityData.Add(StringComp.Similarity(input, synonym, wordPair, SmartComparisonRules));
+                    similarityData.Add(StringComp.Similarity(input, synonym, card, SmartComparisonRules));
                 }
             }
             else

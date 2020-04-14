@@ -133,16 +133,16 @@ namespace SteelQuiz.QuizEditor
         {
             for (int i = 0; i < count; ++i)
             {
-                var w = new QuizEditorWordPair(this, flp_words.Controls.Count);
+                var w = new QuizEditorCard(this, flp_words.Controls.Count);
                 flp_words.Controls.Add(w);
                 flp_words.SetFlowBreak(w, true);
                 w.Size = new Size(flp_words.Size.Width - 46, w.Size.Height);
             }
         }
 
-        public QuizEditorWordPair PrevWord(int wordNumber)
+        public QuizEditorCard PrevWord(int wordNumber)
         {
-            return wordNumber > 0 ? flp_words.Controls[wordNumber - 1] as QuizEditorWordPair : null;
+            return wordNumber > 0 ? flp_words.Controls[wordNumber - 1] as QuizEditorCard : null;
         }
 
         public void RemoveQuizEditorWord()
@@ -153,7 +153,7 @@ namespace SteelQuiz.QuizEditor
         public void ChkFixWordsCount()
         {
             // two empty word pairs should always be present
-            var wps = flp_words.Controls.OfType<QuizEditorWordPair>();
+            var wps = flp_words.Controls.OfType<QuizEditorCard>();
             int emptyCount = wps.Where(x => QEWordEmpty(x)).Count();
             while (emptyCount > EMPTY_WORD_PAIRS_COUNT && QEWordEmpty(wps.ElementAt(wps.Count() - 1)))
             {
@@ -167,10 +167,10 @@ namespace SteelQuiz.QuizEditor
             }
         }
 
-        private bool QEWordEmpty(QuizEditorWordPair qew)
+        private bool QEWordEmpty(QuizEditorCard qew)
         {
             return qew != null ?
-                qew.txt_word1.Text == "" && qew.Synonyms1.IsNullOrEmpty() && qew.txt_word2.Text == "" && qew.Synonyms2.IsNullOrEmpty()
+                qew.txt_word1.Text == "" && qew.FrontSynonyms.IsNullOrEmpty() && qew.txt_word2.Text == "" && qew.BackSynonyms.IsNullOrEmpty()
                 : false;
         }
 
@@ -191,13 +191,13 @@ namespace SteelQuiz.QuizEditor
             quiz.GUID = QuizGuid;
 
             ulong i = 0;
-            foreach (var wordPair in flp_words.Controls.OfType<QuizEditorWordPair>().Where(x => !QEWordEmpty(x)))
+            foreach (var wordPair in flp_words.Controls.OfType<QuizEditorCard>().Where(x => !QEWordEmpty(x)))
             {
                 wordPair.RemoveSynonymsEqualToWords();
 
                 StringComp.Rules comparisonRules = wordPair.ComparisonRules.Data;
 
-                var wp = new Card(wordPair.txt_word1.Text, wordPair.txt_word2.Text, comparisonRules, wordPair.Synonyms1, wordPair.Synonyms2);
+                var wp = new Card(wordPair.txt_word1.Text, wordPair.txt_word2.Text, comparisonRules, wordPair.FrontSynonyms, wordPair.BackSynonyms);
                 quiz.Cards.Add(wp);
                 ++i;
             }
@@ -270,13 +270,13 @@ namespace SteelQuiz.QuizEditor
 
             for (int i = 0; i < quiz.Cards.Count; ++i)
             {
-                var ctrl = flp_words.Controls.OfType<QuizEditorWordPair>().ElementAt(i);
+                var ctrl = flp_words.Controls.OfType<QuizEditorCard>().ElementAt(i);
                 var wp = quiz.Cards[i];
 
                 ctrl.txt_word1.Text = wp.Front;
-                ctrl.Synonyms1 = wp.FrontSynonyms;
+                ctrl.FrontSynonyms = wp.FrontSynonyms;
                 ctrl.txt_word2.Text = wp.Back;
-                ctrl.Synonyms2 = wp.BackSynonyms;
+                ctrl.BackSynonyms = wp.BackSynonyms;
                 ctrl.ComparisonRules.Data = (StringComp.Rules)FixEnum(wp.SmartComparisonRules);
             }
 
@@ -336,7 +336,7 @@ namespace SteelQuiz.QuizEditor
 
         public bool SaveBeforeExit()
         {
-            foreach (var wordPair in flp_words.Controls.OfType<QuizEditorWordPair>())
+            foreach (var wordPair in flp_words.Controls.OfType<QuizEditorCard>())
             {
                 if (wordPair.EditWordSynonyms != null)
                 {
@@ -522,7 +522,7 @@ namespace SteelQuiz.QuizEditor
             // resize wordpair collection
             flp_words.Size = new Size(this.Size.Width - 40, this.Size.Height - 124);
 
-            foreach (var c in flp_words.Controls.OfType<QuizEditorWordPair>())
+            foreach (var c in flp_words.Controls.OfType<QuizEditorCard>())
             {
                 c.Size = new Size(flp_words.Size.Width - 46, c.Size.Height);
             }
@@ -673,7 +673,7 @@ namespace SteelQuiz.QuizEditor
 
             if (enableSmartComparisonToolStripMenuItem.CheckState == CheckState.Checked)
             {
-                foreach (var wp in flp_words.Controls.OfType<QuizEditorWordPair>())
+                foreach (var wp in flp_words.Controls.OfType<QuizEditorCard>())
                 {
                     var compRules = wp.ComparisonRules.Data;
                     undoActions.Add(wp.ComparisonRules.SetSemiSilentUR(compRules));
@@ -690,7 +690,7 @@ namespace SteelQuiz.QuizEditor
             }
             else if (enableSmartComparisonToolStripMenuItem.CheckState == CheckState.Unchecked)
             {
-                foreach (var wp in flp_words.Controls.OfType<QuizEditorWordPair>())
+                foreach (var wp in flp_words.Controls.OfType<QuizEditorCard>())
                 {
                     var compRules = wp.ComparisonRules.Data;
                     undoActions.Add(wp.ComparisonRules.SetSemiSilentUR(compRules));
@@ -719,8 +719,8 @@ namespace SteelQuiz.QuizEditor
                 | StringComp.Rules.IgnoreOpeningWhitespace
                 | StringComp.Rules.IgnoreEndingWhitespace).HasFlag(StringComp.SMART_RULES));
 
-            int fullEnableCount = flp_words.Controls.OfType<QuizEditorWordPair>().Where(x => x.ComparisonRules.Data.HasFlag(StringComp.SMART_RULES)).Count();
-            int totalCount = flp_words.Controls.OfType<QuizEditorWordPair>().Count();
+            int fullEnableCount = flp_words.Controls.OfType<QuizEditorCard>().Where(x => x.ComparisonRules.Data.HasFlag(StringComp.SMART_RULES)).Count();
+            int totalCount = flp_words.Controls.OfType<QuizEditorCard>().Count();
 
             if (fullEnableCount == totalCount)
             {
@@ -746,7 +746,7 @@ namespace SteelQuiz.QuizEditor
             var undoActions = new List<Action>();
             var redoActions = new List<Action>();
 
-            foreach (var wprules in flp_words.Controls.OfType<QuizEditorWordPair>().Select(x => x.ComparisonRules))
+            foreach (var wprules in flp_words.Controls.OfType<QuizEditorCard>().Select(x => x.ComparisonRules))
             {
                 StringComp.Rules newval;
                 StringComp.Rules oldval = wprules.Data;
@@ -781,7 +781,7 @@ namespace SteelQuiz.QuizEditor
 
         private void ModifySmartComparisonSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var smartCompSettings = new SmartComparisonSettings(flp_words.Controls.OfType<QuizEditorWordPair>().Select(x => x.ComparisonRules.Data));
+            var smartCompSettings = new SmartComparisonSettings(flp_words.Controls.OfType<QuizEditorCard>().Select(x => x.ComparisonRules.Data));
             var result = smartCompSettings.ShowDialog();
             var undoRedoes = new List<UndoRedoFuncPair>();
 

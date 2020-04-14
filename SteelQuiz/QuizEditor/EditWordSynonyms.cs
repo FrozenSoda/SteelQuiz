@@ -37,30 +37,30 @@ namespace SteelQuiz.QuizEditor
         {
             get
             {
-                return Language == 1 ? Parent.Synonyms1 : Parent.Synonyms2;
+                return Language == 1 ? Parent.FrontSynonyms : Parent.BackSynonyms;
             }
 
             set
             {
                 if (Language == 1)
                 {
-                    Parent.Synonyms1 = value;
+                    Parent.FrontSynonyms = value;
                 }
                 else
                 {
-                    Parent.Synonyms2 = value;
+                    Parent.BackSynonyms = value;
                 }
             }
         }
 
-        private new QuizEditorWordPair Parent { get; set; }
+        private new QuizEditorCard Parent { get; set; }
         private QuizEditor QuizEditor => Parent.QuizEditor;
 
         private bool changedTextBox = false; // since listbox select switch
         private object[] initialListBoxCollection;
         private bool closeWarning = true;
 
-        public EditWordSynonyms(QuizEditorWordPair parent, string word, int language)
+        public EditWordSynonyms(QuizEditorCard parent, string word, int language)
         {
             InitializeComponent();
             Parent = parent;
@@ -179,7 +179,7 @@ namespace SteelQuiz.QuizEditor
 
             if (Language == 1)
             {
-                if (txt_wordAdd.Text == Parent.Word1)
+                if (txt_wordAdd.Text == Parent.Front)
                 {
                     MessageBox.Show("You can't add a synonym equal to the word you are adding synonyms for", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
@@ -187,7 +187,7 @@ namespace SteelQuiz.QuizEditor
             }
             else if (Language == 2)
             {
-                if (txt_wordAdd.Text == Parent.Word2)
+                if (txt_wordAdd.Text == Parent.Back)
                 {
                     MessageBox.Show("You can't add a synonym equal to the word you are adding synonyms for", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;

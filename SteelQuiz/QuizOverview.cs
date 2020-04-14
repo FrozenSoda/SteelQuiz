@@ -121,7 +121,7 @@ namespace SteelQuiz
                     break;
             }
 
-            switch (Quiz.ProgressData.TermsDisplayOrderOrder)
+            switch (Quiz.ProgressData.CardsDisplayOrderOrder)
             {
                 case CardsOrderByOrder.Ascending:
                     cmb_orderAscendingDescending.SelectedItem = "Ascending";
@@ -132,12 +132,12 @@ namespace SteelQuiz
                     break;
             }
 
-            LoadWordPairs();
+            LoadCards();
 
             cmb_order.SelectedIndexChanged += Cmb_order_SelectedIndexChanged;
             cmb_orderAscendingDescending.SelectedIndexChanged += Cmb_order_SelectedIndexChanged;
 
-            lbl_termsCount.Text = QuizCore.Quiz.WordPairs.Count().ToString();
+            lbl_termsCount.Text = Quiz.Cards.Count().ToString();
         }
 
         public void LoadLearningProgressPercentage()
@@ -147,14 +147,14 @@ namespace SteelQuiz
         }
 
         /// <summary>
-        /// Re-colors the word pairs in the list, to have every other wordpair in a different color, to make reading easier
+        /// Re-colors the word pairs in the list, to have every other Card in a different color, to make reading easier
         /// </summary>
-        public void RecolorWordPairs()
+        public void RecolorCards()
         {
             int count = 0;
             foreach (var c in flp_words.Controls.OfType<Control>())
             {
-                // Every other wordpair should have a slighly different color to make reading them easier
+                // Every other Card should have a slighly different color to make reading them easier
                 var bc = WelcomeTheme.GetBackColor();
                 if (count % 2 == 0)
                 {
@@ -169,7 +169,7 @@ namespace SteelQuiz
             }
         }
 
-        public void LoadWordPairs()
+        public void LoadCards()
         {
             //var watch = new Stopwatch();
             //watch.Start();
@@ -239,7 +239,7 @@ namespace SteelQuiz
             int count = 0;
             foreach (var c in controls)
             {
-                // Every other wordpair should have a slighly different color to make reading them easier
+                // Every other Card should have a slighly different color to make reading them easier
                 var bc = WelcomeTheme.GetBackColor();
                 if (count % 2 == 0)
                 {
@@ -278,7 +278,7 @@ namespace SteelQuiz
             //cpb_learningProgress.InnerColor = theme.GetBackColor();
             //cpb_learningProgress.ForeColor = theme.GetMainLabelForeColor();
 
-            RecolorWordPairs();
+            RecolorCards();
         }
 
         private void Btn_practiseQuiz_Click(object sender, EventArgs e)
@@ -368,12 +368,12 @@ namespace SteelQuiz
 
             QuizCore.SaveQuizProgress(Quiz);
 
-            LoadWordPairs();
+            LoadCards();
         }
 
         private void btn_practiseWriting_Click(object sender, EventArgs e)
         {
-            if (QuizCore.Quiz.WordPairs.Count == 0)
+            if (Quiz.Cards.Count == 0)
             {
                 MessageBox.Show("Cannot practise quiz with no terms", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -384,7 +384,7 @@ namespace SteelQuiz
 
         private void btn_practiseFlashcards_Click(object sender, EventArgs e)
         {
-            if (QuizCore.Quiz.WordPairs.Count == 0)
+            if (Quiz.Cards.Count == 0)
             {
                 MessageBox.Show("Cannot practise quiz with no terms", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
