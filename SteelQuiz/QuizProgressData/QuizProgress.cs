@@ -69,10 +69,9 @@ namespace SteelQuiz.QuizProgressData
         /// </summary>
         public int MinimumTriesCountToConsiderSkippingQuestion { get; set; } = 2;
         /// <summary>
-        /// Current card(s) to answer. Contains multiple elements if a card has multiple definitions through multiple cards.
+        /// A collection of all Cards that should be answered this round.
         /// </summary>
-        [JsonProperty]
-        internal List<Card> CurrentCards { get; set; } = new List<Card>();
+        public List<Card> CurrentCards { get; set; } = new List<Card>();
 
         [JsonIgnore]
         /// <summary>
@@ -172,34 +171,6 @@ namespace SteelQuiz.QuizProgressData
                 return 0d;
             }
             return val;
-        }
-
-        // due to CurrentCards not preserving references due to serialization, implement setter through method instead, to avoid confusion regarding references
-        public void SetCurrentCard(Quiz quiz, Card card)
-        {
-            if (card == null)
-            {
-                CurrentCards.Clear();
-            }
-            else
-            {
-                CurrentCards = card.GetRequiredAnswerSynonyms(quiz).ToList();
-            }
-        }
-
-        public IEnumerable<Card> WordsNotToAsk()
-        {
-            // find words already asked this round
-            var wordsAlreadyAsked = new List<Card>();
-            for (int i = 0; i < CardProgress.Count; ++i)
-            {
-                if (CardProgress[i].AskedThisRound || CardProgress[i].SkipThisRound)
-                {
-                    wordsAlreadyAsked.Add(CardProgress[i].Card);
-                }
-            }
-
-            return wordsAlreadyAsked;
         }
     }
 }
