@@ -35,7 +35,7 @@ using static SteelQuiz.Dashboard;
 
 namespace SteelQuiz.QuizPractise
 {
-    public partial class InQuiz : AutoThemeableForm
+    public partial class QuizPractise : AutoThemeableForm
     {
         private GeneralTheme GeneralTheme = new GeneralTheme();
 
@@ -69,7 +69,12 @@ namespace SteelQuiz.QuizPractise
         /// </summary>
         private bool userCopyingAnswer = false;
 
-        public InQuiz(Quiz quiz, QuizPractiseMode quizPractiseMode)
+        /// <summary>
+        /// True if SteelQuiz should exit when clicking the Close button; false if we should return to Dashboard
+        /// </summary>
+        public bool exitAppOnClose = true;
+
+        public QuizPractise(Quiz quiz, QuizPractiseMode quizPractiseMode)
         {
             InitializeComponent();
 
@@ -264,6 +269,10 @@ namespace SteelQuiz.QuizPractise
         private void InQuiz_FormClosing(object sender, FormClosingEventArgs e)
         {
             QuizCore.SaveQuizProgress(Quiz);
+            if (exitAppOnClose)
+            {
+                Application.Exit();
+            }
         }
     }
 }

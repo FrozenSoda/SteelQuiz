@@ -18,7 +18,7 @@
 
 namespace SteelQuiz.QuizPractise
 {
-    partial class InQuiz
+    partial class QuizPractise
     {
         /// <summary>
         /// Required designer variable.
@@ -46,7 +46,7 @@ namespace SteelQuiz.QuizPractise
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InQuiz));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QuizPractise));
             this.lbl_cardSideToAsk = new System.Windows.Forms.Label();
             this.lbl_cardSideToAnswer = new System.Windows.Forms.Label();
             this.lbl_progress = new System.Windows.Forms.Label();

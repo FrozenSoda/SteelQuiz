@@ -33,9 +33,9 @@ namespace SteelQuiz.QuizPractise
     {
         public Card Card { get; set; }
         private Quiz Quiz { get; set; }
-        private new InQuiz Parent { get; set; }
+        private new QuizPractise Parent { get; set; }
 
-        public FixQuizErrors(InQuiz parent, Quiz quiz, Card wordPair)
+        public FixQuizErrors(QuizPractise parent, Quiz quiz, Card wordPair)
         {
             InitializeComponent();
             Card = wordPair;
@@ -110,7 +110,7 @@ namespace SteelQuiz.QuizPractise
 
         private void btn_editInEditor_Click(object sender, EventArgs e)
         {
-            Parent.ExitAppOnClose = false;
+            Parent.exitAppOnClose = false;
             Program.frmWelcome.Show();
             Program.frmWelcome.OpenQuizEditor(Quiz, Quiz.QuizIdentity.FindQuizPath());
             DialogResult = DialogResult.Abort;

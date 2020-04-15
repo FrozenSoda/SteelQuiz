@@ -437,7 +437,7 @@ namespace SteelQuiz
         public void PractiseQuiz(QuizPractiseMode quizPractiseMode)
         {
             Hide();
-            Program.frmInQuiz = new InQuiz(quizPractiseMode);
+            Program.frmInQuiz = new QuizPractise.QuizPractise(quizPractiseMode);
             Program.frmInQuiz.Show();
         }
 

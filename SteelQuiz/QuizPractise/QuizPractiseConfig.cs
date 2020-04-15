@@ -83,7 +83,7 @@ namespace SteelQuiz.QuizPractise
 
         private void Btn_dontAgree_Click(object sender, EventArgs e)
         {
-            Program.frmInQuiz.FixQuizErrors();
+            //Program.frmInQuiz.FixQuizErrors();
         }
 
         private void Btn_switchTestMode_Click(object sender, EventArgs e)

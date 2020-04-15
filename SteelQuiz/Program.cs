@@ -36,7 +36,7 @@ namespace SteelQuiz
         public static string[] Args { get; set; }
 
         public static Dashboard frmWelcome = null;
-        public static InQuiz frmInQuiz = null;
+        public static QuizPractise.QuizPractise frmInQuiz = null;
         public static Preferences.Preferences frmPreferences = null;
         public static List<QuizEditor.QuizEditor> openQuizEditors = new List<QuizEditor.QuizEditor>();
 
