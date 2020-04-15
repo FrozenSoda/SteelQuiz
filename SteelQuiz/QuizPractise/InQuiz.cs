@@ -197,6 +197,7 @@ namespace SteelQuiz.QuizPractise
 
             CurrentInput = "";
             lbl_cardSideToAnswer.Text = "Enter your answer ...";
+            cardSideAnswerPromptBeingShown = true;
 
             CurrentCard = QuestionSelector.GenerateCard(Quiz);
             if (CurrentCard == null)
