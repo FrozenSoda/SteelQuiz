@@ -62,12 +62,16 @@ namespace SteelQuiz.QuizPractise
             {
                 __currentCard = value;
 
-                if (value != null && Quiz != null)
+                if (value != null)
                 {
                     lbl_cardSideToAsk.Text = value.GetSideToAsk(Quiz);
                     lbl_cardSideToAnswer.Text = "Enter your answer ...";
                     cardSideAnswerPromptBeingShown = true;
                 }
+
+                lbl_progress.Text =
+                    $"Round Progress: {Quiz.Cards.Where(x => x.GetProgressData(Quiz).AskedThisRound).Count()} " +
+                    $"/ {Quiz.Cards.Where(x => !x.GetProgressData(Quiz).SkipThisRound).Count()}";
             }
         }
         private string __currentInput = "";
