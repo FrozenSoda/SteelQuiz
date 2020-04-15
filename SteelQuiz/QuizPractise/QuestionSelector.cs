@@ -79,7 +79,7 @@ namespace SteelQuiz.QuizPractise
                 probabilitySum += item.Probability;
                 converted.Add(new ProbabilityItem<T>() { Item = item.Item, Probability = probabilitySum });
             }
-            converted.Add(new ProbabilityItem<T>() { Item = items.Last().Item, Probability = 1 });
+            converted.Add(new ProbabilityItem<T>() { Item = items.Last().Item, Probability = 1.0 });
 
             var rnd = new Random();
             var r = rnd.NextDouble();
