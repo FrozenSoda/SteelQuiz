@@ -83,13 +83,6 @@ namespace SteelQuiz
                 return;
             }
 
-            /*
-            if (!QuizCore.CheckInitDirectories())
-            {
-                Environment.Exit(1);
-            }
-            */
-
             if (!ConfigManager.LoadConfig())
             {
                 return;

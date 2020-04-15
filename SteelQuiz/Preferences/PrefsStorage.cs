@@ -98,7 +98,7 @@ namespace SteelQuiz.Preferences
                 throw ex;
             }
 
-            if (File.Exists(newPath))
+            if (File.Exists(newPath) && File.Exists(oldPath))
             {
                 var conflictSolution = new QuizProgressConflict();
                 if (conflictSolution.ShowDialog() != DialogResult.OK)
@@ -153,7 +153,7 @@ namespace SteelQuiz.Preferences
                     File.Move(oldPath, newPath);
                 }
             }
-            else
+            else if (File.Exists(oldPath))
             {
                 File.Move(oldPath, newPath);
             }
@@ -164,6 +164,12 @@ namespace SteelQuiz.Preferences
             {
                 ConfigManager.SaveConfig();
             }
+
+            QuizCore.LoadQuizAccessData();
+            // Reload quiz
+            Program.frmWelcome.LoadedQuiz = QuizCore.LoadQuiz(Program.frmWelcome.LoadedQuiz.QuizIdentity.FindQuizPath());
+            Program.frmWelcome.PopulateQuizList();
+            Program.frmWelcome.UpdateQuizOverview();
 
             return true;
         }

@@ -35,10 +35,11 @@ namespace SteelQuiz
         /// </summary>
         /// <param name="fileToBackup">The file to make a backup of.</param>
         /// <param name="destinationDir">The directory where the backup will be stored.</param>
-        public static void BackupFile(string fileToBackup, string destinationDir)
+        /// <param name="throwOnFileMissing">True if an exception should be thrown if the file to backup does not exist.</param>
+        public static void BackupFile(string fileToBackup, string destinationDir, bool throwOnFileMissing = true)
         {
             string destinationFileNameStart = Path.GetFileNameWithoutExtension(fileToBackup);
-            BackupFile(fileToBackup, destinationDir, destinationFileNameStart);
+            BackupFile(fileToBackup, destinationDir, destinationFileNameStart, throwOnFileMissing);
         }
 
         /// <summary>
@@ -47,8 +48,21 @@ namespace SteelQuiz
         /// <param name="fileToBackup">The file to make a backup of.</param>
         /// <param name="destinationDir">The directory where the backup will be stored.</param>
         /// <param name="destinationFileNameStart">The start of the filename for the backups. An additional part will then be added, to make the filename unique.</param>
-        public static void BackupFile(string fileToBackup, string destinationDir, string destinationFileNameStart)
+        /// <param name="throwOnFileMissing">True if an exception should be thrown if the file to backup does not exist; False if the method should just return.</param>
+        public static void BackupFile(string fileToBackup, string destinationDir, string destinationFileNameStart, bool throwOnFileMissing = true)
         {
+            if (!File.Exists(fileToBackup))
+            {
+                if (throwOnFileMissing)
+                {
+                    throw new FileNotFoundException($"File to backup does not exist: {fileToBackup}");
+                }
+                else
+                {
+                    return;
+                }
+            }
+
             Directory.CreateDirectory(destinationDir);
 
             // Find vacant name for backup
@@ -73,7 +87,7 @@ namespace SteelQuiz
                 }
             }
 
-            string backupFile = Path.Combine(destinationDir, destinationFileNameStart + "_" + (maxNum + 1).ToString() + "." + Path.GetExtension(fileToBackup));
+            string backupFile = Path.Combine(destinationDir, destinationFileNameStart + "_" + (maxNum + 1).ToString() + Path.GetExtension(fileToBackup));
             File.Copy(fileToBackup, backupFile);
         }
     }

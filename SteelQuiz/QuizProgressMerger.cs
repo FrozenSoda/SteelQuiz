@@ -40,10 +40,11 @@ namespace SteelQuiz
         /// <returns>True if the merge was successful, otherwise false</returns>
         public static bool Merge(string progressFile1, string progressFile2, string savePath)
         {
-            var bkp = QuizCore.BackupFile(savePath);
-            if (!bkp)
+            BackupHelper.BackupFile(progressFile1, Path.Combine(Path.GetDirectoryName(progressFile1), "SteelQuiz Progress Backups"), false);
+            BackupHelper.BackupFile(progressFile2, Path.Combine(Path.GetDirectoryName(progressFile2), "SteelQuiz Progress Backups"), false);
+            if (File.Exists(savePath) && savePath != progressFile1 && savePath != progressFile2)
             {
-                return false;
+                BackupHelper.BackupFile(savePath, Path.Combine(Path.GetDirectoryName(savePath), "SteelQuiz Progress Backups"));
             }
 
             QuizProgressDataRoot prog1;

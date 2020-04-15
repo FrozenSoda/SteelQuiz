@@ -81,6 +81,8 @@ namespace SteelQuiz
         {
             InitializeComponent();
 
+            QuizCore.LoadQuizAccessData();
+
             btn_createQuiz_originalLoc = btn_createQuiz.Location;
             btn_loadQuizFromFile_originalLoc = btn_loadQuizFromFile.Location;
             btn_importQuiz_originalLoc = btn_importQuiz.Location;
@@ -434,10 +436,10 @@ namespace SteelQuiz
             Flashcards,
         }
 
-        public void PractiseQuiz(QuizPractiseMode quizPractiseMode)
+        public void PractiseQuiz(Quiz quiz, QuizPractiseMode quizPractiseMode)
         {
             Hide();
-            Program.frmInQuiz = new QuizPractise.QuizPractise(quizPractiseMode);
+            Program.frmInQuiz = new QuizPractise.QuizPractise(quiz, quizPractiseMode);
             Program.frmInQuiz.Show();
         }
 

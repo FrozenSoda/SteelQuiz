@@ -92,7 +92,7 @@ namespace SteelQuiz.QuizPractise
             this.lbl_cardSideToAnswer.Name = "lbl_cardSideToAnswer";
             this.lbl_cardSideToAnswer.Size = new System.Drawing.Size(387, 345);
             this.lbl_cardSideToAnswer.TabIndex = 1;
-            this.lbl_cardSideToAnswer.Text = "Enter your answer...";
+            this.lbl_cardSideToAnswer.Text = "Enter your answer ...";
             this.lbl_cardSideToAnswer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lbl_cardSideToAnswer.UseMnemonic = false;
             // 
@@ -255,7 +255,7 @@ namespace SteelQuiz.QuizPractise
             this.btn_cfg.TabStop = false;
             this.btn_cfg.UseVisualStyleBackColor = false;
             // 
-            // InQuiz
+            // QuizPractise
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -276,7 +276,7 @@ namespace SteelQuiz.QuizPractise
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
-            this.Name = "InQuiz";
+            this.Name = "QuizPractise";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "SteelQuiz";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.InQuiz_FormClosing);

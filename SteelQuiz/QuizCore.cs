@@ -163,6 +163,13 @@ namespace SteelQuiz
         {
             string dataRaw = AtomicIO.AtomicRead(ConfigManager.Config.StorageConfig.QuizProgressFile);
             var dataRoot = JsonConvert.DeserializeObject<QuizProgressDataRoot>(dataRaw);
+
+            if (dataRoot.FileFormatVersion == null || new Version(dataRoot.FileFormatVersion).CompareTo(MetaData.GetLatestQuizVersion()) < 0)
+            {
+                // Existing quiz file has an older file format - backup before upgrade
+                BackupProgress();
+            }
+
             var data = dataRoot.QuizProgressData.Where(x => x.QuizGUID == quiz.GUID).FirstOrDefault();
 
             if (data != null)
@@ -208,6 +215,12 @@ namespace SteelQuiz
             {
                 dataRaw = AtomicIO.AtomicRead(ConfigManager.Config.StorageConfig.QuizProgressFile);
                 dataRoot = JsonConvert.DeserializeObject<QuizProgressDataRoot>(dataRaw);
+
+                if (dataRoot.FileFormatVersion == null || new Version(dataRoot.FileFormatVersion).CompareTo(MetaData.GetLatestQuizVersion()) < 0)
+                {
+                    // Existing quiz file has an older file format - backup before upgrade
+                    BackupProgress();
+                }
             }
             else
             {
@@ -239,7 +252,12 @@ namespace SteelQuiz
 
         public static void BackupProgress()
         {
-            string destDir = Path.Combine(Path.GetDirectoryName(ConfigManager.Config.StorageConfig.QuizProgressFile), "SteelQuiz Progress Data Backups");
+            if (!File.Exists(ConfigManager.Config.StorageConfig.QuizProgressFile))
+            {
+                return;
+            }
+
+            string destDir = Path.Combine(Path.GetDirectoryName(ConfigManager.Config.StorageConfig.QuizProgressFile), "SteelQuiz Progress Backups");
             BackupHelper.BackupFile(ConfigManager.Config.StorageConfig.QuizProgressFile, destDir);
         }
     }

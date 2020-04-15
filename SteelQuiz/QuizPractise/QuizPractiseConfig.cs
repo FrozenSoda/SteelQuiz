@@ -92,7 +92,8 @@ namespace SteelQuiz.QuizPractise
                 "Switch mode - SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
             if (msg == DialogResult.Yes)
             {
-                Program.frmInQuiz.SwitchIntelligentLearningMode();
+                QuestionSelector.NewRound(Quiz);
+                Program.frmInQuiz.SetCard();
 
                 if (Quiz.ProgressData.FullTestInProgress)
                 {
@@ -120,7 +121,7 @@ namespace SteelQuiz.QuizPractise
             QuizCore.SaveQuizProgress(Quiz);
 
             QuestionSelector.NewRound(Quiz);
-            Program.frmInQuiz.NewWord();
+            Program.frmInQuiz.SetCard();
         }
 
         private void Rdo_last3attemptsIntelligentLearning_CheckedChanged(object sender, EventArgs e)
@@ -132,7 +133,7 @@ namespace SteelQuiz.QuizPractise
                 if (!Quiz.ProgressData.FullTestInProgress)
                 {
                     QuestionSelector.NewRound(Quiz);
-                    Program.frmInQuiz.NewWord();
+                    Program.frmInQuiz.SetCard();
                 }
             }
         }
@@ -146,7 +147,7 @@ namespace SteelQuiz.QuizPractise
                 if (!Quiz.ProgressData.FullTestInProgress)
                 {
                     QuestionSelector.NewRound(Quiz);
-                    Program.frmInQuiz.NewWord();
+                    Program.frmInQuiz.SetCard();
                 }
             }
         }
@@ -160,7 +161,7 @@ namespace SteelQuiz.QuizPractise
                 if (!Quiz.ProgressData.FullTestInProgress)
                 {
                     QuestionSelector.NewRound(Quiz);
-                    Program.frmInQuiz.NewWord();
+                    Program.frmInQuiz.SetCard();
                 }
             }
         }
@@ -174,7 +175,7 @@ namespace SteelQuiz.QuizPractise
                 if (!Quiz.ProgressData.FullTestInProgress)
                 {
                     QuestionSelector.NewRound(Quiz);
-                    Program.frmInQuiz.NewWord();
+                    Program.frmInQuiz.SetCard();
                 }
             }
         }
@@ -184,7 +185,7 @@ namespace SteelQuiz.QuizPractise
             Quiz.ProgressData.AskQuestionsInRandomOrder = chk_randomOrderQuestions.Checked;
 
             QuestionSelector.NewRound(Quiz);
-            Program.frmInQuiz.NewWord();
+            Program.frmInQuiz.SetCard();
         }
 
         private void nud_minAnsTriesSkip_ValueChanged(object sender, EventArgs e)
@@ -194,7 +195,7 @@ namespace SteelQuiz.QuizPractise
             if (!Quiz.ProgressData.FullTestInProgress)
             {
                 QuestionSelector.NewRound(Quiz);
-                Program.frmInQuiz.NewWord();
+                Program.frmInQuiz.SetCard();
             }
         }
     }

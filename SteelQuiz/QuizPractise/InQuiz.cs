@@ -47,14 +47,46 @@ namespace SteelQuiz.QuizPractise
         /// The Practise mode being used.
         /// </summary>
         private QuizPractiseMode PractiseMode { get; set; }
+        private Card __currentCard;
         /// <summary>
         /// The current Card that is being shown.
         /// </summary>
-        private Card CurrentCard { get; set; }
+        private Card CurrentCard
+        {
+            get
+            {
+                return __currentCard;
+            }
+
+            set
+            {
+                __currentCard = value;
+
+                if (value != null && Quiz != null)
+                {
+                    lbl_cardSideToAsk.Text = value.GetSideToAsk(Quiz);
+                    lbl_cardSideToAnswer.Text = "Enter your answer ...";
+                    cardSideAnswerPromptBeingShown = true;
+                }
+            }
+        }
+        private string __currentInput = "";
         /// <summary>
         /// The current user input, when answering by text.
         /// </summary>
-        private string CurrentInput { get; set; } = "";
+        private string CurrentInput
+        {
+            get
+            {
+                return __currentInput;
+            }
+
+            set
+            {
+                __currentInput = value;
+                lbl_cardSideToAnswer.Text = value;
+            }
+        }
 
         /// <summary>
         /// True if round summary (RoundCompleted) user control is being shown, and a new round should start when pressing ENTER.
@@ -68,6 +100,10 @@ namespace SteelQuiz.QuizPractise
         /// True if the user has entered the wrong answer and is currently transcribing the correct one.
         /// </summary>
         private bool userCopyingAnswer = false;
+        /// <summary>
+        /// True if 'Enter your answer ...' or 'Click here to reveal' prompts are being shown in lbl_cardSideToAnswer
+        /// </summary>
+        private bool cardSideAnswerPromptBeingShown = true;
 
         /// <summary>
         /// True if SteelQuiz should exit when clicking the Close button; false if we should return to Dashboard
@@ -137,11 +173,30 @@ namespace SteelQuiz.QuizPractise
         /// <summary>
         /// Generates a card to be shown - or shows the last one from the previous session if it hadn't been answered.
         /// </summary>
-        private void SetCard()
+        public void SetCard()
         {
             newRoundPending = false;
             newCardPending = false;
             userCopyingAnswer = false;
+
+            foreach (var c in lbl_cardSideToAsk.Controls.OfType<CorrectAnswer>())
+            {
+                lbl_cardSideToAsk.Controls.Remove(c);
+                c.Dispose();
+            }
+            foreach (var c in lbl_cardSideToAsk.Controls.OfType<WrongAnswer>())
+            {
+                lbl_cardSideToAsk.Controls.Remove(c);
+                c.Dispose();
+            }
+            foreach (var c in lbl_cardSideToAsk.Controls.OfType<RoundCompleted>())
+            {
+                lbl_cardSideToAsk.Controls.Remove(c);
+                c.Dispose();
+            }
+
+            CurrentInput = "";
+            lbl_cardSideToAnswer.Text = "Enter your answer ...";
 
             CurrentCard = QuestionSelector.GenerateCard(Quiz);
             if (CurrentCard == null)
@@ -149,12 +204,12 @@ namespace SteelQuiz.QuizPractise
                 // Round completed
 
                 var roundCompleted = new RoundCompleted(Quiz);
-                pnl_cardSideToAsk.Controls.Add(roundCompleted);
+                lbl_cardSideToAsk.Controls.Add(roundCompleted);
+                roundCompleted.Show();
                 newRoundPending = true;
 
                 return;
             }
-            lbl_cardQuestionSideType.Text = CurrentCard.GetSideToAsk(Quiz);
         }
 
         /// <summary>
@@ -193,19 +248,19 @@ namespace SteelQuiz.QuizPractise
 
                 e.Handled = true;
 
-                foreach (var c in pnl_cardSideToAsk.Controls.OfType<CorrectAnswer>())
+                foreach (var c in lbl_cardSideToAsk.Controls.OfType<CorrectAnswer>())
                 {
-                    pnl_cardSideToAsk.Controls.Remove(c);
+                    lbl_cardSideToAsk.Controls.Remove(c);
                     c.Dispose();
                 }
-                foreach (var c in pnl_cardSideToAsk.Controls.OfType<WrongAnswer>())
+                foreach (var c in lbl_cardSideToAsk.Controls.OfType<WrongAnswer>())
                 {
-                    pnl_cardSideToAsk.Controls.Remove(c);
+                    lbl_cardSideToAsk.Controls.Remove(c);
                     c.Dispose();
                 }
-                foreach (var c in pnl_cardSideToAsk.Controls.OfType<RoundCompleted>())
+                foreach (var c in lbl_cardSideToAsk.Controls.OfType<RoundCompleted>())
                 {
-                    pnl_cardSideToAsk.Controls.Remove(c);
+                    lbl_cardSideToAsk.Controls.Remove(c);
                     c.Dispose();
                 }
 
@@ -230,19 +285,33 @@ namespace SteelQuiz.QuizPractise
                 {
                     newCardPending = true;
                     var correctAnswer = new CorrectAnswer(CurrentCard, Quiz, chk.Certainty);
-                    pnl_cardSideToAsk.Controls.Add(correctAnswer);
+                    lbl_cardSideToAsk.Controls.Add(correctAnswer);
+                    correctAnswer.Show();
                 }
                 else
                 {
                     userCopyingAnswer = true;
+                    CurrentInput = "";
                     var wrongAnswer = new WrongAnswer(CurrentCard, Quiz);
-                    pnl_cardSideToAsk.Controls.Add(wrongAnswer);
+                    lbl_cardSideToAsk.Controls.Add(wrongAnswer);
+                    wrongAnswer.Show();
                 }
+            }
+            else
+            {
+                if (cardSideAnswerPromptBeingShown)
+                {
+                    lbl_cardSideToAnswer.Text = "";
+                    cardSideAnswerPromptBeingShown = false;
+                }
+
+                CurrentInput += e.KeyChar;
             }
         }
 
         private void btn_home_Click(object sender, EventArgs e)
         {
+            exitAppOnClose = false;
             Close();
             Program.frmWelcome.Show();
         }
