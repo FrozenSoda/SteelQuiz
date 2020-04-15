@@ -122,7 +122,8 @@ namespace SteelQuiz
             {
                 if (frmInQuiz != null)
                 {
-                    frmInQuiz.ReturnToDashboard();
+                    frmInQuiz.Close();
+                    frmWelcome.Show();
                 }
                 else if (QuizEditorsOpen > 0)
                 {

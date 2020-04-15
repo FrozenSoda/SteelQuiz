@@ -48,10 +48,10 @@ namespace SteelQuiz.QuizPractise
         {
             this.components = new System.ComponentModel.Container();
             this.lbl_certainty = new System.Windows.Forms.Label();
-            this.lbl_cardQuestionType = new System.Windows.Forms.Label();
+            this.lbl_cardQuestionSideType = new System.Windows.Forms.Label();
             this.lbl_cardSideToAsk = new System.Windows.Forms.Label();
             this.lbl_cardSideToAnswer = new System.Windows.Forms.Label();
-            this.lbl_cardAnswerType = new System.Windows.Forms.Label();
+            this.lbl_cardAnswerSideType = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.lbl_instruction = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -68,16 +68,16 @@ namespace SteelQuiz.QuizPractise
             this.lbl_certainty.Text = "Correct!";
             this.lbl_certainty.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lbl_cardQuestionType
+            // lbl_cardQuestionSideType
             // 
-            this.lbl_cardQuestionType.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_cardQuestionType.Location = new System.Drawing.Point(4, 74);
-            this.lbl_cardQuestionType.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbl_cardQuestionType.Name = "lbl_cardQuestionType";
-            this.lbl_cardQuestionType.Size = new System.Drawing.Size(317, 32);
-            this.lbl_cardQuestionType.TabIndex = 1;
-            this.lbl_cardQuestionType.Text = "English:";
-            this.lbl_cardQuestionType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_cardQuestionSideType.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_cardQuestionSideType.Location = new System.Drawing.Point(4, 74);
+            this.lbl_cardQuestionSideType.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_cardQuestionSideType.Name = "lbl_cardQuestionSideType";
+            this.lbl_cardQuestionSideType.Size = new System.Drawing.Size(317, 32);
+            this.lbl_cardQuestionSideType.TabIndex = 1;
+            this.lbl_cardQuestionSideType.Text = "English:";
+            this.lbl_cardQuestionSideType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbl_cardSideToAsk
             // 
@@ -101,16 +101,16 @@ namespace SteelQuiz.QuizPractise
             this.lbl_cardSideToAnswer.Text = "Comer";
             this.lbl_cardSideToAnswer.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // lbl_cardAnswerType
+            // lbl_cardAnswerSideType
             // 
-            this.lbl_cardAnswerType.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_cardAnswerType.Location = new System.Drawing.Point(4, 182);
-            this.lbl_cardAnswerType.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbl_cardAnswerType.Name = "lbl_cardAnswerType";
-            this.lbl_cardAnswerType.Size = new System.Drawing.Size(317, 32);
-            this.lbl_cardAnswerType.TabIndex = 3;
-            this.lbl_cardAnswerType.Text = "Spanish:";
-            this.lbl_cardAnswerType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_cardAnswerSideType.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_cardAnswerSideType.Location = new System.Drawing.Point(4, 182);
+            this.lbl_cardAnswerSideType.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_cardAnswerSideType.Name = "lbl_cardAnswerSideType";
+            this.lbl_cardAnswerSideType.Size = new System.Drawing.Size(317, 32);
+            this.lbl_cardAnswerSideType.TabIndex = 3;
+            this.lbl_cardAnswerSideType.Text = "Spanish:";
+            this.lbl_cardAnswerSideType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbl_instruction
             // 
@@ -130,9 +130,9 @@ namespace SteelQuiz.QuizPractise
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.Controls.Add(this.lbl_instruction);
             this.Controls.Add(this.lbl_cardSideToAnswer);
-            this.Controls.Add(this.lbl_cardAnswerType);
+            this.Controls.Add(this.lbl_cardAnswerSideType);
             this.Controls.Add(this.lbl_cardSideToAsk);
-            this.Controls.Add(this.lbl_cardQuestionType);
+            this.Controls.Add(this.lbl_cardQuestionSideType);
             this.Controls.Add(this.lbl_certainty);
             this.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.White;
@@ -146,10 +146,10 @@ namespace SteelQuiz.QuizPractise
         #endregion
 
         private System.Windows.Forms.Label lbl_certainty;
-        private System.Windows.Forms.Label lbl_cardQuestionType;
+        private System.Windows.Forms.Label lbl_cardQuestionSideType;
         private System.Windows.Forms.Label lbl_cardSideToAsk;
         private System.Windows.Forms.Label lbl_cardSideToAnswer;
-        private System.Windows.Forms.Label lbl_cardAnswerType;
+        private System.Windows.Forms.Label lbl_cardAnswerSideType;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label lbl_instruction;
     }

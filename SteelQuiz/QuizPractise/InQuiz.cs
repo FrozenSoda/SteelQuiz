@@ -134,6 +134,10 @@ namespace SteelQuiz.QuizPractise
         /// </summary>
         private void SetCard()
         {
+            newRoundPending = false;
+            newCardPending = false;
+            userCopyingAnswer = false;
+
             CurrentCard = QuestionSelector.GenerateCard(Quiz);
             if (CurrentCard == null)
             {
@@ -180,17 +184,29 @@ namespace SteelQuiz.QuizPractise
             }
             else if (e.KeyChar == '\r')
             {
+                // ENTER
+
                 e.Handled = true;
 
-                // ENTER
+                foreach (var c in pnl_cardSideToAsk.Controls.OfType<CorrectAnswer>())
+                {
+                    pnl_cardSideToAsk.Controls.Remove(c);
+                    c.Dispose();
+                }
+                foreach (var c in pnl_cardSideToAsk.Controls.OfType<WrongAnswer>())
+                {
+                    pnl_cardSideToAsk.Controls.Remove(c);
+                    c.Dispose();
+                }
+                foreach (var c in pnl_cardSideToAsk.Controls.OfType<RoundCompleted>())
+                {
+                    pnl_cardSideToAsk.Controls.Remove(c);
+                    c.Dispose();
+                }
+
                 if (newRoundPending)
                 {
-                    foreach (var c in pnl_cardSideToAsk.Controls.OfType<RoundCompleted>())
-                    {
-                        pnl_cardSideToAsk.Controls.Remove(c);
-                        c.Dispose();
-                    }
-
+                    QuestionSelector.NewRound(Quiz);
                     SetCard();
 
                     return;
@@ -204,23 +220,26 @@ namespace SteelQuiz.QuizPractise
                 }
 
                 // Check answer
-                var chk = CurrentCard.AnswerCheck(Quiz, CurrentInput);
+                var chk = CurrentCard.AnswerCheck(Quiz, CurrentInput, null, !userCopyingAnswer);
                 if (chk.IsCorrect())
                 {
                     newCardPending = true;
                     var correctAnswer = new CorrectAnswer(CurrentCard, Quiz, chk.Certainty);
+                    pnl_cardSideToAsk.Controls.Add(correctAnswer);
                 }
                 else
                 {
                     userCopyingAnswer = true;
-                    var wrongAnswer = new WrongAnswer();
+                    var wrongAnswer = new WrongAnswer(CurrentCard, Quiz);
+                    pnl_cardSideToAsk.Controls.Add(wrongAnswer);
                 }
             }
         }
 
         private void btn_home_Click(object sender, EventArgs e)
         {
-            ReturnToDashboard();
+            Close();
+            Program.frmWelcome.Show();
         }
 
         private void InQuiz_KeyDown(object sender, KeyEventArgs e)
@@ -240,6 +259,11 @@ namespace SteelQuiz.QuizPractise
                 CurrentInput += "¡";
                 lbl_cardSideToAnswer.Text = CurrentInput;
             }
+        }
+
+        private void InQuiz_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            QuizCore.SaveQuizProgress(Quiz);
         }
     }
 }

@@ -37,13 +37,13 @@ namespace SteelQuiz.QuizPractise
             InitializeComponent();
             SetTheme();
 
-            lbl_cardQuestionType.Text = $"{(quiz.ProgressData.AnswerCardSide == QuizProgressData.CardSide.Front ? quiz.CardBackType : quiz.CardFrontType)}:";
+            lbl_cardQuestionSideType.Text = $"{(quiz.ProgressData.AnswerCardSide == QuizProgressData.CardSide.Front ? quiz.CardBackType : quiz.CardFrontType)}:";
             lbl_cardSideToAsk.Text = card.GetSideToAsk(quiz);
             toolTip1.SetToolTip(lbl_cardSideToAsk, card.GetSideToAsk(quiz));
 
             AutoShrinkFont(lbl_cardSideToAsk, 8);
 
-            lbl_cardAnswerType.Text = $"{(quiz.ProgressData.AnswerCardSide == QuizProgressData.CardSide.Front ? quiz.CardFrontType : quiz.CardBackType)}:";
+            lbl_cardAnswerSideType.Text = $"{(quiz.ProgressData.AnswerCardSide == QuizProgressData.CardSide.Front ? quiz.CardFrontType : quiz.CardBackType)}:";
             lbl_cardSideToAnswer.Text = card.GetSideToAnswer(quiz);
             toolTip1.SetToolTip(lbl_cardSideToAnswer, card.GetSideToAnswer(quiz));
 
@@ -53,7 +53,7 @@ namespace SteelQuiz.QuizPractise
             {
                 lbl_certainty.Text = "Correct!";
 
-                lbl_cardAnswerType.Visible = false;
+                lbl_cardAnswerSideType.Visible = false;
                 lbl_cardSideToAnswer.Visible = false;
             }
             else if (certainty == StringComp.CorrectCertainty.ProbablyCorrect)

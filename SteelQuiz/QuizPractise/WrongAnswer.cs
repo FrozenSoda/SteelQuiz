@@ -26,29 +26,30 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SteelQuiz.ThemeManager.Colors;
+using SteelQuiz.QuizData;
 
 namespace SteelQuiz.QuizPractise
 {
     public partial class WrongAnswer : AutoThemeableUserControl
     {
-        public WrongAnswer(string questionWord, string questionLang, string correctAnswer, string answerLang)
+        public WrongAnswer(Card card, Quiz quiz)
         {
             InitializeComponent();
             SetTheme();
 
-            lbl_questionLang.Text = $"{questionLang} word:";
-            lbl_questionWord.Text = questionWord;
-            toolTip1.SetToolTip(lbl_questionWord, questionWord);
+            lbl_cardQuestionSideType.Text = $"{(quiz.ProgressData.AnswerCardSide == QuizProgressData.CardSide.Front ? quiz.CardBackType : quiz.CardFrontType)}:";
+            lbl_cardSideToAsk.Text = card.GetSideToAsk(quiz);
+            toolTip1.SetToolTip(lbl_cardSideToAsk, card.GetSideToAsk(quiz));
 
-            AutoShrinkFont(lbl_questionWord, 8);
+            AutoShrinkFont(lbl_cardSideToAsk, 8);
 
-            lbl_answerLang.Text = $"Correct {answerLang} word:";
-            lbl_correctAnswer.Text = correctAnswer;
-            toolTip1.SetToolTip(lbl_correctAnswer, correctAnswer);
+            lbl_cardAnswerSideType.Text = $"{(quiz.ProgressData.AnswerCardSide == QuizProgressData.CardSide.Front ? quiz.CardFrontType : quiz.CardBackType)}:";
+            lbl_cardSideToAnswer.Text = card.GetSideToAnswer(quiz);
+            toolTip1.SetToolTip(lbl_cardSideToAnswer, card.GetSideToAnswer(quiz));
 
-            AutoShrinkFont(lbl_correctAnswer, 8);
+            AutoShrinkFont(lbl_cardSideToAnswer, 8);
 
-            lbl_instruction.Text = $"Type the {answerLang} word";
+            lbl_instruction.Text = "Type the correct answer";
         }
 
         public override void SetTheme(GeneralTheme theme = null)
