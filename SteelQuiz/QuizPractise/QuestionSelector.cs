@@ -58,10 +58,10 @@ namespace SteelQuiz.QuizPractise
         }
 
         /// <summary>
-        /// Generates a question/word to be asked, while taking current word and Intelligent Learning settings into account
+        /// Generates a Card to practise, while taking current Card and Intelligent Learning settings into account
         /// </summary>
-        /// <returns>Returns a question/word to be asked</returns>
-        public static Card GenerateWordPair(Quiz quiz)
+        /// <returns>Returns a Card to practise</returns>
+        public static Card GenerateCard(Quiz quiz)
         {
             if (quiz.ProgressData.CurrentCards != null && quiz.ProgressData.CurrentCards.Count > 0)
             {
@@ -70,11 +70,11 @@ namespace SteelQuiz.QuizPractise
 
             if (quiz.ProgressData.FullTestInProgress)
             {
-                return GenerateWordPair_NoIntelligentLearning(quiz);
+                return GenerateCard_NoIntelligentLearning(quiz);
             }
             else
             {
-                return GenerateWordPair_IntelligentLearning(quiz);
+                return GenerateCard_IntelligentLearning(quiz);
             }
         }
 
@@ -91,10 +91,10 @@ namespace SteelQuiz.QuizPractise
         }
 
         /// <summary>
-        /// Generates a question/word to be asked, without taking Intelligent Learning progress into account, that is, pure random (excluding already asked words)
+        /// Generates a Card to practise, without taking Intelligent Learning progress into account, that is, pure random (excluding already asked Cards)
         /// </summary>
         /// <returns></returns>
-        private static Card GenerateWordPair_NoIntelligentLearning(Quiz quiz)
+        private static Card GenerateCard_NoIntelligentLearning(Quiz quiz)
         {
             var wordsNotToAsk = quiz.ProgressData.WordsNotToAsk();
 
@@ -133,10 +133,10 @@ namespace SteelQuiz.QuizPractise
         }
 
         /// <summary>
-        /// Generates a question/word to be asked, while taking Intelligent Learning progress into account
+        /// Generates a Card to practise, while taking Intelligent Learning progress into account
         /// </summary>
         /// <returns></returns>
-        private static Card GenerateWordPair_IntelligentLearning(Quiz quiz)
+        private static Card GenerateCard_IntelligentLearning(Quiz quiz)
         {
             var alreadyAsked = quiz.ProgressData.WordsNotToAsk();
 

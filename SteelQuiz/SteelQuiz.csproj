@@ -140,17 +140,23 @@
     <Compile Include="QuizPractise\MultiAnswer.Designer.cs">
       <DependentUpon>MultiAnswer.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuizPractise\RoundCompleted.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuizPractise\RoundCompleted.Designer.cs">
+      <DependentUpon>RoundCompleted.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuizPractise\QuizPractiseConfig.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="QuizPractise\QuizPractiseConfig.Designer.cs">
       <DependentUpon>QuizPractiseConfig.cs</DependentUpon>
     </Compile>
-    <Compile Include="QuizPractise\ProbablyCorrectAnswer.cs">
+    <Compile Include="QuizPractise\CorrectAnswer.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="QuizPractise\ProbablyCorrectAnswer.Designer.cs">
-      <DependentUpon>ProbablyCorrectAnswer.cs</DependentUpon>
+    <Compile Include="QuizPractise\CorrectAnswer.Designer.cs">
+      <DependentUpon>CorrectAnswer.cs</DependentUpon>
     </Compile>
     <Compile Include="QuizPractise\WrongAnswer.cs">
       <SubType>UserControl</SubType>
@@ -453,6 +459,9 @@
     <Compile Include="QuizProgressData\AnswerAttempt.cs" />
     <Compile Include="WelcomeMessage.cs" />
     <Compile Include="WelcomeMessages.cs" />
+    <EmbeddedResource Include="QuizPractise\RoundCompleted.resx">
+      <DependentUpon>RoundCompleted.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="RecentQuiz.resx">
       <DependentUpon>RecentQuiz.cs</DependentUpon>
     </EmbeddedResource>
@@ -507,8 +516,8 @@
     <EmbeddedResource Include="QuizPractise\QuizPractiseConfig.resx">
       <DependentUpon>QuizPractiseConfig.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="QuizPractise\ProbablyCorrectAnswer.resx">
-      <DependentUpon>ProbablyCorrectAnswer.cs</DependentUpon>
+    <EmbeddedResource Include="QuizPractise\CorrectAnswer.resx">
+      <DependentUpon>CorrectAnswer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuizPractise\WrongAnswer.resx">
       <DependentUpon>WrongAnswer.cs</DependentUpon>

@@ -26,29 +26,44 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SteelQuiz.ThemeManager.Colors;
+using SteelQuiz.QuizData;
 
 namespace SteelQuiz.QuizPractise
 {
-    public partial class ProbablyCorrectAnswer : AutoThemeableUserControl
+    public partial class CorrectAnswer : AutoThemeableUserControl
     {
-        public ProbablyCorrectAnswer(string questionWord, string questionLang, string correctAnswer, string answerLang, string certaintyText)
+        public CorrectAnswer(Card card, Quiz quiz, StringComp.CorrectCertainty certainty)
         {
             InitializeComponent();
             SetTheme();
 
-            lbl_questionLang.Text = $"{questionLang} word:";
-            lbl_questionWord.Text = questionWord;
-            toolTip1.SetToolTip(lbl_questionWord, questionWord);
+            lbl_cardQuestionType.Text = $"{(quiz.ProgressData.AnswerCardSide == QuizProgressData.CardSide.Front ? quiz.CardBackType : quiz.CardFrontType)}:";
+            lbl_cardSideToAsk.Text = card.GetSideToAsk(quiz);
+            toolTip1.SetToolTip(lbl_cardSideToAsk, card.GetSideToAsk(quiz));
 
-            AutoShrinkFont(lbl_questionWord, 8);
+            AutoShrinkFont(lbl_cardSideToAsk, 8);
 
-            lbl_answerLang.Text = $"{answerLang} word:";
-            lbl_correctAnswer.Text = correctAnswer;
-            toolTip1.SetToolTip(lbl_correctAnswer, correctAnswer);
+            lbl_cardAnswerType.Text = $"{(quiz.ProgressData.AnswerCardSide == QuizProgressData.CardSide.Front ? quiz.CardFrontType : quiz.CardBackType)}:";
+            lbl_cardSideToAnswer.Text = card.GetSideToAnswer(quiz);
+            toolTip1.SetToolTip(lbl_cardSideToAnswer, card.GetSideToAnswer(quiz));
 
-            AutoShrinkFont(lbl_correctAnswer, 8);
+            AutoShrinkFont(lbl_cardSideToAnswer, 8);
 
-            lbl_certainty.Text = certaintyText;
+            if (certainty == StringComp.CorrectCertainty.CompletelyCorrect)
+            {
+                lbl_certainty.Text = "Correct!";
+
+                lbl_cardAnswerType.Visible = false;
+                lbl_cardSideToAnswer.Visible = false;
+            }
+            else if (certainty == StringComp.CorrectCertainty.ProbablyCorrect)
+            {
+                lbl_certainty.Text = "Probably correct!";
+            }
+            else if (certainty == StringComp.CorrectCertainty.MaybeCorrect)
+            {
+                lbl_certainty.Text = "Might be correct!";
+            }
         }
 
         public override void SetTheme(GeneralTheme theme = null)

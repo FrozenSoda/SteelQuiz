@@ -51,19 +51,19 @@ namespace SteelQuiz.QuizPractise
             this.lbl_cardSideToAnswer = new System.Windows.Forms.Label();
             this.lbl_progress = new System.Windows.Forms.Label();
             this.lbl_intelligentLearning = new System.Windows.Forms.Label();
-            this.lbl_cardFrontSideType = new System.Windows.Forms.Label();
-            this.lbl_cardBackSideType = new System.Windows.Forms.Label();
+            this.lbl_cardQuestionSideType = new System.Windows.Forms.Label();
+            this.lbl_cardAnswerSideType = new System.Windows.Forms.Label();
             this.btn_w1_synonyms = new System.Windows.Forms.Button();
-            this.pnl_word1 = new System.Windows.Forms.Panel();
-            this.pnl_word2 = new System.Windows.Forms.Panel();
+            this.pnl_cardSideToAsk = new System.Windows.Forms.Panel();
+            this.pnl_cardSideToAnswer = new System.Windows.Forms.Panel();
             this.pnl_knewAnswer = new System.Windows.Forms.Panel();
             this.btn_knewAnswerNO = new System.Windows.Forms.Button();
             this.btn_knewAnswerYES = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btn_home = new System.Windows.Forms.Button();
             this.btn_cfg = new System.Windows.Forms.Button();
-            this.pnl_word1.SuspendLayout();
-            this.pnl_word2.SuspendLayout();
+            this.pnl_cardSideToAsk.SuspendLayout();
+            this.pnl_cardSideToAnswer.SuspendLayout();
             this.pnl_knewAnswer.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -80,7 +80,6 @@ namespace SteelQuiz.QuizPractise
             this.lbl_cardSideToAsk.TabIndex = 0;
             this.lbl_cardSideToAsk.Text = "lbl_cardSideToAsk";
             this.lbl_cardSideToAsk.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbl_cardSideToAsk.Click += new System.EventHandler(this.lbl_word1_Click);
             // 
             // lbl_cardSideToAnswer
             // 
@@ -96,7 +95,6 @@ namespace SteelQuiz.QuizPractise
             this.lbl_cardSideToAnswer.Text = "Enter your answer...";
             this.lbl_cardSideToAnswer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lbl_cardSideToAnswer.UseMnemonic = false;
-            this.lbl_cardSideToAnswer.Click += new System.EventHandler(this.lbl_word2_Click);
             // 
             // lbl_progress
             // 
@@ -120,29 +118,29 @@ namespace SteelQuiz.QuizPractise
             this.lbl_intelligentLearning.TabIndex = 4;
             this.lbl_intelligentLearning.Text = "Intelligent Learning: STATUS_UNKNOWN";
             // 
-            // lbl_cardFrontSideType
+            // lbl_cardQuestionSideType
             // 
-            this.lbl_cardFrontSideType.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.lbl_cardFrontSideType.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_cardFrontSideType.ForeColor = System.Drawing.Color.LightGray;
-            this.lbl_cardFrontSideType.Location = new System.Drawing.Point(65, 9);
-            this.lbl_cardFrontSideType.Name = "lbl_cardFrontSideType";
-            this.lbl_cardFrontSideType.Size = new System.Drawing.Size(331, 23);
-            this.lbl_cardFrontSideType.TabIndex = 5;
-            this.lbl_cardFrontSideType.Text = "lbl_cardFrontSideType";
-            this.lbl_cardFrontSideType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_cardQuestionSideType.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lbl_cardQuestionSideType.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_cardQuestionSideType.ForeColor = System.Drawing.Color.LightGray;
+            this.lbl_cardQuestionSideType.Location = new System.Drawing.Point(65, 9);
+            this.lbl_cardQuestionSideType.Name = "lbl_cardQuestionSideType";
+            this.lbl_cardQuestionSideType.Size = new System.Drawing.Size(331, 23);
+            this.lbl_cardQuestionSideType.TabIndex = 5;
+            this.lbl_cardQuestionSideType.Text = "lbl_cardQuestionSideType";
+            this.lbl_cardQuestionSideType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lbl_cardBackSideType
+            // lbl_cardAnswerSideType
             // 
-            this.lbl_cardBackSideType.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.lbl_cardBackSideType.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_cardBackSideType.ForeColor = System.Drawing.Color.LightGray;
-            this.lbl_cardBackSideType.Location = new System.Drawing.Point(451, 9);
-            this.lbl_cardBackSideType.Name = "lbl_cardBackSideType";
-            this.lbl_cardBackSideType.Size = new System.Drawing.Size(390, 23);
-            this.lbl_cardBackSideType.TabIndex = 6;
-            this.lbl_cardBackSideType.Text = "lbl_cardBackSideType";
-            this.lbl_cardBackSideType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_cardAnswerSideType.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lbl_cardAnswerSideType.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_cardAnswerSideType.ForeColor = System.Drawing.Color.LightGray;
+            this.lbl_cardAnswerSideType.Location = new System.Drawing.Point(451, 9);
+            this.lbl_cardAnswerSideType.Name = "lbl_cardAnswerSideType";
+            this.lbl_cardAnswerSideType.Size = new System.Drawing.Size(390, 23);
+            this.lbl_cardAnswerSideType.TabIndex = 6;
+            this.lbl_cardAnswerSideType.Text = "lbl_cardAnswerSideType";
+            this.lbl_cardAnswerSideType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btn_w1_synonyms
             // 
@@ -160,28 +158,26 @@ namespace SteelQuiz.QuizPractise
             this.btn_w1_synonyms.TabStop = false;
             this.btn_w1_synonyms.Text = "Synonyms";
             this.btn_w1_synonyms.UseVisualStyleBackColor = false;
-            this.btn_w1_synonyms.Click += new System.EventHandler(this.btn_w1_synonyms_Click);
             // 
-            // pnl_word1
+            // pnl_cardSideToAsk
             // 
-            this.pnl_word1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pnl_word1.AutoScroll = true;
-            this.pnl_word1.Controls.Add(this.lbl_cardSideToAsk);
-            this.pnl_word1.Location = new System.Drawing.Point(71, 111);
-            this.pnl_word1.Name = "pnl_word1";
-            this.pnl_word1.Size = new System.Drawing.Size(325, 345);
-            this.pnl_word1.TabIndex = 8;
+            this.pnl_cardSideToAsk.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pnl_cardSideToAsk.AutoScroll = true;
+            this.pnl_cardSideToAsk.Controls.Add(this.lbl_cardSideToAsk);
+            this.pnl_cardSideToAsk.Location = new System.Drawing.Point(71, 111);
+            this.pnl_cardSideToAsk.Name = "pnl_cardSideToAsk";
+            this.pnl_cardSideToAsk.Size = new System.Drawing.Size(325, 345);
+            this.pnl_cardSideToAsk.TabIndex = 8;
             // 
-            // pnl_word2
+            // pnl_cardSideToAnswer
             // 
-            this.pnl_word2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pnl_word2.AutoScroll = true;
-            this.pnl_word2.Controls.Add(this.lbl_cardSideToAnswer);
-            this.pnl_word2.Location = new System.Drawing.Point(454, 111);
-            this.pnl_word2.Name = "pnl_word2";
-            this.pnl_word2.Size = new System.Drawing.Size(387, 345);
-            this.pnl_word2.TabIndex = 9;
-            this.pnl_word2.Click += new System.EventHandler(this.pnl_word2_Click);
+            this.pnl_cardSideToAnswer.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pnl_cardSideToAnswer.AutoScroll = true;
+            this.pnl_cardSideToAnswer.Controls.Add(this.lbl_cardSideToAnswer);
+            this.pnl_cardSideToAnswer.Location = new System.Drawing.Point(454, 111);
+            this.pnl_cardSideToAnswer.Name = "pnl_cardSideToAnswer";
+            this.pnl_cardSideToAnswer.Size = new System.Drawing.Size(387, 345);
+            this.pnl_cardSideToAnswer.TabIndex = 9;
             // 
             // pnl_knewAnswer
             // 
@@ -206,7 +202,6 @@ namespace SteelQuiz.QuizPractise
             this.btn_knewAnswerNO.TabIndex = 2;
             this.btn_knewAnswerNO.Text = "No";
             this.btn_knewAnswerNO.UseVisualStyleBackColor = false;
-            this.btn_knewAnswerNO.Click += new System.EventHandler(this.btn_knewAnswerNO_Click);
             // 
             // btn_knewAnswerYES
             // 
@@ -219,7 +214,6 @@ namespace SteelQuiz.QuizPractise
             this.btn_knewAnswerYES.TabIndex = 1;
             this.btn_knewAnswerYES.Text = "Yes";
             this.btn_knewAnswerYES.UseVisualStyleBackColor = false;
-            this.btn_knewAnswerYES.Click += new System.EventHandler(this.btn_knewAnswerYES_Click);
             // 
             // label1
             // 
@@ -260,7 +254,6 @@ namespace SteelQuiz.QuizPractise
             this.btn_cfg.TabIndex = 12;
             this.btn_cfg.TabStop = false;
             this.btn_cfg.UseVisualStyleBackColor = false;
-            this.btn_cfg.Click += new System.EventHandler(this.Btn_cfg_Click);
             // 
             // InQuiz
             // 
@@ -269,12 +262,12 @@ namespace SteelQuiz.QuizPractise
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(907, 550);
             this.Controls.Add(this.pnl_knewAnswer);
-            this.Controls.Add(this.lbl_cardBackSideType);
-            this.Controls.Add(this.lbl_cardFrontSideType);
+            this.Controls.Add(this.lbl_cardAnswerSideType);
+            this.Controls.Add(this.lbl_cardQuestionSideType);
             this.Controls.Add(this.btn_cfg);
             this.Controls.Add(this.btn_home);
-            this.Controls.Add(this.pnl_word2);
-            this.Controls.Add(this.pnl_word1);
+            this.Controls.Add(this.pnl_cardSideToAnswer);
+            this.Controls.Add(this.pnl_cardSideToAsk);
             this.Controls.Add(this.btn_w1_synonyms);
             this.Controls.Add(this.lbl_intelligentLearning);
             this.Controls.Add(this.lbl_progress);
@@ -286,13 +279,12 @@ namespace SteelQuiz.QuizPractise
             this.Name = "InQuiz";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "SteelQuiz";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.InQuiz_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InQuiz_KeyDown);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.InQuiz_KeyPress);
-            this.pnl_word1.ResumeLayout(false);
-            this.pnl_word1.PerformLayout();
-            this.pnl_word2.ResumeLayout(false);
-            this.pnl_word2.PerformLayout();
+            this.pnl_cardSideToAsk.ResumeLayout(false);
+            this.pnl_cardSideToAsk.PerformLayout();
+            this.pnl_cardSideToAnswer.ResumeLayout(false);
+            this.pnl_cardSideToAnswer.PerformLayout();
             this.pnl_knewAnswer.ResumeLayout(false);
             this.pnl_knewAnswer.PerformLayout();
             this.ResumeLayout(false);
@@ -306,11 +298,11 @@ namespace SteelQuiz.QuizPractise
         private System.Windows.Forms.Label lbl_cardSideToAnswer;
         private System.Windows.Forms.Label lbl_progress;
         private System.Windows.Forms.Label lbl_intelligentLearning;
-        private System.Windows.Forms.Label lbl_cardFrontSideType;
-        private System.Windows.Forms.Label lbl_cardBackSideType;
+        private System.Windows.Forms.Label lbl_cardQuestionSideType;
+        private System.Windows.Forms.Label lbl_cardAnswerSideType;
         private System.Windows.Forms.Button btn_w1_synonyms;
-        private System.Windows.Forms.Panel pnl_word1;
-        private System.Windows.Forms.Panel pnl_word2;
+        private System.Windows.Forms.Panel pnl_cardSideToAsk;
+        private System.Windows.Forms.Panel pnl_cardSideToAnswer;
         private System.Windows.Forms.Button btn_home;
         private System.Windows.Forms.Button btn_cfg;
         private System.Windows.Forms.Panel pnl_knewAnswer;
