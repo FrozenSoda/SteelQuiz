@@ -32,60 +32,91 @@ namespace SteelQuiz.QuizPractise
     public static class QuestionSelector
     {
         /// <summary>
-        /// A container for an item that should be picked from a collection based off of the items' probabilities.
+        /// A collection of items with a specified weight, which affects their chances of getting picked.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        private class ProbabilityItem<T>
+        /// <typeparam name="T">The type of items in the collection.</typeparam>
+        private class WeightedCollection<T>
         {
             /// <summary>
-            /// The item with the specified Probability.
+            /// A container for an item that should be picked from a collection based off of the items' weight.
             /// </summary>
-            public T Item { get; set; }
-
-            private double __probability;
-            /// <summary>
-            /// The probability of this item getting picked.
-            /// </summary>
-            public double Probability
+            /// <typeparam name="T"></typeparam>
+            private class Entry
             {
-                get
-                {
-                    return __probability;
-                }
+                /// <summary>
+                /// The item with the specified Probability.
+                /// </summary>
+                public T Item { get; set; }
 
-                set
-                {
-                    if (value < 0 || value >= 1)
-                    {
-                        throw new FormatException("Probability must be in the interval 0 <= x < 1");
-                    }
-                    __probability = value;
-                }
+                /// <summary>
+                /// The weight, which is a value affecting the chance of this item getting picked. The higher weight, the higher chance of getting picked.
+                /// </summary>
+                public double Weight { get; set; }
+            }
+
+            private List<Entry> entries = new List<Entry>();
+            private double accumulatedWeight = 0.0;
+            private Random random = new Random();
+
+            /// <summary>
+            /// Adds a item to the collection.
+            /// </summary>
+            /// <param name="item">The item to add.</param>
+            /// <param name="weight">The weight of the item.</param>
+            public void Add(T item, double weight)
+            {
+                accumulatedWeight += weight;
+                entries.Add(new Entry() { Item = item, Weight = weight });
+            }
+
+            /// <summary>
+            /// Picks a random item from the collection, based off of their weights.
+            /// </summary>
+            /// <returns>The picked item.</returns>
+            public T Pick()
+            {
+                double rnd = random.NextDouble() * accumulatedWeight;
+                var picked = entries.TakeWhile(x => x.Weight >= rnd).FirstOrDefault();
+                return picked.Item;
             }
         }
 
-        /// <summary>
-        /// Picks an item from a collection of ProbabilityItems
-        /// </summary>
-        /// <typeparam name="T">The type of the items in the collection.</typeparam>
-        /// <param name="items">The items to pick from.</param>
-        /// <returns>The picked item.</returns>
-        private static T PickItem<T>(IEnumerable<ProbabilityItem<T>> items)
+        private static void Swap<T>(List<T> list, int index1, int index2)
         {
-            var converted = new List<ProbabilityItem<T>>(items.Count());
-            var probabilitySum = 0.0;
-            foreach (var item in items.Take(items.Count() - 1))
-            {
-                probabilitySum += item.Probability;
-                converted.Add(new ProbabilityItem<T>() { Item = item.Item, Probability = probabilitySum });
-            }
-            converted.Add(new ProbabilityItem<T>() { Item = items.Last().Item, Probability = 1.0 });
+            T tmp = list[index1];
+            list[index1] = list[index2];
+            list[index2] = tmp;
+        }
 
+        private static void Shuffle<T>(List<T> list)
+        {
             var rnd = new Random();
-            var r = rnd.NextDouble();
-            var selected = converted.SkipWhile(x => x.Probability < r).First();
+            for (int i = list.Count - 1; i >= 0; ++i)
+            {
+                Swap(list, i, rnd.Next(0, i));
+            }
+        }
 
-            return selected.Item;
+        public static void NewRound(Quiz quiz)
+        {
+            if (quiz.ProgressData.FullTestInProgress)
+            {
+                return GenerateCardWithoutIntelligentLearning(quiz);
+            }
+            else
+            {
+                return GenerateCardWithIntelligentLearning(quiz);
+            }
+        }
+
+        private static void NewRoundWithIntelligentLearning(Quiz quiz)
+        {
+
+        }
+
+        private static void NewRoundWithoutIntelligentLearning(Quiz quiz)
+        {
+
         }
 
         public static Card GenerateCard(Quiz quiz)
@@ -102,12 +133,26 @@ namespace SteelQuiz.QuizPractise
 
         public static Card GenerateCardWithIntelligentLearning(Quiz quiz)
         {
+            var possibleCards = from x in quiz.Cards
+                                let progress = x.GetProgressData(quiz)
+                                where !progress.AskedThisRound
+                                select x;
 
+            var weightedCollection = new WeightedCollection<Card>();
+            possibleCards.ToList().ForEach(x => weightedCollection.Add(x, x.GetProgressData(quiz).GetLearningProgress(quiz.ProgressData)));
+
+            return weightedCollection.Pick();
         }
 
         public static Card GenerateCardWithoutIntelligentLearning(Quiz quiz)
         {
+            var possibleCards = from x in quiz.Cards
+                           let progress = x.GetProgressData(quiz)
+                           where !progress.AskedThisRound
+                           select x;
 
+            int r = new Random().Next(0, possibleCards.Count());
+            return possibleCards.ElementAt(r);
         }
     }
 }

@@ -71,7 +71,7 @@ namespace SteelQuiz.QuizPractise
 
                 lbl_progress.Text =
                     $"Round Progress: {Quiz.Cards.Where(x => x.GetProgressData(Quiz).AskedThisRound).Count()} " +
-                    $"/ {Quiz.Cards.Where(x => !x.GetProgressData(Quiz).SkipThisRound).Count()}";
+                    $"/ {Quiz.Cards.Where(x => x.GetProgressData(Quiz).RoundsToSkip == 0).Count()}";
             }
         }
         private string __currentInput = "";
