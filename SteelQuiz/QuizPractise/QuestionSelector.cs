@@ -97,26 +97,27 @@ namespace SteelQuiz.QuizPractise
             }
         }
 
+        /// <summary>
+        /// Marks all Cards as not answered this round, lowers the RoundToSkip variables and updated CurrentCards with a new selection.
+        /// </summary>
+        /// <param name="quiz"></param>
         public static void NewRound(Quiz quiz)
         {
-            if (quiz.ProgressData.FullTestInProgress)
+            foreach (var cardProgress in quiz.ProgressData.CardProgress)
             {
-                return GenerateCardWithoutIntelligentLearning(quiz);
+                cardProgress.AskedThisRound = false;
+                if (cardProgress.RoundsToSkip > 0)
+                {
+                    --cardProgress.RoundsToSkip;
+                }
             }
-            else
-            {
-                return GenerateCardWithIntelligentLearning(quiz);
-            }
-        }
 
-        private static void NewRoundWithIntelligentLearning(Quiz quiz)
-        {
-
-        }
-
-        private static void NewRoundWithoutIntelligentLearning(Quiz quiz)
-        {
-
+            var possibleCards = (from x in quiz.Cards
+                                 let progress = x.GetProgressData(quiz)
+                                 where progress.RoundsToSkip == 0
+                                 select x).ToList();
+            Shuffle(possibleCards);
+            quiz.ProgressData.CurrentCards = possibleCards.Take(10).ToList();
         }
 
         public static Card GenerateCard(Quiz quiz)
@@ -133,26 +134,16 @@ namespace SteelQuiz.QuizPractise
 
         public static Card GenerateCardWithIntelligentLearning(Quiz quiz)
         {
-            var possibleCards = from x in quiz.Cards
-                                let progress = x.GetProgressData(quiz)
-                                where !progress.AskedThisRound
-                                select x;
-
             var weightedCollection = new WeightedCollection<Card>();
-            possibleCards.ToList().ForEach(x => weightedCollection.Add(x, x.GetProgressData(quiz).GetLearningProgress(quiz.ProgressData)));
+            quiz.ProgressData.CurrentCards.ForEach(x => weightedCollection.Add(x, x.GetProgressData(quiz).GetLearningProgress(quiz.ProgressData)));
 
             return weightedCollection.Pick();
         }
 
         public static Card GenerateCardWithoutIntelligentLearning(Quiz quiz)
         {
-            var possibleCards = from x in quiz.Cards
-                           let progress = x.GetProgressData(quiz)
-                           where !progress.AskedThisRound
-                           select x;
-
-            int r = new Random().Next(0, possibleCards.Count());
-            return possibleCards.ElementAt(r);
+            int r = new Random().Next(0, quiz.ProgressData.CurrentCards.Count());
+            return quiz.ProgressData.CurrentCards.ElementAt(r);
         }
     }
 }
