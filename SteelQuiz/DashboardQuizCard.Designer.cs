@@ -48,42 +48,42 @@ namespace SteelQuiz
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DashboardQuizCard));
-            this.lbl_word1 = new System.Windows.Forms.Label();
-            this.lbl_word2 = new System.Windows.Forms.Label();
+            this.lbl_cardFront = new System.Windows.Forms.Label();
+            this.lbl_cardBack = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.lbl_learningProgress_bar = new System.Windows.Forms.Label();
             this.lbl_learningProgress = new System.Windows.Forms.Label();
             this.lbl_learningProgress_desc = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // lbl_word1
+            // lbl_cardFront
             // 
-            this.lbl_word1.AutoSize = true;
-            this.lbl_word1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_word1.Location = new System.Drawing.Point(4, 22);
-            this.lbl_word1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbl_word1.MaximumSize = new System.Drawing.Size(250, 0);
-            this.lbl_word1.MinimumSize = new System.Drawing.Size(250, 38);
-            this.lbl_word1.Name = "lbl_word1";
-            this.lbl_word1.Size = new System.Drawing.Size(250, 38);
-            this.lbl_word1.TabIndex = 0;
-            this.lbl_word1.Text = "¿Cómo te llamas?";
-            this.lbl_word1.SizeChanged += new System.EventHandler(this.Lbl_word_SizeChanged);
+            this.lbl_cardFront.AutoSize = true;
+            this.lbl_cardFront.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_cardFront.Location = new System.Drawing.Point(4, 22);
+            this.lbl_cardFront.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_cardFront.MaximumSize = new System.Drawing.Size(250, 0);
+            this.lbl_cardFront.MinimumSize = new System.Drawing.Size(250, 38);
+            this.lbl_cardFront.Name = "lbl_cardFront";
+            this.lbl_cardFront.Size = new System.Drawing.Size(250, 38);
+            this.lbl_cardFront.TabIndex = 0;
+            this.lbl_cardFront.Text = "¿Cómo te llamas?";
+            this.lbl_cardFront.SizeChanged += new System.EventHandler(this.Lbl_card_SizeChanged);
             // 
-            // lbl_word2
+            // lbl_cardBack
             // 
-            this.lbl_word2.AutoSize = true;
-            this.lbl_word2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_word2.Location = new System.Drawing.Point(286, 22);
-            this.lbl_word2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbl_word2.MaximumSize = new System.Drawing.Size(250, 0);
-            this.lbl_word2.MinimumSize = new System.Drawing.Size(250, 38);
-            this.lbl_word2.Name = "lbl_word2";
-            this.lbl_word2.Size = new System.Drawing.Size(250, 38);
-            this.lbl_word2.TabIndex = 1;
-            this.lbl_word2.Text = "What\'s your name?";
-            this.lbl_word2.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            this.lbl_word2.SizeChanged += new System.EventHandler(this.Lbl_word_SizeChanged);
+            this.lbl_cardBack.AutoSize = true;
+            this.lbl_cardBack.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_cardBack.Location = new System.Drawing.Point(286, 22);
+            this.lbl_cardBack.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_cardBack.MaximumSize = new System.Drawing.Size(250, 0);
+            this.lbl_cardBack.MinimumSize = new System.Drawing.Size(250, 38);
+            this.lbl_cardBack.Name = "lbl_cardBack";
+            this.lbl_cardBack.Size = new System.Drawing.Size(250, 38);
+            this.lbl_cardBack.TabIndex = 1;
+            this.lbl_cardBack.Text = "What\'s your name?";
+            this.lbl_cardBack.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.lbl_cardBack.SizeChanged += new System.EventHandler(this.Lbl_card_SizeChanged);
             // 
             // lbl_learningProgress_bar
             // 
@@ -126,8 +126,8 @@ namespace SteelQuiz
             this.Controls.Add(this.lbl_learningProgress);
             this.Controls.Add(this.lbl_learningProgress_desc);
             this.Controls.Add(this.lbl_learningProgress_bar);
-            this.Controls.Add(this.lbl_word2);
-            this.Controls.Add(this.lbl_word1);
+            this.Controls.Add(this.lbl_cardBack);
+            this.Controls.Add(this.lbl_cardFront);
             this.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.White;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -141,8 +141,8 @@ namespace SteelQuiz
 
         #endregion
 
-        private System.Windows.Forms.Label lbl_word1;
-        private System.Windows.Forms.Label lbl_word2;
+        private System.Windows.Forms.Label lbl_cardFront;
+        private System.Windows.Forms.Label lbl_cardBack;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label lbl_learningProgress_bar;
         private System.Windows.Forms.Label lbl_learningProgress;

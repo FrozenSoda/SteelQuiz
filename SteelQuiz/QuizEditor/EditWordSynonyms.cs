@@ -60,12 +60,12 @@ namespace SteelQuiz.QuizEditor
         private object[] initialListBoxCollection;
         private bool closeWarning = true;
 
-        public EditWordSynonyms(QuizEditorCard parent, string word, int language)
+        public EditWordSynonyms(QuizEditorCard parent, string cardText, int language)
         {
             InitializeComponent();
             Parent = parent;
             Language = language;
-            lbl_synForWord.Text = $"Synonyms for word: {word}";
+            lbl_synForWord.Text = $"Synonyms for: {cardText}";
 
             if (Synonyms != null)
             {

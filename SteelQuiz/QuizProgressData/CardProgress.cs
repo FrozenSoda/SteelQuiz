@@ -66,9 +66,9 @@ namespace SteelQuiz.QuizProgressData
         private List<AnswerAttempt> WordTries { set => AnswerAttempts = value; }
         #endregion
 
-        public CardProgress(Card wordPair)
+        public CardProgress(Card card)
         {
-            Card = wordPair;
+            Card = card;
         }
 
         public void AddAnswerAttempt(AnswerAttempt answerAttempt)
@@ -82,9 +82,9 @@ namespace SteelQuiz.QuizProgressData
         }
 
         /// <summary>
-        /// Calculates the success rate between 0 and 1 for answering this word, for the amount of tries completed
+        /// Calculates the success rate between 0 and 1 for answering this Card, for the total amount of tries completed.
         /// </summary>
-        /// <returns>Returns the success rate between 0 and 1 for answering this word, for the amount of tries completed</returns>
+        /// <returns>Returns the success rate between 0 and 1 for answering this Card, for the amount of tries completed.</returns>
         public double GetSuccessRate()
         {
             var tries = GetAnswerAttemptsCount();
@@ -98,34 +98,12 @@ namespace SteelQuiz.QuizProgressData
         }
 
         /// <summary>
-        /// Calculates the learning progress for this quiz, 
-        /// that is, the average of the success rates for all wordpairs, that is between 0 and 1, divided by total amount of tries to save (WORD_TRIES_FOR_LEARNING_PROGRESS)
+        /// Calculates the success rate between 0 and 1 for answering this Card, for the amount of tries completed decided by quizProgress.IntelligentLearningLastAnswersBasisCount.
         /// </summary>
-        /// <returns>Returns the learning progress</returns>
-        public double GetLearningProgress()
+        /// <returns>Returns the learning progress.</returns>
+        public double GetLearningProgress(QuizProgress quizProgress)
         {
-            var latestTries = AnswerAttempts.Skip(Math.Max(0, AnswerAttempts.Count() - ANSWER_ATTEMPTS_FOR_LEARNING_PROGRESS_DEFAULT));
-            var successCount = latestTries.Where(x => x.Success).Count();
-
-            if (successCount == 0)
-            {
-                return 0d;
-            }
-            else
-            {
-                return successCount / (double)latestTries.Count();
-            }
-        }
-
-        /// <summary>
-        /// Calculates the learning progress for this quiz, 
-        /// that is, the average of the success rates for all wordpairs, that is between 0 and 1, divided by triesToSave.
-        /// </summary>
-        /// <param name="triesToSave">The number of tries to use from the end</param>
-        /// <returns>Returns the learning progress</returns>
-        public double GetLearningProgress(int triesToSave)
-        {
-            var latestTries = AnswerAttempts.Skip(Math.Max(0, AnswerAttempts.Count() - triesToSave));
+            var latestTries = AnswerAttempts.Skip(Math.Max(0, AnswerAttempts.Count() - quizProgress.IntelligentLearningLastAnswersBasisCount));
             var successCount = latestTries.Where(x => x.Success).Count();
 
             if (successCount == 0)

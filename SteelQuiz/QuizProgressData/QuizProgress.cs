@@ -145,27 +145,13 @@ namespace SteelQuiz.QuizProgressData
         }
 
         /// <summary>
-        /// Calculates the success rate between 0 and 1 for answering this word, for the amount of tries completed
-        /// </summary>
-        /// <returns>Returns the success rate between 0 and 1 for answering this word, for the amount of tries completed</returns>
-        public double GetSuccessRate()
-        {
-            double val = CardProgress.Sum(x => x.GetSuccessRate()) / CardProgress.Count();
-            if (double.IsNaN(val))
-            {
-                return 0d;
-            }
-            return val;
-        }
-
-        /// <summary>
         /// Returns the learning progress for this quiz, 
-        /// that is, the average of the success rates for all Cards, that is between 0 and 1, divided by total amount of tries to save (WORD_TRIES_TO_KEEP)
+        /// that is, the average of the success rates for all Cards, that is between 0 and 1, for the amount of tries completed decided by IntelligentLearningLastAnswersBasisCount.
         /// </summary>
         /// <returns></returns>
         public double GetLearningProgress()
         {
-            double val = CardProgress.Sum(x => x.GetLearningProgress()) / CardProgress.Count();
+            double val = CardProgress.Sum(x => x.GetLearningProgress(this)) / CardProgress.Count();
             if (double.IsNaN(val))
             {
                 return 0d;

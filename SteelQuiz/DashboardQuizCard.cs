@@ -42,14 +42,14 @@ namespace SteelQuiz
             SetTheme(WelcomeTheme);
 
             Card = card;
-            var wordProgData = Card.GetProgressData(quiz);
-            SuccessRate = wordProgData.GetSuccessRate();
+            var cardProgressData = Card.GetProgressData(quiz);
+            SuccessRate = cardProgressData.GetSuccessRate();
 
             lbl_learningProgress_bar.Size = new Size((int)Math.Floor(Size.Width * SuccessRate), lbl_learningProgress_bar.Size.Height);
             lbl_learningProgress.Text = Math.Floor(SuccessRate * 100D).ToString() + " %";
 
-            lbl_word1.Text = Card.Front;
-            lbl_word2.Text = Card.Back;
+            lbl_cardFront.Text = Card.Front;
+            lbl_cardBack.Text = Card.Back;
         }
 
         public override void SetTheme(GeneralTheme theme = null)
@@ -92,18 +92,18 @@ namespace SteelQuiz
         {
             UpdateLearningProgressBar();
 
-            lbl_word1.MinimumSize = new Size(Size.Width / 2 - 20, lbl_word1.MinimumSize.Height);
-            lbl_word2.MinimumSize = new Size(Size.Width / 2 - 20, lbl_word2.MinimumSize.Height);
+            lbl_cardFront.MinimumSize = new Size(Size.Width / 2 - 20, lbl_cardFront.MinimumSize.Height);
+            lbl_cardBack.MinimumSize = new Size(Size.Width / 2 - 20, lbl_cardBack.MinimumSize.Height);
 
-            lbl_word1.MaximumSize = new Size(Size.Width / 2 - 20, 0);
-            lbl_word2.MaximumSize = new Size(Size.Width / 2 - 20, 0);
+            lbl_cardFront.MaximumSize = new Size(Size.Width / 2 - 20, 0);
+            lbl_cardBack.MaximumSize = new Size(Size.Width / 2 - 20, 0);
 
-            lbl_word2.Location = new Point(lbl_word1.Right + 32, lbl_word2.Location.Y);
+            lbl_cardBack.Location = new Point(lbl_cardFront.Right + 32, lbl_cardBack.Location.Y);
         }
 
-        private void Lbl_word_SizeChanged(object sender, EventArgs e)
+        private void Lbl_card_SizeChanged(object sender, EventArgs e)
         {
-            int maxBottom = Math.Max(lbl_word1.Bottom, lbl_word2.Bottom);
+            int maxBottom = Math.Max(lbl_cardFront.Bottom, lbl_cardBack.Bottom);
             Size = new Size(Size.Width, maxBottom + 40);
         }
     }
