@@ -29,16 +29,34 @@ namespace SteelQuiz.QuizProgressData
     public class CardProgress : ICloneable
     {
         public Card Card { get; set; }
-
-        [JsonProperty]
-        internal List<AnswerAttempt> AnswerAttempts { get; set; } = new List<AnswerAttempt>();
+        public List<AnswerAttempt> AnswerAttempts { get; set; } = new List<AnswerAttempt>();
 
         public const int ANSWER_ATTEMPTS_FOR_LEARNING_PROGRESS_DEFAULT = 3;
 
+        /// <summary>
+        /// True if this Card has been shown this round.
+        /// </summary>
         public bool AskedThisRound { get; set; } = false;
-        public bool SkipThisRound { get; set; } = false;
+        /// <summary>
+        /// The n number of subsequent rounds from the current, where this Card should not be picked.
+        /// </summary>
+        public int RoundsToSkip { get; set; } = 0;
+
 
         #region Obsolete properties
+        [JsonProperty]
+        [Obsolete("Use RoundsToSkip instead", true)]
+        private bool SkipThisRound
+        {
+            set
+            {
+                if (value)
+                {
+                    RoundsToSkip = 1;
+                }
+            }
+        }
+
         [JsonProperty]
         [Obsolete("Use Card instead", true)]
         private Card WordPair { set => Card = value; }
@@ -125,7 +143,7 @@ namespace SteelQuiz.QuizProgressData
             var cpy = new CardProgress(Card);
             cpy.AnswerAttempts = AnswerAttempts;
             cpy.AskedThisRound = AskedThisRound;
-            cpy.SkipThisRound = SkipThisRound;
+            cpy.RoundsToSkip = RoundsToSkip;
 
             return cpy;
         }
