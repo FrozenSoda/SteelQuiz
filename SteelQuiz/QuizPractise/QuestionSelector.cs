@@ -106,9 +106,19 @@ namespace SteelQuiz.QuizPractise
             foreach (var cardProgress in quiz.ProgressData.CardProgress)
             {
                 cardProgress.AskedThisRound = false;
-                if (cardProgress.RoundsToSkip > 0)
+                --cardProgress.RoundsToSkip;
+                if (cardProgress.RoundsToSkip < 0)
                 {
-                    --cardProgress.RoundsToSkip;
+                    if (cardProgress.AnswerAttempts.Count >= quiz.ProgressData.MinimumTriesCountToConsiderSkippingQuestion)
+                    {
+                        // Evaluate if to skip
+                        var learningProgress = cardProgress.GetLearningProgress(quiz.ProgressData);
+                        cardProgress.RoundsToSkip = (int)Math.Floor(Math.Pow(learningProgress, 2) * 5);
+                    }
+                    else
+                    {
+                        cardProgress.RoundsToSkip = 0;
+                    }
                 }
             }
 

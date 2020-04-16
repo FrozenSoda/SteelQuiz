@@ -242,7 +242,7 @@ namespace SteelQuiz.QuizData
 
                 if (ansDiff.Card.GetRequiredAnswerSynonyms(quiz).Select(x => x.GetProgressData(quiz).AskedThisRound).All(x => x == true))
                 {
-                    quiz.ProgressData.SetCurrentCard(quiz, null);
+                    quiz.ProgressData.CurrentCards.Remove(ansDiff.Card);
                 }
             }
 
