@@ -84,5 +84,10 @@ namespace SteelQuiz.QuizData
             CardBackType = cardBackType;
             FileFormatVersion = quizFileFormatVersion;
         }
+
+        public Card GetCard(Guid guid)
+        {
+            return Cards.Where(x => x.Guid == guid).FirstOrDefault();
+        }
     }
 }

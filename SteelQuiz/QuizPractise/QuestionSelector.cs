@@ -120,7 +120,7 @@ namespace SteelQuiz.QuizPractise
             var possibleCards = (from x in quiz.Cards
                                  let progress = x.GetProgressData(quiz)
                                  where progress.RoundsToSkip == 0
-                                 select x).ToList();
+                                 select x.Guid).ToList();
             Shuffle(possibleCards);
             quiz.ProgressData.CurrentCards = possibleCards.Take(10).ToList();
         }
@@ -144,10 +144,13 @@ namespace SteelQuiz.QuizPractise
                 return null;
             }
 
-            var weightedCollection = new WeightedCollection<Card>();
-            quiz.ProgressData.CurrentCards.ForEach(x => weightedCollection.Add(x, x.GetProgressData(quiz).GetLearningProgress(quiz.ProgressData)));
+            var weightedCollection = new WeightedCollection<Guid>();
+            quiz.ProgressData.CurrentCards.ForEach(x => weightedCollection.Add(x, quiz.GetCard(x).GetProgressData(quiz).GetLearningProgress(quiz.ProgressData)));
 
-            return weightedCollection.Pick();
+            var cardGuid = weightedCollection.Pick();
+            var card = quiz.GetCard(cardGuid);
+
+            return card;
         }
 
         public static Card GenerateCardWithoutIntelligentLearning(Quiz quiz)
@@ -158,7 +161,10 @@ namespace SteelQuiz.QuizPractise
             }
 
             int r = new Random().Next(0, quiz.ProgressData.CurrentCards.Count());
-            return quiz.ProgressData.CurrentCards.ElementAt(r);
+            var cardGuid = quiz.ProgressData.CurrentCards.ElementAt(r);
+            var card = quiz.Cards.Where(x => x.Guid == cardGuid).FirstOrDefault();
+
+            return card;
         }
     }
 }

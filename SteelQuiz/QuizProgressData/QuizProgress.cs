@@ -69,9 +69,9 @@ namespace SteelQuiz.QuizProgressData
         /// </summary>
         public int MinimumTriesCountToConsiderSkippingQuestion { get; set; } = 2;
         /// <summary>
-        /// A collection of all Cards that should be answered this round.
+        /// A collection of the GUIDs of all Cards that should be answered this round.
         /// </summary>
-        public List<Card> CurrentCards { get; set; } = new List<Card>();
+        public List<Guid> CurrentCards { get; set; } = new List<Guid>();
 
         [JsonIgnore]
         /// <summary>
@@ -101,9 +101,11 @@ namespace SteelQuiz.QuizProgressData
         [Obsolete("Use AnswerCardSide instead", true)]
         private int AnswerLanguageNum { set => AnswerCardSide = value == 1 ? CardSide.Front : CardSide.Back; }
 
+        /*
         [JsonProperty]
         [Obsolete("Use CurrentCards instead", true)]
         private List<Card> CurrentWordPairs { set => CurrentCards = value; }
+        */
 
         [JsonProperty]
         [Obsolete("Use CardsDisplayOrder instead", true)]
