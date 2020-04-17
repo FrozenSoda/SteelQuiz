@@ -158,6 +158,8 @@ namespace SteelQuiz.QuizPractise
             var cardGuid = weightedCollection.Pick();
             var card = quiz.GetCard(cardGuid);
 
+            quiz.ProgressData.CurrentCard = cardGuid;
+
             return card;
         }
 
@@ -176,6 +178,8 @@ namespace SteelQuiz.QuizPractise
             int r = new Random().Next(0, quiz.ProgressData.CurrentCards.Count());
             var cardGuid = quiz.ProgressData.CurrentCards.ElementAt(r);
             var card = quiz.Cards.Where(x => x.Guid == cardGuid).FirstOrDefault();
+
+            quiz.ProgressData.CurrentCard = cardGuid;
 
             return card;
         }
