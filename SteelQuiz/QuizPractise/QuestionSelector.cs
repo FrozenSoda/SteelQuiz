@@ -121,8 +121,22 @@ namespace SteelQuiz.QuizPractise
                                  let progress = x.GetProgressData(quiz)
                                  where progress.RoundsToSkip == 0
                                  select x.Guid).ToList();
-            Shuffle(possibleCards);
-            quiz.ProgressData.CurrentCards = possibleCards.Take(10).ToList();
+
+            if (possibleCards.Count > 0)
+            {
+                Shuffle(possibleCards);
+                quiz.ProgressData.CurrentCards = possibleCards.Take(10).ToList();
+            }
+            else
+            {
+                var indexes = Enumerable.Range(0, 5).ToList();
+                Shuffle(indexes);
+                quiz.ProgressData.CurrentCards = indexes
+                    .Where(i => i <= quiz.Cards.Count() - 1)
+                    .Select(i => quiz.Cards[i].Guid).ToList();
+            }
+
+            quiz.ProgressData.CurrentCard = Guid.Empty;
         }
 
         public static Card GenerateCard(Quiz quiz)
@@ -144,7 +158,7 @@ namespace SteelQuiz.QuizPractise
                 return null;
             }
 
-            if (quiz.ProgressData.CurrentCard != null)
+            if (quiz.ProgressData.CurrentCard != Guid.Empty)
             {
                 return quiz.GetCard(quiz.ProgressData.CurrentCard);
             }
@@ -170,7 +184,7 @@ namespace SteelQuiz.QuizPractise
                 return null;
             }
 
-            if (quiz.ProgressData.CurrentCard != null)
+            if (quiz.ProgressData.CurrentCard != Guid.Empty)
             {
                 return quiz.GetCard(quiz.ProgressData.CurrentCard);
             }

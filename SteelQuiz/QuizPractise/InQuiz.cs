@@ -288,11 +288,12 @@ namespace SteelQuiz.QuizPractise
                 var chk = CurrentCard.AnswerCheck(Quiz, CurrentInput, null, !userCopyingAnswer);
                 if (chk.IsCorrect())
                 {
-                    CurrentCard = QuestionSelector.GenerateCard(Quiz); // Generate new card now so that it will be shown on next instance if the user stops practising now
                     newCardPending = true;
                     var correctAnswer = new CorrectAnswer(CurrentCard, Quiz, chk.Certainty);
                     lbl_cardSideToAsk.Controls.Add(correctAnswer);
                     correctAnswer.Show();
+
+                    CurrentCard = QuestionSelector.GenerateCard(Quiz); // Generate new card now so that it will be shown on next instance if the user stops practising now
                 }
                 else
                 {
