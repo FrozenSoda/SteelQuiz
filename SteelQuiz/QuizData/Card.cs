@@ -246,6 +246,7 @@ namespace SteelQuiz.QuizData
             if (ansDiff.IsCorrect())
             {
                 progressData.AskedThisRound = true;
+                quiz.ProgressData.CurrentCard = Guid.Empty;
                 if (progressData.AnswerAttempts.Count >= quiz.ProgressData.MinimumTriesCountToConsiderSkippingQuestion)
                 {
                     progressData.RoundsToSkip = (int)Math.Floor(Math.Pow(progressData.GetLearningProgress(quiz.ProgressData), 2) * 5);

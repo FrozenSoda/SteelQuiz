@@ -72,6 +72,10 @@ namespace SteelQuiz.QuizProgressData
         /// A collection of the GUIDs of all Cards that should be answered this round.
         /// </summary>
         public List<Guid> CurrentCards { get; set; } = new List<Guid>();
+        /// <summary>
+        /// The current card being shown to the user.
+        /// </summary>
+        public Guid CurrentCard { get; set; } = Guid.Empty;
 
         [JsonIgnore]
         /// <summary>

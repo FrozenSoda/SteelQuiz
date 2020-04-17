@@ -144,6 +144,11 @@ namespace SteelQuiz.QuizPractise
                 return null;
             }
 
+            if (quiz.ProgressData.CurrentCard != null)
+            {
+                return quiz.GetCard(quiz.ProgressData.CurrentCard);
+            }
+
             var weightedCollection = new WeightedCollection<Guid>();
             quiz.ProgressData.CurrentCards
                 .Where(x => !quiz.GetCard(x).GetProgressData(quiz).AskedThisRound)
@@ -161,6 +166,11 @@ namespace SteelQuiz.QuizPractise
             if (quiz.ProgressData.CurrentCards == null)
             {
                 return null;
+            }
+
+            if (quiz.ProgressData.CurrentCard != null)
+            {
+                return quiz.GetCard(quiz.ProgressData.CurrentCard);
             }
 
             int r = new Random().Next(0, quiz.ProgressData.CurrentCards.Count());
