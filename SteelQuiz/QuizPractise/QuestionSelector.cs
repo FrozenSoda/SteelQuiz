@@ -76,7 +76,18 @@ namespace SteelQuiz.QuizPractise
             public T Pick()
             {
                 double rnd = random.NextDouble() * accumulatedWeight;
-                var picked = entries.TakeWhile(x => x.Weight >= rnd).FirstOrDefault();
+                //var picked = entries.TakeWhile(x => x.Weight >= rnd).FirstOrDefault();
+                Entry picked = null;
+                foreach (var entry in entries)
+                {
+                    if (rnd < entry.Weight)
+                    {
+                        picked = entry;
+                        break;
+                    }
+
+                    rnd -= entry.Weight;
+                }
                 if (picked == null)
                 {
                     return default(T);
@@ -107,6 +118,8 @@ namespace SteelQuiz.QuizPractise
         /// <param name="quiz"></param>
         public static void NewRound(Quiz quiz)
         {
+            quiz.ProgressData.CorrectAnswersThisRound = 0;
+
             foreach (var cardProgress in quiz.ProgressData.CardProgress)
             {
                 cardProgress.AskedThisRound = false;

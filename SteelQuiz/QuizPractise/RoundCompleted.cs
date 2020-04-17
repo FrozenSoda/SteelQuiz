@@ -41,7 +41,7 @@ namespace SteelQuiz.QuizPractise
             double successRate = (double)quiz.ProgressData.CorrectAnswersThisRound / cardsShown;
 
             lbl_cardsShown.Text = cardsShown.ToString();
-            lbl_successRate.Text = Math.Round(successRate * 100).ToString();
+            lbl_successRate.Text = Math.Round(successRate * 100).ToString() + " %";
         }
 
         public override void SetTheme(GeneralTheme theme = null)

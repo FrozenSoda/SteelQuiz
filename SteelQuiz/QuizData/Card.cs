@@ -238,13 +238,14 @@ namespace SteelQuiz.QuizData
             var ansDiff = new AnswerDiff(bestSimilarityData.Difference, bestSimilarityData.CorrectAnswer, bestSimilarityData.Certainty, bestSimilarityData.Card);
             var progressData = ansDiff.Card.GetProgressData(quiz);
 
-            if (updateProgress)
-            {
-                progressData.AnswerAttempts.Add(new AnswerAttempt(ansDiff.IsCorrect()));
-            }
-
             if (ansDiff.IsCorrect())
             {
+                if (updateProgress)
+                {
+                    progressData.AnswerAttempts.Add(new AnswerAttempt(true));
+                    ++quiz.ProgressData.CorrectAnswersThisRound;
+                }
+
                 progressData.AskedThisRound = true;
                 quiz.ProgressData.CurrentCard = Guid.Empty;
                 if (progressData.AnswerAttempts.Count >= quiz.ProgressData.MinimumTriesCountToConsiderSkippingQuestion)
@@ -258,6 +259,13 @@ namespace SteelQuiz.QuizData
                     quiz.ProgressData.CurrentCards.Remove(ansDiff.Card);
                 }
                 */
+            }
+            else
+            {
+                if (updateProgress)
+                {
+                    progressData.AnswerAttempts.Add(new AnswerAttempt(false));
+                }
             }
 
             QuizCore.SaveQuizProgress(quiz);
