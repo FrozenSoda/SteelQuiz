@@ -114,6 +114,8 @@ namespace SteelQuiz
             Quiz quiz = JsonConvert.DeserializeObject<Quiz>(quizRaw);
             Version quizVersion = new Version(quiz.FileFormatVersion);
 
+            quiz.FileFormatVersion = MetaData.QUIZ_FILE_FORMAT_VERSION;
+
             if (quizVersion.CompareTo(MetaData.GetLatestQuizVersion()) > 0)
             {
                 throw new VersionNotSupportedException(VersionNotSupportedException.NotSupportedReason.AppVersionTooOld);
@@ -133,6 +135,11 @@ namespace SteelQuiz
 
             SaveQuizAccessData();
 
+            if (quizVersion.CompareTo(new Version(4, 0, 0, 1)) < 0)
+            {
+                SaveQuiz(quiz, path);
+            }
+
             return quiz;
         }
 
@@ -147,7 +154,7 @@ namespace SteelQuiz
 
         public static void SaveQuiz(Quiz quiz, string path)
         {
-            string quizRaw = JsonConvert.SerializeObject(quiz);
+            string quizRaw = JsonConvert.SerializeObject(quiz, Formatting.Indented);
             AtomicIO.AtomicWrite(path, quizRaw);
         }
 
@@ -179,6 +186,8 @@ namespace SteelQuiz
                 BackupProgress();
             }
 
+            dataRoot.FileFormatVersion = MetaData.QUIZ_FILE_FORMAT_VERSION;
+
             var data = dataRoot.QuizProgressData.Where(x => x.QuizGUID == quiz.GUID).FirstOrDefault();
 
             if (data != null)
@@ -190,7 +199,11 @@ namespace SteelQuiz
                 dataRoot.QuizProgressData.Add(quiz.ProgressData);
             }
 
+#if DEBUG
+            dataRaw = JsonConvert.SerializeObject(dataRoot, Formatting.Indented);
+#else
             dataRaw = JsonConvert.SerializeObject(dataRoot);
+#endif
             AtomicIO.AtomicWrite(ConfigManager.Config.StorageConfig.QuizProgressFile, dataRaw);
         }
 
@@ -230,6 +243,8 @@ namespace SteelQuiz
                     // Existing quiz file has an older file format - backup before upgrade
                     BackupProgress();
                 }
+
+                dataRoot.FileFormatVersion = MetaData.QUIZ_FILE_FORMAT_VERSION;
             }
             else
             {
@@ -239,7 +254,11 @@ namespace SteelQuiz
             dataRoot.QuizAccessTimes = QuizAccessTimes;
             dataRoot.QuizIdentities = QuizIdentities;
 
+#if DEBUG
+            dataRaw = JsonConvert.SerializeObject(dataRoot, Formatting.Indented);
+#else
             dataRaw = JsonConvert.SerializeObject(dataRoot);
+#endif
             AtomicIO.AtomicWrite(ConfigManager.Config.StorageConfig.QuizProgressFile, dataRaw);
         }
 

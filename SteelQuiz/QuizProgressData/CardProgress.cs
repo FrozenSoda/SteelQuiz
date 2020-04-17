@@ -28,7 +28,7 @@ namespace SteelQuiz.QuizProgressData
 {
     public class CardProgress : ICloneable
     {
-        public Card Card { get; set; }
+        public Guid CardGuid { get; set; }
         public List<AnswerAttempt> AnswerAttempts { get; set; } = new List<AnswerAttempt>();
 
         public const int ANSWER_ATTEMPTS_FOR_LEARNING_PROGRESS_DEFAULT = 3;
@@ -44,6 +44,12 @@ namespace SteelQuiz.QuizProgressData
 
 
         #region Obsolete properties
+        /*
+        [JsonProperty]
+        [Obsolete("Use CardGuid instead", true)]
+        private Card Card { set => CardGuid = value.Guid; }
+        */
+
         [JsonProperty]
         [Obsolete("Use RoundsToSkip instead", true)]
         private bool SkipThisRound
@@ -57,23 +63,25 @@ namespace SteelQuiz.QuizProgressData
             }
         }
 
+        /*
         [JsonProperty]
         [Obsolete("Use Card instead", true)]
         private Card WordPair { set => Card = value; }
+        */
 
         [JsonProperty]
         [Obsolete("Use AnswerAttempts instead", true)]
         private List<AnswerAttempt> WordTries { set => AnswerAttempts = value; }
         #endregion
 
-        public CardProgress(Card card)
+        public CardProgress(Guid cardGuid)
         {
-            Card = card;
+            CardGuid = cardGuid;
         }
 
-        public void AddAnswerAttempt(AnswerAttempt answerAttempt)
+        public Card GetCard(Quiz quiz)
         {
-            AnswerAttempts.Add(answerAttempt);
+            return quiz.Cards.Where(x => x.Guid == CardGuid).FirstOrDefault();
         }
 
         public int GetAnswerAttemptsCount()
@@ -118,7 +126,7 @@ namespace SteelQuiz.QuizProgressData
 
         public object Clone()
         {
-            var cpy = new CardProgress(Card);
+            var cpy = new CardProgress(CardGuid);
             cpy.AnswerAttempts = AnswerAttempts;
             cpy.AskedThisRound = AskedThisRound;
             cpy.RoundsToSkip = RoundsToSkip;

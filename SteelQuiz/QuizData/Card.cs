@@ -33,6 +33,10 @@ namespace SteelQuiz.QuizData
     public class Card
     {
         /// <summary>
+        /// The GUID of this card.
+        /// </summary>
+        public Guid Guid { get; set; } = Guid.NewGuid();
+        /// <summary>
         /// The term/word/question/answer on the front of the "flashcard"
         /// </summary>
         public string Front { get; set; }
@@ -160,13 +164,15 @@ namespace SteelQuiz.QuizData
         {
             foreach (var p in quiz.ProgressData.CardProgress)
             {
-                if (p.Card.Equals(this, true, true))
+                if (p.CardGuid == Guid)
                 {
                     return p;
                 }
             }
 
-            throw new Exception("No progress data could be found for this card");
+            var cardProgress = new CardProgress(Guid);
+            quiz.ProgressData.CardProgress.Add(cardProgress);
+            return cardProgress;
         }
 
         /// <summary>
@@ -234,7 +240,7 @@ namespace SteelQuiz.QuizData
 
             if (updateProgress)
             {
-                progressData.AddAnswerAttempt(new AnswerAttempt(ansDiff.IsCorrect()));
+                progressData.AnswerAttempts.Add(new AnswerAttempt(ansDiff.IsCorrect()));
             }
 
             if (ansDiff.IsCorrect())

@@ -128,7 +128,7 @@ namespace SteelQuiz.QuizProgressData
                     bool found = false;
                     foreach (var c in CardProgress)
                     {
-                        if (c.Card.Equals(card))
+                        if (c.CardGuid.Equals(card.Guid))
                         {
                             found = true;
                         }
@@ -136,7 +136,7 @@ namespace SteelQuiz.QuizProgressData
 
                     if (!found)
                     {
-                        CardProgress.Add(new CardProgress(card));
+                        CardProgress.Add(new CardProgress(card.Guid));
                     }
                 }
             }
