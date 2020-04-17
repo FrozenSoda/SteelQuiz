@@ -230,15 +230,17 @@ namespace SteelQuiz.QuizData
             StringComp.SimilarityData bestSimilarityData = similarityData.OrderBy(x => x.Difference).ThenBy(x => (int)x.Certainty).First();
 
             var ansDiff = new AnswerDiff(bestSimilarityData.Difference, bestSimilarityData.CorrectAnswer, bestSimilarityData.Certainty, bestSimilarityData.Card);
+            var progressData = ansDiff.Card.GetProgressData(quiz);
 
             if (updateProgress)
             {
-                ansDiff.Card.GetProgressData(quiz).AddAnswerAttempt(new AnswerAttempt(ansDiff.IsCorrect()));
+                progressData.AddAnswerAttempt(new AnswerAttempt(ansDiff.IsCorrect()));
             }
 
             if (ansDiff.IsCorrect())
             {
-                ansDiff.Card.GetProgressData(quiz).AskedThisRound = true;
+                progressData.AskedThisRound = true;
+                progressData.RoundsToSkip = (int)Math.Floor(Math.Pow(progressData.GetLearningProgress(quiz.ProgressData), 2) * 5);
 
                 if (ansDiff.Card.GetRequiredAnswerSynonyms(quiz).Select(x => x.GetProgressData(quiz).AskedThisRound).All(x => x == true))
                 {

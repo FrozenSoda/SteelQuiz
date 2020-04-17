@@ -77,6 +77,10 @@ namespace SteelQuiz.QuizPractise
             {
                 double rnd = random.NextDouble() * accumulatedWeight;
                 var picked = entries.TakeWhile(x => x.Weight >= rnd).FirstOrDefault();
+                if (picked == null)
+                {
+                    return default(T);
+                }
                 return picked.Item;
             }
         }
@@ -91,7 +95,7 @@ namespace SteelQuiz.QuizPractise
         private static void Shuffle<T>(List<T> list)
         {
             var rnd = new Random();
-            for (int i = list.Count - 1; i >= 0; ++i)
+            for (int i = list.Count - 1; i >= 0; --i)
             {
                 Swap(list, i, rnd.Next(0, i));
             }
@@ -106,19 +110,10 @@ namespace SteelQuiz.QuizPractise
             foreach (var cardProgress in quiz.ProgressData.CardProgress)
             {
                 cardProgress.AskedThisRound = false;
-                --cardProgress.RoundsToSkip;
-                if (cardProgress.RoundsToSkip < 0)
+                
+                if (cardProgress.RoundsToSkip > 0)
                 {
-                    if (cardProgress.AnswerAttempts.Count >= quiz.ProgressData.MinimumTriesCountToConsiderSkippingQuestion)
-                    {
-                        // Evaluate if to skip
-                        var learningProgress = cardProgress.GetLearningProgress(quiz.ProgressData);
-                        cardProgress.RoundsToSkip = (int)Math.Floor(Math.Pow(learningProgress, 2) * 5);
-                    }
-                    else
-                    {
-                        cardProgress.RoundsToSkip = 0;
-                    }
+                    --cardProgress.RoundsToSkip;
                 }
             }
 
@@ -144,6 +139,11 @@ namespace SteelQuiz.QuizPractise
 
         public static Card GenerateCardWithIntelligentLearning(Quiz quiz)
         {
+            if (quiz.ProgressData.CurrentCards == null)
+            {
+                return null;
+            }
+
             var weightedCollection = new WeightedCollection<Card>();
             quiz.ProgressData.CurrentCards.ForEach(x => weightedCollection.Add(x, x.GetProgressData(quiz).GetLearningProgress(quiz.ProgressData)));
 
@@ -152,6 +152,11 @@ namespace SteelQuiz.QuizPractise
 
         public static Card GenerateCardWithoutIntelligentLearning(Quiz quiz)
         {
+            if (quiz.ProgressData.CurrentCards == null)
+            {
+                return null;
+            }
+
             int r = new Random().Next(0, quiz.ProgressData.CurrentCards.Count());
             return quiz.ProgressData.CurrentCards.ElementAt(r);
         }
