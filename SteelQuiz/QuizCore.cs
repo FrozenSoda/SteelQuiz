@@ -192,7 +192,7 @@ namespace SteelQuiz
 
             if (data != null)
             {
-                data = quiz.ProgressData;
+                dataRoot.QuizProgressData[dataRoot.QuizProgressData.IndexOf(data)] = quiz.ProgressData;
             }
             else
             {
