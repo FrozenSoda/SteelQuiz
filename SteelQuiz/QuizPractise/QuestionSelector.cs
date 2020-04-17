@@ -145,7 +145,10 @@ namespace SteelQuiz.QuizPractise
             }
 
             var weightedCollection = new WeightedCollection<Guid>();
-            quiz.ProgressData.CurrentCards.ForEach(x => weightedCollection.Add(x, quiz.GetCard(x).GetProgressData(quiz).GetLearningProgress(quiz.ProgressData)));
+            quiz.ProgressData.CurrentCards
+                .Where(x => !quiz.GetCard(x).GetProgressData(quiz).AskedThisRound)
+                .ToList()
+                .ForEach(x => weightedCollection.Add(x, quiz.GetCard(x).GetProgressData(quiz).GetLearningProgress(quiz.ProgressData)));
 
             var cardGuid = weightedCollection.Pick();
             var card = quiz.GetCard(cardGuid);
