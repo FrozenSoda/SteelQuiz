@@ -136,6 +136,15 @@ namespace SteelQuiz
             return quiz;
         }
 
+        /// <summary>
+        /// Updates the Cards in the progress data for the specified quiz, to match the cards in the quiz. This is needed for instance if a card has changed or been removed.
+        /// </summary>
+        /// <param name="quiz">The quiz to update progress data for.</param>
+        private static void UpdateQuizProgressCards(Quiz quiz)
+        {
+            
+        }
+
         public static void SaveQuiz(Quiz quiz, string path)
         {
             string quizRaw = JsonConvert.SerializeObject(quiz);
