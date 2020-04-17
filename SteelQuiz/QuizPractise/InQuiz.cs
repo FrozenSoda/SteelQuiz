@@ -211,6 +211,7 @@ namespace SteelQuiz.QuizPractise
                 var roundCompleted = new RoundCompleted(Quiz);
                 lbl_cardSideToAsk.Controls.Add(roundCompleted);
                 roundCompleted.Show();
+                QuestionSelector.NewRound(Quiz);
                 newRoundPending = true;
 
                 return;
@@ -271,7 +272,6 @@ namespace SteelQuiz.QuizPractise
 
                 if (newRoundPending)
                 {
-                    QuestionSelector.NewRound(Quiz);
                     SetCard();
 
                     return;
