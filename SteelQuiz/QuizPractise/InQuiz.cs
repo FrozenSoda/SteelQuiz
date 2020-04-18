@@ -236,9 +236,9 @@ namespace SteelQuiz.QuizPractise
         }
 
         /// <summary>
-        /// Retrieves a collection of answers already entered in a multi-answer question.
+        /// Retrieves a collection of answers already provided to a multi-answer card.
         /// </summary>
-        /// <returns>Returns the collection</returns>
+        /// <returns>The card collection</returns>
         private IEnumerable<Card> MultiAnswersAlreadyEntered()
         {
             return CurrentCard.GetRequiredAlternativeCards(Quiz).Where(x => x.GetProgressData(Quiz).AskedThisRound);
