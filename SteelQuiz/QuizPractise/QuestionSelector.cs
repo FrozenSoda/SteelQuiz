@@ -90,7 +90,7 @@ namespace SteelQuiz.QuizPractise
                 }
                 if (picked == null)
                 {
-                    return default(T);
+                    return default;
                 }
                 return picked.Item;
             }
