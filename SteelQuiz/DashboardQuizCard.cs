@@ -35,18 +35,17 @@ namespace SteelQuiz
         private WelcomeTheme WelcomeTheme { get; set; } = new WelcomeTheme();
         public Card Card { get; set; }
         public double SuccessRate { get; set; }
+        private Quiz Quiz { get; set; }
 
         public DashboardQuizCard(Quiz quiz, Card card)
         {
             InitializeComponent();
             SetTheme(WelcomeTheme);
 
+            Quiz = quiz;
             Card = card;
-            var cardProgressData = Card.GetProgressData(quiz);
-            SuccessRate = cardProgressData.GetSuccessRate();
 
-            lbl_learningProgress_bar.Size = new Size((int)Math.Floor(Size.Width * SuccessRate), lbl_learningProgress_bar.Size.Height);
-            lbl_learningProgress.Text = Math.Floor(SuccessRate * 100D).ToString() + " %";
+            UpdateLearningProgress();
 
             lbl_cardFront.Text = Card.Front;
             lbl_cardBack.Text = Card.Back;
@@ -71,8 +70,11 @@ namespace SteelQuiz
             lbl_learningProgress_bar.ForeColor = lbl_learningProgress_bar_color;
         }
 
-        public void UpdateLearningProgressBar()
+        public void UpdateLearningProgress()
         {
+            var cardProgressData = Card.GetProgressData(Quiz);
+            SuccessRate = cardProgressData.GetSuccessRate();
+            lbl_learningProgress.Text = Math.Floor(SuccessRate * 100D).ToString() + " %";
             lbl_learningProgress_bar.Size = new Size((int)Math.Floor(Size.Width * SuccessRate), lbl_learningProgress_bar.Size.Height);
         }
 
@@ -90,7 +92,7 @@ namespace SteelQuiz
 
         private void DashboardQuizCard_SizeChanged(object sender, EventArgs e)
         {
-            UpdateLearningProgressBar();
+            UpdateLearningProgress();
 
             lbl_cardFront.MinimumSize = new Size(Size.Width / 2 - 20, lbl_cardFront.MinimumSize.Height);
             lbl_cardBack.MinimumSize = new Size(Size.Width / 2 - 20, lbl_cardBack.MinimumSize.Height);

@@ -146,7 +146,7 @@ namespace SteelQuiz
             lbl_learningProgress_bar.Size = new Size((int)Math.Floor(Size.Width * Quiz.ProgressData.GetLearningProgress()), lbl_learningProgress_bar.Size.Height);
             foreach (var c in flp_words.Controls.OfType<DashboardQuizCard>())
             {
-                c.UpdateLearningProgressBar();
+                c.UpdateLearningProgress();
             }
         }
 
