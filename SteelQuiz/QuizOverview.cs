@@ -100,7 +100,7 @@ namespace SteelQuiz
             lbl_quizNameHere.Text = Path.GetFileNameWithoutExtension(Quiz.QuizIdentity.FindQuizPath());
 
             SetTheme(WelcomeTheme);
-            LoadLearningProgressPercentage();
+            UpdateLearningProgress();
 
             switch (Quiz.ProgressData.CardsDisplayOrder)
             {
@@ -140,10 +140,14 @@ namespace SteelQuiz
             lbl_termsCount.Text = Quiz.Cards.Count().ToString();
         }
 
-        public void LoadLearningProgressPercentage()
+        public void UpdateLearningProgress()
         {
-            lbl_learningProgress_bar.Size = new Size((int)Math.Floor(Size.Width * Quiz.ProgressData.GetLearningProgress()), lbl_learningProgress_bar.Size.Height);
             lbl_learningProgress.Text = Math.Floor(Quiz.ProgressData.GetLearningProgress() * 100D).ToString() + " %";
+            lbl_learningProgress_bar.Size = new Size((int)Math.Floor(Size.Width * Quiz.ProgressData.GetLearningProgress()), lbl_learningProgress_bar.Size.Height);
+            foreach (var c in flp_words.Controls.OfType<DashboardQuizCard>())
+            {
+                c.UpdateLearningProgressBar();
+            }
         }
 
         /// <summary>
@@ -272,27 +276,12 @@ namespace SteelQuiz
 
             lbl_learningProgress_bar.ForeColor = lbl_learningProgress_bar_color;
 
-            //btn_resetProgress.ForeColor = ((WelcomeTheme)theme).GetButtonRedForeColor();
-
-            //cpb_learningProgress.BackColor = theme.GetBackColor();
-            //cpb_learningProgress.InnerColor = theme.GetBackColor();
-            //cpb_learningProgress.ForeColor = theme.GetMainLabelForeColor();
-
             RecolorCards();
         }
 
         private void Btn_practiseQuiz_Click(object sender, EventArgs e)
         {
             PractiseQuizButtonsExpanded = !PractiseQuizButtonsExpanded;
-        }
-
-        public void UpdateLearningProgressBar()
-        {
-            lbl_learningProgress_bar.Size = new Size((int)Math.Floor(Size.Width * Quiz.ProgressData.GetLearningProgress()), lbl_learningProgress_bar.Size.Height);
-            foreach (var c in flp_words.Controls.OfType<DashboardQuizCard>())
-            {
-                c.UpdateLearningProgressBar();
-            }
         }
 
         private void QuizProgressInfo_SizeChanged(object sender, EventArgs e)
@@ -303,7 +292,7 @@ namespace SteelQuiz
                 c.Size = new Size(flp_words.Size.Width - 34, c.Size.Height);
             }
 
-            UpdateLearningProgressBar();
+            UpdateLearningProgress();
         }
 
         private void Btn_editQuiz_Click(object sender, EventArgs e)

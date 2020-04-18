@@ -147,7 +147,7 @@ namespace SteelQuiz
             QuizCore.SaveQuizProgress(quiz);
 
             var quizProgressInfo = Program.frmWelcome.FindQuizProgressInfo(QuizIdentity.QuizGuid);
-            quizProgressInfo?.LoadLearningProgressPercentage();
+            quizProgressInfo?.UpdateLearningProgress();
             quizProgressInfo?.LoadCards();
 
             (ParentForm as Dashboard).LoadedQuiz = quiz;

@@ -320,6 +320,7 @@ namespace SteelQuiz.QuizPractise
         {
             exitAppOnClose = false;
             Close();
+            Program.frmWelcome.UpdateQuizOverview(); // Update learning progress etc
             Program.frmWelcome.Show();
         }
 
