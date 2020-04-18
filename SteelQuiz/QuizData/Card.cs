@@ -176,10 +176,10 @@ namespace SteelQuiz.QuizData
         }
 
         /// <summary>
-        /// Finds all synonyms to the answer side of this Card that are required to be provided, including the content in this Card.
+        /// Finds all cards with the same "question" side as this card, and an alternative answer side to this card, that are required to be answered, including this card.
         /// </summary>
-        /// <returns>A collection of Cards required to be provided.</returns>
-        public IEnumerable<Card> GetRequiredAnswerSynonyms(Quiz quiz)
+        /// <returns>A collection of Cards required to be answered.</returns>
+        public IEnumerable<Card> GetRequiredAlternativeCards(Quiz quiz)
         {
             if (quiz.ProgressData.AnswerCardSide == CardSide.Back)
             {
@@ -192,7 +192,7 @@ namespace SteelQuiz.QuizData
             else
             {
                 // should never be reached
-                throw new Exception("GetRequiredAnswerSynonyms() reached end");
+                throw new Exception("GetRequiredAlternativeCards() reached end");
             }
         }
 
@@ -275,7 +275,7 @@ namespace SteelQuiz.QuizData
         {
             var similarityData = new List<StringComp.SimilarityData>();
 
-            foreach (var card in GetRequiredAnswerSynonyms(quiz).Where(x => answerIgnores == null || !answerIgnores.Contains(x.GetSideToAnswer(quiz))))
+            foreach (var card in GetRequiredAlternativeCards(quiz).Where(x => answerIgnores == null || !answerIgnores.Contains(x.GetSideToAnswer(quiz))))
             {
                 similarityData = similarityData.Concat(SimilarityData(quiz, card, input, updateProgress)).ToList();
             }

@@ -241,7 +241,7 @@ namespace SteelQuiz.QuizPractise
         /// <returns>Returns the collection</returns>
         private IEnumerable<Card> MultiAnswersAlreadyEntered()
         {
-            return CurrentCard.GetRequiredAnswerSynonyms(Quiz).Where(x => x.GetProgressData(Quiz).AskedThisRound);
+            return CurrentCard.GetRequiredAlternativeCards(Quiz).Where(x => x.GetProgressData(Quiz).AskedThisRound);
         }
 
         private void InQuiz_KeyPress(object sender, KeyPressEventArgs e)
