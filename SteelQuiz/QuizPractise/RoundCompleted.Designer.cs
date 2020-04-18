@@ -67,6 +67,7 @@ namespace SteelQuiz.QuizPractise
             this.lbl_title.TabIndex = 0;
             this.lbl_title.Text = "Round Completed!";
             this.lbl_title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_title.Click += new System.EventHandler(this.RoundCompleted_Click);
             // 
             // label1
             // 
@@ -78,6 +79,7 @@ namespace SteelQuiz.QuizPractise
             this.label1.TabIndex = 1;
             this.label1.Text = "Cards Shown:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label1.Click += new System.EventHandler(this.RoundCompleted_Click);
             // 
             // lbl_cardsShown
             // 
@@ -89,6 +91,7 @@ namespace SteelQuiz.QuizPractise
             this.lbl_cardsShown.TabIndex = 2;
             this.lbl_cardsShown.Text = "0";
             this.lbl_cardsShown.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lbl_cardsShown.Click += new System.EventHandler(this.RoundCompleted_Click);
             // 
             // lbl_successRate
             // 
@@ -100,6 +103,7 @@ namespace SteelQuiz.QuizPractise
             this.lbl_successRate.TabIndex = 4;
             this.lbl_successRate.Text = "0 %";
             this.lbl_successRate.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lbl_successRate.Click += new System.EventHandler(this.RoundCompleted_Click);
             // 
             // label2
             // 
@@ -111,6 +115,7 @@ namespace SteelQuiz.QuizPractise
             this.label2.TabIndex = 3;
             this.label2.Text = "Correct Answer Rate:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label2.Click += new System.EventHandler(this.RoundCompleted_Click);
             // 
             // lbl_instruction
             // 
@@ -122,6 +127,7 @@ namespace SteelQuiz.QuizPractise
             this.lbl_instruction.TabIndex = 6;
             this.lbl_instruction.Text = "Press ENTER to continue";
             this.lbl_instruction.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_instruction.Click += new System.EventHandler(this.RoundCompleted_Click);
             // 
             // RoundCompleted
             // 
@@ -139,6 +145,7 @@ namespace SteelQuiz.QuizPractise
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "RoundCompleted";
             this.Size = new System.Drawing.Size(325, 345);
+            this.Click += new System.EventHandler(this.RoundCompleted_Click);
             this.ResumeLayout(false);
 
         }

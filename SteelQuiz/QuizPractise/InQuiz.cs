@@ -206,6 +206,8 @@ namespace SteelQuiz.QuizPractise
                 c.Dispose();
             }
 
+            pnl_knewAnswer.Visible = false;
+
             CurrentInput = "";
             if (PractiseMode == QuizPractiseMode.Writing)
             {
@@ -222,10 +224,11 @@ namespace SteelQuiz.QuizPractise
             {
                 // Round completed
 
-                var roundCompleted = new RoundCompleted(Quiz);
+                var roundCompleted = new RoundCompleted(Quiz, PractiseMode, this);
                 lbl_cardSideToAsk.Controls.Add(roundCompleted);
                 roundCompleted.Show();
                 QuestionSelector.NewRound(Quiz);
+                lbl_cardSideToAnswer.Text = "";
                 newRoundPending = true;
 
                 return;
@@ -373,6 +376,11 @@ namespace SteelQuiz.QuizPractise
                 return;
             }
 
+            if (newRoundPending)
+            {
+                return;
+            }
+
             foreach (var c in lbl_cardSideToAsk.Controls.OfType<CorrectAnswer>())
             {
                 lbl_cardSideToAsk.Controls.Remove(c);
@@ -387,13 +395,6 @@ namespace SteelQuiz.QuizPractise
             {
                 lbl_cardSideToAsk.Controls.Remove(c);
                 c.Dispose();
-            }
-
-            if (newRoundPending)
-            {
-                SetCard();
-
-                return;
             }
 
             if (newCardPending)

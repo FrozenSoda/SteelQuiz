@@ -27,12 +27,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SteelQuiz.ThemeManager.Colors;
 using SteelQuiz.QuizData;
+using static SteelQuiz.Dashboard;
 
 namespace SteelQuiz.QuizPractise
 {
     public partial class RoundCompleted : AutoThemeableUserControl
     {
-        public RoundCompleted(Quiz quiz)
+        private QuizPractise QuizPractiseForm { get; set; }
+        private QuizPractiseMode QuizPractiseMode { get; set; }
+
+        public RoundCompleted(Quiz quiz, QuizPractiseMode practiseMode, QuizPractise quizPractiseForm)
         {
             InitializeComponent();
             SetTheme();
@@ -42,6 +46,14 @@ namespace SteelQuiz.QuizPractise
 
             lbl_cardsShown.Text = cardsShown.ToString();
             lbl_successRate.Text = Math.Round(successRate * 100).ToString() + " %";
+
+            if (practiseMode == QuizPractiseMode.Flashcards)
+            {
+                lbl_instruction.Text = "Click here to continue";
+            }
+
+            QuizPractiseMode = practiseMode;
+            QuizPractiseForm = quizPractiseForm;
         }
 
         public override void SetTheme(GeneralTheme theme = null)
@@ -55,6 +67,14 @@ namespace SteelQuiz.QuizPractise
             else
             {
                 lbl_title.ForeColor = Color.DarkGreen;
+            }
+        }
+
+        private void RoundCompleted_Click(object sender, EventArgs e)
+        {
+            if (QuizPractiseMode == QuizPractiseMode.Flashcards)
+            {
+                QuizPractiseForm.SetCard();
             }
         }
     }
