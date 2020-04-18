@@ -95,6 +95,7 @@ namespace SteelQuiz.QuizPractise
             this.lbl_cardSideToAnswer.Text = "Enter your answer ...";
             this.lbl_cardSideToAnswer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lbl_cardSideToAnswer.UseMnemonic = false;
+            this.lbl_cardSideToAnswer.Click += new System.EventHandler(this.lbl_cardSideToAnswer_Click);
             // 
             // lbl_progress
             // 
@@ -202,6 +203,7 @@ namespace SteelQuiz.QuizPractise
             this.btn_knewAnswerNO.TabIndex = 2;
             this.btn_knewAnswerNO.Text = "No";
             this.btn_knewAnswerNO.UseVisualStyleBackColor = false;
+            this.btn_knewAnswerNO.Click += new System.EventHandler(this.btn_knewAnswerNO_Click);
             // 
             // btn_knewAnswerYES
             // 
@@ -214,6 +216,7 @@ namespace SteelQuiz.QuizPractise
             this.btn_knewAnswerYES.TabIndex = 1;
             this.btn_knewAnswerYES.Text = "Yes";
             this.btn_knewAnswerYES.UseVisualStyleBackColor = false;
+            this.btn_knewAnswerYES.Click += new System.EventHandler(this.btn_knewAnswerYES_Click);
             // 
             // label1
             // 

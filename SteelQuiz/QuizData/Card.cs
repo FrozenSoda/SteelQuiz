@@ -218,13 +218,60 @@ namespace SteelQuiz.QuizData
         }
 
         /// <summary>
+        /// Adds successful to AnswerAttempts if updateProgress; then marks the card as answered and calculates when to show it next time.
+        /// </summary>
+        /// <param name="quiz">The quiz which the card belongs to.</param>
+        /// <param name="card">The card to add attempt for.</param>
+        /// <param name="updateProgress">True if the attempt should be added to AnswerAttempts and CorrectAnswersThisRound.</param>
+        public void AddSuccessfulAttempt(Quiz quiz, Card card, bool updateProgress)
+        {
+            var progressData = card.GetProgressData(quiz);
+
+            if (updateProgress)
+            {
+                progressData.AnswerAttempts.Add(new AnswerAttempt(true));
+                ++quiz.ProgressData.CorrectAnswersThisRound;
+            }
+
+            progressData.AskedThisRound = true;
+            quiz.ProgressData.CurrentCard = Guid.Empty;
+            if (progressData.AnswerAttempts.Count >= quiz.ProgressData.MinimumTriesCountToConsiderSkippingQuestion)
+            {
+                progressData.RoundsToSkip = (int)Math.Floor(Math.Pow(progressData.GetLearningProgress(quiz.ProgressData), 2) * 5);
+            }
+        }
+
+        /// <summary>
+        /// Adds a failed attempt to AnswerAttempts if updateProgress
+        /// </summary>
+        /// <param name="quiz">The quiz which the card belongs to.</param>
+        /// <param name="card">The card to add attempt for.</param>
+        /// <param name="updateProgress">True if the attempt should be added to AnswerAttempts.</param>
+        /// <param name="userGoingToCopy">True if the user needs to copy the correct answer and answer correct before continuing; false to mark the question as answered and move on.</param>
+        public void AddFailedAttempt(Quiz quiz, Card card, bool updateProgress, bool userGoingToCopy)
+        {
+            var progressData = card.GetProgressData(quiz);
+
+            if (updateProgress)
+            {
+                progressData.AnswerAttempts.Add(new AnswerAttempt(false));
+            }
+
+            if (!userGoingToCopy)
+            {
+                progressData.AskedThisRound = true;
+                quiz.ProgressData.CurrentCard = Guid.Empty;
+            }
+        }
+
+        /// <summary>
         /// Checks the answer to see if it is correct, and returns data about the closest match
         /// </summary>
         /// <param name="input">The user answer</param>
         /// <param name="answerIgnores">In case of a question with multiple answers, contains the answers already provided</param>
         /// <param name="updateProgress">True if progress should be updated, otherwise false</param>
         /// <returns></returns>
-        public AnswerDiff AnswerCheck(Quiz quiz, string input, IEnumerable<string> answerIgnores = null, bool updateProgress = true)
+        public AnswerDiff WrittenAnswerCheck(Quiz quiz, string input, IEnumerable<string> answerIgnores = null, bool updateProgress = true)
         {
             var similarityData = new List<StringComp.SimilarityData>();
 
@@ -236,22 +283,10 @@ namespace SteelQuiz.QuizData
             StringComp.SimilarityData bestSimilarityData = similarityData.OrderBy(x => x.Difference).ThenBy(x => (int)x.Certainty).First();
 
             var ansDiff = new AnswerDiff(bestSimilarityData.Difference, bestSimilarityData.CorrectAnswer, bestSimilarityData.Certainty, bestSimilarityData.Card);
-            var progressData = ansDiff.Card.GetProgressData(quiz);
 
             if (ansDiff.IsCorrect())
             {
-                if (updateProgress)
-                {
-                    progressData.AnswerAttempts.Add(new AnswerAttempt(true));
-                    ++quiz.ProgressData.CorrectAnswersThisRound;
-                }
-
-                progressData.AskedThisRound = true;
-                quiz.ProgressData.CurrentCard = Guid.Empty;
-                if (progressData.AnswerAttempts.Count >= quiz.ProgressData.MinimumTriesCountToConsiderSkippingQuestion)
-                {
-                    progressData.RoundsToSkip = (int)Math.Floor(Math.Pow(progressData.GetLearningProgress(quiz.ProgressData), 2) * 5);
-                }
+                AddSuccessfulAttempt(quiz, ansDiff.Card, updateProgress);
 
                 /*
                 if (ansDiff.Card.GetRequiredAnswerSynonyms(quiz).Select(x => x.GetProgressData(quiz).AskedThisRound).All(x => x == true))
@@ -262,10 +297,7 @@ namespace SteelQuiz.QuizData
             }
             else
             {
-                if (updateProgress)
-                {
-                    progressData.AnswerAttempts.Add(new AnswerAttempt(false));
-                }
+                AddFailedAttempt(quiz, ansDiff.Card, updateProgress, true);
             }
 
             QuizCore.SaveQuizProgress(quiz);

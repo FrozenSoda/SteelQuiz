@@ -65,7 +65,14 @@ namespace SteelQuiz.QuizPractise
                 if (value != null)
                 {
                     lbl_cardSideToAsk.Text = value.GetSideToAsk(Quiz);
-                    lbl_cardSideToAnswer.Text = "Enter your answer ...";
+                    if (PractiseMode == QuizPractiseMode.Writing)
+                    {
+                        lbl_cardSideToAnswer.Text = "Enter your answer ...";
+                    }
+                    else
+                    {
+                        lbl_cardSideToAnswer.Text = "Click here to reveal";
+                    }
                     cardSideAnswerPromptBeingShown = true;
                 }
 
@@ -200,7 +207,14 @@ namespace SteelQuiz.QuizPractise
             }
 
             CurrentInput = "";
-            lbl_cardSideToAnswer.Text = "Enter your answer ...";
+            if (PractiseMode == QuizPractiseMode.Writing)
+            {
+                lbl_cardSideToAnswer.Text = "Enter your answer ...";
+            }
+            else
+            {
+                lbl_cardSideToAnswer.Text = "Click here to reveal";
+            }
             cardSideAnswerPromptBeingShown = true;
 
             CurrentCard = QuestionSelector.GenerateCard(Quiz);
@@ -285,7 +299,7 @@ namespace SteelQuiz.QuizPractise
                 }
 
                 // Check answer
-                var chk = CurrentCard.AnswerCheck(Quiz, CurrentInput, null, !userCopyingAnswer);
+                var chk = CurrentCard.WrittenAnswerCheck(Quiz, CurrentInput, null, !userCopyingAnswer);
                 if (chk.IsCorrect())
                 {
                     newCardPending = true;
@@ -350,6 +364,59 @@ namespace SteelQuiz.QuizPractise
             {
                 Application.Exit();
             }
+        }
+
+        private void lbl_cardSideToAnswer_Click(object sender, EventArgs e)
+        {
+            if (PractiseMode != QuizPractiseMode.Flashcards)
+            {
+                return;
+            }
+
+            foreach (var c in lbl_cardSideToAsk.Controls.OfType<CorrectAnswer>())
+            {
+                lbl_cardSideToAsk.Controls.Remove(c);
+                c.Dispose();
+            }
+            foreach (var c in lbl_cardSideToAsk.Controls.OfType<WrongAnswer>())
+            {
+                lbl_cardSideToAsk.Controls.Remove(c);
+                c.Dispose();
+            }
+            foreach (var c in lbl_cardSideToAsk.Controls.OfType<RoundCompleted>())
+            {
+                lbl_cardSideToAsk.Controls.Remove(c);
+                c.Dispose();
+            }
+
+            if (newRoundPending)
+            {
+                SetCard();
+
+                return;
+            }
+
+            if (newCardPending)
+            {
+                SetCard();
+
+                return;
+            }
+
+            lbl_cardSideToAnswer.Text = CurrentCard.GetSideToAnswer(Quiz);
+            pnl_knewAnswer.Visible = true;
+        }
+
+        private void btn_knewAnswerYES_Click(object sender, EventArgs e)
+        {
+            CurrentCard.AddSuccessfulAttempt(Quiz, CurrentCard, true);
+            SetCard();
+        }
+
+        private void btn_knewAnswerNO_Click(object sender, EventArgs e)
+        {
+            CurrentCard.AddFailedAttempt(Quiz, CurrentCard, true, false);
+            SetCard();
         }
     }
 }
