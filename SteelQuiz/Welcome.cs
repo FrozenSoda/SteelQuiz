@@ -219,7 +219,7 @@ namespace SteelQuiz
                 if (q.Quiz.GUID == LoadedQuiz.GUID)
                 {
                     q.Size = pnl_quizOverview.Size;
-                    q.UpdateLearningProgress();
+                    q.UpdateLearningProgress(true);
                     q.Show();
                     q.BringToFront();
 

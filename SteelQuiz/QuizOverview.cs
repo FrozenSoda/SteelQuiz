@@ -100,7 +100,7 @@ namespace SteelQuiz
             lbl_quizNameHere.Text = Path.GetFileNameWithoutExtension(Quiz.QuizIdentity.FindQuizPath());
 
             SetTheme(WelcomeTheme);
-            UpdateLearningProgress();
+            UpdateLearningProgress(false);
 
             switch (Quiz.ProgressData.CardsDisplayOrder)
             {
@@ -140,13 +140,25 @@ namespace SteelQuiz
             lbl_termsCount.Text = Quiz.Cards.Count().ToString();
         }
 
-        public void UpdateLearningProgress()
+        /// <summary>
+        /// Updates the displayed learning progress for the Quiz and the Cards.
+        /// </summary>
+        /// <param name="reloadCards">True if the cards should be reloaded - which is needed if the learning progress value is changed.</param>
+        public void UpdateLearningProgress(bool reloadCards)
         {
             lbl_learningProgress.Text = Math.Floor(Quiz.ProgressData.GetLearningProgress() * 100D).ToString() + " %";
             lbl_learningProgress_bar.Size = new Size((int)Math.Floor(Size.Width * Quiz.ProgressData.GetLearningProgress()), lbl_learningProgress_bar.Size.Height);
-            foreach (var c in flp_words.Controls.OfType<DashboardQuizCard>())
+
+            if (reloadCards)
             {
-                c.UpdateLearningProgress();
+                LoadCards();
+            }
+            else
+            {
+                foreach (var c in flp_words.Controls.OfType<DashboardQuizCard>())
+                {
+                    c.UpdateLearningProgress();
+                }
             }
         }
 
@@ -175,20 +187,12 @@ namespace SteelQuiz
 
         public void LoadCards()
         {
-            //var watch = new Stopwatch();
-            //watch.Start();
-
-            //Debug.WriteLine(watch.ElapsedMilliseconds);
             foreach (var c in flp_words.Controls.OfType<Control>())
             {
                 c.Dispose();
             }
 
-            //Debug.WriteLine(watch.ElapsedMilliseconds);
-
             flp_words.Controls.Clear();
-
-            //Debug.WriteLine(watch.ElapsedMilliseconds);
 
             var controls = new List<DashboardQuizCard>();
             foreach (var card in Quiz.Cards)
@@ -197,8 +201,6 @@ namespace SteelQuiz
                 c.Size = new Size(flp_words.Size.Width - 34, c.Size.Height);
                 controls.Add(c);
             }
-
-            //Debug.WriteLine(watch.ElapsedMilliseconds);
 
             switch (cmb_orderAscendingDescending.SelectedItem)
             {
@@ -238,8 +240,6 @@ namespace SteelQuiz
                     break;
             }
 
-            //Debug.WriteLine(watch.ElapsedMilliseconds);
-
             int count = 0;
             foreach (var c in controls)
             {
@@ -258,9 +258,6 @@ namespace SteelQuiz
 
                 ++count;
             }
-
-            //Debug.WriteLine(watch.ElapsedMilliseconds);
-            //watch.Stop();
         }
 
         public override void SetTheme(GeneralTheme theme = null)
@@ -292,7 +289,7 @@ namespace SteelQuiz
                 c.Size = new Size(flp_words.Size.Width - 34, c.Size.Height);
             }
 
-            UpdateLearningProgress();
+            UpdateLearningProgress(false);
         }
 
         private void Btn_editQuiz_Click(object sender, EventArgs e)
@@ -362,6 +359,8 @@ namespace SteelQuiz
 
         private void btn_practiseWriting_Click(object sender, EventArgs e)
         {
+            PractiseQuizButtonsExpanded = false;
+
             if (Quiz.Cards.Count == 0)
             {
                 MessageBox.Show("Cannot practise quiz with no terms", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -373,6 +372,8 @@ namespace SteelQuiz
 
         private void btn_practiseFlashcards_Click(object sender, EventArgs e)
         {
+            PractiseQuizButtonsExpanded = false;
+
             if (Quiz.Cards.Count == 0)
             {
                 MessageBox.Show("Cannot practise quiz with no terms", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
