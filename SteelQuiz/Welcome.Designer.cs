@@ -56,7 +56,7 @@ namespace SteelQuiz
             this.btn_preferences = new System.Windows.Forms.Button();
             this.tmr_welcomeMsg = new System.Windows.Forms.Timer(this.components);
             this.flp_lastQuizzes = new System.Windows.Forms.FlowLayoutPanel();
-            this.pnl_quizInfo = new System.Windows.Forms.Panel();
+            this.pnl_quizOverview = new System.Windows.Forms.Panel();
             this.pnl_welcome = new System.Windows.Forms.Panel();
             this.pnl_welcomeText = new System.Windows.Forms.Panel();
             this.lbl_toBegin = new System.Windows.Forms.Label();
@@ -68,7 +68,7 @@ namespace SteelQuiz
             this.clearRecentQuizzesListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnl_left = new System.Windows.Forms.Panel();
             this.btn_about = new System.Windows.Forms.Button();
-            this.pnl_quizInfo.SuspendLayout();
+            this.pnl_quizOverview.SuspendLayout();
             this.pnl_welcome.SuspendLayout();
             this.pnl_welcomeText.SuspendLayout();
             this.cms_recentQuizzes.SuspendLayout();
@@ -165,11 +165,11 @@ namespace SteelQuiz
             // 
             // pnl_quizInfo
             // 
-            this.pnl_quizInfo.Controls.Add(this.pnl_welcome);
-            this.pnl_quizInfo.Location = new System.Drawing.Point(202, 12);
-            this.pnl_quizInfo.Name = "pnl_quizInfo";
-            this.pnl_quizInfo.Size = new System.Drawing.Size(730, 572);
-            this.pnl_quizInfo.TabIndex = 9;
+            this.pnl_quizOverview.Controls.Add(this.pnl_welcome);
+            this.pnl_quizOverview.Location = new System.Drawing.Point(202, 12);
+            this.pnl_quizOverview.Name = "pnl_quizInfo";
+            this.pnl_quizOverview.Size = new System.Drawing.Size(730, 572);
+            this.pnl_quizOverview.TabIndex = 9;
             // 
             // pnl_welcome
             // 
@@ -321,7 +321,7 @@ namespace SteelQuiz
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.ClientSize = new System.Drawing.Size(944, 596);
             this.Controls.Add(this.pnl_left);
-            this.Controls.Add(this.pnl_quizInfo);
+            this.Controls.Add(this.pnl_quizOverview);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.White;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -334,7 +334,7 @@ namespace SteelQuiz
             this.SizeChanged += new System.EventHandler(this.Welcome_SizeChanged);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Dashboard_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.Dashboard_DragEnter);
-            this.pnl_quizInfo.ResumeLayout(false);
+            this.pnl_quizOverview.ResumeLayout(false);
             this.pnl_welcome.ResumeLayout(false);
             this.pnl_welcomeText.ResumeLayout(false);
             this.cms_recentQuizzes.ResumeLayout(false);
@@ -352,7 +352,7 @@ namespace SteelQuiz
         private System.Windows.Forms.Button btn_preferences;
         internal System.Windows.Forms.Timer tmr_chkUpdate;
         private System.Windows.Forms.Timer tmr_welcomeMsg;
-        private System.Windows.Forms.Panel pnl_quizInfo;
+        private System.Windows.Forms.Panel pnl_quizOverview;
         private System.Windows.Forms.Button btn_loadQuizFromFile;
         private System.Windows.Forms.Button btn_createQuiz;
         private System.Windows.Forms.Button btn_importQuiz;

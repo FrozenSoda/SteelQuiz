@@ -159,13 +159,13 @@ namespace SteelQuiz
             }
             flp_lastQuizzes.Controls.Clear();
 
-            foreach (var q in pnl_quizInfo.Controls.OfType<QuizOverview>())
+            foreach (var q in pnl_quizOverview.Controls.OfType<QuizOverview>())
             {
                 q.Dispose();
             }
 
-            pnl_quizInfo.Controls.Clear();
-            pnl_quizInfo.Controls.Add(pnl_welcome);
+            pnl_quizOverview.Controls.Clear();
+            pnl_quizOverview.Controls.Add(pnl_welcome);
 
             foreach (var quizAccessTimePair in QuizCore.QuizAccessTimes.OrderByDescending(x => x.Value.Ticks))
             {
@@ -198,11 +198,11 @@ namespace SteelQuiz
                 }
             }
 
-            foreach (var c in pnl_quizInfo.Controls.OfType<QuizOverview>())
+            foreach (var c in pnl_quizOverview.Controls.OfType<QuizOverview>())
             {
                 if (c.Quiz.GUID == quizGuid)
                 {
-                    pnl_quizInfo.Controls.Remove(c);
+                    pnl_quizOverview.Controls.Remove(c);
                     c.Dispose();
                     break;
                 }
@@ -214,11 +214,11 @@ namespace SteelQuiz
         /// </summary>
         public void UpdateQuizOverview()
         {
-            foreach (var q in pnl_quizInfo.Controls.OfType<QuizOverview>())
+            foreach (var q in pnl_quizOverview.Controls.OfType<QuizOverview>())
             {
                 if (q.Quiz.GUID == LoadedQuiz.GUID)
                 {
-                    q.Size = pnl_quizInfo.Size;
+                    q.Size = pnl_quizOverview.Size;
                     q.UpdateLearningProgressBar();
                     q.Show();
                     q.BringToFront();
@@ -228,8 +228,8 @@ namespace SteelQuiz
             }
 
             var quizProgressInfo = new QuizOverview(LoadedQuiz);
-            pnl_quizInfo.Controls.Add(quizProgressInfo);
-            quizProgressInfo.Size = pnl_quizInfo.Size;
+            pnl_quizOverview.Controls.Add(quizProgressInfo);
+            quizProgressInfo.Size = pnl_quizOverview.Size;
             quizProgressInfo.Show();
             quizProgressInfo.BringToFront();
 
@@ -243,7 +243,7 @@ namespace SteelQuiz
         /// <returns>Returns the QuizProgressInfo if found, otherwise null</returns>
         public QuizOverview FindQuizProgressInfo(Guid quizGuid)
         {
-            foreach (var q in pnl_quizInfo.Controls.OfType<QuizOverview>())
+            foreach (var q in pnl_quizOverview.Controls.OfType<QuizOverview>())
             {
                 if (q.Quiz.GUID == quizGuid)
                 {
@@ -661,13 +661,13 @@ namespace SteelQuiz
         private void Welcome_SizeChanged(object sender, EventArgs e)
         {
             //lbl_welcome.Size = new Size(Size.Width - 230, Size.Height - 63);
-            pnl_quizInfo.Size = new Size(Size.Width - 230, Size.Height - 63);
+            pnl_quizOverview.Size = new Size(Size.Width - 230, Size.Height - 63);
             pnl_welcomeText.Location =
-                new Point(pnl_quizInfo.Width / 2 - pnl_welcomeText.Size.Width / 2,
-                pnl_quizInfo.Height / 2 - pnl_welcomeText.Size.Height / 2);
-            foreach (var c in pnl_quizInfo.Controls.OfType<Control>())
+                new Point(pnl_quizOverview.Width / 2 - pnl_welcomeText.Size.Width / 2,
+                pnl_quizOverview.Height / 2 - pnl_welcomeText.Size.Height / 2);
+            foreach (var c in pnl_quizOverview.Controls.OfType<Control>())
             {
-                c.Size = pnl_quizInfo.Size;
+                c.Size = pnl_quizOverview.Size;
             }
             flp_lastQuizzes.Size = new Size(flp_lastQuizzes.Size.Width, Size.Height - 143);
         }
