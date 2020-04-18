@@ -180,7 +180,7 @@ namespace SteelQuiz.QuizPractise
             quiz.ProgressData.CurrentCards
                 .Where(x => !quiz.GetCard(x).GetProgressData(quiz).AskedThisRound)
                 .ToList()
-                .ForEach(x => weightedCollection.Add(x, quiz.GetCard(x).GetProgressData(quiz).GetLearningProgress(quiz.ProgressData)));
+                .ForEach(x => weightedCollection.Add(x, quiz.GetCard(x).GetProgressData(quiz).GetLearningProgress(quiz.ProgressData) + 1));
 
             var cardGuid = weightedCollection.Pick();
             var card = quiz.GetCard(cardGuid);
