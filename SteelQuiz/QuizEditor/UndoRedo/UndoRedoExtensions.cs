@@ -141,7 +141,7 @@ namespace SteelQuiz.QuizEditor.UndoRedo
         {
             return () =>
             {
-                quizEditor.flp_words.Controls.Remove(wordPair);
+                quizEditor.flp_cards.Controls.Remove(wordPair);
                 quizEditor.ChkFixWordsCount();
             };
         }
@@ -150,8 +150,8 @@ namespace SteelQuiz.QuizEditor.UndoRedo
         {
             return () =>
             {
-                quizEditor.flp_words.Controls.Add(wordPair);
-                quizEditor.flp_words.Controls.SetChildIndex(wordPair, index);
+                quizEditor.flp_cards.Controls.Add(wordPair);
+                quizEditor.flp_cards.Controls.SetChildIndex(wordPair, index);
                 quizEditor.ChkFixWordsCount();
             };
         }
