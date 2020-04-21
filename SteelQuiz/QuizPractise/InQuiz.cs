@@ -419,5 +419,13 @@ namespace SteelQuiz.QuizPractise
             CurrentCard.AddFailedAttempt(Quiz, CurrentCard, true, false);
             SetCard();
         }
+
+        private void btn_cfg_Click(object sender, EventArgs e)
+        {
+            var quizPractiseConfigFrm = new QuizPractiseConfig(Quiz);
+            quizPractiseConfigFrm.ShowDialog();
+
+            lbl_cardSideToAnswer.Focus();
+        }
     }
 }

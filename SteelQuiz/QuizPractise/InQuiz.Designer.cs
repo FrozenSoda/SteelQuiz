@@ -257,6 +257,7 @@ namespace SteelQuiz.QuizPractise
             this.btn_cfg.TabIndex = 12;
             this.btn_cfg.TabStop = false;
             this.btn_cfg.UseVisualStyleBackColor = false;
+            this.btn_cfg.Click += new System.EventHandler(this.btn_cfg_Click);
             // 
             // QuizPractise
             // 
