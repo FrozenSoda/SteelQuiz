@@ -158,6 +158,12 @@ namespace SteelQuiz.QuizPractise
 
             SetTheme(GeneralTheme);
 
+            if ((CurrentCard = QuestionSelector.GenerateCard(Quiz)) == null)
+            {
+                // Initiate new round if it hasn't previously been done - for instance if this quiz is new.
+                QuestionSelector.NewRound(Quiz);
+            }
+
             SetCard();
         }
 
