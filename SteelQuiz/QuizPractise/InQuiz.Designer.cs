@@ -62,6 +62,7 @@ namespace SteelQuiz.QuizPractise
             this.label1 = new System.Windows.Forms.Label();
             this.btn_home = new System.Windows.Forms.Button();
             this.btn_cfg = new System.Windows.Forms.Button();
+            this.lbl_learningProgress = new System.Windows.Forms.Label();
             this.pnl_cardSideToAsk.SuspendLayout();
             this.pnl_cardSideToAnswer.SuspendLayout();
             this.pnl_knewAnswer.SuspendLayout();
@@ -259,12 +260,24 @@ namespace SteelQuiz.QuizPractise
             this.btn_cfg.UseVisualStyleBackColor = false;
             this.btn_cfg.Click += new System.EventHandler(this.btn_cfg_Click);
             // 
+            // lbl_learningProgress
+            // 
+            this.lbl_learningProgress.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.lbl_learningProgress.AutoSize = true;
+            this.lbl_learningProgress.ForeColor = System.Drawing.Color.LightGray;
+            this.lbl_learningProgress.Location = new System.Drawing.Point(392, 528);
+            this.lbl_learningProgress.Name = "lbl_learningProgress";
+            this.lbl_learningProgress.Size = new System.Drawing.Size(123, 13);
+            this.lbl_learningProgress.TabIndex = 13;
+            this.lbl_learningProgress.Text = "Learning Progress: 0 %";
+            // 
             // QuizPractise
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(907, 550);
+            this.Controls.Add(this.lbl_learningProgress);
             this.Controls.Add(this.pnl_knewAnswer);
             this.Controls.Add(this.lbl_cardAnswerSideType);
             this.Controls.Add(this.lbl_cardQuestionSideType);
@@ -314,5 +327,6 @@ namespace SteelQuiz.QuizPractise
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btn_knewAnswerYES;
         private System.Windows.Forms.Button btn_knewAnswerNO;
+        private System.Windows.Forms.Label lbl_learningProgress;
     }
 }

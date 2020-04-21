@@ -79,6 +79,8 @@ namespace SteelQuiz.QuizPractise
                 lbl_progress.Text =
                     $"Round Progress: {Quiz.Cards.Where(x => x.GetProgressData(Quiz).AskedThisRound).Count()} " +
                     $"/ {Quiz.ProgressData.CurrentCards.Count}";
+
+                lbl_learningProgress.Text = $"Learning Progress: {Math.Floor(Quiz.ProgressData.GetLearningProgress() * 100)} %";
             }
         }
         private string __currentInput = "";
@@ -165,6 +167,7 @@ namespace SteelQuiz.QuizPractise
 
             lbl_intelligentLearning.ForeColor = GeneralTheme.GetBackgroundLabelForeColor();
             lbl_progress.ForeColor = GeneralTheme.GetBackgroundLabelForeColor();
+            lbl_learningProgress.ForeColor = GeneralTheme.GetBackgroundLabelForeColor();
             lbl_cardQuestionSideType.ForeColor = GeneralTheme.GetBackgroundLabelForeColor();
             lbl_cardAnswerSideType.ForeColor = GeneralTheme.GetBackgroundLabelForeColor();
 
