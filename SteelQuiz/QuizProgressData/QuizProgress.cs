@@ -76,10 +76,8 @@ namespace SteelQuiz.QuizProgressData
         /// The current card being shown to the user.
         /// </summary>
         public Guid CurrentCard { get; set; } = Guid.Empty;
-
-        [JsonIgnore]
         /// <summary>
-        /// True if the question to perform a full test has been asked (during this application instance)
+        /// True if the congratulations message for 100 % learning progress have been shown for this quiz.
         /// </summary>
         public bool MasterNoticeShowed { get; set; } = false;
         /// <summary>

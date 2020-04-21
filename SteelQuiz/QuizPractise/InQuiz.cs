@@ -236,6 +236,17 @@ namespace SteelQuiz.QuizPractise
 
                 return;
             }
+
+
+            if (Quiz.ProgressData.GetLearningProgress() == 1.0)
+            {
+                if (!Quiz.ProgressData.MasterNoticeShowed)
+                {
+                    MessageBox.Show("Congratulations! It seems you have learned the whole quiz! Practise until you feel confident - then start a full test, through the " +
+                        "quiz config menu, by clicking the gear button in the bottom right corner", "Quiz Mastered!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Quiz.ProgressData.MasterNoticeShowed = true;
+                }
+            }
         }
 
         /// <summary>
