@@ -34,6 +34,7 @@ namespace SteelQuiz.QuizEditor
     public partial class QuizEditorCard : AutoThemeableUserControl
     {
         public int Number { get; set; } // number in flowlayoutpanel, the first one has number 0 for instance
+        public Guid Guid { get; set; } = Guid.NewGuid(); // The Guid of the card belonging to this control
         public string Front => txt_word1.Text;
         public string Back => txt_word2.Text;
 
@@ -225,14 +226,14 @@ namespace SteelQuiz.QuizEditor
             if (QuizEditor.UpdateUndoRedoStacks)
             {
                 QuizEditor.UndoStack.Push(new UndoRedoFuncPair(
-                    new Action[] { QuizEditor.AddWordPair(this, QuizEditor.flp_words.Controls.GetChildIndex(this)) },
+                    new Action[] { QuizEditor.AddWordPair(this, QuizEditor.flp_cards.Controls.GetChildIndex(this)) },
                     new Action[] { QuizEditor.RemoveWordPair(this) },
                     "Remove word pair",
                     new OwnerControlData(this, this.Parent)
                     ));
             }
             QuizEditor.UpdateUndoRedoTooltips();
-            QuizEditor.flp_words.Controls.Remove(this);
+            QuizEditor.flp_cards.Controls.Remove(this);
             QuizEditor.ChkFixWordsCount();
             QuizEditor.ChangedSinceLastSave = true;
         }

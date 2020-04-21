@@ -52,7 +52,7 @@ namespace SteelQuiz.QuizEditor
             this.cmb_lang1 = new System.Windows.Forms.ComboBox();
             this.cmb_lang2 = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.flp_words = new System.Windows.Forms.FlowLayoutPanel();
+            this.flp_cards = new System.Windows.Forms.FlowLayoutPanel();
             this.mns_top = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -82,9 +82,9 @@ namespace SteelQuiz.QuizEditor
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(12, 33);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(70, 13);
+            this.label2.Size = new System.Drawing.Size(91, 13);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Language 1:";
+            this.label2.Text = "Card Front Type:";
             // 
             // cmb_lang1
             // 
@@ -93,9 +93,9 @@ namespace SteelQuiz.QuizEditor
             this.cmb_lang1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmb_lang1.ForeColor = System.Drawing.Color.White;
             this.cmb_lang1.FormattingEnabled = true;
-            this.cmb_lang1.Location = new System.Drawing.Point(88, 30);
+            this.cmb_lang1.Location = new System.Drawing.Point(109, 30);
             this.cmb_lang1.Name = "cmb_lang1";
-            this.cmb_lang1.Size = new System.Drawing.Size(288, 21);
+            this.cmb_lang1.Size = new System.Drawing.Size(267, 21);
             this.cmb_lang1.TabIndex = 1;
             this.cmb_lang1.TextUpdate += new System.EventHandler(this.Cmb_lang1_TextUpdate);
             // 
@@ -107,9 +107,9 @@ namespace SteelQuiz.QuizEditor
             this.cmb_lang2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmb_lang2.ForeColor = System.Drawing.Color.White;
             this.cmb_lang2.FormattingEnabled = true;
-            this.cmb_lang2.Location = new System.Drawing.Point(473, 30);
+            this.cmb_lang2.Location = new System.Drawing.Point(489, 30);
             this.cmb_lang2.Name = "cmb_lang2";
-            this.cmb_lang2.Size = new System.Drawing.Size(288, 21);
+            this.cmb_lang2.Size = new System.Drawing.Size(272, 21);
             this.cmb_lang2.TabIndex = 2;
             this.cmb_lang2.TextUpdate += new System.EventHandler(this.Cmb_lang2_TextUpdate);
             // 
@@ -121,21 +121,21 @@ namespace SteelQuiz.QuizEditor
             this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(397, 33);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(70, 13);
+            this.label3.Size = new System.Drawing.Size(86, 13);
             this.label3.TabIndex = 5;
-            this.label3.Text = "Language 2:";
+            this.label3.Text = "Card Back Type:";
             // 
-            // flp_words
+            // flp_cards
             // 
-            this.flp_words.AutoScroll = true;
-            this.flp_words.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.flp_words.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flp_words.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flp_words.Location = new System.Drawing.Point(12, 73);
-            this.flp_words.Name = "flp_words";
-            this.flp_words.Size = new System.Drawing.Size(791, 372);
-            this.flp_words.TabIndex = 3;
-            this.flp_words.WrapContents = false;
+            this.flp_cards.AutoScroll = true;
+            this.flp_cards.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.flp_cards.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flp_cards.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flp_cards.Location = new System.Drawing.Point(12, 73);
+            this.flp_cards.Name = "flp_cards";
+            this.flp_cards.Size = new System.Drawing.Size(791, 372);
+            this.flp_cards.TabIndex = 3;
+            this.flp_cards.WrapContents = false;
             // 
             // mns_top
             // 
@@ -304,7 +304,7 @@ namespace SteelQuiz.QuizEditor
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.ClientSize = new System.Drawing.Size(815, 457);
             this.Controls.Add(this.pnl_msg);
-            this.Controls.Add(this.flp_words);
+            this.Controls.Add(this.flp_cards);
             this.Controls.Add(this.cmb_lang2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.cmb_lang1);
@@ -332,7 +332,7 @@ namespace SteelQuiz.QuizEditor
         private System.Windows.Forms.ComboBox cmb_lang1;
         private System.Windows.Forms.ComboBox cmb_lang2;
         private System.Windows.Forms.Label label3;
-        internal System.Windows.Forms.FlowLayoutPanel flp_words;
+        internal System.Windows.Forms.FlowLayoutPanel flp_cards;
         private System.Windows.Forms.MenuStrip mns_top;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
