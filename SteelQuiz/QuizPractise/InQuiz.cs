@@ -311,6 +311,7 @@ namespace SteelQuiz.QuizPractise
                     correctAnswer.Show();
 
                     CurrentCard = QuestionSelector.GenerateCard(Quiz); // Generate new card now so that it will be shown on next instance if the user stops practising now
+                    lbl_cardSideToAnswer.Text = CurrentInput;
                 }
                 else
                 {
