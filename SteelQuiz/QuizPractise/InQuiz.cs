@@ -160,7 +160,7 @@ namespace SteelQuiz.QuizPractise
 
             if ((CurrentCard = QuestionSelector.GenerateCard(Quiz)) == null)
             {
-                // Initiate new round if it hasn't previously been done - for instance if this quiz is new.
+                // Initiate new round if it hasn't previously been done - for instance if this quiz has never been practised before by the user.
                 QuestionSelector.NewRound(Quiz);
             }
 
