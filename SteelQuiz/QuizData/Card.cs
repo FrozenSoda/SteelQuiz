@@ -244,7 +244,7 @@ namespace SteelQuiz.QuizData
         /// <param name="quiz">The quiz which the card belongs to.</param>
         /// <param name="card">The card to add attempt for.</param>
         /// <param name="updateProgress">True if the attempt should be added to AnswerAttempts and CorrectAnswersThisRound.</param>
-        public void AddSuccessfulAttempt(Quiz quiz, Card card, bool updateProgress)
+        public static void AddSuccessfulAttempt(Quiz quiz, Card card, bool updateProgress)
         {
             var progressData = card.GetProgressData(quiz);
 
@@ -269,7 +269,7 @@ namespace SteelQuiz.QuizData
         /// <param name="card">The card to add attempt for.</param>
         /// <param name="updateProgress">True if the attempt should be added to AnswerAttempts.</param>
         /// <param name="userGoingToCopy">True if the user needs to copy the correct answer and answer correct before continuing; false to mark the question as answered and move on.</param>
-        public void AddFailedAttempt(Quiz quiz, Card card, bool updateProgress, bool userGoingToCopy)
+        public static void AddFailedAttempt(Quiz quiz, Card card, bool updateProgress, bool userGoingToCopy)
         {
             var progressData = card.GetProgressData(quiz);
 
