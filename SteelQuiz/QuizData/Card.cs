@@ -130,7 +130,7 @@ namespace SteelQuiz.QuizData
         /// <param name="quiz">The quiz which this card belongs to.</param>
         /// <param name="separator">The string that should be put between all answers.</param>
         /// <returns>All answers joined together to a string.</returns>
-        public string GetAllAnswers(Quiz quiz, string separator = "\n")
+        public string GetAllAnswers(Quiz quiz, string separator = "\n\n")
         {
             var answers = GetRequiredAnswerCards(quiz);
             return string.Join(separator, answers.Select(x => x.GetSideToAnswer(quiz)));
