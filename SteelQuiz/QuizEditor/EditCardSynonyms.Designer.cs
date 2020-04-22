@@ -18,7 +18,7 @@
 
 namespace SteelQuiz.QuizEditor
 {
-    partial class EditWordSynonyms
+    partial class EditCardSynonyms
     {
         /// <summary>
         /// Required designer variable.
@@ -46,12 +46,12 @@ namespace SteelQuiz.QuizEditor
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditWordSynonyms));
-            this.lbl_synForWord = new System.Windows.Forms.Label();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditCardSynonyms));
+            this.lbl_synForPhrase = new System.Windows.Forms.Label();
             this.lst_synonyms = new System.Windows.Forms.ListBox();
             this.btn_apply = new System.Windows.Forms.Button();
             this.btn_cancel = new System.Windows.Forms.Button();
-            this.txt_wordAdd = new System.Windows.Forms.TextBox();
+            this.txt_synonymAdd = new System.Windows.Forms.TextBox();
             this.btn_add = new System.Windows.Forms.Button();
             this.btn_update = new System.Windows.Forms.Button();
             this.btn_remove = new System.Windows.Forms.Button();
@@ -62,16 +62,16 @@ namespace SteelQuiz.QuizEditor
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // lbl_synForWord
+            // lbl_synForPhrase
             // 
-            this.lbl_synForWord.AutoSize = true;
-            this.lbl_synForWord.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_synForWord.ForeColor = System.Drawing.Color.White;
-            this.lbl_synForWord.Location = new System.Drawing.Point(12, 35);
-            this.lbl_synForWord.Name = "lbl_synForWord";
-            this.lbl_synForWord.Size = new System.Drawing.Size(124, 17);
-            this.lbl_synForWord.TabIndex = 0;
-            this.lbl_synForWord.Text = "Synonyms for word:";
+            this.lbl_synForPhrase.AutoSize = true;
+            this.lbl_synForPhrase.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_synForPhrase.ForeColor = System.Drawing.Color.White;
+            this.lbl_synForPhrase.Location = new System.Drawing.Point(12, 35);
+            this.lbl_synForPhrase.Name = "lbl_synForPhrase";
+            this.lbl_synForPhrase.Size = new System.Drawing.Size(90, 17);
+            this.lbl_synForPhrase.TabIndex = 0;
+            this.lbl_synForPhrase.Text = "Synonyms for:";
             // 
             // lst_synonyms
             // 
@@ -120,18 +120,18 @@ namespace SteelQuiz.QuizEditor
             this.btn_cancel.UseVisualStyleBackColor = false;
             this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
             // 
-            // txt_wordAdd
+            // txt_synonymAdd
             // 
-            this.txt_wordAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
-            this.txt_wordAdd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txt_wordAdd.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_wordAdd.ForeColor = System.Drawing.Color.White;
-            this.txt_wordAdd.Location = new System.Drawing.Point(15, 59);
-            this.txt_wordAdd.Name = "txt_wordAdd";
-            this.txt_wordAdd.Size = new System.Drawing.Size(443, 22);
-            this.txt_wordAdd.TabIndex = 0;
-            this.txt_wordAdd.TextChanged += new System.EventHandler(this.txt_wordAdd_TextChanged);
-            this.txt_wordAdd.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_wordAdd_KeyPress);
+            this.txt_synonymAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.txt_synonymAdd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_synonymAdd.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_synonymAdd.ForeColor = System.Drawing.Color.White;
+            this.txt_synonymAdd.Location = new System.Drawing.Point(15, 59);
+            this.txt_synonymAdd.Name = "txt_synonymAdd";
+            this.txt_synonymAdd.Size = new System.Drawing.Size(443, 22);
+            this.txt_synonymAdd.TabIndex = 0;
+            this.txt_synonymAdd.TextChanged += new System.EventHandler(this.txt_wordAdd_TextChanged);
+            this.txt_synonymAdd.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_wordAdd_KeyPress);
             // 
             // btn_add
             // 
@@ -216,7 +216,7 @@ namespace SteelQuiz.QuizEditor
             this.redoToolStripMenuItem.Text = "Redo";
             this.redoToolStripMenuItem.Click += new System.EventHandler(this.redoToolStripMenuItem_Click);
             // 
-            // EditWordSynonyms
+            // EditCardSynonyms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -225,18 +225,18 @@ namespace SteelQuiz.QuizEditor
             this.Controls.Add(this.btn_remove);
             this.Controls.Add(this.btn_update);
             this.Controls.Add(this.btn_add);
-            this.Controls.Add(this.txt_wordAdd);
+            this.Controls.Add(this.txt_synonymAdd);
             this.Controls.Add(this.btn_cancel);
             this.Controls.Add(this.btn_apply);
             this.Controls.Add(this.lst_synonyms);
-            this.Controls.Add(this.lbl_synForWord);
+            this.Controls.Add(this.lbl_synForPhrase);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "EditWordSynonyms";
+            this.Name = "EditCardSynonyms";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Edit word synonyms | SteelQuiz";
+            this.Text = "Edit Synonyms - SteelQuiz";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EditWordSynonyms_FormClosing);
             this.SizeChanged += new System.EventHandler(this.EditWordSynonyms_SizeChanged);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EditWordSynonyms_KeyDown);
@@ -249,11 +249,11 @@ namespace SteelQuiz.QuizEditor
 
         #endregion
 
-        private System.Windows.Forms.Label lbl_synForWord;
+        private System.Windows.Forms.Label lbl_synForPhrase;
         private System.Windows.Forms.ListBox lst_synonyms;
         private System.Windows.Forms.Button btn_apply;
         private System.Windows.Forms.Button btn_cancel;
-        private System.Windows.Forms.TextBox txt_wordAdd;
+        private System.Windows.Forms.TextBox txt_synonymAdd;
         private System.Windows.Forms.Button btn_add;
         private System.Windows.Forms.Button btn_update;
         private System.Windows.Forms.Button btn_remove;

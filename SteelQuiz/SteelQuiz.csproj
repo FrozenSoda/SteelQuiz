@@ -354,11 +354,11 @@
     <Compile Include="QuizPractise\FixQuizErrors.Designer.cs">
       <DependentUpon>FixQuizErrors.cs</DependentUpon>
     </Compile>
-    <Compile Include="QuizEditor\EditWordSynonyms.cs">
+    <Compile Include="QuizEditor\EditCardSynonyms.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="QuizEditor\EditWordSynonyms.Designer.cs">
-      <DependentUpon>EditWordSynonyms.cs</DependentUpon>
+    <Compile Include="QuizEditor\EditCardSynonyms.Designer.cs">
+      <DependentUpon>EditCardSynonyms.cs</DependentUpon>
     </Compile>
     <Compile Include="QuizImport\Guide\QuizImportGuide.cs">
       <SubType>Form</SubType>
@@ -589,8 +589,8 @@
     <EmbeddedResource Include="QuizPractise\InQuiz.resx">
       <DependentUpon>InQuiz.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="QuizEditor\EditWordSynonyms.resx">
-      <DependentUpon>EditWordSynonyms.cs</DependentUpon>
+    <EmbeddedResource Include="QuizEditor\EditCardSynonyms.resx">
+      <DependentUpon>EditCardSynonyms.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuizEditor\QuizEditor.resx">
       <DependentUpon>QuizEditor.cs</DependentUpon>

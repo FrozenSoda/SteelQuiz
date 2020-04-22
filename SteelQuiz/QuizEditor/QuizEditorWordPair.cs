@@ -43,7 +43,7 @@ namespace SteelQuiz.QuizEditor
 
         public Pointer<StringComp.Rules> ComparisonRules { get; set; } = new Pointer<StringComp.Rules>(StringComp.SMART_RULES);
 
-        public EditWordSynonyms EditWordSynonyms { get; set; } = null;
+        public EditCardSynonyms EditWordSynonyms { get; set; } = null;
 
         public QuizEditor QuizEditor { get; set; }
 
@@ -121,7 +121,7 @@ namespace SteelQuiz.QuizEditor
         {
             if (EditWordSynonyms == null)
             {
-                EditWordSynonyms = new EditWordSynonyms(this, language == 1 ? txt_word1.Text : txt_word2.Text, language);
+                EditWordSynonyms = new EditCardSynonyms(this, language == 1 ? txt_word1.Text : txt_word2.Text, language);
             }
         }
 
