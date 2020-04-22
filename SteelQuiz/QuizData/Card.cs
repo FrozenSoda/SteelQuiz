@@ -246,6 +246,7 @@ namespace SteelQuiz.QuizData
         /// <param name="updateProgress">True if the attempt should be added to AnswerAttempts and CorrectAnswersThisRound.</param>
         public static void AddSuccessfulAttempt(Quiz quiz, Card card, bool updateProgress)
         {
+#warning fix so it's not static
             var progressData = card.GetProgressData(quiz);
 
             if (updateProgress)
