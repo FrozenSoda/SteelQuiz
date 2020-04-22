@@ -35,8 +35,8 @@ namespace SteelQuiz.QuizEditor
     {
         public int Number { get; set; } // number in flowlayoutpanel, the first one has number 0 for instance
         public Guid Guid { get; set; } = Guid.NewGuid(); // The Guid of the card belonging to this control
-        public string Front => txt_word1.Text;
-        public string Back => txt_word2.Text;
+        public string Front => txt_front.Text;
+        public string Back => txt_back.Text;
 
         public List<string> FrontSynonyms { get; set; } = new List<string>();
         public List<string> BackSynonyms { get; set; } = new List<string>();
@@ -121,7 +121,7 @@ namespace SteelQuiz.QuizEditor
         {
             if (EditWordSynonyms == null)
             {
-                EditWordSynonyms = new EditCardSynonyms(this, language == 1 ? txt_word1.Text : txt_word2.Text, language);
+                EditWordSynonyms = new EditCardSynonyms(this, language == 1 ? txt_front.Text : txt_back.Text, language);
             }
         }
 
@@ -165,7 +165,7 @@ namespace SteelQuiz.QuizEditor
 
             if (ignore_txt_word_change)
             {
-                txt_word1_text_old = txt_word1.Text;
+                txt_word1_text_old = txt_front.Text;
                 ignore_txt_word_change = false;
                 return;
             }
@@ -173,15 +173,15 @@ namespace SteelQuiz.QuizEditor
             if (QuizEditor.UpdateUndoRedoStacks)
             {
                 QuizEditor.UndoStack.Push(new UndoRedoFuncPair(
-                    new Action[] { txt_word1.ChangeText(txt_word1_text_old, () => { ignore_txt_word_change = true; }) },
-                    new Action[] { txt_word1.ChangeText(txt_word1.Text, () => { ignore_txt_word_change = true; }) },
+                    new Action[] { txt_front.ChangeText(txt_word1_text_old, () => { ignore_txt_word_change = true; }) },
+                    new Action[] { txt_front.ChangeText(txt_front.Text, () => { ignore_txt_word_change = true; }) },
                     "Change word",
                     new OwnerControlData(this, this.Parent)));
                 QuizEditor.UpdateUndoRedoTooltips();
             }
             QuizEditor.ChangedSinceLastSave = true;
 
-            txt_word1_text_old = txt_word1.Text;
+            txt_word1_text_old = txt_front.Text;
         }
 
         private string txt_word2_text_old = "";
@@ -192,7 +192,7 @@ namespace SteelQuiz.QuizEditor
 
             if (ignore_txt_word_change)
             {
-                txt_word2_text_old = txt_word2.Text;
+                txt_word2_text_old = txt_back.Text;
                 ignore_txt_word_change = false;
                 return;
             }
@@ -200,15 +200,15 @@ namespace SteelQuiz.QuizEditor
             if (QuizEditor.UpdateUndoRedoStacks)
             {
                 QuizEditor.UndoStack.Push(new UndoRedoFuncPair(
-                new Action[] { txt_word2.ChangeText(txt_word2_text_old, () => { ignore_txt_word_change = true; }) },
-                new Action[] { txt_word2.ChangeText(txt_word2.Text, () => { ignore_txt_word_change = true; }) },
+                new Action[] { txt_back.ChangeText(txt_word2_text_old, () => { ignore_txt_word_change = true; }) },
+                new Action[] { txt_back.ChangeText(txt_back.Text, () => { ignore_txt_word_change = true; }) },
                 "Change word",
                 new OwnerControlData(this, this.Parent)));
                 QuizEditor.UpdateUndoRedoTooltips();
             }
             QuizEditor.ChangedSinceLastSave = true;
 
-            txt_word2_text_old = txt_word2.Text;
+            txt_word2_text_old = txt_back.Text;
         }
 
         private void txt_word_Click(object sender, EventArgs e)
@@ -338,8 +338,8 @@ namespace SteelQuiz.QuizEditor
         {
             int width = (int)Math.Floor(Size.Width / 2d - 30);
 
-            txt_word1.Size = new Size(width, txt_word1.Size.Height);
-            txt_word2.Size = new Size(width, txt_word2.Size.Height);
+            txt_front.Size = new Size(width, txt_front.Size.Height);
+            txt_back.Size = new Size(width, txt_back.Size.Height);
         }
     }
 }

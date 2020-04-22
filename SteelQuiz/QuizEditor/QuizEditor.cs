@@ -99,14 +99,6 @@ namespace SteelQuiz.QuizEditor
 
             SetTheme();
 
-            /*
-            this.Text += $" | v{Application.ProductVersion}";
-            if (MetaData.PRE_RELEASE)
-            {
-                this.Text += " PRE-RELEASE";
-            }
-            */
-
             if (MetaData.PRE_RELEASE)
             {
                 this.Text += $" v{Application.ProductVersion} PRE-RELEASE";
@@ -154,23 +146,23 @@ namespace SteelQuiz.QuizEditor
         {
             // two empty word pairs should always be present
             var wps = flp_cards.Controls.OfType<QuizEditorCard>();
-            int emptyCount = wps.Where(x => QEWordEmpty(x)).Count();
-            while (emptyCount > EMPTY_WORD_PAIRS_COUNT && QEWordEmpty(wps.ElementAt(wps.Count() - 1)))
+            int emptyCount = wps.Where(x => QuizEditorCardEmpty(x)).Count();
+            while (emptyCount > EMPTY_WORD_PAIRS_COUNT && QuizEditorCardEmpty(wps.ElementAt(wps.Count() - 1)))
             {
                 RemoveQuizEditorWord();
-                emptyCount = wps.Where(x => QEWordEmpty(x)).Count();
+                emptyCount = wps.Where(x => QuizEditorCardEmpty(x)).Count();
             }
             while (emptyCount < EMPTY_WORD_PAIRS_COUNT)
             {
                 AddWordPair();
-                emptyCount = wps.Where(x => QEWordEmpty(x)).Count();
+                emptyCount = wps.Where(x => QuizEditorCardEmpty(x)).Count();
             }
         }
 
-        private bool QEWordEmpty(QuizEditorCard qew)
+        private bool QuizEditorCardEmpty(QuizEditorCard qec)
         {
-            return qew != null ?
-                qew.txt_word1.Text == "" && qew.FrontSynonyms.IsNullOrEmpty() && qew.txt_word2.Text == "" && qew.BackSynonyms.IsNullOrEmpty()
+            return qec != null ?
+                qec.txt_front.Text == "" && qec.FrontSynonyms.IsNullOrEmpty() && qec.txt_back.Text == "" && qec.BackSynonyms.IsNullOrEmpty()
                 : false;
         }
 
@@ -191,13 +183,13 @@ namespace SteelQuiz.QuizEditor
             quiz.GUID = QuizGuid;
 
             ulong i = 0;
-            foreach (var cardControl in flp_cards.Controls.OfType<QuizEditorCard>().Where(x => !QEWordEmpty(x)))
+            foreach (var cardControl in flp_cards.Controls.OfType<QuizEditorCard>().Where(x => !QuizEditorCardEmpty(x)))
             {
                 cardControl.RemoveSynonymsEqualToWords();
 
                 StringComp.Rules comparisonRules = cardControl.ComparisonRules.Data;
 
-                var card = new Card(cardControl.txt_word1.Text, cardControl.txt_word2.Text, comparisonRules, cardControl.FrontSynonyms, cardControl.BackSynonyms);
+                var card = new Card(cardControl.txt_front.Text, cardControl.txt_back.Text, comparisonRules, cardControl.FrontSynonyms, cardControl.BackSynonyms);
                 card.Guid = cardControl.Guid;
                 quiz.Cards.Add(card);
                 ++i;
@@ -275,9 +267,9 @@ namespace SteelQuiz.QuizEditor
                 var card = quiz.Cards[i];
 
                 ctrl.Guid = card.Guid;
-                ctrl.txt_word1.Text = card.Front;
+                ctrl.txt_front.Text = card.Front;
                 ctrl.FrontSynonyms = card.FrontSynonyms;
-                ctrl.txt_word2.Text = card.Back;
+                ctrl.txt_back.Text = card.Back;
                 ctrl.BackSynonyms = card.BackSynonyms;
                 ctrl.ComparisonRules.Data = (StringComp.Rules)FixEnum(card.SmartComparisonRules);
             }

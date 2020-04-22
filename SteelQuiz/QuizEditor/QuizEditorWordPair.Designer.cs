@@ -50,10 +50,10 @@ namespace SteelQuiz.QuizEditor
             this.btn_smartCompSettings = new System.Windows.Forms.Button();
             this.lbl_ansCompRules = new System.Windows.Forms.Label();
             this.chk_smartComp = new System.Windows.Forms.CheckBox();
-            this.txt_word1 = new System.Windows.Forms.TextBox();
-            this.btn_editSynonyms_w1 = new System.Windows.Forms.Button();
-            this.txt_word2 = new System.Windows.Forms.TextBox();
-            this.btn_editSynonyms_w2 = new System.Windows.Forms.Button();
+            this.txt_front = new System.Windows.Forms.TextBox();
+            this.btn_editSynonymsFront = new System.Windows.Forms.Button();
+            this.txt_back = new System.Windows.Forms.TextBox();
+            this.btn_editSynonymsBack = new System.Windows.Forms.Button();
             this.btn_delete = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -117,69 +117,69 @@ namespace SteelQuiz.QuizEditor
             this.chk_smartComp.CheckStateChanged += new System.EventHandler(this.Chk_smartComp_CheckStateChanged);
             this.chk_smartComp.Click += new System.EventHandler(this.Chk_smartComp_Click);
             // 
-            // txt_word1
+            // txt_front
             // 
-            this.txt_word1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
-            this.txt_word1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txt_word1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_word1.ForeColor = System.Drawing.Color.White;
-            this.txt_word1.Location = new System.Drawing.Point(25, 3);
-            this.txt_word1.Name = "txt_word1";
-            this.txt_word1.Size = new System.Drawing.Size(335, 22);
-            this.txt_word1.TabIndex = 0;
-            this.txt_word1.Click += new System.EventHandler(this.txt_word_Click);
-            this.txt_word1.TextChanged += new System.EventHandler(this.txt_word1_TextChanged);
-            this.txt_word1.Enter += new System.EventHandler(this.txt_word1_Enter);
-            this.txt_word1.Leave += new System.EventHandler(this.Txt_word1_Leave);
+            this.txt_front.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.txt_front.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_front.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_front.ForeColor = System.Drawing.Color.White;
+            this.txt_front.Location = new System.Drawing.Point(25, 3);
+            this.txt_front.Name = "txt_front";
+            this.txt_front.Size = new System.Drawing.Size(335, 22);
+            this.txt_front.TabIndex = 0;
+            this.txt_front.Click += new System.EventHandler(this.txt_word_Click);
+            this.txt_front.TextChanged += new System.EventHandler(this.txt_word1_TextChanged);
+            this.txt_front.Enter += new System.EventHandler(this.txt_word1_Enter);
+            this.txt_front.Leave += new System.EventHandler(this.Txt_word1_Leave);
             // 
-            // btn_editSynonyms_w1
+            // btn_editSynonymsFront
             // 
-            this.btn_editSynonyms_w1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
-            this.btn_editSynonyms_w1.FlatAppearance.BorderSize = 0;
-            this.btn_editSynonyms_w1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_editSynonyms_w1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_editSynonyms_w1.ForeColor = System.Drawing.Color.White;
-            this.btn_editSynonyms_w1.Location = new System.Drawing.Point(25, 29);
-            this.btn_editSynonyms_w1.Name = "btn_editSynonyms_w1";
-            this.btn_editSynonyms_w1.Size = new System.Drawing.Size(70, 39);
-            this.btn_editSynonyms_w1.TabIndex = 4;
-            this.btn_editSynonyms_w1.TabStop = false;
-            this.btn_editSynonyms_w1.Text = "Edit Synonyms";
-            this.btn_editSynonyms_w1.UseVisualStyleBackColor = false;
-            this.btn_editSynonyms_w1.Click += new System.EventHandler(this.btn_editSynonyms_w1_Click);
+            this.btn_editSynonymsFront.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.btn_editSynonymsFront.FlatAppearance.BorderSize = 0;
+            this.btn_editSynonymsFront.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_editSynonymsFront.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_editSynonymsFront.ForeColor = System.Drawing.Color.White;
+            this.btn_editSynonymsFront.Location = new System.Drawing.Point(25, 29);
+            this.btn_editSynonymsFront.Name = "btn_editSynonymsFront";
+            this.btn_editSynonymsFront.Size = new System.Drawing.Size(70, 39);
+            this.btn_editSynonymsFront.TabIndex = 4;
+            this.btn_editSynonymsFront.TabStop = false;
+            this.btn_editSynonymsFront.Text = "Edit Synonyms";
+            this.btn_editSynonymsFront.UseVisualStyleBackColor = false;
+            this.btn_editSynonymsFront.Click += new System.EventHandler(this.btn_editSynonyms_w1_Click);
             // 
-            // txt_word2
+            // txt_back
             // 
-            this.txt_word2.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.txt_word2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
-            this.txt_word2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txt_word2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_word2.ForeColor = System.Drawing.Color.White;
-            this.txt_word2.Location = new System.Drawing.Point(390, 3);
-            this.txt_word2.Name = "txt_word2";
-            this.txt_word2.Size = new System.Drawing.Size(335, 22);
-            this.txt_word2.TabIndex = 5;
-            this.txt_word2.Click += new System.EventHandler(this.txt_word_Click);
-            this.txt_word2.TextChanged += new System.EventHandler(this.txt_word2_TextChanged);
-            this.txt_word2.Enter += new System.EventHandler(this.txt_word1_Enter);
-            this.txt_word2.Leave += new System.EventHandler(this.Txt_word2_Leave);
+            this.txt_back.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txt_back.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.txt_back.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_back.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_back.ForeColor = System.Drawing.Color.White;
+            this.txt_back.Location = new System.Drawing.Point(390, 3);
+            this.txt_back.Name = "txt_back";
+            this.txt_back.Size = new System.Drawing.Size(335, 22);
+            this.txt_back.TabIndex = 5;
+            this.txt_back.Click += new System.EventHandler(this.txt_word_Click);
+            this.txt_back.TextChanged += new System.EventHandler(this.txt_word2_TextChanged);
+            this.txt_back.Enter += new System.EventHandler(this.txt_word1_Enter);
+            this.txt_back.Leave += new System.EventHandler(this.Txt_word2_Leave);
             // 
-            // btn_editSynonyms_w2
+            // btn_editSynonymsBack
             // 
-            this.btn_editSynonyms_w2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_editSynonyms_w2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
-            this.btn_editSynonyms_w2.FlatAppearance.BorderSize = 0;
-            this.btn_editSynonyms_w2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_editSynonyms_w2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_editSynonyms_w2.ForeColor = System.Drawing.Color.White;
-            this.btn_editSynonyms_w2.Location = new System.Drawing.Point(655, 29);
-            this.btn_editSynonyms_w2.Name = "btn_editSynonyms_w2";
-            this.btn_editSynonyms_w2.Size = new System.Drawing.Size(70, 39);
-            this.btn_editSynonyms_w2.TabIndex = 6;
-            this.btn_editSynonyms_w2.TabStop = false;
-            this.btn_editSynonyms_w2.Text = "Edit Synonyms";
-            this.btn_editSynonyms_w2.UseVisualStyleBackColor = false;
-            this.btn_editSynonyms_w2.Click += new System.EventHandler(this.btn_editSynonyms_w2_Click);
+            this.btn_editSynonymsBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_editSynonymsBack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.btn_editSynonymsBack.FlatAppearance.BorderSize = 0;
+            this.btn_editSynonymsBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_editSynonymsBack.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_editSynonymsBack.ForeColor = System.Drawing.Color.White;
+            this.btn_editSynonymsBack.Location = new System.Drawing.Point(655, 29);
+            this.btn_editSynonymsBack.Name = "btn_editSynonymsBack";
+            this.btn_editSynonymsBack.Size = new System.Drawing.Size(70, 39);
+            this.btn_editSynonymsBack.TabIndex = 6;
+            this.btn_editSynonymsBack.TabStop = false;
+            this.btn_editSynonymsBack.Text = "Edit Synonyms";
+            this.btn_editSynonymsBack.UseVisualStyleBackColor = false;
+            this.btn_editSynonymsBack.Click += new System.EventHandler(this.btn_editSynonyms_w2_Click);
             // 
             // btn_delete
             // 
@@ -229,10 +229,10 @@ namespace SteelQuiz.QuizEditor
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_delete);
-            this.Controls.Add(this.btn_editSynonyms_w2);
-            this.Controls.Add(this.txt_word2);
-            this.Controls.Add(this.btn_editSynonyms_w1);
-            this.Controls.Add(this.txt_word1);
+            this.Controls.Add(this.btn_editSynonymsBack);
+            this.Controls.Add(this.txt_back);
+            this.Controls.Add(this.btn_editSynonymsFront);
+            this.Controls.Add(this.txt_front);
             this.Controls.Add(this.pnl_translationRules);
             this.Name = "QuizEditorCard";
             this.Size = new System.Drawing.Size(730, 97);
@@ -249,10 +249,10 @@ namespace SteelQuiz.QuizEditor
         private System.Windows.Forms.Panel pnl_translationRules;
         private System.Windows.Forms.Label lbl_ansCompRules;
         internal System.Windows.Forms.CheckBox chk_smartComp;
-        internal System.Windows.Forms.TextBox txt_word1;
-        private System.Windows.Forms.Button btn_editSynonyms_w1;
-        internal System.Windows.Forms.TextBox txt_word2;
-        private System.Windows.Forms.Button btn_editSynonyms_w2;
+        internal System.Windows.Forms.TextBox txt_front;
+        private System.Windows.Forms.Button btn_editSynonymsFront;
+        internal System.Windows.Forms.TextBox txt_back;
+        private System.Windows.Forms.Button btn_editSynonymsBack;
         private System.Windows.Forms.Button btn_delete;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
