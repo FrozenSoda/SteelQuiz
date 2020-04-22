@@ -127,10 +127,10 @@ namespace SteelQuiz.QuizEditor
             this.txt_front.Name = "txt_front";
             this.txt_front.Size = new System.Drawing.Size(335, 22);
             this.txt_front.TabIndex = 0;
-            this.txt_front.Click += new System.EventHandler(this.txt_word_Click);
-            this.txt_front.TextChanged += new System.EventHandler(this.txt_word1_TextChanged);
-            this.txt_front.Enter += new System.EventHandler(this.txt_word1_Enter);
-            this.txt_front.Leave += new System.EventHandler(this.Txt_word1_Leave);
+            this.txt_front.Click += new System.EventHandler(this.txt_cardSide_Click);
+            this.txt_front.TextChanged += new System.EventHandler(this.txt_front_TextChanged);
+            this.txt_front.Enter += new System.EventHandler(this.txt_front_Enter);
+            this.txt_front.Leave += new System.EventHandler(this.Txt_front_Leave);
             // 
             // btn_editSynonymsFront
             // 
@@ -146,7 +146,7 @@ namespace SteelQuiz.QuizEditor
             this.btn_editSynonymsFront.TabStop = false;
             this.btn_editSynonymsFront.Text = "Edit Synonyms";
             this.btn_editSynonymsFront.UseVisualStyleBackColor = false;
-            this.btn_editSynonymsFront.Click += new System.EventHandler(this.btn_editSynonyms_w1_Click);
+            this.btn_editSynonymsFront.Click += new System.EventHandler(this.btn_editSynonymsFront_Click);
             // 
             // txt_back
             // 
@@ -159,10 +159,10 @@ namespace SteelQuiz.QuizEditor
             this.txt_back.Name = "txt_back";
             this.txt_back.Size = new System.Drawing.Size(335, 22);
             this.txt_back.TabIndex = 5;
-            this.txt_back.Click += new System.EventHandler(this.txt_word_Click);
-            this.txt_back.TextChanged += new System.EventHandler(this.txt_word2_TextChanged);
-            this.txt_back.Enter += new System.EventHandler(this.txt_word1_Enter);
-            this.txt_back.Leave += new System.EventHandler(this.Txt_word2_Leave);
+            this.txt_back.Click += new System.EventHandler(this.txt_cardSide_Click);
+            this.txt_back.TextChanged += new System.EventHandler(this.txt_back_TextChanged);
+            this.txt_back.Enter += new System.EventHandler(this.txt_front_Enter);
+            this.txt_back.Leave += new System.EventHandler(this.Txt_back_Leave);
             // 
             // btn_editSynonymsBack
             // 
@@ -179,7 +179,7 @@ namespace SteelQuiz.QuizEditor
             this.btn_editSynonymsBack.TabStop = false;
             this.btn_editSynonymsBack.Text = "Edit Synonyms";
             this.btn_editSynonymsBack.UseVisualStyleBackColor = false;
-            this.btn_editSynonymsBack.Click += new System.EventHandler(this.btn_editSynonyms_w2_Click);
+            this.btn_editSynonymsBack.Click += new System.EventHandler(this.btn_editSynonymsBack_Click);
             // 
             // btn_delete
             // 

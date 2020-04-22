@@ -43,11 +43,11 @@ namespace SteelQuiz.QuizEditor
 
         public Pointer<StringComp.Rules> ComparisonRules { get; set; } = new Pointer<StringComp.Rules>(StringComp.SMART_RULES);
 
-        public EditCardSynonyms EditWordSynonyms { get; set; } = null;
+        public EditCardSynonyms EditCardSynonyms { get; set; } = null;
 
         public QuizEditor QuizEditor { get; set; }
 
-        public bool ignore_txt_word_change = false;
+        public bool ignore_txt_cardSide_change = false;
         public bool ignore_chk_smartComp_change = false;
 
         public QuizEditorCard(QuizEditor owner, int number)
@@ -119,104 +119,104 @@ namespace SteelQuiz.QuizEditor
 
         public void InitEditWordSynonyms(int language)
         {
-            if (EditWordSynonyms == null)
+            if (EditCardSynonyms == null)
             {
-                EditWordSynonyms = new EditCardSynonyms(this, language == 1 ? txt_front.Text : txt_back.Text, language);
+                EditCardSynonyms = new EditCardSynonyms(this, language == 1 ? txt_front.Text : txt_back.Text, language);
             }
         }
 
         public void DisposeEditWordSynonyms()
         {
-            if (EditWordSynonyms != null)
+            if (EditCardSynonyms != null)
             {
-                EditWordSynonyms.DialogResult = DialogResult.Cancel;
-                EditWordSynonyms.Dispose();
-                EditWordSynonyms = null;
+                EditCardSynonyms.DialogResult = DialogResult.Cancel;
+                EditCardSynonyms.Dispose();
+                EditCardSynonyms = null;
             }
         }
 
-        private void btn_editSynonyms_w1_Click(object sender, EventArgs e)
+        private void btn_editSynonymsFront_Click(object sender, EventArgs e)
         {
             InitEditWordSynonyms(1);
-            if (EditWordSynonyms.ShowDialog() == DialogResult.OK)
+            if (EditCardSynonyms.ShowDialog() == DialogResult.OK)
             {
-                FrontSynonyms = EditWordSynonyms.Synonyms;
+                FrontSynonyms = EditCardSynonyms.Synonyms;
                 QuizEditor.ChkFixWordsCount();
             }
             DisposeEditWordSynonyms();
         }
 
-        private void btn_editSynonyms_w2_Click(object sender, EventArgs e)
+        private void btn_editSynonymsBack_Click(object sender, EventArgs e)
         {
             InitEditWordSynonyms(2);
-            if (EditWordSynonyms.ShowDialog() == DialogResult.OK)
+            if (EditCardSynonyms.ShowDialog() == DialogResult.OK)
             {
-                BackSynonyms = EditWordSynonyms.Synonyms;
+                BackSynonyms = EditCardSynonyms.Synonyms;
                 QuizEditor.ChkFixWordsCount();
             }
             DisposeEditWordSynonyms();
         }
 
-        private string txt_word1_text_old = "";
+        private string txt_front_text_old = "";
 
-        private void txt_word1_TextChanged(object sender, EventArgs e)
+        private void txt_front_TextChanged(object sender, EventArgs e)
         {
             QuizEditor.ChkFixWordsCount();
 
-            if (ignore_txt_word_change)
+            if (ignore_txt_cardSide_change)
             {
-                txt_word1_text_old = txt_front.Text;
-                ignore_txt_word_change = false;
+                txt_front_text_old = txt_front.Text;
+                ignore_txt_cardSide_change = false;
                 return;
             }
 
             if (QuizEditor.UpdateUndoRedoStacks)
             {
                 QuizEditor.UndoStack.Push(new UndoRedoFuncPair(
-                    new Action[] { txt_front.ChangeText(txt_word1_text_old, () => { ignore_txt_word_change = true; }) },
-                    new Action[] { txt_front.ChangeText(txt_front.Text, () => { ignore_txt_word_change = true; }) },
+                    new Action[] { txt_front.ChangeText(txt_front_text_old, () => { ignore_txt_cardSide_change = true; }) },
+                    new Action[] { txt_front.ChangeText(txt_front.Text, () => { ignore_txt_cardSide_change = true; }) },
                     "Change word",
                     new OwnerControlData(this, this.Parent)));
                 QuizEditor.UpdateUndoRedoTooltips();
             }
             QuizEditor.ChangedSinceLastSave = true;
 
-            txt_word1_text_old = txt_front.Text;
+            txt_front_text_old = txt_front.Text;
         }
 
-        private string txt_word2_text_old = "";
+        private string txt_back_text_old = "";
 
-        private void txt_word2_TextChanged(object sender, EventArgs e)
+        private void txt_back_TextChanged(object sender, EventArgs e)
         {
             QuizEditor.ChkFixWordsCount();
 
-            if (ignore_txt_word_change)
+            if (ignore_txt_cardSide_change)
             {
-                txt_word2_text_old = txt_back.Text;
-                ignore_txt_word_change = false;
+                txt_back_text_old = txt_back.Text;
+                ignore_txt_cardSide_change = false;
                 return;
             }
 
             if (QuizEditor.UpdateUndoRedoStacks)
             {
                 QuizEditor.UndoStack.Push(new UndoRedoFuncPair(
-                new Action[] { txt_back.ChangeText(txt_word2_text_old, () => { ignore_txt_word_change = true; }) },
-                new Action[] { txt_back.ChangeText(txt_back.Text, () => { ignore_txt_word_change = true; }) },
+                new Action[] { txt_back.ChangeText(txt_back_text_old, () => { ignore_txt_cardSide_change = true; }) },
+                new Action[] { txt_back.ChangeText(txt_back.Text, () => { ignore_txt_cardSide_change = true; }) },
                 "Change word",
                 new OwnerControlData(this, this.Parent)));
                 QuizEditor.UpdateUndoRedoTooltips();
             }
             QuizEditor.ChangedSinceLastSave = true;
 
-            txt_word2_text_old = txt_back.Text;
+            txt_back_text_old = txt_back.Text;
         }
 
-        private void txt_word_Click(object sender, EventArgs e)
+        private void txt_cardSide_Click(object sender, EventArgs e)
         {
             QuizEditor.ChkFixWordsCount();
         }
 
-        private void txt_word1_Enter(object sender, EventArgs e)
+        private void txt_front_Enter(object sender, EventArgs e)
         {
             QuizEditor.ChkFixWordsCount();
         }
@@ -252,11 +252,7 @@ namespace SteelQuiz.QuizEditor
                     ));
                 QuizEditor.UpdateUndoRedoTooltips();
                 FrontSynonyms.Remove(Front);
-                /*
-#warning dont use messageboxes
-                var msg = MessageBox.Show($"A synonym to {Word1} has been removed, that was equal to the word", "SteelQuiz",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    */
+
                 QuizEditor.ShowNotification($"A synonym to '{Front}' has been removed, due to it being equal to the word itself", 0);
             }
 
@@ -270,20 +266,17 @@ namespace SteelQuiz.QuizEditor
                     ));
                 QuizEditor.UpdateUndoRedoTooltips();
                 BackSynonyms.Remove(Back);
-                /*
-                var msg = MessageBox.Show($"A synonym to word {Word2} has been removed, that was equal to the word", "SteelQuiz",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    */
+
                 QuizEditor.ShowNotification($"A synonym to '{Back}' has been removed, due to it being equal to the word itself", 0);
             }
         }
 
-        private void Txt_word1_Leave(object sender, EventArgs e)
+        private void Txt_front_Leave(object sender, EventArgs e)
         {
             RemoveSynonymsEqualToWords(1);
         }
 
-        private void Txt_word2_Leave(object sender, EventArgs e)
+        private void Txt_back_Leave(object sender, EventArgs e)
         {
             RemoveSynonymsEqualToWords(2);
         }

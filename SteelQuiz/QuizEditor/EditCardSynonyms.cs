@@ -239,8 +239,8 @@ namespace SteelQuiz.QuizEditor
             lst_synonyms.Items.Add(txt_synonymAdd.Text);
 
             UndoStack.Push(new UndoRedoFuncPair(
-                new Action[] { lst_synonyms.RemoveItem(() => { return this.Parent.EditWordSynonyms; }, lst_synonyms.Name, txt_synonymAdd.Text) },
-                new Action[] { lst_synonyms.AddItem(() => { return this.Parent.EditWordSynonyms; }, lst_synonyms.Name, txt_synonymAdd.Text) },
+                new Action[] { lst_synonyms.RemoveItem(() => { return this.Parent.EditCardSynonyms; }, lst_synonyms.Name, txt_synonymAdd.Text) },
+                new Action[] { lst_synonyms.AddItem(() => { return this.Parent.EditCardSynonyms; }, lst_synonyms.Name, txt_synonymAdd.Text) },
                 "Add synonym(s)",
                 new OwnerControlData(this, this.Parent, Language)));
             UpdateUndoRedoTooltips();
@@ -319,8 +319,8 @@ namespace SteelQuiz.QuizEditor
 
                 lst_synonyms.Items[lst_synonyms.Items.IndexOf(item)] = _new;
 
-                undoes.Add(lst_synonyms.ChangeItem(() => { return this.Parent.EditWordSynonyms; }, lst_synonyms.Name, old, _new));
-                redoes.Add(lst_synonyms.ChangeItem(() => { return this.Parent.EditWordSynonyms; }, lst_synonyms.Name, _new, old));
+                undoes.Add(lst_synonyms.ChangeItem(() => { return this.Parent.EditCardSynonyms; }, lst_synonyms.Name, old, _new));
+                redoes.Add(lst_synonyms.ChangeItem(() => { return this.Parent.EditCardSynonyms; }, lst_synonyms.Name, _new, old));
             }
 
             UndoStack.Push(new UndoRedoFuncPair(undoes.ToArray(), redoes.ToArray(), "Update synonym(s)", new OwnerControlData(this, this.Parent, Language)));
@@ -347,8 +347,8 @@ namespace SteelQuiz.QuizEditor
             {
                 lst_synonyms.Items.Remove(item);
 
-                undoes.Add(lst_synonyms.AddItem(() => { return this.Parent.EditWordSynonyms; }, lst_synonyms.Name, item));
-                redoes.Add(lst_synonyms.RemoveItem(() => { return this.Parent.EditWordSynonyms; }, lst_synonyms.Name, item));
+                undoes.Add(lst_synonyms.AddItem(() => { return this.Parent.EditCardSynonyms; }, lst_synonyms.Name, item));
+                redoes.Add(lst_synonyms.RemoveItem(() => { return this.Parent.EditCardSynonyms; }, lst_synonyms.Name, item));
             }
 
             UndoStack.Push(new UndoRedoFuncPair(undoes.ToArray(), redoes.ToArray(), "Remove synonym(s)", new OwnerControlData(this, this.Parent, Language)));

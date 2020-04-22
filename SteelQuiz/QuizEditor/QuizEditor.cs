@@ -332,9 +332,9 @@ namespace SteelQuiz.QuizEditor
         {
             foreach (var wordPair in flp_cards.Controls.OfType<QuizEditorCard>())
             {
-                if (wordPair.EditWordSynonyms != null)
+                if (wordPair.EditCardSynonyms != null)
                 {
-                    if (!wordPair.EditWordSynonyms.ApplyChanges(true))
+                    if (!wordPair.EditCardSynonyms.ApplyChanges(true))
                     {
                         return false;
                     }
