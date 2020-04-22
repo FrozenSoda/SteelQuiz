@@ -62,7 +62,6 @@ namespace SteelQuiz.QuizPractise
 
             if (possibleCards.Count > 0)
             {
-                //Shuffle(possibleCards);
                 quiz.ProgressData.CurrentCards = possibleCards.Take(10).ToList();
             }
             else
