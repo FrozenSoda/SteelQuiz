@@ -31,71 +31,6 @@ namespace SteelQuiz.QuizPractise
 {
     public static class QuestionSelector
     {
-        /// <summary>
-        /// A collection of items with a specified weight, which affects their chances of getting picked.
-        /// </summary>
-        /// <typeparam name="T">The type of items in the collection.</typeparam>
-        private class WeightedCollection<T>
-        {
-            /// <summary>
-            /// A container for an item that should be picked from a collection based off of the items' weight.
-            /// </summary>
-            /// <typeparam name="T"></typeparam>
-            private class Entry
-            {
-                /// <summary>
-                /// The item with the specified Probability.
-                /// </summary>
-                public T Item { get; set; }
-
-                /// <summary>
-                /// The weight, which is a value affecting the chance of this item getting picked. The higher weight, the higher chance of getting picked.
-                /// </summary>
-                public double Weight { get; set; }
-            }
-
-            private List<Entry> entries = new List<Entry>();
-            private double accumulatedWeight = 0.0;
-            private Random random = new Random();
-
-            /// <summary>
-            /// Adds a item to the collection.
-            /// </summary>
-            /// <param name="item">The item to add.</param>
-            /// <param name="weight">The weight of the item.</param>
-            public void Add(T item, double weight)
-            {
-                accumulatedWeight += weight;
-                entries.Add(new Entry() { Item = item, Weight = weight });
-            }
-
-            /// <summary>
-            /// Picks a random item from the collection, based off of their weights.
-            /// </summary>
-            /// <returns>The picked item.</returns>
-            public T Pick()
-            {
-                double rnd = random.NextDouble() * accumulatedWeight;
-                //var picked = entries.TakeWhile(x => x.Weight >= rnd).FirstOrDefault();
-                Entry picked = null;
-                foreach (var entry in entries)
-                {
-                    if (rnd < entry.Weight)
-                    {
-                        picked = entry;
-                        break;
-                    }
-
-                    rnd -= entry.Weight;
-                }
-                if (picked == null)
-                {
-                    return default;
-                }
-                return picked.Item;
-            }
-        }
-
         private static void Swap<T>(List<T> list, int index1, int index2)
         {
             T tmp = list[index1];
@@ -176,19 +111,6 @@ namespace SteelQuiz.QuizPractise
             {
                 return quiz.GetCard(quiz.ProgressData.CurrentCard);
             }
-
-            /*
-            var weightedCollection = new WeightedCollection<Guid>();
-            quiz.ProgressData.CurrentCards
-                .Where(x => !quiz.GetCard(x).GetProgressData(quiz).AskedThisRound)
-                .ToList()
-                .ForEach(x => weightedCollection.Add(x, quiz.GetCard(x).GetProgressData(quiz).GetLearningProgress(quiz.ProgressData) + 1));
-
-            var cardGuid = weightedCollection.Pick();
-            var card = quiz.GetCard(cardGuid);
-
-            quiz.ProgressData.CurrentCard = cardGuid;
-            */
 
             var r = new Random();
             var cardGuid = quiz.ProgressData.CurrentCards
