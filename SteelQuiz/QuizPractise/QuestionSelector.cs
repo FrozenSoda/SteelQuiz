@@ -122,11 +122,12 @@ namespace SteelQuiz.QuizPractise
             var possibleCards = (from x in quiz.Cards
                                  let progress = x.GetProgressData(quiz)
                                  where progress.RoundsToSkip == 0
+                                 orderby progress.GetLearningProgress(quiz.ProgressData) ascending
                                  select x.Guid).ToList();
 
             if (possibleCards.Count > 0)
             {
-                Shuffle(possibleCards);
+                //Shuffle(possibleCards);
                 quiz.ProgressData.CurrentCards = possibleCards.Take(10).ToList();
             }
             else
