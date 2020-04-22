@@ -76,6 +76,7 @@ namespace SteelQuiz.QuizPractise
                     cardSideAnswerPromptBeingShown = true;
                 }
 
+#warning Round progress might be incorrect for multi answer cards
                 lbl_progress.Text =
                     $"Round Progress: {Quiz.Cards.Where(x => x.GetProgressData(Quiz).AskedThisRound).Count()} " +
                     $"/ {Quiz.ProgressData.CurrentCards.Count}";
