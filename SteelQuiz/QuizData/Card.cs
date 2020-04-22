@@ -124,6 +124,18 @@ namespace SteelQuiz.QuizData
             return quiz.ProgressData.AnswerCardSide == CardSide.Back ? Back : Front;
         }
 
+        /// <summary>
+        /// Gets all answers to this Card if it has multiple required answers, or just the answer to this card if it only has one required answer, and joins them to a string with the specified separator.
+        /// </summary>
+        /// <param name="quiz">The quiz which this card belongs to.</param>
+        /// <param name="separator">The string that should be put between all answers.</param>
+        /// <returns>All answers joined together to a string.</returns>
+        public string GetAllAnswers(Quiz quiz, string separator = "\n")
+        {
+            var answers = GetRequiredAnswerCards(quiz);
+            return string.Join(separator, answers.Select(x => x.GetSideToAnswer(quiz)));
+        }
+
         public override bool Equals(object obj)
         {
             return Equals(obj as Card, true, true);
@@ -179,7 +191,7 @@ namespace SteelQuiz.QuizData
         /// Finds all cards with the same "question" side as this card, and an alternative answer side to this card, that are required to be answered, including this card.
         /// </summary>
         /// <returns>A collection of Cards required to be answered.</returns>
-        public IEnumerable<Card> GetRequiredAlternativeCards(Quiz quiz)
+        public IEnumerable<Card> GetRequiredAnswerCards(Quiz quiz)
         {
             if (quiz.ProgressData.AnswerCardSide == CardSide.Back)
             {
@@ -202,7 +214,7 @@ namespace SteelQuiz.QuizData
         /// <returns>The card collection</returns>
         public IEnumerable<Card> MultiAnswersAlreadyEntered(Quiz quiz)
         {
-            return GetRequiredAlternativeCards(quiz).Where(x => x.GetProgressData(quiz).AskedThisRound);
+            return GetRequiredAnswerCards(quiz).Where(x => x.GetProgressData(quiz).AskedThisRound);
         }
 
         public class AnswerDiff
@@ -284,7 +296,7 @@ namespace SteelQuiz.QuizData
         {
             var similarityData = new List<StringComp.SimilarityData>();
 
-            foreach (var card in GetRequiredAlternativeCards(quiz).Where(x => answerIgnores == null || !answerIgnores.Contains(x)))
+            foreach (var card in GetRequiredAnswerCards(quiz).Where(x => answerIgnores == null || !answerIgnores.Contains(x)))
             {
                 similarityData = similarityData.Concat(SimilarityData(quiz, card, input, updateProgress)).ToList();
             }

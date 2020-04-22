@@ -211,7 +211,7 @@ namespace SteelQuiz.QuizPractise
         /// <returns>True if multiple answers must be provided; otherwise False.</returns>
         private bool IsCurrentCardMultiAnswer()
         {
-            return CurrentCard.GetRequiredAlternativeCards(Quiz).Count() > 1;
+            return CurrentCard.GetRequiredAnswerCards(Quiz).Count() > 1;
         }
 
         /// <summary>
@@ -462,19 +462,28 @@ namespace SteelQuiz.QuizPractise
                 return;
             }
 
-            lbl_cardSideToAnswer.Text = CurrentCard.GetSideToAnswer(Quiz);
+            //lbl_cardSideToAnswer.Text = CurrentCard.GetSideToAnswer(Quiz);
+            lbl_cardSideToAnswer.Text = CurrentCard.GetAllAnswers(Quiz);
             pnl_knewAnswer.Visible = true;
         }
 
         private void btn_knewAnswerYES_Click(object sender, EventArgs e)
         {
-            CurrentCard.AddSuccessfulAttempt(Quiz, CurrentCard, true);
+            //CurrentCard.AddSuccessfulAttempt(Quiz, CurrentCard, true);
+            foreach (var card in CurrentCard.GetRequiredAnswerCards(Quiz))
+            {
+                card.AddSuccessfulAttempt(Quiz, CurrentCard, true);
+            }
             SetCard();
         }
 
         private void btn_knewAnswerNO_Click(object sender, EventArgs e)
         {
-            CurrentCard.AddFailedAttempt(Quiz, CurrentCard, true, false);
+            //CurrentCard.AddFailedAttempt(Quiz, CurrentCard, true, false);
+            foreach (var card in CurrentCard.GetRequiredAnswerCards(Quiz))
+            {
+                card.AddFailedAttempt(Quiz, CurrentCard, true, false);
+            }
             SetCard();
         }
 
