@@ -473,7 +473,7 @@ namespace SteelQuiz.QuizPractise
             //CurrentCard.AddSuccessfulAttempt(Quiz, CurrentCard, true);
             foreach (var card in CurrentCard.GetRequiredAnswerCards(Quiz))
             {
-                Card.AddSuccessfulAttempt(Quiz, card, true);
+                card.AddSuccessfulAttempt(Quiz, true);
             }
             SetCard();
         }
@@ -483,7 +483,7 @@ namespace SteelQuiz.QuizPractise
             //CurrentCard.AddFailedAttempt(Quiz, CurrentCard, true, false);
             foreach (var card in CurrentCard.GetRequiredAnswerCards(Quiz))
             {
-                Card.AddFailedAttempt(Quiz, card, true, false);
+                card.AddFailedAttempt(Quiz, true, false);
             }
             SetCard();
         }

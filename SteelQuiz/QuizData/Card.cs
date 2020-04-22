@@ -244,10 +244,9 @@ namespace SteelQuiz.QuizData
         /// <param name="quiz">The quiz which the card belongs to.</param>
         /// <param name="card">The card to add attempt for.</param>
         /// <param name="updateProgress">True if the attempt should be added to AnswerAttempts and CorrectAnswersThisRound.</param>
-        public static void AddSuccessfulAttempt(Quiz quiz, Card card, bool updateProgress)
+        public void AddSuccessfulAttempt(Quiz quiz, bool updateProgress)
         {
-#warning fix so it's not static
-            var progressData = card.GetProgressData(quiz);
+            var progressData = GetProgressData(quiz);
 
             if (updateProgress)
             {
@@ -270,9 +269,9 @@ namespace SteelQuiz.QuizData
         /// <param name="card">The card to add attempt for.</param>
         /// <param name="updateProgress">True if the attempt should be added to AnswerAttempts.</param>
         /// <param name="userGoingToCopy">True if the user needs to copy the correct answer and answer correct before continuing; false to mark the question as answered and move on.</param>
-        public static void AddFailedAttempt(Quiz quiz, Card card, bool updateProgress, bool userGoingToCopy)
+        public void AddFailedAttempt(Quiz quiz, bool updateProgress, bool userGoingToCopy)
         {
-            var progressData = card.GetProgressData(quiz);
+            var progressData = GetProgressData(quiz);
 
             if (updateProgress)
             {
@@ -308,18 +307,11 @@ namespace SteelQuiz.QuizData
 
             if (ansDiff.IsCorrect())
             {
-                AddSuccessfulAttempt(quiz, ansDiff.Card, updateProgress);
-
-                /*
-                if (ansDiff.Card.GetRequiredAnswerSynonyms(quiz).Select(x => x.GetProgressData(quiz).AskedThisRound).All(x => x == true))
-                {
-                    quiz.ProgressData.CurrentCards.Remove(ansDiff.Card);
-                }
-                */
+                ansDiff.Card.AddSuccessfulAttempt(quiz, updateProgress);
             }
             else
             {
-                AddFailedAttempt(quiz, ansDiff.Card, updateProgress, true);
+                ansDiff.Card.AddFailedAttempt(quiz, updateProgress, true);
             }
 
             QuizCore.SaveQuizProgress(quiz);
