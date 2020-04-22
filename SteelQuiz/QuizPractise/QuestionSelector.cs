@@ -119,17 +119,6 @@ namespace SteelQuiz.QuizPractise
         public static void NewRound(Quiz quiz)
         {
             quiz.ProgressData.CorrectAnswersThisRound = 0;
-
-            foreach (var cardProgress in quiz.ProgressData.CardProgress)
-            {
-                cardProgress.AskedThisRound = false;
-                
-                if (cardProgress.RoundsToSkip > 0)
-                {
-                    --cardProgress.RoundsToSkip;
-                }
-            }
-
             var possibleCards = (from x in quiz.Cards
                                  let progress = x.GetProgressData(quiz)
                                  where progress.RoundsToSkip == 0
@@ -150,6 +139,17 @@ namespace SteelQuiz.QuizPractise
             }
 
             quiz.ProgressData.CurrentCard = Guid.Empty;
+
+            // Update RoundsToSkip
+            foreach (var cardProgress in quiz.ProgressData.CardProgress)
+            {
+                cardProgress.AskedThisRound = false;
+
+                if (cardProgress.RoundsToSkip > 0)
+                {
+                    --cardProgress.RoundsToSkip;
+                }
+            }
         }
 
         public static Card GenerateCard(Quiz quiz)
