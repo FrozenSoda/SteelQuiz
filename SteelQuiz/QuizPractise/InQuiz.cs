@@ -359,7 +359,7 @@ namespace SteelQuiz.QuizPractise
                 }
 
                 // Check answer
-                var chk = CurrentCard.WrittenAnswerCheck(Quiz, CurrentInput, null, !userCopyingAnswer);
+                var chk = CurrentCard.WrittenAnswerCheck(Quiz, CurrentInput, CurrentCard.MultiAnswersAlreadyEntered(Quiz), !userCopyingAnswer);
                 if (chk.IsCorrect())
                 {
                     newCardPending = true;

@@ -277,14 +277,14 @@ namespace SteelQuiz.QuizData
         /// Checks the answer to see if it is correct, and returns data about the closest match
         /// </summary>
         /// <param name="input">The user answer</param>
-        /// <param name="answerIgnores">In case of a question with multiple answers, contains the answers already provided</param>
+        /// <param name="answerIgnores">In case of a question with multiple answers, contains the cards belonging to answers already provided</param>
         /// <param name="updateProgress">True if progress should be updated, otherwise false</param>
         /// <returns></returns>
-        public AnswerDiff WrittenAnswerCheck(Quiz quiz, string input, IEnumerable<string> answerIgnores = null, bool updateProgress = true)
+        public AnswerDiff WrittenAnswerCheck(Quiz quiz, string input, IEnumerable<Card> answerIgnores = null, bool updateProgress = true)
         {
             var similarityData = new List<StringComp.SimilarityData>();
 
-            foreach (var card in GetRequiredAlternativeCards(quiz).Where(x => answerIgnores == null || !answerIgnores.Contains(x.GetSideToAnswer(quiz))))
+            foreach (var card in GetRequiredAlternativeCards(quiz).Where(x => answerIgnores == null || !answerIgnores.Contains(x)))
             {
                 similarityData = similarityData.Concat(SimilarityData(quiz, card, input, updateProgress)).ToList();
             }
