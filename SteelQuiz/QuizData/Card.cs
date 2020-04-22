@@ -200,7 +200,7 @@ namespace SteelQuiz.QuizData
         /// Retrieves a collection of answers already provided to this card, if it is a multi-answer card.
         /// </summary>
         /// <returns>The card collection</returns>
-        private IEnumerable<Card> MultiAnswersAlreadyEntered(Quiz quiz)
+        public IEnumerable<Card> MultiAnswersAlreadyEntered(Quiz quiz)
         {
             return GetRequiredAlternativeCards(quiz).Where(x => x.GetProgressData(quiz).AskedThisRound);
         }

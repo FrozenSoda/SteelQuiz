@@ -97,7 +97,20 @@ namespace SteelQuiz.QuizPractise
             set
             {
                 __currentInput = value;
-                lbl_cardSideToAnswer.Text = value;
+
+                if (CurrentCard == null)
+                {
+                    return;
+                }
+
+                if (!IsCurrentCardMultiAnswer())
+                {
+                    lbl_cardSideToAnswer.Text = value;
+                }
+                else if (multiAnswerControl != null)
+                {
+                    multiAnswerControl.CurrentLabel.Text = value;
+                }
             }
         }
 
@@ -122,6 +135,8 @@ namespace SteelQuiz.QuizPractise
         /// True if SteelQuiz should exit when clicking the Close button; false if we should return to Dashboard
         /// </summary>
         public bool exitAppOnClose = true;
+
+        private MultiAnswer multiAnswerControl => lbl_cardSideToAnswer.Controls.OfType<MultiAnswer>().FirstOrDefault();
 
         public QuizPractise(Quiz quiz, QuizPractiseMode quizPractiseMode)
         {
@@ -191,6 +206,15 @@ namespace SteelQuiz.QuizPractise
         }
 
         /// <summary>
+        /// Finds if multiple answers are required to be provided to this card.
+        /// </summary>
+        /// <returns>True if multiple answers must be provided; otherwise False.</returns>
+        private bool IsCurrentCardMultiAnswer()
+        {
+            return CurrentCard.GetRequiredAlternativeCards(Quiz).Count() > 1;
+        }
+
+        /// <summary>
         /// Generates a card to be shown - or shows the last one from the previous session if it hadn't been answered.
         /// </summary>
         public void SetCard()
@@ -214,19 +238,15 @@ namespace SteelQuiz.QuizPractise
                 lbl_cardSideToAsk.Controls.Remove(c);
                 c.Dispose();
             }
+            foreach (var c in lbl_cardSideToAnswer.Controls.OfType<MultiAnswer>())
+            {
+                lbl_cardSideToAnswer.Controls.Remove(c);
+                c.Dispose();
+            }
 
             pnl_knewAnswer.Visible = false;
 
             CurrentInput = "";
-            if (PractiseMode == QuizPractiseMode.Writing)
-            {
-                lbl_cardSideToAnswer.Text = "Enter your answer ...";
-            }
-            else
-            {
-                lbl_cardSideToAnswer.Text = "Click here to reveal";
-            }
-            cardSideAnswerPromptBeingShown = true;
 
             CurrentCard = QuestionSelector.GenerateCard(Quiz);
             if (CurrentCard == null)
@@ -242,6 +262,32 @@ namespace SteelQuiz.QuizPractise
 
                 return;
             }
+
+            if (PractiseMode == QuizPractiseMode.Writing)
+            {
+                if (!IsCurrentCardMultiAnswer())
+                {
+                    lbl_cardSideToAnswer.Text = "Enter your answer ...";
+                }
+                else
+                {
+                    // Multi Answer Card
+                    var multiAns = new MultiAnswer();
+                    lbl_cardSideToAnswer.Text = "";
+                    foreach (var card in CurrentCard.MultiAnswersAlreadyEntered(Quiz))
+                    {
+                        multiAns.CurrentLabel.Text = card.GetSideToAnswer(Quiz);
+                        multiAns.CurrentLabel.Clone();
+                    }
+                    multiAns.CurrentLabel.Text = "Enter your answers ...";
+                    lbl_cardSideToAnswer.Controls.Add(multiAns);
+                }
+            }
+            else
+            {
+                lbl_cardSideToAnswer.Text = "Click here to reveal";
+            }
+            cardSideAnswerPromptBeingShown = true;
 
 
             if (Quiz.ProgressData.GetLearningProgress() == 1.0)
