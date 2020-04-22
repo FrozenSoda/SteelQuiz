@@ -48,6 +48,7 @@ namespace SteelQuiz
 
             //lbl_name.Text = Path.GetFileNameWithoutExtension(QuizIdentity.FindQuizPath());
             lbl_name.Text = Path.GetFileNameWithoutExtension(QuizIdentity.LastKnownPath);
+            lbl_folder.Text = Path.GetFileName(Path.GetDirectoryName(QuizIdentity.LastKnownPath));
         }
 
         public override void SetTheme(GeneralTheme theme)
@@ -75,22 +76,12 @@ namespace SteelQuiz
             lbl_name.BackColor = BackColor;
         }
 
-        private void DashboardQuiz_MouseEnter(object sender, EventArgs e)
+        private void Everything_MouseEnter(object sender, EventArgs e)
         {
             SetHoverColors(true);
         }
 
-        private void DashboardQuiz_MouseLeave(object sender, EventArgs e)
-        {
-            SetHoverColors(false);
-        }
-
-        private void Lbl_name_MouseEnter(object sender, EventArgs e)
-        {
-            SetHoverColors(true);
-        }
-
-        private void Lbl_name_MouseLeave(object sender, EventArgs e)
+        private void Everything_MouseLeave(object sender, EventArgs e)
         {
             SetHoverColors(false);
         }
