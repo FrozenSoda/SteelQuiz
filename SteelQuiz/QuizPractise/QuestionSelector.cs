@@ -177,6 +177,7 @@ namespace SteelQuiz.QuizPractise
                 return quiz.GetCard(quiz.ProgressData.CurrentCard);
             }
 
+            /*
             var weightedCollection = new WeightedCollection<Guid>();
             quiz.ProgressData.CurrentCards
                 .Where(x => !quiz.GetCard(x).GetProgressData(quiz).AskedThisRound)
@@ -187,6 +188,16 @@ namespace SteelQuiz.QuizPractise
             var card = quiz.GetCard(cardGuid);
 
             quiz.ProgressData.CurrentCard = cardGuid;
+            */
+
+            var r = new Random();
+            var cardGuid = quiz.ProgressData.CurrentCards
+                .Where(x => !quiz.GetCard(x).GetProgressData(quiz).AskedThisRound)
+                .OrderBy(x => quiz.GetCard(x).GetProgressData(quiz).GetLearningProgress(quiz.ProgressData))
+                .ThenBy(x => r.NextDouble())
+                .First();
+
+            var card = quiz.GetCard(cardGuid);
 
             return card;
         }
