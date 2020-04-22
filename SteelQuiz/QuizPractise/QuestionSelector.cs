@@ -195,7 +195,7 @@ namespace SteelQuiz.QuizPractise
                 .Where(x => !quiz.GetCard(x).GetProgressData(quiz).AskedThisRound)
                 .OrderBy(x => quiz.GetCard(x).GetProgressData(quiz).GetLearningProgress(quiz.ProgressData))
                 .ThenBy(x => r.NextDouble())
-                .First();
+                .FirstOrDefault();
 
             var card = quiz.GetCard(cardGuid);
 

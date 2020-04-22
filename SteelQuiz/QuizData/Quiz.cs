@@ -85,6 +85,11 @@ namespace SteelQuiz.QuizData
             FileFormatVersion = quizFileFormatVersion;
         }
 
+        /// <summary>
+        /// Finds the card with the specified Guid.
+        /// </summary>
+        /// <param name="guid">The Guid of the card to find.</param>
+        /// <returns>Returns the found card if found; otherwise returns null.</returns>
         public Card GetCard(Guid guid)
         {
             return Cards.Where(x => x.Guid == guid).FirstOrDefault();
