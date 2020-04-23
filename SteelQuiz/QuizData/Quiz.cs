@@ -94,5 +94,15 @@ namespace SteelQuiz.QuizData
         {
             return Cards.Where(x => x.Guid == guid).FirstOrDefault();
         }
+
+        /// <summary>
+        /// Calculates the number of cards this round, including eventual multi-answer cards sharing the same question side.
+        /// </summary>
+        /// <returns>The number of cards.</returns>
+        public int GetTotalCurrentCardsCount()
+        {
+            var cards = ProgressData.CurrentCards.SelectMany(x => GetCard(x).GetRequiredAnswerCards(this)).Distinct();
+            return cards.Count();
+        }
     }
 }
