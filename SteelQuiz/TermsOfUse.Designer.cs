@@ -85,7 +85,7 @@ namespace SteelQuiz
             this.btn_agree.Enabled = false;
             this.btn_agree.FlatAppearance.BorderSize = 0;
             this.btn_agree.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_agree.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_agree.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_agree.ForeColor = System.Drawing.Color.White;
             this.btn_agree.Location = new System.Drawing.Point(598, 387);
             this.btn_agree.Name = "btn_agree";
@@ -100,7 +100,7 @@ namespace SteelQuiz
             this.btn_cancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.btn_cancel.FlatAppearance.BorderSize = 0;
             this.btn_cancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_cancel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_cancel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_cancel.ForeColor = System.Drawing.Color.White;
             this.btn_cancel.Location = new System.Drawing.Point(16, 387);
             this.btn_cancel.Name = "btn_cancel";
@@ -131,7 +131,7 @@ namespace SteelQuiz
             this.MaximizeBox = false;
             this.Name = "TermsOfUse";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "SteelQuiz";
+            this.Text = "Welcome to SteelQuiz";
             this.Load += new System.EventHandler(this.TermsOfUse_Load);
             this.ResumeLayout(false);
 

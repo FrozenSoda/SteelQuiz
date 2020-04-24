@@ -57,7 +57,7 @@ namespace SteelQuiz
             // 
             // lbl_msg
             // 
-            this.lbl_msg.Font = new System.Drawing.Font("Segoe UI Semilight", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_msg.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_msg.ForeColor = System.Drawing.Color.White;
             this.lbl_msg.Location = new System.Drawing.Point(12, 38);
             this.lbl_msg.Name = "lbl_msg";
