@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <item>
-  <version>5.0.0.20</version>
+  <version>5.0.0.22</version>
   <url>https://raw.githubusercontent.com/steel9/SteelQuiz/master/Updater/channel_dev/update_pkg.zip</url>
   <changelog>https://github.com/steel9/SteelQuiz/releases</changelog>
   <mandatory>false</mandatory>
-  <checksum algorithm="SHA512">a2ddaa998b69b2b76018575092e276ad5ab685765d723aba613344b136c57908674f1afe717fb087b32a834f5e16054e5aab35794e7cbcf8cb7b55481cb68fb6</checksum>
+  <checksum algorithm="SHA512">3d6943b1e6bd31997ebf1c4f44e03699234f4514e6732db925b254842de3c187c113703b8ccbd9ccbf3b0f2ccc6c8316e5e8ece6acca36d5e77d0d0cc68df8bf</checksum>
 </item>
