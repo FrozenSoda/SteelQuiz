@@ -85,6 +85,8 @@ namespace SteelQuiz.QuizPractise
                     --cardProgress.RoundsToSkip;
                 }
             }
+
+            QuizCore.SaveQuizProgress(quiz);
         }
 
         public static Card GenerateCard(Quiz quiz)
