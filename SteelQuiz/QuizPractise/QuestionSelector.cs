@@ -145,11 +145,16 @@ namespace SteelQuiz.QuizPractise
                 return quiz.GetCard(quiz.ProgressData.CurrentCard);
             }
 
-            int r = new Random().Next(0, quiz.ProgressData.CurrentCards.Count());
-            var cardGuid = quiz.ProgressData.CurrentCards.ElementAt(r);
-            var card = quiz.Cards.Where(x => x.Guid == cardGuid).FirstOrDefault();
+            var r = new Random();
+
+            var cardGuid = quiz.ProgressData.CurrentCards
+                .Where(x => !quiz.GetCard(x).GetProgressData(quiz).AskedThisRound)
+                .OrderBy(x => r.NextDouble())
+                .FirstOrDefault();
 
             quiz.ProgressData.CurrentCard = cardGuid;
+
+            var card = quiz.GetCard(cardGuid);
 
             return card;
         }
