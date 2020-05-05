@@ -515,6 +515,8 @@ namespace SteelQuiz.QuizPractise
                 card.AddSuccessfulAttempt(Quiz, true);
             }
             SetCard();
+
+            lbl_cardSideToAnswer.Focus();  // Needed for KeyPress() event to be triggered when it should
         }
     }
 }
