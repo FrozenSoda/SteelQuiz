@@ -198,10 +198,12 @@ namespace SteelQuiz.QuizPractise
             if (ConfigManager.Config.Theme == ThemeManager.ThemeCore.Theme.Dark)
             {
                 btn_cfg.BackgroundImage = Properties.Resources.gear_1077563_white_with_bigger_border_512x512;
+                llb_overrideIwasRight.LinkColor = Color.Aqua;
             }
             else
             {
                 btn_cfg.BackgroundImage = Properties.Resources.gear_1077563_black_with_bigger_border_512x512;
+                llb_overrideIwasRight.LinkColor = Color.FromArgb(0, 0, 255);
             }
         }
 
@@ -244,6 +246,7 @@ namespace SteelQuiz.QuizPractise
                 c.Dispose();
             }
 
+            llb_overrideIwasRight.Visible = false;
             pnl_knewAnswer.Visible = false;
 
             CurrentInput = "";
@@ -363,6 +366,7 @@ namespace SteelQuiz.QuizPractise
                 if (chk.IsCorrect())
                 {
                     newCardPending = true;
+                    llb_overrideIwasRight.Visible = false;
                     var correctAnswer = new CorrectAnswer(CurrentCard, Quiz, chk.Certainty);
                     lbl_cardSideToAsk.Controls.Add(correctAnswer);
                     correctAnswer.Show();
@@ -372,6 +376,7 @@ namespace SteelQuiz.QuizPractise
                 }
                 else
                 {
+                    llb_overrideIwasRight.Visible = true;
                     userCopyingAnswer = true;
                     CurrentInput = "";
                     var wrongAnswer = new WrongAnswer(CurrentCard, Quiz);
@@ -493,6 +498,23 @@ namespace SteelQuiz.QuizPractise
             quizPractiseConfigFrm.ShowDialog();
 
             lbl_cardSideToAnswer.Focus();
+        }
+
+        private void llb_overrideIwasRight_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (!userCopyingAnswer)
+            {
+                return;
+            }
+
+            foreach (var card in CurrentCard.GetRequiredAnswerCards(Quiz))
+            {
+                var answerAttempts = card.GetProgressData(Quiz).AnswerAttempts;
+                answerAttempts.RemoveAt(answerAttempts.Count - 1);  // Remove last answer attempt
+#warning Success attempt is not added to the end of the list, but one index before ?
+                card.AddSuccessfulAttempt(Quiz, true);
+            }
+            SetCard();
         }
     }
 }

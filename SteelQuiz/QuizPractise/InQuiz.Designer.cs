@@ -63,6 +63,7 @@ namespace SteelQuiz.QuizPractise
             this.btn_home = new System.Windows.Forms.Button();
             this.btn_cfg = new System.Windows.Forms.Button();
             this.lbl_learningProgress = new System.Windows.Forms.Label();
+            this.llb_overrideIwasRight = new System.Windows.Forms.LinkLabel();
             this.pnl_cardSideToAsk.SuspendLayout();
             this.pnl_cardSideToAnswer.SuspendLayout();
             this.pnl_knewAnswer.SuspendLayout();
@@ -271,12 +272,27 @@ namespace SteelQuiz.QuizPractise
             this.lbl_learningProgress.TabIndex = 13;
             this.lbl_learningProgress.Text = "Learning Progress: 0 %";
             // 
+            // llb_overrideIwasRight
+            // 
+            this.llb_overrideIwasRight.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.llb_overrideIwasRight.AutoSize = true;
+            this.llb_overrideIwasRight.LinkColor = System.Drawing.Color.Aqua;
+            this.llb_overrideIwasRight.Location = new System.Drawing.Point(589, 45);
+            this.llb_overrideIwasRight.Name = "llb_overrideIwasRight";
+            this.llb_overrideIwasRight.Size = new System.Drawing.Size(115, 13);
+            this.llb_overrideIwasRight.TabIndex = 14;
+            this.llb_overrideIwasRight.TabStop = true;
+            this.llb_overrideIwasRight.Text = "Override - I was right";
+            this.llb_overrideIwasRight.Visible = false;
+            this.llb_overrideIwasRight.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llb_overrideIwasRight_LinkClicked);
+            // 
             // QuizPractise
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(907, 550);
+            this.Controls.Add(this.llb_overrideIwasRight);
             this.Controls.Add(this.lbl_learningProgress);
             this.Controls.Add(this.pnl_knewAnswer);
             this.Controls.Add(this.lbl_cardAnswerSideType);
@@ -328,5 +344,6 @@ namespace SteelQuiz.QuizPractise
         private System.Windows.Forms.Button btn_knewAnswerYES;
         private System.Windows.Forms.Button btn_knewAnswerNO;
         private System.Windows.Forms.Label lbl_learningProgress;
+        private System.Windows.Forms.LinkLabel llb_overrideIwasRight;
     }
 }
