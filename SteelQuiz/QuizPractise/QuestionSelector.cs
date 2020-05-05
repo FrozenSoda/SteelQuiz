@@ -53,24 +53,32 @@ namespace SteelQuiz.QuizPractise
         /// <param name="quiz"></param>
         public static void NewRound(Quiz quiz)
         {
-            quiz.ProgressData.CorrectAnswersThisRound = 0;
-            var possibleCards = (from x in quiz.Cards
-                                 let progress = x.GetProgressData(quiz)
-                                 where progress.RoundsToSkip == 0
-                                 orderby progress.GetLearningProgress(quiz.ProgressData) ascending
-                                 select x.Guid).ToList();
-
-            if (possibleCards.Count > 0)
+            if (!quiz.ProgressData.FullTestInProgress)
             {
-                quiz.ProgressData.CurrentCards = possibleCards.Take(10).ToList();
+                quiz.ProgressData.CorrectAnswersThisRound = 0;
+                var possibleCards = (from x in quiz.Cards
+                                     let progress = x.GetProgressData(quiz)
+                                     where progress.RoundsToSkip == 0
+                                     orderby progress.GetLearningProgress(quiz.ProgressData) ascending
+                                     select x.Guid).ToList();
+
+                if (possibleCards.Count > 0)
+                {
+                    quiz.ProgressData.CurrentCards = possibleCards.Take(10).ToList();
+                }
+                else
+                {
+                    var indexes = Enumerable.Range(0, 5).ToList();
+                    Shuffle(indexes);
+                    quiz.ProgressData.CurrentCards = indexes
+                        .Where(i => i <= quiz.Cards.Count() - 1)
+                        .Select(i => quiz.Cards[i].Guid).ToList();
+                }
             }
             else
             {
-                var indexes = Enumerable.Range(0, 5).ToList();
-                Shuffle(indexes);
-                quiz.ProgressData.CurrentCards = indexes
-                    .Where(i => i <= quiz.Cards.Count() - 1)
-                    .Select(i => quiz.Cards[i].Guid).ToList();
+                quiz.ProgressData.CurrentCards = quiz.Cards.Select(x => x.Guid).ToList();
+                Shuffle(quiz.ProgressData.CurrentCards);
             }
 
             quiz.ProgressData.CurrentCard = Guid.Empty;
