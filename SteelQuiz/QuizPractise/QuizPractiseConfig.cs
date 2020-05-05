@@ -92,6 +92,8 @@ namespace SteelQuiz.QuizPractise
                 "Switch mode - SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
             if (msg == DialogResult.Yes)
             {
+                Quiz.ProgressData.FullTestInProgress = !Quiz.ProgressData.FullTestInProgress;
+
                 QuestionSelector.NewRound(Quiz);
                 Program.frmInQuiz.SetCard();
 
