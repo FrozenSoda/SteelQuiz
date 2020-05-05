@@ -94,7 +94,7 @@ namespace SteelQuiz.QuizPractise
             {
                 Quiz.ProgressData.FullTestInProgress = !Quiz.ProgressData.FullTestInProgress;
 
-                QuestionSelector.NewRound(Quiz);
+                CardPicker.NewRound(Quiz);
                 Program.frmInQuiz.SetCard();
 
                 if (Quiz.ProgressData.FullTestInProgress)
@@ -122,7 +122,7 @@ namespace SteelQuiz.QuizPractise
 
             QuizCore.SaveQuizProgress(Quiz);
 
-            QuestionSelector.NewRound(Quiz);
+            CardPicker.NewRound(Quiz);
             Program.frmInQuiz.SetCard();
         }
 
@@ -134,7 +134,7 @@ namespace SteelQuiz.QuizPractise
 
                 if (!Quiz.ProgressData.FullTestInProgress)
                 {
-                    QuestionSelector.NewRound(Quiz);
+                    CardPicker.NewRound(Quiz);
                     Program.frmInQuiz.SetCard();
                 }
             }
@@ -148,7 +148,7 @@ namespace SteelQuiz.QuizPractise
 
                 if (!Quiz.ProgressData.FullTestInProgress)
                 {
-                    QuestionSelector.NewRound(Quiz);
+                    CardPicker.NewRound(Quiz);
                     Program.frmInQuiz.SetCard();
                 }
             }
@@ -162,7 +162,7 @@ namespace SteelQuiz.QuizPractise
 
                 if (!Quiz.ProgressData.FullTestInProgress)
                 {
-                    QuestionSelector.NewRound(Quiz);
+                    CardPicker.NewRound(Quiz);
                     Program.frmInQuiz.SetCard();
                 }
             }
@@ -176,7 +176,7 @@ namespace SteelQuiz.QuizPractise
 
                 if (!Quiz.ProgressData.FullTestInProgress)
                 {
-                    QuestionSelector.NewRound(Quiz);
+                    CardPicker.NewRound(Quiz);
                     Program.frmInQuiz.SetCard();
                 }
             }
@@ -186,7 +186,7 @@ namespace SteelQuiz.QuizPractise
         {
             Quiz.ProgressData.AskQuestionsInRandomOrder = chk_randomOrderQuestions.Checked;
 
-            QuestionSelector.NewRound(Quiz);
+            CardPicker.NewRound(Quiz);
             Program.frmInQuiz.SetCard();
         }
 
@@ -196,7 +196,7 @@ namespace SteelQuiz.QuizPractise
 
             if (!Quiz.ProgressData.FullTestInProgress)
             {
-                QuestionSelector.NewRound(Quiz);
+                CardPicker.NewRound(Quiz);
                 Program.frmInQuiz.SetCard();
             }
         }

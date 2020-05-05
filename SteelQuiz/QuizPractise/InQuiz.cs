@@ -173,10 +173,10 @@ namespace SteelQuiz.QuizPractise
 
             SetTheme(GeneralTheme);
 
-            if ((CurrentCard = QuestionSelector.GenerateCard(Quiz)) == null)
+            if ((CurrentCard = CardPicker.GenerateCard(Quiz)) == null)
             {
                 // Initiate new round if it hasn't previously been done - for instance if this quiz has never been practised before by the user.
-                QuestionSelector.NewRound(Quiz);
+                CardPicker.NewRound(Quiz);
             }
 
             SetCard();
@@ -248,7 +248,7 @@ namespace SteelQuiz.QuizPractise
 
             CurrentInput = "";
 
-            CurrentCard = QuestionSelector.GenerateCard(Quiz);
+            CurrentCard = CardPicker.GenerateCard(Quiz);
             if (CurrentCard == null)
             {
                 // Round completed
@@ -256,7 +256,7 @@ namespace SteelQuiz.QuizPractise
                 var roundCompleted = new RoundCompleted(Quiz, PractiseMode, this);
                 lbl_cardSideToAsk.Controls.Add(roundCompleted);
                 roundCompleted.Show();
-                QuestionSelector.NewRound(Quiz);
+                CardPicker.NewRound(Quiz);
                 lbl_cardSideToAnswer.Text = "";
                 newRoundPending = true;
 
@@ -367,7 +367,7 @@ namespace SteelQuiz.QuizPractise
                     lbl_cardSideToAsk.Controls.Add(correctAnswer);
                     correctAnswer.Show();
 
-                    CurrentCard = QuestionSelector.GenerateCard(Quiz); // Generate new card now so that it will be shown on next instance if the user stops practising now
+                    CurrentCard = CardPicker.GenerateCard(Quiz); // Generate new card now so that it will be shown on next instance if the user stops practising now
                     lbl_cardSideToAnswer.Text = CurrentInput;
                 }
                 else

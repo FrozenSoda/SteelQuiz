@@ -29,7 +29,7 @@ using SteelQuiz.Util;
 
 namespace SteelQuiz.QuizPractise
 {
-    public static class QuestionSelector
+    public static class CardPicker
     {
         private static void Swap<T>(List<T> list, int index1, int index2)
         {
