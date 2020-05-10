@@ -110,6 +110,7 @@ namespace SteelQuiz
             // 
             // lbl_folder
             // 
+            this.lbl_folder.AutoEllipsis = true;
             this.lbl_folder.ContextMenuStrip = this.contextMenuStrip1;
             this.lbl_folder.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_folder.Location = new System.Drawing.Point(0, 35);
