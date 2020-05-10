@@ -393,9 +393,12 @@ namespace SteelQuiz.QuizPractise
                         }
                     }
 
-                    MessageBox.Show($"Your answer is wrong to the current card, but correct to other(s):\r\n\r\n" +
-                        string.Join("\r\n", answeredCards.Select(x => x.GetSideToAsk(Quiz))),
-                        "You answered other card(s)", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (answeredCards.Count > 0)
+                    {
+                        MessageBox.Show($"Your answer is wrong to the current card, but correct to other(s):\r\n\r\n" +
+                            string.Join("\r\n", answeredCards.Select(x => x.GetSideToAsk(Quiz))),
+                            "You answered other card(s)", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
 
                     CurrentInput = "";
                 }
