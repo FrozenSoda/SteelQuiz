@@ -383,15 +383,19 @@ namespace SteelQuiz.QuizPractise
                     wrongAnswer.Show();
 
                     // Check if the user answered another card
+                    var answeredCards = new List<Card>();
                     foreach (var card in Quiz.Cards)
                     {
                         var testCheck = card.WrittenAnswerCheck(Quiz, CurrentInput, null, false, false);
                         if (testCheck.IsCorrect())
                         {
-                            MessageBox.Show($"Your answer is wrong to the current card, but correct to another:\r\n\r\n{testCheck.Card.GetSideToAsk(Quiz)}", "You answered another card",
-                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            answeredCards.Add(card);
                         }
                     }
+
+                    MessageBox.Show($"Your answer is wrong to the current card, but correct to other(s):\r\n\r\n" +
+                        string.Join("\r\n", answeredCards.Select(x => x.GetSideToAsk(Quiz))),
+                        "You answered other card(s)", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     CurrentInput = "";
                 }
