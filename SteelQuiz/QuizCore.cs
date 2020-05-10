@@ -130,6 +130,9 @@ namespace SteelQuiz
                 quiz.ProgressData = new QuizProgress(quiz);
             }
 
+            // Remove cards from CurrentCards that has been deleted from the quiz
+            quiz.ProgressData.CurrentCards = quiz.ProgressData.CurrentCards.Where(x => quiz.Cards.Select(y => y.Guid).Contains(x)).ToList();
+
             QuizIdentities[quiz.GUID] = quiz.QuizIdentity;
             QuizAccessTimes[quiz.GUID] = DateTime.Now;
 
