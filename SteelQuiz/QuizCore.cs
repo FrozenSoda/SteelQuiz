@@ -130,9 +130,6 @@ namespace SteelQuiz
                 quiz.ProgressData = new QuizProgress(quiz);
             }
 
-            // Remove cards from CurrentCards that has been deleted from the quiz
-            quiz.ProgressData.CurrentCards = quiz.ProgressData.CurrentCards.Where(x => quiz.Cards.Select(y => y.Guid).Contains(x)).ToList();
-
             QuizIdentities[quiz.GUID] = quiz.QuizIdentity;
             QuizAccessTimes[quiz.GUID] = DateTime.Now;
 
@@ -171,7 +168,18 @@ namespace SteelQuiz
             string dataRaw = AtomicIO.AtomicRead(ConfigManager.Config.StorageConfig.QuizProgressFile);
             var dataRoot = JsonConvert.DeserializeObject<QuizProgressDataRoot>(dataRaw);
 
-            return dataRoot.QuizProgressData.Where(x => x.QuizGUID == quiz.GUID).FirstOrDefault();
+            var progress = dataRoot.QuizProgressData.Where(x => x.QuizGUID == quiz.GUID).FirstOrDefault();
+
+            if (progress != null)
+            {
+                // Remove cards from CurrentCards that has been deleted from the quiz
+                progress.CurrentCards = progress.CurrentCards.Where(x => quiz.Cards.Select(y => y.Guid).Contains(x)).ToList();
+
+                // Remove progress from cards that have been removed from the quiz
+                progress.CardProgress = progress.CardProgress.Where(x => quiz.Cards.Select(y => y.Guid).Contains(x.CardGuid)).ToList();
+            }
+
+            return progress;
         }
 
         /// <summary>
