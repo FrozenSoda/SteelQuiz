@@ -59,14 +59,15 @@ namespace SteelQuiz
             // 
             // lbl_name
             // 
+            this.lbl_name.AutoEllipsis = true;
             this.lbl_name.ContextMenuStrip = this.contextMenuStrip1;
             this.lbl_name.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_name.Location = new System.Drawing.Point(0, 0);
+            this.lbl_name.Location = new System.Drawing.Point(0, 14);
             this.lbl_name.Name = "lbl_name";
-            this.lbl_name.Size = new System.Drawing.Size(170, 49);
+            this.lbl_name.Size = new System.Drawing.Size(170, 21);
             this.lbl_name.TabIndex = 0;
             this.lbl_name.Text = "p308";
-            this.lbl_name.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_name.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.lbl_name.Click += new System.EventHandler(this.Lbl_name_Click);
             this.lbl_name.MouseEnter += new System.EventHandler(this.Everything_MouseEnter);
             this.lbl_name.MouseLeave += new System.EventHandler(this.Everything_MouseLeave);
