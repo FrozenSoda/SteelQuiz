@@ -291,8 +291,9 @@ namespace SteelQuiz.QuizData
         /// <param name="input">The user answer</param>
         /// <param name="answerIgnores">In case of a question with multiple answers, contains the cards belonging to answers already provided</param>
         /// <param name="updateProgress">True if progress should be updated, otherwise false</param>
+        /// <param name="markAsAnswered">True if the matched Card should be marked as answered.</param>
         /// <returns></returns>
-        public AnswerDiff WrittenAnswerCheck(Quiz quiz, string input, IEnumerable<Card> answerIgnores = null, bool updateProgress = true)
+        public AnswerDiff WrittenAnswerCheck(Quiz quiz, string input, IEnumerable<Card> answerIgnores = null, bool updateProgress = true, bool markAsAnswered = true)
         {
             var similarityData = new List<StringComp.SimilarityData>();
 
@@ -305,16 +306,19 @@ namespace SteelQuiz.QuizData
 
             var ansDiff = new AnswerDiff(bestSimilarityData.Difference, bestSimilarityData.CorrectAnswer, bestSimilarityData.Certainty, bestSimilarityData.Card);
 
-            if (ansDiff.IsCorrect())
+            if (markAsAnswered)
             {
-                ansDiff.Card.AddSuccessfulAttempt(quiz, updateProgress);
-            }
-            else
-            {
-                ansDiff.Card.AddFailedAttempt(quiz, updateProgress, true);
-            }
+                if (ansDiff.IsCorrect())
+                {
+                    ansDiff.Card.AddSuccessfulAttempt(quiz, updateProgress);
+                }
+                else
+                {
+                    ansDiff.Card.AddFailedAttempt(quiz, updateProgress, true);
+                }
 
-            QuizCore.SaveQuizProgress(quiz);
+                QuizCore.SaveQuizProgress(quiz);
+            }
 
             return ansDiff;
         }

@@ -378,10 +378,22 @@ namespace SteelQuiz.QuizPractise
                 {
                     llb_overrideIwasRight.Visible = true;
                     userCopyingAnswer = true;
-                    CurrentInput = "";
                     var wrongAnswer = new WrongAnswer(CurrentCard, Quiz);
                     lbl_cardSideToAsk.Controls.Add(wrongAnswer);
                     wrongAnswer.Show();
+
+                    // Check if the user answered another card
+                    foreach (var card in Quiz.Cards)
+                    {
+                        var testCheck = card.WrittenAnswerCheck(Quiz, CurrentInput, null, false, false);
+                        if (testCheck.IsCorrect())
+                        {
+                            MessageBox.Show($"Your answer is wrong to the current card, but correct to another:\r\n\r\n{testCheck.Card.GetSideToAsk(Quiz)}", "You answered another card",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+
+                    CurrentInput = "";
                 }
             }
             else
