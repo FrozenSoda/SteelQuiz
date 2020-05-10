@@ -320,7 +320,7 @@ namespace SteelQuiz.QuizPractise
             if (e.KeyChar == '\b')
             {
                 // BACKSPACE
-                if (CurrentInput.Length > 0)
+                if (!newCardPending && !newRoundPending && CurrentInput.Length > 0)
                 {
                     CurrentInput = CurrentInput.Remove(CurrentInput.Length - 1);
                 }
@@ -400,7 +400,7 @@ namespace SteelQuiz.QuizPractise
                     CurrentInput = "";
                 }
             }
-            else
+            else if (!newCardPending && !newRoundPending)
             {
                 if (cardSideAnswerPromptBeingShown)
                 {
