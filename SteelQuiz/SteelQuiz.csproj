@@ -654,6 +654,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Logo.ico" />
+    <None Include="Resources\edit-synonyms-bigger-border-white.png" />
+    <None Include="Resources\edit-synonyms-bigger-border-black.png" />
+    <None Include="Resources\bin-bigger-border-white.png" />
+    <None Include="Resources\bin-bigger-border-black.png" />
+    <None Include="Resources\bin-white.png" />
+    <None Include="Resources\bin-black.png" />
     <None Include="Resources\gear-1077563-white-with-bigger-border-512x512.png" />
     <None Include="Resources\gear-1077563-black-with-bigger-border-512x512.png" />
     <None Include="Resources\gear-1077563-black-with-bigger-border.png" />

@@ -46,17 +46,19 @@ namespace SteelQuiz.QuizEditor
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pnl_translationRules = new System.Windows.Forms.Panel();
             this.btn_smartCompSettings = new System.Windows.Forms.Button();
             this.lbl_ansCompRules = new System.Windows.Forms.Label();
             this.chk_smartComp = new System.Windows.Forms.CheckBox();
             this.txt_front = new System.Windows.Forms.TextBox();
-            this.btn_editSynonymsFront = new System.Windows.Forms.Button();
             this.txt_back = new System.Windows.Forms.TextBox();
-            this.btn_editSynonymsBack = new System.Windows.Forms.Button();
-            this.btn_delete = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.btn_delete = new System.Windows.Forms.Button();
+            this.btn_editSynonymsBack = new System.Windows.Forms.Button();
+            this.btn_editSynonymsFront = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.pnl_translationRules.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -132,22 +134,6 @@ namespace SteelQuiz.QuizEditor
             this.txt_front.Enter += new System.EventHandler(this.txt_front_Enter);
             this.txt_front.Leave += new System.EventHandler(this.Txt_front_Leave);
             // 
-            // btn_editSynonymsFront
-            // 
-            this.btn_editSynonymsFront.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
-            this.btn_editSynonymsFront.FlatAppearance.BorderSize = 0;
-            this.btn_editSynonymsFront.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_editSynonymsFront.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_editSynonymsFront.ForeColor = System.Drawing.Color.White;
-            this.btn_editSynonymsFront.Location = new System.Drawing.Point(25, 29);
-            this.btn_editSynonymsFront.Name = "btn_editSynonymsFront";
-            this.btn_editSynonymsFront.Size = new System.Drawing.Size(70, 39);
-            this.btn_editSynonymsFront.TabIndex = 4;
-            this.btn_editSynonymsFront.TabStop = false;
-            this.btn_editSynonymsFront.Text = "Edit Synonyms";
-            this.btn_editSynonymsFront.UseVisualStyleBackColor = false;
-            this.btn_editSynonymsFront.Click += new System.EventHandler(this.btn_editSynonymsFront_Click);
-            // 
             // txt_back
             // 
             this.txt_back.Anchor = System.Windows.Forms.AnchorStyles.Top;
@@ -163,40 +149,6 @@ namespace SteelQuiz.QuizEditor
             this.txt_back.TextChanged += new System.EventHandler(this.txt_back_TextChanged);
             this.txt_back.Enter += new System.EventHandler(this.txt_front_Enter);
             this.txt_back.Leave += new System.EventHandler(this.Txt_back_Leave);
-            // 
-            // btn_editSynonymsBack
-            // 
-            this.btn_editSynonymsBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_editSynonymsBack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
-            this.btn_editSynonymsBack.FlatAppearance.BorderSize = 0;
-            this.btn_editSynonymsBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_editSynonymsBack.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_editSynonymsBack.ForeColor = System.Drawing.Color.White;
-            this.btn_editSynonymsBack.Location = new System.Drawing.Point(655, 29);
-            this.btn_editSynonymsBack.Name = "btn_editSynonymsBack";
-            this.btn_editSynonymsBack.Size = new System.Drawing.Size(70, 39);
-            this.btn_editSynonymsBack.TabIndex = 6;
-            this.btn_editSynonymsBack.TabStop = false;
-            this.btn_editSynonymsBack.Text = "Edit Synonyms";
-            this.btn_editSynonymsBack.UseVisualStyleBackColor = false;
-            this.btn_editSynonymsBack.Click += new System.EventHandler(this.btn_editSynonymsBack_Click);
-            // 
-            // btn_delete
-            // 
-            this.btn_delete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_delete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
-            this.btn_delete.FlatAppearance.BorderSize = 0;
-            this.btn_delete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_delete.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_delete.ForeColor = System.Drawing.Color.White;
-            this.btn_delete.Location = new System.Drawing.Point(574, 29);
-            this.btn_delete.Name = "btn_delete";
-            this.btn_delete.Size = new System.Drawing.Size(75, 39);
-            this.btn_delete.TabIndex = 7;
-            this.btn_delete.TabStop = false;
-            this.btn_delete.Text = "Delete";
-            this.btn_delete.UseVisualStyleBackColor = false;
-            this.btn_delete.Click += new System.EventHandler(this.Btn_delete_Click);
             // 
             // label1
             // 
@@ -220,6 +172,62 @@ namespace SteelQuiz.QuizEditor
             this.label2.Size = new System.Drawing.Size(16, 13);
             this.label2.TabIndex = 9;
             this.label2.Text = "2:";
+            // 
+            // btn_delete
+            // 
+            this.btn_delete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_delete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.btn_delete.BackgroundImage = global::SteelQuiz.Properties.Resources.bin_bigger_border_white;
+            this.btn_delete.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_delete.FlatAppearance.BorderSize = 0;
+            this.btn_delete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_delete.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_delete.ForeColor = System.Drawing.Color.White;
+            this.btn_delete.Location = new System.Drawing.Point(639, 29);
+            this.btn_delete.Name = "btn_delete";
+            this.btn_delete.Size = new System.Drawing.Size(40, 40);
+            this.btn_delete.TabIndex = 7;
+            this.btn_delete.TabStop = false;
+            this.toolTip1.SetToolTip(this.btn_delete, "Delete Card");
+            this.btn_delete.UseVisualStyleBackColor = false;
+            this.btn_delete.Click += new System.EventHandler(this.Btn_delete_Click);
+            // 
+            // btn_editSynonymsBack
+            // 
+            this.btn_editSynonymsBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_editSynonymsBack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.btn_editSynonymsBack.BackgroundImage = global::SteelQuiz.Properties.Resources.edit_synonyms_bigger_border_white;
+            this.btn_editSynonymsBack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_editSynonymsBack.FlatAppearance.BorderSize = 0;
+            this.btn_editSynonymsBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_editSynonymsBack.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_editSynonymsBack.ForeColor = System.Drawing.Color.White;
+            this.btn_editSynonymsBack.Location = new System.Drawing.Point(685, 29);
+            this.btn_editSynonymsBack.Name = "btn_editSynonymsBack";
+            this.btn_editSynonymsBack.Size = new System.Drawing.Size(40, 40);
+            this.btn_editSynonymsBack.TabIndex = 6;
+            this.btn_editSynonymsBack.TabStop = false;
+            this.toolTip1.SetToolTip(this.btn_editSynonymsBack, "Edit Synonyms for Card Back");
+            this.btn_editSynonymsBack.UseVisualStyleBackColor = false;
+            this.btn_editSynonymsBack.Click += new System.EventHandler(this.btn_editSynonymsBack_Click);
+            // 
+            // btn_editSynonymsFront
+            // 
+            this.btn_editSynonymsFront.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.btn_editSynonymsFront.BackgroundImage = global::SteelQuiz.Properties.Resources.edit_synonyms_bigger_border_white;
+            this.btn_editSynonymsFront.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_editSynonymsFront.FlatAppearance.BorderSize = 0;
+            this.btn_editSynonymsFront.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_editSynonymsFront.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_editSynonymsFront.ForeColor = System.Drawing.Color.White;
+            this.btn_editSynonymsFront.Location = new System.Drawing.Point(25, 29);
+            this.btn_editSynonymsFront.Name = "btn_editSynonymsFront";
+            this.btn_editSynonymsFront.Size = new System.Drawing.Size(40, 40);
+            this.btn_editSynonymsFront.TabIndex = 4;
+            this.btn_editSynonymsFront.TabStop = false;
+            this.toolTip1.SetToolTip(this.btn_editSynonymsFront, "Edit Synonyms for Card Front");
+            this.btn_editSynonymsFront.UseVisualStyleBackColor = false;
+            this.btn_editSynonymsFront.Click += new System.EventHandler(this.btn_editSynonymsFront_Click);
             // 
             // QuizEditorCard
             // 
@@ -257,5 +265,6 @@ namespace SteelQuiz.QuizEditor
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btn_smartCompSettings;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

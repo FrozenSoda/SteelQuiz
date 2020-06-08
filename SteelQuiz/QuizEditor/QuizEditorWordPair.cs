@@ -107,10 +107,16 @@ namespace SteelQuiz.QuizEditor
             if (ConfigManager.Config.Theme == ThemeManager.ThemeCore.Theme.Dark)
             {
                 btn_smartCompSettings.BackgroundImage = CachedResourceManager.LoadResource<Bitmap>("gear_1077563_white_with_bigger_border_512x512");
+                btn_delete.BackgroundImage = CachedResourceManager.LoadResource<Bitmap>("bin_bigger_border_white");
+                btn_editSynonymsFront.BackgroundImage = CachedResourceManager.LoadResource<Bitmap>("edit_synonyms_bigger_border_white");
+                btn_editSynonymsBack.BackgroundImage = CachedResourceManager.LoadResource<Bitmap>("edit_synonyms_bigger_border_white");
             }
             else
             {
                 btn_smartCompSettings.BackgroundImage = CachedResourceManager.LoadResource<Bitmap>("gear_1077563_black_with_bigger_border_512x512");
+                btn_delete.BackgroundImage = CachedResourceManager.LoadResource<Bitmap>("bin_bigger_border_black");
+                btn_editSynonymsFront.BackgroundImage = CachedResourceManager.LoadResource<Bitmap>("edit_synonyms_bigger_border_black");
+                btn_editSynonymsBack.BackgroundImage = CachedResourceManager.LoadResource<Bitmap>("edit_synonyms_bigger_border_black");
             }
 
             lbl_ansCompRules.ForeColor = theme.GetBackgroundLabelForeColor();
