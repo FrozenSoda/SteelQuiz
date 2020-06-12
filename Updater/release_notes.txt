@@ -1,5 +1,5 @@
 v5.0.0 beta 2 (5.0.0.35):
-**WARNING! Upgrading to this version from earlier versions will reset your quiz progress data and some preferences, due to updated file formats. A conversion process has yet to be implemented, and automatic updates to this version are disabled.**
+**WARNING! Upgrading to this version from earlier versions will reset your quiz progress data and some preferences, due to updated file formats. A conversion process has yet to be implemented, and automatic updates to this version are disabled. Quiz files created/loaded with/by this version cannot be loaded by earlier versions of SteelQuiz.**
 
 - New card selector algorithm, which bases the selection more on progress than randomness, than before.
 - Added support for card re-ordering in Editor.
