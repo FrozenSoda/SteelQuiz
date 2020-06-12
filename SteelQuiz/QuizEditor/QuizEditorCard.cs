@@ -340,5 +340,23 @@ namespace SteelQuiz.QuizEditor
             txt_front.Size = new Size(width, txt_front.Size.Height);
             txt_back.Size = new Size(width, txt_back.Size.Height);
         }
+
+        private void btn_moveUp_Click(object sender, EventArgs e)
+        {
+            int newIndex = QuizEditor.flp_cards.Controls.GetChildIndex(this) - 1;
+            if (newIndex >= 0)
+            {
+                QuizEditor.flp_cards.Controls.SetChildIndex(this, newIndex);
+            }
+        }
+
+        private void btn_moveDown_Click(object sender, EventArgs e)
+        {
+            int newIndex = QuizEditor.flp_cards.Controls.GetChildIndex(this) + 1;
+            if (newIndex < QuizEditor.flp_cards.Controls.Count)
+            {
+                QuizEditor.flp_cards.Controls.SetChildIndex(this, newIndex);
+            }
+        }
     }
 }

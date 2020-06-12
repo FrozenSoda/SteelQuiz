@@ -248,6 +248,7 @@ namespace SteelQuiz.QuizEditor
             this.btn_moveUp.Text = "🡹";
             this.toolTip1.SetToolTip(this.btn_moveUp, "Move upward");
             this.btn_moveUp.UseVisualStyleBackColor = false;
+            this.btn_moveUp.Click += new System.EventHandler(this.btn_moveUp_Click);
             // 
             // btn_moveDown
             // 
@@ -265,6 +266,7 @@ namespace SteelQuiz.QuizEditor
             this.btn_moveDown.Text = "🡻";
             this.toolTip1.SetToolTip(this.btn_moveDown, "Move downward");
             this.btn_moveDown.UseVisualStyleBackColor = false;
+            this.btn_moveDown.Click += new System.EventHandler(this.btn_moveDown_Click);
             // 
             // button1
             // 
