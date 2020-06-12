@@ -379,25 +379,25 @@
     <Compile Include="QuizPractise\EditWordSynonyms.Designer.cs">
       <DependentUpon>EditWordSynonyms.cs</DependentUpon>
     </Compile>
-    <Compile Include="QuizPractise\InQuiz.cs">
+    <Compile Include="QuizPractise\QuizPractise.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="QuizPractise\InQuiz.Designer.cs">
-      <DependentUpon>InQuiz.cs</DependentUpon>
+    <Compile Include="QuizPractise\QuizPractise.Designer.cs">
+      <DependentUpon>QuizPractise.cs</DependentUpon>
     </Compile>
     <Compile Include="MetaData.cs" />
-    <Compile Include="QuizPractise\QuestionSelector.cs" />
+    <Compile Include="QuizPractise\CardPicker.cs" />
     <Compile Include="QuizEditor\QuizEditor.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="QuizEditor\QuizEditor.Designer.cs">
       <DependentUpon>QuizEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="QuizEditor\QuizEditorWordPair.cs">
+    <Compile Include="QuizEditor\QuizEditorCard.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="QuizEditor\QuizEditorWordPair.Designer.cs">
-      <DependentUpon>QuizEditorWordPair.cs</DependentUpon>
+    <Compile Include="QuizEditor\QuizEditorCard.Designer.cs">
+      <DependentUpon>QuizEditorCard.cs</DependentUpon>
     </Compile>
     <Compile Include="QuizEditor\UndoRedo\OwnerControlData.cs" />
     <Compile Include="QuizImport\QuizImporter.cs" />
@@ -455,11 +455,11 @@
     <Compile Include="Updater.cs" />
     <Compile Include="Util\Display.cs" />
     <Compile Include="Util\WinVer.cs" />
-    <Compile Include="Welcome.cs">
+    <Compile Include="Dashboard.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Welcome.Designer.cs">
-      <DependentUpon>Welcome.cs</DependentUpon>
+    <Compile Include="Dashboard.Designer.cs">
+      <DependentUpon>Dashboard.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -593,8 +593,8 @@
     <EmbeddedResource Include="QuizPractise\EditWordSynonyms.resx">
       <DependentUpon>EditWordSynonyms.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="QuizPractise\InQuiz.resx">
-      <DependentUpon>InQuiz.cs</DependentUpon>
+    <EmbeddedResource Include="QuizPractise\QuizPractise.resx">
+      <DependentUpon>QuizPractise.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuizEditor\EditCardSynonyms.resx">
       <DependentUpon>EditCardSynonyms.cs</DependentUpon>
@@ -602,8 +602,8 @@
     <EmbeddedResource Include="QuizEditor\QuizEditor.resx">
       <DependentUpon>QuizEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="QuizEditor\QuizEditorWordPair.resx">
-      <DependentUpon>QuizEditorWordPair.cs</DependentUpon>
+    <EmbeddedResource Include="QuizEditor\QuizEditorCard.resx">
+      <DependentUpon>QuizEditorCard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuizEditor\QuizRecovery.resx">
       <DependentUpon>QuizRecovery.cs</DependentUpon>
@@ -620,8 +620,8 @@
     <EmbeddedResource Include="UpgradeWelcome.resx">
       <DependentUpon>UpgradeWelcome.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Welcome.resx">
-      <DependentUpon>Welcome.cs</DependentUpon>
+    <EmbeddedResource Include="Dashboard.resx">
+      <DependentUpon>Dashboard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
