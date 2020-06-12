@@ -90,7 +90,7 @@ namespace SteelQuiz.QuizEditor
                               Program.frmWelcome.Location.Y + (Program.frmWelcome.Size.Height / 2) - (this.Size.Height / 2)
                             );
 
-            AddWordPair(EMPTY_WORD_PAIRS_COUNT);
+            AddCard(EMPTY_WORD_PAIRS_COUNT);
             QuizRecoveryData = new QuizRecoveryData(QuizPath);
             if (chkRecovery)
             {
@@ -121,7 +121,7 @@ namespace SteelQuiz.QuizEditor
             }
         }
 
-        public void AddWordPair(int count = 1)
+        public void AddCard(int count = 1)
         {
             for (int i = 0; i < count; ++i)
             {
@@ -137,43 +137,54 @@ namespace SteelQuiz.QuizEditor
             return wordNumber > 0 ? flp_cards.Controls[wordNumber - 1] as QuizEditorCard : null;
         }
 
-        public void RemoveQuizEditorWord()
+        public void RemoveCard()
         {
             flp_cards.Controls[flp_cards.Controls.Count - 1].Dispose();
         }
 
         public void CheckFixEmptyCards()
         {
-            // two empty word pairs should always be present
-            var wps = flp_cards.Controls.OfType<QuizEditorCard>();
-            int emptyCount = wps.Where(x => QuizEditorCardEmpty(x)).Count();
-            while (emptyCount > EMPTY_WORD_PAIRS_COUNT && QuizEditorCardEmpty(wps.ElementAt(wps.Count() - 1)))
+            // two empty cards in the end should always be present
+            var cards = flp_cards.Controls.OfType<QuizEditorCard>();
+            int emptyCount = 0;
+            for (int i = cards.Count() - 1; i >= 0; --i)
             {
-                RemoveQuizEditorWord();
-                emptyCount = wps.Where(x => QuizEditorCardEmpty(x)).Count();
+                if (CardEmpty(cards.ElementAt(i)))
+                {
+                    ++emptyCount;
+                } 
+                else
+                {
+                    break;
+                }
             }
-            while (emptyCount < EMPTY_WORD_PAIRS_COUNT)
+
+            for (int i = 0; i < EMPTY_WORD_PAIRS_COUNT - emptyCount; ++i)
             {
-                AddWordPair();
-                emptyCount = wps.Where(x => QuizEditorCardEmpty(x)).Count();
+                AddCard();
+            }
+
+            for (int i = 0; i < emptyCount - EMPTY_WORD_PAIRS_COUNT; ++i)
+            {
+                RemoveCard();
             }
         }
 
-        private bool QuizEditorCardEmpty(QuizEditorCard qec)
+        private bool CardEmpty(QuizEditorCard qec)
         {
             return qec != null ?
                 qec.txt_front.Text == "" && qec.FrontSynonyms.IsNullOrEmpty() && qec.txt_back.Text == "" && qec.BackSynonyms.IsNullOrEmpty()
                 : false;
         }
 
-        private void SetWordPairs(int count)
+        private void SetCards(int count)
         {
             UndoStack.Clear();
             RedoStack.Clear();
 
             flp_cards.Controls.Clear();
 
-            AddWordPair(count);
+            AddCard(count);
         }
 
         private Quiz ConstructQuiz()
@@ -183,7 +194,7 @@ namespace SteelQuiz.QuizEditor
             quiz.GUID = QuizGuid;
 
             ulong i = 0;
-            foreach (var cardControl in flp_cards.Controls.OfType<QuizEditorCard>().Where(x => !QuizEditorCardEmpty(x)))
+            foreach (var cardControl in flp_cards.Controls.OfType<QuizEditorCard>().Where(x => !CardEmpty(x)))
             {
                 cardControl.RemoveSynonymsEqualToWords();
 
@@ -255,7 +266,7 @@ namespace SteelQuiz.QuizEditor
 
             UpdateUndoRedoStacks = false;
 
-            SetWordPairs(quiz.Cards.Count + 2);
+            SetCards(quiz.Cards.Count + 2);
 
             QuizGuid = quiz.GUID;
             cmb_lang1.Text = quiz.CardFrontType;
