@@ -598,11 +598,11 @@ namespace SteelQuiz
 
             if (AddQuizButtonsExpanded)
             {
-                btn_addQuiz.Text = "←";
+                btn_addQuiz.Text = "▼";
             }
             else
             {
-                btn_addQuiz.Text = "+";
+                btn_addQuiz.Text = "▲";
             }
 
             SkipAddQuizButtonsExpandedAnimation = false;

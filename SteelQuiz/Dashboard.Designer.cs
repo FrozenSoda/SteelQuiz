@@ -92,13 +92,13 @@ namespace SteelQuiz
             this.btn_addQuiz.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.btn_addQuiz.FlatAppearance.BorderSize = 0;
             this.btn_addQuiz.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_addQuiz.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_addQuiz.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_addQuiz.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.btn_addQuiz.Location = new System.Drawing.Point(10, 539);
             this.btn_addQuiz.Name = "btn_addQuiz";
             this.btn_addQuiz.Size = new System.Drawing.Size(173, 45);
             this.btn_addQuiz.TabIndex = 1;
-            this.btn_addQuiz.Text = "+";
+            this.btn_addQuiz.Text = "▲";
             this.btn_addQuiz.UseVisualStyleBackColor = false;
             this.btn_addQuiz.Click += new System.EventHandler(this.Btn_addQuiz_Click);
             // 
@@ -163,11 +163,11 @@ namespace SteelQuiz
             this.flp_lastQuizzes.Size = new System.Drawing.Size(196, 477);
             this.flp_lastQuizzes.TabIndex = 8;
             // 
-            // pnl_quizInfo
+            // pnl_quizOverview
             // 
             this.pnl_quizOverview.Controls.Add(this.pnl_welcome);
             this.pnl_quizOverview.Location = new System.Drawing.Point(202, 12);
-            this.pnl_quizOverview.Name = "pnl_quizInfo";
+            this.pnl_quizOverview.Name = "pnl_quizOverview";
             this.pnl_quizOverview.Size = new System.Drawing.Size(730, 572);
             this.pnl_quizOverview.TabIndex = 9;
             // 
@@ -197,8 +197,8 @@ namespace SteelQuiz
             this.lbl_toBegin.Name = "lbl_toBegin";
             this.lbl_toBegin.Size = new System.Drawing.Size(373, 133);
             this.lbl_toBegin.TabIndex = 1;
-            this.lbl_toBegin.Text = "Select a quiz in the Recent Quizzes list, or add one by clicking the plus button " +
-    "in the bottom left corner.";
+            this.lbl_toBegin.Text = "Select a quiz in the Recent Quizzes list, or add one by clicking the triangle arr" +
+    "ow button in the bottom left corner.";
             this.lbl_toBegin.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // btn_loadQuizFromFile
