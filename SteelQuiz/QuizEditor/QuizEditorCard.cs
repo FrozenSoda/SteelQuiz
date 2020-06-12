@@ -348,6 +348,7 @@ namespace SteelQuiz.QuizEditor
             {
                 QuizEditor.flp_cards.Controls.SetChildIndex(this, newIndex);
                 QuizEditor.ChangedSinceLastSave = true;
+                QuizEditor.ChkFixWordsCount();
             }
         }
 
@@ -358,6 +359,7 @@ namespace SteelQuiz.QuizEditor
             {
                 QuizEditor.flp_cards.Controls.SetChildIndex(this, newIndex);
                 QuizEditor.ChangedSinceLastSave = true;
+                QuizEditor.ChkFixWordsCount();
             }
         }
 
@@ -368,6 +370,7 @@ namespace SteelQuiz.QuizEditor
             {
                 QuizEditor.flp_cards.Controls.SetChildIndex(this, prompt.NewIndex);
                 QuizEditor.ChangedSinceLastSave = true;
+                QuizEditor.ChkFixWordsCount();
             }
         }
     }
