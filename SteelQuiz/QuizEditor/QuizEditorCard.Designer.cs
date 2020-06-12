@@ -59,6 +59,9 @@ namespace SteelQuiz.QuizEditor
             this.btn_editSynonymsBack = new System.Windows.Forms.Button();
             this.btn_editSynonymsFront = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btn_moveUp = new System.Windows.Forms.Button();
+            this.btn_moveDown = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.pnl_translationRules.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -183,7 +186,7 @@ namespace SteelQuiz.QuizEditor
             this.btn_delete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_delete.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_delete.ForeColor = System.Drawing.Color.White;
-            this.btn_delete.Location = new System.Drawing.Point(639, 29);
+            this.btn_delete.Location = new System.Drawing.Point(639, 31);
             this.btn_delete.Name = "btn_delete";
             this.btn_delete.Size = new System.Drawing.Size(40, 40);
             this.btn_delete.TabIndex = 7;
@@ -202,7 +205,7 @@ namespace SteelQuiz.QuizEditor
             this.btn_editSynonymsBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_editSynonymsBack.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_editSynonymsBack.ForeColor = System.Drawing.Color.White;
-            this.btn_editSynonymsBack.Location = new System.Drawing.Point(685, 29);
+            this.btn_editSynonymsBack.Location = new System.Drawing.Point(685, 31);
             this.btn_editSynonymsBack.Name = "btn_editSynonymsBack";
             this.btn_editSynonymsBack.Size = new System.Drawing.Size(40, 40);
             this.btn_editSynonymsBack.TabIndex = 6;
@@ -220,7 +223,7 @@ namespace SteelQuiz.QuizEditor
             this.btn_editSynonymsFront.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_editSynonymsFront.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_editSynonymsFront.ForeColor = System.Drawing.Color.White;
-            this.btn_editSynonymsFront.Location = new System.Drawing.Point(25, 29);
+            this.btn_editSynonymsFront.Location = new System.Drawing.Point(25, 31);
             this.btn_editSynonymsFront.Name = "btn_editSynonymsFront";
             this.btn_editSynonymsFront.Size = new System.Drawing.Size(40, 40);
             this.btn_editSynonymsFront.TabIndex = 4;
@@ -229,11 +232,65 @@ namespace SteelQuiz.QuizEditor
             this.btn_editSynonymsFront.UseVisualStyleBackColor = false;
             this.btn_editSynonymsFront.Click += new System.EventHandler(this.btn_editSynonymsFront_Click);
             // 
+            // btn_moveUp
+            // 
+            this.btn_moveUp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.btn_moveUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_moveUp.FlatAppearance.BorderSize = 0;
+            this.btn_moveUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_moveUp.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_moveUp.ForeColor = System.Drawing.Color.White;
+            this.btn_moveUp.Location = new System.Drawing.Point(522, 31);
+            this.btn_moveUp.Name = "btn_moveUp";
+            this.btn_moveUp.Size = new System.Drawing.Size(40, 40);
+            this.btn_moveUp.TabIndex = 10;
+            this.btn_moveUp.TabStop = false;
+            this.btn_moveUp.Text = "🡹";
+            this.toolTip1.SetToolTip(this.btn_moveUp, "Move upward");
+            this.btn_moveUp.UseVisualStyleBackColor = false;
+            // 
+            // btn_moveDown
+            // 
+            this.btn_moveDown.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.btn_moveDown.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_moveDown.FlatAppearance.BorderSize = 0;
+            this.btn_moveDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_moveDown.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_moveDown.ForeColor = System.Drawing.Color.White;
+            this.btn_moveDown.Location = new System.Drawing.Point(171, 31);
+            this.btn_moveDown.Name = "btn_moveDown";
+            this.btn_moveDown.Size = new System.Drawing.Size(40, 40);
+            this.btn_moveDown.TabIndex = 11;
+            this.btn_moveDown.TabStop = false;
+            this.btn_moveDown.Text = "🡻";
+            this.toolTip1.SetToolTip(this.btn_moveDown, "Move downward");
+            this.btn_moveDown.UseVisualStyleBackColor = false;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(125, 31);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(40, 40);
+            this.button1.TabIndex = 12;
+            this.button1.TabStop = false;
+            this.button1.Text = "➽";
+            this.toolTip1.SetToolTip(this.button1, "Move to position");
+            this.button1.UseVisualStyleBackColor = false;
+            // 
             // QuizEditorCard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btn_moveDown);
+            this.Controls.Add(this.btn_moveUp);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_delete);
@@ -266,5 +323,8 @@ namespace SteelQuiz.QuizEditor
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btn_smartCompSettings;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button btn_moveUp;
+        private System.Windows.Forms.Button btn_moveDown;
+        private System.Windows.Forms.Button button1;
     }
 }
