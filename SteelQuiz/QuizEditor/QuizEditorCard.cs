@@ -358,5 +358,14 @@ namespace SteelQuiz.QuizEditor
                 QuizEditor.flp_cards.Controls.SetChildIndex(this, newIndex);
             }
         }
+
+        private void btn_moveTo_Click(object sender, EventArgs e)
+        {
+            var prompt = new QuizEditorCardMoveTo(QuizEditor.flp_cards.Controls.GetChildIndex(this), QuizEditor.flp_cards.Controls.Count - 1);
+            if (prompt.ShowDialog() == DialogResult.OK)
+            {
+                QuizEditor.flp_cards.Controls.SetChildIndex(this, prompt.NewIndex);
+            }
+        }
     }
 }
