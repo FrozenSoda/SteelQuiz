@@ -1,8 +1,22 @@
+v5.0.0 beta 2 (5.0.0.35):
+**WARNING! Upgrading to this version from earlier versions will reset your quiz progress data and some preferences, due to updated file formats. A conversion process has yet to be implemented, and automatic updates to this version are disabled.**
+
+- New card selector algorithm, which bases the selection more on progress than randomness, than before.
+- Added support for card re-ordering in Editor.
+
+- New file formats for quizzes, quiz progress data and configuration.
+- UI improvements in Editor.
+- Re-wrote large portions of the code.
+
+- Fixed confusing terminology within the application.
+- Bug fixes and improvements.
+
+
 v5.0.0 beta 1 (5.0.0.14):
-- Implemented support for global quiz storage - quizzes must no longer be stored in specific quiz folders.
-- Implemented support for drag and dropping quiz files to load them.
-- Implemented support for file associations - you can now double click quiz files to load them!
-- Implemented an option to clear all entries in the Recent Quizzes list.
+- Global quiz storage - quizzes must no longer be stored in specific quiz folders.
+- Support for drag and dropping quiz files to load them.
+- Support for file associations - you can now double click quiz files to load them!
+- Option to clear all entries in the Recent Quizzes list.
 
 - Implemented better control over save path when importing quizzes.
 - Improved window titles to contain more relevant information.

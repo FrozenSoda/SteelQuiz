@@ -260,7 +260,7 @@ namespace SteelQuiz
             this.lbl_recentQuizzes.Name = "lbl_recentQuizzes";
             this.lbl_recentQuizzes.Size = new System.Drawing.Size(170, 43);
             this.lbl_recentQuizzes.TabIndex = 13;
-            this.lbl_recentQuizzes.Text = "Recent Quizzes";
+            this.lbl_recentQuizzes.Text = "Recent";
             this.lbl_recentQuizzes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // cms_recentQuizzes
