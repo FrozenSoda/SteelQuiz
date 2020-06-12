@@ -142,7 +142,7 @@ namespace SteelQuiz.QuizEditor.UndoRedo
             return () =>
             {
                 quizEditor.flp_cards.Controls.Remove(wordPair);
-                quizEditor.ChkFixWordsCount();
+                quizEditor.CheckFixEmptyCards();
             };
         }
 
@@ -152,7 +152,7 @@ namespace SteelQuiz.QuizEditor.UndoRedo
             {
                 quizEditor.flp_cards.Controls.Add(wordPair);
                 quizEditor.flp_cards.Controls.SetChildIndex(wordPair, index);
-                quizEditor.ChkFixWordsCount();
+                quizEditor.CheckFixEmptyCards();
             };
         }
 

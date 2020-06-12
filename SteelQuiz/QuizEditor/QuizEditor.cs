@@ -142,7 +142,7 @@ namespace SteelQuiz.QuizEditor
             flp_cards.Controls[flp_cards.Controls.Count - 1].Dispose();
         }
 
-        public void ChkFixWordsCount()
+        public void CheckFixEmptyCards()
         {
             // two empty word pairs should always be present
             var wps = flp_cards.Controls.OfType<QuizEditorCard>();

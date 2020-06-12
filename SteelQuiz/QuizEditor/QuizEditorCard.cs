@@ -147,7 +147,7 @@ namespace SteelQuiz.QuizEditor
             if (EditCardSynonyms.ShowDialog() == DialogResult.OK)
             {
                 FrontSynonyms = EditCardSynonyms.Synonyms;
-                QuizEditor.ChkFixWordsCount();
+                QuizEditor.CheckFixEmptyCards();
             }
             DisposeEditWordSynonyms();
         }
@@ -158,7 +158,7 @@ namespace SteelQuiz.QuizEditor
             if (EditCardSynonyms.ShowDialog() == DialogResult.OK)
             {
                 BackSynonyms = EditCardSynonyms.Synonyms;
-                QuizEditor.ChkFixWordsCount();
+                QuizEditor.CheckFixEmptyCards();
             }
             DisposeEditWordSynonyms();
         }
@@ -167,7 +167,7 @@ namespace SteelQuiz.QuizEditor
 
         private void txt_front_TextChanged(object sender, EventArgs e)
         {
-            QuizEditor.ChkFixWordsCount();
+            QuizEditor.CheckFixEmptyCards();
 
             if (ignore_txt_cardSide_change)
             {
@@ -194,7 +194,7 @@ namespace SteelQuiz.QuizEditor
 
         private void txt_back_TextChanged(object sender, EventArgs e)
         {
-            QuizEditor.ChkFixWordsCount();
+            QuizEditor.CheckFixEmptyCards();
 
             if (ignore_txt_cardSide_change)
             {
@@ -219,12 +219,12 @@ namespace SteelQuiz.QuizEditor
 
         private void txt_cardSide_Click(object sender, EventArgs e)
         {
-            QuizEditor.ChkFixWordsCount();
+            QuizEditor.CheckFixEmptyCards();
         }
 
         private void txt_front_Enter(object sender, EventArgs e)
         {
-            QuizEditor.ChkFixWordsCount();
+            QuizEditor.CheckFixEmptyCards();
         }
 
         private void Btn_delete_Click(object sender, EventArgs e)
@@ -240,7 +240,7 @@ namespace SteelQuiz.QuizEditor
             }
             QuizEditor.UpdateUndoRedoTooltips();
             QuizEditor.flp_cards.Controls.Remove(this);
-            QuizEditor.ChkFixWordsCount();
+            QuizEditor.CheckFixEmptyCards();
             QuizEditor.ChangedSinceLastSave = true;
         }
 
@@ -348,7 +348,7 @@ namespace SteelQuiz.QuizEditor
             {
                 QuizEditor.flp_cards.Controls.SetChildIndex(this, newIndex);
                 QuizEditor.ChangedSinceLastSave = true;
-                QuizEditor.ChkFixWordsCount();
+                QuizEditor.CheckFixEmptyCards();
             }
         }
 
@@ -359,7 +359,7 @@ namespace SteelQuiz.QuizEditor
             {
                 QuizEditor.flp_cards.Controls.SetChildIndex(this, newIndex);
                 QuizEditor.ChangedSinceLastSave = true;
-                QuizEditor.ChkFixWordsCount();
+                QuizEditor.CheckFixEmptyCards();
             }
         }
 
@@ -370,7 +370,7 @@ namespace SteelQuiz.QuizEditor
             {
                 QuizEditor.flp_cards.Controls.SetChildIndex(this, prompt.NewIndex);
                 QuizEditor.ChangedSinceLastSave = true;
-                QuizEditor.ChkFixWordsCount();
+                QuizEditor.CheckFixEmptyCards();
             }
         }
     }
