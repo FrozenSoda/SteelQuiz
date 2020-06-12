@@ -234,13 +234,14 @@ namespace SteelQuiz.QuizEditor
             // 
             // btn_moveUp
             // 
+            this.btn_moveUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_moveUp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
             this.btn_moveUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btn_moveUp.FlatAppearance.BorderSize = 0;
             this.btn_moveUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_moveUp.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_moveUp.ForeColor = System.Drawing.Color.White;
-            this.btn_moveUp.Location = new System.Drawing.Point(522, 31);
+            this.btn_moveUp.Location = new System.Drawing.Point(593, 31);
             this.btn_moveUp.Name = "btn_moveUp";
             this.btn_moveUp.Size = new System.Drawing.Size(40, 40);
             this.btn_moveUp.TabIndex = 10;
@@ -258,7 +259,7 @@ namespace SteelQuiz.QuizEditor
             this.btn_moveDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_moveDown.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_moveDown.ForeColor = System.Drawing.Color.White;
-            this.btn_moveDown.Location = new System.Drawing.Point(171, 31);
+            this.btn_moveDown.Location = new System.Drawing.Point(117, 31);
             this.btn_moveDown.Name = "btn_moveDown";
             this.btn_moveDown.Size = new System.Drawing.Size(40, 40);
             this.btn_moveDown.TabIndex = 11;
@@ -276,7 +277,7 @@ namespace SteelQuiz.QuizEditor
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(125, 31);
+            this.button1.Location = new System.Drawing.Point(71, 31);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(40, 40);
             this.button1.TabIndex = 12;
