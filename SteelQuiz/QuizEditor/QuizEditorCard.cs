@@ -347,6 +347,7 @@ namespace SteelQuiz.QuizEditor
             if (newIndex >= 0)
             {
                 QuizEditor.flp_cards.Controls.SetChildIndex(this, newIndex);
+                QuizEditor.ChangedSinceLastSave = true;
             }
         }
 
@@ -356,6 +357,7 @@ namespace SteelQuiz.QuizEditor
             if (newIndex < QuizEditor.flp_cards.Controls.Count)
             {
                 QuizEditor.flp_cards.Controls.SetChildIndex(this, newIndex);
+                QuizEditor.ChangedSinceLastSave = true;
             }
         }
 
@@ -365,6 +367,7 @@ namespace SteelQuiz.QuizEditor
             if (prompt.ShowDialog() == DialogResult.OK)
             {
                 QuizEditor.flp_cards.Controls.SetChildIndex(this, prompt.NewIndex);
+                QuizEditor.ChangedSinceLastSave = true;
             }
         }
     }
