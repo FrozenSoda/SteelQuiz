@@ -66,6 +66,8 @@
             // 
             // nud_newIndex
             // 
+            this.nud_newIndex.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.nud_newIndex.ForeColor = System.Drawing.Color.White;
             this.nud_newIndex.Location = new System.Drawing.Point(110, 33);
             this.nud_newIndex.Name = "nud_newIndex";
             this.nud_newIndex.Size = new System.Drawing.Size(194, 25);
@@ -73,29 +75,36 @@
             // 
             // btn_move
             // 
+            this.btn_move.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.btn_move.FlatAppearance.BorderSize = 0;
+            this.btn_move.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_move.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_move.Location = new System.Drawing.Point(196, 72);
             this.btn_move.Name = "btn_move";
             this.btn_move.Size = new System.Drawing.Size(108, 30);
             this.btn_move.TabIndex = 4;
             this.btn_move.Text = "Move";
-            this.btn_move.UseVisualStyleBackColor = true;
+            this.btn_move.UseVisualStyleBackColor = false;
             this.btn_move.Click += new System.EventHandler(this.btn_move_Click);
             // 
             // btn_cancel
             // 
+            this.btn_cancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.btn_cancel.FlatAppearance.BorderSize = 0;
+            this.btn_cancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_cancel.Location = new System.Drawing.Point(12, 72);
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(75, 30);
             this.btn_cancel.TabIndex = 5;
             this.btn_cancel.Text = "Cancel";
-            this.btn_cancel.UseVisualStyleBackColor = true;
+            this.btn_cancel.UseVisualStyleBackColor = false;
             this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
             // 
             // QuizEditorCardMoveTo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.ClientSize = new System.Drawing.Size(316, 114);
             this.Controls.Add(this.btn_cancel);
             this.Controls.Add(this.btn_move);
@@ -104,6 +113,7 @@
             this.Controls.Add(this.lbl_currentIndex);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "QuizEditorCardMoveTo";

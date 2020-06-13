@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace SteelQuiz.QuizEditor
 {
-    public partial class QuizEditorCardMoveTo : Form
+    public partial class QuizEditorCardMoveTo : AutoThemeableForm
     {
         public int NewIndex => (int)nud_newIndex.Value;
 
@@ -21,6 +21,8 @@ namespace SteelQuiz.QuizEditor
             lbl_currentIndex.Text = currentIndex.ToString();
             nud_newIndex.Minimum = 0;
             nud_newIndex.Maximum = maxIndex;
+
+            SetTheme();
         }
 
         private void btn_cancel_Click(object sender, EventArgs e)
