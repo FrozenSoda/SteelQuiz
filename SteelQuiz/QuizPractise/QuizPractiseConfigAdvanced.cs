@@ -73,6 +73,7 @@ namespace SteelQuiz.QuizPractise
                 {
                     CardPicker.NewRound(Quiz);
                     Program.frmInQuiz.SetCard();
+                    QuizCore.SaveQuizProgress(Quiz);
                 }
             }
         }
@@ -87,6 +88,7 @@ namespace SteelQuiz.QuizPractise
                 {
                     CardPicker.NewRound(Quiz);
                     Program.frmInQuiz.SetCard();
+                    QuizCore.SaveQuizProgress(Quiz);
                 }
             }
         }
@@ -101,6 +103,7 @@ namespace SteelQuiz.QuizPractise
                 {
                     CardPicker.NewRound(Quiz);
                     Program.frmInQuiz.SetCard();
+                    QuizCore.SaveQuizProgress(Quiz);
                 }
             }
         }
@@ -115,6 +118,7 @@ namespace SteelQuiz.QuizPractise
                 {
                     CardPicker.NewRound(Quiz);
                     Program.frmInQuiz.SetCard();
+                    QuizCore.SaveQuizProgress(Quiz);
                 }
             }
         }
@@ -127,6 +131,7 @@ namespace SteelQuiz.QuizPractise
             {
                 CardPicker.NewRound(Quiz);
                 Program.frmInQuiz.SetCard();
+                QuizCore.SaveQuizProgress(Quiz);
             }
         }
 

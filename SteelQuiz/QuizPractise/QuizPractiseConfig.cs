@@ -56,6 +56,7 @@ namespace SteelQuiz.QuizPractise
         private void Rdo_answerFront_CheckedChanged(object sender, EventArgs e)
         {
             Quiz.ProgressData.AnswerCardSide = rdo_answerFront.Checked ? QuizProgressData.CardSide.Front : QuizProgressData.CardSide.Back;
+
             CardPicker.NewRound(Quiz);
             Program.frmInQuiz.SetCard();
             QuizCore.SaveQuizProgress(Quiz);
@@ -64,6 +65,7 @@ namespace SteelQuiz.QuizPractise
         private void Chk_intelligentLearning_CheckedChanged(object sender, EventArgs e)
         {
             Quiz.ProgressData.FullTestInProgress = !chk_intelligentLearning.Checked;
+
             CardPicker.NewRound(Quiz);
             Program.frmInQuiz.SetCard();
             QuizCore.SaveQuizProgress(Quiz);
@@ -81,6 +83,7 @@ namespace SteelQuiz.QuizPractise
 
             CardPicker.NewRound(Quiz);
             Program.frmInQuiz.SetCard();
+            QuizCore.SaveQuizProgress(Quiz);
         }
 
         private void btn_close_Click(object sender, EventArgs e)
