@@ -55,6 +55,7 @@ namespace SteelQuiz.QuizPractise
             this.panel1 = new System.Windows.Forms.Panel();
             this.chk_intelligentLearning = new System.Windows.Forms.CheckBox();
             this.btn_close = new System.Windows.Forms.Button();
+            this.llb_helpIntelligentLearning = new System.Windows.Forms.LinkLabel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -155,12 +156,25 @@ namespace SteelQuiz.QuizPractise
             this.btn_close.UseVisualStyleBackColor = false;
             this.btn_close.Click += new System.EventHandler(this.btn_close_Click);
             // 
+            // llb_helpIntelligentLearning
+            // 
+            this.llb_helpIntelligentLearning.AutoSize = true;
+            this.llb_helpIntelligentLearning.LinkColor = System.Drawing.Color.Aqua;
+            this.llb_helpIntelligentLearning.Location = new System.Drawing.Point(183, 140);
+            this.llb_helpIntelligentLearning.Name = "llb_helpIntelligentLearning";
+            this.llb_helpIntelligentLearning.Size = new System.Drawing.Size(72, 13);
+            this.llb_helpIntelligentLearning.TabIndex = 23;
+            this.llb_helpIntelligentLearning.TabStop = true;
+            this.llb_helpIntelligentLearning.Text = "What\'s that?";
+            this.llb_helpIntelligentLearning.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llb_helpIntelligentLearning_LinkClicked);
+            // 
             // QuizPractiseConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(427, 314);
+            this.Controls.Add(this.llb_helpIntelligentLearning);
             this.Controls.Add(this.btn_close);
             this.Controls.Add(this.chk_intelligentLearning);
             this.Controls.Add(this.panel1);
@@ -192,5 +206,6 @@ namespace SteelQuiz.QuizPractise
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.CheckBox chk_intelligentLearning;
         private System.Windows.Forms.Button btn_close;
+        private System.Windows.Forms.LinkLabel llb_helpIntelligentLearning;
     }
 }
