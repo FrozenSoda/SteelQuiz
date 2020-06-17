@@ -91,7 +91,9 @@ namespace SteelQuiz.QuizPractise
         private void llb_helpIntelligentLearning_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             MessageBox.Show("With Intelligent Learning enabled, SteelQuiz will prioritize cards that you haven't learned yet when asking for answers." +
-                "\r\n\r\nWith it disabled, answers to all cards will be asked for.", "What's Intelligent Learning? - SteelQuiz", MessageBoxButtons.OK,
+                "\r\n\r\nWith it disabled, answers to all cards will be asked for.\r\n\r\nIt's a good idea to disable Intelligent Learning when you have finished" +
+                " the quiz to make sure you have learned every card.",
+                "What's Intelligent Learning?", MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
         }
     }
