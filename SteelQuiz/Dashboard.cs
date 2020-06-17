@@ -52,10 +52,10 @@ namespace SteelQuiz
             new WelcomeMessage(@"Ready for some studying \firstname?",
                 null),
             new WelcomeMessage(@"Welcome \firstname!",
-                null, new Func<bool>(() => { return Program.frmWelcome == null || !Program.frmWelcome.firstWelcomeMsgEvalCompleted; })),
+                null, new Func<bool>(() => { return Program.frmDashboard == null || !Program.frmDashboard.firstWelcomeMsgEvalCompleted; })),
             new WelcomeMessage(@"Welcome back \firstname!",
                 new Func<bool>(() => { return ConfigManager.Config.Statistics.LaunchCount.Data > 1; }),
-                new Func<bool>(() => { return Program.frmWelcome == null || !Program.frmWelcome.firstWelcomeMsgEvalCompleted; })),
+                new Func<bool>(() => { return Program.frmDashboard == null || !Program.frmDashboard.firstWelcomeMsgEvalCompleted; })),
             new WelcomeMessage(@"Good morning \firstname!",
                 new Func<bool>(() => { return DateTime.Now.Hour >= 5 && DateTime.Now.Hour < 12; })),
             new WelcomeMessage(@"Good afternoon \firstname!",
@@ -440,8 +440,8 @@ namespace SteelQuiz
         public void PractiseQuiz(Quiz quiz, QuizPractiseMode quizPractiseMode)
         {
             Hide();
-            Program.frmInQuiz = new QuizPractise.QuizPractise(quiz, quizPractiseMode);
-            Program.frmInQuiz.Show();
+            Program.frmQuizPractise = new QuizPractise.QuizPractise(quiz, quizPractiseMode);
+            Program.frmQuizPractise.Show();
         }
 
         private void Welcome_FormClosing(object sender, FormClosingEventArgs e)

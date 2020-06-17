@@ -93,10 +93,10 @@ namespace SteelQuiz.Preferences
                 SetWin10Theme();
             }
 
-            Program.frmWelcome.SetThemeAll();
+            Program.frmDashboard.SetThemeAll();
             //reshow preferences window, to use new theme
             Program.frmPreferences.DialogResult = DialogResult.OK;
-            Program.frmWelcome.ShowPreferences();
+            Program.frmDashboard.ShowPreferences();
         }
 
         private void Txt_name_TextChanged(object sender, EventArgs e)
@@ -129,7 +129,7 @@ namespace SteelQuiz.Preferences
 
             ConfigManager.Config.ShowNameOnWelcomeScreen = rdo_showNameOnWelcome.Checked;
             ConfigManager.SaveConfig();
-            Program.frmWelcome.UpdateCfg();
+            Program.frmDashboard.UpdateCfg();
         }
 
         private void Txt_name_Leave(object sender, EventArgs e)
@@ -140,7 +140,7 @@ namespace SteelQuiz.Preferences
             }
 
             ConfigManager.SaveConfig();
-            Program.frmWelcome.UpdateCfg();
+            Program.frmDashboard.UpdateCfg();
         }
 
         private void Txt_name_KeyPress(object sender, KeyPressEventArgs e)
@@ -149,7 +149,7 @@ namespace SteelQuiz.Preferences
             {
                 e.Handled = true;
                 ConfigManager.SaveConfig();
-                Program.frmWelcome.UpdateCfg();
+                Program.frmDashboard.UpdateCfg();
             }
         }
 

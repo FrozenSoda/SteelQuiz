@@ -167,9 +167,9 @@ namespace SteelQuiz.Preferences
 
             QuizCore.LoadQuizAccessData();
             // Reload quiz
-            Program.frmWelcome.LoadedQuiz = QuizCore.LoadQuiz(Program.frmWelcome.LoadedQuiz.QuizIdentity.FindQuizPath());
-            Program.frmWelcome.PopulateQuizList();
-            Program.frmWelcome.UpdateQuizOverview();
+            Program.frmDashboard.LoadedQuiz = QuizCore.LoadQuiz(Program.frmDashboard.LoadedQuiz.QuizIdentity.FindQuizPath());
+            Program.frmDashboard.PopulateQuizList();
+            Program.frmDashboard.UpdateQuizOverview();
 
             return true;
         }

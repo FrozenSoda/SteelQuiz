@@ -72,7 +72,7 @@ namespace SteelQuiz.QuizPractise
                 if (!Quiz.ProgressData.FullTestInProgress)
                 {
                     CardPicker.NewRound(Quiz);
-                    Program.frmInQuiz.SetCard();
+                    Program.frmQuizPractise.SetCard();
                     QuizCore.SaveQuizProgress(Quiz);
                 }
             }
@@ -87,7 +87,7 @@ namespace SteelQuiz.QuizPractise
                 if (!Quiz.ProgressData.FullTestInProgress)
                 {
                     CardPicker.NewRound(Quiz);
-                    Program.frmInQuiz.SetCard();
+                    Program.frmQuizPractise.SetCard();
                     QuizCore.SaveQuizProgress(Quiz);
                 }
             }
@@ -102,7 +102,7 @@ namespace SteelQuiz.QuizPractise
                 if (!Quiz.ProgressData.FullTestInProgress)
                 {
                     CardPicker.NewRound(Quiz);
-                    Program.frmInQuiz.SetCard();
+                    Program.frmQuizPractise.SetCard();
                     QuizCore.SaveQuizProgress(Quiz);
                 }
             }
@@ -117,7 +117,7 @@ namespace SteelQuiz.QuizPractise
                 if (!Quiz.ProgressData.FullTestInProgress)
                 {
                     CardPicker.NewRound(Quiz);
-                    Program.frmInQuiz.SetCard();
+                    Program.frmQuizPractise.SetCard();
                     QuizCore.SaveQuizProgress(Quiz);
                 }
             }
@@ -130,7 +130,7 @@ namespace SteelQuiz.QuizPractise
             if (!Quiz.ProgressData.FullTestInProgress)
             {
                 CardPicker.NewRound(Quiz);
-                Program.frmInQuiz.SetCard();
+                Program.frmQuizPractise.SetCard();
                 QuizCore.SaveQuizProgress(Quiz);
             }
         }

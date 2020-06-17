@@ -111,8 +111,8 @@ namespace SteelQuiz.QuizPractise
         private void btn_editInEditor_Click(object sender, EventArgs e)
         {
             Parent.exitAppOnClose = false;
-            Program.frmWelcome.Show();
-            Program.frmWelcome.OpenQuizEditor(Quiz, Quiz.QuizIdentity.FindQuizPath());
+            Program.frmDashboard.Show();
+            Program.frmDashboard.OpenQuizEditor(Quiz, Quiz.QuizIdentity.FindQuizPath());
             DialogResult = DialogResult.Abort;
         }
     }

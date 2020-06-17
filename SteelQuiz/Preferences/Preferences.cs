@@ -185,7 +185,7 @@ namespace SteelQuiz.Preferences
         private void Preferences_FormClosing(object sender, FormClosingEventArgs e)
         {
             Save();
-            Program.frmWelcome.UpdateCfg();
+            Program.frmDashboard.UpdateCfg();
         }
     }
 }

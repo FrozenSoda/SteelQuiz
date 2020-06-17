@@ -41,7 +41,7 @@ namespace SteelQuiz.Preferences
 
         public void CheckForUpdates()
         {
-            Program.frmWelcome.tmr_chkUpdate.Stop();
+            Program.frmDashboard.tmr_chkUpdate.Stop();
 
             AutoUpdater.CheckForUpdateEvent += AutoUpdaterOnCheckForUpdateEvent;
             //AutoUpdater.Start("https://raw.githubusercontent.com/steel9/SteelQuiz/master/Updater/update_meta.xml");
@@ -82,7 +82,7 @@ namespace SteelQuiz.Preferences
                 }));
             }
             AutoUpdater.CheckForUpdateEvent -= AutoUpdaterOnCheckForUpdateEvent;
-            Program.frmWelcome.tmr_chkUpdate.Start();
+            Program.frmDashboard.tmr_chkUpdate.Start();
         }
 
         private void Btn_resetAppConfig_Click(object sender, EventArgs e)

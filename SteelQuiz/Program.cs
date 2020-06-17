@@ -35,8 +35,8 @@ namespace SteelQuiz
     {
         public static string[] Args { get; set; }
 
-        public static Dashboard frmWelcome = null;
-        public static QuizPractise.QuizPractise frmInQuiz = null;
+        public static Dashboard frmDashboard = null;
+        public static QuizPractise.QuizPractise frmQuizPractise = null;
         public static Preferences.Preferences frmPreferences = null;
         public static List<QuizEditor.QuizEditor> openQuizEditors = new List<QuizEditor.QuizEditor>();
 
@@ -113,10 +113,10 @@ namespace SteelQuiz
             }
             else if (m.Msg == NativeMethods.WM_LOAD_QUIZ)
             {
-                if (frmInQuiz != null)
+                if (frmQuizPractise != null)
                 {
-                    frmInQuiz.Close();
-                    frmWelcome.Show();
+                    frmQuizPractise.Close();
+                    frmDashboard.Show();
                 }
                 else if (QuizEditorsOpen > 0)
                 {
@@ -140,10 +140,10 @@ namespace SteelQuiz
                     key.DeleteValue("QuizToLoadPath");
                 }
 
-                frmWelcome.LoadedQuiz = QuizCore.LoadQuiz((string)quizPath);
-                frmWelcome.UpdateQuizOverview();
+                frmDashboard.LoadedQuiz = QuizCore.LoadQuiz((string)quizPath);
+                frmDashboard.UpdateQuizOverview();
 
-                ShowMe(frmWelcome);
+                ShowMe(frmDashboard);
             }
         }
 

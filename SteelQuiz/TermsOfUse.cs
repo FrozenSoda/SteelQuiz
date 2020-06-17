@@ -139,8 +139,8 @@ namespace SteelQuiz
         {
             Hide();
 
-            Program.frmWelcome = new Dashboard();
-            Program.frmWelcome.Show();
+            Program.frmDashboard = new Dashboard();
+            Program.frmDashboard.Show();
 
             /*
             if (!QuizCore.ChkCreateQuizProgress())

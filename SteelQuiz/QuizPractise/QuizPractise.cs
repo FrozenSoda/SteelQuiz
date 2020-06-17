@@ -145,13 +145,13 @@ namespace SteelQuiz.QuizPractise
             Quiz = quiz;
             PractiseMode = quizPractiseMode;
 
-            WindowState = Program.frmWelcome.WindowState;
+            WindowState = Program.frmDashboard.WindowState;
             if (WindowState == FormWindowState.Normal)
             {
-                Size = Program.frmWelcome.Size;
+                Size = Program.frmDashboard.Size;
             }
-            Location = new Point(Program.frmWelcome.Location.X + (Program.frmWelcome.Size.Width / 2) - (this.Size.Width / 2),
-                Program.frmWelcome.Location.Y + (Program.frmWelcome.Size.Height / 2) - (this.Size.Height / 2));
+            Location = new Point(Program.frmDashboard.Location.X + (Program.frmDashboard.Size.Width / 2) - (this.Size.Width / 2),
+                Program.frmDashboard.Location.Y + (Program.frmDashboard.Size.Height / 2) - (this.Size.Height / 2));
 
             lbl_cardQuestionSideType.Text = Quiz.ProgressData.AnswerCardSide == CardSide.Front ? Quiz.CardBackType : Quiz.CardFrontType;
             lbl_cardAnswerSideType.Text = Quiz.ProgressData.AnswerCardSide == CardSide.Front ? Quiz.CardFrontType : Quiz.CardBackType;
@@ -419,8 +419,8 @@ namespace SteelQuiz.QuizPractise
         {
             exitAppOnClose = false;
             Close();
-            Program.frmWelcome.UpdateQuizOverview(); // Update learning progress etc
-            Program.frmWelcome.Show();
+            Program.frmDashboard.UpdateQuizOverview(); // Update learning progress etc
+            Program.frmDashboard.Show();
         }
 
         private void InQuiz_KeyDown(object sender, KeyEventArgs e)

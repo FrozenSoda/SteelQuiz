@@ -294,7 +294,7 @@ namespace SteelQuiz
 
         private void Btn_editQuiz_Click(object sender, EventArgs e)
         {
-            Program.frmWelcome.OpenQuizEditor(Quiz, Quiz.QuizIdentity.FindQuizPath());
+            Program.frmDashboard.OpenQuizEditor(Quiz, Quiz.QuizIdentity.FindQuizPath());
         }
 
         private void Lbl_learningProgress_bar_SizeChanged(object sender, EventArgs e)

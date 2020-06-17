@@ -106,7 +106,7 @@ namespace SteelQuiz
 
         private void RemoveFromListToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Program.frmWelcome.RemoveQuiz(QuizIdentity.QuizGuid);
+            Program.frmDashboard.RemoveQuiz(QuizIdentity.QuizGuid);
         }
 
         private void ResetProgressDataToolStripMenuItem_Click(object sender, EventArgs e)
@@ -137,7 +137,7 @@ namespace SteelQuiz
             quiz.ProgressData = new QuizProgress(quiz);
             QuizCore.SaveQuizProgress(quiz);
 
-            var quizProgressInfo = Program.frmWelcome.FindQuizProgressInfo(QuizIdentity.QuizGuid);
+            var quizProgressInfo = Program.frmDashboard.FindQuizProgressInfo(QuizIdentity.QuizGuid);
             if (quizProgressInfo != null)
             {
                 quizProgressInfo.Quiz = quiz;

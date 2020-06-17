@@ -187,7 +187,7 @@ namespace SteelQuiz
 
                 if (uargs != null && uargs.IsUpdateAvailable)
                 {
-                    Program.frmWelcome.tmr_chkUpdate.Interval = 2 * 60 * 60 * 1000; // dont check for updates again for 2h
+                    Program.frmDashboard.tmr_chkUpdate.Interval = 2 * 60 * 60 * 1000; // dont check for updates again for 2h
 
                     var notifyIcon = new NotifyIcon
                     {

@@ -79,15 +79,15 @@ namespace SteelQuiz.QuizEditor
             }
             else
             {
-                WindowState = Program.frmWelcome.WindowState;
+                WindowState = Program.frmDashboard.WindowState;
                 if (WindowState == FormWindowState.Normal)
                 {
-                    Size = Program.frmWelcome.Size;
+                    Size = Program.frmDashboard.Size;
                 }
             }
 
-            this.Location = new Point(Program.frmWelcome.Location.X + (Program.frmWelcome.Size.Width / 2) - (this.Size.Width / 2),
-                              Program.frmWelcome.Location.Y + (Program.frmWelcome.Size.Height / 2) - (this.Size.Height / 2)
+            this.Location = new Point(Program.frmDashboard.Location.X + (Program.frmDashboard.Size.Width / 2) - (this.Size.Width / 2),
+                              Program.frmDashboard.Location.Y + (Program.frmDashboard.Size.Height / 2) - (this.Size.Height / 2)
                             );
 
             AddCard(EMPTY_WORD_PAIRS_COUNT);
@@ -393,17 +393,17 @@ namespace SteelQuiz.QuizEditor
                 else if (returningToMainMenu || !ConfigManager.Config.QuizEditorConfig.CloseApplicationOnEditorClose)
                 {
                     Hide();
-                    Program.frmWelcome.PopulateQuizList();
-                    Program.frmWelcome.SetControlStates();
-                    Program.frmWelcome.GenerateWelcomeMsg();
+                    Program.frmDashboard.PopulateQuizList();
+                    Program.frmDashboard.SetControlStates();
+                    Program.frmDashboard.GenerateWelcomeMsg();
 
-                    Program.frmWelcome.WindowState = WindowState;
+                    Program.frmDashboard.WindowState = WindowState;
                     if (WindowState == FormWindowState.Normal)
                     {
-                        Program.frmWelcome.Size = Size;
+                        Program.frmDashboard.Size = Size;
                     }
 
-                    Program.frmWelcome.Show();
+                    Program.frmDashboard.Show();
                     Program.openQuizEditors.Remove(this);
                 }
                 else

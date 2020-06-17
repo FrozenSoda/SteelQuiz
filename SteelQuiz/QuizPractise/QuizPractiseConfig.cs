@@ -58,7 +58,7 @@ namespace SteelQuiz.QuizPractise
             Quiz.ProgressData.AnswerCardSide = rdo_answerFront.Checked ? QuizProgressData.CardSide.Front : QuizProgressData.CardSide.Back;
 
             CardPicker.NewRound(Quiz);
-            Program.frmInQuiz.SetCard();
+            Program.frmQuizPractise.SetCard();
             QuizCore.SaveQuizProgress(Quiz);
         }
 
@@ -67,7 +67,7 @@ namespace SteelQuiz.QuizPractise
             Quiz.ProgressData.FullTestInProgress = !chk_intelligentLearning.Checked;
 
             CardPicker.NewRound(Quiz);
-            Program.frmInQuiz.SetCard();
+            Program.frmQuizPractise.SetCard();
             QuizCore.SaveQuizProgress(Quiz);
         }
 
@@ -82,7 +82,7 @@ namespace SteelQuiz.QuizPractise
             Quiz.ProgressData.AskQuestionsInRandomOrder = chk_randomOrderQuestions.Checked;
 
             CardPicker.NewRound(Quiz);
-            Program.frmInQuiz.SetCard();
+            Program.frmQuizPractise.SetCard();
             QuizCore.SaveQuizProgress(Quiz);
         }
 
