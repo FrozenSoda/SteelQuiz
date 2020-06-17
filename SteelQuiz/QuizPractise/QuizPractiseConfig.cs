@@ -40,146 +40,39 @@ namespace SteelQuiz.QuizPractise
 
             Quiz = quiz;
 
-            cmb_cardAnswerSide.Items.Add(Quiz.CardFrontType);
-            cmb_cardAnswerSide.Items.Add(Quiz.CardBackType);
+            rdo_answerFront.Text = Quiz.CardFrontType;
+            rdo_answerBack.Text = Quiz.CardBackType;
 
-            cmb_cardAnswerSide.SelectedItem = Quiz.ProgressData.AnswerCardSide == QuizProgressData.CardSide.Front ? Quiz.CardFrontType : Quiz.CardBackType;
-
-            if (Quiz.ProgressData.FullTestInProgress)
-            {
-                btn_switchTestMode.Text = "Enable Intelligent Learning";
-            }
-            else
-            {
-                btn_switchTestMode.Text = "Disable Intelligent Learning (do full test)";
-            }
-
-            if (Quiz.ProgressData.IntelligentLearningLastAnswersBasisCount == 3)
-            {
-                rdo_last3attemptsIntelligentLearning.Checked = true;
-            }
-            else if (Quiz.ProgressData.IntelligentLearningLastAnswersBasisCount == 0)
-            {
-                rdo_allAttemptsIntelligentLearning.Checked = true;
-            }
-            else
-            {
-                rdo_lastNattemptsIntelligentLearning.Checked = true;
-                nud_intelligentLearningAttempsCount.Value = Quiz.ProgressData.IntelligentLearningLastAnswersBasisCount;
-            }
-
-            nud_minAnsTriesSkip.Value = Quiz.ProgressData.MinimumTriesCountToConsiderSkippingQuestion;
-
+            rdo_answerFront.Checked = Quiz.ProgressData.AnswerCardSide == QuizProgressData.CardSide.Front;
+            rdo_answerBack.Checked = Quiz.ProgressData.AnswerCardSide == QuizProgressData.CardSide.Back;
+            chk_intelligentLearning.Checked = !Quiz.ProgressData.FullTestInProgress;
             chk_randomOrderQuestions.Checked = Quiz.ProgressData.AskQuestionsInRandomOrder;
 
-            cmb_cardAnswerSide.SelectedIndexChanged += new EventHandler(Cmb_cardAnswerSide_SelectedIndexChanged);
-            rdo_last3attemptsIntelligentLearning.CheckedChanged += new EventHandler(Rdo_last3attemptsIntelligentLearning_CheckedChanged);
-            rdo_allAttemptsIntelligentLearning.CheckedChanged += new EventHandler(Rdo_allAttemptsIntelligentLearning_CheckedChanged);
-            rdo_lastNattemptsIntelligentLearning.CheckedChanged += new EventHandler(Rdo_lastNattemptsIntelligentLearning_CheckedChanged);
-            nud_intelligentLearningAttempsCount.ValueChanged += new EventHandler(Nud_intelligentLearningAttempsCount_ValueChanged);
-            nud_minAnsTriesSkip.ValueChanged += new EventHandler(nud_minAnsTriesSkip_ValueChanged);
+            rdo_answerFront.CheckedChanged += Rdo_answerFront_CheckedChanged;
             chk_randomOrderQuestions.CheckedChanged += Chk_randomOrderQuestions_CheckedChanged;
+            chk_intelligentLearning.CheckedChanged += Chk_intelligentLearning_CheckedChanged;
         }
 
-        private void Btn_dontAgree_Click(object sender, EventArgs e)
+        private void Rdo_answerFront_CheckedChanged(object sender, EventArgs e)
         {
-            //Program.frmInQuiz.FixQuizErrors();
-        }
-
-        private void Btn_switchTestMode_Click(object sender, EventArgs e)
-        {
-            var msg = MessageBox.Show("Warning: The state of the current round will be lost (current word, word count etc).\r\n\r\nProceed?",
-                "Switch mode - SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
-            if (msg == DialogResult.Yes)
-            {
-                Quiz.ProgressData.FullTestInProgress = !Quiz.ProgressData.FullTestInProgress;
-
-                CardPicker.NewRound(Quiz);
-                Program.frmInQuiz.SetCard();
-
-                if (Quiz.ProgressData.FullTestInProgress)
-                {
-                    btn_switchTestMode.Text = "Enable Intelligent Learning";
-                }
-                else
-                {
-                    btn_switchTestMode.Text = "Disable Intelligent Learning (do full test)";
-                }
-            }
-        }
-
-        private void Cmb_cardAnswerSide_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //Quiz.ProgressData.AnswerLanguage = cmb_langAns.SelectedItem.ToString();
-            if (cmb_cardAnswerSide.SelectedItem.ToString() == Quiz.CardFrontType)
-            {
-                Quiz.ProgressData.AnswerCardSide = QuizProgressData.CardSide.Front;
-            }
-            else if (cmb_cardAnswerSide.SelectedItem.ToString() == Quiz.CardBackType)
-            {
-                Quiz.ProgressData.AnswerCardSide = QuizProgressData.CardSide.Back;
-            }
-
-            QuizCore.SaveQuizProgress(Quiz);
-
+            Quiz.ProgressData.AnswerCardSide = rdo_answerFront.Checked ? QuizProgressData.CardSide.Front : QuizProgressData.CardSide.Back;
             CardPicker.NewRound(Quiz);
             Program.frmInQuiz.SetCard();
+            QuizCore.SaveQuizProgress(Quiz);
         }
 
-        private void Rdo_last3attemptsIntelligentLearning_CheckedChanged(object sender, EventArgs e)
+        private void Chk_intelligentLearning_CheckedChanged(object sender, EventArgs e)
         {
-            if (rdo_last3attemptsIntelligentLearning.Checked)
-            {
-                Quiz.ProgressData.IntelligentLearningLastAnswersBasisCount = 3;
-
-                if (!Quiz.ProgressData.FullTestInProgress)
-                {
-                    CardPicker.NewRound(Quiz);
-                    Program.frmInQuiz.SetCard();
-                }
-            }
+            Quiz.ProgressData.FullTestInProgress = !chk_intelligentLearning.Checked;
+            CardPicker.NewRound(Quiz);
+            Program.frmInQuiz.SetCard();
+            QuizCore.SaveQuizProgress(Quiz);
         }
 
-        private void Rdo_allAttemptsIntelligentLearning_CheckedChanged(object sender, EventArgs e)
+        private void Btn_advanced_Click(object sender, EventArgs e)
         {
-            if (rdo_allAttemptsIntelligentLearning.Checked)
-            {
-                Quiz.ProgressData.IntelligentLearningLastAnswersBasisCount = 0;
-
-                if (!Quiz.ProgressData.FullTestInProgress)
-                {
-                    CardPicker.NewRound(Quiz);
-                    Program.frmInQuiz.SetCard();
-                }
-            }
-        }
-
-        private void Rdo_lastNattemptsIntelligentLearning_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rdo_lastNattemptsIntelligentLearning.Checked)
-            {
-                Quiz.ProgressData.IntelligentLearningLastAnswersBasisCount = (int)nud_intelligentLearningAttempsCount.Value;
-
-                if (!Quiz.ProgressData.FullTestInProgress)
-                {
-                    CardPicker.NewRound(Quiz);
-                    Program.frmInQuiz.SetCard();
-                }
-            }
-        }
-
-        private void Nud_intelligentLearningAttempsCount_ValueChanged(object sender, EventArgs e)
-        {
-            if (rdo_lastNattemptsIntelligentLearning.Checked)
-            {
-                Quiz.ProgressData.IntelligentLearningLastAnswersBasisCount = (int)nud_intelligentLearningAttempsCount.Value;
-
-                if (!Quiz.ProgressData.FullTestInProgress)
-                {
-                    CardPicker.NewRound(Quiz);
-                    Program.frmInQuiz.SetCard();
-                }
-            }
+            var frm = new QuizPractiseConfigAdvanced(Quiz);
+            frm.ShowDialog();
         }
 
         private void Chk_randomOrderQuestions_CheckedChanged(object sender, EventArgs e)
@@ -190,15 +83,9 @@ namespace SteelQuiz.QuizPractise
             Program.frmInQuiz.SetCard();
         }
 
-        private void nud_minAnsTriesSkip_ValueChanged(object sender, EventArgs e)
+        private void btn_close_Click(object sender, EventArgs e)
         {
-            Quiz.ProgressData.MinimumTriesCountToConsiderSkippingQuestion = (int)nud_minAnsTriesSkip.Value;
-
-            if (!Quiz.ProgressData.FullTestInProgress)
-            {
-                CardPicker.NewRound(Quiz);
-                Program.frmInQuiz.SetCard();
-            }
+            DialogResult = DialogResult.OK;
         }
     }
 }

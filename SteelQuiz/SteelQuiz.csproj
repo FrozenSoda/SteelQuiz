@@ -147,6 +147,12 @@
     <Compile Include="QuizPractise\MultiAnswer.Designer.cs">
       <DependentUpon>MultiAnswer.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuizPractise\QuizPractiseConfigAdvanced.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuizPractise\QuizPractiseConfigAdvanced.Designer.cs">
+      <DependentUpon>QuizPractiseConfigAdvanced.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuizPractise\RoundCompleted.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -474,6 +480,9 @@
     <Compile Include="WelcomeMessages.cs" />
     <EmbeddedResource Include="QuizEditor\QuizEditorCardMoveTo.resx">
       <DependentUpon>QuizEditorCardMoveTo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuizPractise\QuizPractiseConfigAdvanced.resx">
+      <DependentUpon>QuizPractiseConfigAdvanced.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuizPractise\RoundCompleted.resx">
       <DependentUpon>RoundCompleted.cs</DependentUpon>
