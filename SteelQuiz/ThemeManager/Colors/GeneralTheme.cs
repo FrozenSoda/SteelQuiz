@@ -76,6 +76,18 @@ namespace SteelQuiz.ThemeManager.Colors
             }
         }
 
+        public virtual Color GetMainLinkLabelForeColor()
+        {
+            if (ConfigManager.Config == null || ConfigManager.Config.Theme == Theme.Dark)
+            {
+                return Color.Aqua;
+            }
+            else
+            {
+                return Color.Blue;
+            }
+        }
+
         public virtual Color GetBackgroundLabelForeColor()
         {
             if (ConfigManager.Config == null || ConfigManager.Config.Theme == Theme.Dark)

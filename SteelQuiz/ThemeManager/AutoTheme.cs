@@ -51,6 +51,11 @@ namespace SteelQuiz.ThemeManager
                 lbl.ForeColor = theme.GetMainLabelForeColor();
             }
 
+            foreach (LinkLabel llb in control.GetAllChildrenRecursive(typeof(LinkLabel)))
+            {
+                llb.LinkColor = theme.GetMainLinkLabelForeColor();
+            }
+
             foreach (var chk in control.GetAllChildrenRecursive(typeof(CheckBox)))
             {
                 chk.ForeColor = theme.GetMainLabelForeColor();
