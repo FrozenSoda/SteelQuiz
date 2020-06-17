@@ -131,9 +131,9 @@ namespace SteelQuiz.QuizPractise
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(9, 108);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(358, 13);
+            this.label2.Size = new System.Drawing.Size(334, 13);
             this.label2.TabIndex = 18;
-            this.label2.Text = "Minimum number of answer tries per question to consider skipping:";
+            this.label2.Text = "Minimum number of answer tries per card to consider skipping:";
             // 
             // nud_minAnsTriesSkip
             // 
