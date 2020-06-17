@@ -76,7 +76,7 @@ namespace SteelQuiz.ThemeManager.Colors
             }
         }
 
-        public virtual Color GetMainLinkLabelForeColor()
+        public virtual Color GetMainLinkLabelLinkColor()
         {
             if (ConfigManager.Config == null || ConfigManager.Config.Theme == Theme.Dark)
             {
