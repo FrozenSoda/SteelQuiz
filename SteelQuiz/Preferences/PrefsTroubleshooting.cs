@@ -44,7 +44,7 @@ namespace SteelQuiz.Preferences
             Program.frmWelcome.tmr_chkUpdate.Stop();
 
             AutoUpdater.CheckForUpdateEvent += AutoUpdaterOnCheckForUpdateEvent;
-            //AutoUpdater.Start("https://raw.githubusercontent.com/steel9/SteelQuiz/master/Updater/update_meta.xml");
+            //AutoUpdater.Start("https://raw.githubusercontent.com/steel9/SteelQuiz/master/Updater/update_meta2.xml");
             Updater.Update(Updater.UpdateMode.Manual);
         }
 
@@ -156,7 +156,7 @@ namespace SteelQuiz.Preferences
 
         private void Btn_update_Click(object sender, EventArgs e)
         {
-            //AutoUpdater.Start("https://raw.githubusercontent.com/steel9/SteelQuiz/master/Updater/update_meta.xml");
+            //AutoUpdater.Start("https://raw.githubusercontent.com/steel9/SteelQuiz/master/Updater/update_meta2.xml");
             Updater.Update(Updater.UpdateMode.Force);
         }
     }

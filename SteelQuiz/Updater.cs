@@ -293,8 +293,8 @@ namespace SteelQuiz
 
         private static ChannelVersion NewestUpdateChannel()
         {
-            return NewestUpdateChannel("https://raw.githubusercontent.com/steel9/SteelQuiz/master/Updater/update_meta.xml",
-                "https://raw.githubusercontent.com/steel9/SteelQuiz/master/Updater/channel_dev/update_meta.xml");
+            return NewestUpdateChannel("https://raw.githubusercontent.com/steel9/SteelQuiz/master/Updater/update_meta2.xml",
+                "https://raw.githubusercontent.com/steel9/SteelQuiz/master/Updater/channel_dev/update_meta2.xml");
         }
 
         /// <summary>
@@ -319,7 +319,7 @@ namespace SteelQuiz
 
                         if (ConfigManager.Config.UpdateConfig.UpdateChannel == ConfigData.UpdateChannel.Stable)
                         {
-                            AutoUpdater.Start("https://raw.githubusercontent.com/steel9/SteelQuiz/master/Updater/update_meta.xml");
+                            AutoUpdater.Start("https://raw.githubusercontent.com/steel9/SteelQuiz/master/Updater/update_meta2.xml");
                         }
                         else if (ConfigManager.Config.UpdateConfig.UpdateChannel == ConfigData.UpdateChannel.Development)
                         {
@@ -327,7 +327,7 @@ namespace SteelQuiz
                             AutoUpdater.Start(newestChannel.MetaURL);
                         }
 
-                        //AutoUpdater.Start("http://localhost:8000/update_meta.xml");
+                        //AutoUpdater.Start("http://localhost:8000/update_meta2.xml");
                     }
                     catch (Exception ex)
                     {
