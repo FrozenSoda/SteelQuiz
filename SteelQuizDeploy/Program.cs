@@ -193,16 +193,16 @@ namespace SteelQuizDeploy
             Console.WriteLine(" OK!");
 
 
-            Console.Write("\nCreating update_pkg.zip ...");
+            Console.Write("\nCreating update_pkg2.zip ...");
 
             string updatePkgPath;
             if (!DevRelease)
             {
-                updatePkgPath = Path.Combine(SolutionRoot, @"Updater\update_pkg.zip");
+                updatePkgPath = Path.Combine(SolutionRoot, @"Updater\update_pkg2.zip");
             }
             else
             {
-                updatePkgPath = Path.Combine(SolutionRoot, @"Updater\channel_dev\update_pkg.zip");
+                updatePkgPath = Path.Combine(SolutionRoot, @"Updater\channel_dev\update_pkg2.zip");
             }
             string[] updatePkgFiles =
             {
@@ -314,7 +314,7 @@ namespace SteelQuizDeploy
             Console.WriteLine("Compiling setup.nsi ... OK!");
 
 
-            Console.Write("\nCalculating SHA512 sum of update_pkg.zip ...");
+            Console.Write("\nCalculating SHA512 sum of update_pkg2.zip ...");
 
             string sha512hash = null;
             using (var sha512 = SHA512.Create())
