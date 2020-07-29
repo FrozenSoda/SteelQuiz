@@ -1,6 +1,6 @@
 WARNING: When updating to SteelQuiz 5, the progress data for your quizzes will be lost!
 
-v5.0.0 (5.0.0.37):
+v5.0.0 (5.0.0.38):
 Highlighted changes:
 - Quizzes can now be stored anywhere, not only in specific folders.
 - New Intelligent Learning algorithms, which are now based more on progress than randomness.
