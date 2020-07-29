@@ -81,7 +81,7 @@ namespace SteelQuiz
             this.btn_update.Name = "btn_update";
             this.btn_update.Size = new System.Drawing.Size(307, 46);
             this.btn_update.TabIndex = 0;
-            this.btn_update.Text = "(3s) Update now (recommended)";
+            this.btn_update.Text = "Update now (recommended)";
             this.btn_update.UseVisualStyleBackColor = false;
             this.btn_update.Click += new System.EventHandler(this.Btn_update_Click);
             // 
@@ -97,7 +97,7 @@ namespace SteelQuiz
             this.btn_notNow.Name = "btn_notNow";
             this.btn_notNow.Size = new System.Drawing.Size(140, 46);
             this.btn_notNow.TabIndex = 2;
-            this.btn_notNow.Text = "(3s) Not now";
+            this.btn_notNow.Text = "Not now";
             this.btn_notNow.UseVisualStyleBackColor = false;
             this.btn_notNow.Click += new System.EventHandler(this.Btn_notNow_Click);
             // 
