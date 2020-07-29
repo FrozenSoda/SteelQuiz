@@ -1,3 +1,19 @@
+WARNING: When updating to SteelQuiz 5, the progress data for your quizzes will be lost!
+
+v5.0.0 (5.0.0.37):
+Highlighted changes:
+- Quizzes can now be stored anywhere, not only in specific folders.
+- New Intelligent Learning algorithms, which are now based more on progress than randomness.
+- Support for drag and dropping quiz files to load them.
+- Support for file associations - you can now double click quiz files to load them!
+- Added support for card re-ordering in Editor.
+- User interface improvements.
+- Fixed confusing terminology within the application.
+- Bug fixes and improvements.
+
+Note: New file formats for quizzes, quiz progress data and configuration. Quizzes opened in SteelQuiz 5 cannot be opened by earlier versions of SteelQuiz. Quiz progress data from earlier versions of SteelQuiz can currently not be converted to the SteelQuiz 5 format, and will thus be lost. Most preferences will be lost if downgrading to earlier versions of SteelQuiz after updating.
+
+
 v4.3.3:
 - Support for updating to SteelQuiz 5.
 - SteelQuiz now asks before installing major updates.
