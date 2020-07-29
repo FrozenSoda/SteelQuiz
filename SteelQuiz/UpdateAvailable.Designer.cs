@@ -49,7 +49,6 @@ namespace SteelQuiz
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UpdateAvailable));
             this.lbl_top = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.btn_update = new System.Windows.Forms.Button();
             this.btn_notNow = new System.Windows.Forms.Button();
             this.rtf_releaseNotes = new System.Windows.Forms.RichTextBox();
@@ -57,30 +56,18 @@ namespace SteelQuiz
             this.lbl_installedVer = new System.Windows.Forms.Label();
             this.tmr_btnEnable = new System.Windows.Forms.Timer(this.components);
             this.chk_autoUpdateInFuture = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lbl_top
             // 
-            this.lbl_top.Font = new System.Drawing.Font("Segoe UI Semilight", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_top.Font = new System.Drawing.Font("Segoe UI", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_top.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.lbl_top.Location = new System.Drawing.Point(12, 9);
             this.lbl_top.Name = "lbl_top";
-            this.lbl_top.Size = new System.Drawing.Size(776, 43);
+            this.lbl_top.Size = new System.Drawing.Size(776, 53);
             this.lbl_top.TabIndex = 1;
-            this.lbl_top.Text = "A new version of SteelQuiz is available (v0.0.0)";
-            this.lbl_top.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label1
-            // 
-            this.label1.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label1.Location = new System.Drawing.Point(12, 52);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(776, 33);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "It is recommended that you update, to get the latest features, bug fixes and impr" +
-    "ovements";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_top.Text = "SteelQuiz v0.0.0 is available";
             // 
             // btn_update
             // 
@@ -88,7 +75,7 @@ namespace SteelQuiz
             this.btn_update.Enabled = false;
             this.btn_update.FlatAppearance.BorderSize = 0;
             this.btn_update.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_update.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_update.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_update.ForeColor = System.Drawing.Color.White;
             this.btn_update.Location = new System.Drawing.Point(481, 392);
             this.btn_update.Name = "btn_update";
@@ -117,37 +104,36 @@ namespace SteelQuiz
             // rtf_releaseNotes
             // 
             this.rtf_releaseNotes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.rtf_releaseNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.rtf_releaseNotes.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rtf_releaseNotes.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtf_releaseNotes.ForeColor = System.Drawing.Color.White;
-            this.rtf_releaseNotes.Location = new System.Drawing.Point(12, 140);
+            this.rtf_releaseNotes.Location = new System.Drawing.Point(33, 136);
             this.rtf_releaseNotes.Name = "rtf_releaseNotes";
             this.rtf_releaseNotes.ReadOnly = true;
-            this.rtf_releaseNotes.Size = new System.Drawing.Size(776, 246);
+            this.rtf_releaseNotes.Size = new System.Drawing.Size(755, 250);
             this.rtf_releaseNotes.TabIndex = 1;
-            this.rtf_releaseNotes.Text = "Please wait...";
+            this.rtf_releaseNotes.Text = "Loading release notes...";
             // 
             // label2
             // 
-            this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label2.Location = new System.Drawing.Point(12, 112);
+            this.label2.Location = new System.Drawing.Point(20, 108);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(776, 25);
+            this.label2.Size = new System.Drawing.Size(768, 25);
             this.label2.TabIndex = 6;
             this.label2.Text = "Release notes:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lbl_installedVer
             // 
-            this.lbl_installedVer.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_installedVer.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_installedVer.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lbl_installedVer.Location = new System.Drawing.Point(8, 85);
+            this.lbl_installedVer.Location = new System.Drawing.Point(231, 62);
             this.lbl_installedVer.Name = "lbl_installedVer";
-            this.lbl_installedVer.Size = new System.Drawing.Size(776, 27);
+            this.lbl_installedVer.Size = new System.Drawing.Size(557, 27);
             this.lbl_installedVer.TabIndex = 7;
-            this.lbl_installedVer.Text = "Installed version: v0.0.0";
-            this.lbl_installedVer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_installedVer.Text = "v0.0.0";
             // 
             // tmr_btnEnable
             // 
@@ -167,19 +153,29 @@ namespace SteelQuiz
             this.chk_autoUpdateInFuture.UseVisualStyleBackColor = true;
             this.chk_autoUpdateInFuture.CheckedChanged += new System.EventHandler(this.Chk_autoUpdateInFuture_CheckedChanged);
             // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.label1.Location = new System.Drawing.Point(29, 62);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(196, 27);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Currently installed version:";
+            // 
             // UpdateAvailable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.chk_autoUpdateInFuture);
             this.Controls.Add(this.lbl_installedVer);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.rtf_releaseNotes);
             this.Controls.Add(this.btn_notNow);
             this.Controls.Add(this.btn_update);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.lbl_top);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -196,7 +192,6 @@ namespace SteelQuiz
         #endregion
 
         private System.Windows.Forms.Label lbl_top;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btn_update;
         private System.Windows.Forms.Button btn_notNow;
         private System.Windows.Forms.RichTextBox rtf_releaseNotes;
@@ -204,5 +199,6 @@ namespace SteelQuiz
         private System.Windows.Forms.Label lbl_installedVer;
         private System.Windows.Forms.Timer tmr_btnEnable;
         private System.Windows.Forms.CheckBox chk_autoUpdateInFuture;
+        private System.Windows.Forms.Label label1;
     }
 }

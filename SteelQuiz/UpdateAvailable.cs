@@ -57,8 +57,8 @@ namespace SteelQuiz
                 btn_notNow.Text = $"({ConfigManager.Config.UpdateConfig.UpdateAvailableButtonEnableDelay_s - secondsSinceStart}s) Not now";
             }
 
-            lbl_top.Text = $"A new version of SteelQuiz is available (v{newVersion.ToString()})";
-            lbl_installedVer.Text = $"Installed version: v{installedVersion.ToString()}";
+            lbl_top.Text = $"SteelQuiz v{newVersion.ToString()} is available";
+            lbl_installedVer.Text = $"v{installedVersion.ToString()}";
             using (var client = new WebClient())
             {
                 try
