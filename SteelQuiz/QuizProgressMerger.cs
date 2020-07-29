@@ -64,7 +64,11 @@ namespace SteelQuiz
 
             QuizProgressDataRoot merged = Merge(prog1, prog2);
 
+#if DEBUG
             AtomicIO.AtomicWrite(savePath, JsonConvert.SerializeObject(merged, Formatting.Indented));
+#else
+            AtomicIO.AtomicWrite(savePath, JsonConvert.SerializeObject(merged));
+#endif
 
             return true;
         }
