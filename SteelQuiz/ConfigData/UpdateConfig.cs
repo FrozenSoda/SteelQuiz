@@ -58,7 +58,7 @@ namespace SteelQuiz.ConfigData
         /// <summary>
         /// The delay until the Update, Not now and Close button becomes enabled on the update dialog. Used to prevent misclicks.
         /// </summary>
-        public int UpdateAvailableButtonEnableDelay_s { get; set; } = 3;
+        public int UpdateAvailableButtonEnableDelay_s { get; set; } = 1;
 
         /// <summary>
         /// The update channel to be used when updating

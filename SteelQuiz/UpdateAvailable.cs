@@ -43,18 +43,18 @@ namespace SteelQuiz
 
             if (ConfigManager.Config.UpdateConfig.UpdateAvailableButtonEnableDelay_s == 0)
             {
-                btn_update.Text = "Update now (recommended)";
+                //btn_update.Text = "Update now (recommended)";
                 btn_update.Enabled = true;
 
-                btn_notNow.Text = "Not now";
+                //btn_notNow.Text = "Not now";
                 btn_notNow.Enabled = true;
 
                 tmr_btnEnable.Stop();
             }
             else
             {
-                btn_update.Text = $"({ConfigManager.Config.UpdateConfig.UpdateAvailableButtonEnableDelay_s - secondsSinceStart}s) Update now (recommended)";
-                btn_notNow.Text = $"({ConfigManager.Config.UpdateConfig.UpdateAvailableButtonEnableDelay_s - secondsSinceStart}s) Not now";
+                //btn_update.Text = $"({ConfigManager.Config.UpdateConfig.UpdateAvailableButtonEnableDelay_s - secondsSinceStart}s) Update now (recommended)";
+                //btn_notNow.Text = $"({ConfigManager.Config.UpdateConfig.UpdateAvailableButtonEnableDelay_s - secondsSinceStart}s) Not now";
             }
 
             lbl_top.Text = $"SteelQuiz v{newVersion.ToString()} is available";
@@ -112,18 +112,18 @@ namespace SteelQuiz
             ++secondsSinceStart;
             if (secondsSinceStart >= ConfigManager.Config.UpdateConfig.UpdateAvailableButtonEnableDelay_s)
             {
-                btn_update.Text = "Update now (recommended)";
+                //btn_update.Text = "Update now (recommended)";
                 btn_update.Enabled = true;
 
-                btn_notNow.Text = "Not now";
+                //btn_notNow.Text = "Not now";
                 btn_notNow.Enabled = true;
 
                 tmr_btnEnable.Stop();
             }
             else
             {
-                btn_update.Text = $"({ConfigManager.Config.UpdateConfig.UpdateAvailableButtonEnableDelay_s - secondsSinceStart}s) Update now (recommended)";
-                btn_notNow.Text = $"({ConfigManager.Config.UpdateConfig.UpdateAvailableButtonEnableDelay_s - secondsSinceStart}s) Not now";
+                //btn_update.Text = $"({ConfigManager.Config.UpdateConfig.UpdateAvailableButtonEnableDelay_s - secondsSinceStart}s) Update now (recommended)";
+                //btn_notNow.Text = $"({ConfigManager.Config.UpdateConfig.UpdateAvailableButtonEnableDelay_s - secondsSinceStart}s) Not now";
             }
         }
 
