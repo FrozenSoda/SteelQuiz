@@ -28,7 +28,7 @@ namespace SteelQuiz
     {
         public const string QUIZ_FILE_FORMAT_VERSION = "4.0.0.1";
         public const string CONFIG_FILE_FORMAT_VERSION = "4.0.0.0";
-        public static bool PRE_RELEASE = true;
+        public static bool PRE_RELEASE = false;
 
         public static Version GetLatestQuizVersion()
         {
