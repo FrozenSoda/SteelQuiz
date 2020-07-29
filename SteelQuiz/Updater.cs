@@ -158,7 +158,8 @@ namespace SteelQuiz
                     }
                     else
                     {
-                        if (ConfigManager.Config.UpdateConfig.AutoUpdateMode == ConfigData.AutomaticUpdateMode.CheckOnly)
+                        if (ConfigManager.Config.UpdateConfig.AutoUpdateMode == ConfigData.AutomaticUpdateMode.CheckOnly
+                            || uargs.CurrentVersion.Major != uargs.InstalledVersion.Major) // Don't update to new major versions automatically
                         {
                             var frmUpdate = new UpdateAvailable(uargs.InstalledVersion, uargs.CurrentVersion);
                             var result = frmUpdate.ShowDialog();
@@ -209,7 +210,8 @@ namespace SteelQuiz
                     }
                     else
                     {
-                        if (ConfigManager.Config.UpdateConfig.AutoUpdateMode == ConfigData.AutomaticUpdateMode.CheckDownloadInstall)
+                        if (ConfigManager.Config.UpdateConfig.AutoUpdateMode == ConfigData.AutomaticUpdateMode.CheckDownloadInstall
+                            && uargs.CurrentVersion.Major == uargs.InstalledVersion.Major) // Always show info before major update
                         {
                             notifyIcon.BalloonTipText = "A software update is available. Click here to update now";
                         }
