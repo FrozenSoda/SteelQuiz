@@ -168,6 +168,16 @@ namespace SteelQuiz
 
                 // Remove progress from cards that have been removed from the quiz
                 progress.CardProgress = progress.CardProgress.Where(x => quiz.Cards.Select(y => y.Guid).Contains(x.CardGuid)).ToList();
+
+                // Issue #45 fix - "Learning Progress still 100 % after adding card to quiz without having answered it"
+                foreach (var card in quiz.Cards)
+                {
+                    if (!progress.CardProgress.Select(x => x.CardGuid).Contains(card.Guid))
+                    {
+                        // CardProgress does not exist for card, create it
+                        progress.CardProgress.Add(new CardProgress(card.Guid));
+                    }
+                }
             }
 
             return progress;
