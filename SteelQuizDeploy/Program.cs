@@ -336,16 +336,16 @@ namespace SteelQuizDeploy
             Console.WriteLine($"SHA512 sum: {sha512hash}");
 
 
-            Console.Write("\nUpdating update_meta.xml ...");
+            Console.Write("\nUpdating update_meta2.xml ...");
 
             string updateMetaPath;
             if (!DevRelease)
             {
-                updateMetaPath = Path.Combine(SolutionRoot, @"Updater\update_meta.xml");
+                updateMetaPath = Path.Combine(SolutionRoot, @"Updater\update_meta2.xml");
             }
             else
             {
-                updateMetaPath = Path.Combine(SolutionRoot, @"Updater\channel_dev\update_meta.xml");
+                updateMetaPath = Path.Combine(SolutionRoot, @"Updater\channel_dev\update_meta2.xml");
             }
 
             var xml = new XmlDocument();
