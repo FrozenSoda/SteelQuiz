@@ -112,11 +112,20 @@ namespace SteelQuiz
 
             string quizRaw = AtomicIO.AtomicRead(path);
             Quiz quiz = JsonConvert.DeserializeObject<Quiz>(quizRaw);
-            Version quizVersion = new Version(quiz.FileFormatVersion);
+
+            Version quizVersion;
+            if (quiz.FileFormatVersion == null)
+            {
+                quizVersion = null;
+            }
+            else
+            {
+                quizVersion = new Version(quiz.FileFormatVersion);
+            }
 
             quiz.FileFormatVersion = MetaData.QUIZ_FILE_FORMAT_VERSION;
 
-            if (quizVersion.CompareTo(MetaData.GetLatestQuizVersion()) > 0)
+            if (quizVersion != null && quizVersion.CompareTo(MetaData.GetLatestQuizVersion()) > 0)
             {
                 throw new VersionNotSupportedException(VersionNotSupportedException.NotSupportedReason.AppVersionTooOld);
             }
