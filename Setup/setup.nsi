@@ -160,8 +160,9 @@ Section "Uninstall"
   Delete "$INSTDIR\Newtonsoft.Json.dll"
   Delete "$INSTDIR\AutoUpdater.NET.dll"
   Delete "$INSTDIR\Fastenshtein.dll"
-  Delete "$INSTDIR\ACCEPTED_LICENSE"
   Delete "$INSTDIR\uninstall.exe"
+  Delete "$INSTDIR\ACCEPTED_LICENSE"
+  Delete "$INSTDIR\InstallInfo.json"
 
   ;Delete remaining shortcuts
   Delete "$SMPROGRAMS\SteelQuiz\Uninstall SteelQuiz.lnk"
