@@ -1,5 +1,10 @@
 WARNING: When updating to SteelQuiz 5, the progress data for your quizzes will be lost!
 
+v5.0.1:
+- Fixed an issue that would cause a crash when opening the quiz editor after a new installation.
+- Fixed an issue that would leave excess leftovers after uninstallation.
+
+
 v5.0.0 (5.0.0.39):
 Highlighted changes:
 - Quizzes can now be stored anywhere, not only in specific folders.
