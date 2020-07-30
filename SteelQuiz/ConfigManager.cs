@@ -106,10 +106,9 @@ namespace SteelQuiz
                 Config.UpdateConfig.UpdateChannel = UpdateChannel.Development;
             }
 
-            if (!Directory.Exists(Config.StorageConfig.DefaultQuizSaveFolder))
-            {
-                Directory.CreateDirectory(Config.StorageConfig.DefaultQuizSaveFolder);
-            }
+            Directory.CreateDirectory(Config.StorageConfig.DefaultQuizSaveFolder);
+            Directory.CreateDirectory(QuizCore.QUIZ_FOLDER_DEFAULT);
+            Directory.CreateDirectory(QuizCore.QUIZ_RECOVERY_FOLDER);
 
             SaveConfig();
         }
