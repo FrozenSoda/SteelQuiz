@@ -191,7 +191,7 @@ namespace SteelQuiz
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(125, 38);
             this.label2.TabIndex = 15;
-            this.label2.Text = "Number of Terms:";
+            this.label2.Text = "Number of Cards:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lbl_termsCount
@@ -238,7 +238,7 @@ namespace SteelQuiz
             this.btn_practiseFlashcards.Visible = false;
             this.btn_practiseFlashcards.Click += new System.EventHandler(this.btn_practiseFlashcards_Click);
             // 
-            // QuizProgressInfo
+            // QuizOverview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -259,7 +259,7 @@ namespace SteelQuiz
             this.Controls.Add(this.btn_editQuiz);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.White;
-            this.Name = "QuizProgressInfo";
+            this.Name = "QuizOverview";
             this.Size = new System.Drawing.Size(730, 572);
             this.SizeChanged += new System.EventHandler(this.QuizProgressInfo_SizeChanged);
             this.ResumeLayout(false);
