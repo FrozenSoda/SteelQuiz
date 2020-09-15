@@ -25,9 +25,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AutoUpdaterDotNET;
 using Microsoft.Win32;
+using Newtonsoft.Json;
 using SteelQuiz.QuizData;
 using SteelQuiz.QuizEditor;
 using SteelQuiz.QuizPractise;
+using SteelQuiz.QuizProgressData;
 
 namespace SteelQuiz
 {
@@ -86,6 +88,19 @@ namespace SteelQuiz
             if (!ConfigManager.LoadConfig())
             {
                 return;
+            }
+
+            if (!File.Exists(ConfigManager.Config.StorageConfig.QuizProgressFile))
+            {
+                // Create empty quiz progress data file
+
+                var progressRoot = new QuizProgressDataRoot(MetaData.QUIZ_FILE_FORMAT_VERSION);
+#if DEBUG
+                var progressRootRaw = JsonConvert.SerializeObject(progressRoot, Formatting.Indented);
+#else
+                var progressRootRaw = JsonConvert.SerializeObject(progressRoot);
+#endif
+                File.WriteAllText(ConfigManager.Config.StorageConfig.QuizProgressFile, progressRootRaw);
             }
 
             ++ConfigManager.Config.Statistics.LaunchCount.Data;
