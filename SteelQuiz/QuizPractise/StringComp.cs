@@ -183,7 +183,7 @@ namespace SteelQuiz.QuizPractise
                     string w3 = correctAnswer.Replace("(", "").Replace(")", ""); // (eye)lash => eyelash
                     similarityData.Add(Similarity(userAnswer, w3, card, rules, (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
 
-                    if (correctAnswer.Count(c => c == ')') > 1)
+                    if (!correctAnswer.TrimEnd().EndsWith(")") || correctAnswer.Count(c => c == ')') > 1)
                     {
                         string w4 = correctAnswer.Split(new[] { ')' }, 2)[1].TrimStart(' '); // (eye)lash => lash
                         similarityData.Add(Similarity(userAnswer, w4, card, rules, (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
