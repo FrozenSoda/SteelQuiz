@@ -113,11 +113,11 @@ namespace SteelQuiz
                     break;
 
                 case CardsOrderBy.AlphabeticalTerm1:
-                    cmb_order.SelectedItem = "Alphabetical Term 1";
+                    cmb_order.SelectedItem = "Alphabetical Front";
                     break;
 
                 case CardsOrderBy.AlphabeticalTerm2:
-                    cmb_order.SelectedItem = "Alphabetical Term 2";
+                    cmb_order.SelectedItem = "Alphabetical Back";
                     break;
             }
 
@@ -212,10 +212,10 @@ namespace SteelQuiz
                             break;
                         case "Quiz Order":
                             break;
-                        case "Alphabetical Term 1":
+                        case "Alphabetical Front":
                             controls = controls.OrderBy(x => x.Card.Front).ToList();
                             break;
-                        case "Alphabetical Term 2":
+                        case "Alphabetical Back":
                             controls = controls.OrderBy(x => x.Card.Back).ToList();
                             break;
                     }
@@ -230,10 +230,10 @@ namespace SteelQuiz
                         case "Quiz Order":
                             controls.Reverse();
                             break;
-                        case "Alphabetical Term 1":
+                        case "Alphabetical Front":
                             controls = controls.OrderByDescending(x => x.Card.Front).ToList();
                             break;
-                        case "Alphabetical Term 2":
+                        case "Alphabetical Back":
                             controls = controls.OrderByDescending(x => x.Card.Back).ToList();
                             break;
                     }
@@ -332,11 +332,11 @@ namespace SteelQuiz
                     Quiz.ProgressData.CardsDisplayOrder = CardsOrderBy.QuizOrder;
                     break;
 
-                case "Alphabetical Term 1":
+                case "Alphabetical Front":
                     Quiz.ProgressData.CardsDisplayOrder = CardsOrderBy.AlphabeticalTerm1;
                     break;
 
-                case "Alphabetical Term 2":
+                case "Alphabetical Back":
                     Quiz.ProgressData.CardsDisplayOrder = CardsOrderBy.AlphabeticalTerm2;
                     break;
             }
