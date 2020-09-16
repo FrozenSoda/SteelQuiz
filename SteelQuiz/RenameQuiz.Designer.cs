@@ -52,6 +52,7 @@ namespace SteelQuiz
             // 
             // txt_newName
             // 
+            this.txt_newName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
             this.txt_newName.Location = new System.Drawing.Point(12, 12);
             this.txt_newName.Name = "txt_newName";
             this.txt_newName.Size = new System.Drawing.Size(275, 22);
@@ -59,22 +60,27 @@ namespace SteelQuiz
             // 
             // btn_apply
             // 
+            this.btn_apply.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.btn_apply.FlatAppearance.BorderSize = 0;
+            this.btn_apply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_apply.Location = new System.Drawing.Point(293, 12);
             this.btn_apply.Name = "btn_apply";
             this.btn_apply.Size = new System.Drawing.Size(75, 23);
             this.btn_apply.TabIndex = 1;
             this.btn_apply.Text = "Apply";
-            this.btn_apply.UseVisualStyleBackColor = true;
+            this.btn_apply.UseVisualStyleBackColor = false;
             this.btn_apply.Click += new System.EventHandler(this.btn_apply_Click);
             // 
             // RenameQuiz
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.ClientSize = new System.Drawing.Size(380, 45);
             this.Controls.Add(this.btn_apply);
             this.Controls.Add(this.txt_newName);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "RenameQuiz";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

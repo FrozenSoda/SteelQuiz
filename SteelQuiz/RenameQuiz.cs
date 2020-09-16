@@ -28,13 +28,15 @@ using System.Windows.Forms;
 
 namespace SteelQuiz
 {
-    public partial class RenameQuiz : Form
+    public partial class RenameQuiz : AutoThemeableForm
     {
         public string NewName => txt_newName.Text;
 
         public RenameQuiz(string oldName)
         {
             InitializeComponent();
+            SetTheme();
+
             txt_newName.Text = oldName;
         }
 
