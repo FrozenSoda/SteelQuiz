@@ -21,6 +21,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace SteelQuiz.QuizPractise
@@ -180,7 +181,14 @@ namespace SteelQuiz.QuizPractise
                     string w2 = correctAnswer.Split('(')[1].Split(')')[0].TrimStart(' ').TrimEnd(' '); // tarp (tarpaulin) => tarpaulin
                     similarityData.Add(Similarity(userAnswer, w2, card, rules, (CorrectCertainty)Math.Max((int)CorrectCertainty.MaybeCorrect, (int)certainty)));
 
-                    string w3 = correctAnswer.Replace("(", "").Replace(")", ""); // (eye)lash => eyelash
+                    //string w3 = correctAnswer.Replace("(", "").Replace(")", ""); // (eye)lash => eyelash
+
+                    var rgp1 = new Regex(Regex.Escape("("));
+                    var rgp2 = new Regex(Regex.Escape(")"));
+
+                    string w3 = rgp1.Replace(correctAnswer, "", 1); // (eye)lash => eye)lash (replace first occurence of starting paranthesis)
+                    w3 = rgp2.Replace(w3, "", 1); // eyelash => eyelash (replace first occurence of ending paranthesis)
+
                     similarityData.Add(Similarity(userAnswer, w3, card, rules, (CorrectCertainty)Math.Max((int)CorrectCertainty.ProbablyCorrect, (int)certainty)));
 
                     if (!correctAnswer.TrimEnd().EndsWith(")") || correctAnswer.Count(c => c == ')') > 1)
