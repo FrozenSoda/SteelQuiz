@@ -29,6 +29,7 @@ using SteelQuiz.QuizData;
 using System.IO;
 using SteelQuiz.ThemeManager.Colors;
 using SteelQuiz.QuizProgressData;
+using System.Diagnostics;
 
 namespace SteelQuiz
 {
@@ -164,6 +165,25 @@ namespace SteelQuiz
 
             var quizExport = new QuizExport(quiz);
             quizExport.ShowDialog();
+        }
+
+        private void renameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var renameForm = new RenameQuiz(Path.GetFileNameWithoutExtension(QuizIdentity.FindQuizPath()));
+            if (renameForm.ShowDialog() == DialogResult.OK)
+            {
+                QuizIdentity.RenameQuiz(renameForm.NewName);
+                QuizCore.QuizIdentities[QuizIdentity.QuizGuid] = QuizIdentity;
+                QuizCore.SaveQuizAccessData();
+                lbl_name.Text = Path.GetFileNameWithoutExtension(QuizIdentity.LastKnownPath);
+
+                if (Program.frmDashboard.LoadedQuiz != null && Program.frmDashboard.LoadedQuiz.QuizIdentity.QuizGuid == QuizIdentity.QuizGuid)
+                {
+                    Program.frmDashboard.LoadedQuiz.QuizIdentity = QuizIdentity;
+                    Program.frmDashboard.PopulateQuizList();
+                    Program.frmDashboard.UpdateQuizOverview();
+                }
+            }
         }
     }
 }

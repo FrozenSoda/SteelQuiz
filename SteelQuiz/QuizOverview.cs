@@ -97,7 +97,7 @@ namespace SteelQuiz
             InitializeComponent();
 
             Quiz = quiz;
-            lbl_quizNameHere.Text = Path.GetFileNameWithoutExtension(Quiz.QuizIdentity.FindQuizPath());
+            UpdateQuizNameLabel();
 
             SetTheme(WelcomeTheme);
             UpdateLearningProgress(false);
@@ -160,6 +160,11 @@ namespace SteelQuiz
                     c.UpdateLearningProgress();
                 }
             }
+        }
+
+        public void UpdateQuizNameLabel()
+        {
+            lbl_quizNameHere.Text = Path.GetFileNameWithoutExtension(Quiz.QuizIdentity.FindQuizPath());
         }
 
         /// <summary>

@@ -98,5 +98,15 @@ namespace SteelQuiz.QuizData
             var name = Path.GetFileNameWithoutExtension(path);
             return name;
         }
+
+        public void RenameQuiz(string newName)
+        {
+            var oldPath = FindQuizPath();
+            var newPath = Path.Combine(Path.GetDirectoryName(oldPath), newName + Path.GetExtension(oldPath));
+
+            File.Move(oldPath, newPath);
+
+            LastKnownPath = newPath;
+        }
     }
 }

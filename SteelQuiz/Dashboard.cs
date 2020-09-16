@@ -221,6 +221,7 @@ namespace SteelQuiz
                 {
                     q.Size = pnl_quizOverview.Size;
                     q.UpdateLearningProgress(true);
+                    q.UpdateQuizNameLabel();
                     q.Show();
                     q.BringToFront();
 
