@@ -155,10 +155,11 @@ namespace SteelQuiz.Preferences
             // llb_gitHub
             // 
             this.llb_gitHub.AutoSize = true;
+            this.llb_gitHub.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.llb_gitHub.LinkColor = System.Drawing.Color.Aqua;
-            this.llb_gitHub.Location = new System.Drawing.Point(16, 109);
+            this.llb_gitHub.Location = new System.Drawing.Point(15, 109);
             this.llb_gitHub.Name = "llb_gitHub";
-            this.llb_gitHub.Size = new System.Drawing.Size(44, 13);
+            this.llb_gitHub.Size = new System.Drawing.Size(56, 20);
             this.llb_gitHub.TabIndex = 2;
             this.llb_gitHub.TabStop = true;
             this.llb_gitHub.Text = "GitHub";
