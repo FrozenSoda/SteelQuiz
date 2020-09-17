@@ -64,8 +64,7 @@ namespace SteelQuiz.Preferences
                     break;
             }
 
-            rdo_showNameOnWelcome.Checked = ConfigManager.Config.ShowNameOnWelcomeScreen;
-            rdo_dontShowNameOnWelcome.Checked = !rdo_showNameOnWelcome.Checked;
+            chk_displayNameInWelcomeMessages.Checked = ConfigManager.Config.ShowNameOnWelcomeScreen;
             txt_name.Text = ConfigManager.Config.FullName;
             chk_win10themeSync.Checked = ConfigManager.Config.SyncWin10Theme;
         }
@@ -109,27 +108,8 @@ namespace SteelQuiz.Preferences
             ConfigManager.Config.FullName = txt_name.Text;
             if (txt_name.Text == "")
             {
-                rdo_dontShowNameOnWelcome.Checked = true;
+                chk_displayNameInWelcomeMessages.Checked = false;
             }
-        }
-
-        private void Rdo_showNameOnWelcome_CheckedChanged(object sender, EventArgs e)
-        {
-            if (skipConfigApply)
-            {
-                return;
-            }
-
-            if (rdo_showNameOnWelcome.Checked && txt_name.Text == "")
-            {
-                MessageBox.Show("Please enter your name first", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                rdo_dontShowNameOnWelcome.Checked = true;
-                return;
-            }
-
-            ConfigManager.Config.ShowNameOnWelcomeScreen = rdo_showNameOnWelcome.Checked;
-            ConfigManager.SaveConfig();
-            Program.frmDashboard.UpdateCfg();
         }
 
         private void Txt_name_Leave(object sender, EventArgs e)
@@ -202,6 +182,25 @@ namespace SteelQuiz.Preferences
                     rdo_themeDark.Checked = true;
                 }
             }
+        }
+
+        private void chk_displayNameInWelcomeMessages_CheckedChanged(object sender, EventArgs e)
+        {
+            if (skipConfigApply)
+            {
+                return;
+            }
+
+            if (chk_displayNameInWelcomeMessages.Checked && txt_name.Text == "")
+            {
+                MessageBox.Show("Please enter your name first", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                chk_displayNameInWelcomeMessages.Checked = false;
+                return;
+            }
+
+            ConfigManager.Config.ShowNameOnWelcomeScreen = chk_displayNameInWelcomeMessages.Checked;
+            ConfigManager.SaveConfig();
+            Program.frmDashboard.UpdateCfg();
         }
     }
 }
