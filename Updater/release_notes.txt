@@ -1,10 +1,11 @@
 WARNING: When updating to SteelQuiz 5, the progress data for your quizzes will be lost!
 
-v5.1.0 (5.1.0.1):
+v5.1.0 (5.1.0.2):
 - You can now rename quizzes from within SteelQuiz.
 - Moved "About" and "Check for Updates" to Preferences.
 - Improved Smart Comparison parsing when dealing with parentheses.
 - Fixed an issue that would cause an error when loading a quiz.
+- Fixed an issue that would display incorrect round success rate while practising in some circumstances.
 - Fixed user interface inconsistencies.
 
 
