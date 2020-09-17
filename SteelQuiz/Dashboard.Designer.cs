@@ -52,7 +52,6 @@ namespace SteelQuiz
             this.btn_addQuiz = new System.Windows.Forms.Button();
             this.ofd_loadQuiz = new System.Windows.Forms.OpenFileDialog();
             this.tmr_chkUpdate = new System.Windows.Forms.Timer(this.components);
-            this.btn_chkUpdates = new System.Windows.Forms.Button();
             this.btn_preferences = new System.Windows.Forms.Button();
             this.tmr_welcomeMsg = new System.Windows.Forms.Timer(this.components);
             this.flp_lastQuizzes = new System.Windows.Forms.FlowLayoutPanel();
@@ -67,7 +66,6 @@ namespace SteelQuiz
             this.cms_recentQuizzes = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.clearRecentQuizzesListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnl_left = new System.Windows.Forms.Panel();
-            this.btn_about = new System.Windows.Forms.Button();
             this.pnl_quizOverview.SuspendLayout();
             this.pnl_welcome.SuspendLayout();
             this.pnl_welcomeText.SuspendLayout();
@@ -113,23 +111,6 @@ namespace SteelQuiz
             this.tmr_chkUpdate.Interval = 120000;
             this.tmr_chkUpdate.Tick += new System.EventHandler(this.Tmr_chkUpdate_Tick);
             // 
-            // btn_chkUpdates
-            // 
-            this.btn_chkUpdates.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_chkUpdates.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            this.btn_chkUpdates.FlatAppearance.BorderSize = 0;
-            this.btn_chkUpdates.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_chkUpdates.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_chkUpdates.ForeColor = System.Drawing.Color.White;
-            this.btn_chkUpdates.Location = new System.Drawing.Point(10, 375);
-            this.btn_chkUpdates.Name = "btn_chkUpdates";
-            this.btn_chkUpdates.Size = new System.Drawing.Size(173, 31);
-            this.btn_chkUpdates.TabIndex = 6;
-            this.btn_chkUpdates.Text = "Check for Updates";
-            this.btn_chkUpdates.UseVisualStyleBackColor = false;
-            this.btn_chkUpdates.Visible = false;
-            this.btn_chkUpdates.Click += new System.EventHandler(this.Btn_chkUpdates_Click);
-            // 
             // btn_preferences
             // 
             this.btn_preferences.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -138,7 +119,7 @@ namespace SteelQuiz
             this.btn_preferences.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_preferences.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_preferences.ForeColor = System.Drawing.Color.White;
-            this.btn_preferences.Location = new System.Drawing.Point(10, 338);
+            this.btn_preferences.Location = new System.Drawing.Point(10, 375);
             this.btn_preferences.Name = "btn_preferences";
             this.btn_preferences.Size = new System.Drawing.Size(173, 31);
             this.btn_preferences.TabIndex = 7;
@@ -281,9 +262,7 @@ namespace SteelQuiz
             // 
             this.pnl_left.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
             this.pnl_left.ContextMenuStrip = this.cms_recentQuizzes;
-            this.pnl_left.Controls.Add(this.btn_about);
             this.pnl_left.Controls.Add(this.lbl_recentQuizzes);
-            this.pnl_left.Controls.Add(this.btn_chkUpdates);
             this.pnl_left.Controls.Add(this.btn_importQuiz);
             this.pnl_left.Controls.Add(this.btn_createQuiz);
             this.pnl_left.Controls.Add(this.btn_loadQuizFromFile);
@@ -295,23 +274,6 @@ namespace SteelQuiz
             this.pnl_left.Name = "pnl_left";
             this.pnl_left.Size = new System.Drawing.Size(197, 596);
             this.pnl_left.TabIndex = 14;
-            // 
-            // btn_about
-            // 
-            this.btn_about.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_about.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            this.btn_about.FlatAppearance.BorderSize = 0;
-            this.btn_about.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_about.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_about.ForeColor = System.Drawing.Color.White;
-            this.btn_about.Location = new System.Drawing.Point(10, 286);
-            this.btn_about.Name = "btn_about";
-            this.btn_about.Size = new System.Drawing.Size(173, 31);
-            this.btn_about.TabIndex = 8;
-            this.btn_about.Text = "About";
-            this.btn_about.UseVisualStyleBackColor = false;
-            this.btn_about.Visible = false;
-            this.btn_about.Click += new System.EventHandler(this.btn_about_Click);
             // 
             // Dashboard
             // 
@@ -348,7 +310,6 @@ namespace SteelQuiz
         private System.Windows.Forms.Label lbl_welcome;
         private System.Windows.Forms.Button btn_addQuiz;
         private System.Windows.Forms.OpenFileDialog ofd_loadQuiz;
-        private System.Windows.Forms.Button btn_chkUpdates;
         private System.Windows.Forms.Button btn_preferences;
         internal System.Windows.Forms.Timer tmr_chkUpdate;
         private System.Windows.Forms.Timer tmr_welcomeMsg;
@@ -364,7 +325,6 @@ namespace SteelQuiz
         private System.Windows.Forms.Panel pnl_left;
         private System.Windows.Forms.ContextMenuStrip cms_recentQuizzes;
         private System.Windows.Forms.ToolStripMenuItem clearRecentQuizzesListToolStripMenuItem;
-        private System.Windows.Forms.Button btn_about;
     }
 }
 
