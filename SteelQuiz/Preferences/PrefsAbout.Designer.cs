@@ -84,7 +84,7 @@ namespace SteelQuiz.Preferences
             this.btn_chkUpdates.ForeColor = System.Drawing.Color.White;
             this.btn_chkUpdates.Location = new System.Drawing.Point(19, 101);
             this.btn_chkUpdates.Name = "btn_chkUpdates";
-            this.btn_chkUpdates.Size = new System.Drawing.Size(116, 24);
+            this.btn_chkUpdates.Size = new System.Drawing.Size(172, 24);
             this.btn_chkUpdates.TabIndex = 9;
             this.btn_chkUpdates.Text = "Check for Updates";
             this.btn_chkUpdates.UseVisualStyleBackColor = false;
@@ -94,7 +94,7 @@ namespace SteelQuiz.Preferences
             // 
             this.lbl_versionType.AutoSize = true;
             this.lbl_versionType.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_versionType.Location = new System.Drawing.Point(141, 69);
+            this.lbl_versionType.Location = new System.Drawing.Point(116, 69);
             this.lbl_versionType.Name = "lbl_versionType";
             this.lbl_versionType.Size = new System.Drawing.Size(75, 20);
             this.lbl_versionType.TabIndex = 8;
@@ -114,7 +114,7 @@ namespace SteelQuiz.Preferences
             // 
             this.lbl_installedVersion.AutoSize = true;
             this.lbl_installedVersion.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_installedVersion.Location = new System.Drawing.Point(141, 40);
+            this.lbl_installedVersion.Location = new System.Drawing.Point(116, 40);
             this.lbl_installedVersion.Name = "lbl_installedVersion";
             this.lbl_installedVersion.Size = new System.Drawing.Size(53, 20);
             this.lbl_installedVersion.TabIndex = 6;
@@ -126,9 +126,9 @@ namespace SteelQuiz.Preferences
             this.label2.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(15, 40);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(120, 20);
+            this.label2.Size = new System.Drawing.Size(60, 20);
             this.label2.TabIndex = 5;
-            this.label2.Text = "Installed Version:";
+            this.label2.Text = "Version:";
             // 
             // label3
             // 
@@ -137,9 +137,9 @@ namespace SteelQuiz.Preferences
             this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(0, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(82, 25);
+            this.label3.Size = new System.Drawing.Size(150, 25);
             this.label3.TabIndex = 4;
-            this.label3.Text = "Updates";
+            this.label3.Text = "Application Info";
             // 
             // panel1
             // 
