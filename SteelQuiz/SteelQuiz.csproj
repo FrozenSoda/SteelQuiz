@@ -89,6 +89,12 @@
     <Compile Include="Extensions\VectorExtensions.cs" />
     <Compile Include="NativeMethods.cs" />
     <Compile Include="Pointer.cs" />
+    <Compile Include="Preferences\PrefsAbout.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Preferences\PrefsAbout.Designer.cs">
+      <DependentUpon>PrefsAbout.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuizEditor\QuizEditorCardMoveTo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -478,6 +484,9 @@
     <Compile Include="QuizProgressData\AnswerAttempt.cs" />
     <Compile Include="WelcomeMessage.cs" />
     <Compile Include="WelcomeMessages.cs" />
+    <EmbeddedResource Include="Preferences\PrefsAbout.resx">
+      <DependentUpon>PrefsAbout.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="QuizEditor\QuizEditorCardMoveTo.resx">
       <DependentUpon>QuizEditorCardMoveTo.cs</DependentUpon>
     </EmbeddedResource>
