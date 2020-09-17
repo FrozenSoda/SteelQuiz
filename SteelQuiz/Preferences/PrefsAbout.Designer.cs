@@ -172,7 +172,7 @@ namespace SteelQuiz.Preferences
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(340, 60);
             this.label1.TabIndex = 1;
-            this.label1.Text = "A quiz program designed to make learning easier.\r\n\r\nCopyright (C) 2020 steel9apps" +
+            this.label1.Text = "A quiz program designed to make learning easier.\r\n\r\nCopyright (C) 2020 Steel9Apps" +
     "";
             // 
             // label4
