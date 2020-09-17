@@ -168,7 +168,7 @@ namespace SteelQuiz
         }
 
         /// <summary>
-        /// Re-colors the word pairs in the list, to have every other Card in a different color, to make reading easier
+        /// Re-colors the cards in the list, to have every other Card in a different color, to make reading easier
         /// </summary>
         public void RecolorCards()
         {

@@ -109,7 +109,7 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             this.rdo_addMultipleTranslationsAsSynonyms.Name = "rdo_addMultipleTranslationsAsSynonyms";
             this.rdo_addMultipleTranslationsAsSynonyms.Size = new System.Drawing.Size(499, 21);
             this.rdo_addMultipleTranslationsAsSynonyms.TabIndex = 4;
-            this.rdo_addMultipleTranslationsAsSynonyms.Text = "Add multiple definitions/translations of a word as synonyms in a single word pair" +
+            this.rdo_addMultipleTranslationsAsSynonyms.Text = "Add multiple definitions/translations of a term as synonyms in a single card" +
     "";
             this.rdo_addMultipleTranslationsAsSynonyms.UseVisualStyleBackColor = true;
             this.rdo_addMultipleTranslationsAsSynonyms.CheckedChanged += new System.EventHandler(this.Rdo_addMultipleTranslationsAsSynonyms_CheckedChanged);
@@ -125,7 +125,7 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             this.rdo_multipleTranslationsAsDifferentWordPairs.Size = new System.Drawing.Size(539, 21);
             this.rdo_multipleTranslationsAsDifferentWordPairs.TabIndex = 3;
             this.rdo_multipleTranslationsAsDifferentWordPairs.TabStop = true;
-            this.rdo_multipleTranslationsAsDifferentWordPairs.Text = "Add words with multiple definitions/translations as separate word pairs (recommen" +
+            this.rdo_multipleTranslationsAsDifferentWordPairs.Text = "Add terms with multiple definitions/translations as separate cards (recommen" +
     "ded)";
             this.rdo_multipleTranslationsAsDifferentWordPairs.UseVisualStyleBackColor = true;
             // 
