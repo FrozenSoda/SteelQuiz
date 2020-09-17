@@ -232,9 +232,9 @@ namespace SteelQuiz.QuizEditor
             if (QuizEditor.UpdateUndoRedoStacks)
             {
                 QuizEditor.UndoStack.Push(new UndoRedoFuncPair(
-                    new Action[] { QuizEditor.AddWordPair(this, QuizEditor.flp_cards.Controls.GetChildIndex(this)) },
-                    new Action[] { QuizEditor.RemoveWordPair(this) },
-                    "Remove word pair",
+                    new Action[] { QuizEditor.AddCard(this, QuizEditor.flp_cards.Controls.GetChildIndex(this)) },
+                    new Action[] { QuizEditor.RemoveCard(this) },
+                    "Remove card",
                     new OwnerControlData(this, this.Parent)
                     ));
             }

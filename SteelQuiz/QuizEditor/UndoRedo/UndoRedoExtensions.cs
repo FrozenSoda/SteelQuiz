@@ -137,21 +137,21 @@ namespace SteelQuiz.QuizEditor.UndoRedo
             };
         }
 
-        public static Action RemoveWordPair(this QuizEditor quizEditor, QuizEditorCard wordPair)
+        public static Action RemoveCard(this QuizEditor quizEditor, QuizEditorCard card)
         {
             return () =>
             {
-                quizEditor.flp_cards.Controls.Remove(wordPair);
+                quizEditor.flp_cards.Controls.Remove(card);
                 quizEditor.CheckFixEmptyCards();
             };
         }
 
-        public static Action AddWordPair(this QuizEditor quizEditor, QuizEditorCard wordPair, int index)
+        public static Action AddCard(this QuizEditor quizEditor, QuizEditorCard card, int index)
         {
             return () =>
             {
-                quizEditor.flp_cards.Controls.Add(wordPair);
-                quizEditor.flp_cards.Controls.SetChildIndex(wordPair, index);
+                quizEditor.flp_cards.Controls.Add(card);
+                quizEditor.flp_cards.Controls.SetChildIndex(card, index);
                 quizEditor.CheckFixEmptyCards();
             };
         }
