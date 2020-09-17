@@ -53,9 +53,9 @@ namespace SteelQuiz.QuizPractise
         /// <param name="quiz"></param>
         public static void NewRound(Quiz quiz)
         {
+            quiz.ProgressData.CorrectAnswersThisRound = 0;
             if (!quiz.ProgressData.FullTestInProgress)
             {
-                quiz.ProgressData.CorrectAnswersThisRound = 0;
                 var possibleCards = (from x in quiz.Cards
                                      let progress = x.GetProgressData(quiz)
                                      where progress.RoundsToSkip == 0
