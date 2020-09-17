@@ -47,9 +47,9 @@ namespace SteelQuiz.Preferences
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.chk_enableAtomicIO = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,6 +64,17 @@ namespace SteelQuiz.Preferences
             this.panel1.Size = new System.Drawing.Size(635, 138);
             this.panel1.TabIndex = 3;
             // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Segoe UI Semilight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(12, 77);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(620, 48);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Atomic IO helps prevent data loss and it is recommended that you keep it enabled." +
+    " If you experience IOExceptions, which might occur due to conflicts with antivir" +
+    "us software, try disabling this option.";
+            // 
             // chk_enableAtomicIO
             // 
             this.chk_enableAtomicIO.AutoSize = true;
@@ -71,11 +82,11 @@ namespace SteelQuiz.Preferences
             this.chk_enableAtomicIO.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chk_enableAtomicIO.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chk_enableAtomicIO.ForeColor = System.Drawing.Color.White;
-            this.chk_enableAtomicIO.Location = new System.Drawing.Point(5, 38);
+            this.chk_enableAtomicIO.Location = new System.Drawing.Point(15, 40);
             this.chk_enableAtomicIO.Name = "chk_enableAtomicIO";
-            this.chk_enableAtomicIO.Size = new System.Drawing.Size(142, 24);
+            this.chk_enableAtomicIO.Size = new System.Drawing.Size(144, 24);
             this.chk_enableAtomicIO.TabIndex = 2;
-            this.chk_enableAtomicIO.Text = "Enable atomic IO";
+            this.chk_enableAtomicIO.Text = "Enable Atomic IO";
             this.chk_enableAtomicIO.UseVisualStyleBackColor = true;
             this.chk_enableAtomicIO.CheckedChanged += new System.EventHandler(this.Chk_enableAtomicIO_CheckedChanged);
             // 
@@ -89,17 +100,6 @@ namespace SteelQuiz.Preferences
             this.label4.Size = new System.Drawing.Size(32, 25);
             this.label4.TabIndex = 0;
             this.label4.Text = "IO";
-            // 
-            // label1
-            // 
-            this.label1.Font = new System.Drawing.Font("Segoe UI Semilight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(1, 80);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(631, 48);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Atomic IO helps prevent data loss and it is recommended that you keep it enabled." +
-    " If you experience IOExceptions, which might occur due to conflicts with antivir" +
-    "us software, try disabling this option.";
             // 
             // PrefsAdvanced
             // 
