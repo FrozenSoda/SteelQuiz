@@ -59,6 +59,7 @@ namespace SteelQuiz.QuizPractise
 
             CardPicker.NewRound(Quiz);
             Program.frmQuizPractise.SetCard();
+            Program.frmQuizPractise.UpdateCardSideTypeLabels();
             QuizCore.SaveQuizProgress(Quiz);
         }
 
@@ -68,6 +69,7 @@ namespace SteelQuiz.QuizPractise
 
             CardPicker.NewRound(Quiz);
             Program.frmQuizPractise.SetCard();
+            Program.frmQuizPractise.UpdateCardSideTypeLabels();
             QuizCore.SaveQuizProgress(Quiz);
         }
 

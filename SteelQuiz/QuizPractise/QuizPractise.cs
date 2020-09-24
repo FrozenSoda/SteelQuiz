@@ -519,6 +519,12 @@ namespace SteelQuiz.QuizPractise
             lbl_cardSideToAnswer.Focus();
         }
 
+        public void UpdateCardSideTypeLabels()
+        {
+            lbl_cardQuestionSideType.Text = Quiz.ProgressData.AnswerCardSide == CardSide.Front ? Quiz.CardBackType : Quiz.CardFrontType;
+            lbl_cardAnswerSideType.Text = Quiz.ProgressData.AnswerCardSide == CardSide.Front ? Quiz.CardFrontType : Quiz.CardBackType;
+        }
+
         private void llb_overrideIwasRight_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             if (!userCopyingAnswer)
