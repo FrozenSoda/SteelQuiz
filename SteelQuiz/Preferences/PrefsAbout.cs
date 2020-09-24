@@ -34,6 +34,7 @@ namespace SteelQuiz.Preferences
     public partial class PrefsAbout : AutoThemeableUserControl, IPreferenceCategory
     {
         private PreferencesTheme PreferencesTheme = new PreferencesTheme();
+        private bool versionRevisionDisplayed = false;
 
         public PrefsAbout()
         {
@@ -44,7 +45,17 @@ namespace SteelQuiz.Preferences
 
         public void LoadPreferences()
         {
-            lbl_installedVersion.Text = Application.ProductVersion;
+            if (MetaData.PRE_RELEASE)
+            {
+                lbl_installedVersion.Text = Application.ProductVersion;
+            }
+            else
+            {
+                // Don't display revision in version
+
+                var ver = new Version(Application.ProductVersion);
+                lbl_installedVersion.Text = ver.Major + "." + ver.Minor + "." + ver.Build;
+            }
             lbl_versionType.Text = MetaData.PRE_RELEASE ? "Pre-Release" : "Stable";
         }
 
@@ -56,6 +67,23 @@ namespace SteelQuiz.Preferences
         private void btn_chkUpdates_Click(object sender, EventArgs e)
         {
             Updater.Update(Updater.UpdateMode.Verbose);
+        }
+
+        private void lbl_installedVersion_Click(object sender, EventArgs e)
+        {
+            if (!MetaData.PRE_RELEASE)
+            {
+                versionRevisionDisplayed = !versionRevisionDisplayed;
+                if (versionRevisionDisplayed)
+                {
+                    lbl_installedVersion.Text = Application.ProductVersion;
+                }
+                else
+                {
+                    var ver = new Version(Application.ProductVersion);
+                    lbl_installedVersion.Text = ver.Major + "." + ver.Minor + "." + ver.Build;
+                }
+            }
         }
     }
 }

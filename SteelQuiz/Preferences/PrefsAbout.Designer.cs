@@ -119,6 +119,7 @@ namespace SteelQuiz.Preferences
             this.lbl_installedVersion.Size = new System.Drawing.Size(53, 20);
             this.lbl_installedVersion.TabIndex = 6;
             this.lbl_installedVersion.Text = "0.0.0.0";
+            this.lbl_installedVersion.Click += new System.EventHandler(this.lbl_installedVersion_Click);
             // 
             // label2
             // 
