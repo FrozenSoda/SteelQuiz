@@ -45,6 +45,8 @@ VIAddVersionKey "FileDescription" "A quiz program designed to make learning word
   !insertmacro MUI_PAGE_COMPONENTS
   !insertmacro MUI_PAGE_DIRECTORY
   !insertmacro MUI_PAGE_INSTFILES
+  !define MUI_FINISHPAGE_RUN "$INSTDIR\SteelQuiz.exe"
+  !insertmacro MUI_PAGE_FINISH
   
   !insertmacro MUI_UNPAGE_CONFIRM
   !insertmacro MUI_UNPAGE_INSTFILES
