@@ -192,6 +192,106 @@ namespace SteelQuizDeploy
 
             Console.WriteLine(" OK!");
 
+            
+            Console.Write("\nGetting SteelQuiz manifest version ...");
+
+            string steelQuizVersion = FileVersionInfo.GetVersionInfo(Path.Combine(SolutionRoot, @"SteelQuiz\bin\Release\SteelQuiz.exe")).ProductVersion;
+
+            Console.WriteLine(" OK!");
+            Console.WriteLine("Found SteelQuiz version: " + steelQuizVersion);
+
+
+            Console.Write("\nSetting version in setup.nsi ...");
+
+            string setupDir = Path.Combine(SolutionRoot, "Setup");
+            string setupNsiFile = Path.Combine(setupDir, "setup.nsi");
+            string[] nsi = File.ReadAllLines(setupNsiFile);
+
+            bool nsiSuccess = false;
+            for (int i = 0; i < nsi.Length; ++i)
+            {
+                if (nsi[i].StartsWith("!define PRODUCT_VERSION"))
+                {
+                    nsi[i] = $"!define PRODUCT_VERSION \"{steelQuizVersion}\"";
+                    nsiSuccess = true;
+                    break;
+                }
+            }
+
+            if (!nsiSuccess)
+            {
+                Console.WriteLine(" FAIL");
+                Console.WriteLine("Could not find '!define PRODUCT_VERSION'");
+                return false;
+            }
+
+            File.WriteAllLines(setupNsiFile, nsi);
+
+            Console.WriteLine(" OK!");
+
+
+            Console.Write("\nSetting version in InstallInfo.json ...");
+
+            try
+            {
+                string installInfoPath = Path.Combine(SolutionRoot, @"Setup\InstallInfo.json");
+                string installInfoRaw = File.ReadAllText(installInfoPath);
+
+                var installInfo = JObject.Parse(installInfoRaw);
+                installInfo["setup_version_run"] = steelQuizVersion;
+
+                installInfoRaw = installInfo.ToString();
+                File.WriteAllText(installInfoPath, installInfoRaw);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(" FAIL");
+                Console.WriteLine(ex.ToString() + "\r\n\r\n");
+                return false;
+            }
+
+            File.WriteAllLines(setupNsiFile, nsi);
+
+            Console.WriteLine(" OK!");
+
+
+            Console.WriteLine("\nCompiling setup.nsi ...");
+            Console.WriteLine("-------------------------------------------------------");
+
+            var makeNsis = new Process();
+            //makeNsis.StartInfo.UseShellExecute = true;
+            //makeNsis.StartInfo.RedirectStandardOutput = true;
+            makeNsis.StartInfo.FileName = @"C:\Program Files (x86)\NSIS\makensis.exe";
+            makeNsis.StartInfo.Arguments = $"\"{setupNsiFile}\"";
+            makeNsis.Start();
+            makeNsis.WaitForExit();
+            Console.WriteLine("-------------------------------------------------------");
+
+            if (makeNsis.ExitCode != 0)
+            {
+                Console.WriteLine("Compiling setup.nsi ... FAIL");
+                Console.WriteLine("makensis returned with exit code: " + makeNsis.ExitCode);
+                return false;
+            }
+
+            Console.WriteLine("Compiling setup.nsi ... OK!");
+
+
+            Console.Write("\nExtracting uninstaller executable from setup ...");
+
+            var extractUninstallerProcess = Process.Start(@"C:\Program Files\7-Zip\7z.exe",
+                $"e \"{Path.Combine(setupDir, "SteelQuizSetup.exe")}\" -aoa \"-o{setupDir}\" Uninstall.exe");
+            extractUninstallerProcess.WaitForExit();
+
+            if (extractUninstallerProcess.ExitCode != 0)
+            {
+                Console.WriteLine("Extracting uninstaller executable from setup ... FAIL");
+                Console.WriteLine("7z returned with exit code: " + extractUninstallerProcess.ExitCode);
+                return false;
+            }
+
+            Console.WriteLine("Extracting uninstaller executable from setup ... OK!");
+
 
             Console.Write("\nCreating update_pkg2.zip ...");
 
@@ -229,89 +329,6 @@ namespace SteelQuizDeploy
             }
 
             Console.WriteLine(" OK!");
-
-            
-            Console.Write("\nGetting SteelQuiz manifest version ...");
-
-            string steelQuizVersion = FileVersionInfo.GetVersionInfo(Path.Combine(SolutionRoot, @"SteelQuiz\bin\Release\SteelQuiz.exe")).ProductVersion;
-
-            Console.WriteLine(" OK!");
-            Console.WriteLine("Found SteelQuiz version: " + steelQuizVersion);
-
-
-            Console.Write("\nSetting version in setup.nsi ...");
-
-            string setupNsiPath = Path.Combine(SolutionRoot, @"Setup\setup.nsi");
-            string[] nsi = File.ReadAllLines(setupNsiPath);
-
-            bool nsiSuccess = false;
-            for (int i = 0; i < nsi.Length; ++i)
-            {
-                if (nsi[i].StartsWith("!define PRODUCT_VERSION"))
-                {
-                    nsi[i] = $"!define PRODUCT_VERSION \"{steelQuizVersion}\"";
-                    nsiSuccess = true;
-                    break;
-                }
-            }
-
-            if (!nsiSuccess)
-            {
-                Console.WriteLine(" FAIL");
-                Console.WriteLine("Could not find '!define PRODUCT_VERSION'");
-                return false;
-            }
-
-            File.WriteAllLines(setupNsiPath, nsi);
-
-            Console.WriteLine(" OK!");
-
-
-            Console.Write("\nSetting version in InstallInfo.json ...");
-
-            try
-            {
-                string installInfoPath = Path.Combine(SolutionRoot, @"Setup\InstallInfo.json");
-                string installInfoRaw = File.ReadAllText(installInfoPath);
-
-                var installInfo = JObject.Parse(installInfoRaw);
-                installInfo["setup_version_run"] = steelQuizVersion;
-
-                installInfoRaw = installInfo.ToString();
-                File.WriteAllText(installInfoPath, installInfoRaw);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(" FAIL");
-                Console.WriteLine(ex.ToString() + "\r\n\r\n");
-                return false;
-            }
-
-            File.WriteAllLines(setupNsiPath, nsi);
-
-            Console.WriteLine(" OK!");
-
-
-            Console.WriteLine("\nCompiling setup.nsi ...");
-            Console.WriteLine("-------------------------------------------------------");
-
-            var makeNsis = new Process();
-            //makeNsis.StartInfo.UseShellExecute = true;
-            //makeNsis.StartInfo.RedirectStandardOutput = true;
-            makeNsis.StartInfo.FileName = @"C:\Program Files (x86)\NSIS\makensis.exe";
-            makeNsis.StartInfo.Arguments = $"\"{setupNsiPath}\"";
-            makeNsis.Start();
-            makeNsis.WaitForExit();
-            Console.WriteLine("-------------------------------------------------------");
-
-            if (makeNsis.ExitCode != 0)
-            {
-                Console.WriteLine("Compiling setup.nsi ... FAIL");
-                Console.WriteLine("makensis returned with exit code: " + makeNsis.ExitCode);
-                return false;
-            }
-
-            Console.WriteLine("Compiling setup.nsi ... OK!");
 
 
             Console.Write("\nCalculating SHA512 sum of update_pkg2.zip ...");
