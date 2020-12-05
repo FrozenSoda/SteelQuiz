@@ -166,10 +166,13 @@ namespace SteelQuiz.Preferences
             }
 
             QuizCore.LoadQuizAccessData();
-            // Reload quiz
-            Program.frmDashboard.LoadedQuiz = QuizCore.LoadQuiz(Program.frmDashboard.LoadedQuiz.QuizIdentity.FindQuizPath());
             Program.frmDashboard.PopulateQuizList();
-            Program.frmDashboard.UpdateQuizOverview();
+            if (Program.frmDashboard.LoadedQuiz != null)
+            {
+                // Reload quiz
+                Program.frmDashboard.LoadedQuiz = QuizCore.LoadQuiz(Program.frmDashboard.LoadedQuiz.QuizIdentity.FindQuizPath());
+                Program.frmDashboard.UpdateQuizOverview();
+            }
 
             return true;
         }
