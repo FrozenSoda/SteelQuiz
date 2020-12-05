@@ -162,7 +162,7 @@ namespace SteelQuiz.QuizEditor
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(16, 13);
             this.label1.TabIndex = 8;
-            this.label1.Text = "1:";
+            this.label1.Text = "F:";
             // 
             // label2
             // 
@@ -174,7 +174,7 @@ namespace SteelQuiz.QuizEditor
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(16, 13);
             this.label2.TabIndex = 9;
-            this.label2.Text = "2:";
+            this.label2.Text = "B:";
             // 
             // btn_moveUp
             // 
