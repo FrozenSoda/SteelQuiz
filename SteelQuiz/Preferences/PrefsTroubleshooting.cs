@@ -89,8 +89,8 @@ namespace SteelQuiz.Preferences
         {
             if (ConfigManager.Config.StorageConfig.QuizProgressFile != QuizCore.PROGRESS_FILE_DEFAULT)
             {
-                MessageBox.Show("The Quiz Progress path must be set to defaults before you can restore everything to defaults. You can find the settings under " +
-                    "Sync > Progress Sync (from the root of preferences)", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("The Quiz Progress path must be set to default before you can restore everything to defaults. You can find the settings under " +
+                    "Storage preferences", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
