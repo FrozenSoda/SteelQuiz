@@ -81,6 +81,7 @@ namespace SteelQuiz.QuizPractise
             // 
             // lbl_cardSideToAsk
             // 
+            this.lbl_cardSideToAsk.AutoEllipsis = true;
             this.lbl_cardSideToAsk.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_cardSideToAsk.Location = new System.Drawing.Point(4, 106);
             this.lbl_cardSideToAsk.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -92,6 +93,7 @@ namespace SteelQuiz.QuizPractise
             // 
             // lbl_cardSideToAnswer
             // 
+            this.lbl_cardSideToAnswer.AutoEllipsis = true;
             this.lbl_cardSideToAnswer.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_cardSideToAnswer.Location = new System.Drawing.Point(4, 214);
             this.lbl_cardSideToAnswer.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
