@@ -1,5 +1,12 @@
 WARNING: When updating to SteelQuiz 5, the progress data for your quizzes will be lost!
 
+v5.1.2:
+- Fixed an issue causing an error when changing the location for the quiz progress data file.
+- Fixed an issue causing too long text to be unexpectedly cut off in Quiz Practise.
+- Fixed erroneous messages.
+- Fixed user interface inconsistencies.
+
+
 v5.1.1:
 - Fixed an issue causing incorrect card side types to be shown in some circumstances while practising quizzes.
 - Fixed an issue causing incomplete removal of files and entries while uninstalling SteelQuiz.
