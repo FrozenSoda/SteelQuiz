@@ -26,8 +26,8 @@ namespace SteelQuiz.QuizEditor.UndoRedo
 {
     public class AutoThemeableUndoRedoForm : AutoThemeableForm, IUndoRedo
     {
-        public Stack<UndoRedoFuncPair> UndoStack { get; set; } = new Stack<UndoRedoFuncPair>();
-        public Stack<UndoRedoFuncPair> RedoStack { get; set; } = new Stack<UndoRedoFuncPair>();
+        public Stack<UndoRedoActionPair> UndoStack { get; set; } = new Stack<UndoRedoActionPair>();
+        public Stack<UndoRedoActionPair> RedoStack { get; set; } = new Stack<UndoRedoActionPair>();
 
         public bool UpdateUndoRedoStacks { get; set; } = true;
         public bool ChangedSinceLastSave { get; set; } = false;

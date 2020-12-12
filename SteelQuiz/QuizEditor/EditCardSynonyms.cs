@@ -120,7 +120,7 @@ namespace SteelQuiz.QuizEditor
             var oldSynonyms = Synonyms.Clone().ToList();
             var newSynonyms = lst_synonyms.Items.OfType<string>().ToList();
 
-            QuizEditor.UndoStack.Push(new UndoRedoFuncPair(
+            QuizEditor.UndoStack.Push(new UndoRedoActionPair(
                 new Action[] { () => { Synonyms = oldSynonyms; } },
                 new Action[] { () => { Synonyms = newSynonyms; } },
                 "Change Synonyms",
@@ -238,7 +238,7 @@ namespace SteelQuiz.QuizEditor
 
             lst_synonyms.Items.Add(txt_synonymAdd.Text);
 
-            UndoStack.Push(new UndoRedoFuncPair(
+            UndoStack.Push(new UndoRedoActionPair(
                 new Action[] { lst_synonyms.RemoveItem(() => { return this.Parent.EditCardSynonyms; }, lst_synonyms.Name, txt_synonymAdd.Text) },
                 new Action[] { lst_synonyms.AddItem(() => { return this.Parent.EditCardSynonyms; }, lst_synonyms.Name, txt_synonymAdd.Text) },
                 "Add synonym(s)",
@@ -323,7 +323,7 @@ namespace SteelQuiz.QuizEditor
                 redoes.Add(lst_synonyms.ChangeItem(() => { return this.Parent.EditCardSynonyms; }, lst_synonyms.Name, _new, old));
             }
 
-            UndoStack.Push(new UndoRedoFuncPair(undoes.ToArray(), redoes.ToArray(), "Update synonym(s)", new OwnerControlData(this, this.Parent, Language)));
+            UndoStack.Push(new UndoRedoActionPair(undoes.ToArray(), redoes.ToArray(), "Update synonym(s)", new OwnerControlData(this, this.Parent, Language)));
             UpdateUndoRedoTooltips();
             ChangedSinceLastSave = true;
 
@@ -351,7 +351,7 @@ namespace SteelQuiz.QuizEditor
                 redoes.Add(lst_synonyms.RemoveItem(() => { return this.Parent.EditCardSynonyms; }, lst_synonyms.Name, item));
             }
 
-            UndoStack.Push(new UndoRedoFuncPair(undoes.ToArray(), redoes.ToArray(), "Remove synonym(s)", new OwnerControlData(this, this.Parent, Language)));
+            UndoStack.Push(new UndoRedoActionPair(undoes.ToArray(), redoes.ToArray(), "Remove synonym(s)", new OwnerControlData(this, this.Parent, Language)));
             UpdateUndoRedoTooltips();
             ChangedSinceLastSave = true;
         }

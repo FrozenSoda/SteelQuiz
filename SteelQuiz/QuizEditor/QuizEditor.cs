@@ -698,7 +698,7 @@ namespace SteelQuiz.QuizEditor
                     wp.ComparisonRules.SetSemiSilent(StringComp.SMART_RULES);
                 }
 
-                UndoStack.Push(new UndoRedoFuncPair(
+                UndoStack.Push(new UndoRedoActionPair(
                     undoActions.ToArray(),
                     redoActions.ToArray(),
                     "Global enable Smart Comparison",
@@ -715,7 +715,7 @@ namespace SteelQuiz.QuizEditor
                     wp.ComparisonRules.SetSemiSilent(StringComp.Rules.None);
                 }
 
-                UndoStack.Push(new UndoRedoFuncPair(
+                UndoStack.Push(new UndoRedoActionPair(
                     undoActions.ToArray(),
                     redoActions.ToArray(),
                     "Global disable Smart Comparison",
@@ -758,7 +758,7 @@ namespace SteelQuiz.QuizEditor
             }
         }
 
-        private UndoRedoFuncPair SetGlobalRuleState(StringComp.Rules rules, bool enabled)
+        private UndoRedoActionPair SetGlobalRuleState(StringComp.Rules rules, bool enabled)
         {
             var undoActions = new List<Action>();
             var redoActions = new List<Action>();
@@ -788,7 +788,7 @@ namespace SteelQuiz.QuizEditor
                 wprules.SetSemiSilent(newval);
             }
 
-            return new UndoRedoFuncPair(
+            return new UndoRedoActionPair(
                     undoActions.ToArray(),
                     redoActions.ToArray(),
                     "Global set comparison rules state",
@@ -800,7 +800,7 @@ namespace SteelQuiz.QuizEditor
         {
             var smartCompSettings = new SmartComparisonSettings(flp_cards.Controls.OfType<QuizEditorCard>().Select(x => x.ComparisonRules.Data));
             var result = smartCompSettings.ShowDialog();
-            var undoRedoes = new List<UndoRedoFuncPair>();
+            var undoRedoes = new List<UndoRedoActionPair>();
 
             if (result != DialogResult.OK)
             {
@@ -866,7 +866,7 @@ namespace SteelQuiz.QuizEditor
                 undoRedoes.Add(SetGlobalRuleState(StringComp.Rules.TreatWordsBetweenSlashAsSynonyms, false));
             }
 
-            UndoRedoFuncPair undoRedo = new UndoRedoFuncPair(undoRedoes.SelectMany(x => x.UndoActions).ToArray(), undoRedoes.SelectMany(x => x.RedoActions).ToArray(),
+            UndoRedoActionPair undoRedo = new UndoRedoActionPair(undoRedoes.SelectMany(x => x.UndoActions).ToArray(), undoRedoes.SelectMany(x => x.RedoActions).ToArray(),
                 "Global set comparison rules state", new OwnerControlData(this, this.Parent));
 
             if (undoRedo.UndoActions.Length > 0)

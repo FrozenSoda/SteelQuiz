@@ -61,7 +61,7 @@ namespace SteelQuiz.QuizEditor
             {
                 if (QuizEditor.UpdateUndoRedoStacks)
                 {
-                    QuizEditor.UndoStack.Push(new UndoRedoFuncPair(
+                    QuizEditor.UndoStack.Push(new UndoRedoActionPair(
                         new Action[] { ComparisonRules.SetSemiSilentUR(ComparisonRules.Data) },
                         new Action[] { ComparisonRules.SetSemiSilentUR(e) },
                         "Change comparison rules",
@@ -178,7 +178,7 @@ namespace SteelQuiz.QuizEditor
 
             if (QuizEditor.UpdateUndoRedoStacks)
             {
-                QuizEditor.UndoStack.Push(new UndoRedoFuncPair(
+                QuizEditor.UndoStack.Push(new UndoRedoActionPair(
                     new Action[] { txt_front.ChangeText(txt_front_text_old, () => { ignore_txt_cardSide_change = true; }) },
                     new Action[] { txt_front.ChangeText(txt_front.Text, () => { ignore_txt_cardSide_change = true; }) },
                     "Change text",
@@ -205,7 +205,7 @@ namespace SteelQuiz.QuizEditor
 
             if (QuizEditor.UpdateUndoRedoStacks)
             {
-                QuizEditor.UndoStack.Push(new UndoRedoFuncPair(
+                QuizEditor.UndoStack.Push(new UndoRedoActionPair(
                 new Action[] { txt_back.ChangeText(txt_back_text_old, () => { ignore_txt_cardSide_change = true; }) },
                 new Action[] { txt_back.ChangeText(txt_back.Text, () => { ignore_txt_cardSide_change = true; }) },
                 "Change text",
@@ -231,7 +231,7 @@ namespace SteelQuiz.QuizEditor
         {
             if (QuizEditor.UpdateUndoRedoStacks)
             {
-                QuizEditor.UndoStack.Push(new UndoRedoFuncPair(
+                QuizEditor.UndoStack.Push(new UndoRedoActionPair(
                     new Action[] { QuizEditor.AddCard(this, QuizEditor.flp_cards.Controls.GetChildIndex(this)) },
                     new Action[] { QuizEditor.RemoveCard(this) },
                     "Remove card",
@@ -250,7 +250,7 @@ namespace SteelQuiz.QuizEditor
 
             if ((word == -1 || word == 1) && FrontSynonyms != null && FrontSynonyms.Contains(Front))
             {
-                QuizEditor.UndoStack.Push(new UndoRedoFuncPair(
+                QuizEditor.UndoStack.Push(new UndoRedoActionPair(
                     new Action[] { FrontSynonyms.AddItem(Front) },
                     new Action[] { FrontSynonyms.RemoveItem(Front) },
                     "Auto-remove synonym",
@@ -264,7 +264,7 @@ namespace SteelQuiz.QuizEditor
 
             if ((word == -1 || word == 2) && BackSynonyms != null && BackSynonyms.Contains(Back))
             {
-                QuizEditor.UndoStack.Push(new UndoRedoFuncPair(
+                QuizEditor.UndoStack.Push(new UndoRedoActionPair(
                     new Action[] { BackSynonyms.AddItem(Back) },
                     new Action[] { BackSynonyms.RemoveItem(Back) },
                     "Auto-remove synonym",

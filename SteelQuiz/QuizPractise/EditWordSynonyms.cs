@@ -35,8 +35,8 @@ namespace SteelQuiz.QuizPractise
         public List<string> Synonyms { get; set; }
         public int Language { get; set; }
 
-        private Stack<UndoRedoFuncPair> UndoStack { get; set; } = new Stack<UndoRedoFuncPair>();
-        private Stack<UndoRedoFuncPair> RedoStack { get; set; } = new Stack<UndoRedoFuncPair>();
+        private Stack<UndoRedoActionPair> UndoStack { get; set; } = new Stack<UndoRedoActionPair>();
+        private Stack<UndoRedoActionPair> RedoStack { get; set; } = new Stack<UndoRedoActionPair>();
 
         private bool changedTextBox = false; // since listbox select switch
         private object[] initialListBoxCollection;
@@ -161,7 +161,7 @@ namespace SteelQuiz.QuizPractise
 
             lst_synonyms.Items.Add(txt_wordAdd.Text);
 
-            UndoStack.Push(new UndoRedoFuncPair(
+            UndoStack.Push(new UndoRedoActionPair(
                 new Action[] { lst_synonyms.RemoveItem(txt_wordAdd.Text) },
                 new Action[] { lst_synonyms.AddItem(txt_wordAdd.Text) },
                 "Add synonym(s)",
@@ -244,7 +244,7 @@ namespace SteelQuiz.QuizPractise
                 redoes.Add(lst_synonyms.ChangeItem(_new, old));
             }
 
-            UndoStack.Push(new UndoRedoFuncPair(undoes.ToArray(), redoes.ToArray(), "Update synonym(s)", new OwnerControlData(this, this.Parent, Language)));
+            UndoStack.Push(new UndoRedoActionPair(undoes.ToArray(), redoes.ToArray(), "Update synonym(s)", new OwnerControlData(this, this.Parent, Language)));
             UpdateUndoRedoTooltips();
 
             txt_wordAdd.Text = "";
@@ -271,7 +271,7 @@ namespace SteelQuiz.QuizPractise
                 redoes.Add(lst_synonyms.RemoveItem(item));
             }
 
-            UndoStack.Push(new UndoRedoFuncPair(undoes.ToArray(), redoes.ToArray(), "Remove synonym(s)", new OwnerControlData(this, this.Parent, Language)));
+            UndoStack.Push(new UndoRedoActionPair(undoes.ToArray(), redoes.ToArray(), "Remove synonym(s)", new OwnerControlData(this, this.Parent, Language)));
             UpdateUndoRedoTooltips();
         }
 
