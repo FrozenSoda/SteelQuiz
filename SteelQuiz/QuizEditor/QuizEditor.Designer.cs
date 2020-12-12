@@ -96,7 +96,7 @@ namespace SteelQuiz.QuizEditor
             this.cmb_lang1.Location = new System.Drawing.Point(109, 30);
             this.cmb_lang1.Name = "cmb_lang1";
             this.cmb_lang1.Size = new System.Drawing.Size(267, 21);
-            this.cmb_lang1.TabIndex = 1;
+            this.cmb_lang1.TabIndex = 0;
             this.cmb_lang1.Text = "Front";
             this.cmb_lang1.TextUpdate += new System.EventHandler(this.Cmb_lang1_TextUpdate);
             // 
@@ -111,7 +111,7 @@ namespace SteelQuiz.QuizEditor
             this.cmb_lang2.Location = new System.Drawing.Point(489, 30);
             this.cmb_lang2.Name = "cmb_lang2";
             this.cmb_lang2.Size = new System.Drawing.Size(272, 21);
-            this.cmb_lang2.TabIndex = 2;
+            this.cmb_lang2.TabIndex = 1;
             this.cmb_lang2.Text = "Back";
             this.cmb_lang2.TextUpdate += new System.EventHandler(this.Cmb_lang2_TextUpdate);
             // 

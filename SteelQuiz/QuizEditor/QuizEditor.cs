@@ -187,6 +187,19 @@ namespace SteelQuiz.QuizEditor
             AddCard(count);
         }
 
+        /// <summary>
+        /// Updates the TabIndexes of the cards to match their displayed order.
+        /// </summary>
+        public void UpdateCardTabIndexes()
+        {
+            int index = 2; // Index 0 and 1 are reserved for card type fields
+            foreach (Control card in flp_cards.Controls)
+            {
+                card.TabIndex = index;
+                ++index;
+            }
+        }
+
         private Quiz ConstructQuiz()
         {
             var quiz = new Quiz(cmb_lang1.Text, cmb_lang2.Text, MetaData.QUIZ_FILE_FORMAT_VERSION);
