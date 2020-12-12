@@ -21,6 +21,7 @@ namespace SteelQuiz.QuizEditor
             lbl_currentIndex.Text = currentIndex.ToString();
             nud_newIndex.Minimum = 0;
             nud_newIndex.Maximum = maxIndex;
+            nud_newIndex.Select(0, nud_newIndex.Text.Length);
 
             SetTheme();
         }
