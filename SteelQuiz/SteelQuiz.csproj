@@ -448,7 +448,7 @@
     </Compile>
     <Compile Include="QuizEditor\UndoRedo\IUndoRedo.cs" />
     <Compile Include="QuizEditor\UndoRedo\UndoRedoExtensions.cs" />
-    <Compile Include="QuizEditor\UndoRedo\UndoRedoFuncPair.cs" />
+    <Compile Include="QuizEditor\UndoRedo\UndoRedoActionPair.cs" />
     <Compile Include="AutoThemeableForm.cs">
       <SubType>Form</SubType>
     </Compile>
