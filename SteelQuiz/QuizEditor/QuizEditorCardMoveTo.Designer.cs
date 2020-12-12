@@ -90,6 +90,7 @@
             // btn_cancel
             // 
             this.btn_cancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_cancel.FlatAppearance.BorderSize = 0;
             this.btn_cancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_cancel.Location = new System.Drawing.Point(12, 72);
@@ -102,9 +103,11 @@
             // 
             // QuizEditorCardMoveTo
             // 
+            this.AcceptButton = this.btn_move;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.CancelButton = this.btn_cancel;
             this.ClientSize = new System.Drawing.Size(316, 114);
             this.Controls.Add(this.btn_cancel);
             this.Controls.Add(this.btn_move);
