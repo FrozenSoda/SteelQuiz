@@ -181,7 +181,7 @@ namespace SteelQuiz.QuizEditor
                 QuizEditor.UndoStack.Push(new UndoRedoFuncPair(
                     new Action[] { txt_front.ChangeText(txt_front_text_old, () => { ignore_txt_cardSide_change = true; }) },
                     new Action[] { txt_front.ChangeText(txt_front.Text, () => { ignore_txt_cardSide_change = true; }) },
-                    "Change word",
+                    "Change text",
                     new OwnerControlData(this, this.Parent)));
                 QuizEditor.UpdateUndoRedoTooltips();
             }
@@ -208,7 +208,7 @@ namespace SteelQuiz.QuizEditor
                 QuizEditor.UndoStack.Push(new UndoRedoFuncPair(
                 new Action[] { txt_back.ChangeText(txt_back_text_old, () => { ignore_txt_cardSide_change = true; }) },
                 new Action[] { txt_back.ChangeText(txt_back.Text, () => { ignore_txt_cardSide_change = true; }) },
-                "Change word",
+                "Change text",
                 new OwnerControlData(this, this.Parent)));
                 QuizEditor.UpdateUndoRedoTooltips();
             }
