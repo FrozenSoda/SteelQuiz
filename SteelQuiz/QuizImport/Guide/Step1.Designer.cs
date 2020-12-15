@@ -48,8 +48,8 @@ namespace SteelQuiz.QuizImport.Guide
         {
             this.lbl_question = new System.Windows.Forms.Label();
             this.flp_siteRdo = new System.Windows.Forms.FlowLayoutPanel();
-            this.rdo_studentlitteratur = new System.Windows.Forms.RadioButton();
             this.rdo_textImport = new System.Windows.Forms.RadioButton();
+            this.rdo_studentlitteratur = new System.Windows.Forms.RadioButton();
             this.flp_siteRdo.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -74,31 +74,31 @@ namespace SteelQuiz.QuizImport.Guide
             this.flp_siteRdo.TabIndex = 7;
             this.flp_siteRdo.TabStop = true;
             // 
-            // rdo_studentlitteratur
-            // 
-            this.rdo_studentlitteratur.AutoSize = true;
-            this.rdo_studentlitteratur.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdo_studentlitteratur.ForeColor = System.Drawing.Color.White;
-            this.rdo_studentlitteratur.Location = new System.Drawing.Point(3, 34);
-            this.rdo_studentlitteratur.Name = "rdo_studentlitteratur";
-            this.rdo_studentlitteratur.Size = new System.Drawing.Size(141, 25);
-            this.rdo_studentlitteratur.TabIndex = 0;
-            this.rdo_studentlitteratur.Text = "Studentlitteratur";
-            this.rdo_studentlitteratur.UseVisualStyleBackColor = true;
-            // 
             // rdo_textImport
             // 
             this.rdo_textImport.AutoSize = true;
             this.rdo_textImport.Checked = true;
-            this.rdo_textImport.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdo_textImport.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdo_textImport.ForeColor = System.Drawing.Color.White;
             this.rdo_textImport.Location = new System.Drawing.Point(3, 3);
             this.rdo_textImport.Name = "rdo_textImport";
-            this.rdo_textImport.Size = new System.Drawing.Size(218, 25);
+            this.rdo_textImport.Size = new System.Drawing.Size(185, 21);
             this.rdo_textImport.TabIndex = 1;
             this.rdo_textImport.TabStop = true;
             this.rdo_textImport.Text = "From text containing words";
             this.rdo_textImport.UseVisualStyleBackColor = true;
+            // 
+            // rdo_studentlitteratur
+            // 
+            this.rdo_studentlitteratur.AutoSize = true;
+            this.rdo_studentlitteratur.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdo_studentlitteratur.ForeColor = System.Drawing.Color.White;
+            this.rdo_studentlitteratur.Location = new System.Drawing.Point(3, 30);
+            this.rdo_studentlitteratur.Name = "rdo_studentlitteratur";
+            this.rdo_studentlitteratur.Size = new System.Drawing.Size(119, 21);
+            this.rdo_studentlitteratur.TabIndex = 0;
+            this.rdo_studentlitteratur.Text = "Studentlitteratur";
+            this.rdo_studentlitteratur.UseVisualStyleBackColor = true;
             // 
             // Step1
             // 

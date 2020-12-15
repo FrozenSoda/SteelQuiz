@@ -42,7 +42,7 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             InitializeComponent();
             foreach (var wordPair in wordPairs)
             {
-                lst_words.Items.Add(wordPair.Front);
+                lst_terms.Items.Add(wordPair.Front);
             }
 
             SetTheme();
