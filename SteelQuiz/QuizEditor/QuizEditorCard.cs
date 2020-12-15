@@ -348,7 +348,7 @@ namespace SteelQuiz.QuizEditor
                 QuizEditor.UndoStack.Push(new UndoRedoActionPair(
                     new Action[] { this.MoveCard(QuizEditor.flp_cards.Controls.GetChildIndex(this)) },
                     new Action[] { this.MoveCard(newIndex) },
-                    "Move Card",
+                    "Move card",
                     new OwnerControlData(this, this.Parent)
                     ));
                 QuizEditor.UpdateUndoRedoTooltips();
