@@ -26,17 +26,11 @@ using System.Windows.Forms;
 
 namespace SteelQuiz.QuizEditor.UndoRedo
 {
+    /// <summary>
+    /// A collection of Actions used in undo/redo-stacks. For example, if an item is added to a ListBox, the RemoveItem Action should be added to the undo stack.
+    /// </summary>
     public static class UndoRedoExtensions
     {
-        /*
-         * The following Funcs should be added to the undo/redo-stacks. For instance, if an item is added to a listbox, RemoveItem should be added to the undo stack
-         * (which will remove the added item when pressing undo)
-         */
-
-        /*
-         * formPtr is a Func which returns the appropriate form
-         */ 
-
         public static Action ChangeText(this TextBox textBox, string to, Action beforeRevertAction)
         {
             return () => {
