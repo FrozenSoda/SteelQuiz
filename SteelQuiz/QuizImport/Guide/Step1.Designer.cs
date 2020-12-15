@@ -82,10 +82,10 @@ namespace SteelQuiz.QuizImport.Guide
             this.rdo_textImport.ForeColor = System.Drawing.Color.White;
             this.rdo_textImport.Location = new System.Drawing.Point(3, 3);
             this.rdo_textImport.Name = "rdo_textImport";
-            this.rdo_textImport.Size = new System.Drawing.Size(185, 21);
+            this.rdo_textImport.Size = new System.Drawing.Size(184, 21);
             this.rdo_textImport.TabIndex = 1;
             this.rdo_textImport.TabStop = true;
-            this.rdo_textImport.Text = "From text containing words";
+            this.rdo_textImport.Text = "From text containing a quiz";
             this.rdo_textImport.UseVisualStyleBackColor = true;
             // 
             // rdo_studentlitteratur
