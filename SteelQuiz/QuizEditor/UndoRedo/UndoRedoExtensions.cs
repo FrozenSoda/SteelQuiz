@@ -150,11 +150,11 @@ namespace SteelQuiz.QuizEditor.UndoRedo
             };
         }
 
-        public static Action MoveCard(this QuizEditor quizEditor, QuizEditorCard card, int index)
+        public static Action MoveCard(this QuizEditorCard card, int index)
         {
             return () =>
             {
-                card.MoveIndex(index, false);
+                card.MoveTo(index, false);
             };
         }
 

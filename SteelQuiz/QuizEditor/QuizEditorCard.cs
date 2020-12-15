@@ -341,13 +341,13 @@ namespace SteelQuiz.QuizEditor
             txt_back.Size = new Size(width, txt_back.Size.Height);
         }
 
-        public void MoveIndex(int newIndex, bool updateUndoRedoStacks = true)
+        public void MoveTo(int newIndex, bool updateUndoRedoStacks = true)
         {
             if (QuizEditor.UpdateUndoRedoStacks && updateUndoRedoStacks)
             {
                 QuizEditor.UndoStack.Push(new UndoRedoActionPair(
-                    new Action[] { QuizEditor.MoveCard(this, QuizEditor.flp_cards.Controls.GetChildIndex(this)) },
-                    new Action[] { QuizEditor.MoveCard(this, newIndex) },
+                    new Action[] { this.MoveCard(QuizEditor.flp_cards.Controls.GetChildIndex(this)) },
+                    new Action[] { this.MoveCard(newIndex) },
                     "Move Card",
                     new OwnerControlData(this, this.Parent)
                     ));
@@ -367,7 +367,7 @@ namespace SteelQuiz.QuizEditor
             int newIndex = QuizEditor.flp_cards.Controls.GetChildIndex(this) - 1;
             if (newIndex >= 0)
             {
-                MoveIndex(newIndex);
+                MoveTo(newIndex);
             }
         }
 
@@ -376,7 +376,7 @@ namespace SteelQuiz.QuizEditor
             int newIndex = QuizEditor.flp_cards.Controls.GetChildIndex(this) + 1;
             if (newIndex < QuizEditor.flp_cards.Controls.Count)
             {
-                MoveIndex(newIndex);
+                MoveTo(newIndex);
             }
         }
 
@@ -385,7 +385,7 @@ namespace SteelQuiz.QuizEditor
             var prompt = new QuizEditorCardMoveTo(QuizEditor.flp_cards.Controls.GetChildIndex(this), QuizEditor.flp_cards.Controls.Count - 1);
             if (prompt.ShowDialog() == DialogResult.OK)
             {
-                MoveIndex(prompt.NewIndex);
+                MoveTo(prompt.NewIndex);
             }
         }
     }
