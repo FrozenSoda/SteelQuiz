@@ -341,8 +341,19 @@ namespace SteelQuiz.QuizEditor
             txt_back.Size = new Size(width, txt_back.Size.Height);
         }
 
-        private void MoveIndex(int newIndex)
+        public void MoveIndex(int newIndex, bool updateUndoRedoStacks = true)
         {
+            if (QuizEditor.UpdateUndoRedoStacks && updateUndoRedoStacks)
+            {
+                QuizEditor.UndoStack.Push(new UndoRedoActionPair(
+                    new Action[] { QuizEditor.MoveCard(this, QuizEditor.flp_cards.Controls.GetChildIndex(this)) },
+                    new Action[] { QuizEditor.MoveCard(this, newIndex) },
+                    "Move Card",
+                    new OwnerControlData(this, this.Parent)
+                    ));
+                QuizEditor.UpdateUndoRedoTooltips();
+            }
+
             QuizEditor.flp_cards.Controls.SetChildIndex(this, newIndex);
 
             QuizEditor.ChangedSinceLastSave = true;
