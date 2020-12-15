@@ -91,6 +91,7 @@ namespace SteelQuiz.QuizImport.Guide
             // rdo_studentlitteratur
             // 
             this.rdo_studentlitteratur.AutoSize = true;
+            this.rdo_studentlitteratur.Enabled = false;
             this.rdo_studentlitteratur.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdo_studentlitteratur.ForeColor = System.Drawing.Color.White;
             this.rdo_studentlitteratur.Location = new System.Drawing.Point(3, 30);
@@ -99,6 +100,7 @@ namespace SteelQuiz.QuizImport.Guide
             this.rdo_studentlitteratur.TabIndex = 0;
             this.rdo_studentlitteratur.Text = "Studentlitteratur";
             this.rdo_studentlitteratur.UseVisualStyleBackColor = true;
+            this.rdo_studentlitteratur.Visible = false;
             // 
             // Step1
             // 
