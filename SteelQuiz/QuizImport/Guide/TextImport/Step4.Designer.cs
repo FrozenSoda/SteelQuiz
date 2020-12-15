@@ -81,7 +81,7 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             this.lbl_question.Name = "lbl_question";
             this.lbl_question.Size = new System.Drawing.Size(760, 43);
             this.lbl_question.TabIndex = 4;
-            this.lbl_question.Text = "Which language are the following words written in?";
+            this.lbl_question.Text = "Which language are the following terms written in?";
             // 
             // lst_words
             // 
@@ -95,7 +95,7 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             this.lst_words.TabIndex = 6;
             this.lst_words.TabStop = false;
             // 
-            // Step5
+            // Step4
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -104,7 +104,7 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lst_words);
             this.Controls.Add(this.lbl_question);
-            this.Name = "Step5";
+            this.Name = "Step4";
             this.Size = new System.Drawing.Size(766, 364);
             this.ResumeLayout(false);
             this.PerformLayout();

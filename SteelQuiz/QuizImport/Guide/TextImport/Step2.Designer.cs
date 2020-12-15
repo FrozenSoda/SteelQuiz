@@ -63,7 +63,7 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             this.lbl_question.Name = "lbl_question";
             this.lbl_question.Size = new System.Drawing.Size(760, 43);
             this.lbl_question.TabIndex = 20;
-            this.lbl_question.Text = "How should SteelQuiz import words that have multiple definitions?";
+            this.lbl_question.Text = "How should SteelQuiz import terms that have multiple definitions?";
             // 
             // pnl_multiTranslationOptions
             // 
@@ -84,9 +84,9 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(735, 51);
             this.label2.TabIndex = 6;
-            this.label2.Text = "With this selected, any definition of the word will be accepted when you are prom" +
-    "pted to enter it. You will not necessarily learn all of the definitions of the w" +
-    "ords.";
+            this.label2.Text = "With this selected, any definition of the term will be accepted when you are prom" +
+    "pted to enter it. You will not necessarily learn all of the definitions of the t" +
+    "erms.";
             // 
             // label1
             // 
@@ -95,10 +95,10 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             this.label1.ForeColor = System.Drawing.Color.Gainsboro;
             this.label1.Location = new System.Drawing.Point(20, 33);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(544, 17);
+            this.label1.Size = new System.Drawing.Size(541, 17);
             this.label1.TabIndex = 5;
             this.label1.Text = "With this selected, SteelQuiz will make sure that you learn all of the definition" +
-    "s, of the words.";
+    "s, of the terms.";
             // 
             // rdo_addMultipleTranslationsAsSynonyms
             // 
@@ -107,10 +107,9 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             this.rdo_addMultipleTranslationsAsSynonyms.ForeColor = System.Drawing.Color.White;
             this.rdo_addMultipleTranslationsAsSynonyms.Location = new System.Drawing.Point(3, 78);
             this.rdo_addMultipleTranslationsAsSynonyms.Name = "rdo_addMultipleTranslationsAsSynonyms";
-            this.rdo_addMultipleTranslationsAsSynonyms.Size = new System.Drawing.Size(499, 21);
+            this.rdo_addMultipleTranslationsAsSynonyms.Size = new System.Drawing.Size(465, 21);
             this.rdo_addMultipleTranslationsAsSynonyms.TabIndex = 4;
-            this.rdo_addMultipleTranslationsAsSynonyms.Text = "Add multiple definitions/translations of a term as synonyms in a single card" +
-    "";
+            this.rdo_addMultipleTranslationsAsSynonyms.Text = "Add multiple definitions/translations of a term as synonyms in a single card";
             this.rdo_addMultipleTranslationsAsSynonyms.UseVisualStyleBackColor = true;
             this.rdo_addMultipleTranslationsAsSynonyms.CheckedChanged += new System.EventHandler(this.Rdo_addMultipleTranslationsAsSynonyms_CheckedChanged);
             // 
@@ -122,11 +121,10 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             this.rdo_multipleTranslationsAsDifferentWordPairs.ForeColor = System.Drawing.Color.White;
             this.rdo_multipleTranslationsAsDifferentWordPairs.Location = new System.Drawing.Point(3, 3);
             this.rdo_multipleTranslationsAsDifferentWordPairs.Name = "rdo_multipleTranslationsAsDifferentWordPairs";
-            this.rdo_multipleTranslationsAsDifferentWordPairs.Size = new System.Drawing.Size(539, 21);
+            this.rdo_multipleTranslationsAsDifferentWordPairs.Size = new System.Drawing.Size(505, 21);
             this.rdo_multipleTranslationsAsDifferentWordPairs.TabIndex = 3;
             this.rdo_multipleTranslationsAsDifferentWordPairs.TabStop = true;
-            this.rdo_multipleTranslationsAsDifferentWordPairs.Text = "Add terms with multiple definitions/translations as separate cards (recommen" +
-    "ded)";
+            this.rdo_multipleTranslationsAsDifferentWordPairs.Text = "Add terms with multiple definitions/translations as separate cards (recommended)";
             this.rdo_multipleTranslationsAsDifferentWordPairs.UseVisualStyleBackColor = true;
             // 
             // Step2
