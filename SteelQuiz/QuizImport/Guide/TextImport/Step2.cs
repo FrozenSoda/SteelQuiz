@@ -43,15 +43,15 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
 
         private void Rdo_addMultipleTranslationsAsSynonyms_CheckedChanged(object sender, EventArgs e)
         {
-            if (rdo_addMultipleTranslationsAsSynonyms.Checked)
+            if (rdo_multipleDefinitionsAsSynonyms.Checked)
             {
                 var msg = MessageBox.Show("Warning! If this option is selected, you will not necessarily learn all the synonyms of the words (which are added" +
                     " to the quiz). Continue?",
                     "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
                 if (msg == DialogResult.No)
                 {
-                    rdo_addMultipleTranslationsAsSynonyms.Checked = false;
-                    rdo_multipleTranslationsAsDifferentWordPairs.Checked = true;
+                    rdo_multipleDefinitionsAsSynonyms.Checked = false;
+                    rdo_multipleDefinitionsAsSeparateCards.Checked = true;
                 }
             }
         }

@@ -50,8 +50,8 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             this.pnl_multiTranslationOptions = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.rdo_addMultipleTranslationsAsSynonyms = new System.Windows.Forms.RadioButton();
-            this.rdo_multipleTranslationsAsDifferentWordPairs = new System.Windows.Forms.RadioButton();
+            this.rdo_multipleDefinitionsAsSynonyms = new System.Windows.Forms.RadioButton();
+            this.rdo_multipleDefinitionsAsSeparateCards = new System.Windows.Forms.RadioButton();
             this.pnl_multiTranslationOptions.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -69,8 +69,8 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             // 
             this.pnl_multiTranslationOptions.Controls.Add(this.label2);
             this.pnl_multiTranslationOptions.Controls.Add(this.label1);
-            this.pnl_multiTranslationOptions.Controls.Add(this.rdo_addMultipleTranslationsAsSynonyms);
-            this.pnl_multiTranslationOptions.Controls.Add(this.rdo_multipleTranslationsAsDifferentWordPairs);
+            this.pnl_multiTranslationOptions.Controls.Add(this.rdo_multipleDefinitionsAsSynonyms);
+            this.pnl_multiTranslationOptions.Controls.Add(this.rdo_multipleDefinitionsAsSeparateCards);
             this.pnl_multiTranslationOptions.Location = new System.Drawing.Point(8, 59);
             this.pnl_multiTranslationOptions.Name = "pnl_multiTranslationOptions";
             this.pnl_multiTranslationOptions.Size = new System.Drawing.Size(760, 161);
@@ -100,32 +100,32 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             this.label1.Text = "With this selected, SteelQuiz will make sure that you learn all of the definition" +
     "s, of the terms.";
             // 
-            // rdo_addMultipleTranslationsAsSynonyms
+            // rdo_multipleDefinitionsAsSynonyms
             // 
-            this.rdo_addMultipleTranslationsAsSynonyms.AutoSize = true;
-            this.rdo_addMultipleTranslationsAsSynonyms.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdo_addMultipleTranslationsAsSynonyms.ForeColor = System.Drawing.Color.White;
-            this.rdo_addMultipleTranslationsAsSynonyms.Location = new System.Drawing.Point(3, 78);
-            this.rdo_addMultipleTranslationsAsSynonyms.Name = "rdo_addMultipleTranslationsAsSynonyms";
-            this.rdo_addMultipleTranslationsAsSynonyms.Size = new System.Drawing.Size(465, 21);
-            this.rdo_addMultipleTranslationsAsSynonyms.TabIndex = 4;
-            this.rdo_addMultipleTranslationsAsSynonyms.Text = "Add multiple definitions/translations of a term as synonyms in a single card";
-            this.rdo_addMultipleTranslationsAsSynonyms.UseVisualStyleBackColor = true;
-            this.rdo_addMultipleTranslationsAsSynonyms.CheckedChanged += new System.EventHandler(this.Rdo_addMultipleTranslationsAsSynonyms_CheckedChanged);
+            this.rdo_multipleDefinitionsAsSynonyms.AutoSize = true;
+            this.rdo_multipleDefinitionsAsSynonyms.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdo_multipleDefinitionsAsSynonyms.ForeColor = System.Drawing.Color.White;
+            this.rdo_multipleDefinitionsAsSynonyms.Location = new System.Drawing.Point(3, 78);
+            this.rdo_multipleDefinitionsAsSynonyms.Name = "rdo_multipleDefinitionsAsSynonyms";
+            this.rdo_multipleDefinitionsAsSynonyms.Size = new System.Drawing.Size(465, 21);
+            this.rdo_multipleDefinitionsAsSynonyms.TabIndex = 4;
+            this.rdo_multipleDefinitionsAsSynonyms.Text = "Add multiple definitions/translations of a term as synonyms in a single card";
+            this.rdo_multipleDefinitionsAsSynonyms.UseVisualStyleBackColor = true;
+            this.rdo_multipleDefinitionsAsSynonyms.CheckedChanged += new System.EventHandler(this.Rdo_addMultipleTranslationsAsSynonyms_CheckedChanged);
             // 
-            // rdo_multipleTranslationsAsDifferentWordPairs
+            // rdo_multipleDefinitionsAsSeparateCards
             // 
-            this.rdo_multipleTranslationsAsDifferentWordPairs.AutoSize = true;
-            this.rdo_multipleTranslationsAsDifferentWordPairs.Checked = true;
-            this.rdo_multipleTranslationsAsDifferentWordPairs.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdo_multipleTranslationsAsDifferentWordPairs.ForeColor = System.Drawing.Color.White;
-            this.rdo_multipleTranslationsAsDifferentWordPairs.Location = new System.Drawing.Point(3, 3);
-            this.rdo_multipleTranslationsAsDifferentWordPairs.Name = "rdo_multipleTranslationsAsDifferentWordPairs";
-            this.rdo_multipleTranslationsAsDifferentWordPairs.Size = new System.Drawing.Size(505, 21);
-            this.rdo_multipleTranslationsAsDifferentWordPairs.TabIndex = 3;
-            this.rdo_multipleTranslationsAsDifferentWordPairs.TabStop = true;
-            this.rdo_multipleTranslationsAsDifferentWordPairs.Text = "Add terms with multiple definitions/translations as separate cards (recommended)";
-            this.rdo_multipleTranslationsAsDifferentWordPairs.UseVisualStyleBackColor = true;
+            this.rdo_multipleDefinitionsAsSeparateCards.AutoSize = true;
+            this.rdo_multipleDefinitionsAsSeparateCards.Checked = true;
+            this.rdo_multipleDefinitionsAsSeparateCards.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdo_multipleDefinitionsAsSeparateCards.ForeColor = System.Drawing.Color.White;
+            this.rdo_multipleDefinitionsAsSeparateCards.Location = new System.Drawing.Point(3, 3);
+            this.rdo_multipleDefinitionsAsSeparateCards.Name = "rdo_multipleDefinitionsAsSeparateCards";
+            this.rdo_multipleDefinitionsAsSeparateCards.Size = new System.Drawing.Size(505, 21);
+            this.rdo_multipleDefinitionsAsSeparateCards.TabIndex = 3;
+            this.rdo_multipleDefinitionsAsSeparateCards.TabStop = true;
+            this.rdo_multipleDefinitionsAsSeparateCards.Text = "Add terms with multiple definitions/translations as separate cards (recommended)";
+            this.rdo_multipleDefinitionsAsSeparateCards.UseVisualStyleBackColor = true;
             // 
             // Step2
             // 
@@ -146,8 +146,8 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
 
         private System.Windows.Forms.Label lbl_question;
         private System.Windows.Forms.Panel pnl_multiTranslationOptions;
-        internal System.Windows.Forms.RadioButton rdo_addMultipleTranslationsAsSynonyms;
-        internal System.Windows.Forms.RadioButton rdo_multipleTranslationsAsDifferentWordPairs;
+        internal System.Windows.Forms.RadioButton rdo_multipleDefinitionsAsSynonyms;
+        internal System.Windows.Forms.RadioButton rdo_multipleDefinitionsAsSeparateCards;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
     }

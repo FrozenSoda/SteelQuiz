@@ -51,8 +51,8 @@ namespace SteelQuiz.QuizImport.Guide
         }
 
         private ImportSource ImportSource { get; set; }
-        private bool MultipleTranslationsAsDifferentWordPairs { get; set; }
-        private IEnumerable<Card> WordPairs { get; set; } = null;
+        private bool MultipleTranslationsAsDifferentCards { get; set; }
+        private IEnumerable<Card> Cards { get; set; } = null;
         public string QuizPath { get; set; }
         private string Language1 { get; set; }
         private string Language2 { get; set; }
@@ -89,12 +89,12 @@ namespace SteelQuiz.QuizImport.Guide
                 if (ImportSource == ImportSource.TextImport)
                 {
                     var uc = GetStep(Step, ImportSource) as TextImport.Step2;
-                    MultipleTranslationsAsDifferentWordPairs = uc.rdo_multipleTranslationsAsDifferentWordPairs.Checked;
+                    MultipleTranslationsAsDifferentCards = uc.rdo_multipleDefinitionsAsSeparateCards.Checked;
                 }
                 else if (ImportSource == ImportSource.Studentlitteratur)
                 {
                     var uc = GetStep(Step, ImportSource) as Studentlitteratur.Step2;
-                    MultipleTranslationsAsDifferentWordPairs = uc.rdo_multipleTranslationsAsDifferentWordPairs.Checked;
+                    MultipleTranslationsAsDifferentCards = uc.rdo_multipleTranslationsAsDifferentWordPairs.Checked;
                 }
             }
             else if (Step == 3)
@@ -118,11 +118,11 @@ namespace SteelQuiz.QuizImport.Guide
                             var w1wordPair = wordPairs.Where(x => x.Front == words[0]).FirstOrDefault();
                             var w2wordPair = wordPairs.Where(x => x.Back == words[1]).FirstOrDefault();
 
-                            if (!MultipleTranslationsAsDifferentWordPairs && w1wordPair != null)
+                            if (!MultipleTranslationsAsDifferentCards && w1wordPair != null)
                             {
                                 w1wordPair.BackSynonyms.Add(words[1]);
                             }
-                            else if (!MultipleTranslationsAsDifferentWordPairs && w2wordPair != null)
+                            else if (!MultipleTranslationsAsDifferentCards && w2wordPair != null)
                             {
                                 w2wordPair.FrontSynonyms.Add(words[0]);
                             }
@@ -139,13 +139,13 @@ namespace SteelQuiz.QuizImport.Guide
                         return;
                     }
 
-                    if (WordPairs != null && !WordPairs.SequenceEqual(wordPairs))
+                    if (Cards != null && !Cards.SequenceEqual(wordPairs))
                     {
                         // if another quiz was selected, reset steps afterwards
                         ResetSteps(4);
                     }
 
-                    WordPairs = wordPairs;
+                    Cards = wordPairs;
                 }
                 else if (ImportSource == ImportSource.Studentlitteratur)
                 {
@@ -154,7 +154,7 @@ namespace SteelQuiz.QuizImport.Guide
                     IEnumerable<Card> wordPairs;
                     if (ImportSource == ImportSource.Studentlitteratur)
                     {
-                        wordPairs = FromStudentlitteratur(url, MultipleTranslationsAsDifferentWordPairs);
+                        wordPairs = FromStudentlitteratur(url, MultipleTranslationsAsDifferentCards);
                     }
                     else
                     {
@@ -166,13 +166,13 @@ namespace SteelQuiz.QuizImport.Guide
                         return;
                     }
 
-                    if (WordPairs != null && !WordPairs.SequenceEqual(wordPairs))
+                    if (Cards != null && !Cards.SequenceEqual(wordPairs))
                     {
                         // if another quiz was selected, reset steps afterwards
                         ResetSteps(4);
                     }
 
-                    WordPairs = wordPairs;
+                    Cards = wordPairs;
                 }
             }
             else if (Step == 4)
@@ -262,7 +262,7 @@ namespace SteelQuiz.QuizImport.Guide
             QuizPath = sfd_quiz.FileName;
 
             var quiz = new Quiz(Language1, Language2, MetaData.QUIZ_FILE_FORMAT_VERSION);
-            quiz.Cards = WordPairs.ToList();
+            quiz.Cards = Cards.ToList();
 
             QuizCore.SaveQuiz(quiz, QuizPath);
 
@@ -394,12 +394,12 @@ namespace SteelQuiz.QuizImport.Guide
                 }
                 else if (step == 4)
                 {
-                    var step4 = new TextImport.Step4(WordPairs);
+                    var step4 = new TextImport.Step4(Cards);
                     pnl_steps.Controls.Add(step4);
                 }
                 else if (step == 5)
                 {
-                    var step5 = new TextImport.Step5(WordPairs);
+                    var step5 = new TextImport.Step5(Cards);
                     pnl_steps.Controls.Add(step5);
                 }
             }
@@ -417,12 +417,12 @@ namespace SteelQuiz.QuizImport.Guide
                 }
                 else if (step == 4)
                 {
-                    var step4 = new Studentlitteratur.Step4(WordPairs);
+                    var step4 = new Studentlitteratur.Step4(Cards);
                     pnl_steps.Controls.Add(step4);
                 }
                 else if (step == 5)
                 {
-                    var step5 = new Studentlitteratur.Step5(WordPairs);
+                    var step5 = new Studentlitteratur.Step5(Cards);
                     pnl_steps.Controls.Add(step5);
                 }
             }
