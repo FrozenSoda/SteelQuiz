@@ -68,7 +68,7 @@ namespace SteelQuiz.QuizImport.Guide
             this.flp_siteRdo.Controls.Add(this.rdo_textImport);
             this.flp_siteRdo.Controls.Add(this.rdo_studentlitteratur);
             this.flp_siteRdo.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flp_siteRdo.Location = new System.Drawing.Point(8, 69);
+            this.flp_siteRdo.Location = new System.Drawing.Point(8, 59);
             this.flp_siteRdo.Name = "flp_siteRdo";
             this.flp_siteRdo.Size = new System.Drawing.Size(755, 248);
             this.flp_siteRdo.TabIndex = 7;
