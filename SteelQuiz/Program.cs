@@ -256,7 +256,8 @@ namespace SteelQuiz
         {
             var quizEditor = new QuizEditor.QuizEditor(chkRecovery);
             openQuizEditors.Add(quizEditor);
-            if (quiz != null)
+            // Make sure quiz is specified and a recovery quiz hasn't been loaded (which would cause ChangedSinceLastSave to be true)
+            if (quiz != null && !quizEditor.ChangedSinceLastSave)
             {
                 quizEditor.LoadQuiz(quiz, quizPath);
             }
