@@ -48,7 +48,7 @@ namespace SteelQuiz.QuizImport.Guide
         {
             this.lbl_question = new System.Windows.Forms.Label();
             this.flp_siteRdo = new System.Windows.Forms.FlowLayoutPanel();
-            this.rdo_textImport = new System.Windows.Forms.RadioButton();
+            this.rdo_plainTextImport = new System.Windows.Forms.RadioButton();
             this.rdo_studentlitteratur = new System.Windows.Forms.RadioButton();
             this.flp_siteRdo.SuspendLayout();
             this.SuspendLayout();
@@ -65,7 +65,7 @@ namespace SteelQuiz.QuizImport.Guide
             // 
             // flp_siteRdo
             // 
-            this.flp_siteRdo.Controls.Add(this.rdo_textImport);
+            this.flp_siteRdo.Controls.Add(this.rdo_plainTextImport);
             this.flp_siteRdo.Controls.Add(this.rdo_studentlitteratur);
             this.flp_siteRdo.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flp_siteRdo.Location = new System.Drawing.Point(8, 59);
@@ -74,19 +74,19 @@ namespace SteelQuiz.QuizImport.Guide
             this.flp_siteRdo.TabIndex = 7;
             this.flp_siteRdo.TabStop = true;
             // 
-            // rdo_textImport
+            // rdo_plainTextImport
             // 
-            this.rdo_textImport.AutoSize = true;
-            this.rdo_textImport.Checked = true;
-            this.rdo_textImport.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdo_textImport.ForeColor = System.Drawing.Color.White;
-            this.rdo_textImport.Location = new System.Drawing.Point(3, 3);
-            this.rdo_textImport.Name = "rdo_textImport";
-            this.rdo_textImport.Size = new System.Drawing.Size(184, 21);
-            this.rdo_textImport.TabIndex = 1;
-            this.rdo_textImport.TabStop = true;
-            this.rdo_textImport.Text = "From text containing a quiz";
-            this.rdo_textImport.UseVisualStyleBackColor = true;
+            this.rdo_plainTextImport.AutoSize = true;
+            this.rdo_plainTextImport.Checked = true;
+            this.rdo_plainTextImport.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdo_plainTextImport.ForeColor = System.Drawing.Color.White;
+            this.rdo_plainTextImport.Location = new System.Drawing.Point(3, 3);
+            this.rdo_plainTextImport.Name = "rdo_plainTextImport";
+            this.rdo_plainTextImport.Size = new System.Drawing.Size(78, 21);
+            this.rdo_plainTextImport.TabIndex = 1;
+            this.rdo_plainTextImport.TabStop = true;
+            this.rdo_plainTextImport.Text = "Plain text";
+            this.rdo_plainTextImport.UseVisualStyleBackColor = true;
             // 
             // rdo_studentlitteratur
             // 
@@ -124,6 +124,6 @@ namespace SteelQuiz.QuizImport.Guide
         private System.Windows.Forms.Label lbl_question;
         private System.Windows.Forms.FlowLayoutPanel flp_siteRdo;
         internal System.Windows.Forms.RadioButton rdo_studentlitteratur;
-        internal System.Windows.Forms.RadioButton rdo_textImport;
+        internal System.Windows.Forms.RadioButton rdo_plainTextImport;
     }
 }

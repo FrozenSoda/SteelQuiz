@@ -75,7 +75,7 @@ namespace SteelQuiz.QuizImport.Guide
                 {
                     ImportSource = ImportSource.Studentlitteratur;
                 }
-                else if (uc.rdo_textImport.Checked)
+                else if (uc.rdo_plainTextImport.Checked)
                 {
                     ImportSource = ImportSource.TextImport;
                 }
