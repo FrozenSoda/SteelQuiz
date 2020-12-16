@@ -94,7 +94,7 @@ namespace SteelQuiz.QuizImport.Guide
             // sfd_quiz
             // 
             this.sfd_quiz.Filter = "SteelQuiz Quiz|*.steelquiz";
-            this.sfd_quiz.Title = "Select a path to save the quiz to";
+            this.sfd_quiz.Title = "Choose where to save the quiz";
             // 
             // QuizImportGuide
             // 
