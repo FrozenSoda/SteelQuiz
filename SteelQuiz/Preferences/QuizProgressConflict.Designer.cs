@@ -67,7 +67,7 @@ namespace SteelQuiz.Preferences
             // 
             this.pnl_step.Location = new System.Drawing.Point(12, 72);
             this.pnl_step.Name = "pnl_step";
-            this.pnl_step.Size = new System.Drawing.Size(657, 208);
+            this.pnl_step.Size = new System.Drawing.Size(657, 223);
             this.pnl_step.TabIndex = 9;
             // 
             // btn_continue
@@ -76,9 +76,9 @@ namespace SteelQuiz.Preferences
             this.btn_continue.FlatAppearance.BorderSize = 0;
             this.btn_continue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_continue.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_continue.Location = new System.Drawing.Point(489, 286);
+            this.btn_continue.Location = new System.Drawing.Point(489, 301);
             this.btn_continue.Name = "btn_continue";
-            this.btn_continue.Size = new System.Drawing.Size(180, 38);
+            this.btn_continue.Size = new System.Drawing.Size(180, 23);
             this.btn_continue.TabIndex = 10;
             this.btn_continue.Text = "Continue";
             this.btn_continue.UseVisualStyleBackColor = false;
@@ -89,9 +89,9 @@ namespace SteelQuiz.Preferences
             this.btn_cancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.btn_cancel.FlatAppearance.BorderSize = 0;
             this.btn_cancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_cancel.Location = new System.Drawing.Point(12, 286);
+            this.btn_cancel.Location = new System.Drawing.Point(12, 301);
             this.btn_cancel.Name = "btn_cancel";
-            this.btn_cancel.Size = new System.Drawing.Size(119, 38);
+            this.btn_cancel.Size = new System.Drawing.Size(119, 23);
             this.btn_cancel.TabIndex = 11;
             this.btn_cancel.Text = "Cancel";
             this.btn_cancel.UseVisualStyleBackColor = false;
@@ -102,9 +102,9 @@ namespace SteelQuiz.Preferences
             this.btn_advancedSimple.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.btn_advancedSimple.FlatAppearance.BorderSize = 0;
             this.btn_advancedSimple.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_advancedSimple.Location = new System.Drawing.Point(137, 286);
+            this.btn_advancedSimple.Location = new System.Drawing.Point(137, 301);
             this.btn_advancedSimple.Name = "btn_advancedSimple";
-            this.btn_advancedSimple.Size = new System.Drawing.Size(119, 38);
+            this.btn_advancedSimple.Size = new System.Drawing.Size(119, 23);
             this.btn_advancedSimple.TabIndex = 12;
             this.btn_advancedSimple.Text = "Advanced";
             this.btn_advancedSimple.UseVisualStyleBackColor = false;
@@ -128,7 +128,7 @@ namespace SteelQuiz.Preferences
             this.MaximizeBox = false;
             this.Name = "QuizProgressConflict";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Quiz Progress Data Conflict | SteelQuiz";
+            this.Text = "Quiz Progress Data Conflict - SteelQuiz";
             this.ResumeLayout(false);
 
         }

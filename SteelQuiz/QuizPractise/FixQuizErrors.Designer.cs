@@ -201,7 +201,7 @@ namespace SteelQuiz.QuizPractise
             this.MaximizeBox = false;
             this.Name = "FixQuizErrors";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Fix quiz errors | SteelQuiz";
+            this.Text = "Fix quiz errors - SteelQuiz";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DontAgreeMenu_FormClosing);
             this.ResumeLayout(false);
 

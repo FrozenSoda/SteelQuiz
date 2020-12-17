@@ -121,7 +121,7 @@ namespace SteelQuiz.QuizPractise
             this.MaximizeBox = false;
             this.Name = "EditWord";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Edit word | SteelQuiz";
+            this.Text = "Edit word - SteelQuiz";
             this.ResumeLayout(false);
             this.PerformLayout();
 

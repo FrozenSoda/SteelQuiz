@@ -54,7 +54,6 @@ namespace SteelQuiz.Preferences
             // 
             // rdo_mergePrioCurrent
             // 
-            this.rdo_mergePrioCurrent.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdo_mergePrioCurrent.Location = new System.Drawing.Point(3, 77);
             this.rdo_mergePrioCurrent.Name = "rdo_mergePrioCurrent";
             this.rdo_mergePrioCurrent.Size = new System.Drawing.Size(327, 67);
@@ -65,7 +64,6 @@ namespace SteelQuiz.Preferences
             // rdo_mergePrioTarget
             // 
             this.rdo_mergePrioTarget.Checked = true;
-            this.rdo_mergePrioTarget.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdo_mergePrioTarget.Location = new System.Drawing.Point(3, 3);
             this.rdo_mergePrioTarget.Name = "rdo_mergePrioTarget";
             this.rdo_mergePrioTarget.Size = new System.Drawing.Size(327, 68);
@@ -77,7 +75,6 @@ namespace SteelQuiz.Preferences
             // 
             // rdo_overwriteTarget
             // 
-            this.rdo_overwriteTarget.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdo_overwriteTarget.Location = new System.Drawing.Point(333, 77);
             this.rdo_overwriteTarget.Name = "rdo_overwriteTarget";
             this.rdo_overwriteTarget.Size = new System.Drawing.Size(321, 67);
@@ -88,7 +85,6 @@ namespace SteelQuiz.Preferences
             // 
             // rdo_keepTarget
             // 
-            this.rdo_keepTarget.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdo_keepTarget.Location = new System.Drawing.Point(333, 3);
             this.rdo_keepTarget.Name = "rdo_keepTarget";
             this.rdo_keepTarget.Size = new System.Drawing.Size(321, 68);
