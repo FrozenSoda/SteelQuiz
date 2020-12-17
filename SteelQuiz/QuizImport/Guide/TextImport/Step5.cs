@@ -27,6 +27,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SteelQuiz.QuizData;
 using static SteelQuiz.QuizImport.QuizImporter;
+using SteelQuiz.ThemeManager.Colors;
 
 namespace SteelQuiz.QuizImport.Guide.TextImport
 {
@@ -46,6 +47,20 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             }
 
             SetTheme();
+        }
+
+        public override void SetTheme(GeneralTheme theme = null)
+        {
+            base.SetTheme(theme);
+
+            if (ConfigManager.Config.Theme == ThemeManager.ThemeCore.Theme.Dark)
+            {
+                lbl_example.ForeColor = Color.Gainsboro;
+            }
+            else
+            {
+                lbl_example.ForeColor = Color.DimGray;
+            }
         }
 
         private void Txt_lang_TextChanged(object sender, EventArgs e)

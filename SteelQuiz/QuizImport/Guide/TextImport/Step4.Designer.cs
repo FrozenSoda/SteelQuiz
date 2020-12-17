@@ -50,7 +50,7 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             this.label1 = new System.Windows.Forms.Label();
             this.lbl_question = new System.Windows.Forms.Label();
             this.lst_terms = new System.Windows.Forms.ListBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lbl_example = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txt_lang
@@ -96,22 +96,22 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             this.lst_terms.TabIndex = 6;
             this.lst_terms.TabStop = false;
             // 
-            // label2
+            // lbl_example
             // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.Color.Silver;
-            this.label2.Location = new System.Drawing.Point(5, 338);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(313, 13);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "Examples:   Spanish; Question; Person; Animal; Polar form;...";
+            this.lbl_example.AutoSize = true;
+            this.lbl_example.ForeColor = System.Drawing.Color.Silver;
+            this.lbl_example.Location = new System.Drawing.Point(5, 338);
+            this.lbl_example.Name = "lbl_example";
+            this.lbl_example.Size = new System.Drawing.Size(313, 13);
+            this.lbl_example.TabIndex = 9;
+            this.lbl_example.Text = "Examples:   Spanish; Question; Person; Animal; Polar form;...";
             // 
             // Step4
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lbl_example);
             this.Controls.Add(this.txt_lang);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lst_terms);
@@ -130,6 +130,6 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lbl_question;
         private System.Windows.Forms.ListBox lst_terms;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lbl_example;
     }
 }
