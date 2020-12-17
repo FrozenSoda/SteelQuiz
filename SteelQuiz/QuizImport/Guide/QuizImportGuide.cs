@@ -135,7 +135,7 @@ namespace SteelQuiz.QuizImport.Guide
                     }
                     catch (IndexOutOfRangeException)
                     {
-                        MessageBox.Show("Pasted text does not match delimeter settings (word/line break)", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Text does not match delimiter settings (term/line break)", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
 
@@ -182,7 +182,7 @@ namespace SteelQuiz.QuizImport.Guide
                     var uc = GetStep(Step, ImportSource) as TextImport.Step4;
                     if (uc.Language1 == "")
                     {
-                        MessageBox.Show("Language cannot be empty", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Language/type cannot be empty", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                     Language1 = uc.Language1;
@@ -192,7 +192,7 @@ namespace SteelQuiz.QuizImport.Guide
                     var uc = GetStep(Step, ImportSource) as Studentlitteratur.Step4;
                     if (uc.Language1 == "")
                     {
-                        MessageBox.Show("Language cannot be empty", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Language/type cannot be empty", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                     Language1 = uc.Language1;
@@ -205,7 +205,7 @@ namespace SteelQuiz.QuizImport.Guide
                     var uc = GetStep(Step, ImportSource) as TextImport.Step5;
                     if (uc.Language2 == "")
                     {
-                        MessageBox.Show("Language cannot be empty", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Language/type cannot be empty", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                     Language2 = uc.Language2;
@@ -218,7 +218,7 @@ namespace SteelQuiz.QuizImport.Guide
                     var uc = GetStep(Step, ImportSource) as Studentlitteratur.Step5;
                     if (uc.Language2 == "")
                     {
-                        MessageBox.Show("Language cannot be empty", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Language/type cannot be empty", "SteelQuiz", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                     Language2 = uc.Language2;
