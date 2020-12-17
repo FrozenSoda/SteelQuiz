@@ -48,8 +48,8 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
         {
             this.lbl_question = new System.Windows.Forms.Label();
             this.pnl_multiTranslationOptions = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lbl_expl2 = new System.Windows.Forms.Label();
+            this.lbl_expl1 = new System.Windows.Forms.Label();
             this.rdo_multipleDefinitionsAsSynonyms = new System.Windows.Forms.RadioButton();
             this.rdo_multipleDefinitionsAsSeparateCards = new System.Windows.Forms.RadioButton();
             this.pnl_multiTranslationOptions.SuspendLayout();
@@ -67,8 +67,8 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             // 
             // pnl_multiTranslationOptions
             // 
-            this.pnl_multiTranslationOptions.Controls.Add(this.label2);
-            this.pnl_multiTranslationOptions.Controls.Add(this.label1);
+            this.pnl_multiTranslationOptions.Controls.Add(this.lbl_expl2);
+            this.pnl_multiTranslationOptions.Controls.Add(this.lbl_expl1);
             this.pnl_multiTranslationOptions.Controls.Add(this.rdo_multipleDefinitionsAsSynonyms);
             this.pnl_multiTranslationOptions.Controls.Add(this.rdo_multipleDefinitionsAsSeparateCards);
             this.pnl_multiTranslationOptions.Location = new System.Drawing.Point(8, 59);
@@ -76,26 +76,26 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             this.pnl_multiTranslationOptions.Size = new System.Drawing.Size(760, 161);
             this.pnl_multiTranslationOptions.TabIndex = 21;
             // 
-            // label2
+            // lbl_expl2
             // 
-            this.label2.ForeColor = System.Drawing.Color.Gainsboro;
-            this.label2.Location = new System.Drawing.Point(20, 98);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(735, 51);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "With this selected, any definition of the term will be accepted when you are prom" +
+            this.lbl_expl2.ForeColor = System.Drawing.Color.Gainsboro;
+            this.lbl_expl2.Location = new System.Drawing.Point(20, 98);
+            this.lbl_expl2.Name = "lbl_expl2";
+            this.lbl_expl2.Size = new System.Drawing.Size(735, 51);
+            this.lbl_expl2.TabIndex = 6;
+            this.lbl_expl2.Text = "With this selected, any definition of the term will be accepted when you are prom" +
     "pted to enter it. You will not necessarily learn all of the definitions of the t" +
     "erms.";
             // 
-            // label1
+            // lbl_expl1
             // 
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.Color.Gainsboro;
-            this.label1.Location = new System.Drawing.Point(20, 23);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(483, 13);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "With this selected, SteelQuiz will make sure that you learn all of the definition" +
+            this.lbl_expl1.AutoSize = true;
+            this.lbl_expl1.ForeColor = System.Drawing.Color.Gainsboro;
+            this.lbl_expl1.Location = new System.Drawing.Point(20, 23);
+            this.lbl_expl1.Name = "lbl_expl1";
+            this.lbl_expl1.Size = new System.Drawing.Size(483, 13);
+            this.lbl_expl1.TabIndex = 5;
+            this.lbl_expl1.Text = "With this selected, SteelQuiz will make sure that you learn all of the definition" +
     "s, of the terms.";
             // 
             // rdo_multipleDefinitionsAsSynonyms
@@ -145,7 +145,7 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
         private System.Windows.Forms.Panel pnl_multiTranslationOptions;
         internal System.Windows.Forms.RadioButton rdo_multipleDefinitionsAsSynonyms;
         internal System.Windows.Forms.RadioButton rdo_multipleDefinitionsAsSeparateCards;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbl_expl2;
+        private System.Windows.Forms.Label lbl_expl1;
     }
 }
