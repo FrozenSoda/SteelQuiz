@@ -61,6 +61,7 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             this.txt_lang.Name = "txt_lang";
             this.txt_lang.Size = new System.Drawing.Size(605, 22);
             this.txt_lang.TabIndex = 0;
+            this.txt_lang.Text = "Front";
             this.txt_lang.TextChanged += new System.EventHandler(this.Txt_lang_TextChanged);
             // 
             // label1
