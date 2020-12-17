@@ -78,13 +78,13 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(5, 366);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(153, 13);
+            this.label1.Size = new System.Drawing.Size(149, 13);
             this.label1.TabIndex = 18;
-            this.label1.Text = "Character(s) between words:";
+            this.label1.Text = "Character(s) between terms:";
             // 
             // txt_chBetweenWords
             // 
-            this.txt_chBetweenWords.Location = new System.Drawing.Point(164, 363);
+            this.txt_chBetweenWords.Location = new System.Drawing.Point(160, 363);
             this.txt_chBetweenWords.Name = "txt_chBetweenWords";
             this.txt_chBetweenWords.Size = new System.Drawing.Size(113, 22);
             this.txt_chBetweenWords.TabIndex = 19;
