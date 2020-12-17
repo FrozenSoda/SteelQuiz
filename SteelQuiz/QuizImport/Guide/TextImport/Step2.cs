@@ -60,8 +60,7 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
         {
             if (rdo_multipleDefinitionsAsSynonyms.Checked)
             {
-                var msg = MessageBox.Show("Warning! If this option is selected, you will not necessarily learn all the synonyms of the words (which are added" +
-                    " to the quiz). Continue?",
+                var msg = MessageBox.Show("Warning! If this option is selected, you will not necessarily learn all of the eventual synonyms of the quiz terms. Continue?",
                     "SteelQuiz", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
                 if (msg == DialogResult.No)
                 {
