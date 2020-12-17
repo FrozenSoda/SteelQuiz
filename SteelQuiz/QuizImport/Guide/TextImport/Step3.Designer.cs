@@ -69,14 +69,14 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             this.rtf_text.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rtf_text.Location = new System.Drawing.Point(8, 59);
             this.rtf_text.Name = "rtf_text";
-            this.rtf_text.Size = new System.Drawing.Size(755, 266);
+            this.rtf_text.Size = new System.Drawing.Size(755, 298);
             this.rtf_text.TabIndex = 17;
             this.rtf_text.Text = "";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(5, 340);
+            this.label1.Location = new System.Drawing.Point(5, 366);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(153, 13);
             this.label1.TabIndex = 18;
@@ -84,7 +84,7 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             // 
             // txt_chBetweenWords
             // 
-            this.txt_chBetweenWords.Location = new System.Drawing.Point(164, 337);
+            this.txt_chBetweenWords.Location = new System.Drawing.Point(164, 363);
             this.txt_chBetweenWords.Name = "txt_chBetweenWords";
             this.txt_chBetweenWords.Size = new System.Drawing.Size(113, 22);
             this.txt_chBetweenWords.TabIndex = 19;
@@ -92,7 +92,7 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             // 
             // txt_chBetweenLines
             // 
-            this.txt_chBetweenLines.Location = new System.Drawing.Point(490, 337);
+            this.txt_chBetweenLines.Location = new System.Drawing.Point(490, 363);
             this.txt_chBetweenLines.Name = "txt_chBetweenLines";
             this.txt_chBetweenLines.Size = new System.Drawing.Size(113, 22);
             this.txt_chBetweenLines.TabIndex = 21;
@@ -101,7 +101,7 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(317, 340);
+            this.label2.Location = new System.Drawing.Point(317, 366);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(167, 13);
             this.label2.TabIndex = 20;
@@ -121,7 +121,7 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.White;
             this.Name = "Step3";
-            this.Size = new System.Drawing.Size(766, 364);
+            this.Size = new System.Drawing.Size(776, 397);
             this.ResumeLayout(false);
             this.PerformLayout();
 
