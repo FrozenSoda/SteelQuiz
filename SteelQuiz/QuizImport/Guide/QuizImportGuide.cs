@@ -103,7 +103,7 @@ namespace SteelQuiz.QuizImport.Guide
                 {
                     var uc = GetStep(Step, ImportSource) as TextImport.Step3;
 
-                    string quizText = uc.rtf_text.Text;
+                    string quizText = uc.rtf_text.Text.Trim('\r', '\n');
                     string termDelimeter = Regex.Unescape(uc.txt_chBetweenTerms.Text);
                     string lineDelimeter = Regex.Unescape(uc.txt_chBetweenLines.Text);
 
