@@ -51,7 +51,7 @@ namespace SteelQuiz.QuizImport.Guide.Studentlitteratur
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.rdo_addMultipleTranslationsAsSynonyms = new System.Windows.Forms.RadioButton();
-            this.rdo_multipleTranslationsAsDifferentWordPairs = new System.Windows.Forms.RadioButton();
+            this.rdo_multipleDefinitionsAsSeparateCards = new System.Windows.Forms.RadioButton();
             this.pnl_multiTranslationOptions.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -70,7 +70,7 @@ namespace SteelQuiz.QuizImport.Guide.Studentlitteratur
             this.pnl_multiTranslationOptions.Controls.Add(this.label2);
             this.pnl_multiTranslationOptions.Controls.Add(this.label1);
             this.pnl_multiTranslationOptions.Controls.Add(this.rdo_addMultipleTranslationsAsSynonyms);
-            this.pnl_multiTranslationOptions.Controls.Add(this.rdo_multipleTranslationsAsDifferentWordPairs);
+            this.pnl_multiTranslationOptions.Controls.Add(this.rdo_multipleDefinitionsAsSeparateCards);
             this.pnl_multiTranslationOptions.Location = new System.Drawing.Point(8, 59);
             this.pnl_multiTranslationOptions.Name = "pnl_multiTranslationOptions";
             this.pnl_multiTranslationOptions.Size = new System.Drawing.Size(760, 161);
@@ -116,18 +116,18 @@ namespace SteelQuiz.QuizImport.Guide.Studentlitteratur
             // 
             // rdo_multipleTranslationsAsDifferentWordPairs
             // 
-            this.rdo_multipleTranslationsAsDifferentWordPairs.AutoSize = true;
-            this.rdo_multipleTranslationsAsDifferentWordPairs.Checked = true;
-            this.rdo_multipleTranslationsAsDifferentWordPairs.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdo_multipleTranslationsAsDifferentWordPairs.ForeColor = System.Drawing.Color.White;
-            this.rdo_multipleTranslationsAsDifferentWordPairs.Location = new System.Drawing.Point(3, 3);
-            this.rdo_multipleTranslationsAsDifferentWordPairs.Name = "rdo_multipleTranslationsAsDifferentWordPairs";
-            this.rdo_multipleTranslationsAsDifferentWordPairs.Size = new System.Drawing.Size(539, 21);
-            this.rdo_multipleTranslationsAsDifferentWordPairs.TabIndex = 3;
-            this.rdo_multipleTranslationsAsDifferentWordPairs.TabStop = true;
-            this.rdo_multipleTranslationsAsDifferentWordPairs.Text = "Add terms with multiple definitions/translations as separate cards (recommen" +
+            this.rdo_multipleDefinitionsAsSeparateCards.AutoSize = true;
+            this.rdo_multipleDefinitionsAsSeparateCards.Checked = true;
+            this.rdo_multipleDefinitionsAsSeparateCards.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdo_multipleDefinitionsAsSeparateCards.ForeColor = System.Drawing.Color.White;
+            this.rdo_multipleDefinitionsAsSeparateCards.Location = new System.Drawing.Point(3, 3);
+            this.rdo_multipleDefinitionsAsSeparateCards.Name = "rdo_multipleTranslationsAsDifferentWordPairs";
+            this.rdo_multipleDefinitionsAsSeparateCards.Size = new System.Drawing.Size(539, 21);
+            this.rdo_multipleDefinitionsAsSeparateCards.TabIndex = 3;
+            this.rdo_multipleDefinitionsAsSeparateCards.TabStop = true;
+            this.rdo_multipleDefinitionsAsSeparateCards.Text = "Add terms with multiple definitions/translations as separate cards (recommen" +
     "ded)";
-            this.rdo_multipleTranslationsAsDifferentWordPairs.UseVisualStyleBackColor = true;
+            this.rdo_multipleDefinitionsAsSeparateCards.UseVisualStyleBackColor = true;
             // 
             // Step2
             // 
@@ -149,7 +149,7 @@ namespace SteelQuiz.QuizImport.Guide.Studentlitteratur
         private System.Windows.Forms.Label lbl_question;
         private System.Windows.Forms.Panel pnl_multiTranslationOptions;
         internal System.Windows.Forms.RadioButton rdo_addMultipleTranslationsAsSynonyms;
-        internal System.Windows.Forms.RadioButton rdo_multipleTranslationsAsDifferentWordPairs;
+        internal System.Windows.Forms.RadioButton rdo_multipleDefinitionsAsSeparateCards;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
     }

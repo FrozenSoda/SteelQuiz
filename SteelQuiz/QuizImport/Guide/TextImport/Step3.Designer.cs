@@ -49,7 +49,7 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             this.lbl_question = new System.Windows.Forms.Label();
             this.rtf_text = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.txt_chBetweenWords = new System.Windows.Forms.TextBox();
+            this.txt_chBetweenTerms = new System.Windows.Forms.TextBox();
             this.txt_chBetweenLines = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -84,11 +84,11 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             // 
             // txt_chBetweenWords
             // 
-            this.txt_chBetweenWords.Location = new System.Drawing.Point(160, 337);
-            this.txt_chBetweenWords.Name = "txt_chBetweenWords";
-            this.txt_chBetweenWords.Size = new System.Drawing.Size(113, 22);
-            this.txt_chBetweenWords.TabIndex = 19;
-            this.txt_chBetweenWords.Text = " - ";
+            this.txt_chBetweenTerms.Location = new System.Drawing.Point(160, 337);
+            this.txt_chBetweenTerms.Name = "txt_chBetweenWords";
+            this.txt_chBetweenTerms.Size = new System.Drawing.Size(113, 22);
+            this.txt_chBetweenTerms.TabIndex = 19;
+            this.txt_chBetweenTerms.Text = " - ";
             // 
             // txt_chBetweenLines
             // 
@@ -114,7 +114,7 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.Controls.Add(this.txt_chBetweenLines);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.txt_chBetweenWords);
+            this.Controls.Add(this.txt_chBetweenTerms);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.rtf_text);
             this.Controls.Add(this.lbl_question);
@@ -132,7 +132,7 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         internal System.Windows.Forms.RichTextBox rtf_text;
-        internal System.Windows.Forms.TextBox txt_chBetweenWords;
+        internal System.Windows.Forms.TextBox txt_chBetweenTerms;
         internal System.Windows.Forms.TextBox txt_chBetweenLines;
     }
 }

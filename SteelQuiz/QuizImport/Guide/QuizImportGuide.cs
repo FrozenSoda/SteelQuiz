@@ -94,7 +94,7 @@ namespace SteelQuiz.QuizImport.Guide
                 else if (ImportSource == ImportSource.Studentlitteratur)
                 {
                     var uc = GetStep(Step, ImportSource) as Studentlitteratur.Step2;
-                    MultipleTranslationsAsDifferentCards = uc.rdo_multipleTranslationsAsDifferentWordPairs.Checked;
+                    MultipleTranslationsAsDifferentCards = uc.rdo_multipleDefinitionsAsSeparateCards.Checked;
                 }
             }
             else if (Step == 3)
@@ -104,32 +104,32 @@ namespace SteelQuiz.QuizImport.Guide
                     var uc = GetStep(Step, ImportSource) as TextImport.Step3;
 
                     string quizText = uc.rtf_text.Text;
-                    string wordDelimeter = Regex.Unescape(uc.txt_chBetweenWords.Text);
+                    string termDelimeter = Regex.Unescape(uc.txt_chBetweenTerms.Text);
                     string lineDelimeter = Regex.Unescape(uc.txt_chBetweenLines.Text);
 
-                    var wordPairs = new List<Card>();
+                    var cards = new List<Card>();
 
                     try
                     {
                         foreach (string line in quizText.Split(new string[] { lineDelimeter }, StringSplitOptions.None))
                         {
-                            string[] words = line.Split(new string[] { wordDelimeter }, StringSplitOptions.None);
+                            string[] terms = line.Split(new string[] { termDelimeter }, StringSplitOptions.None);
 
-                            var w1wordPair = wordPairs.Where(x => x.Front == words[0]).FirstOrDefault();
-                            var w2wordPair = wordPairs.Where(x => x.Back == words[1]).FirstOrDefault();
+                            var term1card = cards.Where(x => x.Front == terms[0]).FirstOrDefault();
+                            var term2card = cards.Where(x => x.Back == terms[1]).FirstOrDefault();
 
-                            if (!MultipleTranslationsAsDifferentCards && w1wordPair != null)
+                            if (!MultipleTranslationsAsDifferentCards && term1card != null)
                             {
-                                w1wordPair.BackSynonyms.Add(words[1]);
+                                term1card.BackSynonyms.Add(terms[1]);
                             }
-                            else if (!MultipleTranslationsAsDifferentCards && w2wordPair != null)
+                            else if (!MultipleTranslationsAsDifferentCards && term2card != null)
                             {
-                                w2wordPair.FrontSynonyms.Add(words[0]);
+                                term2card.FrontSynonyms.Add(terms[0]);
                             }
                             else
                             {
-                                var wordPair = new Card(words[0], words[1], StringComp.SMART_RULES);
-                                wordPairs.Add(wordPair);
+                                var card = new Card(terms[0], terms[1], StringComp.SMART_RULES);
+                                cards.Add(card);
                             }
                         }
                     }
@@ -139,40 +139,40 @@ namespace SteelQuiz.QuizImport.Guide
                         return;
                     }
 
-                    if (Cards != null && !Cards.SequenceEqual(wordPairs))
+                    if (Cards != null && !Cards.SequenceEqual(cards))
                     {
                         // if another quiz was selected, reset steps afterwards
                         ResetSteps(4);
                     }
 
-                    Cards = wordPairs;
+                    Cards = cards;
                 }
                 else if (ImportSource == ImportSource.Studentlitteratur)
                 {
                     var uc = GetStep(Step, ImportSource) as Studentlitteratur.Step3;
                     string url = uc.txt_url.Text;
-                    IEnumerable<Card> wordPairs;
+                    IEnumerable<Card> cards;
                     if (ImportSource == ImportSource.Studentlitteratur)
                     {
-                        wordPairs = FromStudentlitteratur(url, MultipleTranslationsAsDifferentCards);
+                        cards = FromStudentlitteratur(url, MultipleTranslationsAsDifferentCards);
                     }
                     else
                     {
                         throw new NotImplementedException("Hmm... A radio button for import site source was selected that was not implemented in the code (enum)");
                     }
 
-                    if (wordPairs == null)
+                    if (cards == null)
                     {
                         return;
                     }
 
-                    if (Cards != null && !Cards.SequenceEqual(wordPairs))
+                    if (Cards != null && !Cards.SequenceEqual(cards))
                     {
                         // if another quiz was selected, reset steps afterwards
                         ResetSteps(4);
                     }
 
-                    Cards = wordPairs;
+                    Cards = cards;
                 }
             }
             else if (Step == 4)

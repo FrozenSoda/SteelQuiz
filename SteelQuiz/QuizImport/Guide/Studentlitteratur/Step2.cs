@@ -51,7 +51,7 @@ namespace SteelQuiz.QuizImport.Guide.Studentlitteratur
                 if (msg == DialogResult.No)
                 {
                     rdo_addMultipleTranslationsAsSynonyms.Checked = false;
-                    rdo_multipleTranslationsAsDifferentWordPairs.Checked = true;
+                    rdo_multipleDefinitionsAsSeparateCards.Checked = true;
                 }
             }
         }
