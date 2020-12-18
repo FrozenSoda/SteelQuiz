@@ -1,4 +1,13 @@
-WARNING: When updating to SteelQuiz 5, the progress data for your quizzes will be lost!
+WARNING: When updating to SteelQuiz 5 from earlier versions of SteelQuiz, the progress data for your quizzes will be lost!
+
+v5.1.3:
+- Fixed an issue preventing quiz card re-orders from being undone.
+- Fixed usability issues within the Quiz Editor.
+- Fixed incorrect labels within the application.
+- Fixed an issue causing confusing behaviour when loading a quiz in certain circumstances.
+- Fixed user interface inconsistencies.
+- Removed an obsolete quiz import source.
+
 
 v5.1.2:
 - Fixed an issue causing an error when changing the location for the quiz progress data file.
