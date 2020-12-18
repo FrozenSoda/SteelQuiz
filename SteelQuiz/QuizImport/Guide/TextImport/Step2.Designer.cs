@@ -71,6 +71,7 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             this.pnl_multiTranslationOptions.Controls.Add(this.lbl_expl1);
             this.pnl_multiTranslationOptions.Controls.Add(this.rdo_multipleDefinitionsAsSynonyms);
             this.pnl_multiTranslationOptions.Controls.Add(this.rdo_multipleDefinitionsAsSeparateCards);
+            this.pnl_multiTranslationOptions.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pnl_multiTranslationOptions.Location = new System.Drawing.Point(8, 59);
             this.pnl_multiTranslationOptions.Name = "pnl_multiTranslationOptions";
             this.pnl_multiTranslationOptions.Size = new System.Drawing.Size(760, 161);
@@ -79,7 +80,7 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             // lbl_expl2
             // 
             this.lbl_expl2.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lbl_expl2.Location = new System.Drawing.Point(20, 98);
+            this.lbl_expl2.Location = new System.Drawing.Point(20, 102);
             this.lbl_expl2.Name = "lbl_expl2";
             this.lbl_expl2.Size = new System.Drawing.Size(735, 51);
             this.lbl_expl2.TabIndex = 6;
@@ -91,7 +92,7 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             // 
             this.lbl_expl1.AutoSize = true;
             this.lbl_expl1.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lbl_expl1.Location = new System.Drawing.Point(20, 23);
+            this.lbl_expl1.Location = new System.Drawing.Point(20, 27);
             this.lbl_expl1.Name = "lbl_expl1";
             this.lbl_expl1.Size = new System.Drawing.Size(483, 13);
             this.lbl_expl1.TabIndex = 5;
@@ -132,6 +133,7 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.Controls.Add(this.pnl_multiTranslationOptions);
             this.Controls.Add(this.lbl_question);
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "Step2";
             this.Size = new System.Drawing.Size(766, 364);
             this.pnl_multiTranslationOptions.ResumeLayout(false);

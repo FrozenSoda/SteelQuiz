@@ -84,7 +84,7 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             // 
             // txt_chBetweenWords
             // 
-            this.txt_chBetweenWords.Location = new System.Drawing.Point(164, 337);
+            this.txt_chBetweenWords.Location = new System.Drawing.Point(160, 337);
             this.txt_chBetweenWords.Name = "txt_chBetweenWords";
             this.txt_chBetweenWords.Size = new System.Drawing.Size(113, 22);
             this.txt_chBetweenWords.TabIndex = 19;

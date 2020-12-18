@@ -101,7 +101,7 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             // 
             this.lbl_example.AutoSize = true;
             this.lbl_example.ForeColor = System.Drawing.Color.Silver;
-            this.lbl_example.Location = new System.Drawing.Point(5, 338);
+            this.lbl_example.Location = new System.Drawing.Point(5, 309);
             this.lbl_example.Name = "lbl_example";
             this.lbl_example.Size = new System.Drawing.Size(313, 13);
             this.lbl_example.TabIndex = 9;
