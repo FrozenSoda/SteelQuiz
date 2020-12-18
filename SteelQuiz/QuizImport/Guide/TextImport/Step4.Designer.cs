@@ -57,7 +57,7 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             // 
             this.txt_lang.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_lang.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_lang.Location = new System.Drawing.Point(158, 363);
+            this.txt_lang.Location = new System.Drawing.Point(158, 334);
             this.txt_lang.Name = "txt_lang";
             this.txt_lang.Size = new System.Drawing.Size(605, 22);
             this.txt_lang.TabIndex = 0;
@@ -69,7 +69,7 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(5, 365);
+            this.label1.Location = new System.Drawing.Point(5, 336);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(147, 13);
             this.label1.TabIndex = 8;
@@ -93,7 +93,7 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             this.lst_terms.FormattingEnabled = true;
             this.lst_terms.Location = new System.Drawing.Point(2, 55);
             this.lst_terms.Name = "lst_terms";
-            this.lst_terms.Size = new System.Drawing.Size(761, 275);
+            this.lst_terms.Size = new System.Drawing.Size(761, 236);
             this.lst_terms.TabIndex = 6;
             this.lst_terms.TabStop = false;
             // 
@@ -120,7 +120,7 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.White;
             this.Name = "Step4";
-            this.Size = new System.Drawing.Size(766, 397);
+            this.Size = new System.Drawing.Size(766, 364);
             this.ResumeLayout(false);
             this.PerformLayout();
 

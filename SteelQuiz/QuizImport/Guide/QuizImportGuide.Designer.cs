@@ -58,10 +58,11 @@ namespace SteelQuiz.QuizImport.Guide
             this.btn_next.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.btn_next.FlatAppearance.BorderSize = 0;
             this.btn_next.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_next.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_next.ForeColor = System.Drawing.Color.White;
-            this.btn_next.Location = new System.Drawing.Point(668, 415);
+            this.btn_next.Location = new System.Drawing.Point(549, 392);
             this.btn_next.Name = "btn_next";
-            this.btn_next.Size = new System.Drawing.Size(120, 23);
+            this.btn_next.Size = new System.Drawing.Size(239, 46);
             this.btn_next.TabIndex = 1;
             this.btn_next.Text = "Next";
             this.btn_next.UseVisualStyleBackColor = false;
@@ -72,10 +73,11 @@ namespace SteelQuiz.QuizImport.Guide
             this.btn_prevCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.btn_prevCancel.FlatAppearance.BorderSize = 0;
             this.btn_prevCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_prevCancel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_prevCancel.ForeColor = System.Drawing.Color.White;
-            this.btn_prevCancel.Location = new System.Drawing.Point(542, 415);
+            this.btn_prevCancel.Location = new System.Drawing.Point(12, 392);
             this.btn_prevCancel.Name = "btn_prevCancel";
-            this.btn_prevCancel.Size = new System.Drawing.Size(120, 23);
+            this.btn_prevCancel.Size = new System.Drawing.Size(162, 46);
             this.btn_prevCancel.TabIndex = 6;
             this.btn_prevCancel.Text = "Cancel";
             this.btn_prevCancel.UseVisualStyleBackColor = false;
@@ -85,7 +87,7 @@ namespace SteelQuiz.QuizImport.Guide
             // 
             this.pnl_steps.Location = new System.Drawing.Point(12, 12);
             this.pnl_steps.Name = "pnl_steps";
-            this.pnl_steps.Size = new System.Drawing.Size(776, 397);
+            this.pnl_steps.Size = new System.Drawing.Size(776, 374);
             this.pnl_steps.TabIndex = 0;
             this.pnl_steps.TabStop = true;
             // 
@@ -103,7 +105,6 @@ namespace SteelQuiz.QuizImport.Guide
             this.Controls.Add(this.pnl_steps);
             this.Controls.Add(this.btn_prevCancel);
             this.Controls.Add(this.btn_next);
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;

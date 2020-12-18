@@ -101,10 +101,11 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             // rdo_multipleDefinitionsAsSynonyms
             // 
             this.rdo_multipleDefinitionsAsSynonyms.AutoSize = true;
+            this.rdo_multipleDefinitionsAsSynonyms.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdo_multipleDefinitionsAsSynonyms.ForeColor = System.Drawing.Color.White;
             this.rdo_multipleDefinitionsAsSynonyms.Location = new System.Drawing.Point(3, 78);
             this.rdo_multipleDefinitionsAsSynonyms.Name = "rdo_multipleDefinitionsAsSynonyms";
-            this.rdo_multipleDefinitionsAsSynonyms.Size = new System.Drawing.Size(412, 17);
+            this.rdo_multipleDefinitionsAsSynonyms.Size = new System.Drawing.Size(465, 21);
             this.rdo_multipleDefinitionsAsSynonyms.TabIndex = 4;
             this.rdo_multipleDefinitionsAsSynonyms.Text = "Add multiple definitions/translations of a term as synonyms in a single card";
             this.rdo_multipleDefinitionsAsSynonyms.UseVisualStyleBackColor = true;
@@ -114,10 +115,11 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             // 
             this.rdo_multipleDefinitionsAsSeparateCards.AutoSize = true;
             this.rdo_multipleDefinitionsAsSeparateCards.Checked = true;
+            this.rdo_multipleDefinitionsAsSeparateCards.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdo_multipleDefinitionsAsSeparateCards.ForeColor = System.Drawing.Color.White;
             this.rdo_multipleDefinitionsAsSeparateCards.Location = new System.Drawing.Point(3, 3);
             this.rdo_multipleDefinitionsAsSeparateCards.Name = "rdo_multipleDefinitionsAsSeparateCards";
-            this.rdo_multipleDefinitionsAsSeparateCards.Size = new System.Drawing.Size(445, 17);
+            this.rdo_multipleDefinitionsAsSeparateCards.Size = new System.Drawing.Size(505, 21);
             this.rdo_multipleDefinitionsAsSeparateCards.TabIndex = 3;
             this.rdo_multipleDefinitionsAsSeparateCards.TabStop = true;
             this.rdo_multipleDefinitionsAsSeparateCards.Text = "Add terms with multiple definitions/translations as separate cards (recommended)";
@@ -130,7 +132,6 @@ namespace SteelQuiz.QuizImport.Guide.TextImport
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.Controls.Add(this.pnl_multiTranslationOptions);
             this.Controls.Add(this.lbl_question);
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "Step2";
             this.Size = new System.Drawing.Size(766, 364);
             this.pnl_multiTranslationOptions.ResumeLayout(false);
