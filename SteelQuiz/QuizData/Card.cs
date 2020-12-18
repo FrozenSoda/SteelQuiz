@@ -94,11 +94,11 @@ namespace SteelQuiz.QuizData
             Back = backContent;
             SmartComparisonRules = smartComparisonRules;
 
-            if (FrontSynonyms != null)
+            if (frontSynonyms != null)
             {
                 FrontSynonyms = frontSynonyms;
             }
-            if (BackSynonyms != null)
+            if (backSynonyms != null)
             {
                 BackSynonyms = backSynonyms;
             }
